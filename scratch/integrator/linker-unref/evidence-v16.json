@@ -1,0 +1,1170 @@
+{
+  "schema_version": 2,
+  "model": "armlink5-inline-branchnop-v16",
+  "parent_model": "armlink5-inline-branchnop-v15",
+  "previous_implementation_commit": "26c2adac",
+  "branch": "linker-unref",
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref",
+  "adopted": false,
+  "defaults": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  },
+  "previous_evidence": {
+    "path": "scratch/integrator/linker-unref/evidence-v15.json",
+    "sha256": "465d412a3d83df3bf94325c0296304b7132dbc61b85d0742e99495014833cc41",
+    "modified": false
+  },
+  "frozen_gates": {
+    "path": "docs/GATES.md",
+    "version": "1.19",
+    "sha256": "df9147d5721d9a4fb2d43e63604126e602e8d37a695691ee6350f15e31f98639",
+    "modified": false
+  },
+  "gates_draft": "scratch/integrator/linker-unref/GATES-DRAFT.md",
+  "integration": {
+    "unit_stage": "After raw credited-definition ownership checks, every own direct compiled unit runs prepare_unit_u1 before any combination. Scope/namespace/D1/table/group/reference/companion proofs authorize only that unit closure.",
+    "prepared_view": "Only proved U1 code/own companions lose allocated bodies. All definitions and original reference provenance remain visible; prepared views are derived, not new direct inputs.",
+    "composition_vetoes": "Original inputs are checked for foreign supplied references to removals and any supplied personality definitions. Zero-sized/unplaced sources and conservative peer cycles cannot hide. These checks only reject; they do not add actions or lend witnesses.",
+    "aggregate": "The aggregate links prepared objects for ordinary placement/relocation/R1. No aggregate U1 decision/action is allowed; an unprocessed candidate still fails scope.",
+    "witnesses": "Every staged unit retained D1 must match its complete catalogue extent after aggregate relocation, including zero-credit owners.",
+    "receipt": "Build units carry exact matcher-shaped actions in linker_section_rewrites/removed_special_members/unwind_sections; per-function linker_rewrites remain separate. Local action indices and original object/unit/input_kind are retained.",
+    "acceptance": "Both full fresh receipts must bind model16, u1_stage label, exact action/member correspondence and matching witness records. Full receipt hashes and model_uses/reopening machinery retain every action. Bounded receipts are forbidden for prepare.",
+    "bounded": "New --bounded uses the same unit preparation/aggregate comparison path but no hybrid allocation, output payload or recompression; counts are covered, never accepted credit. Proposed names are permitted and hash-bound only there."
+  },
+  "implementation_sha256": {
+    "tools/inplace.py": "d42771be55753d0de6f782dc74d709128bd0501eed98ff486b5e3021fd47cec3",
+    "tools/linker_models.py": "ab57ab9c1c7b6adbfcc8a12937675106e5abc734d67324542a08e1804dccc18d",
+    "tools/build.py": "24a91c25f2a35fb262ce68200b9441873a27eb6113683520c070c263fe3e509a",
+    "tools/accept.py": "e8372f47cf09174de5221f29be1315636f0611b4c5d73c3a30fdfcbbf5646464",
+    "tests/test_build_u1_v16.py": "3354eb6b556b5ad3a06d3982fd7318ab499f41e57531a7be7353683d2eeca76d",
+    "tests/test_accept.py": "c355cb75b53b7225d156c4047599d558c3d3742796ffab0c749c1f8c82707a9c",
+    "tests/test_inplace.py": "b425d5d82ca7c7810a5f2df55c26a9eb22b3a82fbabb49a1eda0afbf430894b1",
+    "tests/test_unreferenced_v12.py": "2d32f8c14be1056b2251ab13da21a5f1502786d5d25c56c52db9cff6444b9eef",
+    "tests/test_unreferenced_v13.py": "bf6bc73a94dc9a409e7de0d2693e16642a3ea750ea4a8d1ab29546ceaccfa2af",
+    "tests/test_unreferenced_v14.py": "0b07cb23143411de7cd7f207366c37ddafdb476072e90ee25d4ff7e7ba06cf8e",
+    "tests/test_unreferenced_v15.py": "1700456e3cde38d7c30f54e87c20730aeb4afd43c0e57c732d1b6e6375270e5b",
+    "docs/LINKER.md": "29ec50422bfd27bbd3760c754236bcc4f1f93a955dbcb366e963243aa581c874",
+    "scratch/integrator/linker-unref/GATES-DRAFT.md": "dd655e48e87bd34d612c20cdbf32a7986fdecb626823917ca12fdb5e5a6f17ff",
+    "scratch/integrator/linker-unref/v16-r1/empty.cpp": "91853cfb80d41943da38f81d360430385f7a55c559f449571bb41e7d9421f372",
+    "scratch/integrator/linker-unref/v16-r1/fixture-ledger.json": "4afab0c41f3a1bf34db164c403ec396cb84327493f6fc63fac9cb6903dd5c393"
+  },
+  "focused_regressions": {
+    "command_id": "focused-v16-r1",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "unittest",
+      "tests.test_inplace.UnreferencedDestructorUnwindModelTest",
+      "tests.test_inplace.UnreferencedDestructorModelTest",
+      "tests.test_inplace.RemovedUnwindModelTest",
+      "tests.test_inplace.RemovedCalleeModelTest",
+      "tests.test_inplace.CppFunctionAliasTest",
+      "tests.test_inplace.CompositeAliasSwitchTest",
+      "tests.test_inplace.ArmlinkModelTest",
+      "tests.test_inplace.ArmlinkBoundaryTest",
+      "tests.test_inplace.BoundedSwitchModelTest",
+      "tests.test_inplace.BoundedSwitchEffectsTest",
+      "tests.test_match.UnreferencedDestructorCompareTest",
+      "tests.test_match.CppAliasCompareTest",
+      "tests.test_match.AliasCompareSafetyTest",
+      "tests.test_match.ModelOptionsTest",
+      "tests.test_build.BuildRemovedCalleeModelTest",
+      "tests.test_accept.AcceptGateTest.test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions",
+      "tests.test_accept.AcceptGateTest.test_v9_to_v10_transition_reopens_u1_owner_and_binds_every_unwind_companion",
+      "tests.test_accept.AcceptGateTest.test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions",
+      "tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_l1_functions_and_exposes_all_mappings",
+      "tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers",
+      "tests.test_accept.AcceptGateTest.test_v3_to_v4_selection_binds_receipts_and_reopens_unchanged_r1_callers",
+      "tests.test_unreferenced_v11",
+      "tests.test_compid.CompidModelOptionsTest",
+      "tests.test_accept.AcceptGateTest.test_v10_to_v11_transition_reopens_u1_owner_and_binds_corrected_model",
+      "tests.test_unreferenced_v12",
+      "tests.test_accept.AcceptGateTest.test_v11_to_v12_transition_reopens_u1_owner_and_binds_complete_metadata_model",
+      "tests.test_unreferenced_v13",
+      "tests.test_accept.AcceptGateTest.test_v12_to_v13_transition_reopens_u1_owner_and_binds_structural_edge_model",
+      "tests.test_unreferenced_v14",
+      "tests.test_accept.AcceptGateTest.test_v13_to_v14_transition_reopens_u1_owner_and_binds_complete_namespace_model",
+      "tests.test_unreferenced_v15",
+      "tests.test_accept.AcceptGateTest.test_v14_to_v15_transition_binds_narrow_single_object_scope",
+      "tests.test_build_u1_v16",
+      "tests.test_accept.AcceptGateTest.test_v15_to_v16_transition_binds_per_unit_actions_witnesses_and_review_scope"
+    ],
+    "exit": 0,
+    "tests_run": 238,
+    "result": "OK"
+  },
+  "checkpoint_invariants": {
+    "command_id": "checkpoint-invariants-v16-r1",
+    "command": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "tests.test_accept.AcceptGateTest.test_explicit_selection_is_bound_in_prepare_receipts_and_history",
+      "tests.test_accept.AcceptGateTest.test_identical_builds_cannot_silently_substitute_another_selected_model",
+      "tests.test_accept.AcceptGateTest.test_identical_builds_cannot_silently_enable_the_literal_model",
+      "tests.test_accept.AcceptGateTest.test_selection_change_after_review_blocks_finalize",
+      "tests.test_accept.AcceptGateTest.test_receipt_mapping_change_after_review_blocks_finalize",
+      "tests.test_accept.AcceptGateTest.test_verify_history_checks_selected_prepare_and_full_receipts",
+      "tests.test_accept.AcceptGateTest.test_rehashed_history_cannot_change_the_prepared_model",
+      "tests.test_accept.AcceptGateTest.test_finalized_history_schema_downgrade_cannot_remove_selection",
+      "tests.test_accept.AcceptGateTest.test_finalized_history_schema_removal_cannot_remove_selection",
+      "tests.test_accept.AcceptGateTest.test_legacy_prepare_cannot_hide_nondefault_receipt_models",
+      "tests.test_accept.AcceptGateTest.test_legacy_history_receipts_must_agree_with_recorded_models",
+      "tests.test_accept.AcceptGateTest.test_post_selector_history_requires_selection_without_schema_or_artifacts",
+      "tests.test_accept.AcceptGateTest.test_post_selector_prepare_requires_selection_without_schema_or_artifacts"
+    ],
+    "exit": 0,
+    "tests_run": 13,
+    "result": "OK"
+  },
+  "new_tests": {
+    "file": "tests/test_build_u1_v16.py",
+    "coverage": [
+      "synthetic full-build unit-stage receipt path",
+      "metadata-only bounded path",
+      "zero-credit U1 owner/witness",
+      "mismatched D1 refusal",
+      "combined/aggregate U1 refusal",
+      "foreign zero-sized dependency veto",
+      "global/weak/local supplied personality veto",
+      "split-unit D1 refusal",
+      "acceptance stage/action/member/witness integrity",
+      "v16 selection and v15 isolation"
+    ]
+  },
+  "bounded_build": {
+    "command_id": "bounded-build-v16-r1",
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/.venv/bin/python",
+      "-c",
+      "import runpy,sys; from pathlib import Path; sys.path.insert(0,'tools'); import toolchain; toolchain.ROOT=Path(sys.argv[1]); sys.argv=['tools/build.py',*sys.argv[2:]]; runpy.run_path('tools/build.py',run_name='__main__')",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a",
+      "--name",
+      "linker-unref-v16-bounded-r1",
+      "--matches",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/fixture-ledger.json",
+      "--fresh",
+      "--jobs",
+      "1",
+      "--bounded",
+      "--names",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+      "--linker-model",
+      "armlink5-inline-branchnop-v16",
+      "--literal-model",
+      "anonymous-string-records-v1"
+    ],
+    "exit": 0,
+    "receipt_path": "build/linker-unref-v16-bounded-r1/receipt.json",
+    "receipt_sha256": "2cb75fce043cb206f485c93c4bcd145ab1bbbd00c708416c1706bec72beb62d1",
+    "fixture_ledger": "scratch/integrator/linker-unref/v16-r1/fixture-ledger.json",
+    "fixture_ledger_sha256": "4afab0c41f3a1bf34db164c403ec396cb84327493f6fc63fac9cb6903dd5c393",
+    "snapshot_commit": "d8aef63a",
+    "attempt": "008",
+    "checks": {
+      "bounded_mode": true,
+      "pass": true,
+      "two_units": true,
+      "selected_model": true,
+      "direct_unit_stage": true,
+      "covered_exact": true,
+      "retained_witness": true,
+      "one_u1_action": true,
+      "own_exidx": true,
+      "d0_extent": true,
+      "model_uses_action_visible": true,
+      "snapshot_source": true,
+      "no_image_payload": true,
+      "not_checkpoint_receipt": true
+    },
+    "covered_spans": [
+      {
+        "function": "func_001acbb4",
+        "source": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+        "address": 1756084,
+        "size": 100,
+        "sha256": "3dcc4769af32c297d855d8f16a49fc153bceefe3730125f0ee42034fcbec4ccf",
+        "original_sha256": "3dcc4769af32c297d855d8f16a49fc153bceefe3730125f0ee42034fcbec4ccf",
+        "match": true
+      }
+    ],
+    "linker_section_rewrites": [
+      {
+        "rule": "unused_deleting_destructor",
+        "target": null,
+        "removed_special_member": {
+          "symbols": [
+            "_ZN14MenuResetSceneD0Ev"
+          ],
+          "section": "i._ZN14MenuResetSceneD0Ev",
+          "section_index": 1,
+          "size": 108,
+          "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+          "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV14MenuResetScene",
+            "vtable_address": 2241984,
+            "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+            "complete_destructor_address": 1756084,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+              "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+              "input_kind": "object"
+            }
+          ]
+        }
+      }
+    ],
+    "removed_special_members": [
+      {
+        "symbols": [
+          "_ZN14MenuResetSceneD0Ev"
+        ],
+        "section": "i._ZN14MenuResetSceneD0Ev",
+        "section_index": 1,
+        "size": 108,
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+        "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+        "input_kind": "object",
+        "evidence": {
+          "vtable": "_ZTV14MenuResetScene",
+          "vtable_address": 2241984,
+          "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+          "complete_destructor_address": 1756084,
+          "d0_slot_offset": 12,
+          "d0_slot_is_null": true,
+          "d1_slot_agrees": true
+        },
+        "unwind_sections": [
+          {
+            "section": ".ARM.exidx",
+            "section_index": 4,
+            "size": 8,
+            "kind": "exidx",
+            "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+            "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+            "input_kind": "object"
+          }
+        ]
+      }
+    ],
+    "model_uses": {
+      "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp": {
+        "r1_callers": [],
+        "l1_functions": [],
+        "literal_rebindings": [],
+        "removed_callees": [],
+        "u1_functions": [
+          "func_001acbb4"
+        ],
+        "removed_special_members": [
+          {
+            "symbols": [
+              "_ZN14MenuResetSceneD0Ev"
+            ],
+            "section": "i._ZN14MenuResetSceneD0Ev",
+            "section_index": 1,
+            "size": 108,
+            "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+            "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+            "input_kind": "object",
+            "evidence": {
+              "vtable": "_ZTV14MenuResetScene",
+              "vtable_address": 2241984,
+              "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+              "complete_destructor_address": 1756084,
+              "d0_slot_offset": 12,
+              "d0_slot_is_null": true,
+              "d1_slot_agrees": true
+            },
+            "unwind_sections": [
+              {
+                "section": ".ARM.exidx",
+                "section_index": 4,
+                "size": 8,
+                "kind": "exidx",
+                "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+                "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+                "input_kind": "object"
+              }
+            ]
+          }
+        ],
+        "linker_section_rewrites": [
+          {
+            "rule": "unused_deleting_destructor",
+            "target": null,
+            "removed_special_member": {
+              "symbols": [
+                "_ZN14MenuResetSceneD0Ev"
+              ],
+              "section": "i._ZN14MenuResetSceneD0Ev",
+              "section_index": 1,
+              "size": 108,
+              "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+              "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+              "input_kind": "object",
+              "evidence": {
+                "vtable": "_ZTV14MenuResetScene",
+                "vtable_address": 2241984,
+                "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+                "complete_destructor_address": 1756084,
+                "d0_slot_offset": 12,
+                "d0_slot_is_null": true,
+                "d1_slot_agrees": true
+              },
+              "unwind_sections": [
+                {
+                  "section": ".ARM.exidx",
+                  "section_index": 4,
+                  "size": 8,
+                  "kind": "exidx",
+                  "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+                  "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+                  "input_kind": "object"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "receipt": {
+      "schema_version": 1,
+      "name": "linker-unref-v16-bounded-r1",
+      "created_utc": "2026-10-23T04:48:28Z",
+      "host": "Linux-x86_64",
+      "fresh": true,
+      "mode": "bounded",
+      "inputs": {
+        "code_bin_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "names_sha256": "e724a493489558cd204ba57d8d85523f21b4b334908c7829e909c791e150b3c6",
+        "matches": "scratch/integrator/linker-unref/v16-r1/fixture-ledger.json",
+        "matches_canonical": false,
+        "matches_sha256": "4afab0c41f3a1bf34db164c403ec396cb84327493f6fc63fac9cb6903dd5c393",
+        "profiles_sha256": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
+        "toolchain_lock_sha256": "4058507b69f000ac4e506a080db95c4b4241796280039d06dbb5356d4192dcb6",
+        "exheader_sha256": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
+        "harness_sha256": {
+          "tools/build.py": "24a91c25f2a35fb262ce68200b9441873a27eb6113683520c070c263fe3e509a",
+          "tools/inplace.py": "d42771be55753d0de6f782dc74d709128bd0501eed98ff486b5e3021fd47cec3",
+          "tools/linker_models.py": "ab57ab9c1c7b6adbfcc8a12937675106e5abc734d67324542a08e1804dccc18d",
+          "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c",
+          "tools/toolchain.py": "c1de88630cdb864782dcb90875392f51c24b5804745d77badcdaf214b5d18398",
+          "tools/ctrfmt.py": "3b380864744779afd222af8e3bb4a69d2c7d2baa6c1544147cd910736e9dc027",
+          "tools/denominator.py": "4d9515f35edb9fb2dae5ecfb1f82ca1931fa2f5b7b2f151c436d6d2ba039f4a8",
+          "tools/match.py": "06d061b980a2ea49c07b395e9889abe309995d5e35ecef0a7a6a5692a722fcf0"
+        },
+        "linker_model": "armlink5-inline-branchnop-v16",
+        "literal_model": "anonymous-string-records-v1",
+        "compilers": {
+          "armcc_504_82": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d"
+        },
+        "u1_stage": "per-unit-direct-before-aggregation",
+        "resolver_sha256": "60a7e2ba6cfc9d5f00e46cf1cf62d93a2427d510fccbf72cd52dd73894a0b5ce",
+        "proposed_names": {
+          "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+          "sha256": "6e62df768d156aad27aadaf98c4b8725c9a82dbaf9052866574d928aafef981c"
+        }
+      },
+      "units": [
+        {
+          "source": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+          "source_sha256": "27745497e2d3c8649d0d747478b1cbd6b184d2f4984c31b5d4895416a555b8bd",
+          "profile": "game",
+          "compiler": "armcc_504_82",
+          "flags": [
+            "--cpu=MPCore",
+            "--fpmode=fast",
+            "--apcs=/interwork",
+            "--arm",
+            "--split_sections",
+            "--signed_chars",
+            "-O3",
+            "-Otime"
+          ],
+          "object_sha256": "ad2edfb11a1ef4f3f248d286f6ed0454b178a2e3bde9b25b4857a2b0b4f1bef4",
+          "functions": [
+            "func_001acbb4"
+          ],
+          "cache_hit": false,
+          "dependency_manifest_sha256": "0823a6e0ce79bcd107d1fc6b8b6fd4c8636805158c6cce89041c22b542914a47",
+          "headers_sha256": {
+            "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/stdarg.h": "8a9885d2eee768eebd840cdfebe6f69a11d84729b6e567267545c92e54fc0ce3",
+            "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/stdbool.h": "26f8dbedc16805c9b86405b2c9ff23692a2a40f0ac45c8ddf1fad7f0dbfdf4b9",
+            "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/stddef.h": "61c3779c0e9a0a64f3130c1bb19e470587b0b509705a4385ef43eac934de6140",
+            "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/stdint.h": "810faa7832dd8ceea75f27d972f2cc4d17ec08015691c7033d8119dc9c3d7f65",
+            "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/string.h": "64930765999a1c8c900a2d111f1da5b0918c1efaa3dfdd0055109c16a79d443c",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/animation.h": "abc15016ed314d72fdf69dae00c0341c72de1b503bf00b61ca8b30be1d85f89b",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/audio.h": "e7e643f3564199ebeab68a02fe3b62cf61a8f0ef3bbdf2854765fa0b389e2903",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/audio_filter.h": "7d8cdee8031480b608b85bf5259549cacc0a098f6786d84569a05a4c4f1729df",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/audio_voice.h": "992e3a4e318397229e45fde7cd51f9e5ab27bd5f1e89a22a69c657285e9b47e8",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/category_pattern.h": "c2ecd4a98da7c93ce510a87f3f04a5676b4b744b547d1e7199289ce61038a8b0",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/category_progress.h": "04c641d3c13b00076775d06306722d3bad2db8d6babaf087d1cade9dd68fc5af",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/character_panel.h": "d99fecfb7dbd7f28c698c6f499e6709900be40f0f57e834d74f9ea7e4ef3994d",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/command_state.h": "a89d31124a32d68bd44005615ad51e4aab5afaca00defc2545e75a2e33db28d7",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/controller.h": "753e4974e1b737cf4310aa8ae12f9729e161eae30c4a309087588d153f8a242b",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/controller_transitions.h": "d2005716a253a2cee04318aa81b0f0b0b468aff842a858bcba0adf068c66fc7f",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/deferred_callback.h": "09a5d06d454412a4d07077561674f55a8a9a802a7ebbb4cbd485704a73a8e456",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/drawing_screen.h": "b3ee312ff595bd966dce0904084f0fbb163f966a615791f7ff18d77bef13cb27",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/effects_menu.h": "a9ea54efe70c393fa1ca30f69467a0b8f39dfbc71ba9fb31726fbf8c416c5c3f",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/functions.h": "5ab4fcdcaec81645368e8aab9f346dd43f336fcc2fd3e33ce0c89e9c2b7ee75a",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/glyph_style.h": "637a77418a98e1e9e5177206ea7d82214e866bacb55bbc2a7667658ba49d5b3d",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/input.h": "3586dad3a0891616f0d82604638106ad91874543e4ee0d6035c07a9bf4b515e3",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/item_entries.h": "e896ea52323aed796dec57ba92155fc71257d842aa647a6d4a7dc677e13f209c",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/item_pages.h": "5002a654145e5a4f8eff6a7b68f7ddf267bb4b3df1fb3a9762cc60df8613d5ec",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_collections.h": "14dd0ed5f1f88c4de95987388e62c7c64d25020ee3eeabf2b5ec80b4bbe639f6",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_controller.h": "58d7a3f5053dd7e4d08fea598e992c58ec07798cd2d64aaeb10e2001b0490154",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_controls.h": "2c53d2320f0a0c91a114775304f5f6dc377db123d556178550761e62600f549f",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_scene.h": "22149b61f9529a7dd852e8f8f0ccb0727d365cf6c069fcb6dd98aeadd0306788",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_scenes.h": "7734a9be0185ccf50baf202b1e44aa2a2cc696ef0bf6f44afda401560e3741ee",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/messages.h": "53b6fd786299bb8463e34058e72ded9a347224a921c66695c9350f0ba04940c8",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/notification.h": "cb769bf90ccfbced8d321cabaaa08311e2cefc6d431b4c98b1074b0cc9acfab4",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/notification_selection.h": "3cb91183f025ef479e43ab2ffda70497067706b5288bdb8094c457b14b08c0ef",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/playback_screen.h": "86b40433d9b5223d03eeb84e2015f04057dbd0734e689cc22ecd9617234a7c7a",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/property_descriptor.h": "717a22e85bae9d519ea8771ae1742be4bffae479f61001b6fedbc1a448a9c3ca",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/render_parameter.h": "cbdae89a6d8a8842fa6a89fc6a278eeda0dc27066c90fd77abb710ac7d3b6ef3",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/resource_runtime.h": "1b6fb94f3c16bcb6bde18215da76f2ac309a4e0cc1ec0696d58fee1bf3bc4c09",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/runtime.h": "1a17d594929bb2ccfb7f77d3f71b56d25f57ed539159f7aa165aa931fd62ad71",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/scene_lifecycle.h": "d71111302e7a938188ada0b2c60ad9a8c6aa246163044da866d00acfcadae9cc",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/screen.h": "e372aaee878b5d9447505f7802804e9b5540ee351dd859c35dfce4cefd465356",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/screen_operations.h": "47d43c349cf46894d5cbf9492040c806fe9eb9230332d4fba31afdc4e299db85",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/selection.h": "34355e23d152b774b6bb32c3b0b915055aef93b543d1ad9d3b17eb998dc7bd1f",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/selection_collections.h": "a1e44ff588bbd6c5f57dcab4a2413f98bc512926561fd3b6e8a8d808a91e113f",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/sound_runtime.h": "bca09f77cb256762430395704b91305c0d332fd1b49f800a26158b4f796ea2cd",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/sound_track.h": "4d77b2ac62c960473f68343625c2f9e29fb24b9b11843459db5653d97ce9a4fb",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/text_choices.h": "973307696bf1ff5e3faaa607cd0711fee1cd6fce93cc710201b40ca252f13ddf",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/training_screen.h": "b03f361da16f4485d70f6f5497cfe12fd020d53f4eee3d98eee478a70a22c144",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/transition_controller.h": "f797fe3cf2262f6f0d0e4f16741a13c64fc9aba0d681abed1a70f1694dbf6212",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/w11_control.h": "5cf2aae61726336f9dce735fa76e2e3422aa33fd51ab6d00c550cbd5bad0f168"
+          },
+          "linker_rewrites": {},
+          "literal_rebindings": [],
+          "removed_callees": [],
+          "u1_witness_comparisons": [
+            {
+              "name": "_ZN14MenuResetSceneD1Ev",
+              "address": 1756084,
+              "size": 100,
+              "status": "match",
+              "sha256": "3dcc4769af32c297d855d8f16a49fc153bceefe3730125f0ee42034fcbec4ccf"
+            }
+          ],
+          "removed_special_members": [
+            {
+              "symbols": [
+                "_ZN14MenuResetSceneD0Ev"
+              ],
+              "section": "i._ZN14MenuResetSceneD0Ev",
+              "section_index": 1,
+              "size": 108,
+              "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+              "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+              "input_kind": "object",
+              "evidence": {
+                "vtable": "_ZTV14MenuResetScene",
+                "vtable_address": 2241984,
+                "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+                "complete_destructor_address": 1756084,
+                "d0_slot_offset": 12,
+                "d0_slot_is_null": true,
+                "d1_slot_agrees": true
+              },
+              "unwind_sections": [
+                {
+                  "section": ".ARM.exidx",
+                  "section_index": 4,
+                  "size": 8,
+                  "kind": "exidx",
+                  "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+                  "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+                  "input_kind": "object"
+                }
+              ]
+            }
+          ],
+          "linker_section_rewrites": [
+            {
+              "rule": "unused_deleting_destructor",
+              "target": null,
+              "removed_special_member": {
+                "symbols": [
+                  "_ZN14MenuResetSceneD0Ev"
+                ],
+                "section": "i._ZN14MenuResetSceneD0Ev",
+                "section_index": 1,
+                "size": 108,
+                "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+                "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+                "input_kind": "object",
+                "evidence": {
+                  "vtable": "_ZTV14MenuResetScene",
+                  "vtable_address": 2241984,
+                  "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+                  "complete_destructor_address": 1756084,
+                  "d0_slot_offset": 12,
+                  "d0_slot_is_null": true,
+                  "d1_slot_agrees": true
+                },
+                "unwind_sections": [
+                  {
+                    "section": ".ARM.exidx",
+                    "section_index": 4,
+                    "size": 8,
+                    "kind": "exidx",
+                    "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/build/linker-unref-v16-bounded-r1/obj/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.o",
+                    "unit": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+                    "input_kind": "object"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "source": "scratch/integrator/linker-unref/v16-r1/empty.cpp",
+          "source_sha256": "91853cfb80d41943da38f81d360430385f7a55c559f449571bb41e7d9421f372",
+          "profile": "game",
+          "compiler": "armcc_504_82",
+          "flags": [
+            "--cpu=MPCore",
+            "--fpmode=fast",
+            "--apcs=/interwork",
+            "--arm",
+            "--split_sections",
+            "--signed_chars",
+            "-O3",
+            "-Otime"
+          ],
+          "object_sha256": "1b7e0a7be67d100f4702d20f3c5f9bd9b456442fb7f6614799a5e16b66256d88",
+          "functions": [],
+          "cache_hit": false,
+          "dependency_manifest_sha256": "2eba717bd363edb6c1fbc8eef669e595769f73f579c3983ff097c69fb22051ea",
+          "headers_sha256": {},
+          "linker_rewrites": {},
+          "literal_rebindings": [],
+          "removed_callees": []
+        }
+      ],
+      "outputs": {
+        "covered_spans": [
+          {
+            "function": "func_001acbb4",
+            "source": "scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+            "address": 1756084,
+            "size": 100,
+            "sha256": "3dcc4769af32c297d855d8f16a49fc153bceefe3730125f0ee42034fcbec4ccf",
+            "original_sha256": "3dcc4769af32c297d855d8f16a49fc153bceefe3730125f0ee42034fcbec4ccf",
+            "match": true
+          }
+        ],
+        "covered_bytes": 100
+      },
+      "covered": {
+        "functions": 1,
+        "bytes": 100,
+        "catalogue_functions": 4624,
+        "catalogue_bytes": 1131454
+      },
+      "checks": {
+        "credited_functions_exact": true,
+        "covered_spans_identical": true
+      },
+      "result": "PASS"
+    },
+    "qualification": "Two-unit bounded fixture comparison, not a whole-ledger production/full-image build, not prepare and not accepted credit."
+  },
+  "real_menu_reset": {
+    "command_id": "real-menu-reset-v16-r1",
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/.venv/bin/python",
+      "-c",
+      "import runpy,sys; from pathlib import Path; sys.path.insert(0,'tools'); import toolchain; toolchain.ROOT=Path(sys.argv[1]); sys.argv=['tools/match.py',*sys.argv[2:]]; runpy.run_path('tools/match.py',run_name='__main__')",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+      "--profile",
+      "game",
+      "--linker-model",
+      "armlink5-inline-branchnop-v16",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--names",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+      "--show",
+      "0",
+      "--out",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1"
+    ],
+    "exit": 0,
+    "snapshot_commit": "d8aef63a",
+    "attempt": "008",
+    "result_path": "scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.result.json",
+    "receipt_sha256": "65cb56742b152673cd911851049d493ca3510ffc3dd1525fe30debafba7a7939",
+    "functions": [
+      {
+        "name": "_ZN14MenuResetSceneD1Ev",
+        "address": 1756084,
+        "size": 100,
+        "candidate_size": 100,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": []
+      }
+    ],
+    "linker_rewrites": [
+      {
+        "rule": "unused_deleting_destructor",
+        "target": null,
+        "removed_special_member": {
+          "symbols": [
+            "_ZN14MenuResetSceneD0Ev"
+          ],
+          "section": "i._ZN14MenuResetSceneD0Ev",
+          "section_index": 1,
+          "size": 108,
+          "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+          "unit": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV14MenuResetScene",
+            "vtable_address": 2241984,
+            "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+            "complete_destructor_address": 1756084,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+              "unit": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      }
+    ],
+    "removed_special_members": [
+      {
+        "symbols": [
+          "_ZN14MenuResetSceneD0Ev"
+        ],
+        "section": "i._ZN14MenuResetSceneD0Ev",
+        "section_index": 1,
+        "size": 108,
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+        "unit": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+        "input_kind": "object",
+        "evidence": {
+          "vtable": "_ZTV14MenuResetScene",
+          "vtable_address": 2241984,
+          "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+          "complete_destructor_address": 1756084,
+          "d0_slot_offset": 12,
+          "d0_slot_is_null": true,
+          "d1_slot_agrees": true
+        },
+        "unwind_sections": [
+          {
+            "section": ".ARM.exidx",
+            "section_index": 4,
+            "size": 8,
+            "kind": "exidx",
+            "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+            "unit": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+            "input_kind": "object"
+          }
+        ]
+      }
+    ],
+    "receipt": {
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+      "source_sha256": "27745497e2d3c8649d0d747478b1cbd6b184d2f4984c31b5d4895416a555b8bd",
+      "profile": "game",
+      "compiler": "armcc_504_82",
+      "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+      "flags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--arm",
+        "--split_sections",
+        "--signed_chars",
+        "-O3",
+        "-Otime"
+      ],
+      "object_sha256": "dc87210750dbab3de73150e28957ac871bbd8af9ecd02e77399e9128f2e65eb2",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+      "linker_model": "armlink5-inline-branchnop-v16",
+      "literal_model": "anonymous-string-records-v1",
+      "literal_rebindings": [],
+      "proposed_names": {
+        "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+        "sha256": "6e62df768d156aad27aadaf98c4b8725c9a82dbaf9052866574d928aafef981c"
+      },
+      "extra_sources": [],
+      "removed_callees": [],
+      "functions": [
+        {
+          "name": "_ZN14MenuResetSceneD1Ev",
+          "address": 1756084,
+          "size": 100,
+          "candidate_size": 100,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN14MenuResetSceneD0Ev"
+          ],
+          "section": "i._ZN14MenuResetSceneD0Ev",
+          "section_index": 1,
+          "size": 108,
+          "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+          "unit": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV14MenuResetScene",
+            "vtable_address": 2241984,
+            "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+            "complete_destructor_address": 1756084,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+              "unit": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ],
+      "linker_rewrites": [
+        {
+          "rule": "unused_deleting_destructor",
+          "target": null,
+          "removed_special_member": {
+            "symbols": [
+              "_ZN14MenuResetSceneD0Ev"
+            ],
+            "section": "i._ZN14MenuResetSceneD0Ev",
+            "section_index": 1,
+            "size": 108,
+            "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+            "unit": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+            "input_kind": "object",
+            "evidence": {
+              "vtable": "_ZTV14MenuResetScene",
+              "vtable_address": 2241984,
+              "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+              "complete_destructor_address": 1756084,
+              "d0_slot_offset": 12,
+              "d0_slot_is_null": true,
+              "d1_slot_agrees": true
+            },
+            "unwind_sections": [
+              {
+                "section": ".ARM.exidx",
+                "section_index": 4,
+                "size": 8,
+                "kind": "exidx",
+                "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+                "unit": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+                "input_kind": "object"
+              }
+            ]
+          }
+        }
+      ],
+      "names_path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/config/names.json",
+      "names_sha256": "e724a493489558cd204ba57d8d85523f21b4b334908c7829e909c791e150b3c6",
+      "resolver_sha256": "60a7e2ba6cfc9d5f00e46cf1cf62d93a2427d510fccbf72cd52dd73894a0b5ce",
+      "exheader_sha256": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
+      "title_sha256": "9d154c561b9503f7aad9c8dd276a1fc40ec4fe86d9e8f4a4ceadc6bd97a91c29",
+      "bss": [
+        2373896,
+        5124844
+      ],
+      "profiles_sha256": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
+      "toolchain_lock_sha256": "4058507b69f000ac4e506a080db95c4b4241796280039d06dbb5356d4192dcb6",
+      "harness_sha256": {
+        "tools/match.py": "06d061b980a2ea49c07b395e9889abe309995d5e35ecef0a7a6a5692a722fcf0",
+        "tools/inplace.py": "d42771be55753d0de6f782dc74d709128bd0501eed98ff486b5e3021fd47cec3",
+        "tools/linker_models.py": "ab57ab9c1c7b6adbfcc8a12937675106e5abc734d67324542a08e1804dccc18d",
+        "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c",
+        "tools/toolchain.py": "c1de88630cdb864782dcb90875392f51c24b5804745d77badcdaf214b5d18398",
+        "tools/ctrfmt.py": "3b380864744779afd222af8e3bb4a69d2c7d2baa6c1544147cd910736e9dc027",
+        "tools/display.py": "d9ff628b48ce1f41f9ac3047f993c375540379f936fb48dcdfd96d6233147de9",
+        "tools/compid.py": "220344f98e10094deef202a2723ea42601b3522ba7ae2b15f04bc4d810180ea7",
+        "tools/collect.py": "2a3dd1c6f5b8f60a1749746f0eaec03a93bca76cf2b2dd420cf8a28f46b06491"
+      },
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1/func_001acbb4.o",
+      "dependency_manifest_sha256": "7e83e72c8fff8ccc3a36dc5f528a9705966d29d1f113eceb90a1be23a56f1906",
+      "headers_sha256": {
+        "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/stdarg.h": "8a9885d2eee768eebd840cdfebe6f69a11d84729b6e567267545c92e54fc0ce3",
+        "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/stdbool.h": "26f8dbedc16805c9b86405b2c9ff23692a2a40f0ac45c8ddf1fad7f0dbfdf4b9",
+        "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/stddef.h": "61c3779c0e9a0a64f3130c1bb19e470587b0b509705a4385ef43eac934de6140",
+        "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/stdint.h": "810faa7832dd8ceea75f27d972f2cc4d17ec08015691c7033d8119dc9c3d7f65",
+        "/home/michael/code/kanken-training-2-decomp/.cache/toolchain/armcc/5.04/b82/bin/../include/string.h": "64930765999a1c8c900a2d111f1da5b0918c1efaa3dfdd0055109c16a79d443c",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/animation.h": "abc15016ed314d72fdf69dae00c0341c72de1b503bf00b61ca8b30be1d85f89b",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/audio.h": "e7e643f3564199ebeab68a02fe3b62cf61a8f0ef3bbdf2854765fa0b389e2903",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/audio_filter.h": "7d8cdee8031480b608b85bf5259549cacc0a098f6786d84569a05a4c4f1729df",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/audio_voice.h": "992e3a4e318397229e45fde7cd51f9e5ab27bd5f1e89a22a69c657285e9b47e8",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/category_pattern.h": "c2ecd4a98da7c93ce510a87f3f04a5676b4b744b547d1e7199289ce61038a8b0",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/category_progress.h": "04c641d3c13b00076775d06306722d3bad2db8d6babaf087d1cade9dd68fc5af",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/character_panel.h": "d99fecfb7dbd7f28c698c6f499e6709900be40f0f57e834d74f9ea7e4ef3994d",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/command_state.h": "a89d31124a32d68bd44005615ad51e4aab5afaca00defc2545e75a2e33db28d7",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/controller.h": "753e4974e1b737cf4310aa8ae12f9729e161eae30c4a309087588d153f8a242b",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/controller_transitions.h": "d2005716a253a2cee04318aa81b0f0b0b468aff842a858bcba0adf068c66fc7f",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/deferred_callback.h": "09a5d06d454412a4d07077561674f55a8a9a802a7ebbb4cbd485704a73a8e456",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/drawing_screen.h": "b3ee312ff595bd966dce0904084f0fbb163f966a615791f7ff18d77bef13cb27",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/effects_menu.h": "a9ea54efe70c393fa1ca30f69467a0b8f39dfbc71ba9fb31726fbf8c416c5c3f",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/functions.h": "5ab4fcdcaec81645368e8aab9f346dd43f336fcc2fd3e33ce0c89e9c2b7ee75a",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/glyph_style.h": "637a77418a98e1e9e5177206ea7d82214e866bacb55bbc2a7667658ba49d5b3d",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/input.h": "3586dad3a0891616f0d82604638106ad91874543e4ee0d6035c07a9bf4b515e3",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/item_entries.h": "e896ea52323aed796dec57ba92155fc71257d842aa647a6d4a7dc677e13f209c",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/item_pages.h": "5002a654145e5a4f8eff6a7b68f7ddf267bb4b3df1fb3a9762cc60df8613d5ec",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_collections.h": "14dd0ed5f1f88c4de95987388e62c7c64d25020ee3eeabf2b5ec80b4bbe639f6",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_controller.h": "58d7a3f5053dd7e4d08fea598e992c58ec07798cd2d64aaeb10e2001b0490154",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_controls.h": "2c53d2320f0a0c91a114775304f5f6dc377db123d556178550761e62600f549f",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_scene.h": "22149b61f9529a7dd852e8f8f0ccb0727d365cf6c069fcb6dd98aeadd0306788",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/menu_scenes.h": "7734a9be0185ccf50baf202b1e44aa2a2cc696ef0bf6f44afda401560e3741ee",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/messages.h": "53b6fd786299bb8463e34058e72ded9a347224a921c66695c9350f0ba04940c8",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/notification.h": "cb769bf90ccfbced8d321cabaaa08311e2cefc6d431b4c98b1074b0cc9acfab4",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/notification_selection.h": "3cb91183f025ef479e43ab2ffda70497067706b5288bdb8094c457b14b08c0ef",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/playback_screen.h": "86b40433d9b5223d03eeb84e2015f04057dbd0734e689cc22ecd9617234a7c7a",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/property_descriptor.h": "717a22e85bae9d519ea8771ae1742be4bffae479f61001b6fedbc1a448a9c3ca",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/render_parameter.h": "cbdae89a6d8a8842fa6a89fc6a278eeda0dc27066c90fd77abb710ac7d3b6ef3",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/resource_runtime.h": "1b6fb94f3c16bcb6bde18215da76f2ac309a4e0cc1ec0696d58fee1bf3bc4c09",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/runtime.h": "1a17d594929bb2ccfb7f77d3f71b56d25f57ed539159f7aa165aa931fd62ad71",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/scene_lifecycle.h": "d71111302e7a938188ada0b2c60ad9a8c6aa246163044da866d00acfcadae9cc",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/screen.h": "e372aaee878b5d9447505f7802804e9b5540ee351dd859c35dfce4cefd465356",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/screen_operations.h": "47d43c349cf46894d5cbf9492040c806fe9eb9230332d4fba31afdc4e299db85",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/selection.h": "34355e23d152b774b6bb32c3b0b915055aef93b543d1ad9d3b17eb998dc7bd1f",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/selection_collections.h": "a1e44ff588bbd6c5f57dcab4a2413f98bc512926561fd3b6e8a8d808a91e113f",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/sound_runtime.h": "bca09f77cb256762430395704b91305c0d332fd1b49f800a26158b4f796ea2cd",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/sound_track.h": "4d77b2ac62c960473f68343625c2f9e29fb24b9b11843459db5653d97ce9a4fb",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/text_choices.h": "973307696bf1ff5e3faaa607cd0711fee1cd6fce93cc710201b40ca252f13ddf",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/training_screen.h": "b03f361da16f4485d70f6f5497cfe12fd020d53f4eee3d98eee478a70a22c144",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/transition_controller.h": "f797fe3cf2262f6f0d0e4f16741a13c64fc9aba0d681abed1a70f1694dbf6212",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/include/game/w11_control.h": "5cf2aae61726336f9dce735fa76e2e3422aa33fd51ab6d00c550cbd5bad0f168"
+      },
+      "effective_profile": {
+        "name": "game",
+        "compiler": "armcc_504_82",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ]
+      },
+      "effective_profile_sha256": "80a3211d9e530b38300e8340004878d3e3f2c2f804dee347a3efff01ed68a301",
+      "proposed_profiles": null,
+      "extra_inputs": []
+    }
+  },
+  "real_menu_scene": {
+    "command_id": "real-menu-scene-v16-r1",
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/.venv/bin/python",
+      "-c",
+      "import runpy,sys; from pathlib import Path; sys.path.insert(0,'tools'); import toolchain; toolchain.ROOT=Path(sys.argv[1]); sys.argv=['tools/match.py',*sys.argv[2:]]; runpy.run_path('tools/match.py',run_name='__main__')",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave2/func_00174480.cpp",
+      "--profile",
+      "game",
+      "--linker-model",
+      "armlink5-inline-branchnop-v16",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--names",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+      "--show",
+      "0",
+      "--out",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-scene-v16-r1"
+    ],
+    "exit": 2,
+    "snapshot_commit": "d8aef63a",
+    "attempt": "006",
+    "result_path": "scratch/integrator/linker-unref/real-menu-scene-v16-r1/func_00174480.result.json",
+    "receipt_sha256": "11227ec70874c33c24b13790ead2b47faf0d69744436c425474d32144cf4da74",
+    "receipt": {
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave2/func_00174480.cpp",
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v16",
+      "literal_model": "anonymous-string-records-v1",
+      "status": "refused",
+      "reason": ".constdata__ZTV9MenuScene+0xc: U1 deleting destructor i._ZN9MenuSceneD0Ev is still referenced (relocation type 2)",
+      "error_type": "LinkError",
+      "functions": []
+    },
+    "linker_rewrites": [],
+    "removed_special_members": []
+  },
+  "real_matcher_checks": {
+    "reset_exit_zero": true,
+    "d1_match": true,
+    "d1_extent": true,
+    "one_u1": true,
+    "d0_extent": true,
+    "exidx_extent": true,
+    "no_branch_rewrites": true,
+    "scene_live_vtable": true,
+    "scene_no_actions": true
+  },
+  "commands": [
+    {
+      "id": "focused-v16-r1",
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "tests.test_inplace.UnreferencedDestructorUnwindModelTest",
+        "tests.test_inplace.UnreferencedDestructorModelTest",
+        "tests.test_inplace.RemovedUnwindModelTest",
+        "tests.test_inplace.RemovedCalleeModelTest",
+        "tests.test_inplace.CppFunctionAliasTest",
+        "tests.test_inplace.CompositeAliasSwitchTest",
+        "tests.test_inplace.ArmlinkModelTest",
+        "tests.test_inplace.ArmlinkBoundaryTest",
+        "tests.test_inplace.BoundedSwitchModelTest",
+        "tests.test_inplace.BoundedSwitchEffectsTest",
+        "tests.test_match.UnreferencedDestructorCompareTest",
+        "tests.test_match.CppAliasCompareTest",
+        "tests.test_match.AliasCompareSafetyTest",
+        "tests.test_match.ModelOptionsTest",
+        "tests.test_build.BuildRemovedCalleeModelTest",
+        "tests.test_accept.AcceptGateTest.test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions",
+        "tests.test_accept.AcceptGateTest.test_v9_to_v10_transition_reopens_u1_owner_and_binds_every_unwind_companion",
+        "tests.test_accept.AcceptGateTest.test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions",
+        "tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_l1_functions_and_exposes_all_mappings",
+        "tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers",
+        "tests.test_accept.AcceptGateTest.test_v3_to_v4_selection_binds_receipts_and_reopens_unchanged_r1_callers",
+        "tests.test_unreferenced_v11",
+        "tests.test_compid.CompidModelOptionsTest",
+        "tests.test_accept.AcceptGateTest.test_v10_to_v11_transition_reopens_u1_owner_and_binds_corrected_model",
+        "tests.test_unreferenced_v12",
+        "tests.test_accept.AcceptGateTest.test_v11_to_v12_transition_reopens_u1_owner_and_binds_complete_metadata_model",
+        "tests.test_unreferenced_v13",
+        "tests.test_accept.AcceptGateTest.test_v12_to_v13_transition_reopens_u1_owner_and_binds_structural_edge_model",
+        "tests.test_unreferenced_v14",
+        "tests.test_accept.AcceptGateTest.test_v13_to_v14_transition_reopens_u1_owner_and_binds_complete_namespace_model",
+        "tests.test_unreferenced_v15",
+        "tests.test_accept.AcceptGateTest.test_v14_to_v15_transition_binds_narrow_single_object_scope",
+        "tests.test_build_u1_v16",
+        "tests.test_accept.AcceptGateTest.test_v15_to_v16_transition_binds_per_unit_actions_witnesses_and_review_scope"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TEMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp"
+      },
+      "exit": 0,
+      "seconds": 6.834,
+      "stdout": "",
+      "stderr": "..............................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 238 tests in 6.659s\n\nOK\n"
+    },
+    {
+      "id": "checkpoint-invariants-v16-r1",
+      "argv": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_accept.AcceptGateTest.test_explicit_selection_is_bound_in_prepare_receipts_and_history",
+        "tests.test_accept.AcceptGateTest.test_identical_builds_cannot_silently_substitute_another_selected_model",
+        "tests.test_accept.AcceptGateTest.test_identical_builds_cannot_silently_enable_the_literal_model",
+        "tests.test_accept.AcceptGateTest.test_selection_change_after_review_blocks_finalize",
+        "tests.test_accept.AcceptGateTest.test_receipt_mapping_change_after_review_blocks_finalize",
+        "tests.test_accept.AcceptGateTest.test_verify_history_checks_selected_prepare_and_full_receipts",
+        "tests.test_accept.AcceptGateTest.test_rehashed_history_cannot_change_the_prepared_model",
+        "tests.test_accept.AcceptGateTest.test_finalized_history_schema_downgrade_cannot_remove_selection",
+        "tests.test_accept.AcceptGateTest.test_finalized_history_schema_removal_cannot_remove_selection",
+        "tests.test_accept.AcceptGateTest.test_legacy_prepare_cannot_hide_nondefault_receipt_models",
+        "tests.test_accept.AcceptGateTest.test_legacy_history_receipts_must_agree_with_recorded_models",
+        "tests.test_accept.AcceptGateTest.test_post_selector_history_requires_selection_without_schema_or_artifacts",
+        "tests.test_accept.AcceptGateTest.test_post_selector_prepare_requires_selection_without_schema_or_artifacts"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TEMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp"
+      },
+      "exit": 0,
+      "seconds": 0.199,
+      "stdout": "",
+      "stderr": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.051s\n\nOK\n"
+    },
+    {
+      "id": "bounded-build-v16-r1",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/.venv/bin/python",
+        "-c",
+        "import runpy,sys; from pathlib import Path; sys.path.insert(0,'tools'); import toolchain; toolchain.ROOT=Path(sys.argv[1]); sys.argv=['tools/build.py',*sys.argv[2:]]; runpy.run_path('tools/build.py',run_name='__main__')",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a",
+        "--name",
+        "linker-unref-v16-bounded-r1",
+        "--matches",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/fixture-ledger.json",
+        "--fresh",
+        "--jobs",
+        "1",
+        "--bounded",
+        "--names",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+        "--linker-model",
+        "armlink5-inline-branchnop-v16",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TEMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp"
+      },
+      "exit": 0,
+      "seconds": 0.303,
+      "stdout": "PASS: 1/4624 functions, 100/1131454 bytes covered; checks {'credited_functions_exact': True, 'covered_spans_identical': True}\nreceipt: build/linker-unref-v16-bounded-r1/receipt.json\n",
+      "stderr": ""
+    },
+    {
+      "id": "real-menu-reset-v16-r1",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/.venv/bin/python",
+        "-c",
+        "import runpy,sys; from pathlib import Path; sys.path.insert(0,'tools'); import toolchain; toolchain.ROOT=Path(sys.argv[1]); sys.argv=['tools/match.py',*sys.argv[2:]]; runpy.run_path('tools/match.py',run_name='__main__')",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v16",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--names",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v16-r1"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TEMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp"
+      },
+      "exit": 0,
+      "seconds": 0.24,
+      "stdout": "note: proposed names overlay /home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN14MenuResetSceneD1Ev @ 0x1acbb4 size 0x64/0x64\nREMOVED  _ZN14MenuResetSceneD0Ev (108 bytes; U1 i._ZN14MenuResetSceneD0Ev)\n",
+      "stderr": ""
+    },
+    {
+      "id": "real-menu-scene-v16-r1",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/.venv/bin/python",
+        "-c",
+        "import runpy,sys; from pathlib import Path; sys.path.insert(0,'tools'); import toolchain; toolchain.ROOT=Path(sys.argv[1]); sys.argv=['tools/match.py',*sys.argv[2:]]; runpy.run_path('tools/match.py',run_name='__main__')",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave2/func_00174480.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v16",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--names",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-scene-v16-r1"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp",
+        "TEMP": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/v16-r1/tmp"
+      },
+      "exit": 2,
+      "seconds": 0.182,
+      "stdout": "note: proposed names overlay /home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json (not config/names.json); a MATCH here needs those bindings adopted\n",
+      "stderr": "error: .constdata__ZTV9MenuScene+0xc: U1 deleting destructor i._ZN9MenuSceneD0Ev is still referenced (relocation type 2)\n"
+    }
+  ],
+  "scope": {
+    "subagents": false,
+    "full_suite": false,
+    "whole_ledger_production_build": false,
+    "bounded_fixture_build": true,
+    "production_prepare": false,
+    "adoption": false,
+    "accept_records_modified": false,
+    "push": false
+  }
+}

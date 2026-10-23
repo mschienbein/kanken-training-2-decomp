@@ -195,6 +195,8 @@ class AcceptGateTest(unittest.TestCase):
             return {**receipt, "name": name, "fresh": kwargs["fresh"], "inputs": {
                 "linker_model": next(linker_choices) if linker_choices is not None else kwargs["linker_model"],
                 "literal_model": next(literal_choices) if literal_choices is not None else kwargs["literal_model"],
+                **({"u1_stage": "per-unit-direct-before-aggregation"}
+                   if accept.linker_models.LINKER_MODELS[kwargs["linker_model"]].per_unit_u1 else {}),
             }}
 
         stubs = {
@@ -553,9 +555,14 @@ class AcceptGateTest(unittest.TestCase):
         if own_unwind:
             member["unwind_sections"] = [{
                 "section": ".ARM.exidx.D0", "section_index": 3, "kind": "exidx", "size": 8, "object": "src/a.c"}]
+        if accept.linker_models.LINKER_MODELS[selected].per_unit_u1:
+            member.update(unit="src/a.c", input_kind="object")
+            member["evidence"]["complete_destructor_address"] = 0x100000
         action = {"rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}
         receipts = [{"source": "src/a.c", "functions": ["func_00100000"], "removed_special_members": [member],
                      "linker_section_rewrites": [action]}]
+        if accept.linker_models.LINKER_MODELS[selected].per_unit_u1:
+            receipts[0]["u1_witness_comparisons"] = [{"address": 0x100000, "size": 4, "status": "match"}]
         record = self.stubbed_prepare("c015", [], receipt_units=receipts, linker_model=selected)
         out = self.root / "accept/c015"
         self.assertEqual(record["revised_units"], [])
@@ -599,6 +606,9 @@ class AcceptGateTest(unittest.TestCase):
 
     def test_v14_to_v15_transition_binds_narrow_single_object_scope(self):
         self.u1_model_transition("armlink5-inline-branchnop-v14", "armlink5-inline-branchnop-v15", own_unwind=True)
+
+    def test_v15_to_v16_transition_binds_per_unit_actions_witnesses_and_review_scope(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v15", "armlink5-inline-branchnop-v16", own_unwind=True)
 
     def test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions(self):
         member = {"symbols": ["_ZN6WidgetD0Ev"], "object": "src/helper.cpp", "section_index": 3}

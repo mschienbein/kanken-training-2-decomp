@@ -2400,6 +2400,36 @@ class InPlaceLinker:
         self.removed_callees = [self._removed_sections[index] for index in sorted(used)]
         return rewrites
 
+    def prepare_unit_u1(self, obj: ObjectFile) -> tuple[ObjectFile, set[int]]:
+        """V16 stages only direct-unit U1; aggregate relocation and witness equality follow in build."""
+        if not self.model.per_unit_u1:
+            raise LinkError("per-unit U1 preparation requires the v16 model")
+        if (not isinstance(getattr(obj, "origin", None), ObjectOrigin) or obj.origin.kind != "object"
+                or getattr(obj, "combination_depth", None) != 0):
+            raise LinkError("U1 refused by scope: per-unit preparation requires its own direct compiled object")
+        self.rewrites, self.removed_callees, self.removed_special_members = [], [], []
+        self._removed_sections, self._removed_unwind, self._unreferenced_sections = {}, {}, {}
+        self._check_u1_input_scope(obj, {})
+        resolved = obj.resolve_definitions()
+        self._retained_sections = self._retention_sections(resolved)
+        self._unreferenced_sections = self._unreferenced_destructors(resolved, {})
+        self._removed_unwind = self._removed_unwind_sections(resolved, {}, self._unreferenced_sections)
+        self._check_unreferenced_destructors(resolved)
+        removed = self._unreferenced_sections.keys() | self._removed_unwind.keys()
+        self.removed_special_members = [self._unreferenced_sections[index]
+                                        for index in sorted(self._unreferenced_sections)]
+        self.rewrites = [SectionElimination(row["section_index"], row) for row in self.removed_special_members]
+        if not removed:
+            return obj, set()
+        prepared = obj.__class__.__new__(obj.__class__)
+        prepared.__dict__ = resolved.__dict__.copy()
+        prepared.sections = {index: section for index, section in resolved.sections.items() if index not in removed}
+        prepared.dependency_sections = {index: section for index, section in resolved.dependency_sections.items()
+                                        if index not in removed}
+        # Keep all definitions/reference provenance visible; removed bodies cannot become externs.
+        prepared.origin, prepared.combination_depth = None, 1
+        return prepared, set(removed)
+
     # -- link + verify -------------------------------------------------------------------------
 
     def link(self, obj: ObjectFile, names_to_address: dict[str, int] | None = None) -> dict[int, LinkedSection]:

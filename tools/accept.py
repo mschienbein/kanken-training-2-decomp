@@ -292,6 +292,30 @@ def model_use_summary(receipt: dict) -> dict:
     return uses
 
 
+def build_receipt_scope_valid(receipt: dict, model: str) -> bool:
+    """Bounded comparisons are not checkpoint builds; v16 must carry every staged unit action."""
+    if receipt.get("mode") == "bounded":
+        return False
+    if not linker_models.LINKER_MODELS[model].per_unit_u1:
+        return True
+    if receipt.get("inputs", {}).get("u1_stage") != "per-unit-direct-before-aggregation":
+        return False
+    for unit in receipt.get("units", []):
+        members = unit.get("removed_special_members", [])
+        actions = unit.get("linker_section_rewrites", [])
+        expected = [{"rule": "unused_deleting_destructor", "target": None,
+                     "removed_special_member": member} for member in members]
+        if actions != expected:
+            return False
+        witnesses = {row.get("address") for row in unit.get("u1_witness_comparisons", [])
+                     if row.get("status") == "match" and row.get("size", 0) > 0}
+        if any(member.get("unit") != unit["source"] or member.get("input_kind") != "object"
+               or member.get("evidence", {}).get("complete_destructor_address") not in witnesses
+               for member in members):
+            return False
+    return True
+
+
 def model_selection(linker_model: str, literal_model: str) -> dict:
     if linker_model not in linker_models.LINKER_MODELS:
         raise AcceptError(f"unknown or retired linker model {linker_model!r}")
@@ -354,6 +378,8 @@ def verify_selection(out: Path, record: dict, *, required: bool = False) -> bool
             raise AcceptError(f"{out.name}: build {suffix} is not a passing fresh build")
         if any(receipt.get("inputs", {}).get(key) != value for key, value in selection.items()):
             raise AcceptError(f"{out.name}: build {suffix} models differ from the frozen selection")
+        if not build_receipt_scope_valid(receipt, selection["linker_model"]):
+            raise AcceptError(f"{out.name}: build {suffix} lacks its required full per-unit U1 receipt")
     if not builds[0].get("outputs") or builds[0]["outputs"] != builds[1].get("outputs"):
         raise AcceptError(f"{out.name}: selected build outputs differ")
     return True
@@ -443,6 +469,9 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
         == builds[1].get("inputs", {}).get("literal_model", "none"),
         "models_selected": all(
             all(b.get("inputs", {}).get(key) == value for key, value in selection.items()) for b in builds),
+        **({"build_scope_valid": all(build_receipt_scope_valid(b, selection["linker_model"]) for b in builds)}
+           if linker_models.LINKER_MODELS[selection["linker_model"]].per_unit_u1
+           or any(b.get("mode") == "bounded" for b in builds) else {}),
         "suite_pass": suite["returncode"] == 0,
         "interfaces_pass": iface_ok,
     }

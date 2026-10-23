@@ -2360,7 +2360,8 @@ class UnreferencedDestructorModelTest(unittest.TestCase):
         for model in inplace.LINKER_MODELS:
             if model in (self.MODEL, "armlink5-inline-branchnop-v10", "armlink5-inline-branchnop-v11",
                          "armlink5-inline-branchnop-v12", "armlink5-inline-branchnop-v13",
-                         "armlink5-inline-branchnop-v14", "armlink5-inline-branchnop-v15"):
+                         "armlink5-inline-branchnop-v14", "armlink5-inline-branchnop-v15",
+                         "armlink5-inline-branchnop-v16"):
                 continue
             self.assertFalse(inplace.linker_model(model).unreferenced_destructors)
             obj, mem, catalogue, names = self.fixture()

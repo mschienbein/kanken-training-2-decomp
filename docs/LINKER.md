@@ -15,14 +15,14 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **v9–v14** implementations remain selectable, immutable and
-**unadopted**. Their sealed FAILs remain under `scratch/review/linker-v10/` through
-`scratch/review/linker-v14/`. V14 fixed the complete namespace, but V14-F01 refuted its
-nested original-object witness/accounting claims and AUDIT pairs P13/C26 and P20/C26.
-The new experimental opt-in **`armlink5-inline-branchnop-v15`** deliberately narrows U1
-to one compile-attested, non-nested object, refusing aggregate/archive/ambiguous inputs.
-The revised gate text and `AUDIT-v15.json` are under `scratch/integrator/linker-unref/`.
-They require independent review; frozen GATES remains v1.19 and defaults remain v2/none.
+The recorded experimental **v9–v15** implementations remain selectable, immutable and
+**unadopted**. Sealed FAILs v10–v14 remain under `scratch/review/`; v15 narrows U1 to
+one direct object but deliberately cannot authorize it inside an aggregate builder.
+The new experimental opt-in **`armlink5-inline-branchnop-v16`** integrates that same
+direct-unit proof before aggregation, with separate composition vetoes and full receipt
+closure. Aggregation itself never authorizes U1. The proposed v1.20 gate text is under
+`scratch/integrator/linker-unref/`, pending independent review. Frozen GATES remains
+v1.19 and defaults remain v2/none.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -784,7 +784,73 @@ Commands, audit binding, hashes and receipts are `scratch/integrator/linker-unre
 fresh real records are under `real-menu-{reset,scene}-v15-r1/`.
 The current builder always supplies an aggregate, so v15 **does not authorize U1 in whole-ledger
 builds**, even with one wrapped unit. No per-unit removal workaround or future broader model is
-implicit. The v1.20 draft now names v15; no adoption, full suite/build, subagents or new credit.
+implicit. The v1.20 draft for that historical proposal named v15; no adoption, full suite/build, subagents or new credit.
+
+## Direct-unit U1 in full builds (experimental v16)
+
+V15's aggregate refusal remains immutable. Only
+**`armlink5-inline-branchnop-v16`** adds a builder stage that authorizes U1 on each ledger
+unit's **own direct compiled object before aggregation**:
+
+1. Compile fresh and inspect original objects for unique emitted credited ownership.
+2. Run `prepare_unit_u1` on each direct, non-nested unit. It uses the narrow original-object
+   witness/reference/metadata rules, stages exact D0/own-companion actions and returns a
+   prepared view. Original definitions/reference provenance remain visible; a group with
+   an unproved R1/other member refuses rather than borrowing an aggregate proof.
+3. Apply **negative composition vetoes** over original inputs. Foreign references to any
+   staged removal—including zero-sized/unplaced sources and conservative peer cycles—
+   refuse. A supposedly external personality marker with any supplied ledger definition
+   also refuses. These checks never add removals or loan a D1 witness.
+4. Combine prepared units for ordinary relocation/placement/R1. The aggregate cannot decide
+   U1; an escaped unprocessed U1 candidate still fails the narrow scope guard.
+5. Verify every retained D1 witness against its complete catalogue extent **after aggregate
+   relocation**, even in a zero-credit owning unit, before publishing a successful receipt.
+
+Build units carry complete original-object `linker_section_rewrites`,
+`removed_special_members` and nested `unwind_sections`; their section indices remain local
+to the original unit. Existing per-function `linker_rewrites` stay separate. Source/object,
+fresh dependency manifest/header, compiler/config/model/harness inputs bind the actions.
+No removed code or metadata earns function/byte credit.
+
+Prepare records both complete fresh receipts and exposes the actions through `model_uses`
+and its U1 summaries. V16 requires `u1_stage: per-unit-direct-before-aggregation`,
+one-to-one action/member correspondence and matching retained-witness records. Review,
+finalize and history recheck that closure. Existing transitions reopen all R1 callers,
+L1 owner functions and credited U1-owner functions; zero-credit owners/actions remain visible.
+
+### Bounded fixture comparison
+
+`build.py --bounded --matches <scratch-ledger>` exercises the same compile/preparation/
+composition/relocation/receipt path but writes **metadata only**: no hybrid allocation,
+`code.bin`/BLZ output or recompression. It records `covered` counts and span hashes, not
+accepted credit or whole-image equality. A proposed `--names` overlay is allowed only in
+this mode and is hash-bound with the canonical/merged names. Bounded receipts are explicitly
+rejected by checkpoint preparation/verification.
+
+Executed focused selection: **238 tests, exit 0, OK**, plus **13 checkpoint-binding tests,
+exit 0, OK**. New synthetic full-path tests cover per-unit action/companion/witness receipts,
+zero-credit owners, wrong D1 bytes, combined-input refusal, split-unit D1 loans, foreign
+zero-sized references, supplied global/weak/local personality definitions and acceptance
+stage/action/witness integrity. The v15→v16 transition binds both receipts and reopens U1 review.
+
+The bounded real check uses a two-unit ledger: exact types-menu d8aef63a MenuResetScene
+attempt008 plus an independent empty zero-credit TU. Frozen game compiler/flags, L1,
+snapshot include root and proposed names are explicit. **Exit 0, PASS**:
+
+- D1 placed at **`0x001acbb4`**, exact **100 B** covered span.
+- Covered/original SHA-256 both
+  **`3dcc4769af32c297d855d8f16a49fc153bceefe3730125f0ee42034fcbec4ccf`**.
+- Exactly one target-null U1 action removes D0 **108 B** and own exidx **8 B**.
+- Complete original object/unit provenance, retained-witness comparison and source/object/
+  dependency/harness closure appear in the receipt and derived `model_uses`.
+- No image payload files or BLZ recompression.
+
+Bounded receipt: `build/linker-unref-v16-bounded-r1/receipt.json`.
+Fixture ledger/helper and exact commands/exits/actions are bound in
+`scratch/integrator/linker-unref/evidence-v16.json`.
+Direct matcher re-runs preserve MenuResetScene **exit 0 / MATCH 100 B** with the same one
+action, and MenuScene **exit 2 / live vtable refusal** without actions.
+No whole-ledger production build, full suite, adoption, subagents or new credit is claimed.
 
 ## Sources
 
