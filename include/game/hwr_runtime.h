@@ -24,7 +24,8 @@ struct RecognitionList {
     struct RecognitionEntry *entries;
     unsigned short capacity, count, worst_score, worst_index;
 };
-/* [INFERENCE] Candidate workspace carved from the existing byte-storage root. */
+/* [INFERENCE] One candidate workspace rooted at bss_004de5cc and published by
+ * func_0014db18; entry rows precede the per-stroke list descriptors. */
 struct HwrCandidateStorage {
     struct RecognitionEntry entries[32][16];
     struct RecognitionList lists[32];
@@ -106,7 +107,8 @@ struct HwrCandidate {
 extern "C" {
 #endif
 extern union HwrWorkspace *data_0024385c;
-extern unsigned char *data_00243830;
+extern struct HwrCandidateStorage *data_00243830;
+extern struct HwrCandidateStorage bss_004de5cc;
 extern unsigned char *data_00243864;
 extern union HwrWorkspace bss_004e07f0;
 extern unsigned short *data_00243888;

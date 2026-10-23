@@ -15,9 +15,10 @@ struct TextTable {
     unsigned char reserved29[3];
 };
 
-/* [INFERENCE] Serialized prefix; an ordinary TextTable begins immediately after. */
+/* [INFERENCE] Names record with its counted table at the observed +0x84 member. */
 struct W8TextTable {
     unsigned char reserved00[0x84];
+    struct TextTable names;
 };
 
 struct MenuItem {

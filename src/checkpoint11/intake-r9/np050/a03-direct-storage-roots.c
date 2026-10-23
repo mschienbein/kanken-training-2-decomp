@@ -33,7 +33,7 @@ static void trim_candidates(struct RecognitionList *list,
 
 static struct HwrCandidateStorage *candidate_storage(void)
 {
-    return (struct HwrCandidateStorage *)data_00243830;
+    return data_00243830;
 }
 
 
