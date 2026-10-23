@@ -15,12 +15,14 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **v9/v10** implementations remain selectable, immutable and
-**unadopted**; their independent review at `scratch/review/linker-v10/codex/REPORT.md`
-sealed **FAIL** (F01–F05). The new experimental opt-in **`armlink5-inline-branchnop-v11`**
-corrects their U1 dependency census, mapping/copy proofs and reporting/hash closure under a
-new identity. Its proposed gate revision is `scratch/integrator/linker-unref/GATES-DRAFT.md`,
-pending independent implementation/exact-text review. `docs/GATES.md` remains frozen v1.19.
+The recorded experimental **v9/v10/v11** implementations remain selectable, immutable and
+**unadopted**. V9/v10 sealed **FAIL** at `scratch/review/linker-v10/codex/REPORT.md`
+(F01–F05); v11 sealed **FAIL** at `scratch/review/linker-v11/codex/REPORT.md`
+(V11-F01: semantic ELF flags were lost before its claimed complete-metadata copy proof).
+The new experimental opt-in **`armlink5-inline-branchnop-v12`** preserves the v11 root
+fixes and adds unreduced semantic section/group metadata and link/info dependency checks.
+Its proposed gate revision is `scratch/integrator/linker-unref/GATES-DRAFT.md`, pending
+independent implementation/exact-text review. `docs/GATES.md` remains frozen v1.19.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -453,7 +455,7 @@ is corrected under its recorded identity. Only **`armlink5-inline-branchnop-v11`
   function extent alignment, ordering, unique offsets, complete ranges and power-of-two
   section alignment must agree.
   Odd or incomplete code ranges are unsupported, not evidence for U1.
-- **F05 — relocation-target identity:** copies compare full section metadata, bytes, mapping
+- **F05 — relocation-target identity:** copies compare decoded section metadata, bytes, mapping
   and each relocation's type/offset plus normalized target identity, binding, kind, value and
   size. A definition's actual combined section identity is mandatory: equal local names,
   equal local data bytes or a matching unproved COMDAT key do not establish one target.
@@ -520,6 +522,67 @@ Exact argv/cwd/exits, reused-fixture hashes and every action are recorded in
 `scratch/integrator/linker-unref/real-menu-reset-v11-r2/func_001acbb4.result.json` and
 `scratch/integrator/linker-unref/real-menu-scene-v11-r2/func_00174480.result.json`.
 No full suite, full build, whole-ledger audit, model adoption or new credit is claimed.
+
+## Unreduced semantic section metadata (experimental v12)
+
+The independent review of `5de7845b` held all five earlier root fixes, but sealed **FAIL**
+on **V11-F01**: `SHF_TLS`, `SHF_INFO_LINK` and individual `SHF_MERGE`/`SHF_STRINGS`
+bits disappeared before the copy comparison. Contradictory D0 copies therefore still
+emitted two U1 actions in either object order. V11's rules, failed review, tests and
+receipts remain unadopted history; no recorded model is repaired under its old name.
+
+Only **`armlink5-inline-branchnop-v12`** enables the additional complete-metadata proof:
+
+- `SectionMetadata` retains the **entire unmasked flag word**, raw address/alignment and
+  link/info fields. Together with the existing resolved section name, type, size and entry
+  size, these fields participate in every selected COMDAT code/own-companion comparison.
+  The comparison is not a whitelist or a reconstruction from executable/writable/merge
+  booleans. Unavailable metadata, decoded/raw disagreement and unmodeled nonzero link/info
+  semantics refuse rather than silently disappear.
+- `GroupMembership` retains each containing group's complete header flags, name, address,
+  size, alignment and entry size, plus its normalized canonical symbol-table/signature
+  metadata. Membership must agree with `SHF_GROUP`; missing/duplicate memberships,
+  unsupported signatures/tables and unequal complete allocated member roles refuse.
+  These checks also apply to R1-only code/companion groups, not just groups containing D0.
+- `SHF_LINK_ORDER` and `SHF_INFO_LINK` section-index dependencies survive combination with
+  correct defining-object ownership. Only independently proved roles normalize corresponding
+  own-unwind targets across copies; arbitrary same-spelled/local targets never normalize.
+  Both header dependency forms enter the U1, R1 and own-unwind incoming/link censuses,
+  including zero-sized allocated sources.
+- ELF file offsets and string-table indices are serialization details, not semantic section
+  identities. Canonical symbol-table/signature evidence normalizes group `sh_link`/`sh_info`
+  only after validation. Identical metadata remains subject to all independent eligibility,
+  root/reference, full-section, own-unwind and source-policy requirements.
+
+`tests/test_unreferenced_v12.py` exercises the actual parsed-ELF TLS reproduction through
+`Context.compare`, all **32 individual flag bits** on D0/exidx/extab in **both object
+orders** (192 contradictory cases), identical-metadata controls, complete header/group
+fields, link/info target identity/remapping, zero-sized INFO_LINK witnesses, pure R1
+companion copies, reporting and immutable-model isolation. Its synthetic compressed-section
+variant has a real ELF compression header; it does not substitute malformed compressed data.
+
+Executed focused selections: **183 tests, exit 0, OK**, plus **13 checkpoint-selection/
+receipt-binding tests, exit 0, OK**. All **18** prior sealed counterexamples and all
+**eight** sealed v11 contradictory-flag fixtures refuse without actions under v12; six
+valid sealed controls still match and report actions (probe exit 0). The first test-helper
+argument-name collision and the first probe's missing `synthetic-elf` path component are
+preserved as exit-1 harness records; their corrected invocations use new immutable names.
+
+Bounded `d8aef63a` real cases use the exact v11 commands with only model/output selection
+changed, retaining `nice -n 10`, the immutable include-root override, frozen `game` profile,
+L1, names overlay and `--show 0`:
+
+- **MenuResetScene attempt008: exit 0**, D1 **MATCH, 100 B at `0x001acbb4`**. Exactly one
+  target-null U1 action removes D0 **108 B** and own exidx **8 B**; no extab or branch rewrite.
+- **MenuScene attempt006: exit 2**, live vtable ABS32 at `.constdata__ZTV9MenuScene+0xc`
+  keeps D0 live; no action is published.
+
+Exact argv/cwd/exits, retained failures, fixture hashes, receipts and actions are recorded in
+`scratch/integrator/linker-unref/evidence-v12.json`; fresh real receipts are under
+`scratch/integrator/linker-unref/real-menu-{reset,scene}-v12-r3/`.
+The v1.20 draft now names v12 and preserves all R1/L1/U1 transition-review obligations.
+V11 remains selectable and unadopted, defaults remain v2/none, and frozen GATES remains v1.19.
+No adoption, full suite, full build, checkpoint rewrite or new credit is claimed.
 
 ## Sources
 

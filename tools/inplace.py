@@ -642,6 +642,34 @@ class Reloc:
     symbol: Symbol
 
 
+@dataclass(frozen=True)
+class GroupMembership:
+    """A containing SHT_GROUP header and its normalized symbol-table/signature semantics."""
+
+    flags: int
+    signature: str
+    name: str
+    header_flags: int
+    address: int
+    size: int
+    alignment: int
+    entry_size: int
+    canonical_symbol_table: bool
+    signature_symbol: tuple[str, int, int, str, str] | None
+
+
+@dataclass(frozen=True)
+class SectionMetadata:
+    """Unreduced semantic ELF header fields; file offsets/name-table indices are not identities."""
+
+    flags: int
+    address: int
+    alignment: int
+    link: int | str
+    info: int | str
+    groups: tuple[GroupMembership, ...] = ()
+
+
 @dataclass
 class Section:
     index: int
@@ -661,6 +689,7 @@ class Section:
     elf_type: str = "SHT_PROGBITS"
     link_order: bool = False
     linked_section: int | str = 0  # sh_link for SHF_LINK_ORDER; remapped with candidate ownership
+    metadata: SectionMetadata | None = None  # v12 requires actual ELF metadata, never guessed flags
 
 
 class ObjectFile:
@@ -692,6 +721,8 @@ class ObjectFile:
                         entsize=s["sh_entsize"],
                         elf_type=s["sh_type"], link_order=bool(s["sh_flags"] & SH_FLAGS.SHF_LINK_ORDER),
                         linked_section=s["sh_link"] if s["sh_flags"] & SH_FLAGS.SHF_LINK_ORDER else 0,
+                        metadata=SectionMetadata(s["sh_flags"], s["sh_addr"], s["sh_addralign"],
+                                                 s["sh_link"], s["sh_info"]),
                         retention=tuple(reason for flag, reason in (
                             (0x10000000, "ARM entry section"), (0x200000, "GNU retain"),
                             (SH_FLAGS.SHF_MASKOS | SH_FLAGS.SHF_MASKPROC, "OS/processor section flags"),
@@ -726,8 +757,20 @@ class ObjectFile:
                     if words:
                         flags = words[0]
                         signature = self.symbols[s["sh_info"]].name if flags & 1 else ""
+                        symbol = self.symbols[s["sh_info"]] if s["sh_info"] < len(self.symbols) else None
+                        membership = GroupMembership(
+                            flags, signature, s.name, s["sh_flags"], s["sh_addr"], s["sh_size"],
+                            s["sh_addralign"], s["sh_entsize"],
+                            s["sh_link"] == elf.get_section_index(".symtab") and symbol is not None,
+                            (symbol.name, symbol.value, symbol.size, symbol.kind, symbol.bind) if symbol else None,
+                        )
                         self.section_groups.append((
                             flags, signature, {member for member in words[1:] if member in allocated_indices}))
+                        for member in words[1:]:
+                            if member in allocated:
+                                section = allocated[member]
+                                section.metadata = replace(
+                                    section.metadata, groups=(*section.metadata.groups, membership))
                         if flags & 1:  # Frozen COMDAT identity; other group semantics are not modeled.
                             for member in words[1:]:
                                 if member in allocated:
@@ -786,8 +829,17 @@ class ObjectFile:
                 new_index = indices[index]
                 linked = (indices.get(section.linked_section, f"UNALLOCATED_{owner}_{section.linked_section}")
                           if section.link_order else 0)
+                metadata = section.metadata
+                if metadata is not None:
+                    metadata = replace(
+                        metadata,
+                        link=indices.get(metadata.link, f"UNALLOCATED_{owner}_{metadata.link}") if metadata.link else 0,
+                        info=(indices.get(metadata.info, f"UNALLOCATED_{owner}_{metadata.info}")
+                              if metadata.flags & SH_FLAGS.SHF_INFO_LINK and metadata.info else metadata.info),
+                    )
                 destination = merged.sections if index in obj.sections else merged.dependency_sections
-                destination[new_index] = replace(section, index=new_index, relocs=[], linked_section=linked)
+                destination[new_index] = replace(section, index=new_index, relocs=[], linked_section=linked,
+                                                 metadata=metadata)
                 merged.section_owners[new_index] = owner
                 merged.section_objects[new_index] = labels[owner] if labels is not None else str(getattr(obj, "path", f"object[{owner}]"))
             for sym in obj.defined_globals():
@@ -1508,6 +1560,51 @@ class InPlaceLinker:
             return obj.sections | getattr(obj, "dependency_sections", {})
         return obj.sections
 
+    def _section_metadata_identity(self, obj: ObjectFile, section: Section,
+                                   proven_targets: dict[int, tuple] | None = None) -> tuple:
+        """V12 compares every semantic header bit/field; only proved section roles normalize."""
+        metadata = section.metadata
+        if metadata is None:
+            raise LinkError(f"{section.name}: complete ELF section metadata is unavailable")
+        if (not metadata.flags & SH_FLAGS.SHF_ALLOC
+                or bool(metadata.flags & SH_FLAGS.SHF_EXECINSTR) != section.executable
+                or bool(metadata.flags & SH_FLAGS.SHF_WRITE) != section.writable
+                or bool(metadata.flags & SH_FLAGS.SHF_LINK_ORDER) != section.link_order
+                or max(1, metadata.alignment) != section.align
+                or section.link_order and metadata.link != section.linked_section):
+            raise LinkError(f"{section.name}: decoded section metadata disagrees with its ELF header")
+        if (metadata.link and not metadata.flags & SH_FLAGS.SHF_LINK_ORDER
+                or metadata.info and not metadata.flags & SH_FLAGS.SHF_INFO_LINK):
+            raise LinkError(f"{section.name}: unsupported ELF sh_link/sh_info semantics")
+        memberships = metadata.groups
+        expected = ((1, section.comdat),) if section.comdat is not None else ()
+        if (tuple((group.flags, group.signature) for group in memberships) != expected
+                or bool(metadata.flags & SH_FLAGS.SHF_GROUP) != bool(memberships)
+                or any(not group.signature or not group.canonical_symbol_table for group in memberships)):
+            raise LinkError(f"{section.name}: unsupported or contradictory ELF group membership")
+        sections = self._reference_sections(obj)
+        targets = proven_targets or {}
+
+        def reference(index: int | str) -> tuple:
+            if index and index not in sections:
+                raise LinkError(f"{section.name}: unrepresented ELF header dependency")
+            return ("section", targets.get(index, index))
+
+        # Do not mask flags: even a bit with no decoded Section boolean changes copy identity.
+        return (metadata.flags, metadata.address, metadata.alignment, reference(metadata.link),
+                reference(metadata.info) if metadata.flags & SH_FLAGS.SHF_INFO_LINK else ("scalar", metadata.info),
+                memberships, section.comdat)
+
+    def _section_dependencies(self, obj: ObjectFile, section: Section) -> tuple[int | str, ...]:
+        """V12 also retains SHF_INFO_LINK dependencies; older models keep their exact census."""
+        if not self.model.complete_section_metadata:
+            return (section.linked_section,) if section.link_order else ()
+        self._section_metadata_identity(obj, section)
+        metadata = section.metadata
+        return tuple(index for index in (metadata.link,
+                                         metadata.info if metadata.flags & SH_FLAGS.SHF_INFO_LINK else 0)
+                     if index)
+
     def _retention_sections(self, obj: ObjectFile) -> dict[int, tuple[str, ...]]:
         """DUI0474K §4.3 roots survive independently of whether their calls inline."""
         sections = self._reference_sections(obj)
@@ -1611,6 +1708,8 @@ class InPlaceLinker:
                 if index not in removed:
                     raise LinkError(f"COMDAT {key[0]} {key[1]} has an unsupported retained callee copy")
                 prior = comdats.setdefault(key, section)
+                if self.model.complete_section_metadata:
+                    self._check_destructor_copy(obj, prior, section)
                 if section.data != prior.data or section.mapping != prior.mapping:
                     raise LinkError(f"COMDAT {key[0]} {key[1]} has contradictory removed-callee copies")
         return removed
@@ -1662,7 +1761,9 @@ class InPlaceLinker:
                     section.mapping, section.align, section.merge_strings, section.entsize,
                     section.elf_type, section.link_order, proven_targets.get(section.linked_section, section.linked_section),
                     [(rel.offset, rel.type, target_identity(rel, section)) for rel in section.relocs],
-                    symbols(section))
+                    symbols(section),
+                    self._section_metadata_identity(obj, section, proven_targets)
+                    if self.model.complete_section_metadata else ())
 
         if identity(first) != identity(second):
             raise LinkError(f"COMDAT {first.comdat} {first.name} has contradictory U1 relocation targets or copies")
@@ -1674,6 +1775,10 @@ class InPlaceLinker:
         for index, section in sections.items():
             if section.comdat not in groups:
                 continue
+            if (self.model.complete_section_metadata
+                    and index not in self._removed_sections
+                    and index not in self._unreferenced_sections and index not in self._removed_unwind):
+                raise LinkError(f"COMDAT {section.comdat}: member has no complete group-removal proof")
             if index in self._removed_unwind:
                 owner = sections[self._removed_unwind[index]]
                 roles[index] = ("own-unwind", owner.name, section.name)
@@ -1686,6 +1791,8 @@ class InPlaceLinker:
                 continue
             copy = {}
             for index in indices:
+                if self.model.complete_section_metadata and index not in roles:
+                    raise LinkError(f"COMDAT {signature}: unrepresented allocated group member")
                 role = roles[index]
                 if role in copy:
                     raise LinkError(f"COMDAT {signature}: duplicate allocated member role is unproved")
@@ -1740,6 +1847,8 @@ class InPlaceLinker:
                 raise LinkError(f"{section.name}: unsupported U1 deleting-destructor section metadata")
             if self.model.checked_destructor_removal:
                 self._check_destructor_mapping(section, symbols)
+            if self.model.complete_section_metadata:
+                self._section_metadata_identity(obj, section)
             for sym in symbols:
                 if sym is destructor:
                     continue
@@ -1815,7 +1924,7 @@ class InPlaceLinker:
         for section in self._reference_sections(obj).values():
             if section.index in dead:
                 continue  # existing R1/v8 rules have already proved this source absent
-            if section.link_order and section.linked_section in targets:
+            if any(index in targets for index in self._section_dependencies(obj, section)):
                 raise LinkError(f"{section.name}: linked metadata keeps a U1 deleting destructor live")
             for rel in section.relocs:
                 if (rel.type == R_ARM_V4BX and section.executable and section.elf_type == "SHT_PROGBITS"
@@ -1883,11 +1992,14 @@ class InPlaceLinker:
             return {}
         companions: dict[int, int] = {}
         exidx_by_owner: dict[int, int] = {}
-        incoming: dict[int, list[tuple[Section, Reloc]]] = {}
+        incoming: dict[int | str, list[tuple[Section, Reloc | None]]] = {}
         for section in self._reference_sections(obj).values():
             for rel in section.relocs:
                 if rel.type != R_ARM_V4BX:
                     incoming.setdefault(rel.symbol.shndx, []).append((section, rel))
+            if self.model.complete_section_metadata:
+                for index in self._section_dependencies(obj, section):
+                    incoming.setdefault(index, []).append((section, None))
 
         def private_data(section: Section, owner: int, kind: str) -> None:
             if (not section.name.startswith(f".ARM.{kind}") or section.nobits or section.executable
@@ -1896,6 +2008,8 @@ class InPlaceLinker:
                     or section.comdat != obj.sections[owner].comdat
                     or section.index in self._retained_sections):
                 raise LinkError(f"{section.name}: not an exclusive unrooted {kind} companion")
+            if self.model.complete_section_metadata:
+                self._section_metadata_identity(obj, section)
             for sym in obj.symbols:
                 if sym.shndx != section.index:
                     continue
@@ -1974,7 +2088,7 @@ class InPlaceLinker:
 
         # Section links are dependencies too, even without an allocated relocation.
         for section in self._reference_sections(obj).values():
-            if (section.link_order and section.linked_section in (removed | companions)
+            if (any(index in (removed | companions) for index in self._section_dependencies(obj, section))
                     and section.index not in companions):
                 raise LinkError(f"{section.name}: another linked section keeps removed unwind/code live")
         # A group is indivisible, including all supplied copies and allocated members that
@@ -2022,6 +2136,9 @@ class InPlaceLinker:
         for section in self._reference_sections(obj).values():
             if section.index in self._removed_unwind:
                 continue
+            if (self.model.complete_section_metadata
+                    and any(index in self._removed_sections for index in self._section_dependencies(obj, section))):
+                raise LinkError(f"{section.name}: ELF header dependency keeps a removed callee live")
             for rel in section.relocs:
                 index = rel.symbol.shndx
                 if index not in self._removed_sections or rel.type == R_ARM_V4BX:
@@ -2109,6 +2226,9 @@ class InPlaceLinker:
         unwind_owners = (self._removed_sections | self._unreferenced_sections
                          if self.model.unreferenced_destructor_unwind else self._removed_sections)
         self._removed_unwind = self._removed_unwind_sections(obj, names_to_address or {}, unwind_owners)
+        if self.model.complete_section_metadata:
+            groups = {obj.sections[index].comdat for index in unwind_owners} - {None}
+            self._check_destructor_group_copies(obj, groups)
         if self.model.checked_destructor_removal:
             self._check_unreferenced_destructors(obj)  # preflight before placement can consume any witness
         placements = self.place(obj, names_to_address or {})

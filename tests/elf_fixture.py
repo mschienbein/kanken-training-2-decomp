@@ -12,8 +12,8 @@ BINDS = {"STB_LOCAL": 0, "STB_GLOBAL": 1, "STB_WEAK": 2}
 SPECIAL_INDICES = {"SHN_UNDEF": 0, "SHN_ABS": 0xFFF1}
 
 
-def serialize_object(obj: inplace.ObjectFile) -> bytes:
-    """Emit only independently constructed test metadata/payload; no licensed object inputs."""
+def serialize_object(obj: inplace.ObjectFile, *, headers: dict[int, dict] | None = None) -> bytes:
+    """Emit independent synthetic ELF; optional actual-header overrides exercise parser losses."""
     symbols = list(obj.symbols)
     for section in obj.sections.values():
         for relocation in section.relocs:
@@ -79,6 +79,8 @@ def serialize_object(obj: inplace.ObjectFile) -> bytes:
         sections.append({"name": ".group." + signature, "type": 17, "flags": 0, "data": data,
                          "size": len(data), "link": symbol_table_index, "info": signature_index,
                          "align": 4, "entsize": 4})
+    for index, fields in (headers or {}).items():
+        sections[indices[index]].update(fields)
     names = bytearray(b"\0")
     for section in sections:
         section["name_offset"] = len(names)
@@ -89,17 +91,18 @@ def serialize_object(obj: inplace.ObjectFile) -> bytes:
                      "data": bytes(names), "size": len(names)})
     blob = bytearray(52)
     for section in sections:
-        blob.extend(bytes(-len(blob) % section.get("align", 1)))
+        blob.extend(bytes(-len(blob) % max(1, section.get("align", 1))))
         section["offset"] = len(blob)
         if section["type"] != 8:
             blob.extend(section["data"])
     blob.extend(bytes(-len(blob) % 4))
-    headers = len(blob)
+    headers_offset = len(blob)
     for section in sections:
-        blob.extend(struct.pack("<10I", section["name_offset"], section["type"], section["flags"], 0,
+        blob.extend(struct.pack("<10I", section["name_offset"], section["type"], section["flags"],
+                                section.get("address", 0),
                                 section["offset"], section["size"], section.get("link", 0),
                                 section.get("info", 0), section.get("align", 1), section.get("entsize", 0)))
     ident = b"\x7fELF\x01\x01\x01" + bytes(9)
-    blob[:52] = struct.pack("<16sHHIIIIIHHHHHH", ident, 1, 40, 1, 0, 0, headers,
+    blob[:52] = struct.pack("<16sHHIIIIIHHHHHH", ident, 1, 40, 1, 0, 0, headers_offset,
                             0x05000000, 52, 0, 0, 40, len(sections), names_index)
     return bytes(blob)
