@@ -1,0 +1,39 @@
+{
+  "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_00113e78",
+    "func_001f0008",
+    "func_001f0018"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/font_ResFontBase_ctor.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u0829"
+  ],
+  "exit_code": 0,
+  "seconds": 0.192888,
+  "source_sha256": "e96372bf88b46931821c73415df2f9ed5c1c00e725431710dd8f4fc0f914e035",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u0829/font_ResFontBase_ctor.result.json",
+  "receipt_sha256": "4c49bd6f48e34c302e2b7137b45db92fcce7d4af2cb6eb5e6e6949c5797d343f",
+  "output": "MATCH    _ZN2nw4font11ResFontBaseC1Ev @ 0x113e78 size 0x34/0x34\nMATCH    _ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtLargeEv @ 0x1f0008 size 0x10/0x10\nMATCH    _ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtSmallEv @ 0x1f0018 size 0x10/0x10\n",
+  "stderr": ""
+}

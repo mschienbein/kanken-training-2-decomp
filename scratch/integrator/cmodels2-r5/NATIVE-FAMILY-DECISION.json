@@ -1,0 +1,605 @@
+{
+  "schema_version": 1,
+  "status": "NATIVE_FAMILY_QUARANTINED_ACCEPTED_FORMS_RETAINED",
+  "gate_authority": {
+    "revision": "v1.20",
+    "adoption_commit": "5ea97031",
+    "linker_model": "armlink5-inline-branchnop-v18",
+    "gates": {
+      "path": "docs/GATES.md",
+      "sha256": "a12e1db3005a8126608842adb7bb96ef3870da4d1d148fa0d76608ba2d358ccc"
+    },
+    "linker": {
+      "path": "docs/LINKER.md",
+      "sha256": "75e0bda9374056158e561ebbdefd3fde984c6242b277a20fe2d6e31d918bbc4d"
+    }
+  },
+  "Main_clarification": "Native tables only through virtual destructor, an actually undefined key and constructor/caller-evidenced external _ZTV binding. The table must not be emitted by a credited TU. No new/reordered slots, PMF decoding, reference suppression or invented interface/base is permitted. Keep the accepted root if no original-evidenced key supports its definition.",
+  "known_original_source_outcomes_not_rerun": [
+    {
+      "class": "MenuScene",
+      "source": "types-menu attempt006",
+      "linker_model": "armlink5-inline-branchnop-v18",
+      "status": "refused",
+      "reason": "Live _ZTV9MenuScene+0xc D0 reference; reported by Main and recorded in linker-v18 evidence.",
+      "rerun": false
+    },
+    {
+      "class": "MenuResetScene",
+      "source": "types-menu attempt008",
+      "linker_model": "armlink5-inline-branchnop-v18",
+      "status": "match",
+      "target_bytes": 100,
+      "qualification": "Known direct-unit success alone does not close the required root/provider/whole-family contract."
+    }
+  ],
+  "natural_changed_input": "Use the actually empty root destructor inline, with the existing finish declaration as undefined key, preserving every slot and field. Derived build declarations remain undefined keys; no forced emission or compiler flag change.",
+  "root_changed_input": {
+    "source": {
+      "path": "scratch/integrator/cmodels2-r5/root-key-probe/native_root.cpp",
+      "sha256": "5d56da6e4861288e8ddbee1142fc769c952ef8e1ccac8b3b73c9351678e66a73"
+    },
+    "header": {
+      "path": "scratch/integrator/cmodels2-r5/root-key-probe/native_root.h",
+      "sha256": "bde9b7994e139dda8d5f3cda39ccf781b5d2bcfac1c80bfb099d1ad9ec043dd3"
+    },
+    "receipt": {
+      "path": "scratch/integrator/cmodels2-r5/root-key-probe/match/native_root.result.json",
+      "sha256": "654700f3fd3073a47e51117cf9c630ab76bf798f43448aa57ecff6a96a8fb321"
+    },
+    "exit_code": 2,
+    "status": "refused",
+    "reason": "candidate defines no surviving catalogued functions to compare"
+  },
+  "derived_changed_inputs": [
+    {
+      "function": "func_001acbb4",
+      "class": "MenuResetScene",
+      "source": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/native_reset.cpp",
+        "sha256": "9ec9a36dff6a1377ad5ad071043569b0619bb7bde2f482c550fafc9e72b9aac2"
+      },
+      "header": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/native_reset.h",
+        "sha256": "d1f5719ac799bf65f76a7caf97180e447d0965af1c2719eb07033182877ce99d"
+      },
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/reset-match/native_reset.result.json",
+        "sha256": "7a867be92861c4e4f27d595ed88090c16a1ad6227fc2401438327e953a51f2e2"
+      },
+      "exit_code": 1,
+      "functions": [
+        {
+          "name": "_ZN14MenuResetSceneD1Ev",
+          "address": 1756084,
+          "size": 100,
+          "candidate_size": 96,
+          "status": "mismatch",
+          "first_diff": 8,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN14MenuResetSceneD0Ev"
+          ],
+          "section": "i._ZN14MenuResetSceneD0Ev",
+          "section_index": 1,
+          "size": 100,
+          "object": "scratch/integrator/cmodels2-r5/root-key-probe/reset-match/native_reset.o",
+          "unit": "scratch/integrator/cmodels2-r5/root-key-probe/reset-match/native_reset.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV14MenuResetScene",
+            "vtable_address": 2241984,
+            "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+            "complete_destructor_address": 1756084,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true,
+            "complete_destructor_size": 100
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "scratch/integrator/cmodels2-r5/root-key-probe/reset-match/native_reset.o",
+              "unit": "scratch/integrator/cmodels2-r5/root-key-probe/reset-match/native_reset.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "function": "func_001b3280",
+      "class": "CalendarScene",
+      "source": "scratch/integrator/cmodels2-r5/root-key-probe/func_001b3280-inline-key.cpp",
+      "names": "scratch/integrator/cmodels2-r5/root-key-probe/func_001b3280-inline-key.names.json",
+      "native_source": "src/wave17/func_001b3280.cpp",
+      "canonical_source_retained": "src/wave17/func_001b3280.cpp",
+      "exit_code": 1,
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/derived-00/func_001b3280-inline-key.result.json",
+        "sha256": "354174fe96379099f8fa1e53f377261aa8b4ad7c3d7d2d7ce09d272218341900"
+      },
+      "functions": [
+        {
+          "name": "_ZN13CalendarSceneD1Ev",
+          "address": 1782400,
+          "size": 192,
+          "candidate_size": 188,
+          "status": "mismatch",
+          "first_diff": 8
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN13CalendarSceneD0Ev"
+          ],
+          "section": "i._ZN13CalendarSceneD0Ev",
+          "section_index": 1,
+          "size": 192,
+          "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-00/func_001b3280-inline-key.o",
+          "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-00/func_001b3280-inline-key.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV13CalendarScene",
+            "vtable_address": 2242052,
+            "complete_destructor": "_ZN13CalendarSceneD1Ev",
+            "complete_destructor_address": 1782400,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true,
+            "complete_destructor_size": 192
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-00/func_001b3280-inline-key.o",
+              "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-00/func_001b3280-inline-key.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "function": "func_001e7470",
+      "class": "DepartureScene",
+      "source": "scratch/integrator/cmodels2-r5/root-key-probe/func_001e7470-inline-key.cpp",
+      "names": "scratch/integrator/cmodels2-r5/root-key-probe/func_001e7470-inline-key.names.json",
+      "native_source": "src/wave17/func_001e7470.cpp",
+      "canonical_source_retained": "src/wave17/func_001e7470.cpp",
+      "exit_code": 1,
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/derived-01/func_001e7470-inline-key.result.json",
+        "sha256": "f74ce4889829ba969fc9863aa14612d278e2a57ec572c4a4e75a09ef002a82b0"
+      },
+      "functions": [
+        {
+          "name": "_ZN14DepartureSceneD1Ev",
+          "address": 1995888,
+          "size": 72,
+          "candidate_size": 68,
+          "status": "mismatch",
+          "first_diff": 8
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN14DepartureSceneD0Ev"
+          ],
+          "section": "i._ZN14DepartureSceneD0Ev",
+          "section_index": 1,
+          "size": 72,
+          "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-01/func_001e7470-inline-key.o",
+          "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-01/func_001e7470-inline-key.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV14DepartureScene",
+            "vtable_address": 2242564,
+            "complete_destructor": "_ZN14DepartureSceneD1Ev",
+            "complete_destructor_address": 1995888,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true,
+            "complete_destructor_size": 72
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-01/func_001e7470-inline-key.o",
+              "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-01/func_001e7470-inline-key.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "function": "func_001e7c70",
+      "class": "DetailedTransitionScene",
+      "source": "scratch/integrator/cmodels2-r5/root-key-probe/func_001e7c70-inline-key.cpp",
+      "names": "scratch/integrator/cmodels2-r5/root-key-probe/func_001e7c70-inline-key.names.json",
+      "native_source": "src/wave17/func_001e7c70.cpp",
+      "canonical_source_retained": "src/wave17/func_001e7c70.cpp",
+      "exit_code": 1,
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/derived-02/func_001e7c70-inline-key.result.json",
+        "sha256": "7b187c55097e89c0d77d45a8ae148810466b53168ec657c52e6d7a9cdb99bcae"
+      },
+      "functions": [
+        {
+          "name": "_ZN23DetailedTransitionSceneD1Ev",
+          "address": 1997936,
+          "size": 72,
+          "candidate_size": 68,
+          "status": "mismatch",
+          "first_diff": 8
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN23DetailedTransitionSceneD0Ev"
+          ],
+          "section": "i._ZN23DetailedTransitionSceneD0Ev",
+          "section_index": 1,
+          "size": 72,
+          "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-02/func_001e7c70-inline-key.o",
+          "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-02/func_001e7c70-inline-key.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV23DetailedTransitionScene",
+            "vtable_address": 2242608,
+            "complete_destructor": "_ZN23DetailedTransitionSceneD1Ev",
+            "complete_destructor_address": 1997936,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true,
+            "complete_destructor_size": 72
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-02/func_001e7c70-inline-key.o",
+              "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-02/func_001e7c70-inline-key.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "function": "func_001e7fdc",
+      "class": "ReturnScene",
+      "source": "scratch/integrator/cmodels2-r5/root-key-probe/func_001e7fdc-inline-key.cpp",
+      "names": "scratch/integrator/cmodels2-r5/root-key-probe/func_001e7fdc-inline-key.names.json",
+      "native_source": "src/wave17/func_001e7fdc.cpp",
+      "canonical_source_retained": "src/wave17/func_001e7fdc.cpp",
+      "exit_code": 1,
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/derived-03/func_001e7fdc-inline-key.result.json",
+        "sha256": "ade202657173d863d20c8cacdc4ac2572f6c2932ec0590fafc2c7314016e774c"
+      },
+      "functions": [
+        {
+          "name": "_ZN11ReturnSceneD1Ev",
+          "address": 1998812,
+          "size": 72,
+          "candidate_size": 68,
+          "status": "mismatch",
+          "first_diff": 8
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN11ReturnSceneD0Ev"
+          ],
+          "section": "i._ZN11ReturnSceneD0Ev",
+          "section_index": 1,
+          "size": 72,
+          "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-03/func_001e7fdc-inline-key.o",
+          "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-03/func_001e7fdc-inline-key.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV11ReturnScene",
+            "vtable_address": 2242652,
+            "complete_destructor": "_ZN11ReturnSceneD1Ev",
+            "complete_destructor_address": 1998812,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true,
+            "complete_destructor_size": 72
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-03/func_001e7fdc-inline-key.o",
+              "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-03/func_001e7fdc-inline-key.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "function": "func_001ec14c",
+      "class": "CompletionScene",
+      "source": "scratch/integrator/cmodels2-r5/root-key-probe/func_001ec14c-inline-key.cpp",
+      "names": "scratch/integrator/cmodels2-r5/root-key-probe/func_001ec14c-inline-key.names.json",
+      "native_source": "src/wave17/func_001ec14c.cpp",
+      "canonical_source_retained": "src/wave17/func_001ec14c.cpp",
+      "exit_code": 1,
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/derived-04/func_001ec14c-inline-key.result.json",
+        "sha256": "e2d0d2786c4d394aa1ce0e96aa38ffdd81bc402cd6770dbe31c0f898bdce48ab"
+      },
+      "functions": [
+        {
+          "name": "_ZN15CompletionSceneD1Ev",
+          "address": 2015564,
+          "size": 72,
+          "candidate_size": 68,
+          "status": "mismatch",
+          "first_diff": 8
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN15CompletionSceneD0Ev"
+          ],
+          "section": "i._ZN15CompletionSceneD0Ev",
+          "section_index": 1,
+          "size": 72,
+          "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-04/func_001ec14c-inline-key.o",
+          "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-04/func_001ec14c-inline-key.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV15CompletionScene",
+            "vtable_address": 2242816,
+            "complete_destructor": "_ZN15CompletionSceneD1Ev",
+            "complete_destructor_address": 2015564,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true,
+            "complete_destructor_size": 72
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-04/func_001ec14c-inline-key.o",
+              "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-04/func_001ec14c-inline-key.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "function": "func_001be128",
+      "class": "ExitSelectionScene",
+      "source": "scratch/integrator/cmodels2-r5/root-key-probe/func_001be128-inline-key.cpp",
+      "names": "scratch/integrator/cmodels2-r5/root-key-probe/func_001be128-inline-key.names.json",
+      "native_source": "src/wave18/func_001be128.cpp",
+      "canonical_source_retained": "src/wave18/func_001be128.cpp",
+      "exit_code": 1,
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/derived-05/func_001be128-inline-key.result.json",
+        "sha256": "9f39f6d8d6a67d9f5e7a635b5fea031d916daf896e6a9f1e62b016f23197a6f0"
+      },
+      "functions": [
+        {
+          "name": "_ZN18ExitSelectionSceneD1Ev",
+          "address": 1827112,
+          "size": 88,
+          "candidate_size": 84,
+          "status": "mismatch",
+          "first_diff": 8
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN18ExitSelectionSceneD0Ev"
+          ],
+          "section": "i._ZN18ExitSelectionSceneD0Ev",
+          "section_index": 1,
+          "size": 88,
+          "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-05/func_001be128-inline-key.o",
+          "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-05/func_001be128-inline-key.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV18ExitSelectionScene",
+            "vtable_address": 2242328,
+            "complete_destructor": "_ZN18ExitSelectionSceneD1Ev",
+            "complete_destructor_address": 1827112,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true,
+            "complete_destructor_size": 88
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-05/func_001be128-inline-key.o",
+              "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-05/func_001be128-inline-key.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "function": "func_001ef7b4",
+      "class": "CategoryScene",
+      "source": "scratch/integrator/cmodels2-r5/root-key-probe/func_001ef7b4-inline-key.cpp",
+      "names": "scratch/integrator/cmodels2-r5/root-key-probe/func_001ef7b4-inline-key.names.json",
+      "native_source": "src/wave18/func_001ef7b4.cpp",
+      "canonical_source_retained": "src/wave18/func_001ef7b4.cpp",
+      "exit_code": 1,
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/root-key-probe/derived-06/func_001ef7b4-inline-key.result.json",
+        "sha256": "1045ea89b072613c4e316a7ad5bb7fe11b209a0d69392cadf15cc2493da73392"
+      },
+      "functions": [
+        {
+          "name": "_ZN13CategorySceneD1Ev",
+          "address": 2029492,
+          "size": 100,
+          "candidate_size": 96,
+          "status": "mismatch",
+          "first_diff": 8
+        }
+      ],
+      "removed_special_members": [
+        {
+          "symbols": [
+            "_ZN13CategorySceneD0Ev"
+          ],
+          "section": "i._ZN13CategorySceneD0Ev",
+          "section_index": 1,
+          "size": 100,
+          "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-06/func_001ef7b4-inline-key.o",
+          "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-06/func_001ef7b4-inline-key.o",
+          "input_kind": "object",
+          "evidence": {
+            "vtable": "_ZTV13CategoryScene",
+            "vtable_address": 2242860,
+            "complete_destructor": "_ZN13CategorySceneD1Ev",
+            "complete_destructor_address": 2029492,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true,
+            "complete_destructor_size": 100
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "scratch/integrator/cmodels2-r5/root-key-probe/derived-06/func_001ef7b4-inline-key.o",
+              "unit": "scratch/integrator/cmodels2-r5/root-key-probe/derived-06/func_001ef7b4-inline-key.o",
+              "input_kind": "object"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "measured_conclusion": "The root emits no surviving D1. Every one of the eight derived D1s is4B short with the natural inline-root key arrangement, despite legal U1 removal of its D0. U1 does not waive D1 equality or repair extent. No supported exact root/derived transaction is demonstrated.",
+  "rejected_policy_workarounds": [
+    "Do not add/reorder virtual slots or invent a base just to change the key.",
+    "Do not change pure/inline/retention/calling semantics merely to suppress a live D0 reference.",
+    "Do not bind a native D1 name to an unrelated free C cleanup body.",
+    "Do not manually decode or flatten PMFs or alias incompatible receiver records."
+  ],
+  "accepted_destructor_forms": [
+    {
+      "function": "func_001b3280",
+      "source": "src/wave17/func_001b3280.cpp",
+      "profile": "game",
+      "accepted_source_sha256": "0580d56768396ccf87c5e59c9cc1f7c1ff3fee9a0b42c0367c973f5abbb3f2c0",
+      "current_source_sha256": "0580d56768396ccf87c5e59c9cc1f7c1ff3fee9a0b42c0367c973f5abbb3f2c0",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    },
+    {
+      "function": "func_001e7470",
+      "source": "src/wave17/func_001e7470.cpp",
+      "profile": "game",
+      "accepted_source_sha256": "f5a2b933b92ea532f9208e771f06a4c52cf8be873a9698b813f2fac48e450a59",
+      "current_source_sha256": "f5a2b933b92ea532f9208e771f06a4c52cf8be873a9698b813f2fac48e450a59",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    },
+    {
+      "function": "func_001e7c70",
+      "source": "src/wave17/func_001e7c70.cpp",
+      "profile": "game",
+      "accepted_source_sha256": "9def5cfdc76b3e586ed61b8f431971624c23d1eeac654504d6a43b9616dae661",
+      "current_source_sha256": "9def5cfdc76b3e586ed61b8f431971624c23d1eeac654504d6a43b9616dae661",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    },
+    {
+      "function": "func_001e7fdc",
+      "source": "src/wave17/func_001e7fdc.cpp",
+      "profile": "game",
+      "accepted_source_sha256": "e010a3a84431433ded34a1cad9046ec4e972a7c33dbe05e2a9b5b6d0fcff1afb",
+      "current_source_sha256": "e010a3a84431433ded34a1cad9046ec4e972a7c33dbe05e2a9b5b6d0fcff1afb",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    },
+    {
+      "function": "func_001ec14c",
+      "source": "src/wave17/func_001ec14c.cpp",
+      "profile": "game",
+      "accepted_source_sha256": "461f09264dd4f91b3350f089154638e766966fcbdb8bbc3337f6dafa546d9cc7",
+      "current_source_sha256": "461f09264dd4f91b3350f089154638e766966fcbdb8bbc3337f6dafa546d9cc7",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    },
+    {
+      "function": "func_001acbb4",
+      "source": "src/wave18/func_001acbb4.cpp",
+      "profile": "game",
+      "accepted_source_sha256": "e59fe1345c5354540843fc7c54d647c9fed7e75047e91ec6de40796a50514cb9",
+      "current_source_sha256": "e59fe1345c5354540843fc7c54d647c9fed7e75047e91ec6de40796a50514cb9",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    },
+    {
+      "function": "func_001be128",
+      "source": "src/wave18/func_001be128.cpp",
+      "profile": "game",
+      "accepted_source_sha256": "bb511d54ec590b3c7b362a57c7139fce37ac4639e33040e69449086ede2195ea",
+      "current_source_sha256": "bb511d54ec590b3c7b362a57c7139fce37ac4639e33040e69449086ede2195ea",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    },
+    {
+      "function": "func_001ef7b4",
+      "source": "src/wave18/func_001ef7b4.cpp",
+      "profile": "game",
+      "accepted_source_sha256": "e958d868ae728e2a5c87240c33cdc145d659f575d35b888eb33af95b949187bb",
+      "current_source_sha256": "e958d868ae728e2a5c87240c33cdc145d659f575d35b888eb33af95b949187bb",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    },
+    {
+      "function": "func_00174480",
+      "source": "src/wave2/func_00174480.c",
+      "profile": "game",
+      "accepted_source_sha256": "05e5c3a44e9a92c9b2370d6d655953d2face42516f4a1a5a59db6112b2a89389",
+      "current_source_sha256": "05e5c3a44e9a92c9b2370d6d655953d2face42516f4a1a5a59db6112b2a89389",
+      "decision": "Accepted form retained; no native alias/replacement, removal or duplicate definition."
+    }
+  ],
+  "native_U1_units_admitted": [],
+  "native_bindings_adopted": [],
+  "blocking_findings": [
+    "CM2-F01",
+    "CM2-F03"
+  ],
+  "output_safety": "Metadata/actions, source paths, sizes and hashes only; no original bytes, disassembly, packet contents or instruction encodings."
+}

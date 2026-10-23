@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "assignment": "CModels2Codex new qualified intake",
+  "status": "reachable-local-source-closure-complete-not-checkpoint-ready",
+  "starting_commit": "8dd4d0169a752a42e5381d9be5367da58fa45d21",
+  "branch": "cmodels2-integrate",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "refreshed_Main_inputs": [
+    {
+      "path": "scratch/integrator/escalation/MODEL_QUEUES.json",
+      "sha256": "2ee0c0b640448acb604035953fb10a6bdb0805ada00e4a648c69162af62e9301"
+    },
+    {
+      "path": "scratch/integrator/escalation/LEDGER.json",
+      "sha256": "cb53d0ee329ddc5b89eae4cf5e7751f63fce6cd6bef0ff44f2837428fcc01afe"
+    }
+  ],
+  "input_snapshot_sha256": "f9d0a8a1ff097799300dbf271b93df43d86ac5ee00a77b5b5223ea8fcb5f3510",
+  "metadata_freshness": "The refreshed ledger/queue already sees np017 and r41414 but retains older r41391/tu625 primary mismatches for001bc5ac/001e5d38. Exact fresh nf203/nf217 RESULTS and receipt/source bindings supersede only those proof choices; historical rows are preserved, not silently rewritten.",
+  "admitted_new_targets": [
+    {
+      "function": "func_00171208",
+      "target_bytes": 96,
+      "source": "src/models2/menu_transition/func_00171208.cpp",
+      "source_sha256": "7a97308881ee69ab80e381d27ce71c73859351126a2cfbe58d3a2597dae405c1",
+      "profile": "game",
+      "author": "np017",
+      "selection": {
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "receipt": {
+        "path": "scratch/cm2/intake-r3/transition/func_00171208.result.json",
+        "sha256": "2702b1c488566692d3510a53ba74280805b0e15d7c3d6734f09bfd14f9910553"
+      },
+      "exit_code": 0,
+      "status": "match",
+      "rules": [
+        "R1"
+      ],
+      "required_verdict": "QUALIFIED",
+      "rewrites": [
+        {
+          "offset": 4,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "set_completion"
+            ],
+            "section": "i.set_completion",
+            "size": 8,
+            "object": "scratch/cm2/intake-r3/transition/extra-0-transition-C-setter.o"
+          }
+        }
+      ],
+      "extra_sources": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_00172e00/transition-C-setter.c",
+          "source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3",
+          "object_sha256": "1846b998a012c7a0857fbff47d0e8f42f5871b8c82d2711a6a683f1ff3501829"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_00172e00/transition-qualified-removed.cpp",
+          "source_sha256": "3a81d25a069879ef6293913b66401d15eecfa12647ef2afaa60a853c18472d56",
+          "object_sha256": "6979b557cbf80656cacd17334339389cde91460a5305f1497a2097a9494e44b4"
+        }
+      ],
+      "model_necessity": "A fresh complete-unit v8/L1 witness, not proof of v8-only necessity; preserved default mismatches/refusals and v3/v6 qualifications remain authoritative for their own inputs."
+    },
+    {
+      "function": "func_001e5d38",
+      "target_bytes": 116,
+      "source": "src/models2/counted_resources/func_001e5d38.cpp",
+      "source_sha256": "158809ed798b9ee6193ec1cb55684163787bf2b36acbfee19a8bac17515080a3",
+      "profile": "game",
+      "author": "nf217",
+      "selection": {
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "receipt": {
+        "path": "scratch/cm2/intake-r3/category/func_001e5d38.result.json",
+        "sha256": "712ac3086d895b8bedc96e38e85812917fdf26d6f2e6a45cd543f8c29ee1f003"
+      },
+      "exit_code": 0,
+      "status": "match",
+      "rules": [
+        "R1"
+      ],
+      "required_verdict": "QUALIFIED",
+      "rewrites": [
+        {
+          "offset": 64,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "w19_item_category"
+            ],
+            "section": "i.w19_item_category",
+            "size": 8,
+            "object": "scratch/cm2/intake-r3/category/extra-0-item_accessors.o"
+          }
+        }
+      ],
+      "extra_sources": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_001730ec/item_accessors.c",
+          "source_sha256": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874",
+          "object_sha256": "ef5b0cc981bf6c105f12137c5a48a77f3092149b3aa2443c13bb873477aab1f5"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_001730ec/func_001730ec_removed.c",
+          "source_sha256": "8e85116907b06b33eaeba46698afb23d9c24f95360cb7c390e0db711d6e81714",
+          "object_sha256": "2dcc92d3a1dbfd47246c73717f1f72e93c34cb1cbcb172a1c56fedef60693400"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/wave19/func_0015f5b0.c",
+          "source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac",
+          "object_sha256": "1b15f4b4bba2a80ac73b869316b48d29307d4e0b2d903cf004dc040d4384fe83"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/wave19/func_001743d8.c",
+          "source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f",
+          "object_sha256": "cf6dfde5a81d4ffafe76be098b65b58588556d303689d0563332d6aa0b5f0b30"
+        }
+      ],
+      "model_necessity": "A fresh complete-unit v8/L1 witness, not proof of v8-only necessity; preserved default mismatches/refusals and v3/v6 qualifications remain authoritative for their own inputs."
+    }
+  ],
+  "admitted_new_functions": 2,
+  "admitted_new_bytes": 212,
+  "specific_dispositions": [
+    {
+      "function": "func_001bc5ac",
+      "size": 924,
+      "disposition": "fresh-v3-match-current-typed-contract-deferred",
+      "author_result": {
+        "path": "scratch/authors/nf203/RESULT.json",
+        "sha256": "d82bd47b77d9cefc2db2ff3107ea69a7a6e3ac7e34d1c442ad05c45c68be50c8"
+      },
+      "fresh_v3": {
+        "source": "scratch/authors/nf203/variants/func_001bc5ac__visibility_model.cpp",
+        "source_sha256": "db4e56d8a1bc153c63fd10b248c9306f61559983c2b01818cd089e1ba25aa7a3",
+        "receipt": {
+          "path": "scratch/authors/nf203/match/45-visibility-v3-witness/func_001bc5ac__visibility_model.result.json",
+          "sha256": "ca428d07059694b5ff4dd05bcc4d506af5916a1dc093e7ed25342788f974b6b5"
+        },
+        "status": "match",
+        "profile": "game",
+        "linker_model": "armlink5-inline-branchnop-v3",
+        "literal_model": "none",
+        "exit_code": 0,
+        "target_bytes": 924,
+        "helper": {
+          "path": "scratch/authors/nf203/src/message_visibility.c",
+          "sha256": "ee944f436f7e76ba36def49e846260b781affb59d55526f32257079b25df3de1"
+        }
+      },
+      "default_primary": {
+        "status": "mismatch",
+        "receipt": {
+          "path": "scratch/authors/nf203/match/46-final-training-default/func_001bc5ac.result.json",
+          "sha256": "519eb405cdcbe7406d0a3aa48ed42da3fb42bb92dba069c0d3400722bce5d5d3"
+        },
+        "differing_bytes": 18,
+        "target_bytes": 924
+      },
+      "preserved_default_helper_refusal": {
+        "path": "scratch/authors/nf203/match/44-visibility-default-refusal/func_001bc5ac__visibility_model.result.json",
+        "sha256": "d0a51dfc578e821c31c08b5b8ce65f2ec4f1b061c9d7848d54e2cf5e59b9dbb4"
+      },
+      "required_selection_attempt": {
+        "selection": {
+          "linker_model": "armlink5-inline-branchnop-v8",
+          "literal_model": "anonymous-string-records-v1"
+        },
+        "receipt": {
+          "path": "scratch/cm2/intake-r3/training-qualification/func_001bc5ac__visibility_model.result.json",
+          "sha256": "83082962546a416f5a9d6ddc8cecdcfd50e7e1a7179339071f5b9e8c0f7a4ef5"
+        },
+        "exit_code": 2,
+        "stage": "compile",
+        "status": "refused",
+        "scope": "Exact named author qualified source/helper against cmodels2 current headers; this is not an observed linker-v8 eligibility refusal or byte comparison.",
+        "diagnostics": {
+          "errors": 7,
+          "menu": "Screen * supplied to canonical SelectionList *",
+          "information": "Screen * supplied to canonical AlternateSelectionList *",
+          "empty_hook": "func_00174480 declaration absent from the exact source include closure; current owner is scene_lifecycle.h with qualified void * contract",
+          "visual_number": "Author W11jVisualOwner * receiver versus this worktree old Screen * prototype; predecessor/current Main already owns source-backed numeric correction."
+        }
+      },
+      "unresolved_real_contracts": [
+        "TrainingScreen menu/information/text/footer producer and all-consumer contracts are not proven by this caller alone. Do not replace fields just to remove compiler errors.",
+        "CharacterPanel * is cast to distinct QueuedDisplayState * for001793e4; no canonical shared relation is supplied or authorized. Equal offsets do not prove a common class.",
+        "Private W19TrainingScreen * reinterpretation must not survive; C010 supplies TrainingScreen * for0016dae8, but its unfinished source/contract checkpoint is not merged here.",
+        "TrainingControls input/list/animation owner relationship needs actual producer/consumer evidence rather than a new alias to hide the input cast."
+      ],
+      "coordination": "C010Codex explicitly declines to infer SelectionList/AlternateSelectionList/QueuedDisplayState equivalence or authorize TrainingScreen field/controls changes without producer/all-consumer proof. Its unchanged bounded provider contracts do not release this target.",
+      "decision": "Do not collect this source or helper. Preserve exact fresh v3 proof and current compile refusal. No selected-model MATCH, full typed closure, accepted credit or readiness is claimed. No unchanged refusal rerun."
+    },
+    {
+      "function": "func_0017a49c",
+      "size": 76,
+      "disposition": "v3-only-known-v6-v8-refusals-preserved",
+      "author_result": {
+        "path": "scratch/authors/r41414/RESULT.json",
+        "sha256": "d7169f89a59676185e1c79a9f1a0926f3fe4090e1918cc70454b2cdc16873010"
+      },
+      "source": {
+        "path": "scratch/authors/r41414/src/func_0017a49c.c",
+        "sha256": "37fb0c739440c7b2c08474fabc63513fc731a941da3133d0d69889117143d90c"
+      },
+      "helper": {
+        "path": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r41414/src/item_kind_helper.c",
+        "sha256": "363769505dc122943cd19a7a3db31bbd598557ee7df31d567f60017e9b9a9b0c"
+      },
+      "qualified_v3": {
+        "receipt": {
+          "path": "scratch/authors/r41414/match/func_0017a49c/codex-step2-20261020-d-d02-header-gap-final-v3/func_0017a49c.result.json",
+          "sha256": "850d46d234945ad51cafa98189f5950eac01710f244f01ea1ec77faff35124f2"
+        },
+        "exit_code": 0,
+        "status": "match",
+        "linker_model": "armlink5-inline-branchnop-v3",
+        "literal_model": "none"
+      },
+      "known_outcomes": [
+        {
+          "linker_model": "armlink5-inline-branchnop-v2",
+          "literal_model": "none",
+          "exit_code": 2,
+          "reason": "unresolved symbol 'r41414_item_kind' (not in config/names.json, not func_/data_/bss_XXXXXXXX)",
+          "receipt": {
+            "path": "scratch/authors/r41414/match/func_0017a49c/codex-step2-20261020-d-d01-header-gap-final-default/func_0017a49c.result.json",
+            "sha256": "e5fe0029d8be488e7c7dc04d7323e722af8641ebbaac728860db5c9bf6e025b4"
+          }
+        },
+        {
+          "linker_model": "armlink5-inline-branchnop-v6",
+          "literal_model": "none",
+          "exit_code": 2,
+          "reason": "i.func_0017a49c+0x1c: removed callee i.r41414_item_kind is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+          "receipt": {
+            "path": "scratch/authors/r41414/match/func_0017a49c/codex-step2-20261020-d-d03-header-gap-final-v6/func_0017a49c.result.json",
+            "sha256": "f5db8c172b4a29d23de082954d0d3a59988f7d92a9280e83eb6ce52518555320"
+          }
+        },
+        {
+          "linker_model": "armlink5-inline-branchnop-v8",
+          "literal_model": "none",
+          "exit_code": 2,
+          "reason": "i.func_0017a49c+0x1c: removed callee i.r41414_item_kind is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+          "receipt": {
+            "path": "scratch/authors/r41414/match/func_0017a49c/codex-step2-20261020-d-d04-header-gap-final-v8/func_0017a49c.result.json",
+            "sha256": "1cf75ccf4bb6ad4b1b05538fd84ca177b81a5a2386e89516ad851a80fec87032"
+          }
+        }
+      ],
+      "rerun": false,
+      "decision": "Preserve the exact v3-only distinction and outstanding ItemPage refinement. Do not weaken v8 or rerun an unchanged entry-only BL/I1-I3/call-ABI refusal; no eligible cmodels2 unit."
+    },
+    {
+      "function": "func_001acc88",
+      "size": 176,
+      "disposition": "default-context-mixed-TU-unclosed-native-contract",
+      "author_result": {
+        "path": "scratch/authors/nf135/RESULT.json",
+        "sha256": "aaaf3329a3a92951c5f8e85a5446746e1305eea578cb8b24328b8cfb40665d59"
+      },
+      "source": "scratch/authors/nf135/src/func_001acff0_07.cpp",
+      "receipt": {
+        "path": "scratch/authors/nf135/match/func_001acff0_07/func_001acff0_07.result.json",
+        "sha256": "bb5c473717bb57f2bce87abdbdd1d19a03cc80672dcb6eee4160b507f43f6a15"
+      },
+      "author_status": "context_match",
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "whole_command_exit_code": 1,
+      "needs_names": [
+        "_ZN18SelectionSet2Tu605D1Ev"
+      ],
+      "qualification": "No D2 alias is requested by this fresh source. The queue d2 label is historical metadata, not a current new-model proof.",
+      "contract_gap": "C010 owns only distinct opaque Component001acd38/Component001acff0 resource receivers, not SelectionSet/Pool singleton/destructor identity. Shared native selection types/names/all-consumer closure remain unadopted; do not infer aliases or model necessity.",
+      "decision": "Retain exact default/context evidence and nominal native-contract deferral; not a new eligible opt-in-model intake. Do not rerun known comparisons or import guessed names."
+    },
+    {
+      "function": "func_001acf28",
+      "size": 200,
+      "disposition": "default-match-unclosed-native-selection-contract",
+      "author_result": {
+        "path": "scratch/authors/nf197/RESULT.json",
+        "sha256": "bbcf4a7ea075232eb2502c10d6c81ca70e3da3a0e0c06d82d3ec29c5d022f3a1"
+      },
+      "source": "scratch/authors/nf197/final/selection_pool.cpp",
+      "receipt": {
+        "path": "scratch/authors/nf197/match/083-final-selection-pool/selection_pool.result.json",
+        "sha256": "ca6761a685f13b5b08150e05648478c682259cbdba58e9cfc58ee0886b338aa5"
+      },
+      "author_status": "match",
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "whole_command_exit_code": 0,
+      "needs_names": [
+        "_ZN19SelectionSet10Tu605D1Ev",
+        "selection_pool_tu605",
+        "_ZGVselection_pool_tu605"
+      ],
+      "qualification": "No D2 alias is requested by this fresh source. The queue d2 label is historical metadata, not a current new-model proof.",
+      "contract_gap": "C010 owns only distinct opaque Component001acd38/Component001acff0 resource receivers, not SelectionSet/Pool singleton/destructor identity. Shared native selection types/names/all-consumer closure remain unadopted; do not infer aliases or model necessity.",
+      "decision": "Retain exact default/context evidence and nominal native-contract deferral; not a new eligible opt-in-model intake. Do not rerun known comparisons or import guessed names."
+    }
+  ],
+  "same_identity_not_recollected": {
+    "func_00169018": "Preserved existing canonical cmodels2 receiver/helper witness; np016 alternate source is not duplicate credit.",
+    "func_001e958c": "Preserved existing isolated cmodels2 v8/L1 witness; later nf091/np033 mixed-TU alternatives add no identity credit.",
+    "func_001e0afc": "Finalized accepted identity; preserve scoped receiver correction and canonical predecessor reset/clock/number corrections on Main integration.",
+    "func_001ed874": "Finalized accepted identity; no collection or duplicate credit.",
+    "func_001a77d4": "C010 owns the independent tu604 default witness; do not import tu917 context v8 alternative.",
+    "func_001c6a68": "Current C010 manifest already owns this default source, despite stale refresh reservation flags."
+  },
+  "explicit_holds_preserved": {
+    "audio": [
+      "func_001d5864",
+      "func_001ab680"
+    ],
+    "other": [
+      "func_001db404",
+      "func_001ef89c",
+      "func_001d5694"
+    ],
+    "policy": "No model/profile relaxation, names-overlay import, callback erasure cast or offset-only common class. No precursor checkpoint is merged or assumed finalized."
+  },
+  "witness_record": {
+    "path": "scratch/integrator/cmodels2/INTAKE-MATCH-r3.json",
+    "sha256": "3d96add9be32016d01ba85303c8534b92765d9e56099f57561626e85e2895e08"
+  },
+  "transition_contract": {
+    "path": "scratch/integrator/cmodels2/TRANSITION-00171208-r3.json",
+    "sha256": "4d7a16f2296a8d33db48e7d97bb421c5acc60dab20c846c09b1650b9b35e1e30"
+  },
+  "category_contract": {
+    "path": "scratch/integrator/cmodels2/CATEGORY-001E5D38-r3.json",
+    "sha256": "d494ef69ff71bb9677f6cf7308618bf6b32fc0b7f906753c61f682831cee9302"
+  },
+  "known_unchanged_refusals_rerun": false,
+  "accepted_credit_added": false,
+  "checkpoint_ready": false
+}

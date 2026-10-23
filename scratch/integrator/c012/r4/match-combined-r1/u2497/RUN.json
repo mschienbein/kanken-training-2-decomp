@@ -1,0 +1,37 @@
+{
+  "source": "src/checkpoint10/collect-r2/func_001f165c_native_offset_chain.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_001f165c"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/collect-r2/func_001f165c_native_offset_chain.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u2497"
+  ],
+  "exit_code": 0,
+  "seconds": 0.191029,
+  "source_sha256": "0b145636ed218765ddf4a8744cec57bdb40d8d36c14f198ec7d4222d85cfc938",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u2497/func_001f165c_native_offset_chain.result.json",
+  "receipt_sha256": "62ef25edbc20f682e986158e15a7c4b60a38aa99a1570bb8e7f31563b60e92e9",
+  "output": "MATCH    _ZNK2nw3lyt8Material15GetBlendModePtrEv @ 0x1f165c size 0x40/0x40\n",
+  "stderr": ""
+}

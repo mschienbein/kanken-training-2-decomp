@@ -1,0 +1,73 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/wave12/func_0016e270.cpp",
+ "source_sha256": "d2bf3af89e20871eca620b8abdd864cc04668923dc08afafe3887a2fe5af5dbf",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "aac81373fc341183119946bdd8ee0c92c4835685864783468ff4eee7a34167d0",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v8",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/object_registration/prompt_manager.c",
+   "source_sha256": "6ca12253c3ff117b00f8582c3b5b8c3942001c099cf0393769673c9115125623",
+   "object_sha256": "a6eb6df6eed3856b5c81ba1ad65e2b9a5e7ff4007555e96704b2d295bd2ef6be"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_prompt_manager_cleanup"
+   ],
+   "section": "i.register_prompt_manager_cleanup",
+   "size": 4,
+   "object": "scratch/integrator/cmodels2/reproof-r4-r1/025-func_0016e270/extra-0-prompt_manager.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_0016e270",
+   "address": 1499760,
+   "size": 144,
+   "candidate_size": 144,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 100,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_prompt_manager_cleanup"
+      ],
+      "section": "i.register_prompt_manager_cleanup",
+      "size": 4,
+      "object": "scratch/integrator/cmodels2/reproof-r4-r1/025-func_0016e270/extra-0-prompt_manager.o"
+     }
+    },
+    {
+     "offset": 112,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

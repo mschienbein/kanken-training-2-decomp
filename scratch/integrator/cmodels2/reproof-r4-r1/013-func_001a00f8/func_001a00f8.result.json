@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/func_001a00f8/func_001a00f8.c",
+ "source_sha256": "8761a5835f925eb3407e5b9bd9690a094e692766396841fff7e3a9c9e75598af",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "468d27ae2fc09f12bc4dc175e0969f30cd52114274fb69b2c1c10eee31354e2d",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v8",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/func_001a00f8/transition_active.c",
+   "source_sha256": "1c6dae14a667abe4af732b6a28c6f08b88c418bf7c4f2988d16351170ae4a0c0",
+   "object_sha256": "b067121cef730968e24b75f6e2d34e0e51ebf6ee0cbe736d27bf3a7d771c22cc"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "r4040_transition_active"
+   ],
+   "section": "i.r4040_transition_active",
+   "size": 8,
+   "object": "scratch/integrator/cmodels2/reproof-r4-r1/013-func_001a00f8/extra-0-transition_active.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001a00f8",
+   "address": 1704184,
+   "size": 264,
+   "candidate_size": 264,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 40,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d003d4",
+     "removed_callee": {
+      "symbols": [
+       "r4040_transition_active"
+      ],
+      "section": "i.r4040_transition_active",
+      "size": 8,
+      "object": "scratch/integrator/cmodels2/reproof-r4-r1/013-func_001a00f8/extra-0-transition_active.o"
+     }
+    }
+   ]
+  }
+ ]
+}

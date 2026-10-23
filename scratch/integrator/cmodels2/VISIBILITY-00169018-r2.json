@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "function": "func_00169018",
+  "target_bytes": 144,
+  "status": "MATCH",
+  "exit_code": 0,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models2/training_visibility/func_00169018.c",
+    "--extra-source",
+    "src/models/func_001ddde4/item_accessors.c",
+    "--extra-source",
+    "src/models/func_001ddde4/func_001ddde4.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v8",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/cm2/resume-r1/training-visibility"
+  ],
+  "receipt": {
+    "path": "scratch/cm2/resume-r1/training-visibility/func_00169018.result.json",
+    "sha256": "a3651247b297e3c6e52e547bd1ecdf295e8fd14afe6895d9557432664b6bffb6"
+  },
+  "compiled_metadata": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models2/training_visibility/func_00169018.c",
+    "source_sha256": "dad803d4f926f04f74fcf7f9b061d0bf2ca43ac9bb0acfb2a03510c6869e0985",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "b76afd9b76f4c5e890453ec433bedb0fe43489c6b888be682a4c69348a3032ee",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_001ddde4/item_accessors.c",
+        "source_sha256": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a",
+        "object_sha256": "8aef9e2b2610591171deb095a0240e9ae95a40bd1b9a2a299a72946da16aaa08"
+      },
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_001ddde4/func_001ddde4.c",
+        "source_sha256": "9c8f69bf4894e894a266a7104d0c591e246c61ac8a4425d61877c6a5499c39b1",
+        "object_sha256": "16aed365be7d77e96aa144cecc9fe4401b70f425ce39f7b5a8806037316e4eaf"
+      }
+    ],
+    "removed_callees": [
+      {
+        "symbols": [
+          "r41279_item_category"
+        ],
+        "section": "i.r41279_item_category",
+        "size": 8,
+        "object": "scratch/cm2/resume-r1/training-visibility/extra-0-item_accessors.o"
+      },
+      {
+        "symbols": [
+          "r41279_item_identifier"
+        ],
+        "section": "i.r41279_item_identifier",
+        "size": 8,
+        "object": "scratch/cm2/resume-r1/training-visibility/extra-0-item_accessors.o"
+      }
+    ],
+    "functions": [
+      {
+        "name": "func_00169018",
+        "address": 1478680,
+        "size": 144,
+        "candidate_size": 144,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": [
+          {
+            "offset": 68,
+            "rule": "inline_insn",
+            "target": null,
+            "removed_callee": {
+              "symbols": [
+                "r41279_item_category"
+              ],
+              "section": "i.r41279_item_category",
+              "size": 8,
+              "object": "scratch/cm2/resume-r1/training-visibility/extra-0-item_accessors.o"
+            }
+          }
+        ]
+      },
+      {
+        "name": "func_001ddde4",
+        "address": 1957348,
+        "size": 464,
+        "candidate_size": 464,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": [
+          {
+            "offset": 104,
+            "rule": "inline_insn",
+            "target": null,
+            "removed_callee": {
+              "symbols": [
+                "r41279_item_identifier"
+              ],
+              "section": "i.r41279_item_identifier",
+              "size": 8,
+              "object": "scratch/cm2/resume-r1/training-visibility/extra-0-item_accessors.o"
+            }
+          },
+          {
+            "offset": 296,
+            "rule": "inline_insn",
+            "target": null,
+            "removed_callee": {
+              "symbols": [
+                "r41279_item_category"
+              ],
+              "section": "i.r41279_item_category",
+              "size": 8,
+              "object": "scratch/cm2/resume-r1/training-visibility/extra-0-item_accessors.o"
+            }
+          },
+          {
+            "offset": 356,
+            "rule": "inline_insn",
+            "target": null,
+            "removed_callee": {
+              "symbols": [
+                "r41279_item_category"
+              ],
+              "section": "i.r41279_item_category",
+              "size": 8,
+              "object": "scratch/cm2/resume-r1/training-visibility/extra-0-item_accessors.o"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "source": {
+    "path": "src/models2/training_visibility/func_00169018.c",
+    "sha256": "dad803d4f926f04f74fcf7f9b061d0bf2ca43ac9bb0acfb2a03510c6869e0985"
+  },
+  "helper_closure": {
+    "source": "src/models/func_001ddde4/item_accessors.c",
+    "source_sha256": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a",
+    "profile": "game",
+    "functions": [],
+    "reused_symbols": [
+      "r41279_item_category"
+    ],
+    "necessary_existing_caller_context": "src/models/func_001ddde4/func_001ddde4.c",
+    "context_reason": "The accepted helper TU also defines r41279_item_identifier; supply its existing accepted caller to witness actual eligible uses of both helper sections, rather than copying/deleting/changing accepted helper definitions. Only func_00169018 is new credit."
+  },
+  "contract": {
+    "incoming": "void func_00169018(struct L041InitializeScreen*,int enabled)",
+    "state_fields": {
+      "scroll_shown": 236,
+      "item": 204,
+      "page": 212,
+      "message": 120
+    },
+    "message_receiver": "One canonical MessageLayout* forwarded unchanged to position and visibility endpoints; no WidgetContainer alias/cast/union.",
+    "getter": "const MenuItem* -> signed byte at+0x10 promoted to int; no mutation; existing r41279_item_category definition.",
+    "outgoing": "MessageLayout*;001ad6d0 two full integer arguments;001ad6ec WidgetPosition(s0/s1);00177b84 full entry enable word.",
+    "identity_qualification": "[INFERENCE] The historical signed-property getter existence, outlining, identity and TU are unrecovered; exact caller bytes do not prove an original call."
+  },
+  "provenance": {
+    "residual_source": {
+      "path": "scratch/research/residual-families/signed-byte/erased-property-getter/func_00169018.c",
+      "sha256": "4759eed6c36b3720eb69e3518525f7feee8998b69b998737887bda2b165debb7"
+    },
+    "residual_helper": {
+      "path": "scratch/research/residual-families/signed-byte/erased-property-getter/signed_key.c",
+      "sha256": "fea6f318a7b672477562828243cc33876e39a735687886ed7a3962e158ba141e"
+    },
+    "preserved_v8_match": {
+      "path": "scratch/integrator/cmodels2/LATE-00169018.json",
+      "sha256": "383db84c4a19ff2d1b6cd18cab23af3e096369b820de612684f904aeedad7126"
+    },
+    "tu1091_result": {
+      "path": "scratch/authors/tu1091/RESULT.json",
+      "sha256": "14141c57e222829ce53fb2818ff2fedcf118d966376354af2a960ecdfe190895"
+    },
+    "tu1091_source": {
+      "path": "scratch/authors/tu1091/src/func_00169018.c",
+      "sha256": "b2dfaf624e38037a9e6865704e23c50461d1b3fc1de5f46095af0ad4368475e3"
+    },
+    "tu1091_helper": {
+      "path": "scratch/authors/tu1091/src/item_category.c",
+      "sha256": "d846723e7e980ee4d9436d1ce16be869ea03932035ea5449079ac79150421e31"
+    }
+  },
+  "receiver_proofs": [
+    {
+      "path": "scratch/worktrees/c009/scratch/integrator/c009/widget-receiver-facts-r2.json",
+      "sha256": "3688f5eb840f6dd6b87a7bd0ca9939a3b9fb85876d72f7c926e0653b5f44d962"
+    },
+    {
+      "path": "scratch/worktrees/c009/scratch/integrator/c009/receiver-contract-cutover-r1.json",
+      "sha256": "48acf5fe6b10f8dbbf4311080fb310e15658bd89a2e4d67edd65fb378463b1e3"
+    },
+    {
+      "path": "scratch/worktrees/c010/scratch/integrator/c010/owner-cutover/factory-facts-receiver-resume-r6.json",
+      "sha256": "998472267a0681a5080b81f5699337a960962c5d0244f19f0cc35105e31e1cb7"
+    }
+  ],
+  "resolution": "Typed receiver deferral discharged for this bounded candidate from actual same-entry/same-field forwarding, corrected MessageLayout endpoints and preserved scoped MATCHes; not offset-only common-class inference. Shared L041 C exposure uses existing type/layout and one prototype. Accepted001b8908 body remains unchanged. No accepted ledger/receipts changed.",
+  "still_required": "Full integrated consumer/G3/argcheck closure and independent R1 typed-provenance review remain Main gates."
+}

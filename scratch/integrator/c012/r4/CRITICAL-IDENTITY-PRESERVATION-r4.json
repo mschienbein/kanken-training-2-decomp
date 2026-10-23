@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "accepted_base": "5820254f",
+  "historical_all_manifest_and_accept_audit": {
+    "path": "INHERITED-OWNER-AUDIT-r38.json",
+    "sha256": "515d93f221e94a5b1c573b08981f9bf71498cf3d136fd68d4d578fbc42552b39"
+  },
+  "rows": [
+    {
+      "function": "func_001cf418",
+      "disposition": "restored-original-owner-no-move",
+      "owner": "src/checkpoint10/func_001cf418.c",
+      "owner_sha256": "4fea5bf21edb768e4cbed8aa3e01ed813b928860ec3514ae3e739e89b2a5853e",
+      "candidate_move": null,
+      "reason": "No same-TU need. Keep exact final accepted source; rejected native TextBox model is quarantined, no dropped identity."
+    },
+    {
+      "function": "func_0019dc20",
+      "disposition": "explicit-accepted-identity-move",
+      "move": {
+        "function": "func_0019dc20",
+        "from": "src/wave6/func_0019dc20.c",
+        "to": "src/checkpoint12/intake-r29/final_func_0019dc20/func_0019dc20.c"
+      },
+      "owner_sha256": "bed93e58eb5b2e25552a31cf734f6cada54e0b57fe68c51bd6c26bb14ad66e41",
+      "reason": "Identity survives under exactly the declared destination, re-derived from the final accepted owner."
+    },
+    {
+      "function": "func_0017e764",
+      "disposition": "explicit-same-candidate-provisional-source-rehome-NOT-accepted-move",
+      "provisional_move": {
+        "from": "src/checkpoint12/intake-r17/pool_release/pool_release.cpp",
+        "to": "src/checkpoint12/intake-r29/final_existing_pool_release/pool_release.cpp"
+      },
+      "current_destination": "src/checkpoint12/intake-r29/final_existing_pool_release/pool_release.cpp",
+      "destination_sha256": "311359c687d362de859ce66af110b338a2791482b632504d98431078fe893dcc",
+      "reason": "Stable provisional c012 identity preserved, now isolated genuine typed pool release. Canonical TaskPool agreement applies; no c014 double credit."
+    }
+  ],
+  "all_accepted_moves": "MOVES-AUDIT-r1.json",
+  "retired_accepted_sources": "OWNER-TRANSITION-r1.json",
+  "imported_unproven_deletion_restored": "FOLDED-ACCEPTED-SOURCE-RESTORATION-r1.json",
+  "accepted_identity_withdrawals": []
+}

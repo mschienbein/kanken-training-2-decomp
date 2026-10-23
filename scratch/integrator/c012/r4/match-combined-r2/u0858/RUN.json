@@ -1,0 +1,44 @@
+{
+  "source": "src/nw4c/snd_GroupFile.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_001393c8",
+    "func_00139430",
+    "func_0013949c"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_001393c8": "src/nw4c/snd_GroupFile.cpp",
+    "func_00139430": "src/nw4c/snd_GroupFile.cpp",
+    "func_0013949c": "src/nw4c/snd_GroupFile.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/snd_GroupFile.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u0858"
+  ],
+  "exit_code": 0,
+  "seconds": 0.197765,
+  "source_sha256": "1429340534626f061fe8c662b9fc60cd79af8fec5b1fbdda5f5b6b4d570022b9",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r2/u0858/snd_GroupFile.result.json",
+  "receipt_sha256": "8937a2f11cffd3dae82e66de0bffdcb5df2418ab518d3e1df3a0e6fbbf0378a7",
+  "output": "MATCH    _ZNK2nw3snd8internal9GroupFile10FileHeader12GetFileBlockEv @ 0x1393c8 size 0x68/0x68\nMATCH    _ZNK2nw3snd8internal9GroupFile10FileHeader12GetInfoBlockEv @ 0x139430 size 0x6c/0x6c\nMATCH    _ZNK2nw3snd8internal9GroupFile10FileHeader14GetInfoExBlockEv @ 0x13949c size 0x68/0x68\n",
+  "stderr": ""
+}

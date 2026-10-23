@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED_DO_NOT_RUN_GATES_YET",
+  "blocking_findings": [
+    "CM2-F01",
+    "CM2-F03"
+  ],
+  "prerequisites": [
+    "Resolve the accepted scene lifecycle/PMF contracts as a complete exactly-witnessed revision on finalized/prepared main; no partial type-family import.",
+    "Rebase onto finalized c009-r5/c010 and the corrected c011 transaction. This worktree inherits stale c011-r3 beyond the two font-dependent NEW holds; its other c011 prereview issues are not silently fixed or owned by cmodels2.",
+    "Retain opaque FontVTable/data_00223d98 and the single float(float) converter protocol. The four font-wrapper holds remain c009-owned; the two additional font holds remain c011-owned.",
+    "Recompute complete ledger, candidate/revised/header/model/helper review closure and unique emitted owners after every predecessor revision.",
+    "Review the explicit F04 table-boundary qualification independently; no original ELF table-size claim is made.",
+    "The unchanged c010 func_001e8810.c retained-call proof fails exit2 (DisplayObject* versus ResourceEvent* at func_00183208); reconcile through the c010 owner before any composed gate."
+  ],
+  "commands": [
+    {
+      "purpose": "Whole-ledger G3; Main serialized slot after blockers are repaired",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/interfaces.py",
+        "--matches",
+        "<fresh-composed-ledger>",
+        "--allow-unchecked-cpp",
+        "--json",
+        "<fresh-output>"
+      ]
+    },
+    {
+      "purpose": "Whole-ledger argcheck and complete adjudication; Main serialized slot",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "<fresh-composed-ledger>",
+        "--json",
+        "<fresh-output>"
+      ]
+    },
+    {
+      "purpose": "Main-only prepare: two fresh full builds, suite, unique-emission/model closure",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "<new-unique-name>",
+        "--candidates",
+        "config/candidates/cmodels2.json",
+        "--linker-model",
+        "armlink5-inline-branchnop-v8",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--allow-unchecked-cpp"
+      ]
+    }
+  ],
+  "heavy_commands_exercised": [],
+  "templates_not_ready_to_execute": true
+}

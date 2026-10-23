@@ -1,0 +1,43 @@
+{
+  "source": "src/models2/training_visibility/func_00169018.c",
+  "profile": "game",
+  "functions": [
+    "func_00169018"
+  ],
+  "extra_sources": [
+    "src/models/func_001ddde4/item_accessors.c"
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/models2/training_visibility/func_00169018.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u2643",
+    "--extra-source",
+    "src/models/func_001ddde4/item_accessors.c"
+  ],
+  "exit_code": 2,
+  "seconds": 0.232492,
+  "source_sha256": "dad803d4f926f04f74fcf7f9b061d0bf2ca43ac9bb0acfb2a03510c6869e0985",
+  "extra_source_sha256": {
+    "src/models/func_001ddde4/item_accessors.c": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a"
+  },
+  "credited_functions_match": false,
+  "all_emitted_functions_match": false,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u2643/func_00169018.result.json",
+  "receipt_sha256": "b4453a7020f8a27a6353e8b30d23ebc61710d4912894c473856716d0e992fdf0",
+  "output": "",
+  "stderr": "error: i.r41279_item_identifier: candidate-only callee has no inlined call; cannot remove it\n"
+}

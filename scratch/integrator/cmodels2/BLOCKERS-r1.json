@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED_NO_ACCEPTED_SCENE_CONTRACT_REPAIR_LANDED",
+  "main_baseline": "e09feab5",
+  "findings": [
+    "CM2-F01",
+    "CM2-F03"
+  ],
+  "protected_accepted_functions": [
+    "func_001a2814",
+    "func_001bd68c",
+    "func_001e0afc",
+    "func_001ed874"
+  ],
+  "protected_units_unchanged_by_this_revision": [
+    "src/models/func_001a2814/func_001a2814_tu.cpp",
+    "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+    "src/models/func_001ed874/func_001ed874.cpp",
+    "src/models/func_001bd68c/func_001bd68c.cpp",
+    "src/wave10/func_00177b10.cpp",
+    "src/wave20/func_001b7dac.cpp"
+  ],
+  "observations": [
+    "MenuControllerState::after_update is a native member protocol, but original physical cell00223564 targets the actual C void(DisplayUpdateManager*) provider001eb7a4. Cell00223558 targets C void(W24BMenuState*) provider001a0200, not the declared ScreenResourceManager protocol.",
+    "L035DrawingScreen/L041InitializeScreen/CategoryScreen have no CallbackTarget base in the actual accepted declarations. 00177b10 stores the converted receiver/PMF; 001b7dac really invokes the pair. Zero original receiver adjustment does not establish a native base subobject.",
+    "Neither C010R5Codex nor TypesComposeCodex has an adoptable complete native contract on finalized/prepared main. Types-menu d069d286 is explicitly quarantined, not imported or merged.",
+    "The native-family research records unresolved compiler-generated CategoryScene/MenuScene D0 entities (historical exit2 refusals) against original null D0 cells. Frozen v8 only removes independently eligible R1 tiny helpers and own unwind companions; it does not authorize general unbound D0/VFE elimination.",
+    "No all-C PMF replacement, shadow alias, callback cast, invented provider, dead-code steering, linker-model switch, protected-identity deferral or unfinalized branch merge was attempted."
+  ],
+  "attempted_work": [
+    "Read the actual accepted shared scene/callback owners and both callback storage/invocation bodies.",
+    "Compared the actual slot/provider and member receiver contracts to the sealed independent per-slot findings.",
+    "Consulted both required owners before any scene/callback-header edits; neither supplied an adoptable contract. Scene/callback headers are intentionally unchanged.",
+    "Read the existing types-menu native-family negative proof instead of rerunning a user-reported identical failure.",
+    "Re-proved all retained v8 required rows plus affected predecessor-form/text-resource closures; those exact results do not make the blocked contracts legal."
+  ],
+  "blocking_external_prerequisite": "An adopted, independently reviewed policy/harness capable of the complete real native scene lifetime/table/PMF transaction, or another complete exactly-witnessed natural accepted-contract repair under frozen v8. No such repair currently exists in finalized/prepared main.",
+  "negative_evidence": {
+    "path": "scratch/worktrees/types-menu/scratch/integrator/types-menu/REMAINING.json",
+    "sha256": "d7061cd43758bf9937e07e7c90f5132c325716125c2cbb4393cdc68bbf19b4d1",
+    "exercised_by_this_agent": false,
+    "reported_native_failure_exit_codes": [
+      2
+    ],
+    "not_a_current_passing_certificate": true
+  },
+  "main_ruling": "Record CM2-F01/F03 unresolved, stop cmodels2 there, and keep c011 moving if exact repair is not achievable.",
+  "exhaustive_transition_set_narrowed": false,
+  "additional_inherited_c010_compile_prerequisite": {
+    "source": "src/checkpoint10/func_001e8810.c",
+    "exit_code": 2,
+    "diagnostic": "line58: DisplayObject* is incompatible with func_00183208(ResourceEvent*)",
+    "argv": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "tools/match.py",
+      "src/checkpoint10/func_001e8810.c",
+      "--profile",
+      "game",
+      "--out",
+      "scratch/integrator/cmodels2/reproof-r4-r1/100-func_001e8810",
+      "--linker-model",
+      "armlink5-inline-branchnop-v8",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--show",
+      "0"
+    ],
+    "output": "scratch/integrator/cmodels2/reproof-r4-r1/100-func_001e8810",
+    "accepted_or_prepared_identity_deferred": false,
+    "owner_contacted": "C010R5Codex",
+    "action": "Record and require the final c010 transaction; no cast, silent drop or unchanged-input retry."
+  }
+}

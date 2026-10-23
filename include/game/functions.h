@@ -2,6 +2,7 @@
 #define GAME_FUNCTIONS_H
 
 #include "game/pool_list.h"
+#include "game/item_entries.h"
 
 /* Cross-unit interfaces without a more specific subsystem header. */
 struct ObjectManager;
@@ -21,7 +22,6 @@ struct Component001b6b88;
 struct Component001b7c88;
 struct Component001eaaac;
 struct Component001eaf70;
-struct CountedResource;
 struct DeferredRequest;
 struct DetailEntry;
 struct ExtendedWorkspace;
@@ -181,7 +181,6 @@ extern int func_00156f50(void);
 extern void func_0015cab4(void);
 extern void func_0015ea60(struct FlagDisplayObject *, int, int);
 extern int func_0015eb90(struct Component0015eb90 *);
-extern int func_0015f5b0(const struct CountedResource *);
 extern int func_00169974(void);
 extern void func_00169b58(void);
 extern int func_0016d000(int);

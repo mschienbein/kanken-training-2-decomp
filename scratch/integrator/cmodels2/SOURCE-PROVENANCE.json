@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "original_result": {
+    "path": "scratch/authors/nf045/RESULT.json",
+    "sha256": "80a26b4f4b3d49e0d55c807d4b437d556d55f4be53a751cc96dc8c1f7e203e72"
+  },
+  "original_sources": [
+    {
+      "path": "scratch/authors/nf045/src/menu_teardown.cpp",
+      "sha256": "35161b44addeefb1f79f199f2d108cf4b216ae3ea66d03d640eda13c8a0028f4"
+    },
+    {
+      "path": "scratch/authors/nf045/src/ui_geometry.cpp",
+      "sha256": "cb23bed538cdf54a3bad8efc7b6e676fdb1954005e35128238567aa0d87a7edc"
+    }
+  ],
+  "candidate_units": [
+    {
+      "source": "src/models2/menu_resources/menu_teardown.cpp",
+      "sha256": "0d10940a421d8caa12ba6c5b13a21dcdf25aad0f504121ce84010ebd4fee0f8b"
+    },
+    {
+      "source": "src/models2/menu_resources/ui_geometry.cpp",
+      "sha256": "3aec912a174809659a0038220c41d8d3c717eb3ad46bbc7bc3f9725222ff46ea"
+    }
+  ],
+  "shared_header": {
+    "path": "include/game/menu_resources.h",
+    "sha256": "0bf91e6d6cfec5b2b3e58530025f1ceca9432880efc8587160368622763b8193"
+  },
+  "partition": "Keep only func_001e958c, its clear_panel/panel_at operations and Item cleanup, with separate natural Point/Rectangle destructor helper. Drop uncredited func_001e96b4, mismatching func_001eb0d0, their TextSlot/TextScreen views and private helpers. No author source or receipt rewritten.",
+  "receiver_correction": "Item::object uses canonical ResourceEvent* from the c009 matching func_00183208 consumer/definition contract. Item identifier remains at +0xa and no AnimationChild/StyleOwner complete-class identity is asserted.",
+  "new_names": [],
+  "selected_match_receipt": {
+    "path": "scratch/cm2/final/menu_teardown.result.json",
+    "sha256": "0b91da2ef8719d6a09403ed7c982b07bfbba2188a0a08cfa5b134ca3cfa1bf10"
+  },
+  "v6_boundary_receipt": {
+    "path": "scratch/cm2/v6-boundary/menu_teardown.result.json",
+    "sha256": "3a8936f0c4d28b7fb0f9a72efc9fd72eff335059a9e905987aa237282be8b518"
+  },
+  "collection_command": "nice -n 10 .venv/bin/python tools/collect.py --dest src/models2/menu_resources --candidates config/candidates/cmodels2.json --linker-model armlink5-inline-branchnop-v8 --literal-model anonymous-string-records-v1 --extra-source scratch/integrator/cmodels2/split/ui_geometry.cpp scratch/integrator/cmodels2/split/RESULT.json",
+  "collection_exit_code": 0
+}

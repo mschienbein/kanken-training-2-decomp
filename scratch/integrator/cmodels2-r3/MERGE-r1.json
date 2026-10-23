@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "base": "ba2301d",
+  "merged": "cee7419",
+  "branch": "cmodels2-r3-closure",
+  "preflight": {
+    "command": [
+      "git",
+      "merge-tree",
+      "--write-tree",
+      "ba2301d",
+      "cee7419"
+    ],
+    "exit_code": 1,
+    "tree": "4d4caa3978755c96583ba499739764e0f98aea6e",
+    "conflict_paths": [
+      "include/game/messages.h",
+      "include/game/training_screen.h",
+      "src/wave19/func_0015f5b0.c",
+      "src/wave19/func_001743d8.c"
+    ]
+  },
+  "merge": {
+    "command": [
+      "git",
+      "-c",
+      "user.name=mschienbein",
+      "-c",
+      "user.email=mschienbein@users.noreply.github.com",
+      "merge",
+      "--no-ff",
+      "--no-commit",
+      "cee7419"
+    ],
+    "exit_code": 1
+  },
+  "decisions": [
+    "Retain all predecessor MessageLayout/training declarations, corrected C guards, and canonical Screen selection/alternate receivers; discard obsolete L041 selection unions.",
+    "Retain cmodels2 shared W8ItemEntry/W8EntryList definitions for both wave19 providers, never the old private CountedResource fork.",
+    "Remove only obsolete CountedResource forward declaration and func_0015f5b0 prototype from predecessor functions.h; item_entries.h is the shared authority.",
+    "No scheduler slot, procedure, queue/signaling, typed registration or vector provider reversion; no callback cast or fake result added."
+  ],
+  "own_candidate_preserved": {
+    "functions": 5,
+    "bytes": 892,
+    "units": 7,
+    "manifest_sha256": "78b1507e214381e03549ccba70d6441e2ac77bd94b1d7a97db32e7e33d4458e6"
+  }
+}

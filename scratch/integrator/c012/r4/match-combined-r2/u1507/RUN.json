@@ -1,0 +1,52 @@
+{
+  "source": "src/models/func_001730ec/func_001730ec_removed.c",
+  "profile": "game",
+  "functions": [
+    "func_001730ec",
+    "func_001e5d38"
+  ],
+  "extra_sources": [
+    "src/models/func_001730ec/item_accessors.c",
+    "src/models2/counted_resources/func_001e5d38.cpp"
+  ],
+  "function_owners": {
+    "func_001730ec": "src/models/func_001730ec/func_001730ec_removed.c",
+    "func_001e5d38": "src/models2/counted_resources/func_001e5d38.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001730ec/func_001730ec_removed.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1507",
+    "--extra-source",
+    "src/models/func_001730ec/item_accessors.c",
+    "--extra-source",
+    "src/models2/counted_resources/func_001e5d38.cpp"
+  ],
+  "exit_code": 0,
+  "seconds": 0.231092,
+  "source_sha256": "8e85116907b06b33eaeba46698afb23d9c24f95360cb7c390e0db711d6e81714",
+  "extra_source_sha256": {
+    "src/models/func_001730ec/item_accessors.c": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874",
+    "src/models2/counted_resources/func_001e5d38.cpp": "158809ed798b9ee6193ec1cb55684163787bf2b36acbfee19a8bac17515080a3"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r2/u1507/func_001730ec_removed.result.json",
+  "receipt_sha256": "d6db8c1369b5c067a852e5574b7e5cfc5b6ae2739b832382d1086c3a1edcd69e",
+  "output": "MATCH    func_001730ec @ 0x1730ec size 0x74/0x74 [armlink5-inline-branchnop-v6: 2 inline_insn]\nMATCH    func_001e5d38 @ 0x1e5d38 size 0x74/0x74 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  w19_item_category (8 bytes; i.w19_item_category)\nREMOVED  w19_item_value (8 bytes; i.w19_item_value)\n",
+  "stderr": ""
+}

@@ -1,0 +1,40 @@
+{
+  "source": "src/checkpoint10/doubleword.c",
+  "profile": "game",
+  "functions": [
+    "func_001c4b10"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_001c4b10": "src/checkpoint10/doubleword.c"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/doubleword.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u2209"
+  ],
+  "exit_code": 0,
+  "seconds": 0.178644,
+  "source_sha256": "d9d834754f8fa03bc4633734ec144b1c02c4b20c2d971b45506f89c5d5a22627",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r2/u2209/doubleword.result.json",
+  "receipt_sha256": "00fd26c17400bda11ed4791d445783da21e7dcab5fa1c5a6578466a9b0491f24",
+  "output": "MATCH    func_001c4b10 @ 0x1c4b10 size 0x14/0x14\n",
+  "stderr": ""
+}

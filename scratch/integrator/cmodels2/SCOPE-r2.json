@@ -1,0 +1,473 @@
+{
+  "schema_version": 2,
+  "checkpoint_candidate": "cmodels2",
+  "status": "local-integration-complete-main-schedules-dependency-boundary-not-checkpoint-ready",
+  "branch": "cmodels2-integrate",
+  "initial_worktree_tip": "5713bab94",
+  "merged_main": "261fdc9",
+  "merge_commit": "64c7cab4d334b82c63a1b9e13f590b99c99541c8",
+  "accepted_checkpoint": "cmodels",
+  "accepted_sequence": 9,
+  "accepted_functions": 1621,
+  "accepted_function_bytes": 195908,
+  "denominator": "v9-r2",
+  "denominator_functions": 4624,
+  "denominator_bytes": 1131454,
+  "gate_revision": "v1.19",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "candidate_manifest": {
+    "path": "config/candidates/cmodels2.json",
+    "sha256": "2c40ae7950bb7c41f6b6a874b053ce5f8aa9cb834faa0cbbb1a80c82b63285bb"
+  },
+  "scope_functions": 3,
+  "scope_target_bytes": 680,
+  "scope_sources": 5,
+  "credited_source_units": 3,
+  "new_helper_only_units": 2,
+  "existing_helper_only_units_reused": [
+    "src/models/func_001ddde4/item_accessors.c"
+  ],
+  "accepted_credit_added": false,
+  "selected": [
+    {
+      "function": "func_001e958c",
+      "address": "0x001e958c",
+      "target_bytes": 296,
+      "source": "src/models2/menu_resources/menu_teardown.cpp",
+      "source_sha256": "0d10940a421d8caa12ba6c5b13a21dcdf25aad0f504121ce84010ebd4fee0f8b",
+      "profile": "game",
+      "author": "nf045-cmodels2-isolation",
+      "selection": {
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "receipt": {
+        "path": "scratch/cm2/final/menu_teardown.result.json",
+        "sha256": "0b91da2ef8719d6a09403ed7c982b07bfbba2188a0a08cfa5b134ca3cfa1bf10"
+      },
+      "provenance": {
+        "path": "scratch/integrator/cmodels2/CANDIDATE-WITNESS.metadata.json",
+        "sha256": "1b7fdc277053e2f5d23fa271bfed61f38b8f66e7d468471a59e6a61acc16a050"
+      },
+      "exit_code": 0,
+      "status": "match",
+      "required_verdict": "QUALIFIED",
+      "rules": [
+        "R1"
+      ],
+      "rewrites": [
+        {
+          "offset": 116,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "_ZN13MenuResources9RectangleD1Ev",
+              "_ZN13MenuResources9RectangleD2Ev"
+            ],
+            "section": "i._ZN13MenuResources9RectangleD1Ev",
+            "size": 4,
+            "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+            "unwind_sections": [
+              {
+                "section": ".ARM.exidx",
+                "section_index": 6,
+                "size": 8,
+                "kind": "exidx",
+                "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+              }
+            ]
+          }
+        },
+        {
+          "offset": 200,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "_ZN13MenuResources5PointD1Ev",
+              "_ZN13MenuResources5PointD2Ev"
+            ],
+            "section": "i._ZN13MenuResources5PointD1Ev",
+            "size": 4,
+            "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+            "unwind_sections": [
+              {
+                "section": ".ARM.exidx",
+                "section_index": 5,
+                "size": 8,
+                "kind": "exidx",
+                "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+              }
+            ]
+          }
+        },
+        {
+          "offset": 212,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "_ZN13MenuResources5PointD1Ev",
+              "_ZN13MenuResources5PointD2Ev"
+            ],
+            "section": "i._ZN13MenuResources5PointD1Ev",
+            "size": 4,
+            "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+            "unwind_sections": [
+              {
+                "section": ".ARM.exidx",
+                "section_index": 5,
+                "size": 8,
+                "kind": "exidx",
+                "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+              }
+            ]
+          }
+        }
+      ],
+      "extra_sources": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models2/menu_resources/ui_geometry.cpp",
+          "source_sha256": "3aec912a174809659a0038220c41d8d3c717eb3ad46bbc7bc3f9725222ff46ea",
+          "object_sha256": "22477f299de8283bd8ac22db005616c05cde5930a006832e49b92fcbfc7baf98"
+        }
+      ],
+      "model_necessity": "Surviving v8-only isolated cleanup: v6/L1 refused its own Point helper exception-index reference; preserved v8/L1 complete-unit MATCH reused. Candidate source and relevant include/input/runtime/menu_resources header dependencies are unchanged."
+    },
+    {
+      "function": "func_001456e4",
+      "address": "0x001456e4",
+      "target_bytes": 240,
+      "source": "src/models2/display_initializer/func_001456e4.c",
+      "source_sha256": "20fa70607a38734c59c29302583160b31c1c0a7053b2fb0699611d90ada56605",
+      "profile": "game",
+      "author": "w16d-cmodels2-canonical-global",
+      "selection": {
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "receipt": {
+        "path": "scratch/cm2/resume-r1/display-initializer/func_001456e4.result.json",
+        "sha256": "7abb5f63379e9b716f20b1d3ecd6b71059308ae6b78292ec590e104544ced114"
+      },
+      "provenance": {
+        "path": "scratch/integrator/cmodels2/DISPLAY-001456E4-r1.json",
+        "sha256": "81f1e54cfb91b13aaad3b812238a5d6adf1aa8d152c34c563fd0d8b8d8a89262"
+      },
+      "exit_code": 0,
+      "status": "match",
+      "required_verdict": "QUALIFIED",
+      "rules": [
+        "R1"
+      ],
+      "rewrites": [
+        {
+          "offset": 124,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "w16_set_screen"
+            ],
+            "section": "i.w16_set_screen",
+            "size": 8,
+            "object": "scratch/cm2/resume-r1/display-initializer/extra-0-display_metadata.o"
+          }
+        }
+      ],
+      "extra_sources": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models2/display_initializer/display_metadata.c",
+          "source_sha256": "0b79e29766b3db971dc4b3fad37b012c8e45642b343bbeb25bce59615b6e8380",
+          "object_sha256": "d657fb9a8cea5b8907168558a8225ff6e5900ce26da2df8a8ab02f5edf20a1d8"
+        }
+      ],
+      "model_necessity": "Historical complete v3/none witness; canonical global correction now complete-unit MATCH under explicit v8/L1. No claim that this requires v8 over v3."
+    },
+    {
+      "function": "func_00169018",
+      "address": "0x00169018",
+      "target_bytes": 144,
+      "source": "src/models2/training_visibility/func_00169018.c",
+      "source_sha256": "dad803d4f926f04f74fcf7f9b061d0bf2ca43ac9bb0acfb2a03510c6869e0985",
+      "profile": "game",
+      "author": "residual-families-tu1091-cmodels2-canonical-receiver",
+      "selection": {
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "receipt": {
+        "path": "scratch/cm2/resume-r1/training-visibility/func_00169018.result.json",
+        "sha256": "a3651247b297e3c6e52e547bd1ecdf295e8fd14afe6895d9557432664b6bffb6"
+      },
+      "provenance": {
+        "path": "scratch/integrator/cmodels2/VISIBILITY-00169018-r2.json",
+        "sha256": "f1c477a33ddae58a85e13948181dce79880439b74cf4f3ea84017d8dc45121da"
+      },
+      "exit_code": 0,
+      "status": "match",
+      "required_verdict": "QUALIFIED",
+      "rules": [
+        "R1"
+      ],
+      "rewrites": [
+        {
+          "offset": 68,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "r41279_item_category"
+            ],
+            "section": "i.r41279_item_category",
+            "size": 8,
+            "object": "scratch/cm2/resume-r1/training-visibility/extra-0-item_accessors.o"
+          }
+        }
+      ],
+      "extra_sources": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_001ddde4/item_accessors.c",
+          "source_sha256": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a",
+          "object_sha256": "8aef9e2b2610591171deb095a0240e9ae95a40bd1b9a2a299a72946da16aaa08"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_001ddde4/func_001ddde4.c",
+          "source_sha256": "9c8f69bf4894e894a266a7104d0c591e246c61ac8a4425d61877c6a5499c39b1",
+          "object_sha256": "16aed365be7d77e96aa144cecc9fe4401b70f425ce39f7b5a8806037316e4eaf"
+        }
+      ],
+      "model_necessity": "Historical complete v3/none witnesses; corrected canonical L041/MessageLayout caller now MATCH under explicit v8/L1 with already accepted helper closure. No claim that this requires v8 over v3.",
+      "new_credit_only": [
+        "func_00169018"
+      ],
+      "unchanged_context_credit_preserved": [
+        "func_001ddde4"
+      ]
+    }
+  ],
+  "new_helpers": [
+    {
+      "source": "src/models2/menu_resources/ui_geometry.cpp",
+      "profile": "game",
+      "functions": [],
+      "source_sha256": "3aec912a174809659a0038220c41d8d3c717eb3ad46bbc7bc3f9725222ff46ea",
+      "callers": [
+        "func_001e958c"
+      ],
+      "unwind_object_closure": "scratch/integrator/cmodels2/MENU-V8-OBJECT-CLOSURE-r1.json"
+    },
+    {
+      "source": "src/models2/display_initializer/display_metadata.c",
+      "profile": "game",
+      "functions": [],
+      "source_sha256": "0b79e29766b3db971dc4b3fad37b012c8e45642b343bbeb25bce59615b6e8380",
+      "callers": [
+        "func_001456e4"
+      ]
+    }
+  ],
+  "accepted_source_revisions": [
+    {
+      "source": "src/wave10/func_00170db4.c",
+      "profile": "game",
+      "functions": [
+        "func_00170db4"
+      ],
+      "accepted_source_sha256": "a0f48f4c3c0e5f51e0cd35dd28600267a4b4bb0a80ee74717a81c0e76102ea92",
+      "current_source_sha256": "7c4d66900f1174673261a3d0d864d88341cb80d543f960fe20cd4b399986530b",
+      "record": "scratch/integrator/cmodels2/RECEIVER-MATCH-r2.json",
+      "receipt": {
+        "path": "scratch/cm2/resume-r1/receiver/func_00170db4/func_00170db4.result.json",
+        "sha256": "ea23aebc5c012c1d776cfa2c79d1648a027cabfe237672c1327d06d6d31f238b"
+      },
+      "ownership_changed": false
+    },
+    {
+      "source": "src/wave10/func_0017a43c.c",
+      "profile": "game",
+      "functions": [
+        "func_0017a43c"
+      ],
+      "accepted_source_sha256": "2003e4cbbe57dc3e065949db5b87774292ee29678c1becdcb2f1d0d7982346ea",
+      "current_source_sha256": "f3e6e480a191285c25498bd6c46c3fd335bb4b08c4a08a7d6f81132f89a6c663",
+      "record": "scratch/integrator/cmodels2/RECEIVER-MATCH-r2.json",
+      "receipt": {
+        "path": "scratch/cm2/resume-r1/receiver/func_0017a43c/func_0017a43c.result.json",
+        "sha256": "d603e0c79ef3347d8725031bdf21da7323bca22b49708b6bd2a36a290a001569"
+      },
+      "ownership_changed": false
+    },
+    {
+      "source": "src/wave7/func_001ad6d0.c",
+      "profile": "game",
+      "functions": [
+        "func_001ad6d0"
+      ],
+      "accepted_source_sha256": "ca924dbfab25ee3df6b6ba6e6e14b8aa52fff36269e17bd705ac5d5b1ab497f8",
+      "current_source_sha256": "0b74b42e81161f5a196361a79eb29c0524d44fea968dd290573985f5e7aa6102",
+      "record": "scratch/integrator/cmodels2/RECEIVER-MATCH-r2.json",
+      "receipt": {
+        "path": "scratch/cm2/resume-r1/receiver/func_001ad6d0/func_001ad6d0.result.json",
+        "sha256": "dc1ee9edcde9412c4820e0514477233eb18def4db8ddce70668e56f14d8502d8"
+      },
+      "ownership_changed": false
+    },
+    {
+      "source": "src/wave7/func_001ad6ec.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001ad6ec"
+      ],
+      "accepted_source_sha256": "20ea45bcbc6f4ce6e2a3ea72d59518859d9aa74b0fc20781e89ea69e12297101",
+      "current_source_sha256": "8f08805fc815803652691c83df0704c2be3516dc267a42307456d877a78b164b",
+      "record": "scratch/integrator/cmodels2/RECEIVER-MATCH-r2.json",
+      "receipt": {
+        "path": "scratch/cm2/resume-r1/receiver/func_001ad6ec/func_001ad6ec.result.json",
+        "sha256": "30d98fb6499c506f970ab017917c7cfa3d89667ce237e4b756d4a10248142484"
+      },
+      "ownership_changed": false
+    },
+    {
+      "source": "src/wave13/func_00177598.c",
+      "profile": "game",
+      "functions": [
+        "func_00177598"
+      ],
+      "accepted_source_sha256": "fd52baa59ca48071e525579e5067c8e7470f0662f0150e05942b2a68af3c6982",
+      "current_source_sha256": "610a6cade56d8aff9592c57e091eb5af3c7ef4d01f72217227bd58f287140a9e",
+      "record": "scratch/integrator/cmodels2/RECEIVER-MATCH-r2.json",
+      "receipt": {
+        "path": "scratch/cm2/resume-r1/receiver/func_00177598/func_00177598.result.json",
+        "sha256": "547333e38a465974d98602cade40c7d719a0e8401e08bce55006b33f330e28d1"
+      },
+      "ownership_changed": false
+    },
+    {
+      "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001e0afc"
+      ],
+      "accepted_source_sha256": "87b9a124b781b4636851933192805c3e838ae7e7cf82afb1221ebfd83f516817",
+      "current_source_sha256": "d6bf75c2e951b2eaedd4db19b4323997345538cf77df6185b7b0a53749687567",
+      "record": "scratch/integrator/cmodels2/RECEIVER-MATCH-r2.json",
+      "receipt": {
+        "path": "scratch/cm2/resume-r1/receiver/training_initialize_grouped_reset/training_initialize_grouped_reset.result.json",
+        "sha256": "f0d10640801bb80ebbd0d6434a07a2df84c8425e12deb7486508f573ed895592"
+      },
+      "ownership_changed": false
+    }
+  ],
+  "header_changes": {
+    "new": [
+      {
+        "path": "include/game/menu_resources.h",
+        "sha256": "0bf91e6d6cfec5b2b3e58530025f1ceca9432880efc8587160368622763b8193"
+      },
+      {
+        "path": "include/game/display_initializer.h",
+        "sha256": "67f63a79ba25f0d928ddabe07b4670faa842d798c6a6cb3e3944cb5e583aa017"
+      }
+    ],
+    "revised": [
+      {
+        "path": "include/game/messages.h",
+        "accepted_sha256": "9bf2902f7cb8b21b8b83b8ca1a88277b9ff6a1dcfd5b78b054d76f90602f7bb0",
+        "current_sha256": "3e05417cc8070094c932c02cbc84bf6120ff10fe21aea92081c8589d3cd28cf8"
+      },
+      {
+        "path": "include/game/screen.h",
+        "accepted_sha256": "b7bdf2a9bd335d7c18bae650ad174863fbd19f99758762162294c8da24d88887",
+        "current_sha256": "6b8d4e667ad02d54faf483b3263f284de15052f182b8150d4a8661fe038c051b"
+      },
+      {
+        "path": "include/game/training_screen.h",
+        "accepted_sha256": "19191b2840a4731e50f751e6da1ddd5350ee08de23a4dcc6ed6a8bebf05211dd",
+        "current_sha256": "418f419724f01f72d8006f0bd4fe6c3c552f84217a6f57e2c6d4e5d86312f670"
+      },
+      {
+        "path": "include/game/sound_controller.h",
+        "accepted_sha256": "ba9f627929967fa7acfe09b349992e837415e569111f8cc90c0587231835c905",
+        "current_sha256": "7267c2290732026d9078620acae2e4b60f038459cc522e15d0fa8d028d35a030"
+      }
+    ],
+    "L041_portable_delta": {
+      "path": "scratch/integrator/cmodels2/L041-C-EXPOSURE-r1.json",
+      "sha256": "888202e1e119b6de73a27358b67ed6da3321f91b462adac81b5fa4ac635303d9"
+    }
+  },
+  "names_added": [],
+  "moves": [],
+  "accepted_identities_withdrawn": [],
+  "ledger_edited": false,
+  "accepted_receipts_edited": false,
+  "ownership_inventory": {
+    "path": "scratch/integrator/cmodels2/OWNERSHIP-INVENTORY-r2.json",
+    "sha256": "8d5fa79da8b6b3b7d618bda56fb54263cd5bb6cc243e793ea15cd4f037e83688"
+  },
+  "model_transition": {
+    "path": "scratch/integrator/cmodels2/MODEL-TRANSITION-r2.json",
+    "sha256": "1dab49459c3d474e1d284fdfeefe21ba1cdbe06bfacec294e36438e0246591a4"
+  },
+  "refresh_reconciliation": {
+    "path": "scratch/integrator/cmodels2/RESIDUE-REFRESH-RECONCILIATION-r1.json",
+    "sha256": "8eb49a9587d787d65d2e2525462919013419b3a10f3b90ee2b1811fb1ff7e32f"
+  },
+  "contract_deferrals": {
+    "path": "scratch/integrator/cmodels2/CONTRACT-DEFERRALS.json",
+    "sha256": "6a067bfff81a796d68b0c9aa2cb2e66ed8879edf107a2e5c3e90c48295d0e137"
+  },
+  "receiver_risk_record": {
+    "path": "scratch/integrator/cmodels2/ACCEPTED-TYPE-RISKS.json",
+    "sha256": "5a2ea451833c07c3906de1cc1661c4f7998f592a5f302b14880e705d320dfd18"
+  },
+  "preserved_complete_v8_sweep": {
+    "path": "scratch/integrator/cmodels2/ACCEPTED-V8.json",
+    "sha256": "31400f7a3aa534e903df366872291e6179ba4ca8771265e783c2f0202a90770f",
+    "measurement_time_status": "prospective prepared-cmodels ledger; those exact units/sources became finalized cmodels on261fdc9",
+    "commands": 1546,
+    "functions": 1621,
+    "bytes": 195908,
+    "helper_only_units": 16,
+    "rerun": false,
+    "current_header_dependencies": "Receiver header changes reopen affected consumers; retained sweeps are not a fresh current-header complete-ledger pass."
+  },
+  "current_isolated_checks": {
+    "new_display": "scratch/integrator/cmodels2/DISPLAY-001456E4-r1.json",
+    "new_visibility_and_existing_helper_caller": "scratch/integrator/cmodels2/VISIBILITY-00169018-r2.json",
+    "receiver_dependencies": "scratch/integrator/cmodels2/RECEIVER-MATCH-r2.json",
+    "receiver_commands": 7,
+    "receiver_functions": 7,
+    "receiver_bytes": 2580,
+    "all_exits_zero": true,
+    "unchanged_v8_only_cleanup": "scratch/integrator/cmodels2/CANDIDATE-WITNESS.metadata.json",
+    "preserved_v8_object_closure": "scratch/integrator/cmodels2/MENU-V8-OBJECT-CLOSURE-r1.json",
+    "command_policy": "main interpreter; existing orig/toolchain symlinks; sequential nice -n10 tools/match.py --show0; exact process exit codes captured, gates never piped"
+  },
+  "remaining_integration_requirements": [
+    "Main owns full integrated compile/build/suite/G3/argcheck and independent model/typed provenance review; no prepare/finalize here.",
+    "ResumeC009-2 canonical reset/clock/number-owner cutover must be preserved on integration; this worktree only imports the receiver core and L041 C guard/prototype delta.",
+    "Reopen all19 prior R1 callers (18 unchanged bodies), every16 helper-only dependency and conservative L1 owner; projected current v8/L1 model-use rows22 R1+1 L1,18 helper-only units. Final receipts determine the complete set after c009/c010/c011 integration.",
+    "001d5864/001ab680 stay evidence-backed audio deferrals until prerequisite all-consumer/G3/argcheck/independent model closure;001db404/001ef89c and c011001d5694 deferrals preserved.",
+    "Main explicitly retained the heavy slot for ResumeC009-2/Main; complete this committed local handoff now without whole-ledger/G3/argcheck. Refresh the projection after c009/c010/c011 finalize."
+  ],
+  "not_run": [
+    "whole-ledger sweeps after this cutover",
+    "full builds",
+    "full suite",
+    "G3",
+    "argcheck/manual full ABI audit",
+    "prepare",
+    "independent checkpoint review",
+    "finalize",
+    "push"
+  ],
+  "preserved_pre_restart_scope_sha256": "86200ae8c90517df31ae01206a2ad2b17beb8a401ae54f6155da7bd6326bb43e",
+  "pre_restart_notes": "scratch/integrator/cmodels2-NOTES.md; old statements remain historical, not current pending-finalization state",
+  "qualification": "All candidate R1 helper identity/outlining/existence/TU provenance remains explicit INFERENCE/QUALIFIED. V8 own-unwind removal is not general metadata stripping or historical exception proof. No external literal/helper/metadata credit or denominator reinterpretation."
+}

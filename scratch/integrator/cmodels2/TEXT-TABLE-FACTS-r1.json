@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "source": "include/game/text_resources.h",
+  "address_point": "0x00223508",
+  "declared_extent": 8,
+  "declared_end": "0x00223510",
+  "next_independently_written_address_point": "0x00223518",
+  "next_writer": "src/checkpoint10/func_00162f78.cpp",
+  "abi_header_extent": 8,
+  "extent_qualification": "[INFERENCE] Complete two-cell address point ends before the neighboring table header. The original flat image has no authenticated ELF symbol size. This is an explicit qualification, not data credit or a recovered native class-name claim.",
+  "semantic_cells": [
+    {
+      "storage": "0x00223500",
+      "classification": "null",
+      "target": null,
+      "cell_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "storage": "0x00223504",
+      "classification": "null",
+      "target": null,
+      "cell_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "storage": "0x00223508",
+      "classification": "null",
+      "target": null,
+      "cell_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "storage": "0x0022350c",
+      "classification": "catalogued-function",
+      "target": "func_0015f890",
+      "cell_sha256": "53759cdd5ea314deaf7c8377190bc7d4ed192ac55b0dcb20cba233860b8feb71"
+    },
+    {
+      "storage": "0x00223510",
+      "classification": "null",
+      "target": null,
+      "cell_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "storage": "0x00223514",
+      "classification": "null",
+      "target": null,
+      "cell_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "storage": "0x00223518",
+      "classification": "catalogued-function",
+      "target": "func_00162f9c",
+      "cell_sha256": "68f04041b96abb39ce258e47ce24b9666aa4d38b18ca2c2d21e23e34d57fde4d"
+    },
+    {
+      "storage": "0x0022351c",
+      "classification": "null",
+      "target": null,
+      "cell_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "storage": "0x00223520",
+      "classification": "catalogued-function",
+      "target": "func_00161ad0",
+      "cell_sha256": "b639e065fd25b09d38aa3702bb6b8f41a00da1d3803de95d69703eea4b9ca010"
+    },
+    {
+      "storage": "0x00223524",
+      "classification": "catalogued-function",
+      "target": "func_001616f8",
+      "cell_sha256": "f6f3d09180520a0d9c90802d26df58a38affb233a3f2746ca453acde40efa716"
+    },
+    {
+      "storage": "0x00223528",
+      "classification": "catalogued-function",
+      "target": "func_00162f0c",
+      "cell_sha256": "2d87b78b278960e6c15c994c4d66b96f973264f130ad6fbce777015b06e30925"
+    }
+  ],
+  "slots": [
+    {
+      "offset": 0,
+      "declared_type": "unsigned null_entry",
+      "actual": "null/VFE, noncallable; no arity asserted"
+    },
+    {
+      "offset": 4,
+      "declared_type": "void (*destroy)(W22TextResources*)",
+      "actual_provider": "func_0015f890",
+      "actual_provider_type": "void(W22TextResources*)",
+      "compatible": true
+    }
+  ],
+  "source_users": [
+    {
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae"
+    },
+    {
+      "source": "src/checkpoint10/func_0015f5e4.cpp",
+      "source_sha256": "f471f38dc139d08394ed61fd9e1391fa1320b7208a93442b1e25c816616b1c0f"
+    },
+    {
+      "source": "src/models/func_0015f890/text_base_destruction.c",
+      "source_sha256": "7b40bed65b4fdd4e73f2d91997d442bdfe2056ae3c813d02413f7a7d6f37128c"
+    }
+  ],
+  "reproof": [
+    {
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "exit_code": 0,
+      "result": "scratch/integrator/cmodels2/reproof-r4-r1/010-func_0015f890/func_0015f890.result.json",
+      "result_sha256": "c7df95537915baf7af00d97c96af774d4caba0e2d8cf21164a8f747d3fc002fb"
+    },
+    {
+      "source": "src/checkpoint10/func_0015f5e4.cpp",
+      "exit_code": 0,
+      "result": "scratch/integrator/cmodels2/reproof-r4-r1/097-func_0015f5e4/func_0015f5e4.result.json",
+      "result_sha256": "0a6416df9099492e47a5d8c1837dc77766656e7c746307a13ed100b4bd97f2b7"
+    }
+  ],
+  "original_bytes_recorded": false,
+  "reproof_helper_source": "src/models/func_0015f890/text_base_destruction.c (compiled as companion in the exact destructor run)"
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "attempts": [
+    {
+      "phase": "merge-tree-preflight",
+      "exit_code": 1,
+      "record": "scratch/integrator/cmodels2-r3/MERGE-r1.json"
+    },
+    {
+      "phase": "worktree-add",
+      "exit_code": 0,
+      "note": "FICLONE fallback warning; ordinary checkout created the requested new branch."
+    },
+    {
+      "phase": "predecessor-merge",
+      "exit_code": 1,
+      "record": "scratch/integrator/cmodels2-r3/MERGE-r1.json"
+    },
+    {
+      "phase": "metadata-helper-import-r1",
+      "exit_code": 1,
+      "error_type": "ModuleNotFoundError",
+      "reason": "The eval interpreter did not include the main .venv pycparser dependency. No metadata was written by the failing cell.",
+      "resolution": "Reuse existing main .venv site-packages for metadata imports; all actual matcher commands use the main .venv Python absolute path. No packages installed or alternate compiler/provider selected."
+    },
+    {
+      "phase": "metadata-contract-owners-r1",
+      "exit_code": 1,
+      "error_type": "KeyError",
+      "reason": "func_0019ea6c is an external declared void API, not a credited defining unit. No records were written by the failing cell.",
+      "resolution": "Record its canonical synchronization.h declaration explicitly; never invent a credited provider/owner."
+    },
+    {
+      "phase": "bounded-r1-runner",
+      "exit_code": 1,
+      "matcher_exit_counts": {
+        "0": 47,
+        "2": 6
+      },
+      "results": "scratch/integrator/cmodels2-r3/runs/bounded-r1/results.json"
+    },
+    {
+      "phase": "bounded-r2-runner",
+      "exit_code": 0,
+      "matcher_exit_counts": {
+        "0": 18
+      },
+      "results": "scratch/integrator/cmodels2-r3/runs/bounded-r2/results.json"
+    }
+  ],
+  "setup": "orig and .cache/toolchain remain symlinked to main. A temporary own .venv symlink was removed; all commands use main .venv directly, avoiding an untracked directory-only-ignore symlink."
+}

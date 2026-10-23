@@ -1,0 +1,39 @@
+{
+  "source": "src/nw4c/font_ResFontBase.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001dae08",
+    "func_001daea4",
+    "func_001daefc"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/font_ResFontBase.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u0828"
+  ],
+  "exit_code": 0,
+  "seconds": 0.185428,
+  "source_sha256": "aae18217b1b80cdedfb2592c82be16798e5a1ea74698ad6012513bd32f6a11f8",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u0828/font_ResFontBase.result.json",
+  "receipt_sha256": "62598ae67674388d81fe9ec74e63ed6a5b5ccd8eccc088a95574cdb6bedb7731",
+  "output": "MATCH    _ZN2nw4font11ResFontBase15GenTextureNamesEv @ 0x1dae08 size 0x90/0x90\nMATCH    _ZN2nw4font11ResFontBase18DeleteTextureNamesEv @ 0x1daea4 size 0x58/0x58\nMATCH    _ZN2nw4font11ResFontBase20RemoveResourceBufferEv @ 0x1daefc size 0x78/0x78\n",
+  "stderr": ""
+}

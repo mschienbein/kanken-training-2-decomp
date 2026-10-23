@@ -1,0 +1,43 @@
+{
+  "source": "src/wave7/func_001916e8.c",
+  "profile": "game",
+  "functions": [
+    "func_001916e8"
+  ],
+  "extra_sources": [
+    "src/models/object_registration/stream_manager.c"
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/wave7/func_001916e8.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u0432",
+    "--extra-source",
+    "src/models/object_registration/stream_manager.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.290585,
+  "source_sha256": "e19265e8634d0fce0a91a644d337c529856df78547d6d1faef0ec13a315ae6c2",
+  "extra_source_sha256": {
+    "src/models/object_registration/stream_manager.c": "ff08f2295c679ff5a266ef4ad6bed125c86ca31d9eab7a2ce41eb945b885e5ad"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u0432/func_001916e8.result.json",
+  "receipt_sha256": "634edc9d95f7b7bb6ca7c47dc4b9391a3cb0b54997e6145df0ae1fd21891af78",
+  "output": "MATCH    func_001916e8 @ 0x1916e8 size 0x58/0x58 [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  register_stream_manager_cleanup (4 bytes; i.register_stream_manager_cleanup)\n",
+  "stderr": ""
+}

@@ -7,27 +7,44 @@ not the old unfinalized cmodels2-r3 lineage. Gates are v1.20; the explicit selec
 is **`armlink5-inline-branchnop-v6` / `anonymous-string-records-v1`**. No U1 or
 per-unit model override is admitted.
 
-- **26 NEW functions / 4,500 B**, plus **30 explicit moves / 908 B**: **56 claims /
-  5,408 B** in **41 candidate units**, including one zero-credit helper-only unit.
-- All **2,682 accepted identities** survive. The unaccepted proposed ledger has
-  **2,708 functions / 293,080 B**, with all **25 helper-only units** retained.
-- **49 tracked NEW holds / 8,588 B** in this
-  re-derivation scope; the proposed accepted `001c5294` move is separately withheld
-  at its unchanged final owner. No accepted identity is deferred or removed.
+- **29 NEW functions / 4,856 B**, plus **30 explicit moves / 908 B**: **59 claims /
+  5,764 B** in **44 candidate units**, including one zero-credit helper-only unit.
+- All **2,682 accepted identities** survive. The unaccepted combined proposed ledger
+  has **2,711 functions / 293,436 B**, with all **25 helper-only units** retained.
+- **60 tracked NEW holds / 13,588 B** remain uncredited: the independent c012 49,
+  all ten cmodels2-r5 holds, and the newly withheld `001456e4`. The proposed accepted
+  `001c5294` move is separately withheld at its unchanged final owner. No accepted
+  identity is deferred or removed.
 - The three previous holds `0010c138`, `001b4310`, `00111114` remain uncredited:
   steering-dependent spellings and the narrowed decoder interface were not restored.
 - The older 149-row census/author deferral snapshot is preserved as historical
   evidence in `HISTORICAL-DEFERRALS-r3.json`, not silently relabeled as a fresh
   current audit or counted again in this 103-identity re-derivation scope.
 
-The complete current-ledger source reproof ran **2,618 serial niced matcher commands,
-all exit 0**: **2,708/2,708 required identities MATCH**, including the natural contexts
-for all **25 helper-only units**. Every emitted comparison in every selected command
-is MATCH; the old failing co-emitted function subsets are not called whole-TU passes.
+Before folding cmodels2-r5, the independent c012 source reproof ran **2,618 serial
+niced matcher commands, all exit 0**: **2,708/2,708 required identities MATCH**,
+including natural contexts for all **25 helper-only units**. Every emitted comparison
+was MATCH; failing co-emitted function subsets are not called whole-TU passes.
 Evidence: `scratch/integrator/c012/r4/match-first-r1/results.json` and
-`REPROOF-FIRST-r1.json`. These are bounded source comparisons, not two fresh G4
-full-image/BLZ receipts, an emitted-owner audit, G3/argcheck, independent reviews,
-preparation, finalization or new accepted progress.
+`REPROOF-FIRST-r1.json`. This component proof is not the combined reproof. Neither
+source comparison is two fresh G4 full-image/BLZ receipts, an emitted-owner audit,
+G3/argcheck, independent reviews, preparation, finalization or new accepted progress.
+
+The fresh **combined** proof passes **2,619 sequential niced natural-context commands,
+all exit 0**, with **2,711/2,711 required identities MATCH**, every emitted comparison
+MATCH and all **25 helper-only units** covered. The actual driver exit is **0**.
+Evidence: `match-combined-r2/results.json`, `REPROOF-COMBINED-r2.json` and
+`DRIVER-EXIT-COMBINED-r2.json` under `scratch/integrator/c012/r4/`.
+
+The preceding combined attempt is retained: **2,621 commands**, with **2,619 exit 0**
+and **two exit 2** (actual driver exit **1**). Each failed standalone caller left
+one existing accessor definition without an actual inline consumer. The correction
+preserves the supplied component's genuine paired-caller contexts: `001ddde4` with
+`00169018`, and `001730ec` with `001e5d38`. Both distinct canonical source owners
+remain explicit; no helper was split, seeded, suppressed or given invented credit.
+`NATURAL-CONTEXT-CLOSURE-r1.json` and `COMPLETE-SCOPE-r3.json` bind those contexts.
+No source, type, header, name, selected model or function count changed for this
+context correction, and no failing emitted subset is called a pass.
 
 ## Final-owner moves and callback authority
 
@@ -123,6 +140,7 @@ Held candidate sources/headers are quarantined outside `src/` and `include/`.
 | `00131464` | byte-offset-owner-recovery | The drain recovers AudioVoiceGroup from PoolLink by offsetof byte subtraction. The agreed TaskPool prefix does not authorize this new container-of access. |
 | `001387f4` | C-facade-into-native-member | Final accepted001306c8 still calls a C facade func001387f4(RenderDrawList**,int). The proposed provider is real ResPrimitive::SetupDrawCommand(bool); a genuine ResPrimitive value-wrapper/caller transaction is missing, not a cast or spare alias. |
 | `0014381c` | native-slot-provider | The proposed new SoundDataManager constructor installs the native vtable over existing non-adopting slot owners:001d0324 is DirectSoundLoaderState cleanup,001f1864 is PointerTableOwner lookup, and001f1800 is EventDispatcher::dispatch(RoutedEvent*). No complete actual native provider/owner transaction is adopted. Bounded pointer identities are evidence of references, not table-extent proof. |
+| `001456e4` | unevidenced-downcast | Fold review traces the real `00181588`/`0013566c` producer to `00183168` and the canonical `data_00242238` ResourceEvent pool. Accepted `00135268` allocates ResourceEvent records. No independent tag/producer proves BoundDisplayObject, while accepted `00181700`/`00181448` require that owner. Main explicitly holds the new body, its setter helper and header. See `FOLDED-DISPLAY-PRODUCER-r1.json`; offset coincidence is not an alias or an adopting provider transaction. |
 | `0014b6f8` | native-slot-provider | The proposed current-request field, SignalState completion and execute vtable would replace final AudioTaskManager/AudioWorkRequest members without the full real execute-slot provider family. Callback width alone is not that type proof. |
 | `00150124` | steering-or-unproved-value-model | The old AudioMixMatrix adds a zeroing constructor followed by an unconditional all-zero reset, without a supplied adopting matrix/helper family. Do not restore redundant work or a guessed matrix API solely for the byte witness. |
 | `0015ea0c` | illegal-downcast | The new caller reinterprets canonical DisplayBinding* as ColoredDisplayBinding* without a tag/producer proof for that concrete object; no C linkage/name addition can close that owner mismatch. |
@@ -166,6 +184,40 @@ remain explicit in `DISPOSITIONS-r2.json`. No volatile, register forcing, barrie
 byte-storage substitute, function-pointer cast or fabricated callee was used to
 recover their private matches.
 
+## Folded cmodels2-r5 disposition
+
+The supplied `5a75bf13` history is folded only after independent c012 commit
+`8c94c419cf2911c8e1616d20ed0435d6565aedfb`. Its four proposed NEW identities are
+individually adjudicated: `00169018` (144 B), `00171208` (96 B) and `001e5d38`
+(116 B) remain qualified source candidates; `001456e4` (240 B) and its newly
+introduced setter/header are held by the producer finding above. The component's
+four revised accepted functions (280 B) and two revised accepted helpers remain;
+together with the TaskPool cutover this is six revised accepted functions (416 B).
+These are revisions, not NEW or move credit.
+
+The imported deletion of `src/checkpoint10/alternate1/func_001650f8.c` had no
+manifest move. Its exact finalized-main source is restored, preserving all six
+accepted identities (`001650f8`, `001f1ebc`, `001f1ed8`, `001f1f20`, `001f1f34`,
+`001f1f4c`). `FOLDED-ACCEPTED-SOURCE-RESTORATION-r1.json` binds that decision.
+
+There is one active candidate, `config/candidates/c012.json`, including every
+tracked NEW hold. The superseded component manifest and original issue document
+are explicitly rehomed under `scratch/integrator/c012/r4/folded-inputs/`; its
+original evidence stays at `scratch/integrator/cmodels2-r5/`. Its proposed counts
+and 86-command bounded proof are historical component facts, not cumulative counts
+or a replacement for the combined proof. **CM2-F01 and CM2-F03 remain blocking,
+outside the credited delta; they are not repaired.** All ten component holds,
+including CM2-F02 `001e958c`, stay uncredited. The existing c011 ownership note for
+`001d5694` remains, and the four c009-owned deferrals are not acquired.
+
+The canonical counted-entry and completion receiver/result models are reused;
+there is no new callback erasure, PMF decoding, native alias, vtable-name binding,
+U1 selection or byte-storage bridge. The explicit text-resource table retains
+CM2-F04's typed live cell and **[INFERENCE]** extent qualification; it does not
+prove a native class identity. Final c010-r8 runtime callback closure remains
+authoritative. The three retained NEW bodies are not provider rows in that closure.
+
+
 ## Integrator boundary
 
 Do not treat this candidate or the full bounded source comparison as checkpoint
@@ -174,3 +226,44 @@ current callback/opaque-owner rulings, refresh source dependencies, run serializ
 whole-ledger interfaces and caller audit, adjudicate every result, then perform the
 ordinary clean prepare with two fresh full builds and suite, two independent reviews
 and finalize. No heavy gate or push was run by this worker.
+
+## Preserved cmodels2-r5 qualifications
+
+The following component findings are carried forward verbatim. Its native-family
+investigation and the component-only scope/proof are preserved in the explicitly
+rehomed original document and `scratch/integrator/cmodels2-r5/`; they are not
+claims of repairs or combined checkpoint readiness.
+
+- **CM2-F01 remains blocking:** the real scene lifecycle providers and their native/
+  explicit table interfaces require one coherent exact migration. Keeping accepted
+  forms is not a claim that the previously identified slot contracts are repaired.
+- **CM2-F03 remains blocking:** the three accepted scene/member-callback relationships
+  need the genuine shared native hierarchy and providers. The PMF is actually invoked;
+  receiver erasure, unrelated record aliases and hand-decoding are not repairs.
+- **CM2-F02:** only NEW `001e958c` (296 B), its geometry helper and its private owner
+  header stay quarantined. The accepted c010 cleanup/provider forms win composition.
+- **CM2-F04:** retain the R4 typed two-cell text-resource address-point table and its
+  explicit extent qualification. Its live cell is `void(W22TextResources *)`; no arity
+  is invented for the null/VFE cell, no native class identity or data credit is claimed.
+- **10 tracked NEW holds / 4,760 B** remain: `0017a49c`, `001ab680`, `001acc88`,
+  `001acf28`, `001bc5ac`, `001d5694`, `001d5864`, `001db404`, `001ef89c`, `001e958c`.
+  Historical failures, v3-only qualifications and c011/audio ownership remain intact.
+  The nine unchanged accepted destructor forms are not counted as NEW holds.
+
+No exact native root/derived transaction was recovered under the authorized
+virtual-destructor/actually-undefined-key/external-`_ZTV` pattern. The component's
+changed inline-root arrangement left no surviving catalogued root D1; eight
+derived D1 comparisons were four bytes short under v18/L1. U1 did not waive D1
+equality. All nine accepted destructor forms remain unchanged; no synthetic slot,
+pure-qualifier change, native-to-C alias, reference suppression or PMF decoding
+is adopted. The old v18 refusal and changed-source failures are preserved rather
+than rerun. `NATIVE-FAMILY-DECISION.json` binds their exact owners and evidence.
+
+The component's model inventory reopens all 28 accepted R1 callers and its one L1
+owning function if a linker-model/header/helper change affects them. Its original
+four NEW R1 callers are reduced to the three retained here; the display initializer
+and setter receive no helper, data or unwind credit. R1 helper identity, outlining,
+original existence and historical TU/call graph remain **[INFERENCE]/QUALIFIED**.
+L1 retains its pool-extent, sharing, ordering and historical-TU qualifications.
+There is one global v6/L1 selection; no component proof label can override it.
+

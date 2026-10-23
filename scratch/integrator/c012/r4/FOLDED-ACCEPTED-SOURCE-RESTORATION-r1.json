@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "observations": [
+    {
+      "commit": "5820254f",
+      "source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "exit_code": 0,
+      "exists": true,
+      "source_sha256": "a419a52ddf5e188188a89603846e5fe964805cc6f0803a0802b4f1a92f8ac823"
+    },
+    {
+      "commit": "8c94c419cf2911c8e1616d20ed0435d6565aedfb",
+      "source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "exit_code": 0,
+      "exists": true,
+      "source_sha256": "a419a52ddf5e188188a89603846e5fe964805cc6f0803a0802b4f1a92f8ac823"
+    },
+    {
+      "commit": "5a75bf13",
+      "source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "exit_code": 128,
+      "exists": false,
+      "source_sha256": null
+    },
+    {
+      "argv": [
+        "git",
+        "diff-tree",
+        "--no-commit-id",
+        "--name-status",
+        "-r",
+        "5820254f",
+        "5a75bf13",
+        "--",
+        "src/checkpoint10/alternate1/func_001650f8.c"
+      ],
+      "exit_code": 0,
+      "source_transition": "D\tsrc/checkpoint10/alternate1/func_001650f8.c"
+    }
+  ],
+  "restored_source": "src/checkpoint10/alternate1/func_001650f8.c",
+  "restored_sha256": "a419a52ddf5e188188a89603846e5fe964805cc6f0803a0802b4f1a92f8ac823",
+  "accepted_functions": [
+    "func_001650f8",
+    "func_001f1ebc",
+    "func_001f1ed8",
+    "func_001f1f20",
+    "func_001f1f34",
+    "func_001f1f4c"
+  ],
+  "reason": "An imported deletion without a manifest move cannot retire accepted identities. Restore exact finalized-main content; canonical ledger and accepted history remain unchanged.",
+  "readiness": "Included in combined serial v6/L1 source reproof; not accepted credit."
+}
