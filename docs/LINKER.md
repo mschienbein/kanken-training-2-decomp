@@ -15,14 +15,15 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **v9–v16** implementations remain selectable, immutable and
-**unadopted**. Sealed FAILs v10–v16 remain under `scratch/review/`; v15 narrows U1 to
-one direct object and v16 stages that proof before aggregation but omits global COMDAT
-copy closure and permits covered-only receipt laundering.
-The new experimental opt-in **`armlink5-inline-branchnop-v17`** adds all-original-copy
-composition vetoes and positive full-image receipt scope. Aggregation itself never
-authorizes U1. The historical proposed v1.20 text under `scratch/integrator/linker-unref/`
-has not been amended for v17. Frozen GATES remains v1.19 and defaults remain v2/none.
+The recorded experimental **v9–v17** implementations remain selectable, immutable and
+**unadopted**. Sealed FAILs v10–v17 remain under `scratch/review/`; v15 narrows U1 to
+one direct object, v16 stages that proof before aggregation, and v17 adds global COMDAT
+copy vetoes and positive full receipt scope but loses empty group declarations and
+incorrectly requires later reporting fields on early historical receipts.
+The new experimental opt-in **`armlink5-inline-branchnop-v18`** preserves every raw group
+declaration before U1 and restores era-scoped historical verification. Aggregation itself
+never authorizes U1. The historical proposed v1.20 text under `scratch/integrator/linker-unref/`
+has not been amended for v18. Frozen GATES remains v1.19 and defaults remain v2/none.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -75,7 +76,8 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v10` | recorded unadopted history, selectable; review FAIL | v9 plus v8's own-exidx/extab closure for U1 owners; inherits F01/F02/F05 and incomplete matcher/grid reporting closure (F03/F04) |
 | `armlink5-inline-branchnop-v11` | recorded unadopted history, selectable; review FAIL | v10 U1/own-companion design plus allocated dependency/root witnesses, mapping checks, normalized copy targets, matcher hashes and explicit action reporting; complete raw ELF metadata gaps remain |
 | `armlink5-inline-branchnop-v16` | recorded unadopted history, selectable; review FAIL | direct-unit U1 preparation before aggregation; missing foreign same-signature COMDAT closure and positive full-build receipt scope |
-| `armlink5-inline-branchnop-v17` | experimental opt-in, **not adopted** | v16 direct-unit proofs plus all-original allocated COMDAT member/copy vetoes; positive full-image receipt/schema/action/witness closure |
+| `armlink5-inline-branchnop-v17` | recorded unadopted history, selectable; review FAIL | all-original allocated COMDAT copy vetoes and positive full receipt scope, but empty declarations disappear and pre-rewrite historical receipts are rejected |
+| `armlink5-inline-branchnop-v18` | experimental opt-in, **not adopted** | v17 plus complete raw group declaration/ownership census before any direct-unit U1 decision, including nonallocated declarations and members; historical receipt fields follow their recorded era |
 
 ## Function-entry alias identity (v6 only)
 
@@ -854,7 +856,7 @@ Direct matcher re-runs preserve MenuResetScene **exit 0 / MATCH 100 B** with the
 action, and MenuScene **exit 2 / live vtable refusal** without actions.
 No whole-ledger production build, full suite, adoption, subagents or new credit is claimed.
 
-## Global composition and positive receipt scope (experimental v17)
+## Global composition and positive receipt scope (recorded v17; review FAIL)
 
 The sealed v16 review (`scratch/review/linker-v16/codex/SEAL.json`, **FAIL**) reproduces
 two independent holes. A foreign same-signature COMDAT group containing kept code,
@@ -890,10 +892,10 @@ counts, unit/compiler/source/object/config/harness provenance and the complete s
 U1 schema. Covered counts/spans are forbidden there. `build_summary` now marks itself
 `build-summary` and preserves scope metadata; it remains deliberately insufficient as a
 receipt. Review, finalize and history re-open the hash-bound complete receipts.
-Historical verification has an explicit legacy path only for already-recorded non-v17
-schema-1 full evidence; it still requires actual complete image/BLZ hashes/checks and
-units. Historical summary formatting cannot authorize covered evidence. Failed legacy
-postmortems may still be reviewed, but their failed prepare cannot finalize.
+V17 intended an explicit legacy path for already-recorded non-v17 schema-1 full evidence.
+Its sealed review shows that a later unconditional `linker_rewrites` requirement breaks
+genuine pre-rewrite c001 receipts. Its positive whole-image/BLZ checks and modern scope
+requirements remain mandatory; failed legacy postmortems still cannot finalize.
 
 Executed **507 tests, exit 0, OK** across every linker test module plus the build/accept
 modules (not the full suite). Exact regressions reproduce all six F01 permutations,
@@ -915,6 +917,51 @@ consumer sweep is `scratch/integrator/linker-unref/AUDIT-v17.json`.
 
 Neither `docs/GATES.md` nor `GATES-DRAFT.md` is changed. No whole-ledger production/full
 build, full suite, adoption, checkpoint mutation, subagent or new credit is claimed.
+
+## Complete raw group census and historical eras (experimental v18)
+
+The sealed v17 review (`scratch/review/linker-v17/codex/SEAL.json`, **FAIL**) found two
+blockers: empty affected `SHT_GROUP` declarations disappeared before the member census
+(**V17-F01**), and finalized full receipts predating rewrite reporting were rejected
+(**V17-F02**). V17's six empty-group acceptances and its historical failure remain
+immutable evidence, not corrected under that selector.
+
+Only **`armlink5-inline-branchnop-v18`** enables `complete_group_declarations`:
+
+- The reader retains every original declaration's index, signature, optional flag word,
+  complete raw member-index tuple, defining-object identity and unsupported-structure
+  issues, including empty declarations and nonallocated members. The independent input
+  declaration count survives combination and nesting. Group ownership is checked before
+  allocation filtering can hide orphan `SHF_GROUP` sections or multiple memberships.
+- The builder validates **all original units before the first local U1 decision**.
+  Direct matching/preparation also requires the complete census. Missing or partial
+  words, missing membership/provenance, orphan/duplicate membership and absent census
+  structures refuse, rather than becoming empty safe defaults. Combination preserves
+  original issues and marks unavailable original censuses explicitly.
+- Every affected declaration must represent at least one allocated member and every such
+  member needs that unit's independent removal proof. Thus a same-signature copy made
+  entirely of filtered nonallocated members cannot disappear from composition checks.
+  Fully accounted unrelated groups remain separate. All existing complete-copy metadata,
+  content, relocation-target, foreign-reference and own-object witness proofs still apply.
+
+Historical verification keeps rewrite dictionaries optional **only** for explicitly
+allowed schema-1 default-model receipts from before the producer recorded `linker_model`.
+The authentic c001–c003 receipts have that shape. Later historical producers and every
+new prepare still require rewrite reporting. Historical source/receipt files are never
+rewritten, and the modern positive full-image/BLZ/scope/action/witness requirements do
+not become optional.
+
+Regression coverage includes the review's six empty declarations and twelve nonempty
+controls, malformed words, absent/orphaned censuses, nested preservation, filtered-member
+copies, agreeing copies and positive unrelated controls. A pre-rewrite fixture exercises
+review, finalize and history without adding a fake empty rewrite dictionary; a modern
+receipt missing the same field still refuses. Verification/evidence is recorded in
+`scratch/integrator/linker-unref/evidence-v18.json` and `AUDIT-v18.json`.
+
+The real integration check uses a detached scratch worktree at Main's pinned integration
+target merged locally with this branch, not hand-assembled source/header snapshots.
+Neither GATES file is amended, and no production full build, full suite, adoption, main
+mutation or push is authorized by this proposal.
 
 ## Sources
 

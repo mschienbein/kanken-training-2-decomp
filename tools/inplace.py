@@ -705,6 +705,18 @@ class ObjectOrigin:
         return self
 
 
+@dataclass(frozen=True)
+class GroupDeclaration:
+    """Original SHT_GROUP evidence, including declarations without a flag/member word."""
+
+    origin: ObjectOrigin
+    index: int
+    signature: str
+    flags: int | None
+    members: tuple[int, ...]
+    issues: tuple[str, ...]
+
+
 class ObjectFile:
     """The allocatable sections, symbols and REL relocations of one armcc object."""
 
@@ -731,6 +743,9 @@ class ObjectFile:
             self.section_groups: list[tuple[int, str, set[int | str]]] = []
             self.group_issues: list[tuple[str, str]] = []
             self.group_copies: list[tuple[str, int, bool, tuple[int, ...]]] = []
+            self.group_declarations: list[GroupDeclaration] = []
+            self.group_declaration_issues: list[str] = []
+            self.input_group_count = sum(s["sh_type"] == "SHT_GROUP" for s in elf.iter_sections())
             for i, s in enumerate(elf.iter_sections()):
                 if s["sh_flags"] & SH_FLAGS.SHF_ALLOC:
                     allocated_indices.add(i)
@@ -785,12 +800,40 @@ class ObjectFile:
                 metadata.append("ELF entry point")
             for section in allocated.values():
                 section.retention += tuple(f"uninterpreted {name}" for name in metadata)
-            for s in elf.iter_sections():
+            memberships: dict[int, list[int]] = {}
+            for group_index, s in enumerate(elf.iter_sections()):
                 if s["sh_type"] == "SHT_GROUP":
-                    words = struct.unpack(f"<{s['sh_size'] // 4}I", s.data())
+                    try:
+                        words = struct.unpack(f"<{s['sh_size'] // 4}I", s.data())
+                    except struct.error as error:
+                        raise LinkError(f"{path}: incomplete SHT_GROUP word structure") from error
+                    flags = words[0] if words else None
+                    symbol = self.symbols[s["sh_info"]] if s["sh_info"] < len(self.symbols) else None
+                    declared = symbol.name if symbol is not None else ""
+                    issues = []
+                    if len(words) < 2:
+                        issues.append("missing group flag or member words")
+                    if flags != 1:
+                        issues.append("unsupported group flags")
+                    if not declared or s["sh_link"] != canonical_table or s["sh_entsize"] != 4:
+                        issues.append("unsupported group signature/table/entry provenance")
+                    members = tuple(words[1:])
+                    if (any(not 0 < member < elf.num_sections() for member in members)
+                            or len(set(members)) != len(members)):
+                        issues.append("unrepresented or duplicate group member index")
+                    for member in members:
+                        if 0 < member < elf.num_sections():
+                            memberships.setdefault(member, []).append(group_index)
+                            target = elf.get_section(member)
+                            if not target["sh_flags"] & SH_FLAGS.SHF_GROUP or target["sh_type"] == "SHT_GROUP":
+                                issues.append("member lacks supported SHF_GROUP membership")
+                    self.group_declarations.append(GroupDeclaration(
+                        self.origin, group_index, declared, flags, members, tuple(issues)))
                     if words:
                         flags = words[0]
-                        signature = self.symbols[s["sh_info"]].name if flags & 1 else ""
+                        if flags & 1 and symbol is None:
+                            raise LinkError(f"{path}: unrepresented SHT_GROUP signature")
+                        signature = symbol.name if flags & 1 else ""
                         symbol = self.symbols[s["sh_info"]] if s["sh_info"] < len(self.symbols) else None
                         declared = symbol.name if symbol is not None else ""
                         if (any(not 0 < member < elf.num_sections() for member in words[1:])
@@ -814,6 +857,12 @@ class ObjectFile:
                             for member in words[1:]:
                                 if member in allocated:
                                     allocated[member].comdat = signature
+            for index, section in enumerate(elf.iter_sections()):
+                owners = memberships.get(index, [])
+                if (section["sh_flags"] & SH_FLAGS.SHF_GROUP and len(owners) != 1
+                        or len(owners) > 1):
+                    self.group_declaration_issues.append(
+                        f"section {index} has missing or multiple SHT_GROUP owners")
             for s in elf.iter_sections():
                 if not isinstance(s, RelocationSection):
                     continue
@@ -832,6 +881,18 @@ class ObjectFile:
         for sec in allocated.values():
             sec.mapping.sort()
 
+    def check_group_declarations(self) -> None:
+        """V18 validates original declarations before a direct-unit or composition U1 decision."""
+        declarations = getattr(self, "group_declarations", None)
+        if declarations is None or len(declarations) != getattr(self, "input_group_count", None):
+            raise LinkError("U1 SHT_GROUP declaration census is unavailable or incomplete")
+        issues = getattr(self, "group_declaration_issues", None)
+        if issues is None or issues:
+            raise LinkError("U1 SHT_GROUP membership cannot be fully accounted for")
+        for declaration in declarations:
+            if declaration.issues:
+                raise LinkError(f"U1 SHT_GROUP {declaration.index}: {declaration.issues[0]}")
+
     def __repr__(self) -> str:
         return f"ObjectFile(sections={len(self.sections)}, symbols={len(self.symbols)})"
 
@@ -847,6 +908,14 @@ class ObjectFile:
         merged.section_owners, merged.section_objects = {}, {}
         merged.section_input_indices = {}
         merged.group_issues = [issue for obj in objects for issue in getattr(obj, "group_issues", [])]
+        merged.group_declarations = [declaration for obj in objects
+                                     for declaration in getattr(obj, "group_declarations", [])]
+        merged.input_group_count = sum(getattr(obj, "input_group_count", 0) for obj in objects)
+        merged.group_declaration_issues = [issue for obj in objects
+                                           for issue in getattr(obj, "group_declaration_issues", [])]
+        if any(not all(hasattr(obj, key) for key in
+                       ("group_declarations", "group_declaration_issues", "input_group_count")) for obj in objects):
+            merged.group_declaration_issues.append("original SHT_GROUP declaration census is unavailable")
         merged.section_groups = []
         merged.origin = None
         merged.combination_depth = 1 + max((getattr(obj, "combination_depth", 0) for obj in objects), default=0)
@@ -1227,6 +1296,8 @@ class InPlaceLinker:
         """V15 has no cross-object U1 proof: reject derived/ambiguous inputs before reading witnesses."""
         if not self.model.single_object_u1:
             return
+        if self.model.complete_group_declarations:
+            obj.check_group_declarations()
         by_section = {}
         for symbol in obj.symbols:
             if symbol.shndx in obj.sections:

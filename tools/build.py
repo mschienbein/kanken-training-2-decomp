@@ -84,6 +84,13 @@ def check_u1_group_closure(objects: list, units: list[dict], plans: list[dict], 
     if not affected:
         return
     for original, plan in zip(objects, plans):
+        if model.complete_group_declarations:
+            allocated = original.sections | original.dependency_sections
+            for declaration in original.group_declarations:
+                if declaration.signature in affected:
+                    members = set(declaration.members) & allocated.keys()
+                    if not members or not members <= plan["removed"]:
+                        raise BuildError("affected U1 COMDAT copy declaration lacks a complete allocated removal proof")
         if any(signature in affected for signature, _ in getattr(original, "group_issues", [])):
             raise BuildError("affected U1 COMDAT copy has unrepresented group members")
         for signature, flags, canonical, _ in getattr(original, "group_copies", []):
@@ -116,6 +123,9 @@ def prepare_unit_objects(objects: list, units: list[dict], image, functions: dic
     """V16 decides U1 only on each own direct unit, then applies composition vetoes."""
     if len(objects) != len(units):
         raise BuildError("unit/object count differs")
+    if model.complete_group_declarations:
+        for original in objects:
+            original.check_group_declarations()
     prepared, plans = [], []
     for original, unit in zip(objects, units):
         view = original.__class__.__new__(original.__class__)

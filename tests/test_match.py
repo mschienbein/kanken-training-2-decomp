@@ -283,6 +283,10 @@ class AliasCompareSafetyTest(unittest.TestCase):
             for model in match.inplace.LINKER_MODELS:
                 with self.subTest(case=case, model=model):
                     obj, mem, catalogue, names = self.explicit_bound_pool_fixture(code_size, pool_size)
+                    if match.inplace.linker_model(model).complete_group_declarations:
+                        from tests.elf_fixture import serialize_object
+                        obj = match.inplace.ObjectFile(Path("explicit.o"), data=serialize_object(obj),
+                                                       input_kind="object")
                     self.assertEqual(match.inplace.function_aliases(obj), {})
                     metadata = [vars(sym).copy() for sym in obj.symbols]
                     ctx = match.Context.__new__(match.Context)

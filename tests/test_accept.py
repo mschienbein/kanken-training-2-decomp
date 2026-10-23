@@ -58,7 +58,7 @@ class AcceptGateTest(unittest.TestCase):
                 "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80},
                 "outputs": {"code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64},
                 "checks": {"credited_functions_exact": True, "code_bin_identical": True, "exefs_code_identical": True},
-                "units": [{**unit, "linker_rewrites": {}} for unit in units],
+                "units": units,
             }
             accept.write_exclusive(out / "receipts" / f"{name}-{suffix}.json", receipt)
             builds.append({key: receipt[key] for key in ("name", "result", "credited", "outputs")})
@@ -97,6 +97,22 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(len(accept.verify_history()), 1)
         with self.assertRaisesRegex(accept.AcceptError, "already finalized"):
             accept.finalize("c001", 1)
+
+    def test_pre_rewrite_legacy_receipts_keep_their_recorded_optional_fields(self):
+        for suffix in ("a", "b"):
+            receipt = accept.load_json(self.root / "accept/c001/receipts" / f"c001-{suffix}.json")
+            self.assertNotIn("linker_model", receipt["inputs"])
+            self.assertTrue(all("linker_rewrites" not in unit for unit in receipt["units"]))
+            self.assertTrue(accept.build_receipt_scope_valid(
+                receipt, accept.LEGACY_MODELS["linker_model"], allow_legacy_full=True))
+            self.assertFalse(accept.build_receipt_scope_valid(receipt, accept.LEGACY_MODELS["linker_model"]))
+            labelled = json.loads(json.dumps(receipt))
+            labelled["inputs"].update(accept.LEGACY_MODELS)
+            self.assertFalse(accept.build_receipt_scope_valid(
+                labelled, accept.LEGACY_MODELS["linker_model"], allow_legacy_full=True))
+        self.review()
+        accept.finalize("c001", 1)
+        self.assertEqual(len(accept.verify_history()), 1)
 
     def test_fail_review_blocks_finalize(self):
         self.review("FAIL")
@@ -639,6 +655,9 @@ class AcceptGateTest(unittest.TestCase):
 
     def test_v16_to_v17_transition_binds_closed_groups_and_positive_full_receipts(self):
         self.u1_model_transition("armlink5-inline-branchnop-v16", "armlink5-inline-branchnop-v17", own_unwind=True)
+
+    def test_v17_to_v18_transition_binds_complete_group_census_and_full_receipts(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v17", "armlink5-inline-branchnop-v18", own_unwind=True)
 
     def test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions(self):
         member = {"symbols": ["_ZN6WidgetD0Ev"], "object": "src/helper.cpp", "section_index": 3}

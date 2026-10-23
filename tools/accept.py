@@ -330,10 +330,13 @@ def build_receipt_scope_valid(receipt: dict, model: str, *, allow_legacy_full: b
         return False
     if any(type(credited.get(key)) is not int or credited[key] < 0 for key in ("functions", "bytes")):
         return False
+    pre_rewrite = legacy and model == LEGACY_MODELS["linker_model"] and "linker_model" not in inputs
     functions_seen, sources_seen = set(), set()
     for unit in units:
         if (not isinstance(unit, dict) or not isinstance(unit.get("source"), str)
-                or not isinstance(unit.get("functions"), list) or not isinstance(unit.get("linker_rewrites"), dict)):
+                or not isinstance(unit.get("functions"), list)):
+            return False
+        if not pre_rewrite and not isinstance(unit.get("linker_rewrites"), dict):
             return False
         if not legacy:
             if (not unit["source"] or unit["source"] in sources_seen

@@ -364,5 +364,5 @@ class ResolutionConsumerTest(unittest.TestCase):
         self.assertTrue(selected.complete_symbol_resolution)
         self.assertTrue(all(not model.complete_symbol_resolution for name, model in inplace.LINKER_MODELS.items()
                             if name not in (MODEL, "armlink5-inline-branchnop-v15", "armlink5-inline-branchnop-v16",
-                                            "armlink5-inline-branchnop-v17")))
+                                            "armlink5-inline-branchnop-v17", "armlink5-inline-branchnop-v18")))
         self.assertEqual(inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
