@@ -28,6 +28,9 @@ extern unsigned char data_002430dc;
 unsigned func_00192a7c(void);
 void func_0019d6c4(unsigned result, unsigned address);
 Result func_00121444(void);
+Result func_00121610(void);
+Result func_001216b8(void);
+Result func_0011375c(unsigned char *selected);
 bool func_0010c06c(void);
 }
 #endif

@@ -127,6 +127,8 @@ extern void func_001dc170(int value);
 extern void func_001dc230(int value);
 extern void func_001dbcec(int grade, int category, int value);
 extern void func_001dbfdc(int grade, int category, int value);
+extern int func_001dbacc(int track, int age, int *category, int *x, int *y,
+                        unsigned char *kind);
 #ifdef __cplusplus
 }
 #endif

@@ -43,6 +43,15 @@ draw-info and renderer contract. Public `Draw`/`DrawSelf` remain unchanged.
 header changes, original ownership facts and bounded witnesses; no accepted
 credit or complete identity for the target root prefix follows from this re-entry.
 
+The unaccepted c012-r4 source delta reuses the existing canonical CSPT
+`PrefetchFileHeader` lookup interface through
+`src/checkpoint12/intake-r22/final_func_00153ebc/`. The same pinned public
+declaration/helper provenance and license remain applicable. Larger native
+layout, sound-manager, stream and TextBox proposals that do not close their
+actual owner/provider families are quarantined under
+`scratch/integrator/c012/r4/held-sources/`, with their per-file notices intact;
+they are not adopted library implementations or new library/data credit.
+
 Policy: only sources whose license is compatible with GPL-3.0 are copied; attribution, the
 upstream license and modification notices stay with the copied code. Public repositories without a
 license grant (inspected 2026-10-17: standalone nnsdk, LibMessageStudio, 3DS sead) are not copied.

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/admit_func_001cbf34/func_001cbf34_native_local_header_all.cpp",
+    "--profile",
+    "middleware",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/018-admit_func_001cbf34",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.21624,
+  "source": "src/checkpoint12/intake-r17/admit_func_001cbf34/func_001cbf34_native_local_header_all.cpp",
+  "source_sha256": "ff5a1be29724a96ca1111e91f06bfdf9936bf2469bb932ca04df855b57582875",
+  "claimed_functions": [
+    "func_001cbf34"
+  ],
+  "profile": "middleware",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/018-admit_func_001cbf34/func_001cbf34_native_local_header_all.result.json",
+  "receipt_sha256": "c8790e0955f5ac42716d15ee732cdb554b73d79e02f07c6239de6298a1085a58",
+  "functions": [
+    {
+      "name": "_ZN2nw3lyt12AnimResource3SetEPKv",
+      "address": 1883956,
+      "size": 168,
+      "candidate_size": 168,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN2nw3lyt12AnimResource3SetEPKv @ 0x1cbf34 size 0xa8/0xa8\n",
+  "stderr": ""
+}

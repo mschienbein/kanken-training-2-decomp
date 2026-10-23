@@ -29,6 +29,7 @@ struct StreamQueue;
 
 #include "game/audio_filter.h"
 #include "game/pool_list.h"
+#include "game/task_pool.h"
 #include "game/stream_manager.h"
 
 #include <stdbool.h>

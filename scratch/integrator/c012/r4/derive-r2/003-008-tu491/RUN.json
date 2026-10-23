@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/008-tu491/func_001387f4.cpp",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/003-008-tu491",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.319169,
+  "source": "src/checkpoint12/intake-r17/008-tu491/func_001387f4.cpp",
+  "source_sha256": "a0ce1943711c54f91bfc534d288d9e246aa984651ecdf60134a58d80b74fb525",
+  "claimed_functions": [
+    "func_001387f4"
+  ],
+  "profile": "game",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/003-008-tu491/func_001387f4.result.json",
+  "receipt_sha256": "24cf0e46a943b3e3cb4c24858b8cb9d5a9859802b42635436d98a87c8b086a78",
+  "functions": [
+    {
+      "name": "_ZN2nw3gfx3res12ResPrimitive16SetupDrawCommandEb",
+      "address": 1279988,
+      "size": 152,
+      "candidate_size": 152,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN2nw3gfx3res12ResPrimitive16SetupDrawCommandEb @ 0x1387f4 size 0x98/0x98\n",
+  "stderr": ""
+}

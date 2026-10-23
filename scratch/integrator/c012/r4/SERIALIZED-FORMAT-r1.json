@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "authority": "Main ruling in this assignment",
+  "interpretation": "The standing byte-offset/byte-storage ban targets constant runtime-object field offsets in place of typed members and storage reinterpretation. A format parser following an offset carried in serialized data may remain QUALIFIED under conditions(a)-(d).",
+  "conditions_verbatim": [
+    "(a) The offset value is read from the serialized record (here the header metadata_offset). No constant byte offset is chosen to reach a field.",
+    "(b) The result is converted once, at the format boundary, to a typed pointer to the documented serialized record type, and is used only through that type afterwards. No runtime-object overlay, union view, memcpy reinterpretation or second model.",
+    "(c) If a canonical helper exists for that format, use it. Otherwise one small typed local helper is acceptable.",
+    "(d) Bounds and alignment assumptions match the original. Note them as [INFERENCE] where they are not evidenced."
+  ],
+  "rows": [
+    {
+      "function": "func_00116e30",
+      "disposition": "QUALIFIED",
+      "a": "metadata_offset and count_offset_words are read from the serialized HWR header. The two-word count-section prefix is format structure, not a constant byte offset into a runtime object.",
+      "b": "Each resolved address becomes one const HwrResourceMetadata or HwrResourceCounts pointer at the format boundary; all subsequent accesses are typed members. There is no runtime overlay, union view, memcpy reinterpretation or alternate model of an existing native object.",
+      "c": "No canonical HWR offset resolver exists in this tree. The one small local resource_counts helper handles the encoded word-offset section; metadata is converted once at its only boundary use.",
+      "d": "[INFERENCE] The original trusts in-bounds, naturally word-aligned records. file_size remains an ignored input; no bounds check, alignment mask or extra assumption-changing transformation is added."
+    },
+    {
+      "function": "func_0010cb9c",
+      "disposition": "QUALIFIED",
+      "a": "section_word_offset comes from the serialized record and indexes its addressed word table; no constant runtime-field byte offset is used.",
+      "b": "The body stays in its one SerializedPacketResource word-table type and obtains counts as typed unsigned elements, with no representation-reconciliation cast.",
+      "c": "The source-local packet_size/add_packet operations operate on values, not raw runtime storage; no native PackedResource alias is declared.",
+      "d": "[INFERENCE] Existing valid-file/table bounds, word alignment and unsigned arithmetic are preserved, including the ignored input_size."
+    },
+    {
+      "function": "func_00153ebc",
+      "disposition": "QUALIFIED",
+      "a": "The CSPT reference table carries its own serialized offsets. 0x4000 selects a block type; it is not a byte displacement into an object.",
+      "b": "The canonical GetBlock result is converted once to const PrefetchFileBlock* at the format boundary.",
+      "c": "Uses the existing canonical PrefetchFileHeader::GetBlock / reference-table resolver, not a private header or another offset helper.",
+      "d": "[INFERENCE] The original valid-reference bounds/alignment assumptions remain unchanged. No extra validation, field overlay or data credit is introduced."
+    }
+  ],
+  "runtime_owner_recovery_holds_unchanged": true
+}

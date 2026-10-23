@@ -5,7 +5,9 @@
 struct W11SingleState;
 
 struct ItemPage {
-    unsigned char reserved00[0x0c];
+    unsigned char reserved00[6];
+    signed char filter_kind;                /* 0x06; signed filtered-count property */
+    unsigned char reserved07[5];
     int count;                              /* 0x0c */
     unsigned char reserved10[8];
     unsigned short **values;
@@ -38,6 +40,9 @@ extern void func_001719f4(struct ItemPageSet *set, unsigned char kind, int forma
                         int category, int index, int enabled);
 extern void func_0015f724(struct ItemPage *page, int index, int column, int value);
 extern void func_0015f840(struct ItemPage *page, int index, unsigned char flags);
+extern int func_00173078(const struct ItemPageSet *set, int kind);
+/* [INFERENCE] R1 removes this supplied getter; historical identity is unknown. */
+extern signed char item_page_kind(const struct ItemPage *page);
 #ifdef __cplusplus
 }
 #endif

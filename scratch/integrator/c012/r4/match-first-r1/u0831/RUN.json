@@ -1,0 +1,38 @@
+{
+  "source": "src/nw4c/lyt_Arc.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001432cc",
+    "func_001cbbc4"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/lyt_Arc.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u0831"
+  ],
+  "exit_code": 0,
+  "seconds": 0.196894,
+  "source_sha256": "6386b8a9767ccc82577bd694ab611288ac340758c21c0a9c955824d8de6aae4b",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-first-r1/u0831/lyt_Arc.result.json",
+  "receipt_sha256": "ed249f24abe380392cccdd033e80352750789743c906ffc6dcd967de4d909931",
+  "output": "MATCH    _ZN2nw3lyt13ARCInitHandleEPvPNS0_9ARCHandleE @ 0x1432cc size 0x4c/0x4c\nMATCH    _ZN2nw3lyt11ARCFastOpenEPNS0_9ARCHandleEiPNS0_11ARCFileInfoE @ 0x1cbbc4 size 0x4c/0x4c\n",
+  "stderr": ""
+}

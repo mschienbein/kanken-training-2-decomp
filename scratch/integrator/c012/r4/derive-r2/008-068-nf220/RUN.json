@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/068-nf220/func_001f1af4_shared.cpp",
+    "--profile",
+    "middleware",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/008-068-nf220",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 1,
+  "seconds": 0.185247,
+  "source": "src/checkpoint12/intake-r17/068-nf220/func_001f1af4_shared.cpp",
+  "source_sha256": "703677de5cc2bfdf8fae9181dbf4dbb10381572b8e24eac882d2df45e34f3256",
+  "claimed_functions": [
+    "func_0018279c"
+  ],
+  "profile": "middleware",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/008-068-nf220/func_001f1af4_shared.result.json",
+  "receipt_sha256": "f99d00d130d3d4bcc6a06dfcb7c68315da1239e846d990e61d6a18c6ad2e51e0",
+  "functions": [
+    {
+      "name": "func_0018279c",
+      "address": 1583004,
+      "size": 124,
+      "candidate_size": 124,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    },
+    {
+      "name": "func_001f1af4",
+      "address": 2038516,
+      "size": 112,
+      "candidate_size": 104,
+      "status": "mismatch",
+      "first_diff": 5,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    func_0018279c @ 0x18279c size 0x7c/0x7c\nMISMATCH func_001f1af4 @ 0x1f1af4 size 0x68/0x70 first difference at +0x5\n",
+  "stderr": ""
+}

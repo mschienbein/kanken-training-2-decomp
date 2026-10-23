@@ -3,10 +3,6 @@
 
 struct AudioChannel;
 
-struct TaskPool {
-    unsigned int reserved00;
-    struct PoolList active;
-};
 
 struct HandleManager;
 extern struct HandleManager bss_004b6888;

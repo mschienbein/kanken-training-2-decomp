@@ -73,6 +73,9 @@ extern void func_001ae2e4(struct L044StatisticsPanel *panel);
 extern void func_001ec1b8(struct CategoryScreen *screen, int reset);
 extern int func_00172994(int channel);
 extern int func_0017abf8(int channel, int sound);
+/* [INFERENCE] The original caller forwards this frame and two full words. */
+extern void func_001c1190(struct L044TrainingFrame *frame, int enabled, int category);
+extern void func_001ed05c(struct CategoryScreen *screen);
 void func_001ed874(struct CategoryScreen *screen);
 #ifdef __cplusplus
 }

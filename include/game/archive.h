@@ -399,6 +399,7 @@ extern unsigned int func_0014a364(const struct SoundArchiveReader *reader);
 extern unsigned func_0014a380(const struct SoundArchiveReader *reader);
 extern const unsigned *func_0014c298(const struct SoundArchiveInfo *info);
 extern const unsigned *func_0014c2b0(const struct SoundArchiveInfo *info);
+extern const struct SoundPlayerInfo *func_0014c2a4(const struct SoundArchiveInfo *info);
 extern unsigned char func_00140ccc(const struct SoundRecord *record);
 extern int func_00140d1c(const struct SoundRecord *record);
 extern unsigned func_0014c23c(const struct SoundFileInfo *info);

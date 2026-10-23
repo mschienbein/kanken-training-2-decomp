@@ -103,10 +103,17 @@ struct PendingState {
 /* The handle-bearing object at 0x002430e0 is not the flag block above. */
 struct ServiceContext;
 
+/* [INFERENCE] The separately referenced linker bounds delimit an empty
+ * constructor range in this image; there is no claimed callback provider. */
+typedef void (*StartupConstructor)(void);
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern struct ServiceState data_00242a50;
+extern StartupConstructor startup_constructors_begin[];
+extern StartupConstructor startup_constructors_end[];
+extern void func_0010163c(void);
 extern struct ServiceClientState data_00242c18;
 extern struct ServiceStringCounts data_002430e4;
 extern void func_0010b5cc(void *context);

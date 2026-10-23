@@ -1,0 +1,43 @@
+{
+  "source": "src/wave19/func_00167284.c",
+  "profile": "game",
+  "functions": [
+    "func_00167284"
+  ],
+  "extra_sources": [
+    "src/models/object_registration/animation_state.c"
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/wave19/func_00167284.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u2089",
+    "--extra-source",
+    "src/models/object_registration/animation_state.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.252826,
+  "source_sha256": "ff10da281247559b755c33e573aa207d8350525ed53c6b5a764e6156cf80d787",
+  "extra_source_sha256": {
+    "src/models/object_registration/animation_state.c": "52ac1278c1f71c6fb826fe161c8561b6edfe5b84f5c46f5a332986963676950b"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-first-r1/u2089/func_00167284.result.json",
+  "receipt_sha256": "2c53d9167a4f4ccf3a08217675e4d5ff279577c4661db6fda7cb56eb5fff6842",
+  "output": "MATCH    func_00167284 @ 0x167284 size 0x58/0x58 [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  register_animation_state_cleanup (4 bytes; i.register_animation_state_cleanup)\n",
+  "stderr": ""
+}

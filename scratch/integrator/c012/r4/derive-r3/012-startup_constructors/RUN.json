@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r32/startup_constructors/func_0010163c.c",
+    "--profile",
+    "sdk",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r3/012-startup_constructors",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.1899,
+  "source": "src/checkpoint12/intake-r32/startup_constructors/func_0010163c.c",
+  "source_sha256": "a593783719ca3feb0b1690d5f278b354df3c9b87a197faba43cd4f4bc7fabcc9",
+  "claimed_functions": [
+    "func_0010163c"
+  ],
+  "profile": "sdk",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r3/012-startup_constructors/func_0010163c.result.json",
+  "receipt_sha256": "7ba932fd7ee38328b7f73d3ad51eeb57347684d71be6be43a31be4736f525f0c",
+  "functions": [
+    {
+      "name": "func_0010163c",
+      "address": 1054268,
+      "size": 52,
+      "candidate_size": 52,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    func_0010163c @ 0x10163c size 0x34/0x34\n",
+  "stderr": ""
+}

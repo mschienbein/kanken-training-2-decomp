@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "branch": "c012-r4",
+  "worktree": "scratch/worktrees/c012-r4",
+  "base_commit": "5820254f",
+  "old_c012_commit": "25dec8449af91cc2416c44027dd5b85e4e6123de",
+  "excluded_old_model_lineage": "9733e05b (not merged or cherry-picked)",
+  "status": "FIRST_SOURCE_DELTA_COMPLETE_NOT_PREPARED",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.20",
+  "counts": {
+    "new_functions": 26,
+    "new_bytes": 4500,
+    "moved_functions": 30,
+    "moved_bytes": 908,
+    "candidate_functions": 56,
+    "candidate_bytes": 5408,
+    "candidate_units": 41,
+    "helper_only_candidate_units": 1,
+    "proposed_functions": 2708,
+    "proposed_bytes": 293080,
+    "held_previous_scope": 47,
+    "prior_R3_holds": 3,
+    "tracked_NEW_holds": 49,
+    "tracked_NEW_hold_bytes": 8588,
+    "withheld_accepted_moves": 1,
+    "withheld_accepted_move_bytes": 40,
+    "tracked_hold_identities_including_accepted_move": 50,
+    "revised_accepted_nonmove_functions": 2,
+    "revised_accepted_nonmove_bytes": 136
+  },
+  "counts_boundary": "Only26 NEW /4500 B are proposed new credit;30 moves /908 B preserve identities. All2682 accepted identities survive. No accepted progress or helper/data/unwind credit was added.",
+  "candidate_manifest": {
+    "path": "config/candidates/c012.json",
+    "sha256": "4e1ed491cdf53c3e9ff3f3fb8bcaa5f8fd3b14cf8869799aaf2f55b5b8da0dda"
+  },
+  "proposed_ledger": {
+    "path": "PROPOSED-LEDGER-r2.json",
+    "sha256": "0bcba0ad61071ee31d95b73951c753bca6bedb2167193573ea9ab4d5fc7a301e",
+    "current_alias": "PROPOSED-LEDGER.json"
+  },
+  "source_reproof": {
+    "schema_version": 1,
+    "selection": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "record": "match-first-r1/results.json",
+    "record_sha256": "27a32767d537d07b511badf5dca4233e26970580bb6732991fd9434dfddcb6e6",
+    "scope": "COMPLETE-SCOPE-r1.json",
+    "scope_sha256": "9c0ce47c656f85b971e97cf4356fb783ca74090623f22a1bf68536e1c91025e4",
+    "result": "PASS",
+    "commands": 2618,
+    "exit_counts": {
+      "0": 2618
+    },
+    "required_functions": 2708,
+    "matched_functions": 2708,
+    "scope_complete": true,
+    "helper_only_units": [
+      "src/checkpoint12/intake-r29/final_func_00173078/item_page_kind.c",
+      "src/models/func_0010be58/result_failure_bits.c",
+      "src/models/func_0013f06c/frame_heap_unbound_hooks.c",
+      "src/models/func_0015f890/text_base_destruction.c",
+      "src/models/func_00168d14/character_panel_minimum.c",
+      "src/models/func_00172e00/transition-C-setter.c",
+      "src/models/func_001730ec/item_accessors.c",
+      "src/models/func_001a00f8/transition_active.c",
+      "src/models/func_001a2814/tu441_removed_helpers.c",
+      "src/models/func_001b8908/panel_accessors.c",
+      "src/models/func_001b9f18/drawing_state.c",
+      "src/models/func_001bd68c/drawing_state.c",
+      "src/models/func_001ddde4/item_accessors.c",
+      "src/models/func_001e0afc/removed_initializers.c",
+      "src/models/func_001ed874/category_initializers.c",
+      "src/models/linear_buffer/linear_buffer_allocator.c",
+      "src/models/object_registration/animation_state.c",
+      "src/models/object_registration/drawing_input.c",
+      "src/models/object_registration/object_manager.c",
+      "src/models/object_registration/prompt_manager.c",
+      "src/models/object_registration/resource_service_lock.c",
+      "src/models/object_registration/sound_resource_cache.c",
+      "src/models/object_registration/stream_manager.c",
+      "src/models/object_registration/style_owner.c",
+      "src/models/transition_setters/transition_active.c"
+    ],
+    "no_failed_emitted_function_subset": true,
+    "not_a_full_G4_receipt_or_emitted_owner_audit": true,
+    "heavy_checks_run": []
+  },
+  "dispositions": {
+    "path": "DISPOSITIONS-r2.json",
+    "sha256": "237d096ff06ee179fa493be1f7fb0e51390623f6404b5f9d63656be0fa7dfd01"
+  },
+  "all_old_moves": {
+    "path": "MOVES-AUDIT-r1.json",
+    "sha256": "615e11356e1f6dee56c6d3e37bee2dcff687e3ac58eab2ac2b03eb1bc4f4b133",
+    "inputs": 32,
+    "retained": 30,
+    "accepted_owner_retained_without_move": [
+      "func_001c5294"
+    ],
+    "held_potential_NEW_not_accepted": [
+      "func_001d4078"
+    ]
+  },
+  "five_legacy_c010_moves": [
+    {
+      "function": "func_0019ecf8",
+      "old_move": {
+        "function": "func_0019ecf8",
+        "from": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+      "final_profile": "sdk",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0019ecf8",
+        "from": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c"
+      },
+      "destination_sha256": "c13db71619b8ba266b74e90e35a5e04ba58f4ccfb7f16f97d69d1bd3ad811179",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001d4078",
+      "old_move": {
+        "function": "func_001d4078",
+        "from": "src/checkpoint10/func_001d4078.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001d4078/func_001d4078.c"
+      },
+      "final_ledger_member": false,
+      "final_owner": null,
+      "final_profile": null,
+      "disposition": "held-potential-NEW-not-a-move",
+      "category": "unmodeled-callback-family",
+      "reason": "Final c010-r8 explicitly deferred001d4078: the result/context callback family is unmodeled. It is not an accepted move. Old ArchiveTransfer/context mutex/result declarations would reverse that closure; both dependent new claims stay held."
+    },
+    {
+      "function": "func_001db960",
+      "old_move": {
+        "function": "func_001db960",
+        "from": "src/checkpoint10/func_001db960.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/func_001db960.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001db960",
+        "from": "src/checkpoint10/func_001db960.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c"
+      },
+      "destination_sha256": "fe8861dd84653046fa645872616e5ffb2f732f9ad1d45bb1604994b326788314",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0021092c",
+      "old_move": {
+        "function": "func_0021092c",
+        "from": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+        "to": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0021092c",
+        "from": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+        "to": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp"
+      },
+      "destination_sha256": "55414407acdaf002af82bc0ff0473fac88fce7002e7b7cbd912112cd86454ec2",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001757dc",
+      "old_move": {
+        "function": "func_001757dc",
+        "from": "src/checkpoint10/func_001757dc.c",
+        "to": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/func_001757dc.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001757dc",
+        "from": "src/checkpoint10/func_001757dc.c",
+        "to": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c"
+      },
+      "destination_sha256": "4cc8a9d54a37f0bc633570be69cb5ab312cb7a9726e3a56c9626cf3cde91cfe1",
+      "final_body_wins": true,
+      "special_case": null
+    }
+  ],
+  "accepted_nonmove_source_revisions": [
+    {
+      "source": "src/wave16/func_00153fec.c",
+      "functions": [
+        "func_00153fec"
+      ],
+      "sha256": "80f5031229be9946f4cedf8fd871b54f8cf3f73bca61edae5269206466941386",
+      "reason": "Shared exact TaskPool definition; implementation body unchanged."
+    },
+    {
+      "source": "src/wave16/func_0015477c.c",
+      "functions": [
+        "func_0015477c"
+      ],
+      "sha256": "131608f72079d492c6a002df1f24656e6da83d3d968201f9c1467d3a1791fe84",
+      "reason": "Shared exact TaskPool definition; implementation body unchanged."
+    }
+  ],
+  "TaskPool_agreement": {
+    "path": "TASK-POOL-AGREEMENT-r1.json",
+    "sha256": "e19e2ae4e7cde59096ddb91e679732037431733ea9e8d0ba713298ef91dc9528",
+    "c014_commit": "479eb7f4",
+    "canonical_header_sha256": "fdecc7599595eac61674d0984c21cb87d742d9cac4a8cd9b068972daf404115c",
+    "one_model": true,
+    "allocation_extent_claimed": false,
+    "0017e764_owner": "c012 only",
+    "legacy0015477c_recovery_newly_approved": false
+  },
+  "cmodels2_dependency_audit": {
+    "kept_units_require_cmodels2_only_sources_or_helpers": false,
+    "direct_old_cmodels2_function_mentions": [],
+    "missing_old_lineage_include": "application_configuration.h came from c011, not cmodels2; the include was unused and removed. The actual Result endpoints are declared in service_clients.h.",
+    "qualification": "Broad old screen/item-entry headers overlapped model work historically, but the retained source uses final main and only c012-exclusive definitions. No old models2 source or helper was copied."
+  },
+  "held_source_policy": {
+    "path": "SOURCE-POLICY-r1.json",
+    "sha256": "e330913eafaa82b84cdddb6fefa03a5214aa06b6a346d3b753902df23c5efd27",
+    "interpretation": "Provisional source admission, not independent G6 or complete native hierarchy approval."
+  },
+  "qualified_format_ruling": {
+    "path": "SERIALIZED-FORMAT-r1.json",
+    "sha256": "e08481d6f89e5e5c2bcc6df40b5145885b5ceecde0cbb821ff164cbb344ce826",
+    "00116e30_retained": "QUALIFIED under Main explicit conditions(a)-(d); runtime byte-owner holds unchanged."
+  },
+  "historical_deferrals": {
+    "path": "HISTORICAL-DEFERRALS-r3.json",
+    "sha256": "45350f918435c9648f571da135642e60965059ebafda35197326fdce96f7aeb9",
+    "status": "Historical149-row snapshot, not newly re-audited/count-conflated."
+  },
+  "current_scope_NEW_holds": [
+    "func_00107dec",
+    "func_0010c138",
+    "func_0010e2e0",
+    "func_00111114",
+    "func_00117f2c",
+    "func_001229d4",
+    "func_00126330",
+    "func_001266e4",
+    "func_0012672c",
+    "func_00131464",
+    "func_001387f4",
+    "func_0014381c",
+    "func_0014b6f8",
+    "func_00150124",
+    "func_0015ea0c",
+    "func_0015f84c",
+    "func_0017433c",
+    "func_0017fe04",
+    "func_00183d3c",
+    "func_0018d51c",
+    "func_0019000c",
+    "func_00195900",
+    "func_001ada1c",
+    "func_001b4310",
+    "func_001b50bc",
+    "func_001b5a34",
+    "func_001b5cc0",
+    "func_001c1c74",
+    "func_001c3068",
+    "func_001c9e08",
+    "func_001cbf34",
+    "func_001cc4cc",
+    "func_001ce9e8",
+    "func_001cf448",
+    "func_001d3f18",
+    "func_001d3f58",
+    "func_001d4010",
+    "func_001d4078",
+    "func_001dac54",
+    "func_001e37ec",
+    "func_001ea1cc",
+    "func_001ebda4",
+    "func_001f1cf0",
+    "func_001f563c",
+    "func_001f57d4",
+    "func_002108b0",
+    "func_00212650",
+    "func_00212ae8",
+    "func_00212b20"
+  ],
+  "unchanged_accepted_attention": [
+    "func_001c5294"
+  ],
+  "source_privacy": "Only sources, decoded pointer identities/addresses, counts, extents and hashes; no original buffers/disassembly/packets/instruction words in the new records.",
+  "known_issues": {
+    "path": "docs/known-issues-c012.md",
+    "sha256": "55f03cc961ea6e72769f1fb9538cb72f630f6ceb8a60c1d02384f18524dea62a"
+  },
+  "not_exercised": [
+    "whole-ledger interfaces",
+    "whole-ledger argcheck",
+    "emitted-owner audit",
+    "build",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "heavy_slot_requests": [],
+  "agent_or_task_calls": 0,
+  "accepted_ledger_or_accept_records_edited": false,
+  "remaining_heavy_commands": "REMAINING-HEAVY-COMMANDS-r1.json"
+}
