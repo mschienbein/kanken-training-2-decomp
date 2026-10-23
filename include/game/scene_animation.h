@@ -50,7 +50,6 @@ struct AnimationObject {
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern int data_0023fdc8;
 extern unsigned func_001409c0(const struct AnimationResource *resource);
 extern void func_00135908(struct AnimationObject *object, int index);
 #ifdef __cplusplus

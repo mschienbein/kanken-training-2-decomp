@@ -1,4 +1,5 @@
 #include "game/scene_animation.h"
+#include "game/startup.h"
 
 struct FrameAdvance { float count; float speed; float step; };
 
@@ -17,7 +18,7 @@ void func_00135908(struct AnimationObject *object, int index)
 
     frame = track->resource->frame;
     length = (float)func_001409c0(track->resource);
-    advance.count = (float)data_0023fdc8;
+    advance.count = (float)data_0023fdc8.current;
     advance.speed = track->speed;
     advance.step = advance.speed * bss_00495b30.nominalFrames;
     frame += advance.count * advance.step;

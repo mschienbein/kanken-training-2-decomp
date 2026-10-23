@@ -41,7 +41,8 @@ struct StartupResources {
     struct StartupCommandPool *commands;
 };
 
-struct RestorableState { unsigned current, saved; };
+/* Signed: func_00135908 converts `current` with a signed integer-to-float conversion. */
+struct RestorableState { int current, saved; };
 
 struct StartupItem { int value, flags, id; };
 /* Callback storage is established by 00195b6c and exact 0049c87c/0049c880
