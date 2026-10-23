@@ -1,0 +1,244 @@
+{
+  "callers": [
+    {
+      "function": "func_00195900",
+      "object": {
+        "path": "scratch/authors/fa02/match/caller-00195900/attempt-01/func_00195900.o",
+        "sha256": "a636a55a252813947757d3fe0059304fa9825ece14784ec9dbe79b20e3799385"
+      },
+      "original_receipt": {
+        "path": "scratch/authors/fa02/match/caller-00195900/attempt-01/func_00195900.result.json",
+        "sha256": "2ceac6b9b55355a534a1dcd26c4ac527da5efa06d8f459d77292aa66740625b0"
+      },
+      "receipt_without_instruction_encodings": {
+        "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "extra_sources": [],
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "functions": [
+          {
+            "address": 1661184,
+            "candidate_size": 264,
+            "first_diff": null,
+            "linker_rewrites": [],
+            "name": "func_00195900",
+            "size": 264,
+            "status": "match"
+          }
+        ],
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "literal_rebindings": [],
+        "object_sha256": "a636a55a252813947757d3fe0059304fa9825ece14784ec9dbe79b20e3799385",
+        "profile": "game",
+        "proposed_names": {
+          "path": "scratch/research/names-admission/overlays/func_00195900.json",
+          "sha256": "819e9f4ff600101d80d8666ef8c41229bb0d8093ce1ef611cdd1e8876631e198"
+        },
+        "removed_callees": [],
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4016/drafts/func_00195900/resume-slot-accessor/func_00195900.cpp",
+        "source_sha256": "27da686fe966140fd6fa9178302314d0ec2f5dbedf4c4889009fd0baa431ddb0"
+      },
+      "source": {
+        "path": "scratch/authors/r4016/drafts/func_00195900/resume-slot-accessor/func_00195900.cpp",
+        "sha256": "27da686fe966140fd6fa9178302314d0ec2f5dbedf4c4889009fd0baa431ddb0"
+      },
+      "source_text": "#include <string.h>\n#include <preinclude.h>\n#include \"game/screen.h\"\n#include <nw/lyt/lyt_Layout.h>\n#include <nw/lyt/lyt_ResourceAccessor.h>\n\n/* [INFERENCE] Game-owned binding slot; middleware interfaces use canonical classes. */\nstruct W16AnimationSlot {\n    unsigned char reserved00[8];\n    float frame;\n    unsigned char reserved0c[8];\n    int mode;\n    float progress;\n    nw::lyt::Layout *player;\n    nw::lyt::AnimTransform *animation;\n    unsigned char reserved24[0x10];\n    nw::lyt::ResourceAccessor *accessor;\n};\nstruct W16AnimatedDisplay {\n    DisplayObject base;\n    W16AnimationSlot *slots[2];\n    __forceinline W16AnimationSlot *animationSlot(int index) { return slots[index]; }\n};\n\n/* INTEGRATOR: move global buffer declaration to include/game/display_resources.h. */\nextern \"C\" { extern char bss_0049d958[]; }\n\nvoid func_00195900(DisplayObject *object, int index, const char *name, int mode)\n{\n    W16AnimatedDisplay *display = reinterpret_cast<W16AnimatedDisplay *>(object);\n    strcpy(bss_0049d958, name);\n    strcat(bss_0049d958, \".bclan\");\n    W16AnimationSlot *slot = display->animationSlot(index);\n    nw::lyt::Layout *player = slot->player;\n    const void *resource = slot->accessor->GetResource(0x616e696d, bss_0049d958, 0);\n    if (slot->animation != 0) {\n        player->UnbindAnimation(0);\n        player->DeleteAnimTransform(slot->animation);\n        slot->animation = 0;\n    }\n    slot->animation = player->CreateAnimTransform(resource, slot->accessor);\n    slot->player->BindAnimation(slot->animation);\n    /* ORIGINAL BUG: a nonzero index still resets playback on slot zero. */\n    {\n        W16AnimationSlot *first = display->animationSlot(0);\n        first->frame = 0.0f;\n        first->animation->SetFrame(0.0f);\n    }\n    W16AnimationSlot *first = display->animationSlot(0);\n    if (mode != 0) {\n        first->mode = 0;\n        first->progress = 0.0f;\n    } else {\n        first->mode = 2;\n    }\n}\n"
+    },
+    {
+      "function": "func_00193168",
+      "object": {
+        "path": "scratch/authors/fa06/match/named-caller-attempt-06/func_00193168.o",
+        "sha256": "5c644ece67b4202a60c274f13056945c5ba83389f9d641af76fc338d716e66f1"
+      },
+      "original_receipt": {
+        "path": "scratch/authors/fa06/match/named-caller-attempt-06/func_00193168.result.json",
+        "sha256": "60948994b1cbecd1bc1c9a4f591c5ca3b13295aa3cd4e65331108b0a9b399de0"
+      },
+      "receipt_without_instruction_encodings": {
+        "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "extra_sources": [],
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "functions": [
+          {
+            "address": 1651048,
+            "candidate_size": 204,
+            "first_diff": null,
+            "linker_rewrites": [],
+            "name": "func_00193168",
+            "size": 204,
+            "status": "match"
+          }
+        ],
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "literal_rebindings": [],
+        "object_sha256": "5c644ece67b4202a60c274f13056945c5ba83389f9d641af76fc338d716e66f1",
+        "profile": "game",
+        "proposed_names": {
+          "path": "scratch/authors/fa06/context-names.json",
+          "sha256": "93fec82a85d868d026a124bf59f5c9957e6cc7a0e805876e1f6fcd496f84fbc2"
+        },
+        "removed_callees": [],
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/fa06/context/attempt-06/func_00193168.cpp",
+        "source_sha256": "51f5f4ac160e8d3465629eb8c5bae38dfcf9c52d4f1783c0632482e2f04837c3"
+      },
+      "source": {
+        "path": "scratch/authors/fa06/context/attempt-06/func_00193168.cpp",
+        "sha256": "51f5f4ac160e8d3465629eb8c5bae38dfcf9c52d4f1783c0632482e2f04837c3"
+      },
+      "source_text": "#include \"game/runtime.h\"\n#include \"game/text.h\"\n\n/* INTEGRATOR: identity-only C ABI witness; do not adopt this caller or declaration.\n * The public C wchar.h declaration uses unsigned-short code units, as confirmed\n * by the C replay. Native C++ wchar_t is nominally distinct from the project's\n * canonical unsigned-short text interfaces. This declaration preserves those\n * existing interfaces without casts. [INFERENCE] Historical spelling unknown.\n */\nextern \"C\" {\nunsigned short *wcsncpy(unsigned short *destination,\n                       const unsigned short *source, size_t count);\n}\n\n/* Reference-selecting minimum: the address of the first operand stays the default. */\nstatic inline unsigned minimum(const unsigned &a, const unsigned &b)\n{\n    const unsigned *smaller = &a;\n    if (a >= b)\n        smaller = &b;\n    return *smaller;\n}\n\nunsigned func_00193168(unsigned short *destination, unsigned capacity, const char *source)\n{\n    int required;\n    int source_count = -1;\n    unsigned result = func_001949e4(0, &required, source, &source_count);\n    bool failed = (result >> 31) != 0;\n    if (failed)\n        return result;\n    unsigned short *temporary = static_cast<unsigned short *>(\n        func_00193110((required + 1) * 2, data_002232d5));\n    result = func_001949e4(temporary, &required, source, &source_count);\n    if (result & 0x80000000u) {\n        func_0019e08c(temporary);\n        return result;\n    }\n    result = 0;\n    temporary[required] = 0;\n    wcsncpy(destination, temporary,\n            minimum(capacity, static_cast<unsigned>(required + 1)));\n    /* ORIGINAL BUG: a zero capacity writes before the destination. */\n    destination[capacity - 1] = 0;\n    func_0019e08c(temporary);\n    return result;\n}\n"
+    },
+    {
+      "function": "func_00180234",
+      "object": {
+        "path": "scratch/authors/fa12/match/context-func_00180234/attempt-01/func_00180234.o",
+        "sha256": "f0002809c3eb19a59879b9ddf27be6b086f709917017ebf46b7d1c958e80242c"
+      },
+      "original_receipt": {
+        "path": "scratch/authors/fa12/match/context-func_00180234/attempt-01/func_00180234.result.json",
+        "sha256": "dbc6c3c8ff4822b7d4a39053a1ae352887fefdd984dda708d1d9a4fbe737e2e8"
+      },
+      "receipt_without_instruction_encodings": {
+        "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "extra_sources": [],
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "functions": [
+          {
+            "address": 1573428,
+            "candidate_size": 224,
+            "first_diff": null,
+            "linker_rewrites": [
+              {
+                "offset": 144,
+                "rule": "inline_nop",
+                "target": 2186948
+              },
+              {
+                "offset": 180,
+                "rule": "inline_nop",
+                "target": 2186948
+              }
+            ],
+            "name": "func_00180234",
+            "size": 224,
+            "status": "match"
+          }
+        ],
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "literal_rebindings": [],
+        "object_sha256": "f0002809c3eb19a59879b9ddf27be6b086f709917017ebf46b7d1c958e80242c",
+        "profile": "game",
+        "proposed_names": null,
+        "removed_callees": [],
+        "source": "/home/michael/code/kanken-training-2-decomp/src/wave8/func_00180234.cpp",
+        "source_sha256": "78fb88bb4dae0bc074f9c846cd3acc39d9fe45d70b5cd85cebbd9ac822cad838"
+      },
+      "source": {
+        "path": "src/wave8/func_00180234.cpp",
+        "sha256": "78fb88bb4dae0bc074f9c846cd3acc39d9fe45d70b5cd85cebbd9ac822cad838"
+      },
+      "source_text": "#include \"game/matrix.h\"\n\n\nstruct Scale3fW8C {\n    float x, y, z;\n    Scale3fW8C(float value) : x(value), y(value), z(value) {}\n};\n\nstruct TransformComponentsW8C {\n    Matrix34 matrix;\n    Scale3fW8C scale;\n    unsigned flags;\n    TransformComponentsW8C(unsigned initial_flags)\n        : matrix(*matrix34Identity()), scale(1.0f), flags(initial_flags) {}\n};\n\nextern \"C\" TransformComponentsW8C *func_00180234(void)\n{\n    /* [INFERENCE] callee identity: the guard-release call was inlined by armlink. */\n    static TransformComponentsW8C components_value(0x7e1);\n    return &components_value;\n}\n"
+    },
+    {
+      "function": "func_001cf418",
+      "object": {
+        "path": "scratch/integrator/library-sweep/callers/match-wcslen/func_001cf418.o",
+        "sha256": "033ff32e64593e781b97cfb7b6f0884cbc5a8bf6807ec3703a9a62c2b5836dd1"
+      },
+      "original_receipt": {
+        "path": "scratch/integrator/library-sweep/callers/match-wcslen/func_001cf418.result.json",
+        "sha256": "85e8da964cff66aeeffe4ec4b510aad00bb8cf22fe71aae3b5008ab21fff9b25"
+      },
+      "receipt_without_instruction_encodings": {
+        "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "extra_sources": [],
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "functions": [
+          {
+            "address": 1897496,
+            "candidate_size": 48,
+            "first_diff": null,
+            "linker_rewrites": [
+              {
+                "offset": 44,
+                "rule": "branchnop",
+                "target": 1897544
+              }
+            ],
+            "name": "func_001cf418",
+            "size": 48,
+            "status": "match"
+          }
+        ],
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "literal_rebindings": [],
+        "object_sha256": "033ff32e64593e781b97cfb7b6f0884cbc5a8bf6807ec3703a9a62c2b5836dd1",
+        "profile": "game",
+        "proposed_names": {
+          "path": "scratch/integrator/library-sweep/callers/names.json",
+          "sha256": "fb5c081f958bfa53a8e59f5b8709b235358e7cc5e5c889a2285d24a0fd988bff"
+        },
+        "removed_callees": [],
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/library-sweep/callers/func_001cf418.c",
+        "source_sha256": "a0522535201741aff8b6cae4338d0eb8f9892137ae104a104bd81bf56ed7e2d8"
+      },
+      "source": {
+        "path": "scratch/integrator/library-sweep/callers/func_001cf418.c",
+        "sha256": "a0522535201741aff8b6cae4338d0eb8f9892137ae104a104bd81bf56ed7e2d8"
+      },
+      "source_text": "#include <wchar.h>\n\nstruct WideTextBuffer;\n\nextern unsigned func_001cf448(struct WideTextBuffer *buffer,\n                              const unsigned short *text,\n                              unsigned position, unsigned count);\n\nunsigned func_001cf418(struct WideTextBuffer *buffer, const unsigned short *text,\n                       unsigned position)\n{\n    return func_001cf448(buffer, text, position, wcslen(text));\n}\n"
+    }
+  ],
+  "qualification": "Retained original compiler receipts and real named caller sources, identity evidence only. Replacement encoding fields are deliberately omitted; original immutable receipt digests remain. No caller is recompiled or adopted by the catalogue revision.",
+  "schema_version": 1
+}

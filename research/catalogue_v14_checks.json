@@ -1,0 +1,123 @@
+{
+  "adoption": false,
+  "author": "CatalogueV14Codex",
+  "commands": [
+    {
+      "argv": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_catalogue_v14",
+        "tests.test_catalogue_alignment",
+        "tests.test_catalogue_v13_r2",
+        "tests.test_analyze.CatalogueTests.test_reviewed_classification_retains_extent_and_physical_ownership",
+        "tests.test_analyze.CatalogueTests.test_classification_requires_identity_proofs_and_is_transactional",
+        "tests.test_analyze.CatalogueTests.test_classification_cannot_mutate_a_complete_protected_record",
+        "tests.test_analyze.CatalogueClosureTests.test_classification_checks_the_entire_original_extent_identity",
+        "tests.test_analyze.CatalogueClosureTests.test_frozen_baseline_and_parent_are_independently_authenticated"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v14",
+      "exit_code": 0,
+      "stderr": ".....................................\n----------------------------------------------------------------------\nRan 37 tests in 26.294s\n\nOK\n",
+      "stdout": "",
+      "wall_seconds": 26.646687
+    },
+    {
+      "argv": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "tools/catalogue_non_c.py",
+        "propose-v14",
+        "--image",
+        "/home/michael/code/kanken-training-2-decomp/orig/code.bin",
+        "--exheader",
+        "/home/michael/code/kanken-training-2-decomp/orig/exheader.bin",
+        "--prove-objects",
+        "--private-root",
+        "/home/michael/code/kanken-training-2-decomp",
+        "--out",
+        "config/catalogue.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v14",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "private proof: 6 whole vendor sections; 5 retained named caller relocations\ncatalogue-v14: 4546 creditable functions; 1120094 extent bytes; proposal only; config/catalogue.json\n",
+      "wall_seconds": 1.367818
+    },
+    {
+      "argv": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "tools/denominator.py",
+        "record",
+        "--note",
+        "UNADOPTED catalogue-v14 proposal on catalogue-v14 from 5820254f: 5 exact named vendor-library owners (104 B) and all 20 explicitly handwritten NW4C FastWordCopyAsm owners (1476 B); creditable denominator 4571/1121674 B -> 4546/1120094 B. All 2682 accepted complete records, every owner extent/entry, physical ranges, 114 unknown B/11 intervals and one anomaly unchanged. REPORT-v14.md and immutable research/catalogue_v14_* evidence; independent review and Main adoption remain required."
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v14",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "denominator v11: 4743 functions, 1143932 bytes (0294dc94d9b6)\n",
+      "wall_seconds": 0.09055
+    },
+    {
+      "argv": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "tools/denominator.py",
+        "verify"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v14",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "ok: denominator v11 matches config/catalogue.json\n",
+      "wall_seconds": 0.046713
+    }
+  ],
+  "denominator_entry": {
+    "catalogue_sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+    "entry_sha256": "0294dc94d9b6fbe1fceea678da5fea8f27a4097d5fcafa5c3c7f718d32271b87",
+    "prev": "81f2f2afa2278e3766ca7e52665c43b807cd8b129b9c67a823adf08764c35a34",
+    "version": 11
+  },
+  "denominator_history": {
+    "path": "docs/denominator-history.jsonl",
+    "sha256": "179e8b3835969b3117d99e69b59b1153796c194090c67a811f58614e14ff43f3",
+    "size": 21825
+  },
+  "focused_tests": {
+    "exit_code": 0,
+    "tests": 37,
+    "unittest_seconds": 26.294,
+    "wall_seconds": 26.646687
+  },
+  "generation": {
+    "path": "research/catalogue_v14_generation.json",
+    "sha256": "c3e1b8f0ac7361070ccd3d44dfd163f566d08e843a46ce879807b2d5630f412a",
+    "size": 570800
+  },
+  "independent_review": false,
+  "new_C_credit": 0,
+  "proposal": {
+    "path": "config/catalogue.json",
+    "sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+    "size": 6706167
+  },
+  "qualifications": [
+    "No full suite, build, compilation, matcher, source/interface review, acceptance prepare/finalize, adoption or push.",
+    "The five target sections plus authenticated complete caller parent were reopened in memory; five retained named caller relocations were reencoded. No vendor, caller, ROM buffers, instruction encodings, disassembly or packets were serialized.",
+    "All prior negative probes/refusals are retained, not rerun or converted to passes.",
+    "The 37 focused tests include metadata-only authored nonexecutable fixtures; exact original-image and private-object certificates were checked separately by the one public generator execution."
+  ],
+  "report": {
+    "path": "docs/catalogue/REPORT-v14.md",
+    "sha256": "5017688b6e5c330943f262c7fb4fa1bc85f82a713ba9650f44364684af77b9cd",
+    "size": 16941
+  },
+  "revision": "catalogue-v14",
+  "schema_version": 1,
+  "source_sha256": {
+    "tests/test_catalogue_v14.py": "7ede8d4aff67dddf7d67d6014e706d3aadd7db213aaca9606e38db68dfea27b3",
+    "tools/catalogue_non_c.py": "d35211db73fc51e64c0cd6a501c024ec26229be4763c940a92c09dc9fe209918"
+  }
+}

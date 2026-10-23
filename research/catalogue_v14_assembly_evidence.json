@@ -1,0 +1,889 @@
+{
+  "additional_to_assigned_targets": [
+    "func_0018423c",
+    "func_00184258",
+    "func_001842d8",
+    "func_00184308",
+    "func_001846f8"
+  ],
+  "adoption": false,
+  "already_classified": [],
+  "authors": {
+    "fa03": {
+      "record": {
+        "agent": "fa03",
+        "caller_context": {
+          "lines": [
+            10,
+            15,
+            51,
+            61
+          ],
+          "native_dispatch_header": "include/nw/gfx/gfx_MemoryUtil.h:46-76",
+          "observed": "The adjacent six-word specialization at 0x0018423c receives a destination command cursor and two six-word shader blocks, and its return advances that cursor. This agrees with native FastWordCopy/FastWordCopyAsm_6 dispatch. Assigned leaves have no direct callers in their generated packets.",
+          "source": "src/checkpoint10/func_001306c8.c"
+        },
+        "classification": "library_candidate: handwritten NW4C assembly; no authored source and no C compile search.",
+        "context_match_receipts": [
+          "scratch/authors/fa03/match/context-func_001840dc/func_001840dc.result.json",
+          "scratch/authors/fa03/match/context-func_00184148/func_00184148.result.json",
+          "scratch/authors/fa03/match/context-func_001847dc/func_001847dc.result.json",
+          "scratch/authors/fa03/match/context-func_001847e8/func_001847e8.result.json"
+        ],
+        "family": [
+          {
+            "address": "0x00184204",
+            "assigned_target": true,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 7,
+            "expected_instruction_sequence_sha256": "37532f9c1e4e1e1f3b95d987558700177c30d5e82097b7ea7050a5ddcaf5d570",
+            "full_extent_accounted": true,
+            "function": "func_00184204",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 7,
+            "observed_instruction_sequence_sha256": "37532f9c1e4e1e1f3b95d987558700177c30d5e82097b7ea7050a5ddcaf5d570",
+            "original_extent_sha256": "83863719ac94ece886a7e6a0d2a3ceedc7a99bfff78d31fa6243d30fdb740a43",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_2",
+            "size": 28,
+            "word_count": 2
+          },
+          {
+            "address": "0x00184220",
+            "assigned_target": true,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 7,
+            "expected_instruction_sequence_sha256": "82de5ae4b1c8a17a1716bf0c1f168d262b403ed23d21c7865e1848a555df11f3",
+            "full_extent_accounted": true,
+            "function": "func_00184220",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 7,
+            "observed_instruction_sequence_sha256": "82de5ae4b1c8a17a1716bf0c1f168d262b403ed23d21c7865e1848a555df11f3",
+            "original_extent_sha256": "b6771f51b04223e5624a46eb955d245b08d04f43874d8b138ca757c8e100b20d",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_4",
+            "size": 28,
+            "word_count": 4
+          },
+          {
+            "address": "0x0018423c",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 7,
+            "expected_instruction_sequence_sha256": "6a863025470f6dd38a8d69c9cf3ea803f79f61b564dcde0ee38e66a6c8a01a1f",
+            "full_extent_accounted": true,
+            "function": "func_0018423c",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 7,
+            "observed_instruction_sequence_sha256": "6a863025470f6dd38a8d69c9cf3ea803f79f61b564dcde0ee38e66a6c8a01a1f",
+            "original_extent_sha256": "71366d8aab58c685cb87160586265f7dcc209984a266d7195c8d90a71dccdc56",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_6",
+            "size": 28,
+            "word_count": 6
+          },
+          {
+            "address": "0x00184258",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 8,
+            "expected_instruction_sequence_sha256": "fc3a7e20ed715486f4e64c24d85e0e06d2de61a24a979b8d06d88b637c318e93",
+            "full_extent_accounted": true,
+            "function": "func_00184258",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 8,
+            "observed_instruction_sequence_sha256": "fc3a7e20ed715486f4e64c24d85e0e06d2de61a24a979b8d06d88b637c318e93",
+            "original_extent_sha256": "cef84d6bb38ff5cd476d4b6b4cf4572ce18c13ed92aec15efb3bde5c086739a3",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_8",
+            "size": 32,
+            "word_count": 8
+          },
+          {
+            "address": "0x00184278",
+            "assigned_target": true,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 12,
+            "expected_instruction_sequence_sha256": "0e8ce6461188cdf95846ac60de5d5cc50b9f7f65c4276f37a20ddf0a6f2c6bb4",
+            "full_extent_accounted": true,
+            "function": "func_00184278",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 12,
+            "observed_instruction_sequence_sha256": "0e8ce6461188cdf95846ac60de5d5cc50b9f7f65c4276f37a20ddf0a6f2c6bb4",
+            "original_extent_sha256": "76d8dd821f16b6d5e18eeba1e176807d73e97c8af7ca175a5e4bd0e73a361346",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_10",
+            "size": 48,
+            "word_count": 10
+          },
+          {
+            "address": "0x001842a8",
+            "assigned_target": true,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 12,
+            "expected_instruction_sequence_sha256": "39ae26dda74e58ce9ecc3235aab7c523e291a732f14a7d7f046e9a3f59e1d457",
+            "full_extent_accounted": true,
+            "function": "func_001842a8",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 12,
+            "observed_instruction_sequence_sha256": "39ae26dda74e58ce9ecc3235aab7c523e291a732f14a7d7f046e9a3f59e1d457",
+            "original_extent_sha256": "20d7b1b10629296926924fbf565bdae3ea011600eaa61356911f70e5f92423ee",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_12",
+            "size": 48,
+            "word_count": 12
+          },
+          {
+            "address": "0x001842d8",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 12,
+            "expected_instruction_sequence_sha256": "446d635fbe922a8920732cc12590c50e07dd0c78e75a7fdb52a9ad3dfe155ac6",
+            "full_extent_accounted": true,
+            "function": "func_001842d8",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 12,
+            "observed_instruction_sequence_sha256": "446d635fbe922a8920732cc12590c50e07dd0c78e75a7fdb52a9ad3dfe155ac6",
+            "original_extent_sha256": "c60278ef679c26e1f1e93505ea8122241d6670b342519f19c85e4f8f7ba0ae1b",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_14",
+            "size": 48,
+            "word_count": 14
+          },
+          {
+            "address": "0x00184308",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 13,
+            "expected_instruction_sequence_sha256": "065bbace7143e943aae117d8f5a9c4ed650b37b707969053230f47ad91d84253",
+            "full_extent_accounted": true,
+            "function": "func_00184308",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 13,
+            "observed_instruction_sequence_sha256": "065bbace7143e943aae117d8f5a9c4ed650b37b707969053230f47ad91d84253",
+            "original_extent_sha256": "8939425ba1eebd51ed2b5b1a431fc20ca68b64ad22138a4386fd6d61a0076a8c",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_16",
+            "size": 52,
+            "word_count": 16
+          },
+          {
+            "address": "0x0018433c",
+            "assigned_target": true,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 17,
+            "expected_instruction_sequence_sha256": "8213ea837e2e97c2e49b6fc18c4ab42e1e68af5228bb4a38d4be9503d2bfbcef",
+            "full_extent_accounted": true,
+            "function": "func_0018433c",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 17,
+            "observed_instruction_sequence_sha256": "8213ea837e2e97c2e49b6fc18c4ab42e1e68af5228bb4a38d4be9503d2bfbcef",
+            "original_extent_sha256": "9167e88497cd32bb603e4a5a4b6ae225a44442b5de8d2193f5ee9944050d8887",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_18",
+            "size": 68,
+            "word_count": 18
+          },
+          {
+            "address": "0x00184380",
+            "assigned_target": true,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 17,
+            "expected_instruction_sequence_sha256": "afb4af02eb8614f96e0410e7cfebdf8bc3ca959d7655aab96cf4e9139d9e0db4",
+            "full_extent_accounted": true,
+            "function": "func_00184380",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 17,
+            "observed_instruction_sequence_sha256": "afb4af02eb8614f96e0410e7cfebdf8bc3ca959d7655aab96cf4e9139d9e0db4",
+            "original_extent_sha256": "492a30e460216e919a8dc77141cf77fba137eee3db8f05c217a500c5371497fa",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_20",
+            "size": 68,
+            "word_count": 20
+          },
+          {
+            "address": "0x001843c4",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 17,
+            "expected_instruction_sequence_sha256": "70c572a97d7922b67d673889106455289fe6504bba5d348a4649175976e0d4be",
+            "full_extent_accounted": true,
+            "function": "func_001843c4",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 17,
+            "observed_instruction_sequence_sha256": "70c572a97d7922b67d673889106455289fe6504bba5d348a4649175976e0d4be",
+            "original_extent_sha256": "df629a1f3b14d5d171b6d7fababd4b365006237840d43ae87dbaac065b310e1c",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_22",
+            "size": 68,
+            "word_count": 22
+          },
+          {
+            "address": "0x00184408",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 18,
+            "expected_instruction_sequence_sha256": "4002ff5e7530ec75d9cacc385a8cdf9381ccca433b0c3aec8540cbe1e8d9c8e8",
+            "full_extent_accounted": true,
+            "function": "func_00184408",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 18,
+            "observed_instruction_sequence_sha256": "4002ff5e7530ec75d9cacc385a8cdf9381ccca433b0c3aec8540cbe1e8d9c8e8",
+            "original_extent_sha256": "a89d8b821fcafa6dd509cf7a350d898f3100759975367c0c265f48d975ef30c6",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_24",
+            "size": 72,
+            "word_count": 24
+          },
+          {
+            "address": "0x00184450",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 22,
+            "expected_instruction_sequence_sha256": "6b60e32b3e9b467b626c211b2eb11b6dd9355edd57af36f45eecbdd7020f52c9",
+            "full_extent_accounted": true,
+            "function": "func_00184450",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 22,
+            "observed_instruction_sequence_sha256": "6b60e32b3e9b467b626c211b2eb11b6dd9355edd57af36f45eecbdd7020f52c9",
+            "original_extent_sha256": "98a29a7dcd78a348d9beba44d1aa0700b4de7a48dadd391c303c94c78de8c0e2",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_26",
+            "size": 88,
+            "word_count": 26
+          },
+          {
+            "address": "0x001844a8",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 22,
+            "expected_instruction_sequence_sha256": "d1fb2661c7e05317c867f10f521ccda6f9e4f5522292ba29b7be2693a0771d03",
+            "full_extent_accounted": true,
+            "function": "func_001844a8",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 22,
+            "observed_instruction_sequence_sha256": "d1fb2661c7e05317c867f10f521ccda6f9e4f5522292ba29b7be2693a0771d03",
+            "original_extent_sha256": "a9a020c90ee0c3c3434668d0f728e7a49f3b19df877a596ff0d20b2791ef9bdc",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_28",
+            "size": 88,
+            "word_count": 28
+          },
+          {
+            "address": "0x00184500",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 22,
+            "expected_instruction_sequence_sha256": "64a17a7c047de05c3f7da32cb5f665b5b68a5302a689275a953fe521ba102381",
+            "full_extent_accounted": true,
+            "function": "func_00184500",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 22,
+            "observed_instruction_sequence_sha256": "64a17a7c047de05c3f7da32cb5f665b5b68a5302a689275a953fe521ba102381",
+            "original_extent_sha256": "1da0fea8e7eb46b2b4b346419829b137bfa4b930bad4f1bed94186997045024c",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_30",
+            "size": 88,
+            "word_count": 30
+          },
+          {
+            "address": "0x00184558",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 23,
+            "expected_instruction_sequence_sha256": "84b392c822f7367d0332f7458f0bb8284f95c0cf43d44ebabadf82d8165e13ab",
+            "full_extent_accounted": true,
+            "function": "func_00184558",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 23,
+            "observed_instruction_sequence_sha256": "84b392c822f7367d0332f7458f0bb8284f95c0cf43d44ebabadf82d8165e13ab",
+            "original_extent_sha256": "cdc0d075774abb168b6ccbff8fa41fd94182fdc9234a691b0e0872703cad3f91",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_32",
+            "size": 92,
+            "word_count": 32
+          },
+          {
+            "address": "0x001845b4",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 27,
+            "expected_instruction_sequence_sha256": "9c1a5e455c33feadb98bafa6877da41f83c8f319ce6ed9319aa243d94221538e",
+            "full_extent_accounted": true,
+            "function": "func_001845b4",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 27,
+            "observed_instruction_sequence_sha256": "9c1a5e455c33feadb98bafa6877da41f83c8f319ce6ed9319aa243d94221538e",
+            "original_extent_sha256": "e37704a59cb7a3877c59015fd16058f3e55c7c61712ca07e262027969a0298c4",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_34",
+            "size": 108,
+            "word_count": 34
+          },
+          {
+            "address": "0x00184620",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 27,
+            "expected_instruction_sequence_sha256": "708d1e9e557475e2b49e6cf9c36187a57eb7e1b6e5d427719f30c12f3f8cacd2",
+            "full_extent_accounted": true,
+            "function": "func_00184620",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 27,
+            "observed_instruction_sequence_sha256": "708d1e9e557475e2b49e6cf9c36187a57eb7e1b6e5d427719f30c12f3f8cacd2",
+            "original_extent_sha256": "cd66017358f695c295dfa2bd1356968dd49773eab2a4585468f09485ae71749d",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_36",
+            "size": 108,
+            "word_count": 36
+          },
+          {
+            "address": "0x0018468c",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 27,
+            "expected_instruction_sequence_sha256": "95d0af924d35d46bc0374eb988fab7c5a9d599ca46d2c2ea451f3f05c6d5b708",
+            "full_extent_accounted": true,
+            "function": "func_0018468c",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 27,
+            "observed_instruction_sequence_sha256": "95d0af924d35d46bc0374eb988fab7c5a9d599ca46d2c2ea451f3f05c6d5b708",
+            "original_extent_sha256": "2798d8ac0ca507d0ebe9360e07b934d8f4974ebd0d55894644761eeade5bf790",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_38",
+            "size": 108,
+            "word_count": 38
+          },
+          {
+            "address": "0x001846f8",
+            "assigned_target": false,
+            "different_instruction_ordinals": [],
+            "expected_instruction_count": 52,
+            "expected_instruction_sequence_sha256": "337fe899d289f2c992008453cf5c9e3be795317c8d67448f6fc47a057208f96c",
+            "full_extent_accounted": true,
+            "function": "func_001846f8",
+            "isa": "arm",
+            "non_instruction_span_count": 0,
+            "normalized_instruction_identity": true,
+            "observed_instruction_count": 52,
+            "observed_instruction_sequence_sha256": "337fe899d289f2c992008453cf5c9e3be795317c8d67448f6fc47a057208f96c",
+            "original_extent_sha256": "e4d453aae0ae9e72c9d71002ef9bee38cefe78628ab9ad8d40e26fbfc26a305b",
+            "public_symbol": "nw::gfx::internal::FastWordCopyAsm_78",
+            "size": 208,
+            "word_count": 78
+          }
+        ],
+        "family_summary": {
+          "all_isa": "arm",
+          "assigned_extent_bytes": 288,
+          "assigned_targets": 6,
+          "bindings_proposed": [],
+          "complete_instruction_identities": 20,
+          "specializations": 20
+        },
+        "input_sha256": {
+          "config/catalogue.json": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+          "include/nw/gfx/gfx_CommandUtil.h": "b53b5cab554bd230c278159e4d55d1fd3aebd141d7b92741bc65ae5802cad480",
+          "include/nw/gfx/gfx_MemoryUtil.h": "a47b62ee44c7db5268dd13abf4c0439812debb77d70953feed67c760ef206427",
+          "src/checkpoint10/func_001306c8.c": "0a4f89533986391beec185b6283d8fd0e17c884a64cfbf016ee16cc626d92595"
+        },
+        "kind": "non_c_assembly_identity_evidence",
+        "method": {
+          "conditions": "Mnemonic condition/flag suffixes, every operand, register order, writeback, immediate and prefetch address remain compared. Extent must contain exactly the expected number of four-byte ARM instructions and no literal/data spans.",
+          "description": "Expand pinned public COPYNWORD/COPY8WORD/COPY6WORD/COPY4WORD/COPY2WORD assembler macros in memory for each declared word count; compare every normalized instruction in each complete original ARM catalogue extent. Neither original bytes, original disassembly nor public assembler bodies are retained in this receipt.",
+          "initial_comparison": "scratch/authors/fa03/PROVENANCE-compare01.json",
+          "initial_comparison_diagnosis": "Incomplete architectural register-alias normalization produced false differences. Adding sb/r13/r14/r15 spelling equivalence resolved every difference; no original or upstream code was changed.",
+          "normalization": [
+            "Lowercase and insignificant whitespace normalization.",
+            "Documented architectural register spelling equivalence: a1-a4, v1-v8, ip/fp/sl/sb and r13/r14/r15.",
+            "Equivalent push/pop and increment-after multiple-transfer spelling normalization.",
+            "Expand inclusive register-list ranges and normalize immediate numeric spelling."
+          ],
+          "not_claimed": "This is source-instruction identity evidence supporting reviewed assembly classification, not a compiled C MATCH, an archive-library build fingerprint, or automatic denominator authorization."
+        },
+        "review_required": "Integrator/reviewer must approve any catalogue reclassification. No function aliases, library names or revised denominator were installed.",
+        "schema_version": 1,
+        "scope": "Six assigned first-attempt targets. Additional contiguous specializations are context only; no denominator or symbol-binding change is made.",
+        "target_semantic_observations": [
+          {
+            "copy_bytes": 8,
+            "dest_word_aligned_return": true,
+            "function": "func_00184204",
+            "prefetch_hints": [],
+            "preserved_but_unused_core_registers": 5,
+            "preserved_core_registers": 5
+          },
+          {
+            "copy_bytes": 16,
+            "dest_word_aligned_return": true,
+            "function": "func_00184220",
+            "prefetch_hints": [],
+            "preserved_but_unused_core_registers": 4,
+            "preserved_core_registers": 5
+          },
+          {
+            "copy_bytes": 40,
+            "dest_word_aligned_return": true,
+            "function": "func_00184278",
+            "prefetch_hints": [
+              {
+                "lookahead_bytes": 64,
+                "source_already_advanced_bytes": 16
+              }
+            ],
+            "preserved_but_unused_core_registers": 0,
+            "preserved_core_registers": 5
+          },
+          {
+            "copy_bytes": 48,
+            "dest_word_aligned_return": true,
+            "function": "func_001842a8",
+            "prefetch_hints": [
+              {
+                "lookahead_bytes": 64,
+                "source_already_advanced_bytes": 16
+              }
+            ],
+            "preserved_but_unused_core_registers": 0,
+            "preserved_core_registers": 5
+          },
+          {
+            "copy_bytes": 72,
+            "dest_word_aligned_return": true,
+            "function": "func_0018433c",
+            "prefetch_hints": [
+              {
+                "lookahead_bytes": 64,
+                "source_already_advanced_bytes": 16
+              },
+              {
+                "lookahead_bytes": 64,
+                "source_already_advanced_bytes": 48
+              }
+            ],
+            "preserved_but_unused_core_registers": 0,
+            "preserved_core_registers": 5
+          },
+          {
+            "copy_bytes": 80,
+            "dest_word_aligned_return": true,
+            "function": "func_00184380",
+            "prefetch_hints": [
+              {
+                "lookahead_bytes": 64,
+                "source_already_advanced_bytes": 16
+              },
+              {
+                "lookahead_bytes": 64,
+                "source_already_advanced_bytes": 48
+              }
+            ],
+            "preserved_but_unused_core_registers": 0,
+            "preserved_core_registers": 5
+          }
+        ],
+        "upstream": {
+          "commit": "15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+          "declarations_header": "include/nw/gfx/gfx_MemoryUtil.h",
+          "declarations_lines": [
+            20,
+            42
+          ],
+          "git_blob_sha1": "4aa4c1dca8acb1b968ec2d39327e99bb4c85ab4f",
+          "path": "sources/libraries/gfx/gfx_MemoryUtil.cpp",
+          "public_macro_definition_lines": [
+            11,
+            78
+          ],
+          "public_specialization_lines": [
+            80,
+            99
+          ],
+          "repository": "https://github.com/ctrdecomp/NintendoWare4Ctr",
+          "sha256": "b5b1cba6154e1663c9dad92ec601b975c12f2e4815859dd06642912096498e31",
+          "url": "https://raw.githubusercontent.com/ctrdecomp/NintendoWare4Ctr/15ddb5632db5a6f0d2f46e3827fc78df468684bd/sources/libraries/gfx/gfx_MemoryUtil.cpp"
+        }
+      },
+      "source": {
+        "path": "scratch/authors/fa03/PROVENANCE.json",
+        "sha256": "b94a7df470bb5d050106270dcde076f80b81e41bbc94372fa1e6668cd88dc693",
+        "size": 22538
+      }
+    },
+    "fa04": {
+      "record": {
+        "abi": {
+          "behavior": "Copy the fixed number of 32-bit words forward; return the destination advanced by the copied word count. The native declaration intentionally does not make the source pointer const.",
+          "caller_context": "src/checkpoint10/func_001306c8.c:59-61 consumes the advanced destination returned by the adjacent fixed six-word copier at 0x0018423c.",
+          "canonical_type": "u32* (u32* destination, u32* source), in namespace nw::gfx::internal",
+          "target_callers": "No direct callers, callees or data references are recorded for any of the six targets."
+        },
+        "agent": "fa04",
+        "functions": [
+          {
+            "address": "0x001843c4",
+            "canonical_header": "include/nw/gfx/gfx_MemoryUtil.h",
+            "catalogue_evidence": [
+              "closed_constant_copy_leaf"
+            ],
+            "catalogue_kind": "function",
+            "complete_code_range": true,
+            "copy_byte_count": 88,
+            "copy_word_count": 22,
+            "expected_instruction_count": 17,
+            "function": "func_001843c4",
+            "header_declaration": "DECL_SUB(22)",
+            "identity": "nw::gfx::internal::FastWordCopyAsm_22",
+            "instruction_count": 17,
+            "isa": "arm",
+            "original_extent_sha256": "df629a1f3b14d5d171b6d7fababd4b365006237840d43ae87dbaac065b310e1c",
+            "original_operation_sha256": "6e48083b308e73e355dfc2cdce2945ad476f4d60bd1c7e707155ec73f36e4988",
+            "pools": 0,
+            "public_operation_sha256": "6e48083b308e73e355dfc2cdce2945ad476f4d60bd1c7e707155ec73f36e4988",
+            "relocations_required": 0,
+            "size": 68,
+            "whole_operation_trace_equal": true
+          },
+          {
+            "address": "0x00184408",
+            "canonical_header": "include/nw/gfx/gfx_MemoryUtil.h",
+            "catalogue_evidence": [
+              "closed_constant_copy_leaf"
+            ],
+            "catalogue_kind": "function",
+            "complete_code_range": true,
+            "copy_byte_count": 96,
+            "copy_word_count": 24,
+            "expected_instruction_count": 18,
+            "function": "func_00184408",
+            "header_declaration": "DECL_SUB(24)",
+            "identity": "nw::gfx::internal::FastWordCopyAsm_24",
+            "instruction_count": 18,
+            "isa": "arm",
+            "original_extent_sha256": "a89d8b821fcafa6dd509cf7a350d898f3100759975367c0c265f48d975ef30c6",
+            "original_operation_sha256": "c766cf6728cbbd5bb896b1585849868ac21c3281a0c1f430a713916eef6e67a9",
+            "pools": 0,
+            "public_operation_sha256": "c766cf6728cbbd5bb896b1585849868ac21c3281a0c1f430a713916eef6e67a9",
+            "relocations_required": 0,
+            "size": 72,
+            "whole_operation_trace_equal": true
+          },
+          {
+            "address": "0x00184450",
+            "canonical_header": "include/nw/gfx/gfx_MemoryUtil.h",
+            "catalogue_evidence": [
+              "closed_constant_copy_leaf"
+            ],
+            "catalogue_kind": "function",
+            "complete_code_range": true,
+            "copy_byte_count": 104,
+            "copy_word_count": 26,
+            "expected_instruction_count": 22,
+            "function": "func_00184450",
+            "header_declaration": "DECL_SUB(26)",
+            "identity": "nw::gfx::internal::FastWordCopyAsm_26",
+            "instruction_count": 22,
+            "isa": "arm",
+            "original_extent_sha256": "98a29a7dcd78a348d9beba44d1aa0700b4de7a48dadd391c303c94c78de8c0e2",
+            "original_operation_sha256": "049d455dba8119963bc11705c4cac00247cc7001a04f9bb99a8e926516a3959f",
+            "pools": 0,
+            "public_operation_sha256": "049d455dba8119963bc11705c4cac00247cc7001a04f9bb99a8e926516a3959f",
+            "relocations_required": 0,
+            "size": 88,
+            "whole_operation_trace_equal": true
+          },
+          {
+            "address": "0x001844a8",
+            "canonical_header": "include/nw/gfx/gfx_MemoryUtil.h",
+            "catalogue_evidence": [
+              "closed_constant_copy_leaf"
+            ],
+            "catalogue_kind": "function",
+            "complete_code_range": true,
+            "copy_byte_count": 112,
+            "copy_word_count": 28,
+            "expected_instruction_count": 22,
+            "function": "func_001844a8",
+            "header_declaration": "DECL_SUB(28)",
+            "identity": "nw::gfx::internal::FastWordCopyAsm_28",
+            "instruction_count": 22,
+            "isa": "arm",
+            "original_extent_sha256": "a9a020c90ee0c3c3434668d0f728e7a49f3b19df877a596ff0d20b2791ef9bdc",
+            "original_operation_sha256": "79a0baa3b60dd57ad322fde70b0cbe6231039643fc40bb0a6ae63e376e0d60a8",
+            "pools": 0,
+            "public_operation_sha256": "79a0baa3b60dd57ad322fde70b0cbe6231039643fc40bb0a6ae63e376e0d60a8",
+            "relocations_required": 0,
+            "size": 88,
+            "whole_operation_trace_equal": true
+          },
+          {
+            "address": "0x00184500",
+            "canonical_header": "include/nw/gfx/gfx_MemoryUtil.h",
+            "catalogue_evidence": [
+              "closed_constant_copy_leaf"
+            ],
+            "catalogue_kind": "function",
+            "complete_code_range": true,
+            "copy_byte_count": 120,
+            "copy_word_count": 30,
+            "expected_instruction_count": 22,
+            "function": "func_00184500",
+            "header_declaration": "DECL_SUB(30)",
+            "identity": "nw::gfx::internal::FastWordCopyAsm_30",
+            "instruction_count": 22,
+            "isa": "arm",
+            "original_extent_sha256": "1da0fea8e7eb46b2b4b346419829b137bfa4b930bad4f1bed94186997045024c",
+            "original_operation_sha256": "7b372bf45c531da1dfb0da7a5cf017cec3aad0e3452d941846775667bd455690",
+            "pools": 0,
+            "public_operation_sha256": "7b372bf45c531da1dfb0da7a5cf017cec3aad0e3452d941846775667bd455690",
+            "relocations_required": 0,
+            "size": 88,
+            "whole_operation_trace_equal": true
+          },
+          {
+            "address": "0x00184558",
+            "canonical_header": "include/nw/gfx/gfx_MemoryUtil.h",
+            "catalogue_evidence": [
+              "closed_constant_copy_leaf"
+            ],
+            "catalogue_kind": "function",
+            "complete_code_range": true,
+            "copy_byte_count": 128,
+            "copy_word_count": 32,
+            "expected_instruction_count": 23,
+            "function": "func_00184558",
+            "header_declaration": "DECL_SUB(32)",
+            "identity": "nw::gfx::internal::FastWordCopyAsm_32",
+            "instruction_count": 23,
+            "isa": "arm",
+            "original_extent_sha256": "cdc0d075774abb168b6ccbff8fa41fd94182fdc9234a691b0e0872703cad3f91",
+            "original_operation_sha256": "0c0d9b9e9974e3e7d1e5ffe5ba39c53e2e45cf16d10e492ae48d5b319c33a9dd",
+            "pools": 0,
+            "public_operation_sha256": "0c0d9b9e9974e3e7d1e5ffe5ba39c53e2e45cf16d10e492ae48d5b319c33a9dd",
+            "relocations_required": 0,
+            "size": 92,
+            "whole_operation_trace_equal": true
+          }
+        ],
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "input_hashes": {
+          "config/catalogue.json": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+          "config/names.json": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+          "include/nw/gfx/gfx_MemoryUtil.h": "a47b62ee44c7db5268dd13abf4c0439812debb77d70953feed67c760ef206427",
+          "src/checkpoint10/func_001306c8.c": "0a4f89533986391beec185b6283d8fd0e17c884a64cfbf016ee16cc626d92595"
+        },
+        "method": [
+          "Read the pinned public implementation into memory only; extract COPY8WORD, COPY6WORD, COPY4WORD, COPY2WORD and COPYNWORD macro bodies.",
+          "Expand COPYNWORD at each target word count, interpreting the local integer SETA, WHILE and nested IF/ELSE/ENDIF controls. COPYNWORD itself owns the return.",
+          "Compare the entire expanded operation sequence to the private packet instruction sequence. Normalize only letter case, whitespace, register aliases/ranges and numeric-immediate notation; preserve instruction spelling, predicates, operands, writeback and order.",
+          "Require the complete ARM catalogue extent to be code, with no pools, literals, calls or relocated targets. Record only counts and hashes; never retain or print the private instruction sequence in this report."
+        ],
+        "model": "openai-codex/gpt-6.1-sol",
+        "preliminary_c_probe": {
+          "candidate_size": 8,
+          "exit_code": 1,
+          "original_size": 68,
+          "profile": "game",
+          "qualification": "Early aggregate-copy experiment, before the native handwritten-assembly identity was established. Its void return is not the recovered native contract; preserve as a failed experiment only, never integrate or credit.",
+          "receipt": "scratch/authors/fa04/match/func_001843c4/a01-aggregate-game/func_001843c4.result.json",
+          "source": "scratch/authors/fa04/src/func_001843c4.c",
+          "status": "mismatch"
+        },
+        "public_source": {
+          "canonical_declaration": "include/nw/gfx/gfx_MemoryUtil.h:20-41 uses asm u32* FastWordCopyAsm_##size(u32*, u32*) for every target word count.",
+          "commit": "15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+          "git_blob": "4aa4c1dca8acb1b968ec2d39327e99bb4c85ab4f",
+          "path": "sources/libraries/gfx/gfx_MemoryUtil.cpp",
+          "repository": "https://github.com/ctrdecomp/NintendoWare4Ctr",
+          "sha256": "b5b1cba6154e1663c9dad92ec601b975c12f2e4815859dd06642912096498e31",
+          "source_kind": "Explicit handwritten ARM assembly: five assembler macros, with COPYNWORD instantiated by asm u32* FastWordCopyAsm_N(u32*, u32*) definitions.",
+          "url": "https://raw.githubusercontent.com/ctrdecomp/NintendoWare4Ctr/15ddb5632db5a6f0d2f46e3827fc78df468684bd/sources/libraries/gfx/gfx_MemoryUtil.cpp"
+        },
+        "qualification": "[INFERENCE] Symbol-to-image-address identity follows complete normalized-operation correspondence to the pinned public assembly and its canonical header declarations. This is not a newly compiled byte-equality witness, archive authentication, compiler-version proof, names-overlay adoption, denominator revision or C credit.",
+        "schema_version": 1,
+        "scope": "Six complete ARM owners; no classification or denominator changes are made by this report.",
+        "status": "library_candidate"
+      },
+      "source": {
+        "path": "scratch/authors/fa04/classification-evidence.json",
+        "sha256": "fabf86026cb211f0ecc2cc1b4411c060ed85e88726b1359953734078f592c457",
+        "size": 9585
+      }
+    },
+    "fa05": {
+      "record": {
+        "agent": "fa05",
+        "batch": "scratch/integrator/batches/fa05.json",
+        "canonical_context": {
+          "declaration_lines": "20-42",
+          "dispatch_lines": "46-76",
+          "header": "include/nw/gfx/gfx_MemoryUtil.h",
+          "observations": [
+            "The existing header explicitly declares asm u32* FastWordCopyAsm_N(u32*, u32*) for N=34,36,38.",
+            "FastWordCopy converts byte count to word count, dispatches these three exact counts, and returns the advanced destination pointer.",
+            "src/nw4c/PROVENANCE-round3.json records that these are assembly entrypoint declarations only; no assembler implementation was imported.",
+            "All four supplied accepted neighbours re-match under frozen game profile. This is context evidence only; handwritten target assembly has no compiler-profile requirement."
+          ]
+        },
+        "comparison_method": {
+          "byte_match_claim": false,
+          "comparison_scope": "Every decoded operation across each complete 108-byte ARM catalogue owner, not a prefix or a normalized byte mask. All 27 operations agree in order, opcode semantics, registers, addressing, writeback, immediates and return. The owners have no pools, calls or data references.",
+          "input_handling": "Private packets and original instruction objects were inspected only in memory. No original bytes, disassembly, packets, or upstream assembly bodies are reproduced in this receipt.",
+          "normalization": [
+            "Case and whitespace normalization.",
+            "Canonical ldm/ldmia and stm/stmia spellings.",
+            "Canonical register aliases sb/sl/fp/ip to r9/r10/r11/r12.",
+            "Expansion of register ranges into ordered register lists.",
+            "Canonical numeric immediate notation."
+          ],
+          "source_authored": false,
+          "upstream_expansion": "Parsed the upstream MACRO/MEND blocks, expanded COPYNWORD for each exact word count using its existing COPY8WORD and remainder macro bodies, and retained its existing prologue and complete return."
+        },
+        "context_matcher_invocations": [
+          {
+            "command": ".venv/bin/python tools/match.py src/wave19/func_001840dc.cpp --profile game --show 0 --out scratch/authors/fa05/context-match/func_001840dc",
+            "exit_code": 0,
+            "receipt": "scratch/authors/fa05/context-match/func_001840dc/func_001840dc.result.json",
+            "status": "match"
+          },
+          {
+            "command": ".venv/bin/python tools/match.py src/checkpoint10/func_00184148.cpp --profile game --show 0 --out scratch/authors/fa05/context-match/func_00184148",
+            "exit_code": 0,
+            "receipt": "scratch/authors/fa05/context-match/func_00184148/func_00184148.result.json",
+            "status": "match"
+          },
+          {
+            "command": ".venv/bin/python tools/match.py src/wave14/func_001847dc.c --profile game --show 0 --out scratch/authors/fa05/context-match/func_001847dc",
+            "exit_code": 0,
+            "receipt": "scratch/authors/fa05/context-match/func_001847dc/func_001847dc.result.json",
+            "status": "match"
+          },
+          {
+            "command": ".venv/bin/python tools/match.py src/wave15/func_001847e8.c --profile game --show 0 --out scratch/authors/fa05/context-match/func_001847e8",
+            "exit_code": 0,
+            "receipt": "scratch/authors/fa05/context-match/func_001847e8/func_001847e8.result.json",
+            "status": "match"
+          }
+        ],
+        "failures_preserved": "No failed matcher invocation. The four context matches ran sequentially; no target match was attempted.",
+        "functions": [
+          {
+            "address": "0x001845b4",
+            "callees": 0,
+            "catalogue_evidence": "closed_constant_copy_leaf",
+            "complete_catalogue_code_range": true,
+            "complete_operation_sequence_equal": true,
+            "copy_bytes": 136,
+            "data_references": 0,
+            "differing_operation_offsets": [],
+            "direct_callers": 0,
+            "expected_instruction_count": 27,
+            "function": "func_001845b4",
+            "instruction_count": 27,
+            "isa": "arm",
+            "normalized_operation_sha256": "19b7b4bcd0148b9fbe89f7d40a6d40f8b77864de1d70dd3be8d312e7d11997cf",
+            "original_owner_sha256": "e37704a59cb7a3877c59015fd16058f3e55c7c61712ca07e262027969a0298c4",
+            "pool_count": 0,
+            "public_symbol_inference": "nw::gfx::internal::FastWordCopyAsm_34",
+            "size": 108,
+            "word_count": 34
+          },
+          {
+            "address": "0x00184620",
+            "callees": 0,
+            "catalogue_evidence": "closed_constant_copy_leaf",
+            "complete_catalogue_code_range": true,
+            "complete_operation_sequence_equal": true,
+            "copy_bytes": 144,
+            "data_references": 0,
+            "differing_operation_offsets": [],
+            "direct_callers": 0,
+            "expected_instruction_count": 27,
+            "function": "func_00184620",
+            "instruction_count": 27,
+            "isa": "arm",
+            "normalized_operation_sha256": "44799fca529e65c90d9f397f38515b8dabb2209a95e404d715e88eb685dd928f",
+            "original_owner_sha256": "cd66017358f695c295dfa2bd1356968dd49773eab2a4585468f09485ae71749d",
+            "pool_count": 0,
+            "public_symbol_inference": "nw::gfx::internal::FastWordCopyAsm_36",
+            "size": 108,
+            "word_count": 36
+          },
+          {
+            "address": "0x0018468c",
+            "callees": 0,
+            "catalogue_evidence": "closed_constant_copy_leaf",
+            "complete_catalogue_code_range": true,
+            "complete_operation_sequence_equal": true,
+            "copy_bytes": 152,
+            "data_references": 0,
+            "differing_operation_offsets": [],
+            "direct_callers": 0,
+            "expected_instruction_count": 27,
+            "function": "func_0018468c",
+            "instruction_count": 27,
+            "isa": "arm",
+            "normalized_operation_sha256": "c9eb9e11c9d233f917d4a27b72ac9a08447a768175f2df14ae4174f1db448a88",
+            "original_owner_sha256": "2798d8ac0ca507d0ebe9360e07b934d8f4974ebd0d55894644761eeade5bf790",
+            "pool_count": 0,
+            "public_symbol_inference": "nw::gfx::internal::FastWordCopyAsm_38",
+            "size": 108,
+            "word_count": 38
+          }
+        ],
+        "integration_qualification": "Proposed library/handwritten-assembly classification only. Existing creditable denominator entries remain unchanged until an independent reviewed denominator revision. No source adoption or names binding is proposed.",
+        "purpose": "Redacted evidence for handwritten NintendoWare fixed-word-copy assembly classification; not a compiled-C receipt or denominator adoption.",
+        "schema_version": 1,
+        "target_attempts_reason": "Zero target compiles: all three owners are explicitly handwritten assembly in the canonical public family and agree with the complete upstream macro operation sequences. The author brief requires library_candidate with no source for handwritten assembly; forcing approximately 30 natural-C variants would not change that ownership evidence.",
+        "target_matcher_invocations": [],
+        "upstream": {
+          "commit": "15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+          "git_blob_sha1": "4aa4c1dca8acb1b968ec2d39327e99bb4c85ab4f",
+          "implementation_summary": "COPYNWORD saves/restores its working registers, repeats COPY8WORD, selects the COPY2WORD/COPY4WORD/COPY6WORD remainder, and supplies its own return. Each eight-word chunk prefetches source data. No wrapper return was appended for comparison.",
+          "observed_implementation_kind": "Explicit asm definitions generated by DECL_SUB(size), invoking the COPYNWORD assembly macro; the implementation is not C/C++.",
+          "repository": "https://github.com/ctrdecomp/NintendoWare4Ctr",
+          "sha256": "b5b1cba6154e1663c9dad92ec601b975c12f2e4815859dd06642912096498e31",
+          "size": 1550,
+          "source": "sources/libraries/gfx/gfx_MemoryUtil.cpp",
+          "url": "https://raw.githubusercontent.com/ctrdecomp/NintendoWare4Ctr/15ddb5632db5a6f0d2f46e3827fc78df468684bd/sources/libraries/gfx/gfx_MemoryUtil.cpp",
+          "version_qualification": "This witness identifies the pinned public implementation, not an authenticated original library or compiler build. Public symbol identity is [INFERENCE] from complete operation equality, fixed word counts, and the canonical declarations."
+        }
+      },
+      "source": {
+        "path": "scratch/authors/fa05/ASSEMBLY-IDENTITY.json",
+        "sha256": "c70b7a5522fc4a18f107c195c93fb63ab19bba73e42bd96ed75d80cbe9fff026",
+        "size": 7880
+      }
+    }
+  },
+  "canonical_header": {
+    "path": "include/nw/gfx/gfx_MemoryUtil.h",
+    "sha256": "a47b62ee44c7db5268dd13abf4c0439812debb77d70953feed67c760ef206427",
+    "size": 1741
+  },
+  "family_end": 1591240,
+  "family_start": 1589764,
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "new_C_credit": 0,
+  "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
+  "schema_version": 1
+}
