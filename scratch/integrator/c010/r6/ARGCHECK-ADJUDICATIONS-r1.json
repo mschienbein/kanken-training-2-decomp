@@ -1,0 +1,3365 @@
+{
+  "schema_version": 1,
+  "status": "ALL_NEW_ISSUES_ADJUDICATED_FALSE_POSITIVE_NOTES_RETAINED_NO_SOURCE_CHANGE",
+  "agent": "C010R5Codex",
+  "source_subject": {
+    "merged_source": "ab62b5ae",
+    "Main_base": "a443fef1",
+    "candidate_commit": "4d154743e02a576bbb8cfc6e11cc662e3273593e",
+    "candidate_branch": "c010-r6",
+    "c010_r7_created": false,
+    "c010_r7_branch_probe_exit": 1,
+    "c010_r7_worktree_exists": false
+  },
+  "input_binding": {
+    "new_facts": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/merge-main/scratch/integrator/c010-r6/main-argcheck-new-facts-r1.json",
+      "sha256": "88113aaeb97a0d5bc6646ea9605aee6542ca4baaecc593a8e5668bb0793075f0"
+    },
+    "argcheck": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/merge-main/scratch/integrator/c010-r6/main-argcheck-r1.json",
+      "sha256": "d1cc6ce3bb002e234570ba953dcc2246e1eeaf93be07416249ffcf801af9a1d2",
+      "actual_exit_code": 2,
+      "summary": {
+        "callback_sites": 10,
+        "direct_sites": 13120,
+        "elapsed_seconds": 644.692,
+        "flagged_functions": 55,
+        "functions": 2693,
+        "issues": 88,
+        "notes": 513,
+        "rewrite_sites": 46,
+        "tail_sites": 703,
+        "unchecked_functions": 529,
+        "unresolved_indirect_sites": 1045
+      }
+    },
+    "baseline": {
+      "path": "scratch/worktrees/c009-r6/scratch/integrator/c009-r6/main-argcheck-r1.json",
+      "sha256": "5dd222cb0a574af43fd50322471bc654f8684cce8e16f342632a1b5042bd462d",
+      "adjudications": "scratch/worktrees/c009-r6/scratch/integrator/c009-r6/main-argcheck-adjudications-r1.json"
+    },
+    "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+    "original_image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "source_headers_sha256": {
+      "include/ctr/svc.h": "db0c16252c02f695e41777380148412f352054f506c045b24f72ed37dbdbd7e5",
+      "include/game/applet.h": "cd0c27db41c18b6d1d996ad5f0e9cf122a38d0ed02da7b70a177b8d46de09d24",
+      "include/game/audio_voice.h": "815f6c6801b34fd991eef32deb3429bba4b083a6a0bd61ee7327c8212df94cd7",
+      "include/game/exp_heap.h": "ce249bad8783cc767baaf2dda84a59d2adbd46f4da10cc9037694537500ec39f",
+      "include/game/functions.h": "e66e3661971f14aefea3ec11c69495fe948804e715e59abd119da925131d480a",
+      "include/game/resource_tables.h": "66136d99b1443ce2320080933577a0b074b6ac7a5642d895b2a2af2d5a63b12f",
+      "include/game/sdk_init.h": "fe6dc1d866424be442fcb37a400ebb1f47b34a0be5a310479e734a2d0f2de755",
+      "include/game/service_state.h": "f411cdc1224fcfd1b970cd74eb7415180a0a43ecb9f8f2b4112e7df9cb4f954d",
+      "include/game/sound_track.h": "8e0131846fe8db612523fdf6231cbce69fb036f2bbdbcc70cbddcf6121ee5eee",
+      "src/checkpoint10/collect-r2/func_00123364.c": "568c100c4b256e41a2faef40cccd142d33df6406d2da3691a98d574d82491216",
+      "src/checkpoint10/func_00103978.c": "ebe77131396bf59ead5ce75166755915e8581a6f65703ae455a28afec37ab6ee",
+      "src/checkpoint10/func_0010d27c.c": "fc7a2d05a93ff3abeac2d85d9e1a862fc38321bc7e0086cc63d707aee2f644ed",
+      "src/checkpoint10/func_0011da50.c": "03459b3084694c71c1f892509b82f6957fa86f25f3eeaeaadfd3287a8c2af1ad",
+      "src/checkpoint10/func_0011f6a8.c": "ed4472b719a281a85009fde09d244052622e7dad7cab9283c83d928d1bf1c183",
+      "src/checkpoint10/func_00121cf8.c": "741c1b3547cab183c2f981eacb6d4aac324d3fde9ce0c18b66bc74f88221e176",
+      "src/checkpoint10/func_00141560.c": "16eeae9c46c95ac47168564de933d1610ab88570c7d62cd191016dd879137edf",
+      "src/checkpoint10/func_0014cc9c.c": "b4717d396edfdad66264ae3ff8e5905453e86dd6fb87d6eb3418ccbfd6ffed33",
+      "src/checkpoint10/func_0014d7a0.cpp": "b0611e1b7297db9f5bd5ac5cd47d289a27cc471681fa2cebff564f6a1bb732f2",
+      "src/checkpoint10/func_00155dec.c": "56bbb899d61fbbd1692d37e3a01d6f4ea511d8d45aeefbc3ddf302a0faa33b67",
+      "src/checkpoint10/func_0015e534_vtb0.cpp": "bf70a8ac86a0cfd0f4547cb47ee218ea7c6ebed4394ab568ee9008bbecaea310",
+      "src/checkpoint10/func_00175d90.c": "377cb25f70da2675aefb7efc64520d971ae574f917f00b87b91f5fbe6bcff4ad",
+      "src/checkpoint10/func_0018075c.cpp": "e851f7b515a5785807c6a8ba913ec111759a13a385fe80032f31715231092abf",
+      "src/checkpoint10/func_001852f8.cpp": "8ba8fc5e577ca61f20f33ea09e2daff9e26b8e56c96a4dafb8365947cbc0d816",
+      "src/checkpoint10/func_00192410.c": "6ee7e517c8f03cbca42161742b2c1119688b2fa61a87d0c76c3b0334d1aa010f",
+      "src/checkpoint10/func_00192458.c": "07c9cc4a822cc159a760de83e93ad602e0473f3945edc4d52ebcc05580ad1ef0",
+      "src/checkpoint10/func_00195e5c.c": "6df51ef68309f2939f33bc7726f70bab6cd81fcc251b6eaad650856ce175ab86",
+      "src/checkpoint10/func_00196564.c": "83f4992403d61bafb2ed6fc7d6d75ee4480b7a70996ae79bf3fd833a608f9405",
+      "src/checkpoint10/func_001965a4.c": "bf221c0c5d418ad21c4df572d4a70b699dcf3ab11a06d8b9d02f1f5feb959c7e",
+      "src/checkpoint10/func_001e9754.c": "ac86f681093d164b701cf31ba8d4984e92361f7f5d0f9ffcdc4c6d5249c742b8",
+      "src/checkpoint10/func_001efcd0_01.c": "cd3fc08fc82cbd3b9abfad1d5f634cc24d8b36236788ace0f373a06874568864",
+      "src/checkpoint10/func_001f16f8_recovery.cpp": "dda4d2933b4579be9cc5b7e319e30cf2b2205e7c6c24dfcecd57d32398709d7e",
+      "src/checkpoint10/func_001f23b8.c": "17185b8ede4232cee8dfc6f223f8f293cfc63d1ec3ba3161d93c013bf4535008",
+      "src/checkpoint10/resume_0012fdd0_reply.c": "8e39fd54494a5498619ea8889e119ec694e4dc1046b1b41a30be7ffc83964e5f",
+      "src/large/func_001f206c.c": "49683aa3b2b3e947de85018cabad38f6fb13c2d8d85d4637c516a7305054291d",
+      "src/retries/func_0012d550.c": "4d9556498c6b032686c6cecb3d4ef5af4dd24db85a15ec359bb52f24a4eba202",
+      "src/wave11/func_00205320.cpp": "71732674f3d6e17a892a69ffba8566ba7786e9e4e7d05e76b30e1b0fc6096541",
+      "src/wave13/func_001db0f8.c": "7db6cf093d159af56566ccedf836fe3051b48acf657bf505b91fae3c7b4df3d2",
+      "src/wave14/func_00195e64.c": "255f9151eeaeb15793fe9c2517e67aa773563347cd2f45edf7f40b3c31cd34ae",
+      "src/wave18/func_001d2be8.c": "49bc20921fff4bbed9cfe99597f56023109f6043d7218dec687ce88ae817cd60",
+      "src/wave2/func_00164ebc.c": "97bef02071a0bed89271c463f9773e1221e78ef187b2c0a00b2b59fca69b3499",
+      "src/wave8/func_00139214.c": "95ec815adade59b3351414703b4602522f0451e6685f2bcfacf0d437c070fbd0",
+      "src/wave9/func_0013923c.c": "ca07e787af842915ade5155f5eaf5f0bb6741ce57d4833b7cc400014be2c0040"
+    }
+  },
+  "scope": {
+    "new_issue_facts": 10,
+    "distinct_new_issue_targets": 5,
+    "adjudicated_false_positive_facts": 10,
+    "prototype_changes": 0,
+    "NEW_deferrals_added": 0,
+    "new_note_facts": 105,
+    "distinct_note_targets": 74,
+    "note_groups": 5,
+    "spotchecked_note_targets": 22,
+    "removed_note_facts": 1
+  },
+  "result": "No missing formal or consumed void result is established by these ten facts. The actual flagged events are identity no-ops, caller frame restoration, or an intervening kernel timer result not modeled as a register overwrite. Every source interface and credited caller remains unchanged. Retain every reported input in the105 notes; no note is treated as authority to erase a formal.",
+  "new_issues": [
+    {
+      "fact_index": 1,
+      "function": "func_00103978",
+      "c010_claim": true,
+      "declaration": {
+        "line": 74,
+        "source": "include/game/resource_tables.h"
+      },
+      "kind": "missing_core_parameters",
+      "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00100e3c"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The purported r0 preparation at0x00100e38 is a value-preserving identity operation, not construction of an incoming argument.",
+          "The purported result read at0x00100e40 is another value-preserving identity operation; it performs no semantic use of a return value.",
+          "Bounded original provider inspection has no entry core-argument read before definition and calls only func0010bf88 before clearing its published global fields; the source matches the no-argument global-initialization operation."
+        ],
+        "caller": "func_00100d74",
+        "sites": [
+          "0x00100e3c"
+        ],
+        "signature_kept": "void func_00103978(void)",
+        "qualification": "No historical callee identity is inferred from the no-op markers. The fact needed here is their lack of argument/result data effect."
+      }
+    },
+    {
+      "fact_index": 2,
+      "function": "func_00103978",
+      "c010_claim": true,
+      "declaration": {
+        "line": 74,
+        "source": "include/game/resource_tables.h"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00100e3c"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The purported r0 preparation at0x00100e38 is a value-preserving identity operation, not construction of an incoming argument.",
+          "The purported result read at0x00100e40 is another value-preserving identity operation; it performs no semantic use of a return value.",
+          "Bounded original provider inspection has no entry core-argument read before definition and calls only func0010bf88 before clearing its published global fields; the source matches the no-argument global-initialization operation."
+        ],
+        "caller": "func_00100d74",
+        "sites": [
+          "0x00100e3c"
+        ],
+        "signature_kept": "void func_00103978(void)",
+        "qualification": "No historical callee identity is inferred from the no-op markers. The fact needed here is their lack of argument/result data effect."
+      }
+    },
+    {
+      "fact_index": 3,
+      "function": "func_00103978",
+      "c010_claim": true,
+      "declaration": {
+        "line": 7,
+        "source": "src/checkpoint10/func_00103978.c"
+      },
+      "kind": "missing_core_parameters",
+      "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00100e3c"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The purported r0 preparation at0x00100e38 is a value-preserving identity operation, not construction of an incoming argument.",
+          "The purported result read at0x00100e40 is another value-preserving identity operation; it performs no semantic use of a return value.",
+          "Bounded original provider inspection has no entry core-argument read before definition and calls only func0010bf88 before clearing its published global fields; the source matches the no-argument global-initialization operation."
+        ],
+        "caller": "func_00100d74",
+        "sites": [
+          "0x00100e3c"
+        ],
+        "signature_kept": "void func_00103978(void)",
+        "qualification": "No historical callee identity is inferred from the no-op markers. The fact needed here is their lack of argument/result data effect."
+      }
+    },
+    {
+      "fact_index": 4,
+      "function": "func_00103978",
+      "c010_claim": true,
+      "declaration": {
+        "line": 7,
+        "source": "src/checkpoint10/func_00103978.c"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00100e3c"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The purported r0 preparation at0x00100e38 is a value-preserving identity operation, not construction of an incoming argument.",
+          "The purported result read at0x00100e40 is another value-preserving identity operation; it performs no semantic use of a return value.",
+          "Bounded original provider inspection has no entry core-argument read before definition and calls only func0010bf88 before clearing its published global fields; the source matches the no-argument global-initialization operation."
+        ],
+        "caller": "func_00100d74",
+        "sites": [
+          "0x00100e3c"
+        ],
+        "signature_kept": "void func_00103978(void)",
+        "qualification": "No historical callee identity is inferred from the no-op markers. The fact needed here is their lack of argument/result data effect."
+      }
+    },
+    {
+      "fact_index": 5,
+      "function": "func_00164ebc",
+      "c010_claim": false,
+      "declaration": {
+        "line": 94,
+        "source": "include/game/functions.h"
+      },
+      "kind": "missing_core_parameters",
+      "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+      "registers": [
+        "r3"
+      ],
+      "sites": [
+        "0x0020536c"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_CALLER_FRAME_RESTORE",
+        "observations": [
+          "The new site0x0020536c is a tail registration after r3 and the return address are restored from the caller stack at0x00205368.",
+          "That restored frame word is not a fourth registration input. The actual source compiler initializer creates OwnedHandle; the existing registration contract supplies object/destructor/image-base only.",
+          "The accepted return-only provider is not used as sole proof of ignored-input arity; the new caller epilogue and existing three-input registration population establish why this particular r3 diagnostic is spurious."
+        ],
+        "caller": "func_00205320",
+        "sites": [
+          "0x0020536c"
+        ],
+        "signature_kept": "void func_00164ebc(void *, ObjectDestructor, void (*)(void))",
+        "accepted_provider_unchanged": true
+      }
+    },
+    {
+      "fact_index": 6,
+      "function": "func_001852f8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 106,
+        "source": "include/game/exp_heap.h"
+      },
+      "kind": "missing_core_parameters",
+      "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+      "registers": [
+        "r3"
+      ],
+      "sites": [
+        "0x001ae754",
+        "0x001b7c70"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_CALLER_FRAME_RESTORE",
+        "observations": [
+          "At0x001ae750 and0x001b7c6c, r3 is restored from the caller stack with the return address immediately before a tail transfer. This is frame teardown, not a fourth argument being set up.",
+          "The actual provider consumes only the allocation input r0, then performs lock/free/unlock; the extra r3 slot is not a caller-evidenced formal.",
+          "The declared one-argument deallocation wrapper and every retained credited caller remain unchanged."
+        ],
+        "callers": [
+          "func_001ae4a0",
+          "func_001b7880"
+        ],
+        "sites": [
+          "0x001ae754",
+          "0x001b7c70"
+        ],
+        "signature_kept": "void func_001852f8(void *allocation)"
+      }
+    },
+    {
+      "fact_index": 7,
+      "function": "func_001852f8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 5,
+        "source": "src/wave4/func_001852f4.c"
+      },
+      "kind": "missing_core_parameters",
+      "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+      "registers": [
+        "r3"
+      ],
+      "sites": [
+        "0x001ae754",
+        "0x001b7c70"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_CALLER_FRAME_RESTORE",
+        "observations": [
+          "At0x001ae750 and0x001b7c6c, r3 is restored from the caller stack with the return address immediately before a tail transfer. This is frame teardown, not a fourth argument being set up.",
+          "The actual provider consumes only the allocation input r0, then performs lock/free/unlock; the extra r3 slot is not a caller-evidenced formal.",
+          "The declared one-argument deallocation wrapper and every retained credited caller remain unchanged."
+        ],
+        "callers": [
+          "func_001ae4a0",
+          "func_001b7880"
+        ],
+        "sites": [
+          "0x001ae754",
+          "0x001b7c70"
+        ],
+        "signature_kept": "void func_001852f8(void *allocation)"
+      }
+    },
+    {
+      "fact_index": 8,
+      "function": "func_00192458",
+      "c010_claim": true,
+      "declaration": {
+        "line": 118,
+        "source": "include/game/service_state.h"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00192420"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The sole flagged continuation read at0x00192428 is a value-preserving identity no-op, not a test/store/forward of the wrapper return.",
+          "Original source path00192410 invokes 00192484(0),00192458(1),0019242c() and discards the command-wrapper results. The actual provider marshals the incoming value into a no-output service call."
+        ],
+        "caller": "func_00192410",
+        "sites": [
+          "0x00192420"
+        ],
+        "signature_kept": "void func_00192458(unsigned value)"
+      }
+    },
+    {
+      "fact_index": 9,
+      "function": "func_00192458",
+      "c010_claim": true,
+      "declaration": {
+        "line": 12,
+        "source": "src/checkpoint10/func_00192458.c"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00192420"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The sole flagged continuation read at0x00192428 is a value-preserving identity no-op, not a test/store/forward of the wrapper return.",
+          "Original source path00192410 invokes 00192484(0),00192458(1),0019242c() and discards the command-wrapper results. The actual provider marshals the incoming value into a no-output service call."
+        ],
+        "caller": "func_00192410",
+        "sites": [
+          "0x00192420"
+        ],
+        "signature_kept": "void func_00192458(unsigned value)"
+      }
+    },
+    {
+      "fact_index": 10,
+      "function": "func_00195e5c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 6,
+        "source": "src/checkpoint10/func_00195e5c.c"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00100fc8"
+      ],
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_INTERVENING_KERNEL_OUTPUT",
+        "observations": [
+          "The flagged later read at0x00100ff4 is preceded by the kernel timer service at0x00100fcc, service0x28.",
+          "The repository canonical declaration is __svc(0x28) long long svcGetSystemTick(void): its timer result replaces r0/r1. The later r0 use is the timer output, not the earlier notification-wrapper return.",
+          "The decoder reported no implicit core-register outputs for that service, so the local result scanner incorrectly carried the earlier call result through it.",
+          "The current wrapper remains the true-notify void operation; its branch-to-next rewrite falls into the existing bool notification helper. No status/result contract is invented from the later timer use."
+        ],
+        "caller": "func_00100d74",
+        "sites": [
+          "0x00100fc8"
+        ],
+        "signature_kept": "void func_00195e5c(void)",
+        "ABI_evidence": "include/ctr/svc.h:70; AAPCS 64-bit integer result occupies r0/r1"
+      }
+    }
+  ],
+  "issue_class_summary": {
+    "identity_no_op_facts": 6,
+    "caller_frame_restore_facts": 3,
+    "intervening_kernel_output_facts": 1,
+    "mechanical_exit_2_retained": true,
+    "mechanical_issue_count_88_unchanged": true,
+    "baseline_78_issues_not_readjudicated_as_new": true
+  },
+  "new_notes": [
+    {
+      "fact_index": 1,
+      "function": "func_0010d27c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 10,
+        "source": "src/checkpoint10/func_0010d27c.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 2,
+      "function": "func_00115ad4",
+      "c010_claim": false,
+      "declaration": {
+        "line": 37,
+        "source": "include/game/applet.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 3,
+      "function": "func_0011da50",
+      "c010_claim": true,
+      "declaration": {
+        "line": 48,
+        "source": "include/game/shader.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r2"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 4,
+      "function": "func_0011da50",
+      "c010_claim": true,
+      "declaration": {
+        "line": 6,
+        "source": "src/checkpoint10/func_0011da50.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r2"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 5,
+      "function": "func_0011f6a8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 29,
+        "source": "include/game/archive_ipc.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r2"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 6,
+      "function": "func_0011f6a8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 5,
+        "source": "src/checkpoint10/func_0011f6a8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r2"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 7,
+      "function": "func_00121cf8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 15,
+        "source": "src/checkpoint10/func_00121cf8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 8,
+      "function": "func_00122350",
+      "c010_claim": false,
+      "declaration": {
+        "line": 107,
+        "source": "include/game/runtime.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 9,
+      "function": "func_0012251c",
+      "c010_claim": false,
+      "declaration": {
+        "line": 109,
+        "source": "include/game/runtime.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 10,
+      "function": "func_00123364",
+      "c010_claim": true,
+      "declaration": {
+        "line": 19,
+        "source": "src/checkpoint10/collect-r2/func_00123364.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 11,
+      "function": "func_0012d550",
+      "c010_claim": false,
+      "declaration": {
+        "line": 26,
+        "source": "include/game/archive_ipc.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 12,
+      "function": "func_0012f570",
+      "c010_claim": true,
+      "declaration": {
+        "line": 40,
+        "source": "include/game/graphics_state.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 13,
+      "function": "func_0012f570",
+      "c010_claim": true,
+      "declaration": {
+        "line": 6,
+        "source": "src/checkpoint10/func_0012f570.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 14,
+      "function": "func_0012fdd0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 19,
+        "source": "src/checkpoint10/resume_0012fdd0_reply.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r3"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 15,
+      "function": "func_001306c8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 54,
+        "source": "src/checkpoint10/func_001306c8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 16,
+      "function": "func_00132344",
+      "c010_claim": true,
+      "declaration": {
+        "line": 5,
+        "source": "src/checkpoint10/func_00132344.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 17,
+      "function": "func_00136878",
+      "c010_claim": false,
+      "declaration": {
+        "line": 192,
+        "source": "include/ctr/ipc.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 18,
+      "function": "func_00137c20",
+      "c010_claim": false,
+      "declaration": {
+        "line": 198,
+        "source": "include/ctr/ipc.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 19,
+      "function": "func_00139214",
+      "c010_claim": false,
+      "declaration": {
+        "line": 88,
+        "source": "include/game/sound_archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1",
+        "r2"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 20,
+      "function": "func_0013923c",
+      "c010_claim": false,
+      "declaration": {
+        "line": 510,
+        "source": "include/game/archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1",
+        "r2"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 21,
+      "function": "func_0013931c",
+      "c010_claim": false,
+      "declaration": {
+        "line": 85,
+        "source": "include/game/sound_archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1",
+        "r2"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 22,
+      "function": "func_00140904",
+      "c010_claim": true,
+      "declaration": {
+        "line": 28,
+        "source": "src/checkpoint10/func_00140904.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 23,
+      "function": "func_00141560",
+      "c010_claim": true,
+      "declaration": {
+        "line": 25,
+        "source": "include/game/command_buffer.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "s0"
+      ],
+      "group": "N01-VFP-INDEPENDENT",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 24,
+      "function": "func_00141560",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_00141560.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "s0"
+      ],
+      "group": "N01-VFP-INDEPENDENT",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 25,
+      "function": "func_00141560",
+      "c010_claim": true,
+      "declaration": {
+        "line": 100,
+        "source": "include/game/command_group.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "s0"
+      ],
+      "group": "N01-VFP-INDEPENDENT",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 26,
+      "function": "func_00146188",
+      "c010_claim": true,
+      "declaration": {
+        "line": 67,
+        "source": "include/game/input_runtime.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 27,
+      "function": "func_00146188",
+      "c010_claim": true,
+      "declaration": {
+        "line": 4,
+        "source": "src/checkpoint10/func_00146188.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 28,
+      "function": "func_00147264",
+      "c010_claim": true,
+      "declaration": {
+        "line": 53,
+        "source": "include/game/object_pool.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 29,
+      "function": "func_00147264",
+      "c010_claim": true,
+      "declaration": {
+        "line": 8,
+        "source": "src/checkpoint10/func_00147264.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 30,
+      "function": "func_0014aeb4",
+      "c010_claim": true,
+      "declaration": {
+        "line": 6,
+        "source": "src/checkpoint10/func_0014aeb4.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 31,
+      "function": "func_0014af70",
+      "c010_claim": false,
+      "declaration": {
+        "line": 196,
+        "source": "include/ctr/ipc.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 32,
+      "function": "func_0014cc9c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 277,
+        "source": "include/game/service_runtime.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "s0"
+      ],
+      "group": "N01-VFP-INDEPENDENT",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 33,
+      "function": "func_0014cc9c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 4,
+        "source": "src/checkpoint10/func_0014cc9c.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "s0"
+      ],
+      "group": "N01-VFP-INDEPENDENT",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 34,
+      "function": "func_0014d308",
+      "c010_claim": true,
+      "declaration": {
+        "line": 470,
+        "source": "include/game/audio_voice.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 35,
+      "function": "func_0014d7a0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 93,
+        "source": "include/game/object_manager.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 36,
+      "function": "func_001547ec",
+      "c010_claim": false,
+      "declaration": {
+        "line": 286,
+        "source": "include/game/prefetch_stream.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 37,
+      "function": "func_00154804",
+      "c010_claim": true,
+      "declaration": {
+        "line": 288,
+        "source": "include/game/prefetch_stream.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 38,
+      "function": "func_00154804",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_00154804.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 39,
+      "function": "func_00155120",
+      "c010_claim": true,
+      "declaration": {
+        "line": 19,
+        "source": "src/checkpoint10/func_00155120.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 40,
+      "function": "func_00155dec",
+      "c010_claim": true,
+      "declaration": {
+        "line": 462,
+        "source": "include/game/audio_voice.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 41,
+      "function": "func_00155dec",
+      "c010_claim": true,
+      "declaration": {
+        "line": 7,
+        "source": "src/checkpoint10/func_00155dec.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 42,
+      "function": "func_0015e534",
+      "c010_claim": true,
+      "declaration": {
+        "line": 453,
+        "source": "include/game/screen.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 43,
+      "function": "func_0015e57c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 455,
+        "source": "include/game/screen.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 44,
+      "function": "func_001650f8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 72,
+        "source": "include/game/archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 45,
+      "function": "func_001650f8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 10,
+        "source": "src/checkpoint10/alternate1/func_001650f8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 46,
+      "function": "func_0016a0d0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 98,
+        "source": "include/game/command_group.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 47,
+      "function": "func_0016bda4",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_0016bda4.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r2"
+      ],
+      "group": "N02-IPC-AND-WIDE-FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 48,
+      "function": "func_001757dc",
+      "c010_claim": true,
+      "declaration": {
+        "line": 14,
+        "source": "src/checkpoint10/func_001757dc.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 49,
+      "function": "func_00175d90",
+      "c010_claim": true,
+      "declaration": {
+        "line": 98,
+        "source": "include/game/w11_control.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 50,
+      "function": "func_00175d90",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_00175d90.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 51,
+      "function": "func_0017a9b4",
+      "c010_claim": true,
+      "declaration": {
+        "line": 388,
+        "source": "include/game/screen.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 52,
+      "function": "func_0017a9b4",
+      "c010_claim": true,
+      "declaration": {
+        "line": 2,
+        "source": "src/wave2/func_00176ae8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 53,
+      "function": "func_0017a9b4",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/wave7/func_0017a6f4.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 54,
+      "function": "func_0017a9b4",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/wave8/func_0017a9ac.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 55,
+      "function": "func_0017e640",
+      "c010_claim": true,
+      "declaration": {
+        "line": 91,
+        "source": "include/game/object_manager.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 56,
+      "function": "func_0017e8fc",
+      "c010_claim": true,
+      "declaration": {
+        "line": 265,
+        "source": "include/game/service_runtime.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 57,
+      "function": "func_0017e8fc",
+      "c010_claim": true,
+      "declaration": {
+        "line": 7,
+        "source": "src/checkpoint10/func_0017e8fc.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 58,
+      "function": "func_0018075c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 255,
+        "source": "include/game/sound_runtime.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1",
+        "r2"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 59,
+      "function": "func_0018d850",
+      "c010_claim": false,
+      "declaration": {
+        "line": 410,
+        "source": "include/game/archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 60,
+      "function": "func_001905b0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 6,
+        "source": "src/checkpoint10/func_001905b0.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 61,
+      "function": "func_001905e0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 8,
+        "source": "src/checkpoint10/func_001905e0.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 62,
+      "function": "func_00190610",
+      "c010_claim": true,
+      "declaration": {
+        "line": 4,
+        "source": "src/checkpoint10/func_00190610.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r3"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 63,
+      "function": "func_0019194c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 50,
+        "source": "include/game/shader.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 64,
+      "function": "func_0019194c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_0019194c.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 65,
+      "function": "func_001abf24",
+      "c010_claim": true,
+      "declaration": {
+        "line": 52,
+        "source": "include/game/selection_components.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 66,
+      "function": "func_001abf24",
+      "c010_claim": true,
+      "declaration": {
+        "line": 20,
+        "source": "src/checkpoint10/func_001abf24.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 67,
+      "function": "func_001adff8",
+      "c010_claim": false,
+      "declaration": {
+        "line": 50,
+        "source": "include/game/selection_components.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 68,
+      "function": "func_001b0188",
+      "c010_claim": false,
+      "declaration": {
+        "line": 94,
+        "source": "include/game/w11_control.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 69,
+      "function": "func_001b06a4",
+      "c010_claim": false,
+      "declaration": {
+        "line": 56,
+        "source": "include/game/screen_transition.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 70,
+      "function": "func_001b3564",
+      "c010_claim": true,
+      "declaration": {
+        "line": 57,
+        "source": "include/game/selection_components.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 71,
+      "function": "func_001b3564",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_001b3564.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 72,
+      "function": "func_001b3c0c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 100,
+        "source": "include/game/w11_control.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 73,
+      "function": "func_001b3c0c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 11,
+        "source": "src/checkpoint10/func_001b3c0c_shape01.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 74,
+      "function": "func_001b4ec8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 10,
+        "source": "src/wave20/func_001791fc.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r2"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 75,
+      "function": "func_001bbdd4",
+      "c010_claim": true,
+      "declaration": {
+        "line": 89,
+        "source": "include/game/training_screen.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 76,
+      "function": "func_001bdb70",
+      "c010_claim": true,
+      "declaration": {
+        "line": 163,
+        "source": "include/game/selection.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 77,
+      "function": "func_001bdb70",
+      "c010_claim": true,
+      "declaration": {
+        "line": 15,
+        "source": "src/checkpoint10/func_001bdb70.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 78,
+      "function": "func_001c1600",
+      "c010_claim": true,
+      "declaration": {
+        "line": 30,
+        "source": "include/game/prompt.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 79,
+      "function": "func_001c1e6c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 103,
+        "source": "include/game/display_animation.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 80,
+      "function": "func_001c1e6c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 23,
+        "source": "src/checkpoint10/func_001c1e6c.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 81,
+      "function": "func_001d2be8",
+      "c010_claim": false,
+      "declaration": {
+        "line": 25,
+        "source": "include/game/progress_counters.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 82,
+      "function": "func_001d9198",
+      "c010_claim": false,
+      "declaration": {
+        "line": 281,
+        "source": "include/game/audio_voice.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 83,
+      "function": "func_001dcdd0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 55,
+        "source": "include/game/selection_components.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 84,
+      "function": "func_001dcdd0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 9,
+        "source": "src/checkpoint10/func_001dcdd0.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 85,
+      "function": "func_001dcf4c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 56,
+        "source": "include/game/selection_components.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 86,
+      "function": "func_001dcf4c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 9,
+        "source": "src/checkpoint10/func_001dcf4c.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 87,
+      "function": "func_001e8810",
+      "c010_claim": true,
+      "declaration": {
+        "line": 46,
+        "source": "src/checkpoint10/func_001e8810.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 88,
+      "function": "func_001e8934",
+      "c010_claim": true,
+      "declaration": {
+        "line": 131,
+        "source": "include/game/selection.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 89,
+      "function": "func_001e9754",
+      "c010_claim": true,
+      "declaration": {
+        "line": 26,
+        "source": "include/game/motion_screen.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "s0"
+      ],
+      "group": "N01-VFP-INDEPENDENT",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 90,
+      "function": "func_001e9754",
+      "c010_claim": true,
+      "declaration": {
+        "line": 13,
+        "source": "src/checkpoint10/func_001e9754.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "s0"
+      ],
+      "group": "N01-VFP-INDEPENDENT",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 91,
+      "function": "func_001e9e7c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 59,
+        "source": "include/game/selection_components.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 92,
+      "function": "func_001e9e7c",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_001e9e7c.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 93,
+      "function": "func_001eaed8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 185,
+        "source": "include/game/resource_runtime.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 94,
+      "function": "func_001eaed8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 24,
+        "source": "src/checkpoint10/func_001eaed8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 95,
+      "function": "func_001efcd0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 433,
+        "source": "include/game/audio_voice.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 96,
+      "function": "func_001efcd0",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_001efcd0_01.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 97,
+      "function": "func_001f16f8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 516,
+        "source": "include/game/archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N03-CPP-AND-AGGREGATE-OWNERS",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 98,
+      "function": "func_001f1ebc",
+      "c010_claim": true,
+      "declaration": {
+        "line": 77,
+        "source": "include/game/archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 99,
+      "function": "func_001f1ebc",
+      "c010_claim": true,
+      "declaration": {
+        "line": 35,
+        "source": "src/checkpoint10/alternate1/func_001650f8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 100,
+      "function": "func_001f1ed8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 78,
+        "source": "include/game/archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 101,
+      "function": "func_001f1ed8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 40,
+        "source": "src/checkpoint10/alternate1/func_001650f8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 102,
+      "function": "func_001f206c",
+      "c010_claim": false,
+      "declaration": {
+        "line": 412,
+        "source": "include/game/archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 103,
+      "function": "func_001f2308",
+      "c010_claim": false,
+      "declaration": {
+        "line": 413,
+        "source": "include/game/archive.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "group": "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 104,
+      "function": "func_001f23b8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 113,
+        "source": "include/game/item_text.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    },
+    {
+      "fact_index": 105,
+      "function": "func_001f23b8",
+      "c010_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint10/func_001f23b8.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "group": "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "See grouped adjudication and representative bounded original/source witnesses. A missing local unconsumed-write observation is not evidence for removing a parameter."
+    }
+  ],
+  "note_groups": {
+    "N01-VFP-INDEPENDENT": {
+      "functions": [
+        "func_00141560",
+        "func_0014cc9c",
+        "func_001e9754"
+      ],
+      "fact_count": 7,
+      "disposition": "RETAIN_CURRENT_TYPED_INPUTS",
+      "rationale": "Core and VFP parameter allocation are independent. A caller may forward an already live s0 rather than explicitly rewrite it in the unconsumed-write window. Preserve the existing float parameters; all three representative provider bodies actually consume their floats.",
+      "spot_checks": [
+        "func_00141560",
+        "func_0014cc9c",
+        "func_001e9754"
+      ]
+    },
+    "N02-IPC-AND-WIDE-FORWARDING": {
+      "functions": [
+        "func_0010d27c",
+        "func_0011f6a8",
+        "func_00123364",
+        "func_0012d550",
+        "func_0012fdd0",
+        "func_00136878",
+        "func_00137c20",
+        "func_0014af70",
+        "func_0016bda4"
+      ],
+      "fact_count": 10,
+      "disposition": "RETAIN_CURRENT_TYPED_INPUTS",
+      "rationale": "Transport and tail wrappers forward pointer/scalar/byte inputs, including stack-resident 64-bit tokens and later stack inputs. A call clears the local pending-write window, and a register forwarded unchanged has no new local write. None of these notes authorizes removing the real forwarded input.",
+      "spot_checks": [
+        "func_0010d27c",
+        "func_0011f6a8",
+        "func_0012d550",
+        "func_00123364",
+        "func_0012fdd0"
+      ]
+    },
+    "N03-CPP-AND-AGGREGATE-OWNERS": {
+      "functions": [
+        "func_00121cf8",
+        "func_0014d308",
+        "func_0014d7a0",
+        "func_0015e534",
+        "func_0015e57c",
+        "func_0016a0d0",
+        "func_00175d90",
+        "func_0017e640",
+        "func_0018075c",
+        "func_001bbdd4",
+        "func_001c1600",
+        "func_001d9198",
+        "func_001f16f8"
+      ],
+      "fact_count": 14,
+      "disposition": "RETAIN_CURRENT_TYPED_INPUTS",
+      "rationale": "Retain the actual owner, by-value iterator, color component, constructor/storage and native bridge contracts. The C parser does not establish C++ member interfaces, and absence of an immediate caller write does not turn an owner into a no-argument function. Representative providers dereference their real receiver, preserve the iterator storage, assemble color from every input or forward their output/resource arguments. This grouped adjudication is not a new blanket C++ type waiver.",
+      "spot_checks": [
+        "func_00121cf8",
+        "func_0014d7a0",
+        "func_0015e534",
+        "func_0018075c",
+        "func_001f16f8"
+      ]
+    },
+    "N04-SELECTORS-OUTPUTS-AND-CONSUMED-SETUP": {
+      "functions": [
+        "func_0011da50",
+        "func_0012251c",
+        "func_0012f570",
+        "func_001306c8",
+        "func_00139214",
+        "func_0013923c",
+        "func_0013931c",
+        "func_0014aeb4",
+        "func_00155dec",
+        "func_001b3c0c",
+        "func_001b4ec8",
+        "func_001c1e6c",
+        "func_001e8810",
+        "func_001e8934",
+        "func_001f206c",
+        "func_001f2308"
+      ],
+      "fact_count": 21,
+      "disposition": "RETAIN_CURRENT_TYPED_INPUTS",
+      "rationale": "Retain typed selectors, counts, indices and writable-output parameters. Setup already read for address calculation, a conditional, or an earlier call is deliberately removed by argcheck from the unconsumed-write set; that does not mean the argument is absent at the eventual call. Representative source/original provider witnesses use these values in the downstream command/count/index/output operations.",
+      "spot_checks": [
+        "func_0011da50",
+        "func_00139214",
+        "func_0013923c",
+        "func_00155dec",
+        "func_001f206c"
+      ]
+    },
+    "N05-RETAIN-EXISTING-RECEIVER-OR-PAYLOAD": {
+      "functions": [
+        "func_00115ad4",
+        "func_00122350",
+        "func_00132344",
+        "func_00140904",
+        "func_00146188",
+        "func_00147264",
+        "func_001547ec",
+        "func_00154804",
+        "func_00155120",
+        "func_001650f8",
+        "func_001757dc",
+        "func_0017a9b4",
+        "func_0017e8fc",
+        "func_0018d850",
+        "func_001905b0",
+        "func_001905e0",
+        "func_00190610",
+        "func_0019194c",
+        "func_001abf24",
+        "func_001adff8",
+        "func_001b0188",
+        "func_001b06a4",
+        "func_001b3564",
+        "func_001bdb70",
+        "func_001d2be8",
+        "func_001dcdd0",
+        "func_001dcf4c",
+        "func_001e9e7c",
+        "func_001eaed8",
+        "func_001efcd0",
+        "func_001f1ebc",
+        "func_001f1ed8",
+        "func_001f23b8"
+      ],
+      "fact_count": 53,
+      "disposition": "RETAIN_CURRENT_TYPED_INPUTS",
+      "rationale": "Retain the existing receiver/payload/handle/table contracts. These are notes only: they establish that the bounded caller window has no explicit unconsumed preparation, not that the value is dead or the formal wrong. Representative original providers access the incoming object/table and source bodies retain those fields or forward the object. Existing matched/manual contract evidence is not replaced by an absence heuristic.",
+      "spot_checks": [
+        "func_001efcd0",
+        "func_001f23b8",
+        "func_001d2be8"
+      ]
+    }
+  },
+  "note_spot_checks": [
+    {
+      "function": "func_0010d27c",
+      "source": "src/checkpoint10/func_0010d27c.c",
+      "source_sha256": "fc7a2d05a93ff3abeac2d85d9e1a862fc38321bc7e0086cc63d707aee2f644ed",
+      "notes": [
+        1
+      ],
+      "observation": "All three inputs survive preliminary checks and are forwarded to0010d2b8; original entry preservation witnesses include r1 at10d284.",
+      "bounded_original_semantics": {
+        "function": "func_0010d27c",
+        "extent": 60,
+        "entry_register_read_witnesses_linear": {
+          "r1": "0x10d284"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00101624",
+              "written_as": "r0"
+            },
+            {
+              "register": "r2",
+              "write": "0x0010161c",
+              "written_as": "r2"
+            }
+          ],
+          "caller": "0x00100d74",
+          "kind": "tail",
+          "results": [],
+          "site": "0x00101630"
+        }
+      ]
+    },
+    {
+      "function": "func_0011da50",
+      "source": "src/checkpoint10/func_0011da50.c",
+      "source_sha256": "03459b3084694c71c1f892509b82f6957fa86f25f3eeaeaadfd3287a8c2af1ad",
+      "notes": [
+        3,
+        4
+      ],
+      "observation": "The allegedly absent r0 register address and r2 increment are forwarded/reordered into00187828. The credited196564/1965a4 sources feed the previous lookup call result and an explicit increment value1; do not remove either input because a bounded unconsumed-write set omits it.",
+      "bounded_original_semantics": {
+        "function": "func_0011da50",
+        "extent": 64,
+        "entry_register_read_witnesses_linear": {
+          "r2": "0x11da58"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r1",
+              "write": "0x0019658c",
+              "written_as": "r1"
+            },
+            {
+              "register": "r3",
+              "write": "0x00196580",
+              "written_as": "r3"
+            }
+          ],
+          "caller": "0x00196564",
+          "kind": "tail",
+          "results": [],
+          "site": "0x00196590"
+        },
+        {
+          "arguments": [
+            {
+              "register": "r1",
+              "write": "0x001965cc",
+              "written_as": "r1"
+            },
+            {
+              "register": "r3",
+              "write": "0x001965c0",
+              "written_as": "r3"
+            }
+          ],
+          "caller": "0x001965a4",
+          "kind": "tail",
+          "results": [],
+          "site": "0x001965d0"
+        }
+      ]
+    },
+    {
+      "function": "func_0011f6a8",
+      "source": "src/checkpoint10/func_0011f6a8.c",
+      "source_sha256": "ed4472b719a281a85009fde09d244052622e7dad7cab9283c83d928d1bf1c183",
+      "notes": [
+        5,
+        6
+      ],
+      "observation": "Full output/buffer/count/mode/64-bit-token/index contract is forwarded to0012d550. An unchanged incoming count does not need a new caller write.",
+      "bounded_original_semantics": {
+        "function": "func_0011f6a8",
+        "extent": 32,
+        "entry_register_read_witnesses_linear": {},
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00117b24",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00117b10",
+              "written_as": "r1"
+            },
+            {
+              "register": "r3",
+              "write": "0x00117b20",
+              "written_as": "r3"
+            }
+          ],
+          "caller": "0x00117ad8",
+          "kind": "direct",
+          "results": [
+            {
+              "read": "0x00117b2c",
+              "register": "r0"
+            }
+          ],
+          "site": "0x00117b28"
+        }
+      ]
+    },
+    {
+      "function": "func_0012d550",
+      "source": "src/retries/func_0012d550.c",
+      "source_sha256": "4d9556498c6b032686c6cecb3d4ef5af4dd24db85a15ec359bb52f24a4eba202",
+      "notes": [
+        11
+      ],
+      "observation": "Original entry argument spill and source marshalling retain r0 output,r1 buffer,r2 count,r3 mode plus the complete stack token/flags. Its caller forwards those inputs without fresh writes.",
+      "bounded_original_semantics": {
+        "function": "func_0012d550",
+        "extent": 112,
+        "entry_register_read_witnesses_linear": {
+          "r0": "0x12d550",
+          "r1": "0x12d550",
+          "r2": "0x12d550",
+          "r3": "0x12d550"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [],
+          "caller": "0x0011f6a8",
+          "kind": "direct",
+          "results": [],
+          "site": "0x0011f6bc"
+        }
+      ]
+    },
+    {
+      "function": "func_00121cf8",
+      "source": "src/checkpoint10/func_00121cf8.c",
+      "source_sha256": "741c1b3547cab183c2f981eacb6d4aac324d3fde9ce0c18b66bc74f88221e176",
+      "notes": [
+        7
+      ],
+      "observation": "By-value one-pointer begin/end iterators and fill value are stored/read in the actual loop; the original entry preserves their registers. Do not erase the begin argument because its caller has no pending write.",
+      "bounded_original_semantics": {
+        "function": "func_00121cf8",
+        "extent": 48,
+        "entry_register_read_witnesses_linear": {
+          "r0": "0x121cf8"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r1",
+              "write": "0x001929c0",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x001929c4",
+              "written_as": "r2"
+            }
+          ],
+          "caller": "0x00192978",
+          "kind": "direct",
+          "results": [],
+          "site": "0x001929c8"
+        }
+      ]
+    },
+    {
+      "function": "func_00123364",
+      "source": "src/checkpoint10/collect-r2/func_00123364.c",
+      "source_sha256": "568c100c4b256e41a2faef40cccd142d33df6406d2da3691a98d574d82491216",
+      "notes": [
+        10
+      ],
+      "observation": "The byte enabled argument is copied into the transmitted command struct, in addition to value. Original incoming r1 is read at123374.",
+      "bounded_original_semantics": {
+        "function": "func_00123364",
+        "extent": 52,
+        "entry_register_read_witnesses_linear": {
+          "r1": "0x123374"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001921c4",
+              "written_as": "r0"
+            }
+          ],
+          "caller": "0x00191e18",
+          "kind": "direct",
+          "results": [],
+          "site": "0x001921c8"
+        }
+      ]
+    },
+    {
+      "function": "func_0012fdd0",
+      "source": "src/checkpoint10/resume_0012fdd0_reply.c",
+      "source_sha256": "8e39fd54494a5498619ea8889e119ec694e4dc1046b1b41a30be7ffc83964e5f",
+      "notes": [
+        14
+      ],
+      "observation": "The fourth core input value survives service checks and is forwarded with the other arguments into001380c8; original r3 preservation is at12fde4.",
+      "bounded_original_semantics": {
+        "function": "func_0012fdd0",
+        "extent": 84,
+        "entry_register_read_witnesses_linear": {
+          "r3": "0x12fde4"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00122ec8",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00122ecc",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00122ec0",
+              "written_as": "r2"
+            }
+          ],
+          "caller": "0x00122b30",
+          "kind": "direct",
+          "results": [],
+          "site": "0x00122ed0"
+        },
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00122f40",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00122f3c",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00122f38",
+              "written_as": "r2"
+            }
+          ],
+          "caller": "0x00122b30",
+          "kind": "direct",
+          "results": [],
+          "site": "0x00122f44"
+        }
+      ]
+    },
+    {
+      "function": "func_00141560",
+      "source": "src/checkpoint10/func_00141560.c",
+      "source_sha256": "16eeae9c46c95ac47168564de933d1610ab88570c7d62cd191016dd879137edf",
+      "notes": [
+        23,
+        24,
+        25
+      ],
+      "observation": "Source puts float value into values[0] and passes the array. The original tail caller001db0f8 supplies the mode in r0 while forwarding the live independent VFP input; no explicit s0 write is needed in that caller.",
+      "bounded_original_semantics": {
+        "function": "func_00141560",
+        "extent": 52,
+        "entry_register_read_witnesses_linear": {},
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001db0fc",
+              "written_as": "r0"
+            }
+          ],
+          "caller": "0x001db0f8",
+          "kind": "tail",
+          "results": [],
+          "site": "0x001db100"
+        }
+      ]
+    },
+    {
+      "function": "func_0014cc9c",
+      "source": "src/checkpoint10/func_0014cc9c.c",
+      "source_sha256": "b4717d396edfdad66264ae3ff8e5905453e86dd6fb87d6eb3418ccbfd6ffed33",
+      "notes": [
+        32,
+        33
+      ],
+      "observation": "Source stores value into command->value. Original entry consumes s0 at14ccac before service calls.",
+      "bounded_original_semantics": {
+        "function": "func_0014cc9c",
+        "extent": 124,
+        "entry_register_read_witnesses_linear": {
+          "s0": "0x14ccac"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0014e274",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x0014e270",
+              "written_as": "r1"
+            }
+          ],
+          "caller": "0x0014e218",
+          "kind": "direct",
+          "results": [],
+          "site": "0x0014e278"
+        }
+      ]
+    },
+    {
+      "function": "func_001e9754",
+      "source": "src/checkpoint10/func_001e9754.c",
+      "source_sha256": "ac86f681093d164b701cf31ba8d4984e92361f7f5d0f9ffcdc4c6d5249c742b8",
+      "notes": [
+        89,
+        90
+      ],
+      "observation": "Source preserves and consumes start/finish/duration; original entry preserves s0,s1,s2 at1e9760/64/68. Their absence from a late window does not delete the floats.",
+      "bounded_original_semantics": {
+        "function": "func_001e9754",
+        "extent": 196,
+        "entry_register_read_witnesses_linear": {
+          "s0": "0x1e9760"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0015fe54",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x0015fe5c",
+              "written_as": "r1"
+            },
+            {
+              "register": "s1",
+              "write": "0x0015fe50",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x0015fe58",
+              "written_as": "s2"
+            }
+          ],
+          "caller": "0x0015fc3c",
+          "kind": "direct",
+          "results": [],
+          "site": "0x0015fe60"
+        },
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001ddc38",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001ddc40",
+              "written_as": "r1"
+            },
+            {
+              "register": "s1",
+              "write": "0x001ddc34",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x001ddc3c",
+              "written_as": "s2"
+            }
+          ],
+          "caller": "0x001dda24",
+          "kind": "direct",
+          "results": [],
+          "site": "0x001ddc44"
+        }
+      ]
+    },
+    {
+      "function": "func_001efcd0",
+      "source": "src/checkpoint10/func_001efcd0_01.c",
+      "source_sha256": "cd3fc08fc82cbd3b9abfad1d5f634cc24d8b36236788ace0f373a06874568864",
+      "notes": [
+        95,
+        96
+      ],
+      "observation": "Actual provider reads AudioChannel.state then forwards it; original r0 dereference at1efcd0 establishes receiver use.",
+      "bounded_original_semantics": {
+        "function": "func_001efcd0",
+        "extent": 8,
+        "entry_register_read_witnesses_linear": {
+          "r0": "0x1efcd0"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [],
+          "caller": "0x001f2ef8",
+          "kind": "tail",
+          "results": [],
+          "site": "0x001f2f04"
+        }
+      ]
+    },
+    {
+      "function": "func_001f23b8",
+      "source": "src/checkpoint10/func_001f23b8.c",
+      "source_sha256": "17185b8ede4232cee8dfc6f223f8f293cfc63d1ec3ba3161d93c013bf4535008",
+      "notes": [
+        104,
+        105
+      ],
+      "observation": "Actual provider reads info->parameters and parses the resulting property; original r0 read at1f23c4 establishes the input.",
+      "bounded_original_semantics": {
+        "function": "func_001f23b8",
+        "extent": 52,
+        "entry_register_read_witnesses_linear": {
+          "r0": "0x1f23c4"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [],
+          "caller": "0x001f2e3c",
+          "kind": "direct",
+          "results": [
+            {
+              "read": "0x001f2ed0",
+              "register": "r0"
+            }
+          ],
+          "site": "0x001f2ecc"
+        }
+      ]
+    },
+    {
+      "function": "func_0018075c",
+      "source": "src/checkpoint10/func_0018075c.cpp",
+      "source_sha256": "e851f7b515a5785807c6a8ba913ec111759a13a385fe80032f31715231092abf",
+      "notes": [
+        58
+      ],
+      "observation": "Actual pool->state plus buffer and size are forwarded into the stride-aware allocator. r1/r2 are live unchanged arguments rather than fresh local writes.",
+      "bounded_original_semantics": {
+        "function": "func_0018075c",
+        "extent": 12,
+        "entry_register_read_witnesses_linear": {},
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00146bcc",
+              "written_as": "r0"
+            }
+          ],
+          "caller": "0x00146a68",
+          "kind": "direct",
+          "results": [],
+          "site": "0x00146bd0"
+        }
+      ]
+    },
+    {
+      "function": "func_001d2be8",
+      "source": "src/wave18/func_001d2be8.c",
+      "source_sha256": "49bc20921fff4bbed9cfe99597f56023109f6043d7218dec687ce88ae817cd60",
+      "notes": [
+        81
+      ],
+      "observation": "All three current/limit pairs are reached through state; original r0 field access at1d2be8 proves receiver use.",
+      "bounded_original_semantics": {
+        "function": "func_001d2be8",
+        "extent": 64,
+        "entry_register_read_witnesses_linear": {
+          "r0": "0x1d2be8"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [],
+          "caller": "0x001d2fe8",
+          "kind": "direct",
+          "results": [],
+          "site": "0x001d2ff0"
+        }
+      ]
+    },
+    {
+      "function": "func_001f206c",
+      "source": "src/large/func_001f206c.c",
+      "source_sha256": "49683aa3b2b3e947de85018cabad38f6fb13c2d8d85d4637c516a7305054291d",
+      "notes": [
+        102
+      ],
+      "observation": "The item ID controls tag dispatch and table index; source and original incoming r1 read at1f2070 retain it.",
+      "bounded_original_semantics": {
+        "function": "func_001f206c",
+        "extent": 576,
+        "entry_register_read_witnesses_linear": {
+          "r1": "0x1f2070"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001f2adc",
+              "written_as": "r0"
+            }
+          ],
+          "caller": "0x001f2ac8",
+          "kind": "direct",
+          "results": [
+            {
+              "read": "0x001f2ae4",
+              "register": "r0"
+            }
+          ],
+          "site": "0x001f2ae0"
+        }
+      ]
+    },
+    {
+      "function": "func_00139214",
+      "source": "src/wave8/func_00139214.c",
+      "source_sha256": "95ec815adade59b3351414703b4602522f0451e6685f2bcfacf0d437c070fbd0",
+      "notes": [
+        19
+      ],
+      "observation": "bank_id is forwarded into001409cc and file_id is populated; original r2 preservation at13921c and downstream use establish output contract.",
+      "bounded_original_semantics": {
+        "function": "func_00139214",
+        "extent": 40,
+        "entry_register_read_witnesses_linear": {
+          "r2": "0x13921c"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00185af8",
+              "written_as": "r0"
+            }
+          ],
+          "caller": "0x00185aec",
+          "kind": "direct",
+          "results": [
+            {
+              "read": "0x00185b04",
+              "register": "r0"
+            }
+          ],
+          "site": "0x00185b00"
+        }
+      ]
+    },
+    {
+      "function": "func_0013923c",
+      "source": "src/wave9/func_0013923c.c",
+      "source_sha256": "ca07e787af842915ade5155f5eaf5f0bb6741ce57d4833b7cc400014be2c0040",
+      "notes": [
+        20
+      ],
+      "observation": "item_id is forwarded to0018341c and output fields are populated; original entry retains r2 at139240.",
+      "bounded_original_semantics": {
+        "function": "func_0013923c",
+        "extent": 116,
+        "entry_register_read_witnesses_linear": {
+          "r2": "0x139240"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001858e8",
+              "written_as": "r0"
+            }
+          ],
+          "caller": "0x001858dc",
+          "kind": "direct",
+          "results": [
+            {
+              "read": "0x001858f4",
+              "register": "r0"
+            }
+          ],
+          "site": "0x001858f0"
+        }
+      ]
+    },
+    {
+      "function": "func_0014d7a0",
+      "source": "src/checkpoint10/func_0014d7a0.cpp",
+      "source_sha256": "b0611e1b7297db9f5bd5ac5cd47d289a27cc471681fa2cebff564f6a1bb732f2",
+      "notes": [
+        35
+      ],
+      "observation": "Native intrusive iteration uses the incoming ResourceRecordList before summing; original r0 preservation at14d7a4.",
+      "bounded_original_semantics": {
+        "function": "func_0014d7a0",
+        "extent": 92,
+        "entry_register_read_witnesses_linear": {
+          "r0": "0x14d7a4"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [],
+          "caller": "0x0014ba3c",
+          "kind": "direct",
+          "results": [
+            {
+              "read": "0x0014bc2c",
+              "register": "r0"
+            }
+          ],
+          "site": "0x0014bc28"
+        }
+      ]
+    },
+    {
+      "function": "func_0015e534",
+      "source": "src/checkpoint10/func_0015e534_vtb0.cpp",
+      "source_sha256": "bf70a8ac86a0cfd0f4547cb47ee218ea7c6ebed4394ab568ee9008bbecaea310",
+      "notes": [
+        42
+      ],
+      "observation": "Every RGB byte is used in Color8 and the actual TextBox operation; original reads of r1,r2,r3 are witnessed. Stack alpha is kept as well.",
+      "bounded_original_semantics": {
+        "function": "func_0015e534",
+        "extent": 72,
+        "entry_register_read_witnesses_linear": {
+          "r2": "0x15e53c",
+          "r1": "0x15e540",
+          "r3": "0x15e550"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00170008",
+              "written_as": "r0"
+            }
+          ],
+          "caller": "0x0016fff8",
+          "kind": "direct",
+          "results": [],
+          "site": "0x0017000c"
+        }
+      ]
+    },
+    {
+      "function": "func_00175d90",
+      "source": "src/checkpoint10/func_00175d90.c",
+      "source_sha256": "377cb25f70da2675aefb7efc64520d971ae574f917f00b87b91f5fbe6bcff4ad",
+      "notes": [
+        49,
+        50
+      ],
+      "observation": "Typed owner provider retains its receiver; original r0 use at175d94, not a zero-argument helper.",
+      "bounded_original_semantics": {
+        "function": "func_00175d90",
+        "extent": 60,
+        "entry_register_read_witnesses_linear": {
+          "r0": "0x175d94"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [],
+          "caller": "0x001616f8",
+          "kind": "direct",
+          "results": [],
+          "site": "0x00161884"
+        },
+        {
+          "arguments": [],
+          "caller": "0x001a0250",
+          "kind": "direct",
+          "results": [],
+          "site": "0x001a0398"
+        }
+      ]
+    },
+    {
+      "function": "func_00155dec",
+      "source": "src/checkpoint10/func_00155dec.c",
+      "source_sha256": "56bbb899d61fbbd1692d37e3a01d6f4ea511d8d45aeefbc3ddf302a0faa33b67",
+      "notes": [
+        40,
+        41
+      ],
+      "observation": "priority is clamped, stored and forwarded with channel; original reads include r1 at155df0 and r0 at155e08.",
+      "bounded_original_semantics": {
+        "function": "func_00155dec",
+        "extent": 52,
+        "entry_register_read_witnesses_linear": {
+          "r1": "0x155df0",
+          "r0": "0x155e08"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [],
+          "caller": "0x00155148",
+          "kind": "direct",
+          "results": [],
+          "site": "0x00155188"
+        },
+        {
+          "arguments": [],
+          "caller": "0x0015643c",
+          "kind": "direct",
+          "results": [],
+          "site": "0x0015646c"
+        }
+      ]
+    },
+    {
+      "function": "func_001f16f8",
+      "source": "src/checkpoint10/func_001f16f8_recovery.cpp",
+      "source_sha256": "dda4d2933b4579be9cc5b7e319e30cf2b2205e7c6c24dfcecd57d32398709d7e",
+      "notes": [
+        97
+      ],
+      "observation": "The id and writable wave-info output reach both native reader and addon paths; original entry preserves r1 at1f1700 and r2 at1f1708.",
+      "bounded_original_semantics": {
+        "function": "func_001f16f8",
+        "extent": 88,
+        "entry_register_read_witnesses_linear": {
+          "r1": "0x1f1700"
+        },
+        "interpretation": "Only positive reads intersecting this function's noted registers are retained. Source distinguishes meaningful inputs from spills/saved scratch registers; absence in a linear scan is not unused-parameter proof."
+      },
+      "original_callsite_facts": [
+        {
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0016a348",
+              "written_as": "r0"
+            },
+            {
+              "register": "r2",
+              "write": "0x0016a34c",
+              "written_as": "r2"
+            }
+          ],
+          "caller": "0x0016a29c",
+          "kind": "direct",
+          "results": [],
+          "site": "0x0016a350"
+        }
+      ]
+    }
+  ],
+  "independent_VFP_witnesses": [
+    {
+      "function": "func_00141560",
+      "s0_memory_use_witnesses": [
+        "0x141574"
+      ],
+      "source_role": "retained float input",
+      "writes_to_s0_reported_before_tail": false
+    },
+    {
+      "function": "func_001db0f8",
+      "s0_memory_use_witnesses": [
+        "0x1db0f8"
+      ],
+      "source_role": "retained float input",
+      "writes_to_s0_reported_before_tail": false
+    }
+  ],
+  "removed_note_adjudication": {
+    "fact": {
+      "function": "func_001d9198",
+      "kind": "notes",
+      "fact": {
+        "declaration": {
+          "source": "include/game/sound_track.h"
+        },
+        "kind": "declared_inputs_not_observed",
+        "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+        "registers": [
+          "r0"
+        ]
+      }
+    },
+    "disposition": "CANONICAL_DECLARATION_LOCATION_CHANGE_NOT_ARGUMENT_REMOVAL",
+    "observation": "The stale sound_track.h note disappears, but audio_voice.h still declares the full channels/priority/callback/context func001d9198 contract and its corresponding r0 note is retained among the105 new notes. No actual input was removed."
+  },
+  "bounded_original_methods": {
+    "inspection": "Private image decoded only in memory for the listed provider/caller extents; emitted only semantic facts, addresses/extents and hashes. No original bytes, encodings, disassembly, packets or licensed payload retained.",
+    "issue_targets_and_callers": [
+      "func_00100d74",
+      "func_00103978",
+      "func_0010bf88",
+      "func_001852f8",
+      "func_001ae4a0",
+      "func_001b7880",
+      "func_00192410",
+      "func_00192458",
+      "func_00195e5c",
+      "func_00195e64",
+      "func_00164ebc",
+      "func_00205320"
+    ],
+    "stack_restore_evidence": [
+      {
+        "write": "0x001ae750",
+        "tail_site": "0x001ae754",
+        "restores_r3_and_return_address": true
+      },
+      {
+        "write": "0x001b7c6c",
+        "tail_site": "0x001b7c70",
+        "restores_r3_and_return_address": true
+      },
+      {
+        "write": "0x00205368",
+        "tail_site": "0x0020536c",
+        "restores_r3_and_return_address": true
+      }
+    ],
+    "identity_no_op_evidence": [
+      "0x00100e38",
+      "0x00100e40",
+      "0x00192428"
+    ],
+    "timer_override_evidence": {
+      "site": "0x00100fcc",
+      "service": 40,
+      "contract": "svcGetSystemTick(void) -> long long",
+      "register_outputs": [
+        "r0",
+        "r1"
+      ],
+      "decoder_reported_outputs": [],
+      "later_flagged_read": "0x00100ff4"
+    }
+  },
+  "executed_investigation_commands": [
+    {
+      "purpose": "bounded provider/caller semantic classification",
+      "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "first_exit": 1,
+      "first_diagnostic": "Capstone binding has no ARM_INS_LDMIA constant; no source/check result inferred.",
+      "second_exit": 1,
+      "second_diagnostic": "Capstone binding has no ARM_INS_STMIA constant; no source/check result inferred.",
+      "corrected_exit": 0
+    },
+    {
+      "purpose": "no-op versus kernel timer continuation provenance",
+      "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "exit": 0
+    },
+    {
+      "purpose": "positive original note-input spot checks",
+      "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "exit": 0
+    },
+    {
+      "purpose": "independent VFP memory-use spot checks",
+      "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "exit": 0
+    },
+    {
+      "purpose": "requested successor branch absence",
+      "argv": [
+        "git",
+        "show-ref",
+        "--verify",
+        "--quiet",
+        "refs/heads/c010-r7"
+      ],
+      "exit": 1
+    }
+  ],
+  "verification_boundary": {
+    "whole_ledger_argcheck_rerun": false,
+    "interfaces_rerun": false,
+    "matcher_rerun": false,
+    "full_build_or_suite": false,
+    "prepare_or_acceptance_changes": false,
+    "reason": "No source/header/candidate/profile/name/catalogue change, hence no changed caller/provider closure to re-prove. Main's existing gate output is retained; bounded private original/source inspection adjudicates only its new diagnostics."
+  },
+  "qualifications": [
+    "The105 notes remain conservative absence observations, not blanket proof of every dynamic target/unused-input contract. Five groups cover every fact exactly once, with22 representative providers and original caller/provider witnesses.",
+    "Previously accepted/inherited issue adjudications remain Main-owned; this record does not relabel the88-issue machine report as a mechanically passing argcheck.",
+    "The decoder does not model this kernel service's core outputs, and it counts identity no-ops and epilogue restoration as dataflow events. Those evidence-specific false positives do not authorize suppressing other argcheck warnings or dropping genuine caller inputs."
+  ]
+}
