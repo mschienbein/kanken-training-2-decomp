@@ -2,11 +2,11 @@
 
 Current entry on top; older entries are kept as history.
 
-## 2026-10-23 (later) — c010-r8 accepted (+413 functions); gates v1.20 approved
+## 2026-10-23 (later) — c010-r8 accepted (+413 functions); gates v1.20 adopted
 
 **Accepted:** 2,682 functions / 288,580 B (seq 11: … c009-r6, c010-r8). Denominator **v13-r2**:
-4,571 creditable functions / 1,121,674 B (**25.73%**). Gates **v1.19**; v1.20 is approved and
-adopted next, between checkpoints.
+4,571 creditable functions / 1,121,674 B (**25.73%**). Gates **v1.20** (adopted 5ea97031,
+between checkpoints).
 
 - **c010-r8** adds 413 functions / 39,208 B with explicit linker v6 plus literal L1. It took three
   review rounds:
@@ -19,13 +19,16 @@ adopted next, between checkpoints.
 - **Inherited attention:** the table also found 48 definite callback type/role mismatches, 7 custom-family
   rows and 26 unmodeled rows on providers accepted in c001–c009. ctypes1 r2 fixes 32 of them
   exactly; the rest are held with reasons.
-- **Gates v1.20 approved (exact text):** linker model `armlink5-inline-branchnop-v18` adds U1, removal
-  of an unused deleting destructor from a single directly compiled object, with complete
+- **Gates v1.20 adopted (exact reviewed text):** linker model `armlink5-inline-branchnop-v18` adds U1,
+  removal of an unused deleting destructor from a single directly compiled object, with complete
   COMDAT/section-group closure.
   - The implementation passed review after v11–v17 each failed one round. The exact gate text
     passed on its second round.
-  - Adoption, with a full suite run, comes next, between checkpoints. It unblocks cmodels2 and the
-    native MenuScene destructor family.
+  - GATES.md is byte-identical to the approved text. LINKER.md is the approved text plus main's
+    disjoint catalogue sections (`scratch/integrator/gates-v1.20-adoption-evidence.json`, private).
+  - Integrated suite: 1,092 tests, 0 failed modules; `accept.py verify` binds all 11 checkpoints.
+  - This unblocks cmodels2 and the native MenuScene destructor family. Each needs explicit v18
+    selection and reopens its affected R1 callers.
 - **Ready for gates, in order:**
   - c011-r8: 79 functions / 11,080 B, with c013's intake folded in. Pre-review running.
   - ctypes1 r2: 55 units and 18 headers revised, 1 new function. Pre-review running.

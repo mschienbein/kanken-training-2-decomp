@@ -5,7 +5,7 @@ Current entry on top.
 ## 2026-10-23 (later) — c010-r8 accepted; 16-subagent cap (current)
 
 **State:** `docs/STATUS.md` top entry. Accepted 2,682 functions / 288,580 B (seq 11, c010-r8);
-denominator v13-r2; gates v1.19, with v1.20 approved but not yet adopted. Same host and inputs as below.
+denominator v13-r2; gates v1.20 (adopted 5ea97031, linker v18 available). Same host and inputs as below.
 
 Changes to the restart sequence below:
 - **Concurrency:** the user raised the cap to **16 concurrent subagents**, nested agents included.
@@ -17,14 +17,12 @@ Changes to the restart sequence below:
 - **Authors:** `scratch/integrator/rotation.py fill()` launches from `queue.json`. The `nm*` prefix
   is the step-5c near-miss third pass (pool in `scratch/integrator/STEP5C-POOL-r1.json`), and it
   runs ahead of the remaining `np*` batches.
-- **Next order:**
-  1. Adopt GATES v1.20 and linker v18. Merge `linker-unref` (f025ea2c), check the approved r2
-     hashes, then run the full suite and `verify`.
-  2. c011-r8 (folds in c013).
-  3. ctypes1 r2.
-  4. c014 intake.
-  5. c012 re-derivation.
-  6. cmodels2 and the native MenuScene family under v18.
+- **Next order** (GATES v1.20 and linker v18 are adopted):
+  1. c011-r8 (folds in c013).
+  2. ctypes1 r2.
+  3. c014 intake.
+  4. c012 re-derivation.
+  5. cmodels2 and the native MenuScene family under v18.
 
 ## 2026-10-23 — c009-r6 accepted; 8-subagent cap
 
