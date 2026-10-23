@@ -9,7 +9,7 @@ struct StreamMutex;
 
 #include "game/pool_list.h"
 
-#include "game/object_manager.h"
+#include "game/stream_manager.h"
 
 struct FreeLink {
     struct FreeLink *next;
@@ -20,15 +20,20 @@ struct RegionList {
     struct FreeLink *head;
 };
 
-struct RegionBlock;
+/* The native FrameHeap state chain stores both allocation boundaries. */
+struct RegionBlock {
+    unsigned tag;
+    unsigned char *low;
+    unsigned char *high;
+    struct RegionBlock *previous;
+};
 struct RegionHeap {
     const void *vtable;
     struct PoolLink registration;
     unsigned char *start;
     unsigned char *end;
     unsigned signature;
-    struct RegionHeap *parent;
-    struct PoolLink children;
+    struct PoolList children;
     unsigned options;
     unsigned char *low;
     unsigned char *high;
@@ -59,11 +64,16 @@ extern "C" {
 void frame_heap_release_lock(void *heap);
 void frame_heap_release_unlock(void *heap);
 extern int func_00125a5c(struct HeapStorage *storage);
+extern int func_00116ce8(struct RegionHeapOwner *owner);
+extern void func_0017f4f4(struct FreeLink **head, struct FreeLink *node);
 extern int func_0013f110(struct RegionHeap *heap, unsigned tag);
 extern int func_0013f06c(struct RegionHeap *heap, unsigned tag);
-/* [INFERENCE] The observed callers ignore the allocator-mode operation's
- * result; the pointer-returning contract retains the delivered heap view. */
-extern struct RegionHeap *func_00146758(struct RegionHeap *heap, unsigned flags);
+/* Native FrameHeap::Free(int) and every recovered consumer discard r0.
+ * The operation has no pointer result; the C view retains the full mode word. */
+extern void func_00146758(struct RegionHeap *heap, unsigned flags);
+/* [INFERENCE] The return-only hook's callers retain the heap owner input,
+ * although erased v2 calls do not establish the original helper's identity. */
+extern void func_001467e4(struct RegionHeap *heap);
 extern void func_001467e8(struct RegionHeap *heap);
 extern void func_001834b8(struct HeapStorage *storage);
 extern struct RegionHeap *func_001834a4(struct RegionHeap *heap);

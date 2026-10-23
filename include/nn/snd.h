@@ -7,6 +7,12 @@
  */
 #pragma once
 #include "types.h"
+/* Frame length attested by libctru's ndspSync capture count (zlib license),
+ * commit 9b55eda44cf80b971503991e0c78f9bc8fe50425, source/ndsp/ndsp.c.
+ * Project-owned SDK spelling; no libctru implementation or SDK code copied.
+ * See src/nw4c/FACTS-HEADER-GAPS.json and LICENSE-LIBCTRU.txt.
+ */
+#define NN_SND_SAMPLES_PER_FRAME 160
 namespace nn { namespace snd { namespace CTR {
 enum AuxBusId { AUX_BUS_A = 0, AUX_BUS_B = 1, AUX_BUS_NUM = 2, AUX_BUS_NULL = -1 };
 enum ChannelIndex { CHANNEL_INDEX_FRONT_LEFT, CHANNEL_INDEX_FRONT_RIGHT,

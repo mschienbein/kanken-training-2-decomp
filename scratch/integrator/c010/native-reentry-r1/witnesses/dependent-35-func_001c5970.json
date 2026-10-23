@@ -1,0 +1,49 @@
+{
+  "witness_kind": "metadata-only-match-receipt",
+  "private_receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-35-func_001c5970/func_001c5970.result.json",
+  "private_receipt_sha256": "e5d5427f813c38da5c4b94dd5956202b0df19c4f7ce99182ded9f0d4d8ff1c7e",
+  "qualification": "The unmodified tool receipt is kept privately. This publication omits generated instruction-word fields from linker-rewrite metadata; no code or instruction words are published. All source/object/image hashes, statuses, extents, offsets, targets and selected models are retained.",
+  "match": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/src/wave8/func_001c5970.c",
+    "source_sha256": "32ab0b3a1e03f7463ba1f527365eba31668c95ba007b8f31808bb4f78e1bd801",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "fe13b1e4349ec84923a5cacceeae50734f0a3f6952e855c00b7a1e387028f666",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "func_001c5970",
+        "address": 1857904,
+        "size": 8,
+        "candidate_size": 8,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": [
+          {
+            "offset": 4,
+            "rule": "branchnop",
+            "target": 1857912
+          }
+        ]
+      }
+    ]
+  }
+}

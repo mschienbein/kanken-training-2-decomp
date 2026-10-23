@@ -4,7 +4,6 @@
 
 #include "game/w11_control.h"
 
-extern void func_001b3c0c(struct AnimationState *slider, int delta);
 
 
 void func_001e74b8(struct W6SelectionScreen *screen)

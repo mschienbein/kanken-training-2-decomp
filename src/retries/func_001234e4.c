@@ -15,7 +15,7 @@ unsigned func_001234e4(const void *buffer, unsigned size, unsigned value)
     command[3] = value;
     command[4] = ctrIpcStaticBufferDescriptor(size, 0);
     command[5] = (unsigned)buffer;
-    result = (unsigned)svcSendSyncRequest(data_00243040);
+    result = (unsigned)svcSendSyncRequest(data_00243040.handle);
     if ((int)(result & 0x80000000u) >= 0)
         result = command[1];
     return result;

@@ -1,0 +1,24 @@
+{
+  "source": "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c",
+  "source_sha256": "c3d232d539ce857d295e12a4fbcc7d85e9746e5378a5063a3e8b9905ee1ed90a",
+  "profile": "middleware",
+  "exit_code": 2,
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-packet-middleware"
+  ],
+  "stdout": "",
+  "stderr": "error: armcc failed (1) on gpu_memcpy_packet.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c\", line 10: Error:  #28: expression must have a constant value\n      const struct GpuCommandPacket packet = { value, header };\n                                               ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c\", line 10: Error:  #28: expression must have a constant value\n      const struct GpuCommandPacket packet = { value, header };\n                                                      ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c: 0 warnings, 2 errors\n\n",
+  "label": "gpu-memcpy-packet-middleware"
+}

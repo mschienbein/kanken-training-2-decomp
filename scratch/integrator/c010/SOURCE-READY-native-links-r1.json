@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "status": "native-animation-contract-cutover-complete-with-bounded-witnesses-awaiting-main-integrated-closure",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-native-links",
+  "branch": "c010-native-links",
+  "base_commit": "a3062ee4a9e71bf1bf5913eb07748ab0750a5238",
+  "parent_source_ready": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/SOURCE-READY-r68.json",
+    "sha256": "9e46e1a3bb5414c678526e600a96a9c4f34df8c3f3219e5dc09e739c29df418b"
+  },
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "counts": {
+    "candidate_units": 497,
+    "candidate_claims": 510,
+    "new_functions": 500,
+    "new_target_bytes": 47360,
+    "accepted_moves": 10,
+    "moved_target_bytes": 240,
+    "new_deferred_units": 48,
+    "new_deferred_functions": 50,
+    "new_deferred_target_bytes": 9196,
+    "reentered_prior_deferrals": [
+      "func_001685c0",
+      "func_00168618"
+    ]
+  },
+  "candidate_manifest": "config/candidates/c010.json",
+  "candidate_manifest_sha256": "b159999ba9360bc4a2a6ab799d842fc3c6a1edf4aa54c1312d8f485384bfc809",
+  "candidate_composition": {
+    "original_units": 496,
+    "original_claims": 509,
+    "current_units": 497,
+    "current_claims": 510,
+    "original_units_preserved_verbatim": true,
+    "original_moves_preserved_verbatim": true,
+    "original_move_count": 10,
+    "accepted_manifest_unchanged": true,
+    "names_manifest_unchanged": true,
+    "qualification": "Structural candidate/immutable-file bookkeeping only, not a whole-ledger ownership or semantic audit."
+  },
+  "bounded_inventory": "scratch/integrator/c010/native-links-inputs-r1.json",
+  "bounded_scope": "scratch/integrator/c010/native-links-scope-r1.json",
+  "bounded_witness_index": "scratch/integrator/c010/NATIVE-LINKS-WITNESSES-r1.json",
+  "contract": "scratch/integrator/c010/NATIVE-LINKS-CONTRACT-r1.json",
+  "deferrals": "scratch/integrator/c010/NEW-DEFERRALS-native-links-r1.json",
+  "parent_complete_inventory": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/CURRENT-INVENTORY-r67.json",
+  "parent_complete_dry_ledger": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/dry-matches-r67.json",
+  "parent_complete_direct_scope": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/match-scope-r67.json",
+  "parent_complete_witness_index": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/MATCH-WITNESS-INDEX-r67.json",
+  "global_input_freshness": "Parent full-ledger/source/header inventory and scopes are historical and stale after this cutover. Main must regenerate under a new immutable revision after integrating the approved frozen predecessor; the bounded16-unit scope does not replace or narrow them.",
+  "accepted_identities_preserved_structurally": 1621,
+  "projected_functions_metadata_only": 2797,
+  "projected_units_metadata_only": 2725,
+  "newly_closed": [
+    "func_001cff58"
+  ],
+  "newly_closed_target_bytes": 56,
+  "new_moves": [],
+  "reservation_boundary": {
+    "unchanged_source_hashes": {
+      "src/checkpoint10/func_001c7760.cpp": "6ca3a01c9ac026963a558b0fcd1c3954005dae48c8e49366d793b9f816a5b83c",
+      "src/checkpoint10/func_001c8a40.cpp": "7a65a8c02c2ac77d4627733b70bc59347c6199d2567c4e650bc4144ed4afd663"
+    },
+    "c011": "001c7760/001c7fa0 native-pair and001c8a40 dependent reservation unchanged; no new release/credit implied.",
+    "textures": "No texture aggregate source/provider/header/slot identity is changed; all texture deferral rows remain verbatim."
+  },
+  "dependencies": [
+    {
+      "owner": "FixC009R3Codex/Main",
+      "status": "not frozen/imported here",
+      "subjects": [
+        "scheduler callback result protocol and typed C mandatory-discard procedure definitions",
+        "typed erased registration helpers and source/helper hash closure",
+        "156da0 void*(void*) vector entry",
+        "14de8c native RuntimeMember constructor and actual callers"
+      ],
+      "constraint": "Do not force uniformint, erase real results, fabricate returns or import unfinished predecessor patches. Re-enter deferred10239c/13db40 only with the frozen coherent protocol."
+    },
+    {
+      "owner": "C011Codex/Main",
+      "status": "reserved, not released",
+      "subjects": [
+        "001c7760/001c7fa0 native pair identity and return ABI",
+        "001c8a40 dependent native mapper call"
+      ],
+      "sources": [
+        "src/checkpoint10/func_001c7760.cpp",
+        "src/checkpoint10/func_001c8a40.cpp"
+      ],
+      "constraint": "Exact source bytes retained but neither identity is proposed for C010 credit; no new pair cutover authorized. Refresh future proposed move/addition metadata without changing accepted history.",
+      "snapshot_note": {
+        "current_c010_sha256": "6ca3a01c9ac026963a558b0fcd1c3954005dae48c8e49366d793b9f816a5b83c",
+        "peer_reported_c011_sha256": "6035021e9ca99d3ce6a3ecb8edfd63919c36916b629b41e649621b1c814fddde",
+        "peer_worktree_not_rechecked": true,
+        "claim": "These are distinct preserved snapshots, not byte-identical across worktrees and not a release/re-entry authorization."
+      }
+    },
+    {
+      "owner": "Main final manual review",
+      "status": "unexercised",
+      "subjects": [
+        "all original virtual/callback slot results and supplied inputs",
+        "data_002429f8 actual interior release-slot consumer closure",
+        "accepted/native1d4174 loader/archive nominal fork remains explicit, not cured by deferred new callers",
+        "191e18 parent6-argument AppletTimeout-by-value versus child private5-argument lead",
+        "all source/header R1 and L1 dependencies and emitted unique ownership"
+      ],
+      "constraint": "Per-unit bytes, structural ownership projection and absence of a warning are not typed-contract proofs."
+    }
+  ],
+  "preservation": [
+    "Every pre-existing attempt, receipt and accepted record remains unchanged.",
+    "Old mutable handoff/candidate snapshots preserved as HANDOFF-before-codex-r67.json and CANDIDATES-before-codex-r67.json.",
+    "Constructorr36 all21exit2 and r38 eleven failures preserved; corrected21 successes are tenr38 plus elevenr39.",
+    "Dispatchr39 twentyMATCH/twenty-two mismatches preserved; narrowedr40 closes all22 remaining callbacks.",
+    "Graphics storager56 andr60 native animation byte differences, GPUr63/r65/r66 and actual quad allocation gap remain preserved non-exhausted residue.",
+    "Services malformedr1, exact recoveredr1-original and validr2 remain Main-owned immutable helper artifacts.",
+    "All original496 candidate rows/509 claims and all10 existing move rows remain verbatim; only the witnessed001cff58 row is appended.",
+    "All1621 accepted identities remain in the unchanged accepted manifest; accepted001cff50/001cfdac/001cfd94 retain their current source owners.",
+    "The original49-row r67 deferral record and old graphics/native failures remain immutable. The new deferral revision resolves only001cff58, retaining48 rows/50 functions/9196B.",
+    "No texture aggregate or c011 native-pair source/header/name reservation changed."
+  ],
+  "exercised_verification": {
+    "actual_driver_exit": 0,
+    "unit_count": 16,
+    "unit_actual_exit_counts": {
+      "0": 16
+    },
+    "all_claimed_functions_match": true,
+    "primary_extents": {
+      "func_0016b58c": 112,
+      "func_001cfd94": 8,
+      "func_001cfdac": 8,
+      "func_001cff50": 8,
+      "func_001cff58": 56
+    },
+    "show": 0,
+    "profiles": "15 game and1 sdk, from exact accepted/predecessor/c010 metadata",
+    "models": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "failed_match_attempts": [],
+    "preserved_diagnostic_attempts": "The actual original-query exits and the initial metadata KeyError/corrected predecessor lookup are retained; earlier C010 graphics/native failures are not modified."
+  },
+  "checks_not_run": [
+    "whole-ledger interfaces/native/signatures/MATCH",
+    "whole original callback/indirect audit",
+    "argcheck",
+    "full builds",
+    "test suite",
+    "prepare",
+    "independent reviews",
+    "finalize",
+    "verify",
+    "push"
+  ],
+  "remaining_heavy_command_record": "scratch/integrator/c010/REMAINING-HEAVY-COMMANDS-native-links-r1.json",
+  "verification_boundary": "Only sixteen sequential frozen-profile --show0 v6/L1 matches and metadata-only exact original/object queries were exercised. Structural bookkeeping is not a whole-ledger audit. No full build, suite, gate, accepted receipt/history change or push was performed."
+}

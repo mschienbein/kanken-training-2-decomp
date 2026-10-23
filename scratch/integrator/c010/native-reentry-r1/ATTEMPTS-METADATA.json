@@ -1,0 +1,2012 @@
+{
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "attempts": [
+    {
+      "label": "texture-find-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_find.cpp",
+      "source_sha256": "cb85f26925882d91b3338fb425f627ff642a56e45b8edf24763bd996b91d9b30",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-find-native-game/terminal.json",
+      "terminal_sha256": "29ea1c81b6be828428a18fa5075cef1920375a8e7b7fc4d1adfb497b0ba57667",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-find-native-game/texture_find.result.json",
+      "receipt_sha256": "e5eb5ce45a8a99f76e466fa7410a812e28a2b7bb2358ffc693cbd32e1d1f0d52",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+          "address": 1885252,
+          "size": 136,
+          "candidate_size": 140,
+          "status": "mismatch",
+          "first_diff": 112,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "8aa6b881e96b6136c5ba63ea2774b055f89f5579fc27b7f6c630678f6a31388a",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-find-native-game.json",
+        "sha256": "e31f7490775ac4658e1597e1bb5d2ba0f56ed632170c662dd5c68b67e4027356"
+      }
+    },
+    {
+      "label": "texture-find-named-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_find_named.cpp",
+      "source_sha256": "f4c429025598c84c27ed859869b87727f57b3d076eb3be51959e388765f77a5b",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-find-named-game/terminal.json",
+      "terminal_sha256": "0b95fa52d3baa714bbc68f4def04a7b9206ba83461de858588dcaf50490fa436",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-find-named-game/texture_find_named.result.json",
+      "receipt_sha256": "35f950a64c3bfcccd107abd856f430b5f3cb8dc695f9910b30b91b69d3cd34f9",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+          "address": 1885252,
+          "size": 136,
+          "candidate_size": 184,
+          "status": "mismatch",
+          "first_diff": 16,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "05e3b43646678f43fb65cdf9dfa820caa4b60d66fb08b3bccb18e4c3c10095e0",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-find-named-game.json",
+        "sha256": "52fd1841805050fa0e7b2d0e0da6022b20538a1bc2db713abcdf0e78dbaaab5b"
+      }
+    },
+    {
+      "label": "texture-find-native-middleware",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_find.cpp",
+      "source_sha256": "cb85f26925882d91b3338fb425f627ff642a56e45b8edf24763bd996b91d9b30",
+      "profile": "middleware",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-find-native-middleware/terminal.json",
+      "terminal_sha256": "bfac169e89e5fe92e0c8906c041731b3dbb124a460a9033141de8316589fa50d",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-find-native-middleware/texture_find.result.json",
+      "receipt_sha256": "efa475d012db803359b7d88cef5afceec0cbee17477e05d90ccef8fbf9b1cdd1",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+          "address": 1885252,
+          "size": 136,
+          "candidate_size": 140,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "4795acf22e5f8c3baf27f29bbf6098cdb0b1de137034c426037dc037d5acc697",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-find-native-middleware.json",
+        "sha256": "092ed60156a99253d387cf91725c9004761ad3c634055fe36eb3448051032ab2"
+      }
+    },
+    {
+      "label": "texture-find-native-sdk",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_find.cpp",
+      "source_sha256": "cb85f26925882d91b3338fb425f627ff642a56e45b8edf24763bd996b91d9b30",
+      "profile": "sdk",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-find-native-sdk/terminal.json",
+      "terminal_sha256": "1a8efef2371a44df70bdd63e0af78013f8e757577adc5f63cc5af8272f848f63",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-find-native-sdk/texture_find.result.json",
+      "receipt_sha256": "b070935ea267b709b6dfe99bb03d6d250faac759e97fcbae95dd64106829cef3",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+          "address": 1885252,
+          "size": 136,
+          "candidate_size": 196,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "ad9d4f4d2280514235c1f57e2ed35bc58ebc852fe4e5fc77a5f986e81bec953f",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-find-native-sdk.json",
+        "sha256": "7c12032d762086da77211ce47b5d1b839e06db031be4653e9ca37cf68b51ef85"
+      }
+    },
+    {
+      "label": "camera-initialize-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/camera_initialize.cpp",
+      "source_sha256": "ad447673f68053737d337f8b079fd8934fa395cd0380f9e6a443330810a9441b",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/camera-initialize-native-game/terminal.json",
+      "terminal_sha256": "f706a85c671c4f355ce8b9d485878d1ed18bf980478fb9894b3d4a6280d3bf36",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/camera-initialize-native-game/camera_initialize.result.json",
+      "receipt_sha256": "f7348933f694696de3e9944695843255442c0803f3432b1f32f46f971ec0b52c",
+      "functions": [
+        {
+          "name": "_ZN2nw3gfx6Camera10InitializeEPNS_2os10IAllocatorE",
+          "address": 1872840,
+          "size": 72,
+          "candidate_size": 72,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "74bb51eb5deb5c03ddb7d6760feb264178bbf4a5165c75f7c777ed59a2c7fd5d",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/camera-initialize-native-game.json",
+        "sha256": "852156886ad72459d6c7471d5cdcdaf783d3b7e3bb76254fdffec6f06742a49f"
+      }
+    },
+    {
+      "label": "fragment-initialize-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/fragment_initialize.cpp",
+      "source_sha256": "9ea6cc23e06d66be655a56a24bc2764b02fb96ed16241d39b399b145ec1c66a8",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/fragment-initialize-native-game/terminal.json",
+      "terminal_sha256": "4c4fd47520ebab1de09957f6f483c49c0e7a469f10a1be91a8200068d78c8ffe",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/fragment-initialize-native-game/fragment_initialize.result.json",
+      "receipt_sha256": "2116270636bda4c860fdfcf3db9aad96360418158e59a666d6d6c46b8147ceed",
+      "functions": [
+        {
+          "name": "_ZN2nw3gfx13FragmentLight10InitializeEPNS_2os10IAllocatorE",
+          "address": 1859148,
+          "size": 84,
+          "candidate_size": 84,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "a4865cd1c8b01066ec9bc4215909dd7171cbe9b2e94cf8cf657549d44c216e6d",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/fragment-initialize-native-game.json",
+        "sha256": "685afe0408c5628c8d7d42dff86e16efe6000f603932a8db74423af7a3cf0ff7"
+      }
+    },
+    {
+      "label": "gpu-memcpy-words-middleware",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_words.c",
+      "source_sha256": "8a47a8cb2010106fa16bfb60fa4fcc79aef5780e4b0d8ccadff57a8ba4bc24c9",
+      "profile": "middleware",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-words-middleware/terminal.json",
+      "terminal_sha256": "0fde0d920594fc8890bb81be227888ee883719c11933dfac47bc5dea249a0aca",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-words-middleware/gpu_memcpy_words.result.json",
+      "receipt_sha256": "51b48d5f51cb5a2bf1224ce6c00ee66adb119aa20e95090bf3fdbe77f93199c9",
+      "functions": [
+        {
+          "name": "func_001273a0",
+          "address": 1209248,
+          "size": 1044,
+          "candidate_size": 1068,
+          "status": "mismatch",
+          "first_diff": 0,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "9a4d10014eec30c49724b51973343cc50f8ccc4de03f3bdcd0ef1bc344aff2ce",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/gpu-memcpy-words-middleware.json",
+        "sha256": "8cad623ad9756ae64822526007e273525e06a5a00e3d9f39a794a2fc97790a62"
+      }
+    },
+    {
+      "label": "gpu-memcpy-local-middleware",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_local.c",
+      "source_sha256": "d204233ee794c0eb607b4439c79c4452e80ab7f5fa9c9afcddeb4a0cd8346037",
+      "profile": "middleware",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-local-middleware/terminal.json",
+      "terminal_sha256": "d232389a28da761109d3dbe2740582f26297384e867f273734efd20bbe8db2e0",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-local-middleware/gpu_memcpy_local.result.json",
+      "receipt_sha256": "88a7d3f4bf28c09df937f56f799fbd31aabe9767490d02e133fc5b77e920f192",
+      "functions": [
+        {
+          "name": "func_001273a0",
+          "address": 1209248,
+          "size": 1044,
+          "candidate_size": 1048,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "1463860e69fb41343ae9a7b2ddea3bfec52beaa0557f6d9de43e7a2101a4c0ec",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/gpu-memcpy-local-middleware.json",
+        "sha256": "fbf98168418d7f965e8334bf029ffea72b8d9311160044d4befacc7fd288e6f5"
+      }
+    },
+    {
+      "label": "gpu-memcpy-reserve-middleware",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_reserve.c",
+      "source_sha256": "f3146c4b070478337bb194e6a3bb7913974fc88697712459a468bc0eb07293f5",
+      "profile": "middleware",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-reserve-middleware/terminal.json",
+      "terminal_sha256": "dc2603c31be5ab1a10b2edcf1c3a8d1db6ecf43fd17cb6614db9069c7f8a526e",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-reserve-middleware/gpu_memcpy_reserve.result.json",
+      "receipt_sha256": "59d1b12ed71a424fd324a7017795dbc735152b17a24b79c0b1d3eead348a926f",
+      "functions": [
+        {
+          "name": "func_001273a0",
+          "address": 1209248,
+          "size": 1044,
+          "candidate_size": 1152,
+          "status": "mismatch",
+          "first_diff": 0,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "5fed69cd1de607bef0e73dd020a681ab66741b216c50be00f4844a451ca33cc6",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/gpu-memcpy-reserve-middleware.json",
+        "sha256": "ba987fe148c90ac0d470563fada5891f1ceee8452aed07d4a624c1119858ff2b"
+      }
+    },
+    {
+      "label": "gpu-memcpy-packet-middleware",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c",
+      "source_sha256": "c3d232d539ce857d295e12a4fbcc7d85e9746e5378a5063a3e8b9905ee1ed90a",
+      "profile": "middleware",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-packet-middleware/terminal.json",
+      "terminal_sha256": "6e10d43d2e2cac93ff442b12242b939e5de083f3290ea9ceb1016cdfad464597",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-packet-middleware/gpu_memcpy_packet.result.json",
+      "receipt_sha256": "48f46861fdbe8fc55d99965fe16c70ab693aafc198fb3113525d9c3d51bccdee",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/gpu-memcpy-packet-middleware.json",
+        "sha256": "8d9fa302d56598945819fd9e07f59168275380b35f5f68805cffe65991e06cfe"
+      }
+    },
+    {
+      "label": "gpu-memcpy-packet-assign-middleware",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet_assign.c",
+      "source_sha256": "efc606f08c0c641c161307dcb2e70856b6705ff8f739b2834a4a05714865fabe",
+      "profile": "middleware",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-packet-assign-middleware/terminal.json",
+      "terminal_sha256": "8a38c6b8282e02d69fc696b42f496091af6588de7842b88ca5020f582c69151c",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-packet-assign-middleware/gpu_memcpy_packet_assign.result.json",
+      "receipt_sha256": "444bd7b5a45488a256c9626dd097fba355839459bbafc9dfb124c372d2c1fd1d",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/gpu-memcpy-packet-assign-middleware.json",
+        "sha256": "28c87c309f3af492c09fb77b30556de4a375581b7f6e4e0dc5ad9991f9055ea5"
+      }
+    },
+    {
+      "label": "texture-find-single-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_find_single.cpp",
+      "source_sha256": "deb3a5dc748874e74381041d4d504c4d2faa0e1c8ac7d8743b2a0b8cd685c7ba",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-find-single-game/terminal.json",
+      "terminal_sha256": "6ce1e4c0a44d8c447b290f7da08c66d1450415c20e22056a13f746dff13ea720",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-find-single-game/texture_find_single.result.json",
+      "receipt_sha256": "7e6783c545abedf6ff549d1e387da52a0d518174944fbf5bc72d61d8d9316e6b",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+          "address": 1885252,
+          "size": 136,
+          "candidate_size": 168,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "fb3e3ac79281edd5bac2c1d635e33fa61b5c4f19668bd0d6b6f6453c48f81710",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-find-single-game.json",
+        "sha256": "9d20dd4b2be33f3a0c96ff4ce8ff5afe9620c9f83e5a01a9c042baee26dc8ad1"
+      }
+    },
+    {
+      "label": "texture-accessors-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_accessors.cpp",
+      "source_sha256": "6dc9f5501774c50b374d370a5a5e665fb8931f902267fe2470180f39cace2d63",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-accessors-native-game/terminal.json",
+      "terminal_sha256": "7b7b8f00d8615c62ba3ab8db11b833033154e7688870dfe4c4e70fbe1065899d",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-accessors-native-game/texture_accessors.result.json",
+      "receipt_sha256": "381f5ced724230525c170a213db304ca7113a79f8bc9455c88d33d5125922061",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt19ArcResourceAccessor10GetTextureEPKc",
+          "address": 1887928,
+          "size": 104,
+          "candidate_size": 116,
+          "status": "mismatch",
+          "first_diff": 36,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN22TextureCacheAccessor2810GetTextureEPKc",
+          "address": 1888264,
+          "size": 104,
+          "candidate_size": 116,
+          "status": "mismatch",
+          "first_diff": 36,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "9140f2b27388de95f20185d9e133c3be1288d1fc02e0c3006fbcac1ebd61266c",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-accessors-native-game.json",
+        "sha256": "78b2035aa23373b6ebe890782b1f989b6302713c54dfa2db641c85940308dcdc"
+      }
+    },
+    {
+      "label": "texture-accessors-native-returns-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_accessors_returns.cpp",
+      "source_sha256": "9e97f0c9cd80bf582cbd35181dcaabcff8d1249d008da2f87e0aea896d85fcc6",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-accessors-native-returns-game/terminal.json",
+      "terminal_sha256": "01297354a9c1b09d2b75d698523b29197937606f30f71ebbd52e8786fed3f8b2",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-accessors-native-returns-game/texture_accessors_returns.result.json",
+      "receipt_sha256": "a0410d627e895059508a8e12651a711fe73d9699546598b5f1b1cfb16c014463",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt19ArcResourceAccessor10GetTextureEPKc",
+          "address": 1887928,
+          "size": 104,
+          "candidate_size": 116,
+          "status": "mismatch",
+          "first_diff": 36,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN22TextureCacheAccessor2810GetTextureEPKc",
+          "address": 1888264,
+          "size": 104,
+          "candidate_size": 116,
+          "status": "mismatch",
+          "first_diff": 36,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "f16b0d7ca7a23a5f393d3c10669d0364ca958bd49bcd656a42d7d7b8a3f4d92e",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-accessors-native-returns-game.json",
+        "sha256": "b3ec2cd0d9f773914b485df1d846bc33befd2c0f4960e5baf4bd7b177ebed9b5"
+      }
+    },
+    {
+      "label": "texture-accessors-native-copy-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_accessors_copy.cpp",
+      "source_sha256": "4c64faeadcfee5e6f386a6e63063081271fe79072d513b33a2a9349c174bdbd3",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-accessors-native-copy-game/terminal.json",
+      "terminal_sha256": "c7cc6668d2178f9ee0a772d1334d1cbe362dacebd1f2dcf2f5553e4fbba24cd7",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-accessors-native-copy-game/texture_accessors_copy.result.json",
+      "receipt_sha256": "697e4a9b6832261dd28d1d8808a613f3541922a0ca4b6a08c493c5ca30dc73ac",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt19ArcResourceAccessor10GetTextureEPKc",
+          "address": 1887928,
+          "size": 104,
+          "candidate_size": 104,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN22TextureCacheAccessor2810GetTextureEPKc",
+          "address": 1888264,
+          "size": 104,
+          "candidate_size": 104,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "06f52916518d4f1d87c95a8c094bbd8e7c8abb129bc12b162cbff2304a4ee271",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-accessors-native-copy-game.json",
+        "sha256": "7c244658edca5dfb1887bd493cbf53ceda02715c45fefaef7b8755751f1abe62"
+      }
+    },
+    {
+      "label": "texture-find-found-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_find_found.cpp",
+      "source_sha256": "f0e3eaf185afb73d25c03357acc8a29e6d21d8c385fbd4d6e1f1507d7392a9ec",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-find-found-game/terminal.json",
+      "terminal_sha256": "ca4db076823c1602823db11d37cf011ee194060a9dacd63ca4fee8e44aa8555a",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-find-found-game/texture_find_found.result.json",
+      "receipt_sha256": "066b3b0d3e7e3113e9f80ae98602d24386bfed061dc5f49bd9364e417e021e18",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+          "address": 1885252,
+          "size": 136,
+          "candidate_size": 184,
+          "status": "mismatch",
+          "first_diff": 16,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "2e225faf7e2702c6e6e200263adf0353eaba8844bcbc1cc6143e55cce652bb97",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-find-found-game.json",
+        "sha256": "3095beb8ed313213d6c59168c050b3ac59e4081fce50cae9cc13c19e22769feb"
+      }
+    },
+    {
+      "label": "fragment-original-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/fragment_original.cpp",
+      "source_sha256": "b18639a58388052d62bfb0b09745f61f6134d0905a2179ec5cb9b7eae2bd276b",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/fragment-original-native-game/terminal.json",
+      "terminal_sha256": "740848efa47493750ce9c32cfb0ddaa1441713d6ad0bbf6ae2fe074562ea51cb",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/fragment-original-native-game/fragment_original.result.json",
+      "receipt_sha256": "9094c5de01c8c9fae34757a144a4900c05766692a5b349c98fba65827af07070",
+      "functions": [
+        {
+          "name": "_ZN2nw3gfx13FragmentLight19CreateOriginalValueEPNS_2os10IAllocatorE",
+          "address": 1859440,
+          "size": 348,
+          "candidate_size": 100,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "573272eae0815a65d3a24e4e527284a5f29dd487a9767bb5029b9fb0ec737d1b",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/fragment-original-native-game.json",
+        "sha256": "77399751b13fd7da3cc1b7ab4272beed05e99fb8d9686be968591a55f423c3f0"
+      }
+    },
+    {
+      "label": "camera-original-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/camera_original.cpp",
+      "source_sha256": "355db0da6f70ae9af1a0e5c348cd35cacae4b2c52c688939c7e0ae4f6aa6b2dd",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/camera-original-native-game/terminal.json",
+      "terminal_sha256": "81f2dff7a10e167ab929f71a9bfc87e5118165a191294091e6e083dc29b43fa2",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/camera-original-native-game/camera_original.result.json",
+      "receipt_sha256": "85c527e9252c8904628f9ab32306f5c107213b86d6b30b18c10a577d0719247a",
+      "functions": [
+        {
+          "name": "_ZN2nw3gfx6Camera13StoreOriginalEPNS_2os10IAllocatorE",
+          "address": 1872912,
+          "size": 692,
+          "candidate_size": 596,
+          "status": "mismatch",
+          "first_diff": 0,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "079a7ec4395f335a6a6e1619b081f94ba67fb10134741f6ccbe2a2e0d00ce041",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/camera-original-native-game.json",
+        "sha256": "17d49429d7528e335a1af6622a86814661c2edb4c12ce0a35821f3f3e1cac5b9"
+      }
+    },
+    {
+      "label": "texture-mapper-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/texture_mapper_native.cpp",
+      "source_sha256": "48916af1aca64b7b11645229d071476b4e49ed79e189c7adca6ca4330dbd0915",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/texture-mapper-native-game/terminal.json",
+      "terminal_sha256": "0c496f0d1e18e2002b38f0b1c367f4e1b9e7607e3174733f51667092ce256765",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-mapper-native-game/texture_mapper_native.result.json",
+      "receipt_sha256": "727260e7fc3bb97f0f4423e80e1cf2b8ef8154efcb87f90ed3487958b1b180c3",
+      "functions": [
+        {
+          "name": "func_001c8a40",
+          "address": 1870400,
+          "size": 176,
+          "candidate_size": 176,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "19acce73fdaacfc59a785b2a572a2bc7d6ce92d62eef69311402489f3de3edf2",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/texture-mapper-native-game.json",
+        "sha256": "544fe793d6ae33312ae8adf52afdb6497a4f5b5a866fafae276d814564760078"
+      }
+    },
+    {
+      "label": "cube-provider-current-game",
+      "source": "src/checkpoint10/collect-r2/func_001c8244.cpp",
+      "source_sha256": "3d9ad5e596eda30e74668153d6c6e1eba6c0cdb83b65cedde96458d36b216259",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/cube-provider-current-game/terminal.json",
+      "terminal_sha256": "fb4325f9b9784237cd6d95a8878f7cb324fe167cd57d513d228cb3c382b6f303",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/cube-provider-current-game/func_001c8244.result.json",
+      "receipt_sha256": "3336e00322a4501de36b2bf01401d72ef0841b2b83d4cdb0ea1484b2d56974ca",
+      "functions": [
+        {
+          "name": "_ZN2nw3gfx3res25SetupTextureMapperCommandENS1_26ResPixelBasedTextureMapperENS1_14ResCubeTextureE",
+          "address": 1868356,
+          "size": 480,
+          "candidate_size": 480,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "0db9bc47ccca76d6d6894dfd8c08dd6f230b731621b4ef06193dae0ec08a970f",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/cube-provider-current-game.json",
+        "sha256": "3cf2e5e5ad766b6019d77f186de351a5fc624ca4148ee9b8a48068697d756f7f"
+      }
+    },
+    {
+      "label": "pane-commands-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/pane_commands.cpp",
+      "source_sha256": "7e1954e50e5d65f571a8961d6bc6d05678a16d0ed50d566897bba6531b6c51c9",
+      "profile": "game",
+      "exit_code": 1,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/pane-commands-native-game/terminal.json",
+      "terminal_sha256": "db7424e1494f25e4ecc95493840922dd5dbb686d56f0166c94338682ea4bfda3",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/pane-commands-native-game/pane_commands.result.json",
+      "receipt_sha256": "ba0b1b33c98c3db42a2411f232af6cd0fa6df2c3264e43d057389c386790c9bb",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane12DrawCommandsEPhP14LayoutDrawInfoP19LayoutRenderContext",
+          "address": 1146536,
+          "size": 132,
+          "candidate_size": 132,
+          "status": "mismatch",
+          "first_diff": 44,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "b99df9c75bce9cb1d7c7b61235e80fc66e6ed86f9b753b14b583fc6167ab04e7",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/pane-commands-native-game.json",
+        "sha256": "8237977ef954347e532465ab2a3aadbbefa79b4d3359a631f3acafbe957bd271"
+      }
+    },
+    {
+      "label": "pane-uniform-commands-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/pane_uniform_commands.cpp",
+      "source_sha256": "1c6641a6ad76265c50d1df2536c413ec84e6630bfda16c7bd5744c95c798ca08",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/pane-uniform-commands-native-game/terminal.json",
+      "terminal_sha256": "6107fa08e251562cbeb04ee3aebed7e89258583ad83cfe2826be8cc1723d15a0",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/pane-uniform-commands-native-game/pane_uniform_commands.result.json",
+      "receipt_sha256": "e8ee42abe352385d2601fd94cb48a60de9b848472355263b7b3c78d983ed57ec",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane12DrawCommandsEPhP14LayoutDrawInfoP19LayoutRenderContext",
+          "address": 1146536,
+          "size": 132,
+          "candidate_size": 132,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "671f29522cc58e3bfb35c87fb27f8e6cf76d6b5b25f3ae5a45c315d643a45fbc",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/pane-uniform-commands-native-game.json",
+        "sha256": "0288746ff7063d81ce12265b9fec4cd844342f8f0b9e6943e6ca8d0cc3fafaad"
+      }
+    },
+    {
+      "label": "pane-uniform-base-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/pane_uniform_base.cpp",
+      "source_sha256": "46d10f5378a1cddff74b9247b8969c455ef9782120b6dfd48f50efed379e39f8",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/pane-uniform-base-native-game/terminal.json",
+      "terminal_sha256": "9f983278e9995d60e18870f4e98e986037b64e4870b6ad36bf45e5dad0073063",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/pane-uniform-base-native-game/pane_uniform_base.result.json",
+      "receipt_sha256": "e0cf245545abbbf6320cab6f926b97ece030bd129f38738cbfff69c3eab329a2",
+      "functions": [
+        {
+          "name": "_ZNK2nw3lyt4Pane19MakeUniformDataSelfEPhP14LayoutDrawInfoP19LayoutRenderContext",
+          "address": 2032048,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "916bfaa23fce81441e0817f70f7dbbd3fadac23b424835309c7220235850a4d2",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/pane-uniform-base-native-game.json",
+        "sha256": "2bd47b36ac77c7ebbe985f4e20f3c48d29bc6672bbf8b0c57d7a70da24069289"
+      }
+    },
+    {
+      "label": "layout-commands-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/layout_commands.cpp",
+      "source_sha256": "0610619585fecf7ef553a716dbab6f8aa6c3a43aff75d28c41d807f197f1f14d",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/layout-commands-native-game/terminal.json",
+      "terminal_sha256": "76ad195a650e95f38a0b9a2367c35267730e86eb4954afe9865781cf4d997fee",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/layout-commands-native-game/layout_commands.result.json",
+      "receipt_sha256": "bbbf6e954977c65601d3d7e5bad28cb658dc4d2c7b43b7084510344a663e4a69",
+      "functions": [
+        {
+          "name": "func_00196c04",
+          "address": 1666052,
+          "size": 76,
+          "candidate_size": 76,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "50826fe2960d626adbc762d88844e9b81a1ea748009800463980b651a319cc44",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/layout-commands-native-game.json",
+        "sha256": "2d18e92acc62a171c0c69fe3376a05c6309f71282caac1a48be4e565e191936d"
+      }
+    },
+    {
+      "label": "layout-root-shared-native-game",
+      "source": "scratch/integrator/c010/native-reentry-r1/src/layout_root_commands.cpp",
+      "source_sha256": "60c16fbead7791b6c584179ef18a261d7886c7da76d2b751afdc301629777775",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/layout-root-shared-native-game/terminal.json",
+      "terminal_sha256": "3431448357ee63fc551b74f5a16dabc9d47e9c07693e0d49123eb33e0f18c26f",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/layout-root-shared-native-game/layout_root_commands.result.json",
+      "receipt_sha256": "6f9ce989b04845a8ae319b5f78d9ceb17a11af2d13c4e3a8d47093331de55be5",
+      "functions": [
+        {
+          "name": "func_00196c04",
+          "address": 1666052,
+          "size": 76,
+          "candidate_size": 76,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "79e04e2e286bafd0d5cbc73de88489a14a47166315c4cbea4cffbb10c6b3881f",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/layout-root-shared-native-game.json",
+        "sha256": "3a40fe43a8364118c5911839471d1a554411446e0ce805cb00e867d7f7f14e09"
+      }
+    },
+    {
+      "label": "pane-base-destination-native-game",
+      "source": "src/wave8/func_001f01b0.cpp",
+      "source_sha256": "977080f3c11233e78c1b513821d3130db34d0d819701f48a21d447131bdf7c59",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/pane-base-destination-native-game/terminal.json",
+      "terminal_sha256": "0e4c73f864331b1ef89e24c92eca0587803771df9951fa5f6f9cad66bb6f108b",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/pane-base-destination-native-game/func_001f01b0.result.json",
+      "receipt_sha256": "31c4ea7b88bc8137f6d854ad84f8361511f134320d1fcef5ff8c61fd3af64fdd",
+      "functions": [
+        {
+          "name": "_ZNK2nw3lyt4Pane19MakeUniformDataSelfEPhP14LayoutDrawInfoP19LayoutRenderContext",
+          "address": 2032048,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "1f978ba34956f3203d985973a81ac9ae7cb4f1e2588d14bb4b702fe10eab73f0",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/pane-base-destination-native-game.json",
+        "sha256": "30d6e865a04fb97f45ffa77848e70cecf555127f181e4251e06bde9811801d6b"
+      }
+    },
+    {
+      "label": "dependent-01-func_0017a518",
+      "source": "src/checkpoint10/collect-r2/func_0017a518.cpp",
+      "source_sha256": "6e71d51f5b5cd48aa4c613f8fda9d135caf8d3984e8ac84efd9acc8bd012b680",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-01-func_0017a518/terminal.json",
+      "terminal_sha256": "57197e0157dd27b3c94dc554d4049e5d34da3429508c2dda4d24a82377d27244",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-01-func_0017a518/func_0017a518.result.json",
+      "receipt_sha256": "6937f6a1e2d8e448ef3e59e951f98fa94ca489286b63432245a8d51a3365ec44",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-01-func_0017a518.json",
+        "sha256": "fac86731f39777a1c27ab68f9209e6947dd08cc3a0295837405427cb7c75e87f"
+      }
+    },
+    {
+      "label": "dependent-02-func_001cc1d4_real",
+      "source": "src/checkpoint10/collect-r2/func_001cc1d4_real.cpp",
+      "source_sha256": "ae922edc6c4d82b906830a61d8af22493f6b28998dce2d714f9741622d724be8",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-02-func_001cc1d4_real/terminal.json",
+      "terminal_sha256": "180603176503aba9dff2d01310ab36c10bbe9bb9511f3e34b7f9051184b2c657",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-02-func_001cc1d4_real/func_001cc1d4_real.result.json",
+      "receipt_sha256": "e210fecd9f7370d7a5c7d582a51f07715752ccc18b197c59fd571ea3487c12a8",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt14GroupContainer11AppendGroupEPNS0_5GroupE",
+          "address": 1884628,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "a6a194f964adc2cd2c0179181e76264486a4d7d441db4b3dfd1c477c760038db",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-02-func_001cc1d4_real.json",
+        "sha256": "6080e8ef169e7cf4cd45cd9b13f68e1a6e8b9647782c067385bdf184ed85c01c"
+      }
+    },
+    {
+      "label": "dependent-03-func_00167c34",
+      "source": "src/checkpoint10/func_00167c34.cpp",
+      "source_sha256": "f5d68b501b0aa4a4ed373913c2711092581d2f0bce42c08309e52eb37db81400",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-03-func_00167c34/terminal.json",
+      "terminal_sha256": "d31824c85ecea48b7511f7945c7e902bec98852b006db0d592ea8fa0fb4bd1c2",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-03-func_00167c34/func_00167c34.result.json",
+      "receipt_sha256": "b913915ee5bb241f91f13ae883cd95c365e27547c8d21d1d0b2f0c0acf02518d",
+      "functions": [
+        {
+          "name": "func_00167c34",
+          "address": 1473588,
+          "size": 184,
+          "candidate_size": 184,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "62c5c5ed6e44a7460727f67a00107aea3af6aee93dde1a06ac9c25dcac216f13",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-03-func_00167c34.json",
+        "sha256": "89efccb8212c92fe29b737c8b63e9935cd57f98f79d2f628a24517e583cba9a4"
+      }
+    },
+    {
+      "label": "dependent-04-layout_root_commands",
+      "source": "src/checkpoint10/native/layout_root_commands.cpp",
+      "source_sha256": "60c16fbead7791b6c584179ef18a261d7886c7da76d2b751afdc301629777775",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-04-layout_root_commands/terminal.json",
+      "terminal_sha256": "860e4859298abd82ce5ec6ec52af85b0ec89ea7c0b11f43b0580f9d3cdcfc575",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-04-layout_root_commands/layout_root_commands.result.json",
+      "receipt_sha256": "3f696e094574dc6740f5ff2ed6a803e4e949708a1645ad8f21d1b2a06328bf44",
+      "functions": [
+        {
+          "name": "func_00196c04",
+          "address": 1666052,
+          "size": 76,
+          "candidate_size": 76,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "6753a74505008d5dec27fe5e233ba4d2da8032dd1134bd1aa032766cac91c36d",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-04-layout_root_commands.json",
+        "sha256": "7fa4dc7375bcb5951335785a612b7c2109072752b8789450c934de205590616c"
+      }
+    },
+    {
+      "label": "dependent-05-pane_uniform_commands",
+      "source": "src/checkpoint10/native/pane_uniform_commands.cpp",
+      "source_sha256": "1c6641a6ad76265c50d1df2536c413ec84e6630bfda16c7bd5744c95c798ca08",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-05-pane_uniform_commands/terminal.json",
+      "terminal_sha256": "224495df9eeafe36fb1b7790acb6eeabb10ba201d5b606715a6bfdf224c0901b",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-05-pane_uniform_commands/pane_uniform_commands.result.json",
+      "receipt_sha256": "6a5f84b0d71971732a952d6f076da416d002d51094f8372992b521331655ac6b",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane12DrawCommandsEPhP14LayoutDrawInfoP19LayoutRenderContext",
+          "address": 1146536,
+          "size": 132,
+          "candidate_size": 132,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "7b5eb5a5558d96847b8c38c435bb9fd64703a95a36dd3d383da0418dbe06995d",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-05-pane_uniform_commands.json",
+        "sha256": "b72045efa345d235fef24c2b5928176a2a00bdbb201665512d01cf18f2a251fe"
+      }
+    },
+    {
+      "label": "dependent-06-lyt_Animation__SetResource",
+      "source": "src/nw4c/lyt_Animation__SetResource.cpp",
+      "source_sha256": "d5a914500f199eae79bd86d87bbdbb81fe054da46f261647b6606a0f6b39f2bb",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-06-lyt_Animation__SetResource/terminal.json",
+      "terminal_sha256": "74095578ffe4436116c834ebc86702d46bc3bbff3966f507f2ff452ebc76c644",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-06-lyt_Animation__SetResource/lyt_Animation__SetResource.result.json",
+      "receipt_sha256": "41ff0ec2eedbafbd02f557865c2fa7fec15eaa33738bbefb7f1b7deb4cb49411",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt18AnimTransformBasic11SetResourceEPKNS0_3res14AnimationBlockEPNS0_16ResourceAccessorE",
+          "address": 1885472,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "c339758cdf3aaf196ec65983ee7803f80b6000474196b095a53f1f190869c907",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-06-lyt_Animation__SetResource.json",
+        "sha256": "c764fb27522d4a7bc9783dc4a224e4ba7b271af1685825e71275940b8209ed81"
+      }
+    },
+    {
+      "label": "dependent-07-lyt_Common",
+      "source": "src/nw4c/lyt_Common.cpp",
+      "source_sha256": "64891bf7c0fcac86a1d7cba3f9fd4cc1a37f0408b6a2e0cb084b59bf4f683f42",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-07-lyt_Common/terminal.json",
+      "terminal_sha256": "8722773b25ecef3af4772ec9b9c5f82255f387ecc2f9b76d17900360ef3ce8a1",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-07-lyt_Common/lyt_Common.result.json",
+      "receipt_sha256": "15672af1c6cf45f2af3f1c10fa1921b8435f69cbf7ca4087b3b14da810167a10",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt8internal11TexCoordAry4FreeEv",
+          "address": 1485428,
+          "size": 44,
+          "candidate_size": 44,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN2nw3lyt8internal11TexCoordAryC1Ev",
+          "address": 1570936,
+          "size": 20,
+          "candidate_size": 20,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "24d2b65c2721544e98f601dab6a63685e264fc5d6d04e95b1a5635eb8776d20d",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-07-lyt_Common.json",
+        "sha256": "101c475cdf591e7b5f7724c46b7de17a29ad3a2dd2c604c6fce097d13821292a"
+      }
+    },
+    {
+      "label": "dependent-08-lyt_Layout__AllocMemory",
+      "source": "src/nw4c/lyt_Layout__AllocMemory.cpp",
+      "source_sha256": "86aa54186dce33314c5b1307bb373e520c663b15ddfd246a78cb1f678d1ed6dc",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-08-lyt_Layout__AllocMemory/terminal.json",
+      "terminal_sha256": "ec25eec1fea09ccd92bc49359307b6fbc77343aeeed1121883128bd8f49f166f",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-08-lyt_Layout__AllocMemory/lyt_Layout__AllocMemory.result.json",
+      "receipt_sha256": "1265074f377ac86227f4343443cb650d4940552cd1ae9f08cb8fc73247230675",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6Layout11AllocMemoryEjh",
+          "address": 1644904,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "e344c3b714cca95788b8fa82a5e49e63f2439192820e9516e3fdf1986e3b395d",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-08-lyt_Layout__AllocMemory.json",
+        "sha256": "5728e52b9b467de3510482f1f04a04b36d9c87fd00e83d688ce78c2e8bca7c73"
+      }
+    },
+    {
+      "label": "dependent-09-lyt_Layout__Animate",
+      "source": "src/nw4c/lyt_Layout__Animate.cpp",
+      "source_sha256": "0569630e91e01b92b1048a91e68809280c84868a3aa4542df08e56782d3a1a55",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-09-lyt_Layout__Animate/terminal.json",
+      "terminal_sha256": "50227e32f762e3c673bc3988d648d03e5bcf0a64c4f8795602e0b3dbf3981d61",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-09-lyt_Layout__Animate/lyt_Layout__Animate.result.json",
+      "receipt_sha256": "8714ab6627b0e318833ec53a901bc4c25f284f3d9e2dde15e7b69bbc1ce30052",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6Layout7AnimateEj",
+          "address": 1895564,
+          "size": 28,
+          "candidate_size": 28,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "deaf89da4afb0a77ba04ba061a73bdf5d35d7af1f1f34fc40cdceb4221a6db1e",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-09-lyt_Layout__Animate.json",
+        "sha256": "7aeb95393f9ceac42ce70ff9ed48b508c7301539813a6c2e06965150ebbdb9bc"
+      }
+    },
+    {
+      "label": "dependent-10-lyt_Layout__BindAnimation",
+      "source": "src/nw4c/lyt_Layout__BindAnimation.cpp",
+      "source_sha256": "644e71ebdf4ccbceeb338f74b05ef9d0dc1432538256824a84d8b7fc9219a71e",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-10-lyt_Layout__BindAnimation/terminal.json",
+      "terminal_sha256": "47bfe57641092f350f2208699f2a17e6fb79efd697b78c5bd206ea207e187c3f",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-10-lyt_Layout__BindAnimation/lyt_Layout__BindAnimation.result.json",
+      "receipt_sha256": "70853484e60718cc717b58086bfa778f8c79b9b669f94fb8a14ae74f186e0b72",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6Layout13BindAnimationEPNS0_13AnimTransformE",
+          "address": 1894468,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "5add414def07298321197cb6fa05147a6ec747601e8aa3a13e579748a1063c70",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-10-lyt_Layout__BindAnimation.json",
+        "sha256": "230d4225a64b804869ec0a861633d2c0d8cd6d38937949f0cb2993e4dd08a4a6"
+      }
+    },
+    {
+      "label": "dependent-11-lyt_Layout__CalculateMtx",
+      "source": "src/nw4c/lyt_Layout__CalculateMtx.cpp",
+      "source_sha256": "923e838c19fef238b3f72c2157ea0a9b0368c5bee2d8024d15845de1fa95af70",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-11-lyt_Layout__CalculateMtx/terminal.json",
+      "terminal_sha256": "8d0fb59f4647d818de50ed47267651541c871d3c12bb21978d94ab6abf860454",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-11-lyt_Layout__CalculateMtx/lyt_Layout__CalculateMtx.result.json",
+      "receipt_sha256": "f814ebe52a4a5e55a54d6445c412f204ab79a8c8d3c062165b1b924a5a97f5f3",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6Layout12CalculateMtxERKNS0_8DrawInfoE",
+          "address": 1894440,
+          "size": 28,
+          "candidate_size": 28,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "e50708a5cb7e475974e281dcbfb5326fca7f425665345477ef751f196980055a",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-11-lyt_Layout__CalculateMtx.json",
+        "sha256": "8bca0bf66937c88e57d547da5e6add29eca4c71188f907408aceae1bda518442"
+      }
+    },
+    {
+      "label": "dependent-12-lyt_Layout__Layout",
+      "source": "src/nw4c/lyt_Layout__Layout.cpp",
+      "source_sha256": "48f10046033163a6f912aae88f0d81bfba78be250278eaee4e264c6b94902408",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-12-lyt_Layout__Layout/terminal.json",
+      "terminal_sha256": "ce15bd8486a3584173b6c1b69d8918ffc6aa159d23f3e930325d53153a3659ae",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-12-lyt_Layout__Layout/lyt_Layout__Layout.result.json",
+      "receipt_sha256": "11ea40774952afdeddf14eae86206c813471f0fa5d269a0c2023976e872a0789",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6LayoutC1Ev",
+          "address": 1599752,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "69da6ebefae24658582fc69e4cc54b952de7df3c645c6d1af67904cbbc413996",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-12-lyt_Layout__Layout.json",
+        "sha256": "bee24a7c797276277a3421f2044eb57c61c1ecae92f2310f8a9037f7dd5fef78"
+      }
+    },
+    {
+      "label": "dependent-13-lyt_Layout__SetAnimationEnable",
+      "source": "src/nw4c/lyt_Layout__SetAnimationEnable.cpp",
+      "source_sha256": "8b6e0d2e9ee50adfbbd683c7897ac50ff2c55208498f8de6e65755f07872cc28",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-13-lyt_Layout__SetAnimationEnable/terminal.json",
+      "terminal_sha256": "827adc81993b956bdcd2bcfadf810d7a35c512c0618195afbbd9c41c164b8d6d",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-13-lyt_Layout__SetAnimationEnable/lyt_Layout__SetAnimationEnable.result.json",
+      "receipt_sha256": "5459434554457b11332dad9ec8c1b6198c127b77bf0fa48d33545fea88c561a9",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6Layout18SetAnimationEnableEPNS0_13AnimTransformEb",
+          "address": 1894536,
+          "size": 32,
+          "candidate_size": 32,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "1a5c2751297b36ce680dcf40c0ad2229b6f57caa486f0f9943458a3d2bd69bb5",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-13-lyt_Layout__SetAnimationEnable.json",
+        "sha256": "5d30a760f97796563d408f8c647963155b1662ec82997bd5119eaca1768d4fae"
+      }
+    },
+    {
+      "label": "dependent-14-lyt_Layout__UnbindAllAnimation",
+      "source": "src/nw4c/lyt_Layout__UnbindAllAnimation.cpp",
+      "source_sha256": "24843245badfef6d5489992e8f5047e61c40ccd3660df695834a41e269e6f405",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-14-lyt_Layout__UnbindAllAnimation/terminal.json",
+      "terminal_sha256": "3eb3acec6a9cfe034424e0327bdf9272d9b5b8a766deafdf796324f7693d8dcb",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-14-lyt_Layout__UnbindAllAnimation/lyt_Layout__UnbindAllAnimation.result.json",
+      "receipt_sha256": "fff755d86a6ca49beaed72c5fc1da30e1470bbb2aefd784504f7a4e68c0309d0",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6Layout18UnbindAllAnimationEv",
+          "address": 1894568,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "bfac1e6523c24e8c7bd36ba363783814adf2bf76a06cda74f6002e096c228331",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-14-lyt_Layout__UnbindAllAnimation.json",
+        "sha256": "05ab72c44101b2385acf92e56ddc67fd581f671320852ca5120e6747bb08d45a"
+      }
+    },
+    {
+      "label": "dependent-15-lyt_Layout__UnbindAnimation",
+      "source": "src/nw4c/lyt_Layout__UnbindAnimation.cpp",
+      "source_sha256": "7522e7d65bceadf1a926dd4dfdf737d062e378e468f67397a5b9e47b61ab242f",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-15-lyt_Layout__UnbindAnimation/terminal.json",
+      "terminal_sha256": "6ef51565d9a315b9a6406e80f302c6c264702a804551470b21232cc8d288ec84",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-15-lyt_Layout__UnbindAnimation/lyt_Layout__UnbindAnimation.result.json",
+      "receipt_sha256": "0e438f22897c5092a9a832981fac5dd4bb32069f80512a8a98bd198af2acb54c",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6Layout15UnbindAnimationEPNS0_13AnimTransformE",
+          "address": 1894504,
+          "size": 32,
+          "candidate_size": 32,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "5c2ba01662870a26983b697a1178b363305de3570a648eda424417dd4c22ff54",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-15-lyt_Layout__UnbindAnimation.json",
+        "sha256": "f469f63d6956e9e7cfb0b9ea56aeb30fc94ffb285f849b157c39ff8d312f96e2"
+      }
+    },
+    {
+      "label": "dependent-16-lyt_Pane__Animate",
+      "source": "src/nw4c/lyt_Pane__Animate.cpp",
+      "source_sha256": "0213fc6641c7a48dc3722e94280353ccc9c7eedffdcdaa2239f50ffd9cbf1c6c",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-16-lyt_Pane__Animate/terminal.json",
+      "terminal_sha256": "f9429cdf99a0ab5dc31bd54a4da81f5f4100f917428a9a05717b308e14d7738a",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-16-lyt_Pane__Animate/lyt_Pane__Animate.result.json",
+      "receipt_sha256": "95609c6b6358b52388515a3730bcaa29446d89dcee793170a8ddd5f923ae8267",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane7AnimateEj",
+          "address": 1890980,
+          "size": 108,
+          "candidate_size": 108,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "7aa373d148e2e920e80ff0559d06f06b339bacfe9e4f426a6e9ffb8ceeb7ef9b",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-16-lyt_Pane__Animate.json",
+        "sha256": "1cf2c22b84c23ab0fd17f397e6545ef47b6b6bc20a238a939492929a6b3b92bb"
+      }
+    },
+    {
+      "label": "dependent-17-lyt_Pane__BindAnimation",
+      "source": "src/nw4c/lyt_Pane__BindAnimation.cpp",
+      "source_sha256": "37e140a2f5a1d50c2e3261df16c916e91e79e93b1066b69dd643172cb3ed889d",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-17-lyt_Pane__BindAnimation/terminal.json",
+      "terminal_sha256": "8e21c81ec74574c44fa7723e6e62ebd7ffb602e46dcf83bd26273fa7c03279f2",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-17-lyt_Pane__BindAnimation/lyt_Pane__BindAnimation.result.json",
+      "receipt_sha256": "9ed78b89b0a1b5efa04ca62eff2e559e7227b79c5970e01c8fe3d7b17e3142e8",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane13BindAnimationEPNS0_13AnimTransformEbb",
+          "address": 1890284,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "3c1460e3358bd33a13427989339d168f12924745432b77c5e365688a752273fe",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-17-lyt_Pane__BindAnimation.json",
+        "sha256": "ec963bd7361ffc5f59cd55539d1e4c8566346953471d164ccb7840d012e48c24"
+      }
+    },
+    {
+      "label": "dependent-18-lyt_Pane__FindMaterialByName",
+      "source": "src/nw4c/lyt_Pane__FindMaterialByName.cpp",
+      "source_sha256": "aa5fa1689281c1f5995851c2d3c4be997945b49d536ea6a513de66181baf4a7e",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-18-lyt_Pane__FindMaterialByName/terminal.json",
+      "terminal_sha256": "925e85897d61f1b145e7fb9e4d4f2affd33ada3924c1c8e19561e858daeaddcd",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-18-lyt_Pane__FindMaterialByName/lyt_Pane__FindMaterialByName.result.json",
+      "receipt_sha256": "966b21f4703b03cffddeb2543792accaf6a5b600cc7fd4bc3e0c27ddff611509",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane18FindMaterialByNameEPKcb",
+          "address": 1890580,
+          "size": 196,
+          "candidate_size": 196,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "eae661f7329d819f9a8dc0151c6d83031409989ca8ceb9aa905c24d898c58885",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-18-lyt_Pane__FindMaterialByName.json",
+        "sha256": "630ea4c2e007b5b8604a2e6468efbfd921e917f2292952232e6c1e0b5235a7bd"
+      }
+    },
+    {
+      "label": "dependent-19-lyt_Pane__FindPaneByName",
+      "source": "src/nw4c/lyt_Pane__FindPaneByName.cpp",
+      "source_sha256": "9de87205ff8530c1701438648173c0809cb86a43dc2caf7a2681515b4c76d25f",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-19-lyt_Pane__FindPaneByName/terminal.json",
+      "terminal_sha256": "357c0666f4b87ef3e8c45ccf12428f728b39599f027548d6c1eab98124e7029d",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-19-lyt_Pane__FindPaneByName/lyt_Pane__FindPaneByName.result.json",
+      "receipt_sha256": "0c9db9f093a523786f7507b47c7c997e2a1e6fb5a8b6d0f10b48191c6a479541",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane14FindPaneByNameEPKcb",
+          "address": 1890320,
+          "size": 116,
+          "candidate_size": 116,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "be4bba04a8fc36bf04369e2867b2fe2ad9a1b3fd817b5359318969e617009b8a",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-19-lyt_Pane__FindPaneByName.json",
+        "sha256": "43316b6e3cfdc1346b65feecc118f19b4f05c223c33fe655868b2f7403d73603"
+      }
+    },
+    {
+      "label": "dependent-20-lyt_Pane__GetMaterial",
+      "source": "src/nw4c/lyt_Pane__GetMaterial.cpp",
+      "source_sha256": "2a9e46b8686feb261890466945849223aa6a81b3642bca06570c3ace7c375f8d",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-20-lyt_Pane__GetMaterial/terminal.json",
+      "terminal_sha256": "c1f393bb8d9fc9100aab4a6687c706a51a7878c9420c8ad60daee92a4ae26f53",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-20-lyt_Pane__GetMaterial/lyt_Pane__GetMaterial.result.json",
+      "receipt_sha256": "6bde83930fa2eaee8fdfa988aa6b5ea5a56dd730c1377f1428614bc819fe50c4",
+      "functions": [
+        {
+          "name": "_ZNK2nw3lyt4Pane11GetMaterialEv",
+          "address": 1572200,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "00f2a72bbce9681855e205fa408b366fbe7ef0526cde9fe77932b392274c132c",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-20-lyt_Pane__GetMaterial.json",
+        "sha256": "6fb7546920f0e7a1a453a98abbc1d4c941b84e17307b138c08c7847b89ffcf81"
+      }
+    },
+    {
+      "label": "dependent-21-lyt_Pane__GetVtxColor",
+      "source": "src/nw4c/lyt_Pane__GetVtxColor.cpp",
+      "source_sha256": "aa0a4bbf8884436870430ce74b76501591c5580198138b505a6ce2848b4c030b",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-21-lyt_Pane__GetVtxColor/terminal.json",
+      "terminal_sha256": "77bf8a038663365a1d34f691b886c9270811515387201d5a4baf55e2b2e9f504",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-21-lyt_Pane__GetVtxColor/lyt_Pane__GetVtxColor.result.json",
+      "receipt_sha256": "8ec26760083c9510bb6bca99563fc6b3e4d3ef98ccc24c9ffc9ff9e27fb483eb",
+      "functions": [
+        {
+          "name": "_ZNK2nw3lyt4Pane11GetVtxColorEj",
+          "address": 1189488,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "41d29b3c3e15b0af4a05a4b0bed084b27e1c12d61ed66830a7897a373b5ac7dc",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-21-lyt_Pane__GetVtxColor.json",
+        "sha256": "be98be21edadfe640434feb96175a4de90f46c3d1a80d020865eeebe3a445be3"
+      }
+    },
+    {
+      "label": "dependent-22-lyt_Pane__SetColorElement",
+      "source": "src/nw4c/lyt_Pane__SetColorElement.cpp",
+      "source_sha256": "53817ebf6e42eee1571424fb218bd485034d7072ba1bfbb4ece112e46827e813",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-22-lyt_Pane__SetColorElement/terminal.json",
+      "terminal_sha256": "87c3f420007faf8edbe71027ebb4b76369ce65e32112de56719ed8e313ddf5c2",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-22-lyt_Pane__SetColorElement/lyt_Pane__SetColorElement.result.json",
+      "receipt_sha256": "32b48f319a9bb9fa14d495e41363b8b2b99f6d7e6e08b8de92079bf7e7669336",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane15SetColorElementEjh",
+          "address": 1890436,
+          "size": 28,
+          "candidate_size": 28,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "67df8667f8bbcc46cf851669c0017a669ea5ba2ea03c2aefc2d9d646fd50603c",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-22-lyt_Pane__SetColorElement.json",
+        "sha256": "7126705b7342b4bba44752bcc61874d42d61956ef5b78d53ea4ac1abe28505c6"
+      }
+    },
+    {
+      "label": "dependent-23-lyt_Pane__UnbindAnimation",
+      "source": "src/nw4c/lyt_Pane__UnbindAnimation.cpp",
+      "source_sha256": "8770bf8cdfc427df4d15982ceaf209c1d6286febd6c9a341c82a9d2a800c973b",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-23-lyt_Pane__UnbindAnimation/terminal.json",
+      "terminal_sha256": "c946707e853eab954ddae7bc91f0542f4cae7675f41c94aaa9203942e02be5e8",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-23-lyt_Pane__UnbindAnimation/lyt_Pane__UnbindAnimation.result.json",
+      "receipt_sha256": "a73a5a72ade57073c9b02ff0ba27b9be7226c9daed7b1b2f051178cbf08b79b0",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt4Pane15UnbindAnimationEPNS0_13AnimTransformEb",
+          "address": 1890464,
+          "size": 100,
+          "candidate_size": 100,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "4f69e3d69200b6acbfd3d09d995bf67d01ba981a51b63adc0d25b968eb95dba0",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-23-lyt_Pane__UnbindAnimation.json",
+        "sha256": "b88a2a14488857dd1d403bc6ff977d17afdb522b51885c1c9cb31da3f51cbcb9"
+      }
+    },
+    {
+      "label": "dependent-24-lyt_TextBox",
+      "source": "src/nw4c/lyt_TextBox.cpp",
+      "source_sha256": "dd43794138beb4dfe4862fb183cf4edad9f0f81c640c2a71e16c49635b9f13a7",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-24-lyt_TextBox/terminal.json",
+      "terminal_sha256": "349881185a4e33fea7741fff03ba533b55a805a944e0a4908dd551ffe7f6dafb",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-24-lyt_TextBox/lyt_TextBox.result.json",
+      "receipt_sha256": "82133945c4517f9536b015ff4d25447e9946dfd474a3b443be96eb91a6ad8900",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt7TextBox11SetVtxColorEjNS_2ut6Color8E",
+          "address": 1897476,
+          "size": 20,
+          "candidate_size": 20,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN2nw3lyt7TextBox18SetVtxColorElementEjh",
+          "address": 1898392,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw3lyt7TextBox11GetMaterialEj",
+          "address": 2036652,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw3lyt7TextBox14GetMaterialNumEv",
+          "address": 2036852,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw3lyt7TextBox16GetTextGlobalMtxEPN2nn4math5MTX34E",
+          "address": 2036868,
+          "size": 184,
+          "candidate_size": 184,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "d45c1d06472d3a80f6580a1442fc6e020101a41b993cf1e62372dc11f67001a7",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-24-lyt_TextBox.json",
+        "sha256": "f4ba944c3acc51d7c8170d016f82c9237661d5a1db3b62a5994a438622dd34ed"
+      }
+    },
+    {
+      "label": "dependent-25-lyt_Window",
+      "source": "src/nw4c/lyt_Window.cpp",
+      "source_sha256": "f160d15674e7bbd864d975f04df4f3e4b569ec743f5b92f3c4c9d0ac98857b54",
+      "profile": "middleware",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-25-lyt_Window/terminal.json",
+      "terminal_sha256": "e7b4b8f6d93bd3c3da2951b70bd3f4e92299dc50126cb01bfd8ba03c7426ad0b",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-25-lyt_Window/lyt_Window.result.json",
+      "receipt_sha256": "94942a44879a282c443fe63b5bf4eb64c6a422582093f463b59f86d7d194eaec",
+      "functions": [
+        {
+          "name": "_ZN2nw3lyt6Window11SetVtxColorEjNS_2ut6Color8E",
+          "address": 1895848,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN2nw3lyt6Window18SetVtxColorElementEjh",
+          "address": 1896084,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "eb9a883b9b15707e65476d551bdfbaf062db1141b1dbae812115dec48d7a842d",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-25-lyt_Window.json",
+        "sha256": "af69764a37e23dbd0ef047bf893f361d1b98c22da6a79ecc0597c375f94aa879"
+      }
+    },
+    {
+      "label": "dependent-26-func_0010e17c",
+      "source": "src/wave14/func_0010e17c.cpp",
+      "source_sha256": "6898cc6c27f97500ec08bd2868c2787b9156e2114913fb08d7c97a7a29e26864",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-26-func_0010e17c/terminal.json",
+      "terminal_sha256": "bade2209011a2f14452a3b159fa0023479a1d17e85d36814efad818fbfdc8258",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-26-func_0010e17c/func_0010e17c.result.json",
+      "receipt_sha256": "f03bc326cf1a51d4e1d89e2fab2a6b627fabbe0229db83f9ae33461eb382a611",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-26-func_0010e17c.json",
+        "sha256": "8f23e13d608ff890a16130d454f43aa93c19bbfa8524535586103eff67b043b5"
+      }
+    },
+    {
+      "label": "dependent-27-func_00117648",
+      "source": "src/wave14/func_00117648.cpp",
+      "source_sha256": "330ec3ea05ef9198faaaa65c112872930148f2f1ff0d3bd9256afbbb101eac78",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-27-func_00117648/terminal.json",
+      "terminal_sha256": "35d16e832286982133f453ad5f18c580ee976ffb8090e5bc75d5433025769e48",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-27-func_00117648/func_00117648.result.json",
+      "receipt_sha256": "c5aa440ec0d3b53fc7c4ca5ff1d97e47b2738cd43c0c306894ca3143b3e65c3d",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-27-func_00117648.json",
+        "sha256": "5f01b69dee0039b80179a1b1420ca3d4de7f9a118a5c1c6c0dc34499f624cff0"
+      }
+    },
+    {
+      "label": "dependent-28-func_0011eec4",
+      "source": "src/wave14/func_0011eec4.cpp",
+      "source_sha256": "0f3dadd3a9f761fa20c91e6b6e386815db814fa81024d20348e6731bc19ae79a",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-28-func_0011eec4/terminal.json",
+      "terminal_sha256": "f60f5b51b50c6c260e3c68033d6690b7ff17cd4df584488f2db79db63c9b2af5",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-28-func_0011eec4/func_0011eec4.result.json",
+      "receipt_sha256": "effc808581a678fceae578f495b586e57f57ffdf7f1866c97e5baf863af1a63b",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-28-func_0011eec4.json",
+        "sha256": "8248f20625b5a8020b0df0c6af8187b139b0e71dff7e4ee74b8d1fbb21681f68"
+      }
+    },
+    {
+      "label": "dependent-29-func_0016637c",
+      "source": "src/wave14/func_0016637c.cpp",
+      "source_sha256": "a5b12ab7f81885cf82a74059fdc348c0f942b2da1cfeeac6e34528fe5dacaf33",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-29-func_0016637c/terminal.json",
+      "terminal_sha256": "4fc24d3c95020c8ce38481508822b294b19e9709f3ef5d7cbaf5448ea10378ac",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-29-func_0016637c/func_0016637c.result.json",
+      "receipt_sha256": "2330a74bb3ea104766fe75011d6c228a81203117cf354132aa32d31bf0449868",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-29-func_0016637c.json",
+        "sha256": "0792d455b56eecb03862fe8642c11fd20150727506284b5951096a385c8b3888"
+      }
+    },
+    {
+      "label": "dependent-30-func_0017a558",
+      "source": "src/wave14/func_0017a558.cpp",
+      "source_sha256": "e9f5f10fd208bd1e22cc6524c3125e61426ee17e7b8d295a4463638e0d215e17",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-30-func_0017a558/terminal.json",
+      "terminal_sha256": "4d4287e8dcc606aa586264cda0814fec92ddc0a293396cac6c618fe5c99a19dd",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-30-func_0017a558/func_0017a558.result.json",
+      "receipt_sha256": "c4fc47ab664108b411650b4066ef7812c4618206a1b8024514416cdfcb472ece",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-30-func_0017a558.json",
+        "sha256": "8c573aa3e06f0061e4d2a75f3cf344f712a10e1f83719fd668642dc5e323ec31"
+      }
+    },
+    {
+      "label": "dependent-31-func_001c5978",
+      "source": "src/wave14/func_001c5978.c",
+      "source_sha256": "52623030bbad4237310da2c4f4a2968e6624dcab18ea317f8b4e055d890603f7",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-31-func_001c5978/terminal.json",
+      "terminal_sha256": "85b2da34d56e90c6e204be757d9ae33d378714e9876eb20fd98f8168fa8a252a",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-31-func_001c5978/func_001c5978.result.json",
+      "receipt_sha256": "43874c3c56f25052b4f9d84cc30657987de997ec78cebaaf102095dc06eeae05",
+      "functions": [
+        {
+          "name": "func_001c5978",
+          "address": 1857912,
+          "size": 28,
+          "candidate_size": 28,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "9dcdefd19358ca42ce7f33ca7db88cc23715a0eee66621384a7840ab447bc628",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-31-func_001c5978.json",
+        "sha256": "304dbcd1ec8c06f413db06ddc7a826b51de79361a18f1b6b5560b42a938014de"
+      }
+    },
+    {
+      "label": "dependent-32-func_001cf6dc",
+      "source": "src/wave14/func_001cf6dc.cpp",
+      "source_sha256": "fad780e70298f0be6dd5ef6b834adeefe5ec7df915ddf44cf354a3332214b894",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-32-func_001cf6dc/terminal.json",
+      "terminal_sha256": "81cdf11585cae792db4a4fcc8906aa2d96aaf030941f1510ffc9eaa3a9a7c65c",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-32-func_001cf6dc/func_001cf6dc.result.json",
+      "receipt_sha256": "2bfa270fec9c54e66f9e176cf6827b268c8fc3a836d8ffe9e4a7fd16ae952dfd",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-32-func_001cf6dc.json",
+        "sha256": "96aeeac2cef90dbb0c6f0f98e3088c0df62ed772d85e1da605c26892a34b5acd"
+      }
+    },
+    {
+      "label": "dependent-33-func_001da0e0",
+      "source": "src/wave14/func_001da0e0.cpp",
+      "source_sha256": "3ab38e0a499626964f2950f66cd4ce54cee6d29918b8fb6af670b8f8a7333aab",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-33-func_001da0e0/terminal.json",
+      "terminal_sha256": "dc9535c8f3c73a4f58255b35a01bc185eced15bb33475909e49b2e43da8090ae",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-33-func_001da0e0/func_001da0e0.result.json",
+      "receipt_sha256": "d8bb6b82d555892148ebbf9f427f6aee45ea81c0d0dbc5c79112faae6d8da2a1",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-33-func_001da0e0.json",
+        "sha256": "e6dbb750feb52f3991ad61075c3debd8b7ab2bdd175827c0aa4d6ca67ace99dd"
+      }
+    },
+    {
+      "label": "dependent-34-func_001da0fc",
+      "source": "src/wave14/func_001da0fc.cpp",
+      "source_sha256": "e7635889b3990e7c77648c4bbf9fdc3084449b67b3f63f4d614ef8d48c18287b",
+      "profile": "game",
+      "exit_code": 2,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-34-func_001da0fc/terminal.json",
+      "terminal_sha256": "212a7111fd781c9b972bee56ac5772003151aac7a95812da5c7336e324dd95cc",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-34-func_001da0fc/func_001da0fc.result.json",
+      "receipt_sha256": "c9c27084a1d0ee5625cfacad80ddf0a82dc38075c4500298268bf84afe8b42be",
+      "functions": [],
+      "object_sha256": null,
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-34-func_001da0fc.json",
+        "sha256": "f4ea5211e1b9d7bf5338bdc0c83ea57ca45b7180fb1f007a1b19ba224ad7e38b"
+      }
+    },
+    {
+      "label": "dependent-35-func_001c5970",
+      "source": "src/wave8/func_001c5970.c",
+      "source_sha256": "32ab0b3a1e03f7463ba1f527365eba31668c95ba007b8f31808bb4f78e1bd801",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-35-func_001c5970/terminal.json",
+      "terminal_sha256": "b9f47ea3b8183dd1c6f6691d8a36bb7d9a90ce49a0ff188cd59969195a09feb2",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-35-func_001c5970/func_001c5970.result.json",
+      "receipt_sha256": "e5d5427f813c38da5c4b94dd5956202b0df19c4f7ce99182ded9f0d4d8ff1c7e",
+      "functions": [
+        {
+          "name": "func_001c5970",
+          "address": 1857904,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 4,
+              "rule": "branchnop",
+              "target": 1857912
+            }
+          ]
+        }
+      ],
+      "object_sha256": "fe13b1e4349ec84923a5cacceeae50734f0a3f6952e855c00b7a1e387028f666",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-35-func_001c5970.json",
+        "sha256": "1b7dbfca9c4667f48cb06e1e697b576f5ebfe80f507bf0c3d4064d002bc52b13"
+      }
+    },
+    {
+      "label": "dependent-36-func_001f01b0",
+      "source": "src/wave8/func_001f01b0.cpp",
+      "source_sha256": "977080f3c11233e78c1b513821d3130db34d0d819701f48a21d447131bdf7c59",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-36-func_001f01b0/terminal.json",
+      "terminal_sha256": "c5b52ed3d211150793f33df49cf833d151deda4ad377b71d7ea0a5f3032e8c73",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-36-func_001f01b0/func_001f01b0.result.json",
+      "receipt_sha256": "31c4ea7b88bc8137f6d854ad84f8361511f134320d1fcef5ff8c61fd3af64fdd",
+      "functions": [
+        {
+          "name": "_ZNK2nw3lyt4Pane19MakeUniformDataSelfEPhP14LayoutDrawInfoP19LayoutRenderContext",
+          "address": 2032048,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "1f978ba34956f3203d985973a81ac9ae7cb4f1e2588d14bb4b702fe10eab73f0",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-36-func_001f01b0.json",
+        "sha256": "d954b22810cfe6350b7aed521a9fbd4ad0188f7854940a24c3143d1c2bf22868"
+      }
+    },
+    {
+      "label": "dependent-final-01-func_0017a518",
+      "source": "src/checkpoint10/collect-r2/func_0017a518.cpp",
+      "source_sha256": "6e71d51f5b5cd48aa4c613f8fda9d135caf8d3984e8ac84efd9acc8bd012b680",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-01-func_0017a518/terminal.json",
+      "terminal_sha256": "d6eecc0a41aa630910683400b2a3bed16d59bd6fc48bd86a45ea2f1a857489e8",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-01-func_0017a518/func_0017a518.result.json",
+      "receipt_sha256": "ce3f788541a9da4a75a291b384ac630393492c3bfc182b0d2e896fe42ea49747",
+      "functions": [
+        {
+          "name": "func_0017a518",
+          "address": 1549592,
+          "size": 64,
+          "candidate_size": 64,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 60,
+              "rule": "branchnop",
+              "target": 1549656
+            }
+          ]
+        },
+        {
+          "name": "func_0017a5b0",
+          "address": 1549744,
+          "size": 64,
+          "candidate_size": 64,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "24c2c542d1e595afe723902068cd6a58bb2cc93cec3627f3ef15abc6e2780f78",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-01-func_0017a518.json",
+        "sha256": "91b267c847592353400822bd4dacae19de4f3602f7e14b73f016a8ba0ceec6c7"
+      }
+    },
+    {
+      "label": "dependent-final-04-layout_root_commands",
+      "source": "src/checkpoint10/native/layout_root_commands.cpp",
+      "source_sha256": "60c16fbead7791b6c584179ef18a261d7886c7da76d2b751afdc301629777775",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-04-layout_root_commands/terminal.json",
+      "terminal_sha256": "d0ccd2ef7e6723001d608b96592c9d106f903c798dc8d7f9d38e74ce37eb2773",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-04-layout_root_commands/layout_root_commands.result.json",
+      "receipt_sha256": "ca80bdd1a2936340d43461acdf4f63fa9f9a4f26989187c02ae874be7865d306",
+      "functions": [
+        {
+          "name": "func_00196c04",
+          "address": 1666052,
+          "size": 76,
+          "candidate_size": 76,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "0cfea9f8386d9855f07619886020570618da40eb8e99854afab3b3a95d280b2c",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-04-layout_root_commands.json",
+        "sha256": "b99132cab02bb154e53d013d6ef498746b6d5c9db6ba31b163d338824794c30e"
+      }
+    },
+    {
+      "label": "dependent-final-26-func_0010e17c",
+      "source": "src/wave14/func_0010e17c.cpp",
+      "source_sha256": "6898cc6c27f97500ec08bd2868c2787b9156e2114913fb08d7c97a7a29e26864",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-26-func_0010e17c/terminal.json",
+      "terminal_sha256": "1a9e390426dd90dd8bc94fcd08f954c04f26a2ba0e9512956f48014330234a13",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-26-func_0010e17c/func_0010e17c.result.json",
+      "receipt_sha256": "1ff246819359d39bb2eebe0a481a8cc2d0e9f687b3a90cce969f6699980a55bd",
+      "functions": [
+        {
+          "name": "_ZN17LayoutDrawStorageC1Ev",
+          "address": 1106300,
+          "size": 48,
+          "candidate_size": 48,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "d65434517374ae7151354c01988d6380e7f9a9c4a590e1f034203135820fdea1",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-26-func_0010e17c.json",
+        "sha256": "3403284aff7794e69ed802758d6781d558adf3268aa3a25538cf4ad3fe23efc4"
+      }
+    },
+    {
+      "label": "dependent-final-27-func_00117648",
+      "source": "src/wave14/func_00117648.cpp",
+      "source_sha256": "330ec3ea05ef9198faaaa65c112872930148f2f1ff0d3bd9256afbbb101eac78",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-27-func_00117648/terminal.json",
+      "terminal_sha256": "0bf11f5414afc2a7caded374ef8550bcd14f274969c6200c4fa4f196c72a42e0",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-27-func_00117648/func_00117648.result.json",
+      "receipt_sha256": "b471e9027bbff951c71c1de6e36b3bdf63830f0af43d3c70526f0b593af3c095",
+      "functions": [
+        {
+          "name": "_ZN15LayoutSubobjectC1Ev",
+          "address": 1144392,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "77b1d1b00c5c9cabd6f851dba171f924e9e241ef1c934cc158cc8ffecd89f932",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-27-func_00117648.json",
+        "sha256": "97edef31c3f09aab7ca6de28c78d7b7575126d00be618d6a06868462f015f345"
+      }
+    },
+    {
+      "label": "dependent-final-28-func_0011eec4",
+      "source": "src/wave14/func_0011eec4.cpp",
+      "source_sha256": "0f3dadd3a9f761fa20c91e6b6e386815db814fa81024d20348e6731bc19ae79a",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-28-func_0011eec4/terminal.json",
+      "terminal_sha256": "2aab1210471e0c17dc29f95816160d343b316730fc185a9195e149ee20ecbbb8",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-28-func_0011eec4/func_0011eec4.result.json",
+      "receipt_sha256": "edeaef4d2b709e83aa2c04df81272fb16896f50b31e046922303cca956eb1e99",
+      "functions": [
+        {
+          "name": "_ZN15LayoutDrawStateC1Ev",
+          "address": 1175236,
+          "size": 68,
+          "candidate_size": 68,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "b6632f13df182aa96ed37c90bd3e5b52708263420567668aa0f102410700e6a5",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-28-func_0011eec4.json",
+        "sha256": "c77cebd4862464ddab322ba23b2e91c1dfef38e66ab18509fea3de309a35ed3f"
+      }
+    },
+    {
+      "label": "dependent-final-29-func_0016637c",
+      "source": "src/wave14/func_0016637c.cpp",
+      "source_sha256": "a5b12ab7f81885cf82a74059fdc348c0f942b2da1cfeeac6e34528fe5dacaf33",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-29-func_0016637c/terminal.json",
+      "terminal_sha256": "40b292b980eef6c8893f29c2c54711073240ee5819f3bbea508f913bd005677a",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-29-func_0016637c/func_0016637c.result.json",
+      "receipt_sha256": "41d418615a99d1e851ff17344129be8a590858f52ed336d30c90675ec05d8676",
+      "functions": [
+        {
+          "name": "func_0016637c",
+          "address": 1467260,
+          "size": 140,
+          "candidate_size": 140,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "0283af7ef7ee0913cd11d85e83144a64e081694188fbf87591c078bdd2658b7b",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-29-func_0016637c.json",
+        "sha256": "47d06d285b735a30be914188b2a3e675fae5beaa196643ef73770e5257947e15"
+      }
+    },
+    {
+      "label": "dependent-final-30-func_0017a558",
+      "source": "src/wave14/func_0017a558.cpp",
+      "source_sha256": "e9f5f10fd208bd1e22cc6524c3125e61426ee17e7b8d295a4463638e0d215e17",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-30-func_0017a558/terminal.json",
+      "terminal_sha256": "707f275187b9c06588ad6a36618cb5189b380f529bf57ed0a4b7ea5b97e7f4ec",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-30-func_0017a558/func_0017a558.result.json",
+      "receipt_sha256": "e0b22da3f48105cbde4c3439e2aad574dcb0dbb329972e30ba3e99ee8b1a6a3c",
+      "functions": [
+        {
+          "name": "func_0017a558",
+          "address": 1549656,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "d9c0907c3dd0d79ba3ff6299ef9a32a8e30b4a768e2205b1753034ac95098e57",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-30-func_0017a558.json",
+        "sha256": "2a633df8979f25a056773b253725798c1003c734dccd31de235050fe60d6373e"
+      }
+    },
+    {
+      "label": "dependent-final-31-func_001c5978",
+      "source": "src/wave14/func_001c5978.c",
+      "source_sha256": "52623030bbad4237310da2c4f4a2968e6624dcab18ea317f8b4e055d890603f7",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-31-func_001c5978/terminal.json",
+      "terminal_sha256": "f08522dc80bfd8826fa9e54520c245dc85fccc30a8050bcbbedd37d5d003e9b2",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-31-func_001c5978/func_001c5978.result.json",
+      "receipt_sha256": "16ed6b6ed731a1c39a02c0244a0576f4012a28bcd21808bf1f5733abdb2eadf2",
+      "functions": [
+        {
+          "name": "func_001c5978",
+          "address": 1857912,
+          "size": 28,
+          "candidate_size": 28,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "6dc84489a3f79e1df8a714658e9df772127340878100575954f3255eb5bc111f",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-31-func_001c5978.json",
+        "sha256": "28e723e23c375864cffda5916943bd416a7ffb29f02b23cfb42054fd2ea323f6"
+      }
+    },
+    {
+      "label": "dependent-final-32-func_001cf6dc",
+      "source": "src/wave14/func_001cf6dc.cpp",
+      "source_sha256": "fad780e70298f0be6dd5ef6b834adeefe5ec7df915ddf44cf354a3332214b894",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-32-func_001cf6dc/terminal.json",
+      "terminal_sha256": "3daec8f1a8abcf17990375c4060e84c3e493df021ca2721a73be6e579f16755f",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-32-func_001cf6dc/func_001cf6dc.result.json",
+      "receipt_sha256": "92d55c9efd904c421950a233c7d8bcf713dcdb42566af4253266041cd36d1f26",
+      "functions": [
+        {
+          "name": "func_001cf6dc",
+          "address": 1898204,
+          "size": 188,
+          "candidate_size": 188,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 84,
+              "rule": "inline_nop",
+              "target": 1203028
+            }
+          ]
+        }
+      ],
+      "object_sha256": "75d1a3cd56292d57f3da15945e4ee15cd09845126b5950fcb8252ec56b4e6c22",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-32-func_001cf6dc.json",
+        "sha256": "c9e63775ef95a466b8173fe1f2a8661b47b66b0c514830003390c37b8ca54dc3"
+      }
+    },
+    {
+      "label": "dependent-final-33-func_001da0e0",
+      "source": "src/wave14/func_001da0e0.cpp",
+      "source_sha256": "3ab38e0a499626964f2950f66cd4ce54cee6d29918b8fb6af670b8f8a7333aab",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-33-func_001da0e0/terminal.json",
+      "terminal_sha256": "6b72e778c5ec8ea066243544ef6608c5af6c5d17660e6ac448f9a4f617dc7e08",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-33-func_001da0e0/func_001da0e0.result.json",
+      "receipt_sha256": "ebe36e95cc29173cbad5fb5fa2954e25b60c2f674037706c85d1bd2ab2477936",
+      "functions": [
+        {
+          "name": "func_001da0e0",
+          "address": 1941728,
+          "size": 28,
+          "candidate_size": 28,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "08d0da17e5f1851c906f124c9e218689ca5b1e6c3ed2db29aa58fc1b48296179",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-33-func_001da0e0.json",
+        "sha256": "1ef7c77fa6268b740c5d69e20013b5146a12d704cf18ba7a8af7acbe30f03aa2"
+      }
+    },
+    {
+      "label": "dependent-final-34-func_001da0fc",
+      "source": "src/wave14/func_001da0fc.cpp",
+      "source_sha256": "e7635889b3990e7c77648c4bbf9fdc3084449b67b3f63f4d614ef8d48c18287b",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-34-func_001da0fc/terminal.json",
+      "terminal_sha256": "dda1b518ef6f67cb81d07f34996d2e70508e30b2011c9df5951489eb04837473",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-34-func_001da0fc/func_001da0fc.result.json",
+      "receipt_sha256": "d399f1b55a49123111148cfc8f9f719704b1e72315468c64f293e10a294c02cf",
+      "functions": [
+        {
+          "name": "func_001da0fc",
+          "address": 1941756,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "object_sha256": "bb27f9699c2ba5165f75f0df9021cfe624b908c417d6d81d3b6639117a38564a",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-34-func_001da0fc.json",
+        "sha256": "4222907abf179a3e3b75e06a346ad509eab4842e17f8460d30d394e34717e219"
+      }
+    },
+    {
+      "label": "dependent-final-35-func_001c5970",
+      "source": "src/wave8/func_001c5970.c",
+      "source_sha256": "32ab0b3a1e03f7463ba1f527365eba31668c95ba007b8f31808bb4f78e1bd801",
+      "profile": "game",
+      "exit_code": 0,
+      "terminal": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-35-func_001c5970/terminal.json",
+      "terminal_sha256": "95555e49c6c79613d220a740cd361e48aac654f5869eccd7a379abaa6b71340e",
+      "receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-final-35-func_001c5970/func_001c5970.result.json",
+      "receipt_sha256": "dc48e51bba6efd4375bb00988d2090d3dd7a9a6af654c7d9e52a66b68d2132ff",
+      "functions": [
+        {
+          "name": "func_001c5970",
+          "address": 1857904,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 4,
+              "rule": "branchnop",
+              "target": 1857912
+            }
+          ]
+        }
+      ],
+      "object_sha256": "a960477dfcd6e60c001f87d0d92460670a4d03671cda241c570196636b2de4e9",
+      "public_witness": {
+        "path": "scratch/integrator/c010/native-reentry-r1/witnesses/dependent-final-35-func_001c5970.json",
+        "sha256": "51671fa877c38ea3fd0285345896a620ad1c73b00ea39103ca30c2c0897e5771"
+      }
+    }
+  ],
+  "count": 74,
+  "interpretation": "Conditional MATCHes under diagnostic unadopted names are not closures. Every exit and failure is retained with source and receipt hashes. Private objects/dependency files and original tool receipts stay local; public witnesses omit generated linker rewrite instruction words."
+}

@@ -84,6 +84,7 @@ extern "C" {
 #endif
 int func_0013931c(const struct SoundArchiveReader *reader, unsigned item_id,
                   struct SoundRangeInfo *output);
+int func_00131950(const struct SoundArchiveReader *reader, unsigned sound_id);
 int func_00139214(const struct SoundArchiveReader *archive, unsigned bank_id,
                    unsigned *file_id);
 #ifdef __cplusplus

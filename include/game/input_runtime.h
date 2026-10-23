@@ -64,6 +64,7 @@ extern int func_00180e74(struct ServiceCoordinator *coordinator, int index,
 extern void func_00180d9c(struct ServiceCoordinator *coordinator, int index, float value);
 extern void func_0014837c(struct InputLatchSnapshot *snapshot);
 extern void func_001483c0(struct InputController *controller);
+extern void func_00146188(struct InputController *controller);
 extern void func_0013712c(struct InputSessionContext *state);
 extern void func_00137118(void);
 #ifdef __cplusplus

@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_Pane.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-20: normalize standalone includes and recover the target's
+ * byte-cursor MakeUniformDataSelf slot and cast-free command traversal declaration.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -15,6 +16,9 @@
 #include "lyt_Common.h"
 #include "lyt_Resources.h"
 #include "lyt_Types.h"
+
+struct LayoutDrawInfo;
+struct LayoutRenderContext;
 
 namespace nw {
 namespace lyt {
@@ -212,9 +216,14 @@ public:
 
     virtual void Draw(const DrawInfo& drawInfo);
     virtual void DrawSelf(const DrawInfo& drawInfo);
+    unsigned char* DrawCommands(unsigned char* cursor, ::LayoutDrawInfo* info,
+                                ::LayoutRenderContext* renderer);
 
     void MakeUniformData(DrawInfo* pDrawInfo, Drawer* pDrawer) const;
-    virtual void MakeUniformDataSelf(DrawInfo* pDrawInfo, Drawer* pDrawer) const;
+    /* Original native Pane vtable anchors put this target-version endpoint at
+     * +0x68. Public Draw/DrawSelf remain distinct, unmodified void APIs. */
+    virtual unsigned char* MakeUniformDataSelf(unsigned char* cursor,
+        ::LayoutDrawInfo* info, ::LayoutRenderContext* renderer) const;
 
     void SetMtxDirty() { this->SetMtxCondition(MTXCONDITION_DIRTY); }
 

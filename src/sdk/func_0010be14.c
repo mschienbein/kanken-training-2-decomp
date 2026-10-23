@@ -1,4 +1,5 @@
 #include "ctr/cp15.h"
+#include "game/synchronization.h"
 
 struct RecursiveMutex {
     int state;
@@ -6,7 +7,6 @@ struct RecursiveMutex {
     unsigned int depth;
 };
 
-extern int func_0011359c(int *state);
 
 int func_0010be14(struct RecursiveMutex *mutex)
 {

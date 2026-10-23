@@ -1,10 +1,5 @@
 #include "game/functions.h"
-struct ServiceClientState {
-    unsigned char reserved00[0x10];
-    unsigned handle;
-};
-
-extern struct ServiceClientState data_00242c18;
+#include "game/service_state.h"
 
 
 int func_0010bc70(unsigned handle)

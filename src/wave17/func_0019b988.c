@@ -1,31 +1,7 @@
 #include "game/functions.h"
 #include "game/runtime.h"
 
-struct RenderGroupVTable;
-struct RenderResourceGroup {
-    const struct RenderGroupVTable *vtable;
-    unsigned char initialized;
-    unsigned char reserved05[3];
-    unsigned mode;
-    unsigned count;
-    unsigned ids[3];
-    int width;
-    int height;
-};
-struct RenderResourceConfiguration {
-    unsigned reserved00;
-    unsigned mode;
-    unsigned count;
-    unsigned format;
-    int width;
-    int height;
-    unsigned memory_type;
-};
-
-extern void func_00196114(unsigned mode);
-extern void func_0011dbb4(int count, unsigned *ids);
-extern void func_0019cc68(unsigned id);
-extern void func_0011dab4(unsigned format, int width, int height, unsigned memory_type);
+#include "game/render_resource.h"
 
 
 

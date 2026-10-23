@@ -6,7 +6,6 @@
 
 #include "game/resource_runtime.h"
 
-extern void func_001c3c50(struct GeometryAssetSlot **slots);
 
 
 

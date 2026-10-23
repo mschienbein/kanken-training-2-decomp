@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "status": "eleven-stale-marker-cutovers-match-not-G3",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "before_sha256": {
+    "src/checkpoint10/func_00196114.c": "9651751105919f07dc0f8e693bf8ff3280de8751cf08a6e3b2bfa4ae27d3ca83",
+    "src/checkpoint10/func_001dc100.c": "25c37323fa80aeb5b0ba301fef05aa44ddd790d2bd32b3b079dc9753a4a7d4ff",
+    "src/checkpoint10/func_001dc180.c": "86e5cdecec802a845a76fea4d9a6a9cf9d1befd0198c5fb6984c07c8af13ae37",
+    "src/checkpoint10/func_001dc1ac.c": "910909d104828d3f70d5cdd7e9e8ddedc57114d30feb753caecc42575b0b47cc",
+    "src/checkpoint10/func_001dc1d8.c": "8ff3a56918cfd970688289712a50c9e185f344d6ba77eeb16ac4f57e092256b5",
+    "src/checkpoint10/func_001dc8e0.c": "25e63ba0594f41599e9f18ea91191514b97a6609c7e1d33cde47711faf99d9c9",
+    "src/checkpoint10/func_00190b1c.c": "e2bfba8808ea653095bfac29751062ca62950d632471a40eb48b9f9d9a44a8d3",
+    "src/checkpoint10/func_00190c1c.c": "681c59a154981aef5068e7c22fbc36809043cfaa7d1175cb9b2c20a58ad84237",
+    "src/checkpoint10/func_0010a814.c": "adfe9452fd5d37cdcec404378a770350ed58f2d0862da2a7cef821b9314fbdb9",
+    "src/checkpoint10/func_0017a9b4.cpp": "ab01968b49eb0fc08b5a76c06871cf0cbad61482152cc9c627cc6357f58f5d27",
+    "src/checkpoint10/collect-r2/func_0017a71c.cpp": "84d8c0846e27c47084b7957ef78589e30e9270deaea9a7591190e06ba5e28f9a",
+    "include/game/notification.h": "b49144fd0d2733b6a3ddc41312eff312cddac9384035234028e77697992837a4",
+    "include/game/selection.h": "b40ca89b51a221e2306d00ff94ebdc57497ab43eab65fb1110b91d58458ec18f",
+    "include/game/bss_0049ecf0.h": "1443dcac10504686a0ffcdc384135e487e6c2ede753482326a676cae0d503834",
+    "include/game/screen.h": "078bddfd758e765563c775fef011c3c083f7ce7013eb99314dff4fd103f225ea"
+  },
+  "preserved_before": "before-ui-r1/",
+  "source_units": [
+    "src/checkpoint10/func_00196114.c",
+    "src/checkpoint10/func_001dc100.c",
+    "src/checkpoint10/func_001dc180.c",
+    "src/checkpoint10/func_001dc1ac.c",
+    "src/checkpoint10/func_001dc1d8.c",
+    "src/checkpoint10/func_001dc8e0.c",
+    "src/checkpoint10/func_00190b1c.c",
+    "src/checkpoint10/func_00190c1c.c",
+    "src/checkpoint10/func_0010a814.c",
+    "src/checkpoint10/func_0017a9b4.cpp",
+    "src/checkpoint10/collect-r2/func_0017a71c.cpp"
+  ],
+  "result": "ui-mechanical-match-r7/results.json",
+  "units": 11,
+  "match_units": 11,
+  "exit_counts": {
+    "0": 11
+  },
+  "decisions": [
+    "CommandSystem.resource_index already canonical at0x124; private duplicate removed.",
+    "NotificationDayEntry days180 already canonical at payload+0x6298, SavedNotification+8 ->0x62a0; root shadows removed. Full-word day equality uses canonical signed int storage without narrowing.",
+    "W6Category patterns9 and items.values2x2 already canonical; local duplicate records removed, original varargs overrun comment retained.",
+    "DisplayQueueCounter mode is+0xc; enabled is+8. Update real mode, no invented enable field.",
+    "0017a9b4/17a71c use accepted bss_0024445c25 pointer table provider, not a second data root."
+  ],
+  "remaining_typed_gates": "All dependent-header consumers, C++ manual contracts, original callback/indirect facts, G3 and argcheck remain pending."
+}

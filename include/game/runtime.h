@@ -66,7 +66,8 @@ struct BitmapPool {
 struct MotionKey {
     float time;
     unsigned flags;
-    unsigned char reserved08[0x10];
+    unsigned char reserved08[0x0c];
+    float value;
 };
 struct MotionState {
     struct InputMode mode;
@@ -103,6 +104,10 @@ extern "C" {
 /* ARM EABI's four-byte-aligned copy helper; the bound identity is already proven. */
 extern void __aeabi_memcpy4(void *destination, const void *source, size_t size);
 extern void func_00192720(void *destination, const void *source, unsigned size);
+extern int func_00122350(int index);
+extern const char *func_0012142c(unsigned region);
+extern int func_0012251c(char *destination, const char *format, ...);
+extern void *func_0019df08(void *destination, unsigned size);
 extern void func_0016ee38(struct MotionState *state);
 extern int func_0016ece8(struct MotionState *state, const struct MotionKey *keys, int heap);
 extern void func_0016ec84(struct MotionState *state, int first, int last);
@@ -110,6 +115,7 @@ extern void func_0016ec6c(struct MotionState *state, int looping);
 extern void func_0016ec28(struct MotionState *state, int frame);
 extern void func_0016e924(struct MotionState *state, float delta);
 extern const struct MotionKey data_002188e8[4];
+extern const struct MotionKey data_002180fc[3];
 extern unsigned char *func_00152d48(struct BitmapPool *pool);
 extern void func_0017e5f4(struct BitmapPool *pool, const void *element);
 extern struct BufferOwner bss_002d4270;
@@ -134,6 +140,7 @@ extern void func_0011ef58(long long nanoseconds); /* underlying sleep operation 
 extern void *func_0013714c(void *object);      /* empty destructor wrapper */
 extern void *func_00137150(void *object);      /* preserves the allocation pointer */
 extern void func_001852f4(void *allocation);   /* releases a heap allocation */
+extern void func_0019e08c(void *allocation);
 extern void *func_0018f7f0(void *object);      /* preserves the allocation pointer */
 extern void func_0019d6c4(unsigned result, unsigned instruction_address);
 extern int func_0019f568(void);               /* fatal-error / assertion handler */

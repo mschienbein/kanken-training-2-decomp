@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "owner": "Main only",
+  "status": "unexercised-in-native-links-worktree",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "working_directory": "Main-selected integration worktree after importing the approved frozen c009-r3 correction and this native-links commit.",
+  "prerequisites": [
+    "Reconcile the approved frozen predecessor rather than overwriting current contracts.",
+    "Regenerate the COMPLETE dry ledger as scratch/integrator/c010/dry-matches-native-links-r1.json and complete direct scope as scratch/integrator/c010/match-scope-native-links-r1.json; update HANDOFF paths and header/source hashes. The sixteen-unit slice is not a replacement for that full scope.",
+    "Rebind/extend the complete original slot map under source-slot-map-native-links-r1.json; retain c011 and texture deferrals.",
+    "Use unused output/run/checkpoint names; preserve every failed integrated attempt."
+  ],
+  "commands": [
+    {
+      "step": "header_plan",
+      "command": "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/plan_header_closure.py --run source-native-links-r1"
+    },
+    {
+      "step": "interfaces",
+      "command": "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/interfaces.py check --matches scratch/integrator/c010/dry-matches-native-links-r1.json --allow-unchecked-cpp --json scratch/integrator/c010/interfaces-native-links-r1.json"
+    },
+    {
+      "step": "native",
+      "command": "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run native-native-links-r1 --manifest scratch/integrator/c010/affected-header-match-scope-source-native-links-r1.json"
+    },
+    {
+      "step": "signatures",
+      "command": "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run signatures-native-links-r1 --signatures --manifest scratch/integrator/c010/affected-header-match-scope-source-native-links-r1.json"
+    },
+    {
+      "step": "complete_context_build",
+      "command": "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/build.py --name c010-native-links-context-r1 --matches scratch/integrator/c010/dry-matches-native-links-r1.json --fresh --jobs 4 --linker-model armlink5-inline-branchnop-v6 --literal-model anonymous-string-records-v1",
+      "qualification": "Optional only if prepare immediately supplies both required fresh complete-context builds; retain all helper-only units. Do not use the isolated scope runner to diagnose missing complete-context helpers."
+    },
+    {
+      "step": "original_indirect",
+      "command": "DECOMP_ROOT=\"$PWD\" DECOMP_AUDIT_OUT=\"$PWD/scratch/integrator/c010/indirect-native-links-r1\" nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python /home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3/audit_indirect.py --run source-native-links-r1 --matches scratch/integrator/c010/dry-matches-native-links-r1.json --scope scratch/integrator/c010/affected-header-match-scope-source-native-links-r1.json --slot-map scratch/integrator/c010/source-slot-map-native-links-r1.json --require-object data_002429f8 --require-object data_002429f4",
+      "qualification": "Use the refreshed C010 map, not the unrelated c008 default. Every reported original slot/receiver/input/result fact needs manual adjudication."
+    },
+    {
+      "step": "argcheck",
+      "command": "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/argcheck.py --matches scratch/integrator/c010/dry-matches-native-links-r1.json --json scratch/integrator/c010/argcheck-native-links-r1.json",
+      "qualification": "Adjudicate every warning and manual C++/VFP contract, including inherited 191e18 six-versus-five and 1d4174 loader/archive holds."
+    },
+    {
+      "step": "prepare",
+      "command": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/jobs.py run --name c010-native-links-prepare-r1 -- /home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/accept.py prepare --checkpoint c010 --candidates config/candidates/c010.json --allow-unchecked-cpp --linker-model armlink5-inline-branchnop-v6 --literal-model anonymous-string-records-v1",
+      "qualification": "Only after clean committed stable inputs, predecessor finalization and the seven-step pre-review. Confirm checkpoint c010 is unused or choose a fresh one. Require actual job exit0 and prepare PASS, including two complete fresh builds and full suite."
+    }
+  ],
+  "after_prepare": [
+    "Two independent bound reviews covering every new/revised/moved/retained required function and all R1/L1/header dependencies.",
+    "Main alone finalizes, verifies accepted ledger/history closure and pushes."
+  ],
+  "parent_command_record": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/REMAINING-HEAVY-COMMANDS-r68.json",
+  "boundary": "No command in this record was run here."
+}

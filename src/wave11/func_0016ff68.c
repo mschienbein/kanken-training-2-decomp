@@ -1,7 +1,8 @@
 #include "game/w11_control.h"
-static __inline void set_object_active(struct DisplayObject *object, int enabled)
+static __inline void set_object_active(struct ResourceEvent *event, int enabled)
 {
-    if (object != 0) {
+    if (event != 0) {
+        struct DisplayObject *object = &event->base;
         switch (func_0017a9a0(object, 0)) {
         case 3: func_00195a08(object, 0, enabled); break;
         case 5: func_0015e948(object, enabled); break;

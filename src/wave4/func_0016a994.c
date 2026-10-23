@@ -1,6 +1,4 @@
-/* [INFERENCE] Signature: Callee packet dereferences r0 as an object, frees its member allocation and invokes virtual cleanup methods. */
-
-extern void func_0016a998(void *object);
+#include "game/layout_lifecycle.h"
 
 void func_0016a994(void *object)
 {

@@ -35,6 +35,9 @@ extern "C" {
 #endif
 
 extern int func_0017adc4(const unsigned short *text);   /* length in code units */
+/* Search compares the full incoming word against zero-extended code units. */
+extern const unsigned short *func_0015dd5c(const unsigned short *text, unsigned character);
+extern int func_0016e5cc(const unsigned short *left, const unsigned short *right, int count);
 extern const unsigned short *func_00179090(const struct MenuItem *item);
 extern const unsigned short *func_001791e0(const struct TextTable *table, int index);
 extern unsigned short *func_00178f28(unsigned short *destination, unsigned byte_limit,
@@ -42,6 +45,15 @@ extern unsigned short *func_00178f28(unsigned short *destination, unsigned byte_
 /* [INFERENCE] Candidate-only item accessor identities remain unrecovered. */
 int r41279_item_identifier(const struct MenuItem *item);
 int r41279_item_category(const struct MenuItem *item);
+/* [INFERENCE] Wide-copy identity remains address-named, not authenticated wcsncpy. */
+extern unsigned short *func_0018651c(unsigned short *destination,
+                                   const unsigned short *source, unsigned count);
+extern unsigned func_001949e4(unsigned short *destination, int *destination_count,
+                             const char *source, int *source_count);
+extern unsigned func_0012e930(unsigned short *destination, int *destination_count,
+                             const char *source, int *source_count, unsigned newline);
+extern unsigned func_00193168(unsigned short *destination, unsigned capacity,
+                             const char *source);
 
 #ifdef __cplusplus
 }

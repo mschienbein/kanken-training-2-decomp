@@ -7,6 +7,7 @@ pass the normal checkpoint review before it is credited.
 | Upstream | License | Pinned commit | Used for | Files here |
 |---|---|---|---|---|
 | [ctrdecomp/NintendoWare4Ctr](https://github.com/ctrdecomp/NintendoWare4Ctr) | GPL-3.0-only | `15ddb5632db5a6f0d2f46e3827fc78df468684bd` (2026-10-11) | NW4C layout, sound, font and graphics code (upstream 3.7.4; target 3.7.5) | `src/nw4c/`, curated `include/nw/`, project-owned `include/nn/` adapters and `include/preinclude.h`; per-file notices, `src/nw4c/LICENSE.txt`, `PROVENANCE.json` and `PROVENANCE-round3.json` preserve supplied origin/modifications; integration hashes are recorded with c007. |
+| [devkitPro/libctru](https://github.com/devkitPro/libctru) | zlib | `9b55eda44cf80b971503991e0c78f9bc8fe50425` (2026-09-29) | The 160-sample DSP frame length published by `ndspSync` in `libctru/source/ndsp/ndsp.c`; no implementation copied | Project-owned `NN_SND_SAMPLES_PER_FRAME` declaration in `include/nn/snd.h`; numeric-source hashes in `src/nw4c/FACTS-HEADER-GAPS.json`, license notice in `src/nw4c/LICENSE-LIBCTRU.txt`. |
 
 The public Khronos GLES declaration/constant subsets in `include/GLES2/` use the
 MIT license from [OpenGL-Registry](https://github.com/KhronosGroup/OpenGL-Registry),
@@ -21,6 +22,52 @@ It selects `FrameHeap::FreeByState` and externalizes two release-mode hooks; the
 erased historical identities are explicitly inferred. Its per-file notice is retained,
 and the upstream license remains in `src/nw4c/LICENSE.txt`. The hooks and model selection
 grant no library/helper credit.
+
+The unaccepted c010 candidate
+`src/checkpoint10/collect-r2/func_001cff58.cpp` adapts the same pinned
+`lyt_Animation.cpp` lookup algorithm. Its sole native definition and the existing
+native animation-list contract are shared by the pane/material lookup and unbind
+consumers; target owner prefixes remain separate from native pane/material classes.
+The same-address name proof, bounded destination receipts and limitations are in
+`scratch/integrator/c010/NATIVE-LINKS-CONTRACT-r1.json`; neither this cutover nor its
+private matches grants accepted credit.
+
+The unaccepted c010 native re-entry
+`src/checkpoint10/native/pane_uniform_commands.cpp` adapts the same pinned
+`lyt_Pane.cpp` traversal using the actual native `Pane` child list, without a
+derived-owner cast. Original vtable anchors establish the target-version
+byte-cursor `MakeUniformDataSelf` slot; `Pane`, `Picture`, `TextBox` and `Window`
+declarations retain its native const receiver and share the recovered cursor,
+draw-info and renderer contract. Public `Draw`/`DrawSelf` remain unchanged.
+`scratch/integrator/c010/DEFERRAL-REENTRY-native-r1.json` binds the source,
+header changes, original ownership facts and bounded witnesses; no accepted
+credit or complete identity for the target root prefix follows from this re-entry.
+
 Policy: only sources whose license is compatible with GPL-3.0 are copied; attribution, the
 upstream license and modification notices stay with the copied code. Public repositories without a
 license grant (inspected 2026-10-17: standalone nnsdk, LibMessageStudio, 3DS sead) are not copied.
+
+## Canonical declaration gaps (2026-10-17)
+
+`src/nw4c/FACTS-HEADER-GAPS.json` records the public sources, private game-code
+evidence locations and limitations of three standalone-header prerequisites:
+
+- `include/nn/math.h` supplies only `PivotDirection::PIVOT_NONE`, visible as
+  `nw::math::PivotDirection` / `PIVOT_NONE` through the existing NW4C import.
+  **[INFERENCE]** The zero default and one-byte field follow the projection
+  builder at `func_001246a4`; the public camera-updater initializer supplies the
+  name. No licensed defining SDK header was found. Other directions and their
+  values are deliberately not declared.
+- `include/GLES2/gl2dmpconstants.h` supplies `GL_LUT_TEXTURE0_DMP = 0x6600`.
+  **[INFERENCE]** The name comes from public `gfx_RenderContext.h::ToLutTexture`;
+  the value follows the game's texture-target dispatch at `func_00184808`,
+  independently of the Khronos constants. The token is absent from the public
+  registry already surveyed in `FACTS-KHRONOS.json`. This project-owned header
+  is GPL-3.0-or-later, not an addition attributed to the MIT registry subset.
+- `include/nn/snd.h` supplies `NN_SND_SAMPLES_PER_FRAME = 160` from the pinned
+  zlib-licensed libctru source above. **[INFERENCE]** Associating that frame
+  length with the SDK spelling is corroborated by `func_001d2790`'s reverb
+  delay-length initialization and the public `snd_FxReverb.h` multipliers.
+
+These are minimal declaration/value recoveries, not a copy of Nintendo SDK
+headers, proof of unrecovered SDK enum members, or additional function credit.

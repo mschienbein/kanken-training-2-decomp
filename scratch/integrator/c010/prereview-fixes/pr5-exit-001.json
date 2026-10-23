@@ -1,0 +1,34 @@
+{
+  "source": "src/checkpoint10/collect-r2/aux_commands.cpp",
+  "profile": "game",
+  "functions": [
+    "func_00151a74",
+    "func_00151b04"
+  ],
+  "author": "tu577",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/collect-r2/aux_commands.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/001"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "e5c3768671cdb4d4dc195eb5052cb90afe206d163ef817d16b16c351c98b1435",
+  "receipt": "scratch/g3u-pr5/001/aux_commands.result.json",
+  "receipt_sha256": "73dc5859706c916e352539469219fd87a34ae1137da29e3f65f1b80ce10c7ec4",
+  "extra_source_sha256": {},
+  "output": "MATCH    func_00151a74 @ 0x151a74 size 0x90/0x90\nMATCH    func_00151b04 @ 0x151b04 size 0x8c/0x8c\n"
+}

@@ -1,21 +1,11 @@
-struct ProgressCounters {
-    unsigned char reserved00[0x70];
-    int first_limit;
-    int first;
-    unsigned char reserved78[0x18];
-    int second_limit;
-    int second;
-    unsigned char reserved98[0x28];
-    int third_limit;
-    int third;
-};
+#include "game/progress_counters.h"
 
-void func_001d2be8(struct ProgressCounters *state)
+void func_001d2be8(struct ExtendedTimedState *state)
 {
-    if (state->first < state->first_limit)
-        ++state->first;
-    if (state->second < state->second_limit)
-        ++state->second;
-    if (state->third < state->third_limit)
-        ++state->third;
+    if (state->first.current < state->first.limit)
+        ++state->first.current;
+    if (state->second.current < state->second.limit)
+        ++state->second.current;
+    if (state->third.current < state->third.limit)
+        ++state->third.current;
 }

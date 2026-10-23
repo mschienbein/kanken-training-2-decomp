@@ -2,6 +2,538 @@
   "schema_version": 1,
   "note": "Names overlay: real names for catalogued addresses. Identity is the address; renaming never changes the catalogue.",
   "symbols": {
+    "_ZN2nw4font14CharStrmReader20ReadNextCharUTF8CopyEv": {
+      "address": 1945576,
+      "evidence": "c010 prereview F05: data_0021c64c selects this separate original CharStrmReader member copy; emitted symbol is observed in F05-COMPILE-r1.json. [INFERENCE] Copy suffix distinguishes this body from the primary native emitted address, not a free-function/member-pointer conversion."
+    },
+    "_ZN2nw4font14CharStrmReader20ReadNextCharSJISCopyEv": {
+      "address": 1945520,
+      "evidence": "c010 prereview F05: the second descriptor entry at data_0021c64c+8 selects this separately emitted genuine CharStrmReader member. [INFERENCE] Copy suffix; native owner and u16 callable contract follow the exact returned-reader descriptor."
+    },
+    "_ZN2nw4font14CharStrmReader18ReadNextCharCP1252Ev": {
+      "address": 1945704,
+      "evidence": "c010 prereview F05: the exact canonical native member selected by data_0021c64c+0x10, aligned with types-fontgfx70ac3e9. Accepted identity moves to src/wave13/func_001db068.cpp; no Copy alias or duplicate emission remains."
+    },
+    "_ZN2nw4font14CharStrmReader17ReadNextCharUTF16Ev": {
+      "address": 1945684,
+      "evidence": "c010 prereview F05: the exact canonical native member selected by data_0021c64c+0x18, aligned with types-fontgfxa14c1f61 and its actual wchar_t stream. Accepted identity moves to src/wave13/func_001db054.cpp; no Copy alias or duplicate emission remains."
+    },
+    "_ZN2nw4font10RectDrawer20GetCommandBufferSizeEPKvj": {
+      "address": 1142320,
+      "evidence": "c010 natural canonical caller src/checkpoint10/func_0010e230.cpp MATCH152/152 with unchanged BL relocation at+20 to original00116e30; exact source/object/receipt hashes and public header contracts in scratch/integrator/c010/FONT-CONTRACT-CUTOVER-r1.json. [INFERENCE] Historical source name not recovered; no erased call/alias or byte masking."
+    },
+    "_ZN2nw4font10RectDrawer10InitializeEPvPKvj": {
+      "address": 1142040,
+      "evidence": "c010 natural canonical caller src/checkpoint10/func_0010e230.cpp MATCH152/152 with unchanged BL relocation at+136 to original00116d18; same unchanged RectDrawer receiver as accepted separate-buffer overload. Exact closure in scratch/integrator/c010/FONT-CONTRACT-CUTOVER-r1.json; historical spelling remains [INFERENCE]."
+    },
+    "_ZN10LayerOwner10initializeEv": {
+      "address": 2010184,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4064/match/func_001eac48/paired_ordered/game/func_001eac48.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN11HeapManagerD1Ev": {
+      "address": 2029724,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4038/recovery/match/ef89c-members-game/ef89c_members.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN11HeapManagerD2Ev": {
+      "address": 2029724,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4038/recovery/match/ef89c-members-game/ef89c_members.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN12MaterialInitC1Ev": {
+      "address": 1572356,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4072/match/func_0017fe04/03-callback-middleware/func_0017fe04_external_color_callback.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN12MaterialInitC2Ev": {
+      "address": 1572356,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4072/match/func_0017fe04/03-callback-middleware/func_0017fe04_external_color_callback.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN13CommandActionC1Ev": {
+      "address": 1461116,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4062/match/resume_command_virtual_game/command_virtual.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN13CommandActionC2Ev": {
+      "address": 1461116,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4062/match/resume_command_virtual_game/command_virtual.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN13ExtendedStateC1Ev": {
+      "address": 1116216,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w21b/match/func_00110838/final-8-game/func_00110838.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN13ExtendedStateC2Ev": {
+      "address": 1116216,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w21b/match/func_00110838/final-8-game/func_00110838.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN15W11EntryCommandC1Ev": {
+      "address": 1439820,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4015/match/final/f0015f84c/func_0015f84c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN15W11EntryCommandC2Ev": {
+      "address": 1439820,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4015/match/final/f0015f84c/func_0015f84c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16GlobalPoolObject7releaseEv": {
+      "address": 1854244,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w22j/match/func_001c4b24/final/func_001c4b24.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16SoundSystemStateC1Ev": {
+      "address": 1847400,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w21a/match/func_001c3068/final-06/func_001c3068.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16SoundSystemStateC2Ev": {
+      "address": 1847400,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w21a/match/func_001c3068/final-06/func_001c3068.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16TimestampBuffersC1Ev": {
+      "address": 1205040,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w23b/match/func_00126330/final-game/func_00126330.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16TimestampBuffersC2Ev": {
+      "address": 1205040,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w23b/match/func_00126330/final-game/func_00126330.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16W22ResourceGroupC1Ev": {
+      "address": 1763592,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w22g/match/func_001ae908/06-game/func_001ae908.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16W22ResourceGroupC2Ev": {
+      "address": 1763592,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w22g/match/func_001ae908/06-game/func_001ae908.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16W22WeightedGroupC1Ev": {
+      "address": 1786812,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w22g/match/func_001b43bc/05-game/func_001b43bc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN16W22WeightedGroupC2Ev": {
+      "address": 1786812,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w22g/match/func_001b43bc/05-game/func_001b43bc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN18TextureBufferOwnerD1Ev": {
+      "address": 1862248,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41267/match/func_001c6a68/final-game/func_001c6a68.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN18TextureBufferOwnerD2Ev": {
+      "address": 1862248,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41267/match/func_001c6a68/final-game/func_001c6a68.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN18W11PositionCommandC1Essjfff": {
+      "address": 1527196,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4061/match/func_00174d9c/func_00174d9c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN18W11PositionCommandC2Essjfff": {
+      "address": 1527196,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4061/match/func_00174d9c/func_00174d9c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3lyt4Pane12DrawCommandsEPhP14LayoutDrawInfoP19LayoutRenderContext": {
+      "address": 1146536,
+      "evidence": "c010 native reentry: exact emitted native Pane self-definition MATCH at 0x00117ea8; scratch/integrator/c010/DEFERRAL-REENTRY-native-r1.json binds original vtable anchors, source/object hashes and witnesses. [INFERENCE] Descriptive member spelling; actual native Pane owner and typed child list, with no derived-owner alias or cast. Replaces the obsolete PaneCommandTraversal spelling."
+    },
+    "_ZNK2nw3lyt4Pane19MakeUniformDataSelfEPhP14LayoutDrawInfoP19LayoutRenderContext": {
+      "address": 2032048,
+      "evidence": "c010 native reentry: exact emitted const native Pane self-definition MATCH at 0x001f01b0; original native Pane-family vtables at 0x00224170/0x002243f8 place this cursor-result endpoint at +0x68, anchored by six accepted native Pane members. Source/object hashes and witnesses: scratch/integrator/c010/DEFERRAL-REENTRY-native-r1.json. The accepted identity stays at src/wave8/func_001f01b0.cpp."
+    },
+    "_ZN21W22LargeResourceGroupC1Ev": {
+      "address": 1794832,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w22g/match/func_001b6310/06-game/func_001b6310.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN21W22LargeResourceGroupC2Ev": {
+      "address": 1794832,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/w22g/match/func_001b6310/06-game/func_001b6310.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN22R41270AnimGroupStorageD1Ev": {
+      "address": 1880332,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41270/match/func_001cb10c/final-exact-game/func_001cb10c_destructor.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN22R41270AnimGroupStorageD2Ev": {
+      "address": 1880332,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41270/match/func_001cb10c/final-exact-game/func_001cb10c_destructor.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN26SoundPreparationParametersC1EP21SoundArchiveAccessorsP17SoundFileProviderPK20SoundPreparationInfoPK18SoundFileReferencePK13SoundWaveInfo": {
+      "address": 1934860,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r301/match/func_001d860c/final-middleware/func_001d860c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN26SoundPreparationParametersC2EP21SoundArchiveAccessorsP17SoundFileProviderPK20SoundPreparationInfoPK18SoundFileReferencePK13SoundWaveInfo": {
+      "address": 1934860,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r301/match/func_001d860c/final-middleware/func_001d860c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw2io10FileStream12FilePosition4SkipEi": {
+      "address": 1858964,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4000/match/func_001c5d94/final-middleware/func_001c5d94.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3gfx3res12ResPrimitive16SetupDrawCommandEb": {
+      "address": 1279988,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/tu491/match/34-split-native-primitive-final-game/func_001387f4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3gfx3res18ResVertexAttribute7CleanupEv": {
+      "address": 1866420,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41268/match/func_001c7ab4/final-selected-game/func_001c7ab4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3gfx3res25SetupTextureMapperCommandENS1_26ResPixelBasedTextureMapperENS1_14ResCubeTextureE": {
+      "address": 1868356,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41268/match/func_001c8244/final-selected-game/func_001c8244.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3lyt11TexResource3SetEPvj": {
+      "address": 1323504,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/tu492/match/20-final-tu-game/func_001431f0_tu.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3lyt12AnimResource3SetEPKv": {
+      "address": 1883956,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4065/match/func_001cbf34/a07_middleware/func_001cbf34_native_local_header_all.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3lyt14GroupContainer11AppendGroupEPNS0_5GroupE": {
+      "address": 1884628,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4023/match/func_001cc1d4/real-middleware/func_001cc1d4_real.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3lyt6Layout19CreateAnimTransformERKNS0_12AnimResourceEPNS0_16ResourceAccessorE": {
+      "address": 1894644,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41271/match/func_001ce8f4/final-game/func_001ce8f4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3lyt8Material15GetBlendModePtrEv": {
+      "address": 1364460,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4065/match/func_0014d1ec/a13_middleware/func_0014d1ec_native_offset_chain.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3lyt8internal17FindAnimationLinkEPNS_2ut8LinkListINS0_13AnimationLinkELl0EEEPNS0_13AnimTransformE": {
+      "address": 1900376,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4024/match/func_001cff58/recovery-final/game/func_001cff58.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd16SoundDataManagerC1Ev": {
+      "address": 1325084,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4005/match/func_0014381c/final/func_0014381c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd16SoundDataManagerC2Ev": {
+      "address": 1325084,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4005/match/func_0014381c/final/func_0014381c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd7FxDelay12UpdateBufferEiPN2nn3snd3CTR10AuxBusDataEiNS0_12SampleFormatEfNS0_10OutputModeE": {
+      "address": 1909352,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41272/match/func_001d2268/final/middleware/func_001d2268_history_ref.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd7FxDelay8FinalizeEv": {
+      "address": 1909608,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41272/match/func_001d2368/final/middleware/func_001d2368.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd8FxReverb8FinalizeEv": {
+      "address": 1910588,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41272/match/func_001d273c/final/game/func_001d273c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd8internal10BasicSound10SetPanModeENS0_7PanModeE": {
+      "address": 1643516,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41250/match/func_001913fc/92-native-final/func_001913fc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd8internal10BasicSound11SetPanCurveENS0_8PanCurveE": {
+      "address": 1911148,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41273/match/func_001d296c/final-sdk/func_001d296c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd8internal10BasicSound14SetFrontBypassEb": {
+      "address": 1911692,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r41273/match/func_001d2b8c/final-sdk/func_001d2b8c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd8internal15GroupFileReaderC1EPKv": {
+      "address": 1249184,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4072/match/func_00130fa0/05-range-middleware/func_00130fa0_public_range.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd8internal15GroupFileReaderC2EPKv": {
+      "address": 1249184,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4072/match/func_00130fa0/05-range-middleware/func_00130fa0_public_range.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw3snd8internal18BufferedFileStreamC2EPNS_2io10FileStreamE": {
+      "address": 1916696,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4028/match/func_001d3f18/final_middleware/func_001d3f18.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw4font14CharStrmReader16ReadNextCharSJISEv": {
+      "address": 1858204,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4073/match/func_001c5a9c/a13-game/func_001c5a9c_native.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZN2nw4font14CharStrmReader16ReadNextCharUTF8Ev": {
+      "address": 1858260,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4007/match/func_001c5ad4/nw-reader-game/nw-reader.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZNK2nw3lyt8Material15GetBlendModePtrEv": {
+      "address": 2037340,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4065/match/func_001f165c/a01_middleware/func_001f165c_native_offset_chain.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "_ZNK2nw3snd8internal13WaveSoundFile10FileHeader12GetInfoBlockEv": {
+      "address": 1281848,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4066/match/func_00138f38/step2-01-middleware/func_00138f38.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_001f563c_cpp_82a74737": {
+      "address": 2053692,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4008/match/func_001f563c_confirmed/game/func_001f563c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_001f57d4_cpp_4bb06614": {
+      "address": 2054100,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4008/match/func_001f57d4_confirmed/game/func_001f57d4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_001f58bc_cpp_6120461c": {
+      "address": 2054332,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a01/match/func_001f58bc/attempt02-game/func_001f58bc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_001f5930_cpp_7027fc98": {
+      "address": 2054448,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a01/match/func_001f5930/attempt06-game/func_001f5930.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_001f596c_cpp_a16462d4": {
+      "address": 2054508,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a01/match/func_001f596c/attempt05-game/func_001f596c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002052f0_cpp_718d3b76": {
+      "address": 2118384,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a01/match/func_002052f0/attempt02-game/func_002052f0.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00205308_cpp_40d60546": {
+      "address": 2118408,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a01/match/func_00205308/attempt02-game/func_00205308.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002069ac_cpp_c44729fe": {
+      "address": 2124204,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a01/match/func_002069ac/attempt05-game/func_002069ac.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002069c0_cpp_03435965": {
+      "address": 2124224,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a01/match/func_002069c0/attempt05-game/func_002069c0.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002069d4_cpp_d7efa5ff": {
+      "address": 2124244,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a02/match/func_002069d4/final-game/func_002069d4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00206a4c_cpp_74aa802a": {
+      "address": 2124364,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a02/match/func_00206a4c/final-game/func_00206a4c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0020e358_cpp_a609a6cd": {
+      "address": 2155352,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a02/match/func_0020e358/final-game/func_0020e358.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0020e370_cpp_afbfeae6": {
+      "address": 2155376,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a03/match/func_0020e370/attempt-03-game/func_0020e370.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0021086c_cpp_c690f4a6": {
+      "address": 2164844,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a03/match/func_0021086c/attempt-03-game/func_0021086c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00210880_cpp_8482ff21": {
+      "address": 2164864,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a03/match/func_00210880/attempt-03-game/func_00210880.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00210898_cpp_7cdea636": {
+      "address": 2164888,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a03/match/func_00210898/attempt-03-game/func_00210898.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002108b0_cpp_571f51b8": {
+      "address": 2164912,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a03/match/func_002108b0/attempt-04-game/func_002108b0.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002108e8_cpp_93bb888a": {
+      "address": 2164968,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a03/match/func_002108e8/attempt-03-game/func_002108e8.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00210900_cpp_475e889f": {
+      "address": 2164992,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_00210900/a04-game/func_00210900.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0021092c_cpp_8a50bcae": {
+      "address": 2165036,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_0021092c/a02-game/func_0021092c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00210948_cpp_cf6609fb": {
+      "address": 2165064,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_00210948/a02-game/func_00210948.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002124ec_cpp_015c5db7": {
+      "address": 2172140,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_002124ec/a11-game/func_002124ec.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212500_cpp_47bbc15f": {
+      "address": 2172160,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_00212500/a02-game/func_00212500.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212518_cpp_4a90b7c2": {
+      "address": 2172184,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_00212518/a09-game/func_00212518.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0021252c_cpp_b7238c03": {
+      "address": 2172204,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_0021252c/a02-game/func_0021252c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212544_cpp_74a64136": {
+      "address": 2172228,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_00212544/a09-game/func_00212544.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212558_cpp_73cb852f": {
+      "address": 2172248,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_00212558/a09-game/func_00212558.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0021256c_cpp_499987b5": {
+      "address": 2172268,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a04/match/func_0021256c/a09-game/func_0021256c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212580_cpp_f45399e0": {
+      "address": 2172288,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_00212580/attempt-03-game-native-bound/func_00212580.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212650_cpp_8b06bf39": {
+      "address": 2172496,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_00212650/attempt-02-game-native-bound/func_00212650.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002126c8_cpp_2de9c5a9": {
+      "address": 2172616,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_002126c8/attempt-03-game-native-bound/func_002126c8.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002126dc_cpp_d306b588": {
+      "address": 2172636,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_002126dc/attempt-03-game-native-bound/func_002126dc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212a8c_cpp_40572043": {
+      "address": 2173580,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_00212a8c/attempt-03-game-native-bound/func_00212a8c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212aa4_cpp_7bb3622f": {
+      "address": 2173604,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_00212aa4/attempt-03-game-native-bound/func_00212aa4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212abc_cpp_c4d64aff": {
+      "address": 2173628,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_00212abc/attempt-03-game-native-bound/func_00212abc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212ad0_cpp_772e5444": {
+      "address": 2173648,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_00212ad0/attempt-03-game-native-bound/func_00212ad0.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212ae8_cpp_7c32027b": {
+      "address": 2173672,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/r4008/match/func_00212ae8_confirmed/game/func_00212ae8.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212b20_cpp_e130d70a": {
+      "address": 2173728,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a05/match/func_00212b20/attempt-02-game-native-bound/func_00212b20.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00212b48_cpp_7c2ba9f2": {
+      "address": 2173768,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_00212b48/final-overlay-game/func_00212b48.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00213624_cpp_49e16c68": {
+      "address": 2176548,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_00213624/final-overlay-game/func_00213624.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0021431c_cpp_bceea83f": {
+      "address": 2179868,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_0021431c/final-overlay-game/func_0021431c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00214334_cpp_de59e9d4": {
+      "address": 2179892,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_00214334/final-overlay-game/func_00214334.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0021434c_cpp_999956cb": {
+      "address": 2179916,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_0021434c/final-overlay-game/func_0021434c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00214360_cpp_2174f3c2": {
+      "address": 2179936,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_00214360/final-overlay-game/func_00214360.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00214378_cpp_ddcd7bbe": {
+      "address": 2179960,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_00214378/final-overlay-game/func_00214378.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00214390_cpp_773b18e1": {
+      "address": 2179984,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_00214390/final-game/func_00214390.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002143bc_cpp_4e0d8d74": {
+      "address": 2180028,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a06/match/func_002143bc/final-overlay-game/func_002143bc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002143d4_cpp_b2b40508": {
+      "address": 2180052,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a07/match/func_002143d4/final/func_002143d4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00214424_cpp_653098b3": {
+      "address": 2180132,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a07/match/func_00214424/final/func_00214424.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_0021443c_cpp": {
+      "address": 2180156,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a07/match/func_0021443c/final/func_0021443c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002145dc_cpp_0a59a001": {
+      "address": 2180572,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a07/match/func_002145dc/final/func_002145dc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00214fa0_cpp_76e0ff6f": {
+      "address": 2183072,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a07/match/func_00214fa0/final/func_00214fa0.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00214fb8_cpp_03efec2a": {
+      "address": 2183096,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a07/match/func_00214fb8/final/func_00214fb8.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00214fd0_cpp_2faf7bf0": {
+      "address": 2183120,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a07/match/func_00214fd0/final/func_00214fd0.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002158c0_cpp_7e98186f": {
+      "address": 2185408,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a07/match/func_002158c0/final/func_002158c0.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002158ec_cpp_2a8401b0": {
+      "address": 2185452,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a08/match/func_002158ec/rtti-02-game-names/func_002158ec.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215904_cpp": {
+      "address": 2185476,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a08/match/func_00215904/rtti-04-native-math-middleware-names/func_00215904.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215960_cpp_04822833": {
+      "address": 2185568,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a08/match/func_00215960/rtti-02-game-names/func_00215960.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215978_cpp_31d98ea8": {
+      "address": 2185592,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a08/match/func_00215978/rtti-02-game-names/func_00215978.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002159c8_cpp_3a297cda": {
+      "address": 2185672,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a08/match/func_002159c8/rtti-02-game-names/func_002159c8.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002159dc_cpp_fffad119": {
+      "address": 2185692,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a08/match/func_002159dc/rtti-02-game-names/func_002159dc.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_002159f4_cpp_4e8ca871": {
+      "address": 2185716,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a08/match/func_002159f4/rtti-02-game-names/func_002159f4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215a0c_cpp_f6e0287d": {
+      "address": 2185740,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a08/match/func_00215a0c/rtti-02-game-names/func_00215a0c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215a24_cpp_23324d9b": {
+      "address": 2185764,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a09/match/func_00215a24/02-game/func_00215a24.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215a4c_cpp_783b775d": {
+      "address": 2185804,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a09/match/func_00215a4c/03-final/func_00215a4c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215a64_cpp_386fc283": {
+      "address": 2185828,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a09/match/func_00215a64/02-game/func_00215a64.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215a7c_cpp_79f5dc76": {
+      "address": 2185852,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a09/match/func_00215a7c/02-game/func_00215a7c.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215a94_cpp_9d99ce60": {
+      "address": 2185876,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a09/match/func_00215a94/02-game/func_00215a94.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215aac_cpp_28c2bfe9": {
+      "address": 2185900,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a09/match/func_00215aac/02-game/func_00215aac.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
+    "__sti___17_func_00215ac4_cpp_36b44ab1": {
+      "address": 2185924,
+      "evidence": "c010: hash-bound emitted same-address self-definition in scratch/authors/v9a09/match/func_00215ac4/02-game/func_00215ac4.result.json; object/source identity facts in scratch/integrator/c010/names-admitted-r1.json. [INFERENCE] Native spelling, class and role; canonical contracts and independent checkpoint review remain required."
+    },
     "_ZGVZ16matrix34IdentityvE14identity_value": {
       "address": 2373880,
       "evidence": "scratch/authors/w8c/match/func_00180234/final-2/func_00180234.result.json: whole-function MATCH proves the identity static guard placement"

@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/owner-cutover/task-svc-scope-r1.json",
+  "scope_sha256": "103a8a65d29b1c44f70a924ebd1b7cd06c1ab3042642a764a34c3d58d20d9ecc",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  },
+  "expected_units": 6,
+  "completed_units": 6,
+  "paused": false,
+  "match_units": 5,
+  "exit_counts": {
+    "0": 5,
+    "2": 1
+  },
+  "rows": [
+    {
+      "source": "src/wave11/func_001d6b24.c",
+      "profile": "game",
+      "functions": [
+        "func_001d6b24"
+      ],
+      "author": "w11d",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave11/func_001d6b24.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/task-svc-match-r1/wave11/func_001d6b24"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001d6b24 @ 0x1d6b24 size 0x18/0x18\n",
+      "receipt": "scratch/integrator/c010/task-svc-match-r1/wave11/func_001d6b24/func_001d6b24.result.json",
+      "source_sha256": "c904a7ac4a0d8959744ac6a31b58d6415e2bd6f456333ef9826b9161c237a9b7"
+    },
+    {
+      "source": "src/wave11/func_001d6678.c",
+      "profile": "game",
+      "functions": [
+        "func_001d6678"
+      ],
+      "author": "w11d",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave11/func_001d6678.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/task-svc-match-r1/wave11/func_001d6678"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001d6678 @ 0x1d6678 size 0x18/0x18\n",
+      "receipt": "scratch/integrator/c010/task-svc-match-r1/wave11/func_001d6678/func_001d6678.result.json",
+      "source_sha256": "c1d913192960fd592e44d7436bc1be949868a8935fa4b32a5eff77914d53da33"
+    },
+    {
+      "source": "src/wave4/func_001d32e0.c",
+      "profile": "game",
+      "functions": [
+        "func_001d32e0"
+      ],
+      "author": "Wave4Author0",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave4/func_001d32e0.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/task-svc-match-r1/wave4/func_001d32e0"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001d32e0 @ 0x1d32e0 size 0x4/0x4 [armlink5-inline-branchnop-v2: 1 branchnop]\n",
+      "receipt": "scratch/integrator/c010/task-svc-match-r1/wave4/func_001d32e0/func_001d32e0.result.json",
+      "source_sha256": "50faaeaae425e84e0100c2585c67eed6d0e7666843b0563bb7247f8ebb8bd742"
+    },
+    {
+      "source": "src/checkpoint10/func_001d3230.cpp",
+      "profile": "sdk",
+      "functions": [
+        "func_001d3230"
+      ],
+      "author": "r41273",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_001d3230.cpp",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/task-svc-match-r1/checkpoint10/func_001d3230"
+      ],
+      "exit_code": 2,
+      "credited_functions_match": false,
+      "output": "error: armcc failed (1) on func_001d3230.cpp:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/audio_voice.h\", line 149: Error:  #70: incomplete type is not allowed\n      struct SoundOperationEntry entries[];\n                                 ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001d3230.cpp: 0 warnings, 1 error\n\n",
+      "receipt": "scratch/integrator/c010/task-svc-match-r1/checkpoint10/func_001d3230/func_001d3230.result.json",
+      "source_sha256": "015c8a56e68c86199547fc1658f2bfde2808267db9a9cd2980e0009af4b5c156"
+    },
+    {
+      "source": "src/checkpoint10/func_001d7e6c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001d7e6c"
+      ],
+      "author": "w23h",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_001d7e6c.c",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/task-svc-match-r1/checkpoint10/func_001d7e6c"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001d7e6c @ 0x1d7e6c size 0x70/0x70\n",
+      "receipt": "scratch/integrator/c010/task-svc-match-r1/checkpoint10/func_001d7e6c/func_001d7e6c.result.json",
+      "source_sha256": "8447ac791446175aed1e44423ca652ca53bd8e622f3bdc81d877e892f19a7ca1"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+      "profile": "sdk",
+      "functions": [
+        "func_0019ecf8"
+      ],
+      "author": "svc-hole-reviewed-9ffdbbe-dd5fa8c",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/collect-r2/func_0019ecf8.c",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/task-svc-match-r1/checkpoint10/collect-r2/func_0019ecf8"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_0019ecf8 @ 0x19ecf8 size 0x34/0x34\n",
+      "receipt": "scratch/integrator/c010/task-svc-match-r1/checkpoint10/collect-r2/func_0019ecf8/func_0019ecf8.result.json",
+      "source_sha256": "c13db71619b8ba266b74e90e35a5e04ba58f4ccfb7f16f97d69d1bd3ad811179"
+    }
+  ]
+}

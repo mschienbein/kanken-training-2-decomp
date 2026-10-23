@@ -57,6 +57,18 @@ struct AnimationOwner {
 #endif
 };
 
+struct AnimationResetSlot {
+    unsigned char reserved00[0x14];
+    int state;
+    float progress;
+};
+struct AnimationDisplayObject {
+    struct DisplayObject base;
+#ifndef __cplusplus
+    struct AnimationResetSlot *slots[];
+#endif
+};
+
 typedef struct FrameTiming {
     unsigned int reserved;
     float rate;
@@ -79,6 +91,7 @@ extern float func_0016702c(const float *rectangle, float value);
 extern float func_00167000(const float *rectangle, float value);
 extern void func_001670e4(float *destination, float x, float y, float z, float w);
 extern FrameTiming bss_00495b30;
+extern void func_0015eaa8(struct AnimationDisplayObject *object, int index);
 extern float func_0017adb4(void);
 extern float func_00191134(void);
 extern int func_00174324(const struct AnimationOwner *owner, int index);

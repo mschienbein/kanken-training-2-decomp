@@ -6,10 +6,6 @@ struct StreamCriticalSection;
 
 #include "game/stream_manager.h"
 
-struct SignalState {
-    unsigned int state;
-    struct StreamCriticalSection critical;
-};
 struct SynchronizationOwner {
     const void *vtable;
     struct SignalState synchronization;
@@ -23,6 +19,10 @@ extern "C" {
 #endif
 extern void func_0019ea6c(struct SignalState *state);
 extern void func_00195d94(struct SignalState *state);
+extern void func_0019ea64(struct SynchronizationOwner *object);
+/* [INFERENCE] Signed exclusive-state word and scalar success result,
+ * evidenced by the recursive-mutex consumer and the emitted definition. */
+extern int func_0011359c(int *state);
 #ifdef __cplusplus
 }
 #endif
@@ -37,10 +37,5 @@ extern struct SignalState data_0024301c;
 #endif
 
 
-union SynchronizationStorage {
-    struct StreamSemaphore semaphore;
-    unsigned words[2];
-    struct SignalState signal;
-};
 
 #endif

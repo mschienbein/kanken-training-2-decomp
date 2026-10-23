@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "metadata_operations": [
+    {
+      "tool": "functions.eval",
+      "APIs": [
+        "tools.accept.compose_units",
+        "tools.accept.function_sources",
+        "tools.accept.source_hashes",
+        "tools.accept.header_hashes",
+        "tools.accept.linker_review_summary"
+      ],
+      "status": "completed; metadata only, not process/test/gate exits",
+      "composition_counts": {
+        "accepted_units": 1562,
+        "accepted_functions": 1621,
+        "accepted_bytes": 195908,
+        "predecessor_units": 2243,
+        "predecessor_functions": 2296,
+        "predecessor_bytes": 252692,
+        "predecessor_new_functions": 675,
+        "candidate_units": 498,
+        "candidate_claims": 511,
+        "new_functions": 501,
+        "new_target_bytes": 47420,
+        "accepted_moves": 10,
+        "moved_target_bytes": 240,
+        "complete_units": 2731,
+        "complete_functions": 2797,
+        "complete_bytes": 300112,
+        "helper_only_units": 22
+      }
+    },
+    {
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/plan_header_closure.py",
+        "--run",
+        "source-r3-closure-r2"
+      ],
+      "exit_code": 0,
+      "script_sha256": "149ad7e32c3eff6a358c7b9540f2598ab8fe7d32c3f49f4c4e35ec4d0ea98a0b",
+      "output": "affected-header-plan-source-r3-closure-r2.json",
+      "output_sha256": "6fac595b7f9d1b41d3c856d70dfc172082d8b17970af3126115989a065b92ee5",
+      "scope": "affected-header-match-scope-source-r3-closure-r2.json",
+      "scope_sha256": "e5c646951f95a02814e84e74912d806fded1a43a97b2add21f2153dea3c4e323",
+      "complete_dry_units": 2731,
+      "direct_units": 1444,
+      "header_units": 2568,
+      "helper_contexts": 25
+    }
+  ],
+  "retained_predecessor_attempts": "METADATA-COMMANDS-r3-closure-r1.json",
+  "bounded_attempt_index": "MATCH-WITNESS-INDEX-r3-closure-r2.json",
+  "exact_bounded_ELF_metadata_command": "BOUNDED-EMITTED-OWNERSHIP-command-r3-closure-r2.json",
+  "subsequent_unexercised_helper_update": {
+    "path": "scratch/integrator/c010/match_scope.py",
+    "current_sha256": "12dad49d3820e3b8ceadf3a6b713e9e4308a0555ff054b50f3e75f373485a4ba",
+    "change": "Automatically projects supported current-run units[].linker_rewrites; bounded witnesses used earlier recorded helper revision and are separately projected from actual receipts."
+  }
+}

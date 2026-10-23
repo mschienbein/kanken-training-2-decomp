@@ -1,0 +1,35 @@
+{
+  "source": "src/nw4c/font_RectDrawer.cpp",
+  "profile": "game",
+  "functions": [
+    "func_00116dc0",
+    "func_00196ca4",
+    "func_001dace8"
+  ],
+  "author": "nw4c3",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/font_RectDrawer.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/091"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "5e50c28ca7b722f16d14861daebcea5768c2306bddaf6cceb9ca3a825742e1cd",
+  "receipt": "scratch/g3u-pr5/091/font_RectDrawer.result.json",
+  "receipt_sha256": "1114fe234a879ede119274726e85d262d5676beb15a337819a73224f56f1ac1a",
+  "extra_source_sha256": {},
+  "output": "MATCH    _ZN2nw4font10RectDrawer10InitializeEPvS2_PKvj @ 0x116dc0 size 0x20/0x20\nMATCH    _ZN2nw4font10RectDrawer11SetParallaxEfff @ 0x196ca4 size 0x14/0x14\nMATCH    _ZN2nw4font10RectDrawer8FinalizeEv @ 0x1dace8 size 0x10/0x10\n"
+}

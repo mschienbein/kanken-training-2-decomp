@@ -24,6 +24,10 @@ extern "C" {
 #endif
 CtrResult func_0012d478(void);
 extern struct Result func_0010b804(void);
+extern unsigned func_0013e7d0(void);
+extern CtrResult func_00136d4c(void);
+extern CtrResult func_00136278(void);
+extern CtrResult func_0012d3e4(void);
 #ifdef __cplusplus
 }
 #endif

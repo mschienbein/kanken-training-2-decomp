@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "interfaces": "scratch/integrator/c010/g3-unify/interfaces-r1.json",
+  "exit_code": 1,
+  "disagreements": 0,
+  "policy": 4,
+  "policy_resolutions": [
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0013db40",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/wave16/func_00135ae8.c",
+          "type": "function(void) -> int"
+        }
+      ],
+      "header": "include/game/scheduler.h",
+      "resolution": "Move the exact existing callable type into the subsystem header and remove its local copy. No source-body, input, result or callback ABI change."
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001415d0",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_0013db40.c",
+          "type": "function(void) -> int"
+        }
+      ],
+      "header": "include/game/scheduler.h",
+      "resolution": "Move the exact existing callable type into the subsystem header and remove its local copy. No source-body, input, result or callback ABI change."
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001415e8",
+      "sites": [
+        {
+          "line": 6,
+          "source": "src/checkpoint10/func_0013db40.c",
+          "type": "function(void) -> int"
+        }
+      ],
+      "header": "include/game/scheduler.h",
+      "resolution": "Move the exact existing callable type into the subsystem header and remove its local copy. No source-body, input, result or callback ABI change."
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00155ab4",
+      "sites": [
+        {
+          "line": 17,
+          "source": "src/checkpoint10/func_00154f3c.c",
+          "type": "function(pointer to (struct ServiceCoordinator), int, short) -> int"
+        }
+      ],
+      "header": "include/game/audio_dsp.h",
+      "resolution": "Move the exact existing callable type into the subsystem header and remove its local copy. No source-body, input, result or callback ABI change."
+    }
+  ],
+  "reproof_scope": "scratch/integrator/c010/g3-unify/policy-reproof-scope-r1.json",
+  "reproof_units": 72,
+  "heavy_slot_release": "scratch/integrator/c010/g3-unify/HEAVY-SLOT-RELEASED-r2.json"
+}

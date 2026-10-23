@@ -1,0 +1,44 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/checkpoint10/collect-r2/func_001913fc.cpp",
+ "source_sha256": "c1563a214ceca214a93f92e0b90c37943f9ae35b8252e2e5a97962952b5f32b6",
+ "profile": "sdk",
+ "compiler": "armcc_41_791",
+ "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O2",
+  "-Otime"
+ ],
+ "object_sha256": "1b17b16181e243471ceaf6837316c6a0aafc6d10e7d9955fde24c84a097ac20d",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "_ZN2nw3snd8internal10BasicSound10SetPanModeENS0_7PanModeE",
+   "address": 1643516,
+   "size": 92,
+   "candidate_size": 92,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 88,
+     "rule": "branchnop",
+     "target": 1643608,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

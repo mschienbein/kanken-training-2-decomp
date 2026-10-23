@@ -2,7 +2,6 @@
 
 struct ItemPage;
 
-extern int func_0015f6ec(const struct ItemPage *page);
 
 int func_001e5ce0(const struct ItemPageSet *set)
 {

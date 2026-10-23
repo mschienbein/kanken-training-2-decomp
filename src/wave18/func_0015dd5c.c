@@ -1,3 +1,4 @@
+#include "game/text.h"
 /* The caller searches a UTF-16 string for a space and advances past the result. */
 const unsigned short *func_0015dd5c(const unsigned short *text, unsigned value)
 {

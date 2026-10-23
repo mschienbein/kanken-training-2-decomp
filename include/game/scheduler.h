@@ -15,7 +15,7 @@ extern "C" {
 typedef int (*ScheduledTaskCallback)(void);
 struct ScheduledTaskBinding { ScheduledTaskCallback callback; int wait; };
 struct ScheduledTask {
-    unsigned short enabled;
+    short enabled;
     short previous, next;
     unsigned short priority;
     struct ScheduledTaskBinding binding;
@@ -54,6 +54,9 @@ extern void func_0012d1d8(int count, int preserve);
 extern void func_0012ced8(void);
 extern void func_001951dc(unsigned int handle);
 extern void func_0012d1c8(void);
+extern int func_0013db40(void);
+extern int func_001415d0(void);
+extern int func_001415e8(void);
 extern int func_00141c70(void);
 extern int func_001900a8(void);
 extern int func_00110a70(void);

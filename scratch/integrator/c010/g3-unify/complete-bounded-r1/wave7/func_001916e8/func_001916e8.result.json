@@ -1,0 +1,73 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/wave7/func_001916e8.c",
+ "source_sha256": "e19265e8634d0fce0a91a644d337c529856df78547d6d1faef0ec13a315ae6c2",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "20c076352687782b9bb80065c2466607769f7d0553bfb7ecf1eefd7267884c36",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/models/object_registration/stream_manager.c",
+   "source_sha256": "ff08f2295c679ff5a266ef4ad6bed125c86ca31d9eab7a2ce41eb945b885e5ad",
+   "object_sha256": "824654bee372463d79dc922014ca9e59dfe3bc5c816a69f16b8e8d750413bfdc"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_stream_manager_cleanup"
+   ],
+   "section": "i.register_stream_manager_cleanup",
+   "size": 4,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/integrator/c010/g3-unify/complete-bounded-r1/wave7/func_001916e8/extra-0-stream_manager.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001916e8",
+   "address": 1644264,
+   "size": 88,
+   "candidate_size": 88,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 52,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_stream_manager_cleanup"
+      ],
+      "section": "i.register_stream_manager_cleanup",
+      "size": 4,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/integrator/c010/g3-unify/complete-bounded-r1/wave7/func_001916e8/extra-0-stream_manager.o"
+     }
+    },
+    {
+     "offset": 60,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

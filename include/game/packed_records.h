@@ -19,6 +19,8 @@ extern "C" {
 #endif
 extern int func_00169878(struct PackedRecordSet *list, int value);
 extern int func_00169874(struct PackedRecordSet *list, int value);
+extern const unsigned short *func_001dcecc(struct PackedRecordSet *list, int value);
+extern int func_001dcf0c(struct PackedRecordSet *list, int value);
 #ifdef __cplusplus
 }
 #endif

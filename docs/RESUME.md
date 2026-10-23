@@ -2,6 +2,113 @@
 
 Current entry on top.
 
+## 2026-10-20 — c010 frozen R3 source reconciliation (unaccepted)
+
+The isolated `c010-r3-closure` branch reconciles frozen R3 source `7e74f95`
+through Main's source integration `b7bb6d9`, preserving both registered c009-r2
+**FAIL** reviews and every R3 qualification. Its provisional predecessor remains
+**2,296 functions / 252,692 B**; canonical acceptance/history are still Main-only.
+The complete C010 projection is **2,731 units / 2,797 functions / 300,112 B**,
+retaining **all 501 new functions / 47,420 B and ten accepted moves / 240 B**.
+No further identity was withdrawn and none was accepted here.
+
+Scheduler storage uses the real C `int(void)` callback contract. Genuine integer
+providers retain their returns; only actual C procedure definitions use the
+qualified MUST-discard unspecified-result rule. The queue `00186598` and signaling
+`0019ea6c` remain void. The genuine generic vector entry, unique native
+`RuntimeMember` constructor owner/move and typed non-invoking registrations are
+retained. Old incompatible `0010239c`/`0013db40` routes remain deferred, not
+silently re-entered. The archive `1947019`, native-links `05a0669` and native
+animation `0f282a0` closures remain intact.
+
+Two selected callers required real canonical-owner field reconciliation:
+`0010b5cc` now writes `AppletStartupState.requested` and retains the correctly
+typed interior event binding; `001811b8` uses `WorkQueue.enabled/active`.
+The final bounded set covers **63 current source/dependency combinations**:
+**66 sequential matcher invocations**, **63 actual exit 0**, two retained compiler
+exit 2 failures and one retained exit 1 mismatch. Every call used explicit
+**v6 + L1** and `--show 0`; no full suite/build, whole-ledger compiler/audit,
+prepare, review or finalization ran here.
+
+Private `HANDOFF.json` now selects fresh `r3-closure-r2` complete inventories,
+the **1,444-unit direct scope**, **2,568-unit header scope**, all **22 helper-only
+units**, **25 explicit helper recipes**, and the rebound original-slot hint map.
+The header planner and sequential matcher preserve per-caller helper contexts;
+older scopes and every failed attempt remain unchanged. The 29 slot hints are
+not a complete original-consumer audit: Main must still enumerate and adjudicate
+all original slots and the `data_002429f8`/`data_002429f4` object consumers.
+
+Main must run the exact remaining serialized gates in
+`REMAINING-HEAVY-COMMANDS-r3-closure-r2.json`. In particular, argcheck `--rewrites`
+requires a fresh complete receipt projection using `units[].linker_rewrites`
+or root `linker_rewrites`: a sweep index, this bounded rewrite subset or the stale
+all-history default is not current closure. Predecessor acceptance, complete
+source/header/R1/L1 diagnostics and unique emitted ownership, full builds/tests,
+two fresh reviews, final acceptance and push remain Main-only.
+
+## 2026-10-20 — c010 native animation lifetime re-entry (unaccepted)
+
+`001ce8b8` now has a **60/60 B game MATCH** at its collected destination under
+explicit linker **v6 + literal L1**. A `const nw::lyt::AnimResource&` bound directly
+to `nw::lyt::AnimResource(file)` keeps that native temporary alive through the
+reference scope and the actual `Layout::CreateAnimTransform` virtual call. Its
+inline constructor still calls the retained same-address native `Set`; the
+original receiver/accessor and returned `AnimTransform*` are preserved. This is
+a natural matching lifetime form, not proof of the historical source spelling.
+No headers, native identities, profiles, helper owners or accepted context changed.
+
+The singleton collection appends one claim while preserving all previous **500
+new functions and ten accepted moves**: **498 units / 511 claims**, comprising
+**501 proposed new functions / 47,420 B** and the unchanged **ten moves / 240 B**.
+The new deferral revision retires only `001ce8b8`; **47 units / 49 functions /
+9,136 B** remain deferred without an exhausted-search claim. The frozen seed,
+r56/r60 failures, four new trial mismatches and both exact lifetime/destination
+witnesses are retained by private `NATIVE-ANIMATION-CLOSURE-r1.json`.
+
+The native-links cutover and parent archive prerequisite remain intact. Main
+imports this re-entry only after the frozen c009-r3 closure, then refreshes the
+complete inventories and runs the integrated heavy gates. Only five sequential
+trial matches, destination collection and its retained match were exercised here;
+accepted credit is unchanged. Current pointers are in private `HANDOFF.json`,
+`SOURCE-READY-native-animation-r1.json` and `NEW-DEFERRALS-native-animation-r1.json`.
+
+## 2026-10-20 — c010 source-contract handoff (unaccepted)
+
+The `c010-integrate` draft contains **496 units / 509 claims**: **499 proposed new
+functions / 47,304 B** and **10 explicit accepted-identity moves / 240 B**. Accepted
+credit is unchanged. Two earlier contract deferrals, `001685c0` and `00168618`,
+have bounded canonical witnesses. Another **49 new units / 51 functions / 9,252 B**
+are explicitly deferred with their source, prior receipts and exact re-entry
+conditions preserved privately; no accepted identity is withdrawn.
+
+The source cutovers cover the shared resource-constructor/dispatch prefix,
+full-width constructor counts and returned receiver, canonical audio and session
+lifecycles, static handle subobjects, DSP pointer banks, publication globals,
+numeric owners and native resource-wrapper interfaces. Native glyph output and
+the target glyph format remain distinct; font caches are at `+0x14/+0x16`.
+`PIPELINE_STORAGE_INITIALIZED_BYTES = 0x854` and its flexible snapshot tail remain
+unchanged. Erased identities and partial native ownership remain qualified.
+
+Private `scratch/integrator/c010/SOURCE-READY-r68.json` and its inventory bind the
+current proposal and bounded observations, including preserved failures. The
+typed canonical variants of `001273a0`, `0017f7f8` and `001ce8b8` remain measured
+byte-match residue, not exhausted searches or accepted implementations.
+
+Main subsequently imported the isolated `0011f6a8` archive-wrapper prerequisite
+from child commit `f5c402a`, without child candidate credit or unrelated header
+declarations. The wrapper now preserves the terminal's six-input contract,
+including the complete 64-bit token and typed writable outputs. Fresh parent-tree
+v6/L1 witnesses MATCH: wrapper 32 B / game, terminal `0012d550` 112 B / sdk.
+`scratch/integrator/c010/PARENT-ARCHIVE-IMPORT-r69.json` binds this addendum;
+the r67/r68 snapshots remain historical and must be refreshed before heavy gates.
+
+Next import only Main's frozen c009-r3 correction, reconcile its callable and
+native-constructor dependencies, then obtain Main's heavy slot for the complete
+header-dependent MATCH/helper closure, G3, native/signature probes, original
+callback audit, argcheck, fresh full builds and independent checkpoint reviews.
+No full build, suite, prepare, finalize or acceptance claim follows from this
+source-only handoff. Selection remains explicit linker **v6 + literal L1**.
+
 ## 2026-10-20 — resumed WSL desktop (current)
 
 **State:** `docs/STATUS.md` top entry. Accepted 1,621 functions / 195,908 B (seq 9, cmodels);

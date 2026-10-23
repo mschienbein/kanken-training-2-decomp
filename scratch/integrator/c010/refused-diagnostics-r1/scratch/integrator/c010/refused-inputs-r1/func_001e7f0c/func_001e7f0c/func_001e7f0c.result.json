@@ -1,0 +1,10 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001e7f0c/func_001e7f0c.cpp",
+ "profile": "game",
+ "linker_model": "armlink5-inline-branchnop-v2",
+ "literal_model": "none",
+ "status": "refused",
+ "reason": "armcc failed (1) on func_001e7f0c.cpp:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001e7f0c/func_001e7f0c.cpp\", line 5: Error:  #256: invalid redeclaration of type name \"CallbackTarget\" (declared at line 6 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/deferred_callback.h\")\n  class CallbackTarget {\n        ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001e7f0c/func_001e7f0c.cpp\", line 40: Error:  #135: class \"TouchDeviceState\" has no member \"reserved10\"\n          if (!func_00177124(7) && (bss_004972d8.reserved10[0] & 0x10))\n                                                 ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001e7f0c/func_001e7f0c.cpp\", line 45: Error:  #167: argument of type \"ScenePhaseState *\" is incompatible with parameter of type \"CallbackTarget *\"\n          func_00177b10(scene, &CallbackTarget::on_complete);\n                        ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001e7f0c/func_001e7f0c.cpp\", line 45: Error:  #167: argument of type \"void (CallbackTarget::*)()\" is incompatible with parameter of type \"MemberCallback\"\n          func_00177b10(scene, &CallbackTarget::on_complete);\n                               ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001e7f0c/func_001e7f0c.cpp: 0 warnings, 4 errors\n",
+ "error_type": "ToolchainError",
+ "functions": []
+}

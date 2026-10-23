@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_001794e8.cpp",
+      "profile": "sdk",
+      "functions": [
+        "func_001794e8"
+      ],
+      "author": "r330",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_001794e8.cpp",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-r4/000"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "source_sha256": "ca70215609156acc6ad28c1f12e46458301be537bb81a42404588fecc77b0210",
+      "receipt": "scratch/g3u-r4/000/func_001794e8.result.json",
+      "receipt_sha256": "736673fb74e0ce8a5da6863fe45cfa1c8f351807c16556824b48f8426cadf5b0",
+      "extra_source_sha256": {},
+      "output": "MATCH    func_001794e8 @ 0x1794e8 size 0xd4/0xd4\n"
+    },
+    {
+      "source": "src/checkpoint10/func_0017a9b4.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0017a9b4"
+      ],
+      "author": "r330",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_0017a9b4.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-r4/001"
+      ],
+      "exit_code": 1,
+      "credited_functions_match": false,
+      "source_sha256": "62257c450752636ee6feccf9097b18d9a37e4e973d6a9647dca20ed394838752",
+      "receipt": "scratch/g3u-r4/001/func_0017a9b4.result.json",
+      "receipt_sha256": "9d4c140021a6e40d0d2c388a432524535234f98e4714d9b6adbbdbf0eeb9dafa",
+      "extra_source_sha256": {},
+      "output": "MISMATCH func_0017a9b4 @ 0x17a9b4 size 0xdc/0xdc first difference at +0x5\n"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0017a71c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0017a71c"
+      ],
+      "author": "tu590",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/collect-r2/func_0017a71c.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-r4/002"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "source_sha256": "bc9478268ba9443162bcd14672a7cdd22d41ec94fdeb73ec69e43ac8785fff8f",
+      "receipt": "scratch/g3u-r4/002/func_0017a71c.result.json",
+      "receipt_sha256": "e3e3b4ac97ccc358b122434e565f957c005716586e639662910ac79cce75b045",
+      "extra_source_sha256": {},
+      "output": "MATCH    func_0017a71c @ 0x17a71c size 0xc8/0xc8\n"
+    }
+  ],
+  "match_units": 2,
+  "units": 3,
+  "exit_code": 1
+}

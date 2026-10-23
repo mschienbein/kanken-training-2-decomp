@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/copy-view.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001dafb0",
+        "func_001dafe8"
+      ],
+      "author": "r4007",
+      "qualifications": [
+        "[INFERENCE] Copy member suffixes distinguish the original secondary descriptor entries from the primary native CharStrmReader methods; no free-function/member-pointer conversion."
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/copy-view.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr2/000"
+      ],
+      "exit_code": 1,
+      "credited_functions_match": false,
+      "source_sha256": "8dd7dd8ddc6e3f2b5713c9385dd74eb7cbc23382a83811741ce6f4d2b0239bf9",
+      "receipt": "scratch/g3u-pr2/000/copy-view.result.json",
+      "receipt_sha256": "02481e2f6569a750f9acaadb833db619de479cca09eaa3e6b9c21fc5626d8f4f",
+      "extra_source_sha256": {},
+      "output": "MISMATCH _ZN2nw4font14CharStrmReader20ReadNextCharSJISCopyEv @ 0x1dafb0 size 0x38/0x38 first difference at +0x1\nMISMATCH _ZN2nw4font14CharStrmReader20ReadNextCharUTF8CopyEv @ 0x1dafe8 size 0x6c/0x6c first difference at +0x6\n"
+    },
+    {
+      "source": "src/wave13/func_001db054.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001db054"
+      ],
+      "author": "C010G3UnifyCodex-prereview-F05",
+      "qualifications": [
+        "Genuine canonical CharStrmReader member, aligned with types-fontgfx70ac3e9/a14c1f61; no duplicate Copy alias."
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/wave13/func_001db054.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr2/001"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "source_sha256": "691cdc17894d66de54729e26ed69290619dc1e692d49750c560a773507deb02a",
+      "receipt": "scratch/g3u-pr2/001/func_001db054.result.json",
+      "receipt_sha256": "6fa6dc1fa50fa478a21829b3091129eb38c9aab1f1e150d02ad200e021cd4200",
+      "extra_source_sha256": {},
+      "output": "MATCH    _ZN2nw4font14CharStrmReader17ReadNextCharUTF16Ev @ 0x1db054 size 0x14/0x14\n"
+    },
+    {
+      "source": "src/wave13/func_001db068.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001db068"
+      ],
+      "author": "C010G3UnifyCodex-prereview-F05",
+      "qualifications": [
+        "Genuine canonical CharStrmReader member, aligned with types-fontgfx70ac3e9/a14c1f61; no duplicate Copy alias."
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/wave13/func_001db068.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr2/002"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "source_sha256": "ae1e6fb8390ec058a54d5bf0e776dd326040a50199aaa134e7701d3a1571b8ed",
+      "receipt": "scratch/g3u-pr2/002/func_001db068.result.json",
+      "receipt_sha256": "c4039cd523d06b3827a29c445954c92b24fb58c662613a5e078fbd57e8008dac",
+      "extra_source_sha256": {},
+      "output": "MATCH    _ZN2nw4font14CharStrmReader18ReadNextCharCP1252Ev @ 0x1db068 size 0x14/0x14\n"
+    },
+    {
+      "source": "src/checkpoint10/func_001b48c8.c",
+      "profile": "game",
+      "functions": [
+        "func_001b48c8"
+      ],
+      "author": "w22i",
+      "extra_sources": [
+        "src/models/object_registration/sound_resource_cache.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_001b48c8.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr2/003",
+        "--extra-source",
+        "src/models/object_registration/sound_resource_cache.c"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "source_sha256": "23ad536704c9e569dd28a9d0f1925046e1234ae977218ff37e29c6f08af76663",
+      "receipt": "scratch/g3u-pr2/003/func_001b48c8.result.json",
+      "receipt_sha256": "450e1601ccd4d185f760e8990c10080644099be6cc3518e91c9b2a3fd0108846",
+      "extra_source_sha256": {
+        "src/models/object_registration/sound_resource_cache.c": "45a9f591b10e8d25ddbe9350308b0cbcbca8def27d42b800599d6a504c922113"
+      },
+      "output": "MATCH    func_001b48c8 @ 0x1b48c8 size 0x58/0x58 [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  register_sound_resource_cache_cleanup (4 bytes; i.register_sound_resource_cache_cleanup)\n"
+    },
+    {
+      "source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001650f8",
+        "func_001f1ebc",
+        "func_001f1ed8",
+        "func_001f1f20",
+        "func_001f1f34",
+        "func_001f1f4c"
+      ],
+      "author": "w22a",
+      "qualifications": [
+        "[INFERENCE] noinline is a descriptive/code-generation choice preserving the outlined shared search, not recovered original attribute syntax; applies to every function in this unit."
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/alternate1/func_001650f8.c",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr2/004"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "source_sha256": "a419a52ddf5e188188a89603846e5fe964805cc6f0803a0802b4f1a92f8ac823",
+      "receipt": "scratch/g3u-pr2/004/func_001650f8.result.json",
+      "receipt_sha256": "51a4a282e27386238a9ef16c84e25d8c943c0509ab330413c96a8262a9d0af2a",
+      "extra_source_sha256": {},
+      "output": "MATCH    func_001650f8 @ 0x1650f8 size 0xc0/0xc0\nMATCH    func_001f1ebc @ 0x1f1ebc size 0x1c/0x1c\nMATCH    func_001f1ed8 @ 0x1f1ed8 size 0x1c/0x1c\nMATCH    func_001f1f20 @ 0x1f1f20 size 0x14/0x14\nMATCH    func_001f1f34 @ 0x1f1f34 size 0x18/0x18\nMATCH    func_001f1f4c @ 0x1f1f4c size 0x18/0x18\n"
+    },
+    {
+      "source": "src/wave20/func_001f4cf8.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001f4cf8"
+      ],
+      "author": "w20b",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+        "tools/match.py",
+        "src/wave20/func_001f4cf8.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr2/005"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "source_sha256": "876a92d9dfd4d2b4581b2ab6d5ea59c27cb06f85c913ae26e8e4d51d73b6cbd1",
+      "receipt": "scratch/g3u-pr2/005/func_001f4cf8.result.json",
+      "receipt_sha256": "126022d6869abf6f8435fa3e741f0f3ddd7ecd83baed4e33688c993c807a8d09",
+      "extra_source_sha256": {},
+      "output": "MATCH    _ZNK2nw4font4Font17GetCharStrmReaderEw @ 0x1f4cf8 size 0x40/0x40\n"
+    }
+  ],
+  "match_units": 5,
+  "units": 6,
+  "exit_code": 1
+}

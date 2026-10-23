@@ -1,0 +1,40 @@
+{
+  "source": "src/checkpoint10/func_001f580c_default.c",
+  "profile": "middleware",
+  "functions": [
+    "func_001f580c"
+  ],
+  "author": "C010DefSchedCodex",
+  "extra_sources": [
+    "src/models/object_registration/resource_service_lock.c"
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/func_001f580c_default.c",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-r2/003",
+    "--extra-source",
+    "src/models/object_registration/resource_service_lock.c"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "cef8b5072f0df1af3e7f93b863cd771e069cccb8d7170cf82067fd781b97fa1b",
+  "receipt": "scratch/g3u-r2/003/func_001f580c_default.result.json",
+  "receipt_sha256": "9866b9ddff73cbfa14d44907e920cf33dec45e350321f575de2058da8295064e",
+  "extra_source_sha256": {
+    "src/models/object_registration/resource_service_lock.c": "3f5b2311d8af64bab6e18a40ec0d897f47c8ee8ebabd65878d09ffee01d5537b"
+  },
+  "output": "MATCH    func_001f580c @ 0x1f580c size 0x60/0x60 [armlink5-inline-branchnop-v6: 1 inline_nop]\nREMOVED  register_resource_service_lock_cleanup (4 bytes; i.register_resource_service_lock_cleanup)\n"
+}

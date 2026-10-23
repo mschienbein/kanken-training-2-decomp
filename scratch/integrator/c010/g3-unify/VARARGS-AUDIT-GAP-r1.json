@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "source": "src/checkpoint10/func_00190c1c.c",
+  "source_sha256": "80d6b27f92ca42747020603b6c878936538c6bad43d407c3ba8c3b74fae27b2c",
+  "public_source_construct": "va_arg(arguments, int)",
+  "compiler_builtin": "__va_arg",
+  "prepared_expression_rows": [
+    {
+      "line": 1872,
+      "expression": "group->patterns[index].details.members[item] = __va_arg(arguments, int);"
+    }
+  ],
+  "prepared_text_sha256": "2dc56a937a2f82ba618edae3cc0f159d02ed54d2adf1cfbe7585220db39a2aa7",
+  "final_audit_error": [
+    {
+      "kind": "c",
+      "reason": "src/checkpoint10/func_00190c1c.c:1872:80: before: int",
+      "source": "src/checkpoint10/func_00190c1c.c"
+    }
+  ],
+  "MATCH_witness": "scratch/integrator/c010/g3-unify/complete-bounded-r1/checkpoint10/func_00190c1c/func_00190c1c.result.json",
+  "MATCH_witness_sha256": "9a2e136a14ce190fd1ef43df4c4415d98e211009f5f6c38e54feb88bd57f16aa",
+  "qualification": "Do not change valid matching variadic source, relabel it C++, add a fake bound or weaken fail-closed audit behavior. The C parser needs explicit compiler type-operand support; no parser/tool change is made in this declaration-unification branch."
+}

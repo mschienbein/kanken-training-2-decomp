@@ -1,0 +1,1136 @@
+{
+  "schema_version": 1,
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "analysis_script_sha256": "3f4a9bab418bc904a318323d9af2411fcfe07d19b9b8c1205275f0a06f7124c8",
+  "functions": [
+    {
+      "function": "func_001d9198",
+      "memory_facts": [
+        {
+          "site_offset": 40,
+          "base": {
+            "kind": "prior-call-register",
+            "target": "func_001d5528",
+            "meaningful_result_requires_use_evidence": true
+          },
+          "field_offset": 314,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": false
+          }
+        },
+        {
+          "site_offset": 76,
+          "base": {
+            "kind": "prior-call-register",
+            "target": "func_001d5528",
+            "meaningful_result_requires_use_evidence": true
+          },
+          "field_offset": 424,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "prior-call-register",
+            "target": "func_0017e500",
+            "meaningful_result_requires_use_evidence": true
+          }
+        }
+      ],
+      "calls": [
+        {
+          "site_offset": 20,
+          "target": "func_00185cc0",
+          "arguments": {
+            "r0": {
+              "kind": "entry",
+              "function": "func_001d9198",
+              "register": "r0"
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_001d9198",
+              "register": "r1"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_001d9198",
+              "register": "r2"
+            },
+            "r3": {
+              "kind": "entry",
+              "function": "func_001d9198",
+              "register": "r3"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 24,
+          "target": "func_001d5528",
+          "arguments": {
+            "r0": {
+              "kind": "prior-call-register",
+              "target": "func_00185cc0",
+              "meaningful_result_requires_use_evidence": true
+            },
+            "r1": {
+              "kind": "unknown"
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 44,
+          "target": "func_00185c58",
+          "arguments": {
+            "r0": {
+              "kind": "constant",
+              "is_zero": false
+            },
+            "r1": {
+              "kind": "unknown"
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 64,
+          "target": "func_0017e500",
+          "arguments": {
+            "r0": {
+              "kind": "prior-call-register",
+              "target": "func_00185c58",
+              "meaningful_result_requires_use_evidence": true
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_001d9198",
+              "register": "r0"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_001d9198",
+              "register": "r1"
+            },
+            "r3": {
+              "kind": "constant",
+              "is_zero": false
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 92,
+          "target": "func_001d96e8",
+          "arguments": {
+            "r0": {
+              "kind": "prior-call-register",
+              "target": "func_001d5528",
+              "meaningful_result_requires_use_evidence": true
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_001d9198",
+              "register": "r2"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_001d9198",
+              "register": "r3"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 108,
+          "target": "func_00185cc0",
+          "arguments": {
+            "r0": {
+              "kind": "prior-call-register",
+              "target": "func_0017e500",
+              "meaningful_result_requires_use_evidence": true
+            },
+            "r1": {
+              "kind": "unknown"
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 120,
+          "target": "func_00182994",
+          "arguments": {
+            "r0": {
+              "kind": "prior-call-register",
+              "target": "func_00185cc0",
+              "meaningful_result_requires_use_evidence": true
+            },
+            "r1": {
+              "kind": "prior-call-register",
+              "target": "func_001d5528",
+              "meaningful_result_requires_use_evidence": true
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        }
+      ]
+    },
+    {
+      "function": "func_001d96e8",
+      "memory_facts": [
+        {
+          "site_offset": 20,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 428,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 24,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 416,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r1"
+          },
+          "evidence": "abstract multi-register field store"
+        },
+        {
+          "site_offset": 24,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 420,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r2"
+          },
+          "evidence": "abstract multi-register field store"
+        },
+        {
+          "site_offset": 32,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 312,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 36,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 315,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": false
+          }
+        },
+        {
+          "site_offset": 40,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 316,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 44,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 317,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 48,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 132,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 52,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 124,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 56,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 128,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 60,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 120,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 68,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 400,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 72,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 404,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": false
+          }
+        },
+        {
+          "site_offset": 80,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 405,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": false
+          }
+        },
+        {
+          "site_offset": 88,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 372,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 92,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 376,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 96,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 380,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 100,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 392,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 104,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 396,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 108,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 320,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 112,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 356,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 116,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 324,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 120,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 328,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 124,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 332,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 128,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 336,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 132,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 318,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 136,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 340,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 140,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 344,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 144,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 348,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 148,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 352,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 160,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 384,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": false
+          }
+        },
+        {
+          "site_offset": 164,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 385,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": false
+          }
+        },
+        {
+          "site_offset": 180,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 360,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 184,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 368,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 188,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 364,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 244,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 406,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 276,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 407,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "unknown"
+          }
+        },
+        {
+          "site_offset": 280,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 408,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 284,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d96e8",
+            "register": "r0"
+          },
+          "field_offset": 412,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        }
+      ],
+      "calls": [
+        {
+          "site_offset": 200,
+          "target": "func_001d2d20",
+          "arguments": {
+            "r0": {
+              "kind": "offset",
+              "base": {
+                "kind": "entry",
+                "function": "func_001d96e8",
+                "register": "r0"
+              },
+              "offset": 152
+            },
+            "r1": {
+              "kind": "constant",
+              "is_zero": false
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_001d96e8",
+              "register": "r2"
+            },
+            "r3": {
+              "kind": "constant",
+              "is_zero": false
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 216,
+          "target": "func_0017e818",
+          "arguments": {
+            "r0": {
+              "kind": "unknown"
+            },
+            "r1": {
+              "kind": "unknown"
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        }
+      ]
+    },
+    {
+      "function": "func_0018290c",
+      "memory_facts": [
+        {
+          "site_offset": 72,
+          "base": {
+            "kind": "entry",
+            "function": "func_0018290c",
+            "register": "r2"
+          },
+          "field_offset": 416,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 84,
+          "base": {
+            "kind": "entry",
+            "function": "func_0018290c",
+            "register": "r2"
+          },
+          "field_offset": 420,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        },
+        {
+          "site_offset": 104,
+          "base": {
+            "kind": "entry",
+            "function": "func_0018290c",
+            "register": "r2"
+          },
+          "field_offset": 424,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 108,
+          "base": {
+            "kind": "entry",
+            "function": "func_0018290c",
+            "register": "r2"
+          },
+          "field_offset": 312,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 112,
+          "base": {
+            "kind": "entry",
+            "function": "func_0018290c",
+            "register": "r2"
+          },
+          "field_offset": 313,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        },
+        {
+          "site_offset": 116,
+          "base": {
+            "kind": "entry",
+            "function": "func_0018290c",
+            "register": "r2"
+          },
+          "field_offset": 314,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        }
+      ],
+      "calls": [
+        {
+          "site_offset": 48,
+          "target": "func_00183550",
+          "arguments": {
+            "r0": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r0"
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r1"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r2"
+            },
+            "r3": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r3"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 68,
+          "target": "func_00183550",
+          "arguments": {
+            "r0": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r0"
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r1"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r2"
+            },
+            "r3": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r3"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 96,
+          "target": "indirect",
+          "arguments": {
+            "r0": {
+              "kind": "entry",
+              "function": "func_0018290c",
+              "register": "r2"
+            },
+            "r1": {
+              "kind": "unknown"
+            },
+            "r2": {
+              "kind": "word-read",
+              "from": {
+                "kind": "offset",
+                "base": {
+                  "kind": "entry",
+                  "function": "func_0018290c",
+                  "register": "r2"
+                },
+                "offset": 420
+              }
+            },
+            "r3": {
+              "kind": "word-read",
+              "from": {
+                "kind": "offset",
+                "base": {
+                  "kind": "entry",
+                  "function": "func_0018290c",
+                  "register": "r2"
+                },
+                "offset": 416
+              }
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 120,
+          "target": "func_00185cc0",
+          "arguments": {
+            "r0": {
+              "kind": "constant",
+              "is_zero": true
+            },
+            "r1": {
+              "kind": "unknown"
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        }
+      ]
+    },
+    {
+      "function": "func_001d5bf4",
+      "memory_facts": [
+        {
+          "site_offset": 20,
+          "base": {
+            "kind": "entry",
+            "function": "func_001d5bf4",
+            "register": "r2"
+          },
+          "field_offset": 156,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "constant",
+            "is_zero": true
+          }
+        }
+      ],
+      "calls": [
+        {
+          "site_offset": 12,
+          "target": "func_0017dae0",
+          "arguments": {
+            "r0": {
+              "kind": "entry",
+              "function": "func_001d5bf4",
+              "register": "r0"
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_001d5bf4",
+              "register": "r1"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_001d5bf4",
+              "register": "r2"
+            },
+            "r3": {
+              "kind": "entry",
+              "function": "func_001d5bf4",
+              "register": "r3"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        }
+      ]
+    },
+    {
+      "function": "func_001d5528",
+      "memory_facts": [],
+      "calls": [
+        {
+          "site_offset": 8,
+          "target": "func_0017dfdc",
+          "arguments": {
+            "r0": {
+              "kind": "entry",
+              "function": "func_001d5528",
+              "register": "r0"
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_001d5528",
+              "register": "r1"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_001d5528",
+              "register": "r2"
+            },
+            "r3": {
+              "kind": "entry",
+              "function": "func_001d5528",
+              "register": "r3"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 24,
+          "target": "func_001d9820",
+          "arguments": {
+            "r0": {
+              "kind": "prior-call-register",
+              "target": "func_0017dfdc",
+              "meaningful_result_requires_use_evidence": true
+            },
+            "r1": {
+              "kind": "unknown"
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 44,
+          "target": "func_00191154",
+          "arguments": {
+            "r0": {
+              "kind": "offset",
+              "base": {
+                "kind": "entry",
+                "function": "func_001d5528",
+                "register": "r0"
+              },
+              "offset": 4
+            },
+            "r1": {
+              "kind": "offset",
+              "base": {
+                "kind": "entry",
+                "function": "func_001d5528",
+                "register": "r0"
+              },
+              "offset": 8
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "unknown"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        }
+      ]
+    }
+  ],
+  "qualification": "Original scoped CFG facts only. A memory read through a returned value supports that value's pointer use, but does not recover original class or native mangled identity. No common complete object type is inferred solely from offsets, SDK spelling or live incoming register presence. Indirect slots and all other consumers still need final audit."
+}

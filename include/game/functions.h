@@ -14,7 +14,7 @@ struct Component0015eb90;
 struct Component001acc1c;
 struct Component001acebc;
 struct Component001ad134;
-struct Component001adff8;
+struct W19SelectionPanel;
 struct Component001af244;
 struct Component001b4718;
 struct Component001b6b88;
@@ -91,6 +91,11 @@ extern void func_001c6adc(void);
 extern void func_001db134(void *object);
 extern void func_00215ec4(volatile unsigned int *guard);
 extern void func_00216140(void *object, ObjectDestructor destroy, void (*image_base)(void));
+extern void func_00164ebc(void *object, ObjectDestructor destroy, void (*image_base)(void));
+/* [INFERENCE] Registration supplies one opaque object argument to each empty
+ * destructor; no erased call establishes a more specific native class name. */
+extern void func_001e3818(void *object);
+extern void func_001e37dc(void *object);
 /* [INFERENCE] Source-only typed no-op registration protocols. The original call
  * identities were erased; these helpers neither store nor invoke callbacks. */
 extern void register_drawing_input_cleanup(struct W10DrawingInput *object,
@@ -177,7 +182,6 @@ extern void func_0015cab4(void);
 extern void func_0015ea60(struct FlagDisplayObject *, int, int);
 extern int func_0015eb90(struct Component0015eb90 *);
 extern int func_0015f5b0(const struct CountedResource *);
-extern void func_00166f1c(void *, int, int);
 extern int func_00169974(void);
 extern void func_00169b58(void);
 extern int func_0016d000(int);
@@ -219,7 +223,7 @@ extern int func_0019f2e8(void);
 extern int func_001acc1c(struct Component001acc1c *);
 extern int func_001acebc(struct Component001acebc *);
 extern int func_001ad134(struct Component001ad134 *);
-extern void func_001adff8(struct Component001adff8 *);
+extern void func_001adff8(struct W19SelectionPanel *);
 extern int func_001af244(struct Component001af244 *);
 extern int func_001b4718(struct Component001b4718 *);
 extern int func_001b6b88(struct Component001b6b88 *);

@@ -6,7 +6,6 @@ extern void func_00135128(int count);
 extern void func_00135f1c(int count);
 /* [INFERENCE] The third option is caller-evidenced but unused by the callee. */
 extern void func_00135c74(int count, int mode, unsigned option);
-extern void func_00135c10(int count);
 
 
 

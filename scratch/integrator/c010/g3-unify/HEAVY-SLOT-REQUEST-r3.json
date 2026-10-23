@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "agent": "C010G3UnifyCodex",
+  "part": 2,
+  "class": "exclusive full-ledger interfaces",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify",
+  "branch": "c010-g3-unify",
+  "dry_ledger": "scratch/integrator/c010/g3-unify/dry-matches-r2.json",
+  "dry_sha256": "8a7f69b4a40a54f768448390b72b25c74fd82f226aef8ca410756669516560a3",
+  "units": 2735,
+  "current_MATCH_units": 2712,
+  "current_MATCH_functions": 2803,
+  "helper_only_units": 23,
+  "candidate_new_functions": 507,
+  "moves": 13,
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/c010/g3-unify/dry-matches-r2.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/c010/g3-unify/interfaces-r2.json"
+  ],
+  "prior_local_interfaces": [
+    {
+      "path": "scratch/integrator/c010/g3-unify/local-interfaces-r1.json",
+      "exit_code": 0,
+      "units": 109,
+      "disagreements": 0,
+      "policy": 0
+    },
+    {
+      "path": "scratch/integrator/c010/g3-unify/local-interfaces-r2.json",
+      "exit_code": 0,
+      "units": 5,
+      "disagreements": 0,
+      "policy": 0
+    }
+  ],
+  "full_sweep_failure_retained": {
+    "exit_code": 1,
+    "path": "scratch/integrator/c010/g3-unify/complete-bounded-r1/results.json",
+    "failed_units": 18,
+    "all_closed_by_new_bounded_witnesses": true
+  },
+  "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r3.json",
+  "header_reproof_closure": "scratch/integrator/c010/g3-unify/HEADER-REPROOF-CLOSURE-r2.json",
+  "source_and_header_binding": "scratch/integrator/c010/g3-unify/CURRENT-INVENTORY-g3-unify-r4.json",
+  "request_number": 3,
+  "frozen_source_commit": "e1283c7",
+  "previous_full_audit": {
+    "path": "scratch/integrator/c010/g3-unify/interfaces-r1.json",
+    "exit": 1,
+    "disagreements": 0,
+    "policy": 4,
+    "all_four_policy_sites_moved_unchanged": "scratch/integrator/c010/g3-unify/G3-REMAINING-POLICY-r1.json"
+  },
+  "latest_bounded_reproof": {
+    "run": "scratch/integrator/c010/g3-unify/r6-results.json",
+    "units": 72,
+    "matches": 72,
+    "source_commit": "e1283c7"
+  },
+  "latest_local_G3": {
+    "path": "scratch/integrator/c010/g3-unify/local-interfaces-r3.json",
+    "exit": 0,
+    "units": 6,
+    "disagreements": 0,
+    "policy": 0
+  }
+}

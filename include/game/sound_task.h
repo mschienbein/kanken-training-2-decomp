@@ -10,14 +10,13 @@ struct SoundPlaybackState;
 struct SoundPlayerBase;
 struct SoundPoolStorage;
 struct SoundRegularInstance;
-union SynchronizationStorage;
 struct SoundShortBufferDescriptor;
 struct SoundSmallDescriptor;
 struct SoundStreamPlayer;
 struct SoundSubPlayer;
 struct SoundTaskBase;
 struct SoundTaskRegistryEntry;
-struct StreamSemaphore;
+struct SignalState;
 struct TimingState;
 
 #include "game/functions.h"
@@ -32,7 +31,7 @@ struct TimingState;
 
 struct SoundPlayerBase {
     const void *vtable;
-    union SynchronizationStorage state;
+    struct SignalState state;
     unsigned char flags[5];
     unsigned char reserved11[3];
     float volume;
@@ -141,10 +140,18 @@ struct SoundRegularInstance {
 struct SoundTaskBase {
     const void *vtable;
     struct PoolLink link;
-    union SynchronizationStorage state;
+    struct SignalState state;
     unsigned char active;
     unsigned char reserved15[3];
     void *owner;
+};
+struct SoundQueuedTask {
+    struct SoundTaskBase base;
+    unsigned arguments[11];
+    unsigned char option;
+    unsigned char reserved49[3];
+    void *source;
+    struct PoolLink queue_link;
 };
 
 #ifdef __cplusplus
@@ -155,12 +162,14 @@ extern struct SoundStreamPlayer *func_0014d690(struct SoundStreamPlayer *player)
 extern const unsigned data_002246b8[];
 extern struct SoundSubPlayer *func_0014d544(struct SoundSubPlayer *player);
 extern const unsigned data_00224aac[];
-extern void func_0019df28(struct StreamSemaphore *semaphore, int count);
+extern void func_0019df28(struct SignalState *semaphore, int count);
 extern struct EmbeddedSoundInstance *func_0014b824(struct EmbeddedSoundInstance *object,
                                              struct SoundPoolStorage *owner);
 extern struct SoundRegularInstance *func_0014bd78(struct SoundRegularInstance *object,
                                               struct SoundPoolStorage *owner);
 extern struct SoundTaskBase *func_00180510(struct SoundTaskBase *task);
+extern const unsigned data_00224978[];
+extern struct SoundQueuedTask *func_0014d664(struct SoundQueuedTask *task);
 #ifdef __cplusplus
 }
 #endif

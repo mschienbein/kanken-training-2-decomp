@@ -1,6 +1,5 @@
-#include "ctr/svc.h"
+#include "ctr/ipc.h"
 
-extern CtrHandle data_00243040;
 extern const CtrHandle data_0021c5cc;
 extern void func_00192afc(CtrResult result, const void *location);
 
@@ -23,7 +22,7 @@ static __forceinline void CheckResult(CtrResult result, const void *location)
 
 CtrResult func_0011516c(void)
 {
-    CtrResult result = CloseSession(&data_00243040);
+    CtrResult result = CloseSession(&data_00243040.handle);
     CheckResult(result, (const void *)__current_pc());
     return result;
 }

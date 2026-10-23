@@ -21,7 +21,8 @@ class Resource {
 public:
     virtual unsigned read(unsigned *transferred, unsigned long long offset,
                           void *buffer, unsigned size);
-    virtual void slot01();
+    virtual Result write(int *transferred, long long offset,
+                         const void *buffer, unsigned size, int options);
     virtual void slot02();
     virtual Result get_size(ResourceSize *size);
     virtual void slot04();
@@ -39,5 +40,8 @@ public:
 
 
 extern "C" void func_0019d5c4(Resource *resource);
+extern "C" void func_001211b8(int mode);
+extern "C" Result func_001c4a8c(int *transferred, Resource *resource,
+    long long offset, const void *buffer, unsigned size, int options);
 
 #endif

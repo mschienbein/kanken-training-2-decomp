@@ -1,11 +1,6 @@
 #include "game/functions.h"
-#include <stdint.h>
+#include "game/resource_runtime.h"
 
-struct W17PrimaryState {
-    unsigned int reserved00[3];
-    unsigned int value;
-    unsigned int active;
-};
 
 
 

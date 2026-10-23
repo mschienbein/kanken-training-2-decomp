@@ -1,0 +1,515 @@
+{
+  "schema_version": 1,
+  "family": "display",
+  "agent": "C010DefDisplayCodex",
+  "model": "openai-codex/gpt-6.1-sol:max",
+  "branch": "c010-def-display",
+  "base_commit": "8575e16",
+  "status": "one-function-restored-ten-functions-honestly-deferred-awaiting-main-gates",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "summary": {
+    "target_functions": 11,
+    "target_bytes": 2332,
+    "closed_functions": 1,
+    "closed_bytes": 40,
+    "still_deferred_functions": 10,
+    "still_deferred_bytes": 2292
+  },
+  "input_binding": {
+    "record": "scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+    "sha256": "344ee699b6e6c70f9dbfc0c33a6a88c021f8c138f284c9b4e23fcbf845995352",
+    "prior_records_not_overwritten": true,
+    "preserved_source_root": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010"
+  },
+  "prior_reentries_read": [
+    "scratch/integrator/c010/NEW-DEFERRALS-native-links-r1.json",
+    "scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/retained-source-reads.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/original-contract-facts-r1.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/graphics-storage-match-r56/results.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4061/RECOVERY-EVIDENCE.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4061/RESULT.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu434/variants/final-vertex-array-game/vertex_array.cpp"
+  ],
+  "closed": [
+    {
+      "function": "func_00168cec",
+      "bytes": 40,
+      "source": "src/checkpoint10/func_00168cec.cpp",
+      "profile": "game",
+      "source_sha256": "0c23eefc4e81cd159c050d8438fed81e2f68d91a487d5f5c23ea7821263a2c6c",
+      "canonical_contract": "void func_00168cec(WidgetController*, int alpha); calls void func_0016e300(WidgetController*,int,int,int,int,int)",
+      "resolution": "Preserve original full-word incoming/forwarded alpha rather than infer byte formals from downstream storage. This controller-only wrapper does not need or assert any concrete DisplayData/BoundDisplayObject/ResourceEvent identity.",
+      "original_evidence": [
+        "00168cec+0x0c stores entry r1 as a word and +0x1c forwards it unchanged in outgoing stack slot +4; no byte load/store/extension occurs.",
+        "0016e300 reads the WidgetController indexed slot vector at +0x0c and forwards entry color words (including the two stacked words); its body has no byte loads/stores/extensions.",
+        "The complete direct census has three 0016e300 sites (00168cec and the two 001b5a34 calls) and three 00168cec sites (001de638 and two in 001dfe88). The alpha callers explicitly byte-convert their values. The chosen full-int ABI does not depend on extrapolating those byte conversions to every downstream callee.",
+        "The existing 001debb4 state-machine caller declares the two alpha-calling state bodies void and discards their results; the wrapper return contract stays void."
+      ],
+      "qualification": "[INFERENCE] int signedness/role names retain the existing full-word color convention; no recovered native mangled identity or complete downstream color-owner contract is claimed.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "src/checkpoint10/func_001debb4.c"
+      ],
+      "witnesses": [
+        {
+          "source": "scratch/integrator/c010/display-reentry-r1/drafts/func_00168cec.cpp",
+          "source_sha256": "0c23eefc4e81cd159c050d8438fed81e2f68d91a487d5f5c23ea7821263a2c6c",
+          "profile": "game",
+          "exit_code": 0,
+          "command_record": "scratch/integrator/c010/display-reentry-r1/match/alpha-full-word-r1-exit.json",
+          "receipt": "scratch/integrator/c010/display-reentry-r1/match/alpha-full-word-r1/func_00168cec.result.json",
+          "receipt_sha256": "89bb2a17e8df0a6bbf2e378c36a7b2ceff65f4e150bcfd9e7e2c9287e2ff99ab",
+          "object_sha256": "844dbe2e688f5121d1dc4bc6ea5135c5b520f034a915d05fb447387d7f99385a",
+          "functions": [
+            {
+              "name": "func_00168cec",
+              "address": 1477868,
+              "size": 40,
+              "candidate_size": 40,
+              "status": "match",
+              "first_diff": null,
+              "linker_rewrites": []
+            }
+          ]
+        },
+        {
+          "source": "src/checkpoint10/func_00168cec.cpp",
+          "source_sha256": "0c23eefc4e81cd159c050d8438fed81e2f68d91a487d5f5c23ea7821263a2c6c",
+          "profile": "game",
+          "exit_code": 0,
+          "command_record": "scratch/integrator/c010/display-reentry-r1/match/alpha-destination-r1-exit.json",
+          "receipt": "scratch/integrator/c010/display-reentry-r1/match/alpha-destination-r1/func_00168cec.result.json",
+          "receipt_sha256": "c00fe9d39009193b530dd9e0ec58a660e20568a4508cc4b9d4637e8f668d3b2b",
+          "object_sha256": "9efaeee9b35a1433eccee19400c2624c3865aedf1f83aa7af82767d716e63a76",
+          "functions": [
+            {
+              "name": "func_00168cec",
+              "address": 1477868,
+              "size": 40,
+              "candidate_size": 40,
+              "status": "match",
+              "first_diff": null,
+              "linker_rewrites": []
+            }
+          ]
+        }
+      ],
+      "collection": {
+        "record": "scratch/integrator/c010/display-reentry-r1/collection-exit-r1.json",
+        "exit_code": 0,
+        "collected": "scratch/integrator/c010/display-reentry-r1/collected.json"
+      },
+      "accepted_identity_removed": false,
+      "accepted_identity_moved": false
+    }
+  ],
+  "still_deferred": [
+    {
+      "functions": [
+        "func_00175ab8"
+      ],
+      "bytes": 212,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/func_00175ab8_green_unsigned_temp.c",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00175ab8_green_unsigned_temp.c",
+      "preserved_source_sha256": "1dff078e98dffbf09e0756201011f0f15b7f9ae8af807b96e64a6f66765fa85e",
+      "previous_category": "shared-contract-gap",
+      "previous_reason": "Close original incoming color-domain/ABI proof and the70030/167e08 receiver contract; then obtain a cast-free canonical destination witness. Byte stores alone do not prove byte formals.",
+      "fresh_observations": [
+        "The original has four byte stores into the handle color cache but no byte loads or explicit byte extensions; the public full-int colors remain unchanged. The direct original census finds 29 calls in 15 catalogue owners, not just the four retained tracked callers in the earlier proposal.",
+        "The full-word 0016e300 contract can be kept without publishing a narrowed color prototype. It does not prove a common nominal receiver for 00170030 and the DisplayData color endpoints."
+      ],
+      "remaining_evidence_gap": "W8DisplayHandle.object is DisplayObject*. Type 6 reaches 00170030/00167e08, while types 3/5 reach part/surface operations. Original factory attachment stores have not established one cast-free concrete owner/attachment representation for those branches. Cache-byte stores do not establish unsigned-char incoming formals.",
+      "next_supported_step": "Trace the tag-specific attachment objects constructed in 0013566c (including its 00186908/001405a4/0014055c branches), then the 00181520/00196e14 resource installation. Recover the actual typed owner/attachment relation before canonicalizing W8DisplaySet/W8DisplayHandle and obtaining a destination MATCH. Keep the full-int incoming contract meanwhile.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "include/game/screen.h",
+        "src/wave10/func_00170014.c",
+        "src/wave10/func_0016fff8.c"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    },
+    {
+      "functions": [
+        "func_001e5194"
+      ],
+      "bytes": 276,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/func_001e5194.cpp",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e5194.cpp",
+      "preserved_source_sha256": "7bbe3123704ef92e1d852e15255c3c3670c3b3cc9c7ec3cb2c22eb52cbac52ce",
+      "previous_category": "shared-contract-gap",
+      "previous_reason": "Resolve tagged color receiver representations and full parameter contracts with75ab8/70030/70088/70014/6fff8. Prove update/finish contracts; uncalled slots describe layout only.",
+      "fresh_observations": [
+        "The preserved source still casts the same DisplayObject* through void* to incompatible DisplayData*/BoundDisplayObject* receivers; none of those casts is adopted.",
+        "The distinct controller has its input at +0x14, target at +0x180 and motion at +0x1a4. Existing ScreenController fields differ; matching offsets in a separate cleanup view would not establish class identity."
+      ],
+      "remaining_evidence_gap": "The actual target owner for each tag and the populated update/finish vtable providers are unproved. The local FadeInputState declaration also conflicts with canonical W10DrawingInput. Layout-only virtual declarations cannot establish callable input/result contracts.",
+      "next_supported_step": "Recover the constructor/assignment that populates the fade target and the actual vtable installed in this receiver. Bind the +0x18/+0x20 slot providers and W10DrawingInput projection from those original uses, then migrate the color owner family jointly without object/function-pointer casts.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "include/game/controller.h",
+        "include/game/screen_operations.h"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    },
+    {
+      "functions": [
+        "func_001b5a34",
+        "func_001b5cc0"
+      ],
+      "bytes": 584,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/positions.cpp",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/positions.cpp",
+      "preserved_source_sha256": "c0d8752569725e688fda9bc864d5d3842f65e20836a2eaa6423bfcc8ad166c04",
+      "previous_category": "shared-contract-gap",
+      "previous_reason": "Close6e300 full caller/callee width contract jointly with the color family; do not treat current local byte prototype as independent proof.",
+      "fresh_observations": [
+        "0016e300 has only three direct original sites: 00168cec+0x1c and 001b5a34+0xec/+0x114. Full-word forwarding is now the shared declaration; the old local byte declaration is not needed or adopted.",
+        "Both preserved functions still use DisplayObject* slot values as BoundDisplayObject* in tag 5/6 position branches. The width correction alone therefore does not make this translation unit admissible."
+      ],
+      "remaining_evidence_gap": "A natural tag-specific owner/projection for the slots is missing. 00181700 dereferences binding[0]->pane, while 0015e684 dereferences binding[index]->link: changing these to DisplayObject* merely because the first geometry fields agree would erase actual pointee fields. The private W10LayoutPosition also still needs the existing PanePlacement type when the unit is restored.",
+      "next_supported_step": "Resolve the 0013566c attachment/pool owner contract and the actual slot producers before replacing the casts. Then use PanePlacement from pane_descriptors.h, the full-word dispatcher declaration and the existing CharacterPanel/WidgetController owners, preserving the original null-object fault and re-proving both functions together.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "src/wave7/func_00181700.c",
+        "src/retries/func_0015e684.c",
+        "include/game/pane_descriptors.h"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    },
+    {
+      "functions": [
+        "func_001af00c"
+      ],
+      "bytes": 328,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/func_001af00c.cpp",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001af00c.cpp",
+      "preserved_source_sha256": "ad4f4cce0e6e9eb700284c99af3e977d50e0adfe1cde84c99f177af0dfedd6c1",
+      "previous_category": "shared-contract-gap",
+      "previous_reason": "WidgetSlot.object is DisplayObject*, but00181700/0015e684 currently require BoundDisplayObject*. Prove the tag-specific concrete owner or correct those APIs and all consumers; no two-step void* cast, alias or geometry-only identity assumption. Current source was restored; no successful canonical af00c MATCH is claimed.",
+      "fresh_observations": [
+        "Original producer 001ad148 stores the 0017a818 result through the pointer at controller+0x10 (slot 1), then feeds that same result to 00181700 and 0015e684. This is actual producer/consumer flow, not just slot geometry.",
+        "0017a818 is currently declared ResourceEvent*; its original factory path calls 00181588 -> 0013566c -> 00183168. This exposes the remaining canonical owner split rather than authorizing a downcast."
+      ],
+      "remaining_evidence_gap": "The original slot-1 producer reaches the resource-pool factory, but the canonical WidgetSlot uses DisplayObject* and the accepted position setters use BoundDisplayObject*. The complete pool object and its tag-specific attachments have not been coherently represented; no ResourceEvent/BoundDisplayObject containment is established.",
+      "next_supported_step": "Recover that pool/attachment representation from 0013566c, 00183168 and 00181520, then migrate the actual producer, marker caller and every affected accepted setter consumer together. Only afterward replace the marker/table shadows with WidgetController slot 1 and bss_0024716c[5] and re-match.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "include/game/screen.h",
+        "src/wave7/func_00181700.c",
+        "src/retries/func_0015e684.c"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    },
+    {
+      "functions": [
+        "func_001ae9e4"
+      ],
+      "bytes": 156,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/collect-r2/func_001ae9e4.cpp",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001ae9e4.cpp",
+      "preserved_source_sha256": "b54fef4127479f7c014ddd478deee681dd7bae4737c7d75995569b574769414e",
+      "previous_category": "shared-contract-gap",
+      "previous_reason": "Canonical func_00183208 takes ResourceEvent*, not DisplayObject*. Prove the actual slot-pointee resource relationship through constructor/assignment/callback flow. If ResourceEvent is established, type slot.object accordingly and pass its.base only to display operations. Four-byte slot extent alone is insufficient, and no cast/alias may conceal the conflict.",
+      "fresh_observations": [
+        "The neighbouring 001ae908 allocator/initializer and cleanup retain the 25 one-pointer display slots and 12 snapshot pointers; no larger WidgetSlot allocation is substituted.",
+        "Fresh 001ae2e4 facts show slot 0 receives 0017a818, slot 12 receives 00170a20, and slot 24 receives 001e5738. 00170a20 starts through 00181748; 001e5738 starts through 0015dedc. One ResourceEvent producer is not proof for the other slot families."
+      ],
+      "remaining_evidence_gap": "The complete result/owner chains for 00170a20 and 001e5738 and the corresponding original slot assignments are not tied to one canonical ResourceEvent receiver. The actual same-owner relationship of the Tu606/W19/L044 partial views is also not closed. The preserved snapshot teardown still uses an offsetof/reinterpret recovery, which is not admitted as a new cast-free lifetime proof.",
+      "next_supported_step": "Trace 00181748 and 0015dedc through their allocation/pool providers and bind all three slot groups plus the constructor to the actual shared owner. Then type the real four-byte slot as ResourceEvent* where proven, migrate the same-owner consumers and implement natural snapshot/rectangle teardown without nominal pointer recovery before a fresh MATCH.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "src/checkpoint10/func_001ae00c.c",
+        "include/game/category_progress.h",
+        "src/wave15/func_00183208.c"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    },
+    {
+      "functions": [
+        "func_00167cfc"
+      ],
+      "bytes": 268,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/func_00167cfc.c",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00167cfc.c",
+      "preserved_source_sha256": "fe2d7656c4fa34436968368fc1f758537c0d17a78355023cc4a9cf96b4fea895",
+      "previous_category": "shared-contract-gap",
+      "previous_reason": "The tag5 branch reinterprets BoundDisplayObject as DisplayData for0015e5c4. Its canonical interfaces are distinct, with no actual containing-object/tag-specific producer proof. The independent canonical bound-display setters do not authorize this cast.",
+      "fresh_observations": [
+        "The 0017a818 factory passes the same factory result to 00167cfc; that factory path reaches 0013566c/00183168.",
+        "The accepted tag-5 rotation provider 0015e5c4 uses DisplayData.parts[index]->surface, while accepted 0015e684 uses BoundDisplayObject.bindings[index]->link. The preserved source still casts between these nominal records."
+      ],
+      "remaining_evidence_gap": "The actual containing pool object and the tag-5 attachment identity are unresolved. Common geometry and equal attachment offsets do not establish DisplayData/BoundDisplayObject identity or permit the existing cast.",
+      "next_supported_step": "Establish each tag-specific attachment from the original allocation and installation paths in 0013566c and 00181520, reconcile the accepted position/rotation providers and all consumers using those actual fields, and only then re-enter this seven-float dispatcher.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "src/wave10/func_0015e5c4.c",
+        "src/retries/func_0015e684.c",
+        "include/game/screen.h"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    },
+    {
+      "functions": [
+        "func_001c2f10"
+      ],
+      "bytes": 256,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/func_001c2f10.c",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001c2f10.c",
+      "preserved_source_sha256": "458aaa91fdef56982fe2c3ff82753e82da62327bae6b226b4660d518eb30b7ce",
+      "previous_category": "shared-contract-gap",
+      "previous_reason": "The timer slot also reaches accepted func_0016f534(BoundDisplayObject*). Cleanup requires ResourceEvent*, while the current display operation uses only ResourceEvent.base (DisplayObject*). No actual ResourceEvent/BoundDisplayObject containment or tag-specific owner is proved. Retain the independent ResourceEvent cleanup witness for001c3010, but do not invent a bound-display downcast or publish this incompatible caller.",
+      "fresh_observations": [
+        "Fresh 001c2dd0 producer facts show 0017a818 at +0x60 followed by a store of its result to the timer slot object field at +0x88 (slot+4). This independently supports the timer ResourceEvent ownership already used by accepted cleanup.",
+        "The timer update still needs 0016f534, whose actual accepted provider dereferences DisplayBinding via BoundDisplayObject.bindings. Projecting only ResourceEvent.base cannot satisfy that operation."
+      ],
+      "remaining_evidence_gap": "The timer resource-pool object has no proved BoundDisplayObject containment or tag-specific attachment projection for 0016f534. The independent 001c3010 ResourceEvent cleanup remains valid and is intentionally unchanged.",
+      "next_supported_step": "Resolve the resource-pool/attachment owner through 0017a818 -> 00181588 -> 0013566c -> 00183168; then either use a naturally typed proved subobject or correct 0016f534 and all its actual consumers. Do not merge the separate wide collection or cast the resource pointer.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "include/game/selection_cleanup.h",
+        "src/checkpoint10/func_001c3010.cpp",
+        "src/wave18/func_0016f534.c"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    },
+    {
+      "functions": [
+        "func_00174d9c"
+      ],
+      "bytes": 84,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/collect-r2/func_00174d9c.cpp",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_00174d9c.cpp",
+      "preserved_source_sha256": "42e1c1308c0ef2f0800b03bbd066459a75eaf8ec2588d14d202f2eaf445a2077",
+      "previous_category": "shared-contract-gap",
+      "previous_reason": "Need a natural full-int constructor witness or independent original caller/ABI evidence for a justified contract revision. Preserve the current private MATCH as deferred, not accepted.",
+      "fresh_observations": [
+        "One distinct new variant retained the canonical int,int,unsigned constructor and converted identifiers only at a private stored-short helper boundary. It still emits 84/84 bytes with first difference +0x5 under frozen game/v6/L1.",
+        "The original direct caller census has 561 sites across 17 catalogue owners. This is a location census, not a proved argument-domain or historical short-formal contract. Earlier full-int statement/helper permutations were not repeated and no new binding was admitted."
+      ],
+      "remaining_evidence_gap": "No natural full-int constructor exact witness has been found. Halfword member stores and code-generation differences do not independently justify replacing the canonical full-word constructor/caller contract with short,short. The preserved private short-formal MATCH remains deferred.",
+      "next_supported_step": "Use original caller argument/storage evidence to distinguish a genuinely narrow historical constructor from full-width inputs, or find a natural full-int initialization/lifetime form beyond the already recorded statement/helper permutations. Retain the canonical constructor and playback caller contracts until then.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "scratch/integrator/c010/display-reentry-r1/drafts/position_full_word.cpp",
+        "scratch/integrator/c010/display-reentry-r1/match/constructor-full-word-stored-ids-r1/position_full_word.result.json",
+        "include/game/command_state.h",
+        "include/game/playback_screen.h"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    },
+    {
+      "functions": [
+        "func_0017f7f8"
+      ],
+      "bytes": 128,
+      "status": "still-deferred",
+      "source": "src/checkpoint10/vertex_array.cpp",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/vertex_array.cpp",
+      "preserved_source_sha256": "ec43d771d68590f16e245b9e0af43f609b4ede4ca5f1b5aceba523bd5f0fcfff",
+      "previous_category": "canonicalization-byte-mismatch",
+      "previous_reason": "Actual DisplayTexCoords allocation/default lifetime construction preserves uninitialized32-byte quad storage and full-word requested capacity, without the old VEC2-to-quad nominal cast. The fresh game witness r56 emits84/128B. Do not invent empty constructors/loops solely to restore code shape; no exhausted-search claim.",
+      "fresh_observations": [
+        "A distinct natural allocation form default-initialized the actual DisplayTexCoords array with placement new[] (without parentheses), preserving uninitialized floats and full-word requested capacity. It also emits 84/128 bytes, first difference +0, under frozen game/v6/L1.",
+        "No empty DisplayTexCoords constructor, constructor-only counting loop, native-vector-to-quad cast or value initialization was introduced. The original scalar-storage canonicalization witness and this failed array-lifetime witness are both retained."
+      ],
+      "remaining_evidence_gap": "Canonical DisplayTexCoords has trivial float[4][2] storage, whose real default initialization does not reproduce the original 128-byte construction shape. nn::math::VEC2 default construction is not a proved nominal quad storage identity. The historical 001cf1f4 post-call r1 qualification is not converted into an invented source result.",
+      "next_supported_step": "Recover source-backed native quad/vector element ownership and default lifetime semantics that can be represented in the shared coordinate type without a nominal cast, or find a natural canonical scalar-quad lifetime/allocation form that matches. Re-prove all coordinate consumers if the shared storage definition changes; do not claim an exhausted source search.",
+      "evidence": [
+        "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json",
+        "scratch/integrator/c010/display-reentry-r1/drafts/vertex_array_default_array.cpp",
+        "scratch/integrator/c010/display-reentry-r1/match/coordinates-default-array-r1/vertex_array_default_array.result.json",
+        "include/game/screen.h",
+        "include/nw/lyt/lyt_Layout.h"
+      ],
+      "source_revised": false,
+      "candidate_appended": false
+    }
+  ],
+  "header_changes": [
+    {
+      "path": "include/game/screen.h",
+      "before_sha256": "fe3770a7e76a942e91b3f3a0b7bf6873dc8b033875f4791918e0517cdf198915",
+      "after_sha256": "50239be9363a2bf0ab04fd88c07816e9401f86924310cb214273fd7c7c39ef7c",
+      "changes": [
+        "Adds full-word WidgetController color-dispatch declaration for 0016e300.",
+        "Adds full-word WidgetController alpha-wrapper declaration for 00168cec.",
+        "Adds a short full-word-versus-byte-storage rationale; no record layout, pre-existing prototype or helper is changed."
+      ],
+      "dependent_unit_scope": [
+        "src/checkpoint10/func_00168cec.cpp"
+      ],
+      "scope_reason": "The pre-edit src/include symbol search found no live 0016e300/00168cec declarations or callers; the former local byte declarations are only in preserved deferred sources. The only compiled unit using either added declaration is the restored wrapper. No existing accepted provider/caller source was revised."
+    }
+  ],
+  "candidate_change": {
+    "path": "config/candidates/c010.json",
+    "appended_unit": "src/checkpoint10/func_00168cec.cpp",
+    "appended_functions": [
+      "func_00168cec"
+    ],
+    "moves_added": [],
+    "existing_units_removed": [],
+    "existing_moves_changed": false
+  },
+  "attempts": [
+    {
+      "source": "scratch/integrator/c010/display-reentry-r1/drafts/func_00168cec.cpp",
+      "source_sha256": "0c23eefc4e81cd159c050d8438fed81e2f68d91a487d5f5c23ea7821263a2c6c",
+      "profile": "game",
+      "exit_code": 0,
+      "command_record": "scratch/integrator/c010/display-reentry-r1/match/alpha-full-word-r1-exit.json",
+      "receipt": "scratch/integrator/c010/display-reentry-r1/match/alpha-full-word-r1/func_00168cec.result.json",
+      "receipt_sha256": "89bb2a17e8df0a6bbf2e378c36a7b2ceff65f4e150bcfd9e7e2c9287e2ff99ab",
+      "object_sha256": "844dbe2e688f5121d1dc4bc6ea5135c5b520f034a915d05fb447387d7f99385a",
+      "functions": [
+        {
+          "name": "func_00168cec",
+          "address": 1477868,
+          "size": 40,
+          "candidate_size": 40,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ]
+    },
+    {
+      "source": "scratch/integrator/c010/display-reentry-r1/drafts/position_full_word.cpp",
+      "source_sha256": "d65bf71219c9d88cc3aa5d49137d8e0a9066c352cd0b45403db761c744450d3c",
+      "profile": "game",
+      "exit_code": 1,
+      "command_record": "scratch/integrator/c010/display-reentry-r1/match/constructor-full-word-stored-ids-r1-exit.json",
+      "receipt": "scratch/integrator/c010/display-reentry-r1/match/constructor-full-word-stored-ids-r1/position_full_word.result.json",
+      "receipt_sha256": "ed9983f1873e7fe29dc6fef88b9253df7aa629b8dfc456e39911359ee72a5d83",
+      "object_sha256": "4d401b123772eb307eb5661148e373966ab6f4e23b399f69decc348a2fb782ce",
+      "functions": [
+        {
+          "name": "_ZN18W11PositionCommandC1Eiijfff",
+          "address": 1527196,
+          "size": 84,
+          "candidate_size": 84,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        }
+      ]
+    },
+    {
+      "source": "scratch/integrator/c010/display-reentry-r1/drafts/vertex_array_default_array.cpp",
+      "source_sha256": "e3bcf002e50f4756f864b6e026e41ebf1afb723ef7307e4390b23adcbf7a3206",
+      "profile": "game",
+      "exit_code": 1,
+      "command_record": "scratch/integrator/c010/display-reentry-r1/match/coordinates-default-array-r1-exit.json",
+      "receipt": "scratch/integrator/c010/display-reentry-r1/match/coordinates-default-array-r1/vertex_array_default_array.result.json",
+      "receipt_sha256": "73de722a68b4cbe6578e576bbac83fb5302924bf382a6a604f891b8b5e97d8b2",
+      "object_sha256": "ee4f3853cd380a2395e2ef80e430a0d8f4e8a5fae270c91bbde269d6895af971",
+      "functions": [
+        {
+          "name": "func_0017f7f8",
+          "address": 1570808,
+          "size": 128,
+          "candidate_size": 84,
+          "status": "mismatch",
+          "first_diff": 0,
+          "linker_rewrites": []
+        }
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_00168cec.cpp",
+      "source_sha256": "0c23eefc4e81cd159c050d8438fed81e2f68d91a487d5f5c23ea7821263a2c6c",
+      "profile": "game",
+      "exit_code": 0,
+      "command_record": "scratch/integrator/c010/display-reentry-r1/match/alpha-destination-r1-exit.json",
+      "receipt": "scratch/integrator/c010/display-reentry-r1/match/alpha-destination-r1/func_00168cec.result.json",
+      "receipt_sha256": "c00fe9d39009193b530dd9e0ec58a660e20568a4508cc4b9d4637e8f668d3b2b",
+      "object_sha256": "9efaeee9b35a1433eccee19400c2624c3865aedf1f83aa7af82767d716e63a76",
+      "functions": [
+        {
+          "name": "func_00168cec",
+          "address": 1477868,
+          "size": 40,
+          "candidate_size": 40,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ]
+    }
+  ],
+  "original_fact_commands": [
+    {
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/display-reentry-r1/original_facts_r1.py"
+      ],
+      "exit_code": 0,
+      "owners": 28,
+      "direct_sites": 671,
+      "record": "scratch/integrator/c010/display-reentry-r1/original-facts-r1.json",
+      "note": "First run used the original_facts.py spelling; its exact content is retained under original_facts_r1.py and bound by the recorded script hash."
+    },
+    {
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/display-reentry-r1/original_facts.py",
+        "--run",
+        "r2"
+      ],
+      "exit_code": 0,
+      "owners": 38,
+      "direct_sites": 671,
+      "record": "scratch/integrator/c010/display-reentry-r1/original-facts-r2.json"
+    }
+  ],
+  "facts_limitations": "Original reports contain path-local abstract provenance, not a full alias/loop/virtual-ABI proof; arbitrary constants are range-classified rather than reproduced. Reports do not contain original instructions, bytes, disassembly or payload. Exactness witnesses are the matcher receipts, not the fact scripts.",
+  "verification_exercised": [
+    "Four sequential bounded match.py --show 0 runs: two MATCH witnesses for the restored wrapper, two preserved mismatches.",
+    "One collect.py destination re-derivation using the frozen v6/L1 selection.",
+    "Two scoped metadata-only original fact commands."
+  ],
+  "not_run": [
+    "full build",
+    "test suite",
+    "whole-ledger audit",
+    "G3",
+    "argcheck",
+    "prepare",
+    "independent review",
+    "finalize",
+    "push"
+  ],
+  "preservation": {
+    "predecessor_sources_unchanged": true,
+    "accepted_sources_unchanged": true,
+    "accepted_functions_dropped": [],
+    "accepted_functions_moved": [],
+    "profile_changes": [],
+    "model_changes": [],
+    "new_name_bindings_admitted": [],
+    "failed_sources_and_exits_retained": true
+  },
+  "main_followup": "Review the full-word wrapper contract and its scoped header addition, then include the collected source in the ordinary c010 integration gates. The other ten functions remain outside candidates with the exact evidence gaps above; their old private byte MATCHes are not promoted."
+}

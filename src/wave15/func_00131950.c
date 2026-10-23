@@ -1,4 +1,5 @@
 #include "game/archive.h"
+#include "game/sound_archive.h"
 
 extern int func_00139174(const struct SoundArchiveInfo *info, unsigned int sound_id);
 

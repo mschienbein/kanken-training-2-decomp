@@ -1,7 +1,6 @@
 #include "ctr/cp15.h"
-#include "ctr/svc.h"
+#include "ctr/ipc.h"
 
-extern CtrHandle data_00243040;
 
 struct IpcByteResponse {
     unsigned int header;
@@ -18,7 +17,7 @@ CtrResult func_0018f068(unsigned int value, unsigned char *output)
 
     command->header = (9u << 16) | (1u << 6);
     command->value = value;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = (int)((unsigned int)result & 0x80000000u);
     if (failure < 0)
         return result;

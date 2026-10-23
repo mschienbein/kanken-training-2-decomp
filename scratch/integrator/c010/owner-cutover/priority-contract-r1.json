@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "status": "source-adjudicated-five-touched-units-match-not-whole-audit",
+  "original_facts": "priority-facts-r1.json",
+  "author_result": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r41164/RESULT.json",
+  "author_result_sha256": "e5ed646f71babb9c2735792fcbe716e75b7c2b8e99374cc2c0459faabb2b56fc",
+  "native_header": "include/nw/snd/snd_BasicSound.h",
+  "native_header_sha256": "fe8e91a083a0cb02500ceca93a1bf0a66182f1529de8b934d732c0c406d7389c",
+  "accepted_setter": {
+    "function": "func_0016a87c",
+    "priority_formal": "int",
+    "ambient_formal": "int",
+    "stored_priority": "unsigned char",
+    "priority_offset": 157,
+    "ambient_offset": 80,
+    "original_word_load_callers": {
+      "func_001d0614": [
+        1408,
+        1988,
+        2376
+      ]
+    }
+  },
+  "same_class_setter": {
+    "function": "func_001d2c84",
+    "priority_formal": "int",
+    "stored_priority": "unsigned char",
+    "original_word_load_callers": {
+      "func_001d0614": [
+        3952
+      ]
+    },
+    "notification": "receiver-bearing void(SoundInstance*) at slot0x24; native OnUpdatePlayerPriority() corroboration, not recovered mangled identity"
+  },
+  "canonical_prefix_cutover": {
+    "player_pointer_offset": 16,
+    "pool_link_offset": 248,
+    "player_link_offset": 264,
+    "selection_link_offset": 272,
+    "priority_notification_slot": 36,
+    "root_size_unchanged": 280,
+    "shared_types": [
+      "SoundInstance",
+      "SoundInstanceVTable",
+      "SoundInstancePool",
+      "SequenceSoundControl",
+      "WaveSoundControl"
+    ],
+    "completed_marker_units": [
+      "src/checkpoint10/func_001d2c84.c",
+      "src/checkpoint10/func_001d3bcc.cpp",
+      "src/checkpoint10/func_001d9c14.cpp"
+    ]
+  },
+  "still_blocked": {
+    "source": "src/checkpoint10/func_001d3230.cpp",
+    "reason": "SoundPoolObject/SoundPoolLinkage union removed in favor of canonical SoundInstance.pool_link, but task cancellation still passes RegistryEntry* to an accepted int endpoint. Its INTEGRATOR marker remains; no cast, shadow shared declaration or fake replacement callee was added."
+  },
+  "source_binding": [
+    {
+      "source": "src/wave6/func_0016a87c.c",
+      "before_sha256": "e2ba114b2570aacbde1e6866b4e602096e6fbc03c76ce05aa0785db9223688f1",
+      "after_sha256": "a37357e4bf10f2d3f1e5b500e2a0f57960a4c95d5fcdeb2d772e584f12debd61",
+      "preserved_before": "priority-before/src/wave6/func_0016a87c.c"
+    },
+    {
+      "source": "src/checkpoint10/func_001d2c84.c",
+      "before_sha256": "1d0fa8ed56544fd6093838ed4ae6527c92f41281654f078f2a59c9ef4f3362f8",
+      "after_sha256": "c349b77f785a433937ee511e732ba6e29242f4cc64bc4d7fa4bbd447d41a2acb",
+      "preserved_before": "priority-before/src/checkpoint10/func_001d2c84.c"
+    },
+    {
+      "source": "src/checkpoint10/func_001d3bcc.cpp",
+      "before_sha256": "a0ea611fcd9375067cebc5d8feb908bd706c24310b421b86111f0b56a5d50d3a",
+      "after_sha256": "39dc0f92843efecddbb59bf62defdfb38dde3269efa1b4174e91cfee47421ece",
+      "preserved_before": "priority-before/src/checkpoint10/func_001d3bcc.cpp"
+    },
+    {
+      "source": "src/checkpoint10/func_001d9c14.cpp",
+      "before_sha256": "82b8b3f9a6d13804e8a74fe7a509cdaa25e2f4ef06965de1164a5f7ec387e14c",
+      "after_sha256": "aad7bececd63253d5172e764e358b5a5b9aeb435b5a1a84cd9a6f0ae31a73306",
+      "preserved_before": "priority-before/src/checkpoint10/func_001d9c14.cpp"
+    },
+    {
+      "source": "src/checkpoint10/func_001d3230.cpp",
+      "before_sha256": "8d68a2b765929febfd03dd0ac0da776dedabd32b03d3d7ded7be6549e9ea03d7",
+      "after_sha256": "db7e2d8591e5a36609926a4c2b9b9b9458ae56d995bc1c76ce015847d4952b89",
+      "preserved_before": "priority-before/src/checkpoint10/func_001d3230.cpp"
+    }
+  ],
+  "same_class_sweep_qualifications": [
+    "func_00155dec already uses int and clamps its separate channel priority; no width change.",
+    "Sound handles forward int in the pinned native header; no narrow handle forwarder was identified in this bounded source pass.",
+    "Scheduler unsigned-short fields and file-handle priorities are different contracts and were not widened.",
+    "func_001d2ce0 tests handle attachment; it is not a numeric priority getter.",
+    "Original same-class caller investigation covers func_001d0614 and both setters, not an all-catalogue indirect/signature or runtime audit.",
+    "SoundPlayer/control/pool spellings are descriptive canonical C views; no historical native address-to-mangled-name binding or complete original class-size claim is made.",
+    "The shared external targets func_00143328 and func_0016a3e0 retain the delivered natural-caller contracts; unresolved body/return and native identity qualifications still require the final argcheck/canonical pass."
+  ],
+  "matches": {
+    "results": "../priority-match-r1/results.json",
+    "units": 5,
+    "exit_counts": {
+      "0": 5
+    },
+    "claimed_functions": 5,
+    "source_context": "After header-gap cherry-pick and c009 b6bfcecb merge; sequential nice10 frozen profiles, v2/none, --show0."
+  }
+}

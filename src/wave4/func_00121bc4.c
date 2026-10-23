@@ -1,8 +1,8 @@
 /* [INFERENCE] Signature: Callee packet preserves r0 and forwards it as the second argument to func_00186224/func_0012edd4. */
 
-extern void func_00121bc8(void *object);  /* intrusive-list object; callee rewrites its links */
+#include "game/exp_heap.h"
 
-void func_00121bc4(void *object)
+void func_00121bc4(struct ExpHeap *object)
 {
-    func_00121bc8(object);
+    func_00121bc8(&object->base);
 }

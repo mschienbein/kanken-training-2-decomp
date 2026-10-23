@@ -1,0 +1,2220 @@
+{
+  "schema_version": 1,
+  "scope_units": 431,
+  "counts": {
+    "forward": 23,
+    "different-definition": 79,
+    "identical-definition": 32
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_0017e454.cpp",
+      "type": "PrefetchReferenceTable",
+      "line": 1,
+      "source_sha256": "ccacba1f688259bbf3a4bfdf9ee7a2df3a30f8f5eccd29da5e53a9411f17df4d",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/prefetch_stream.h",
+          "body": "struct PrefetchReferenceTable { unsigned count ; }",
+          "line": 106
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0017e640.cpp",
+      "type": "ManagerLock",
+      "line": 3,
+      "source_sha256": "e76afd940f7df603d0e27fffe2194bbcad01d3c304892cacb938ab9488dc927a",
+      "kind": "different-definition",
+      "body": "struct ManagerLock { unsigned int state ; }",
+      "canonical": [
+        {
+          "header": "include/game/locked_list.h",
+          "body": "struct ManagerLock : StreamMutex { ManagerLock ( ) { critical . state = 0 ; owner = 0 ; depth = ~ 0u ; } }",
+          "line": 17
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0017e640.cpp",
+      "type": "ObjectManager",
+      "line": 7,
+      "source_sha256": "e76afd940f7df603d0e27fffe2194bbcad01d3c304892cacb938ab9488dc927a",
+      "kind": "different-definition",
+      "body": "struct ObjectManager { unsigned char reserved00 [ 0x1c4 ] ; struct ManagerLock lock ; unsigned char reserved1c8 [ 0x14 ] ; struct PoolList active ; }",
+      "canonical": [
+        {
+          "header": "include/game/object_manager.h",
+          "body": "struct ObjectManager { unsigned char reserved00 [ 0x1b8 ] ; unsigned field1b8 , field1bc , field1c0 ; struct StreamMutex lock ; unsigned char reserved1d0 [ 0x0c ] ; struct PoolList active ; unsigned char reserved1e8 [ 0x0c ] ; unsigned char running ; unsigned char reserved1f5 [ 2 ] ; unsigned char stopping ; }",
+          "line": 13
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001441f8.c",
+      "type": "ArchiveResourceReference",
+      "line": 1,
+      "source_sha256": "c013a7860666496098dea2355f34b06b145b40e185969ef6d26a58c754efc66e",
+      "kind": "different-definition",
+      "body": "struct ArchiveResourceReference { unsigned short type ; unsigned short reserved02 ; int offset ; }",
+      "canonical": [
+        {
+          "header": "include/game/archive_resource.h",
+          "body": "struct ArchiveResourceReference { unsigned short type , reserved02 ; int offset ; }",
+          "line": 6
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001441f8.c",
+      "type": "ArchiveInternalFile",
+      "line": 6,
+      "source_sha256": "c013a7860666496098dea2355f34b06b145b40e185969ef6d26a58c754efc66e",
+      "kind": "different-definition",
+      "body": "struct ArchiveInternalFile { unsigned group ; unsigned offset ; unsigned size ; }",
+      "canonical": [
+        {
+          "header": "include/game/archive_resource.h",
+          "body": "struct ArchiveInternalFile { unsigned group , offset , size ; }",
+          "line": 28
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0010a814.c",
+      "type": "DisplayQueueCounter",
+      "line": 4,
+      "source_sha256": "adfe9452fd5d37cdcec404378a770350ed58f2d0862da2a7cef821b9314fbdb9",
+      "kind": "different-definition",
+      "body": "struct DisplayQueueCounter { unsigned char reserved00 [ 8 ] ; int count ; int enabled ; }",
+      "canonical": [
+        {
+          "header": "include/game/screen.h",
+          "body": "struct DisplayQueueCounter { unsigned ready ; unsigned count ; unsigned enabled ; int mode ; unsigned char active ; unsigned char reserved11 [ 3 ] ; int counter ; unsigned capacity ; }",
+          "line": 172
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001ce8b8.cpp",
+      "type": "BinaryFileHeader",
+      "line": 1,
+      "source_sha256": "5e75e3cdfed626111893cbe58941b90b90bd6199db5c96c94f5bce7c4c208d7b",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/font_resource.h",
+          "body": "struct BinaryFileHeader { unsigned signature ; unsigned short byte_order ; unsigned short header_size ; unsigned version ; unsigned file_size ; unsigned short block_count ; unsigned short reserved12 ; unsigned char blocks [ ] ; }",
+          "line": 68
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001ce8b8.cpp",
+      "type": "BinaryBlockHeader",
+      "line": 2,
+      "source_sha256": "5e75e3cdfed626111893cbe58941b90b90bd6199db5c96c94f5bce7c4c208d7b",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/font_resource.h",
+          "body": "struct BinaryBlockHeader { unsigned signature ; unsigned size ; }",
+          "line": 97
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0016de28_shape11.c",
+      "type": "AnimationState",
+      "line": 3,
+      "source_sha256": "210e91d983f84065ffbacc0e3d224fcd71b71959b8d5345207e2a6bf5eb06460",
+      "kind": "different-definition",
+      "body": "struct AnimationState { unsigned char reserved00 [ 0x34 ] ; unsigned char disabled ; unsigned char has_secondary ; unsigned char reserved36 [ 0x0e ] ; float start ; float finish ; unsigned char reserved4c [ 0x0c ] ; float lower ; float upper ; float current ; }",
+      "canonical": [
+        {
+          "header": "include/game/w11_control.h",
+          "body": "struct AnimationState { unsigned char reserved00 [ 0x10 ] ; void * primary ; unsigned char reserved14 [ 0x30 ] ; float start , finish ; unsigned char reserved4c [ 8 ] ; int enabled ; float lower , upper , current ; }",
+          "line": 29
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0018f6c8_shape07.c",
+      "type": "MappedMemoryBlock",
+      "line": 6,
+      "source_sha256": "2c890c84ce483ef35743c3450f7760b288389bcb89762dd2a5cb6d51cb211d45",
+      "kind": "different-definition",
+      "body": "struct MappedMemoryBlock { struct MappedMemoryBlock * next ; struct MappedMemoryBlock * previous ; void * address ; unsigned int size ; unsigned char read_only ; unsigned char reserved [ 3 ] ; CtrHandle handle ; unsigned char mapped ; }",
+      "canonical": [
+        {
+          "header": "include/game/memory_arena.h",
+          "body": "struct MappedMemoryBlock { struct MappedMemoryBlock * next , * previous ; void * address ; unsigned size ; unsigned char read_only ; unsigned char reserved11 [ 3 ] ; CtrHandle handle ; unsigned char mapped ; }",
+          "line": 7
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0018f6c8_shape07.c",
+      "type": "MemoryArena",
+      "line": 17,
+      "source_sha256": "2c890c84ce483ef35743c3450f7760b288389bcb89762dd2a5cb6d51cb211d45",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/memory_arena.h",
+          "body": "struct MemoryArena { unsigned char * begin , * end ; struct MappedMemoryBlock * current ; struct StreamMutex mutex ; }",
+          "line": 16
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001526b4_modefirst.c",
+      "type": "AudioBiquadCoefficients",
+      "line": 4,
+      "source_sha256": "e8444a3abc4ae0d72b8f8d03f12e9bda961c4154d40b79362ca14a91cc8e7676",
+      "kind": "different-definition",
+      "body": "struct AudioBiquadCoefficients { short b0 , b1 , b2 , a1 , a2 ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_filter.h",
+          "body": "struct AudioBiquadCoefficients { short values [ 5 ] ; }",
+          "line": 9
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001526b4_modefirst.c",
+      "type": "AdpcmCoefficients",
+      "line": 7,
+      "source_sha256": "e8444a3abc4ae0d72b8f8d03f12e9bda961c4154d40b79362ca14a91cc8e7676",
+      "kind": "identical-definition",
+      "body": "struct AdpcmCoefficients { short pairs [ 8 ] [ 2 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AdpcmCoefficients { short pairs [ 8 ] [ 2 ] ; }",
+          "line": 49
+        }
+      ],
+      "matching_headers": [
+        "include/game/audio_voice.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001526b4_modefirst.c",
+      "type": "AudioSlot",
+      "line": 8,
+      "source_sha256": "e8444a3abc4ae0d72b8f8d03f12e9bda961c4154d40b79362ca14a91cc8e7676",
+      "kind": "identical-definition",
+      "body": "struct AudioSlot { unsigned char reserved00 [ 0x10 ] ; signed char mode ; unsigned char state ; unsigned char reserved12 [ 2 ] ; struct AudioSlot * next ; unsigned char reserved18 [ 0x18 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioSlot { unsigned char reserved00 [ 0x10 ] ; signed char mode ; unsigned char state ; unsigned char reserved12 [ 2 ] ; struct AudioSlot * next ; unsigned char reserved18 [ 0x18 ] ; }",
+          "line": 141
+        }
+      ],
+      "matching_headers": [
+        "include/game/audio_voice.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001526b4_modefirst.c",
+      "type": "AudioChannelState",
+      "line": 18,
+      "source_sha256": "e8444a3abc4ae0d72b8f8d03f12e9bda961c4154d40b79362ca14a91cc8e7676",
+      "kind": "different-definition",
+      "body": "struct AudioChannelState { unsigned int id ; unsigned short generation ; unsigned char reserved06 [ 6 ] ; unsigned char started ; unsigned char mode ; unsigned char reserved0e [ 6 ] ; struct AudioBiquadCoefficients filter ; unsigned short flags1e ; unsigned char reserved20 [ 0x10 ] ; struct AudioSlot * pending ; unsigned short pending_count ; unsigned short pending_limit ; unsigned char reserved38 [ 0x34 ] ; unsigned short flags ; unsigned char reserved6e [ 2 ] ; struct StreamMutex mutex ; struct AdpcmCoefficients coefficients ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioChannelState { unsigned int channel ; unsigned short generation ; unsigned short value06 ; unsigned int value08 ; unsigned char active ; unsigned char mode ; unsigned char flag0e ; unsigned char flag0f ; unsigned int value10 ; struct AudioBiquadCoefficients biquad ; unsigned short flags1e ; unsigned int sample_rate ; float value24 ; unsigned char reserved28 [ 4 ] ; unsigned int value2c ; unsigned int value30 ; unsigned short value34 ; unsigned short value36 ; float value38 ; float value3c ; float values40 [ 10 ] ; float value68 ; unsigned short flags ; unsigned char flag6e ; unsigned char flag6f ; struct StreamMutex mutex ; struct AdpcmCoefficients coefficients ; }",
+          "line": 53
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001526b4_modefirst.c",
+      "type": "AudioChannel",
+      "line": 39,
+      "source_sha256": "e8444a3abc4ae0d72b8f8d03f12e9bda961c4154d40b79362ca14a91cc8e7676",
+      "kind": "different-definition",
+      "body": "struct AudioChannel { unsigned char reserved00 [ 4 ] ; unsigned char mode ; unsigned char reserved05 [ 7 ] ; struct AudioBiquadCoefficients filter ; unsigned char reserved16 [ 0x52 ] ; struct AudioChannelState * state ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioChannel { unsigned char reserved00 [ 4 ] ; unsigned char mode ; unsigned char reserved05 [ 7 ] ; struct AudioBiquadCoefficients filter ; unsigned char reserved16 [ 6 ] ; float volume ; unsigned char reserved20 [ 0x44 ] ; float gain ; struct AudioChannelState * state ; }",
+          "line": 83
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0015343c_late_workspace.c",
+      "type": "StreamLockGuard",
+      "line": 5,
+      "source_sha256": "c96db7f96ba4a01d1318cfe68c51cb6115fdf6c602f6f2e390a6b1daf67a5830",
+      "kind": "different-definition",
+      "body": "struct StreamLockGuard { struct StreamMutex * mutex ; }",
+      "canonical": [
+        {
+          "header": "include/game/exp_heap.h",
+          "body": "struct StreamLockGuard { struct StreamMutex * mutex ; explicit StreamLockGuard ( struct StreamMutex * value ) : mutex ( value ) { func_00192bd8 ( mutex ) ; } ~ StreamLockGuard ( ) { func_00195d74 ( mutex ) ; } }",
+          "line": 68
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0015343c_late_workspace.c",
+      "type": "WorkspacePair",
+      "line": 25,
+      "source_sha256": "c96db7f96ba4a01d1318cfe68c51cb6115fdf6c602f6f2e390a6b1daf67a5830",
+      "kind": "identical-definition",
+      "body": "struct WorkspacePair { struct ChannelWorkspace * channels ; struct ExtendedWorkspace * extended ; }",
+      "canonical": [
+        {
+          "header": "include/game/service_runtime.h",
+          "body": "struct WorkspacePair { struct ChannelWorkspace * channels ; struct ExtendedWorkspace * extended ; }",
+          "line": 53
+        }
+      ],
+      "matching_headers": [
+        "include/game/service_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001534e0_late_workspace.c",
+      "type": "StreamLockGuard",
+      "line": 5,
+      "source_sha256": "36e1da92d9ef90577645e54b20467c004082305d95b90a4197f504a1ed4e2754",
+      "kind": "different-definition",
+      "body": "struct StreamLockGuard { struct StreamMutex * mutex ; }",
+      "canonical": [
+        {
+          "header": "include/game/exp_heap.h",
+          "body": "struct StreamLockGuard { struct StreamMutex * mutex ; explicit StreamLockGuard ( struct StreamMutex * value ) : mutex ( value ) { func_00192bd8 ( mutex ) ; } ~ StreamLockGuard ( ) { func_00195d74 ( mutex ) ; } }",
+          "line": 68
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001534e0_late_workspace.c",
+      "type": "WorkspacePair",
+      "line": 25,
+      "source_sha256": "36e1da92d9ef90577645e54b20467c004082305d95b90a4197f504a1ed4e2754",
+      "kind": "identical-definition",
+      "body": "struct WorkspacePair { struct ChannelWorkspace * channels ; struct ExtendedWorkspace * extended ; }",
+      "canonical": [
+        {
+          "header": "include/game/service_runtime.h",
+          "body": "struct WorkspacePair { struct ChannelWorkspace * channels ; struct ExtendedWorkspace * extended ; }",
+          "line": 53
+        }
+      ],
+      "matching_headers": [
+        "include/game/service_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_00175ab8_green_unsigned_temp.c",
+      "type": "DisplayObject",
+      "line": 4,
+      "source_sha256": "994bba675174d7828384181f73bdb1257cf23ffe4b469a4d50c114025c75172c",
+      "kind": "identical-definition",
+      "body": "struct DisplayObject { float position [ 3 ] ; float rotation [ 3 ] ; float scale [ 3 ] ; unsigned char reserved24 [ 0x6e ] ; unsigned char types [ 2 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/screen.h",
+          "body": "struct DisplayObject { float position [ 3 ] ; float rotation [ 3 ] ; float scale [ 3 ] ; unsigned char reserved24 [ 0x6e ] ; unsigned char types [ 2 ] ; }",
+          "line": 15
+        }
+      ],
+      "matching_headers": [
+        "include/game/screen.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_00175ab8_green_unsigned_temp.c",
+      "type": "DisplayPart",
+      "line": 11,
+      "source_sha256": "994bba675174d7828384181f73bdb1257cf23ffe4b469a4d50c114025c75172c",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/screen.h",
+          "body": "struct DisplayPart { unsigned char reserved00 [ 0x10 ] ; unsigned char alpha , red , green , blue ; unsigned char reserved14 [ 8 ] ; struct LayoutContainer * container ; unsigned char reserved20 [ 8 ] ; struct DisplaySurface * surface ; unsigned char reserved2c [ 8 ] ; struct LayoutPane * pane ; }",
+          "line": 41
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00175ab8_green_unsigned_temp.c",
+      "type": "DisplayData",
+      "line": 12,
+      "source_sha256": "994bba675174d7828384181f73bdb1257cf23ffe4b469a4d50c114025c75172c",
+      "kind": "identical-definition",
+      "body": "struct DisplayData { struct DisplayObject base ; struct DisplayPart * parts [ ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/screen.h",
+          "body": "struct DisplayData { struct DisplayObject base ; struct DisplayPart * parts [ ] ; }",
+          "line": 52
+        }
+      ],
+      "matching_headers": [
+        "include/game/screen.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001e3700_array_loop.cpp",
+      "type": "HeapArena",
+      "line": 8,
+      "source_sha256": "b6735620db9304bdb85ea0e29968bec2ffca88b34604012ddeae12f75ec5086a",
+      "kind": "different-definition",
+      "body": "struct HeapArena { const W15fVTable * vtable ; unsigned int state04 ; unsigned int state08 ; unsigned int state0c ; unsigned int state10 ; unsigned int state14 ; unsigned int state18 ; unsigned char reserved1c [ 0x38 ] ; unsigned allocations ; unsigned char * lower ; unsigned size ; void initialize ( ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/exp_heap.h",
+          "body": "struct HeapArena { struct ManagedExpHeap base ; unsigned char * lower ; unsigned size ; }",
+          "line": 63
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001312d4.cpp",
+      "type": "ObjectManager",
+      "line": 9,
+      "source_sha256": "098179b5de0bb110fd7ae019fd52bd12a5d834ed4e631855a76bdfa45c824e7c",
+      "kind": "different-definition",
+      "body": "struct ObjectManager { unsigned char reserved00 [ 0x1b8 ] ; unsigned field1b8 , field1bc , field1c0 ; StreamMutex lock ; nw :: ut :: LinkList < RegistryEntry , offsetof ( RegistryEntry , link ) > registry ; PoolList active ; unsigned char reserved1e8 [ 0x0c ] ; unsigned char running ; unsigned char reserved1f5 [ 2 ] ; unsigned char stopping ; }",
+      "canonical": [
+        {
+          "header": "include/game/object_manager.h",
+          "body": "struct ObjectManager { unsigned char reserved00 [ 0x1b8 ] ; unsigned field1b8 , field1bc , field1c0 ; struct StreamMutex lock ; unsigned char reserved1d0 [ 0x0c ] ; struct PoolList active ; unsigned char reserved1e8 [ 0x0c ] ; unsigned char running ; unsigned char reserved1f5 [ 2 ] ; unsigned char stopping ; }",
+          "line": 13
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0014bc70.cpp",
+      "type": "ObjectManager",
+      "line": 9,
+      "source_sha256": "c118493d38868a3eb678505149e2389bc851027eb168f6004aa6e5d8422e5c6c",
+      "kind": "different-definition",
+      "body": "struct ObjectManager { unsigned char reserved00 [ 0x1b8 ] ; unsigned field1b8 , field1bc , field1c0 ; StreamMutex lock ; nw :: ut :: LinkList < RegistryEntry , offsetof ( RegistryEntry , link ) > registry ; PoolList active ; unsigned char reserved1e8 [ 0x0c ] ; unsigned char running ; unsigned char reserved1f5 [ 2 ] ; unsigned char stopping ; }",
+      "canonical": [
+        {
+          "header": "include/game/object_manager.h",
+          "body": "struct ObjectManager { unsigned char reserved00 [ 0x1b8 ] ; unsigned field1b8 , field1bc , field1c0 ; struct StreamMutex lock ; unsigned char reserved1d0 [ 0x0c ] ; struct PoolList active ; unsigned char reserved1e8 [ 0x0c ] ; unsigned char running ; unsigned char reserved1f5 [ 2 ] ; unsigned char stopping ; }",
+          "line": 13
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0019ebd0.cpp",
+      "type": "ServiceObject",
+      "line": 18,
+      "source_sha256": "1fd096870069f3e05664afc693b316c22ac1a61e5060581bef9d459fd790e34e",
+      "kind": "identical-definition",
+      "body": "struct ServiceObject { unsigned handle ; }",
+      "canonical": [
+        {
+          "header": "include/game/service_protocol.h",
+          "body": "struct ServiceObject { unsigned handle ; }",
+          "line": 8
+        }
+      ],
+      "matching_headers": [
+        "include/game/service_protocol.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001d65e0.cpp",
+      "type": "SceneEngine",
+      "line": 35,
+      "source_sha256": "5ac62fa6142e91459ca56401a21cf990c57e480e15abcafc90bbeda5bb3c6a2d",
+      "kind": "different-definition",
+      "body": "struct SceneEngine { unsigned char reserved00 [ 0x14 ] ; struct SceneRenderer * renderer ; unsigned char reserved18 [ 0x51 - 0x18 ] ; unsigned char inhibited ; unsigned char reserved52 [ 0x64 - 0x52 ] ; struct PolymorphicBase base ; unsigned char reserved68 [ 8 ] ; struct SignalState synchronization ; unsigned char reserved78 [ 0x84 - 0x78 ] ; struct PoolList active ; struct FreeLink * free_list ; struct SceneEntry entries [ 32 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneEngine { const void * vtable ; unsigned char reserved04 [ 0x4d ] ; unsigned char inhibited ; unsigned char reserved52 [ 0x32 ] ; struct PoolList active ; ~ SceneEngine ( ) ; }",
+          "line": 51
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00154804.c",
+      "type": "PrefetchReferenceTable",
+      "line": 8,
+      "source_sha256": "92115b3816ada5591d4a4c35fc438e2fe3b98aa20dd940a8febff653645e35b8",
+      "kind": "different-definition",
+      "body": "struct PrefetchReferenceTable { unsigned count ; struct PrefetchChannelReference entries [ ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/prefetch_stream.h",
+          "body": "struct PrefetchReferenceTable { unsigned count ; }",
+          "line": 106
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001e9754.c",
+      "type": "MotionState",
+      "line": 4,
+      "source_sha256": "a7910461069dc731dff6e37feb68c6d04f3f582ec1479218cdb09cf191be73dc",
+      "kind": "different-definition",
+      "body": "struct MotionState { int mode ; unsigned key_flags ; unsigned flags ; float time ; float scale ; float first_time ; float last_time ; int first ; int last ; int current ; float blend ; int count ; struct MotionKey * allocation ; }",
+      "canonical": [
+        {
+          "header": "include/game/runtime.h",
+          "body": "struct MotionState { struct InputMode mode ; unsigned key_flags ; unsigned flags ; float time ; float scale ; float first_time ; float last_time ; int first ; int last ; int current ; float blend ; int count ; struct MotionKey * allocation ; }",
+          "line": 71
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001e9754.c",
+      "type": "AnimatedWidget",
+      "line": 20,
+      "source_sha256": "a7910461069dc731dff6e37feb68c6d04f3f582ec1479218cdb09cf191be73dc",
+      "kind": "identical-definition",
+      "body": "struct AnimatedWidget { unsigned flags ; int enabled ; unsigned char reserved08 [ 0x48 ] ; float position [ 2 ] ; float displacement [ 2 ] ; float effective [ 2 ] ; float base [ 2 ] ; unsigned char reserved70 [ 0x14 ] ; struct MotionState motion ; }",
+      "canonical": [
+        {
+          "header": "include/game/motion_screen.h",
+          "body": "struct AnimatedWidget { unsigned flags ; int enabled ; unsigned char reserved08 [ 0x48 ] ; float position [ 2 ] ; float displacement [ 2 ] ; float effective [ 2 ] ; float base [ 2 ] ; unsigned char reserved70 [ 0x14 ] ; struct MotionState motion ; }",
+          "line": 5
+        }
+      ],
+      "matching_headers": [
+        "include/game/motion_screen.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001e9754.c",
+      "type": "MotionScreen",
+      "line": 32,
+      "source_sha256": "a7910461069dc731dff6e37feb68c6d04f3f582ec1479218cdb09cf191be73dc",
+      "kind": "identical-definition",
+      "body": "struct MotionScreen { unsigned char reserved00 [ 0x20 ] ; struct AnimatedWidget * widgets [ 20 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/motion_screen.h",
+          "body": "struct MotionScreen { unsigned char reserved00 [ 0x20 ] ; struct AnimatedWidget * widgets [ 20 ] ; }",
+          "line": 17
+        }
+      ],
+      "matching_headers": [
+        "include/game/motion_screen.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001e9754.c",
+      "type": "MotionKey",
+      "line": 38,
+      "source_sha256": "a7910461069dc731dff6e37feb68c6d04f3f582ec1479218cdb09cf191be73dc",
+      "kind": "different-definition",
+      "body": "struct MotionKey { float time ; unsigned flags ; unsigned char reserved08 [ 0x0c ] ; float value ; }",
+      "canonical": [
+        {
+          "header": "include/game/runtime.h",
+          "body": "struct MotionKey { float time ; unsigned flags ; unsigned char reserved08 [ 0x10 ] ; }",
+          "line": 66
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "type": "PipelineConfiguration",
+      "line": 2,
+      "source_sha256": "2b0c1af1b97c430b1f2d5d2bea9391a4fbc4d47fee9fda3f7b774bd709aef0a4",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct PipelineConfiguration { struct VertexAttribute attributes [ 16 ] ; unsigned char reserved180 [ 8 ] ; float constants [ 16 ] [ 4 ] ; struct VertexRange ranges [ 16 ] ; }",
+          "line": 73
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "type": "PipelineStorage",
+      "line": 17,
+      "source_sha256": "2b0c1af1b97c430b1f2d5d2bea9391a4fbc4d47fee9fda3f7b774bd709aef0a4",
+      "kind": "different-definition",
+      "body": "struct PipelineStorage { struct W6eGpuBuffer * buckets [ 512 ] ; struct PipelineConfiguration * configuration ; unsigned char reserved804 [ 0x50 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct PipelineStorage { unsigned char reserved00 [ 0x800 ] ; struct PipelineConfiguration * configuration ; unsigned reserved804 ; unsigned current ; unsigned reserved80c ; struct PipelineSnapshot snapshots [ ] ; }",
+          "line": 84
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "type": "PipelineOwner",
+      "line": 23,
+      "source_sha256": "2b0c1af1b97c430b1f2d5d2bea9391a4fbc4d47fee9fda3f7b774bd709aef0a4",
+      "kind": "identical-definition",
+      "body": "struct PipelineOwner { struct PipelineStorage * storage ; unsigned ready ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct PipelineOwner { struct PipelineStorage * storage ; unsigned ready ; }",
+          "line": 95
+        }
+      ],
+      "matching_headers": [
+        "include/game/render_state.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "type": "GpuVertexAttribute",
+      "line": 28,
+      "source_sha256": "2b0c1af1b97c430b1f2d5d2bea9391a4fbc4d47fee9fda3f7b774bd709aef0a4",
+      "kind": "identical-definition",
+      "body": "struct GpuVertexAttribute { unsigned offset ; unsigned components ; unsigned format ; unsigned stride ; unsigned buffer ; unsigned char normalized ; unsigned char enabled ; unsigned char reserved16 [ 2 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct GpuVertexAttribute { unsigned offset ; unsigned components ; unsigned format ; unsigned stride ; unsigned buffer ; unsigned char normalized ; unsigned char enabled ; unsigned char reserved16 [ 2 ] ; }",
+          "line": 107
+        }
+      ],
+      "matching_headers": [
+        "include/game/render_state.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "type": "GpuState",
+      "line": 39,
+      "source_sha256": "2b0c1af1b97c430b1f2d5d2bea9391a4fbc4d47fee9fda3f7b774bd709aef0a4",
+      "kind": "different-definition",
+      "body": "struct GpuState { unsigned dirty ; unsigned char reserved04 [ 0x1c ] ; int viewport_x ; int viewport_y ; int viewport_width ; int viewport_height ; unsigned char viewport_dirty ; unsigned char reserved31 [ 0x427 ] ; struct GpuVertexAttribute attributes [ 16 ] ; unsigned element_buffer ; unsigned array_buffer ; unsigned deferred_buffer ; unsigned char reserved5e4 [ 0x7c ] ; float clear_color [ 4 ] ; unsigned char reserved670 [ 0x100 ] ; unsigned control ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct GpuState { unsigned dirty ; unsigned char reserved04 [ 0x1c ] ; int viewport_x ; int viewport_y ; int viewport_width ; int viewport_height ; unsigned char viewport_dirty ; unsigned char reserved31 [ 0x27 ] ; unsigned active_texture ; unsigned char reserved5c [ 0x3fc ] ; struct GpuVertexAttribute attributes [ 16 ] ; unsigned element_buffer ; unsigned array_buffer ; unsigned deferred_buffer ; unsigned char reserved5e4 [ 0x7c ] ; float clear_color [ 4 ] ; unsigned char reserved670 [ 0x100 ] ; unsigned control ; }",
+          "line": 118
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0014aeb4.c",
+      "type": "MappedMemoryBlock",
+      "line": 3,
+      "source_sha256": "1bd5bf3b1a4489b03fbdf8b497e55eea6f4551aed474078222ce0f005b39c9bc",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/memory_arena.h",
+          "body": "struct MappedMemoryBlock { struct MappedMemoryBlock * next , * previous ; void * address ; unsigned size ; unsigned char read_only ; unsigned char reserved11 [ 3 ] ; CtrHandle handle ; unsigned char mapped ; }",
+          "line": 7
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0014aeb4.c",
+      "type": "MemoryArena",
+      "line": 4,
+      "source_sha256": "1bd5bf3b1a4489b03fbdf8b497e55eea6f4551aed474078222ce0f005b39c9bc",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/memory_arena.h",
+          "body": "struct MemoryArena { unsigned char * begin , * end ; struct MappedMemoryBlock * current ; struct StreamMutex mutex ; }",
+          "line": 16
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0019312c.c",
+      "type": "PackageFile",
+      "line": 4,
+      "source_sha256": "a1e403b34ed4e19a7ea2f270a3afd5101bf012632988b1b453feaf760a72eaa8",
+      "kind": "identical-definition",
+      "body": "struct PackageFile { struct WordPair handle ; unsigned char reserved08 [ 0x10 ] ; const struct PackageAttribute * attributes ; unsigned attribute_count ; unsigned reserved20 ; unsigned short * path ; unsigned path_length ; unsigned reserved2c ; }",
+      "canonical": [
+        {
+          "header": "include/game/package_file.h",
+          "body": "struct PackageFile { struct WordPair handle ; unsigned char reserved08 [ 0x10 ] ; const struct PackageAttribute * attributes ; unsigned attribute_count ; unsigned reserved20 ; unsigned short * path ; unsigned path_length ; unsigned reserved2c ; }",
+          "line": 7
+        }
+      ],
+      "matching_headers": [
+        "include/game/package_file.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0019312c.c",
+      "type": "PackageView",
+      "line": 18,
+      "source_sha256": "a1e403b34ed4e19a7ea2f270a3afd5101bf012632988b1b453feaf760a72eaa8",
+      "kind": "identical-definition",
+      "body": "struct PackageView { struct PackageFile * file ; }",
+      "canonical": [
+        {
+          "header": "include/game/package_file.h",
+          "body": "struct PackageView { struct PackageFile * file ; }",
+          "line": 18
+        }
+      ],
+      "matching_headers": [
+        "include/game/package_file.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0016bd7c.c",
+      "type": "FileHandleOwner",
+      "line": 3,
+      "source_sha256": "f86647d6d861acee2cc8f73c274e1db32e628ca3216288cd553167e2ca6f0dd6",
+      "kind": "identical-definition",
+      "body": "struct FileHandleOwner { unsigned reserved00 ; unsigned handle ; }",
+      "canonical": [
+        {
+          "header": "include/game/file_handle.h",
+          "body": "struct FileHandleOwner { unsigned reserved00 ; unsigned handle ; }",
+          "line": 15
+        }
+      ],
+      "matching_headers": [
+        "include/game/file_handle.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_00181a4c.c",
+      "type": "CommandQueue",
+      "line": 25,
+      "source_sha256": "b9c8255b9f396549b26aaaa97d81cebf6afdd613bd8010529f7559ed55d77081",
+      "kind": "different-definition",
+      "body": "struct CommandQueue { unsigned char reserved00 [ 0x1024 ] ; int next ; unsigned reserved28 ; struct QueuedCommand commands [ 256 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/bss_0049ecf0.h",
+          "body": "struct CommandQueue { unsigned id ; unsigned char * base ; unsigned capacity ; unsigned offset ; unsigned committed_bytes ; unsigned committed_offset ; struct Command * commands ; unsigned char reserved1c [ 4 ] ; int count ; int completed_count ; int cursor ; unsigned flags ; unsigned state30 ; unsigned state34 ; void ( * callback ) ( void ) ; unsigned reserved3c ; struct CommandQueue * next ; }",
+          "line": 30
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00155dec.c",
+      "type": "AudioChannelState",
+      "line": 2,
+      "source_sha256": "a18575cd50921c97e91f2e03da67e749b7f673f0c322c566f16475f9c9712b81",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioChannelState { unsigned int channel ; unsigned short generation ; unsigned short value06 ; unsigned int value08 ; unsigned char active ; unsigned char mode ; unsigned char flag0e ; unsigned char flag0f ; unsigned int value10 ; struct AudioBiquadCoefficients biquad ; unsigned short flags1e ; unsigned int sample_rate ; float value24 ; unsigned char reserved28 [ 4 ] ; unsigned int value2c ; unsigned int value30 ; unsigned short value34 ; unsigned short value36 ; float value38 ; float value3c ; float values40 [ 10 ] ; float value68 ; unsigned short flags ; unsigned char flag6e ; unsigned char flag6f ; struct StreamMutex mutex ; struct AdpcmCoefficients coefficients ; }",
+          "line": 53
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00155dec.c",
+      "type": "AudioChannel",
+      "line": 6,
+      "source_sha256": "a18575cd50921c97e91f2e03da67e749b7f673f0c322c566f16475f9c9712b81",
+      "kind": "different-definition",
+      "body": "struct AudioChannel { unsigned char reserved00 [ 0x20 ] ; int priority ; unsigned char reserved24 [ 0x44 ] ; struct AudioChannelState * state ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioChannel { unsigned char reserved00 [ 4 ] ; unsigned char mode ; unsigned char reserved05 [ 7 ] ; struct AudioBiquadCoefficients filter ; unsigned char reserved16 [ 6 ] ; float volume ; unsigned char reserved20 [ 0x44 ] ; float gain ; struct AudioChannelState * state ; }",
+          "line": 83
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d6ab8.cpp",
+      "type": "SynchronizationOwner",
+      "line": 7,
+      "source_sha256": "67177cfeec2d8d2615ecaee2d63aabd64335eeac851353406380ca0628f45c31",
+      "kind": "different-definition",
+      "body": "struct SynchronizationOwner { const void * vtable ; struct SynchronizationState synchronization ; }",
+      "canonical": [
+        {
+          "header": "include/game/synchronization.h",
+          "body": "struct SynchronizationOwner { const void * vtable ; struct SignalState synchronization ; }",
+          "line": 13
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d6ab8.cpp",
+      "type": "FreeLink",
+      "line": 11,
+      "source_sha256": "67177cfeec2d8d2615ecaee2d63aabd64335eeac851353406380ca0628f45c31",
+      "kind": "identical-definition",
+      "body": "struct FreeLink { struct FreeLink * next ; }",
+      "canonical": [
+        {
+          "header": "include/game/region_heap.h",
+          "body": "struct FreeLink { struct FreeLink * next ; }",
+          "line": 14
+        }
+      ],
+      "matching_headers": [
+        "include/game/region_heap.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001d6ab8.cpp",
+      "type": "SceneEngine",
+      "line": 41,
+      "source_sha256": "67177cfeec2d8d2615ecaee2d63aabd64335eeac851353406380ca0628f45c31",
+      "kind": "different-definition",
+      "body": "struct SceneEngine { unsigned char reserved00 [ 0x14 ] ; struct SceneRenderer * renderer ; unsigned char reserved18 [ 0x51 - 0x18 ] ; unsigned char inhibited ; unsigned char reserved52 [ 0x64 - 0x52 ] ; struct PolymorphicBase base ; unsigned char reserved68 [ 8 ] ; struct SynchronizationState synchronization ; unsigned char reserved74 [ 0x84 - 0x74 ] ; struct PoolList active ; struct FreeLink * free_list ; struct SceneEntry entries [ 32 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneEngine { const void * vtable ; unsigned char reserved04 [ 0x4d ] ; unsigned char inhibited ; unsigned char reserved52 [ 0x32 ] ; struct PoolList active ; ~ SceneEngine ( ) ; }",
+          "line": 51
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0010e230.c",
+      "type": "ResourceFile",
+      "line": 9,
+      "source_sha256": "812d84720ef91f723a550f92e3c2d87f5d032640be11515a53864c50979a74a5",
+      "kind": "different-definition",
+      "body": "struct ResourceFile { unsigned signature ; unsigned count_offset_words ; unsigned metadata_offset ; }",
+      "canonical": [
+        {
+          "header": "include/game/resource_stream.h",
+          "body": "struct ResourceFile { const void * vtable ; ResourceStream stream ; Result result ; unsigned char recoverable ; unsigned char reserved1d [ 3 ] ; }",
+          "line": 13
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0010e230.c",
+      "type": "ResourceDescriptor",
+      "line": 23,
+      "source_sha256": "812d84720ef91f723a550f92e3c2d87f5d032640be11515a53864c50979a74a5",
+      "kind": "different-definition",
+      "body": "struct ResourceDescriptor { const struct ResourceFile * file ; unsigned file_size ; }",
+      "canonical": [
+        {
+          "header": "include/game/resource_descriptors.h",
+          "body": "class ResourceDescriptor : public ResourceDescriptorBase { public : int category ; int resource ; const char * name ; ResourceDescriptor ( ) ; ResourceDescriptor ( int category , int resource , const char * name ) ; }",
+          "line": 33
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d5f1c.cpp",
+      "type": "W15iWavePlayer",
+      "line": 13,
+      "source_sha256": "3105836e4b357b389de74b03d37341bb09dd0aca9e6502c23306ca7d67f12b69",
+      "kind": "different-definition",
+      "body": "struct W15iWavePlayer : SynchronizationOwner { unsigned char registered ; unsigned char flag0d ; unsigned char flag0e ; unsigned char stopping ; unsigned char reserved10 [ 0x34 ] ; RegistryEntry entry ; RegistryEntry managed_entry ; unsigned char reserved5c [ 0x40 ] ; AudioVoice * voice ; unsigned char reserveda0 ; unsigned char event_active ; unsigned char managed ; unsigned char reserveda3 ; W15iSoundPool * pool ; PendingTask68 * item ; }",
+      "canonical": [
+        {
+          "header": "include/game/wave_player.h",
+          "body": "struct W15iWavePlayer { const unsigned * vtable ; unsigned char reserved04 [ 8 ] ; unsigned char registered ; unsigned char flag0d ; unsigned char flag0e ; unsigned char stopping ; unsigned char reserved10 [ 0x34 ] ; RegistryEntry entry ; RegistryEntry managed_entry ; unsigned char reserved5c [ 0x40 ] ; AudioVoice * voice ; unsigned char reserveda0 ; unsigned char event_active ; unsigned char managed ; unsigned char reserveda3 ; W15iSoundPool * pool ; W15iWaveItem * item ; }",
+          "line": 17
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/c5f4_final2.cpp",
+      "type": "SceneVec3",
+      "line": 5,
+      "source_sha256": "fd6a18a66fdd20b90660ed9a7e6367b1860e6d9974fc7b1ba279845ea11c34c2",
+      "kind": "identical-definition",
+      "body": "struct SceneVec3 { float x , y , z ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_runtime.h",
+          "body": "struct SceneVec3 { float x , y , z ; }",
+          "line": 19
+        }
+      ],
+      "matching_headers": [
+        "include/game/scene_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/c5f4_final2.cpp",
+      "type": "SceneVec2",
+      "line": 6,
+      "source_sha256": "fd6a18a66fdd20b90660ed9a7e6367b1860e6d9974fc7b1ba279845ea11c34c2",
+      "kind": "identical-definition",
+      "body": "struct SceneVec2 { float x , y ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_runtime.h",
+          "body": "struct SceneVec2 { float x , y ; }",
+          "line": 20
+        }
+      ],
+      "matching_headers": [
+        "include/game/scene_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/c5f4_final2.cpp",
+      "type": "SceneMode",
+      "line": 7,
+      "source_sha256": "fd6a18a66fdd20b90660ed9a7e6367b1860e6d9974fc7b1ba279845ea11c34c2",
+      "kind": "identical-definition",
+      "body": "union SceneMode { unsigned char byte ; struct { unsigned char kind : 4 ; unsigned char global : 1 ; unsigned char reserved : 3 ; } bits ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_runtime.h",
+          "body": "union SceneMode { unsigned char byte ; struct { unsigned char kind : 4 ; unsigned char global : 1 ; unsigned char reserved : 3 ; } bits ; }",
+          "line": 21
+        }
+      ],
+      "matching_headers": [
+        "include/game/scene_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/c5f4_final2.cpp",
+      "type": "SceneNode",
+      "line": 18,
+      "source_sha256": "fd6a18a66fdd20b90660ed9a7e6367b1860e6d9974fc7b1ba279845ea11c34c2",
+      "kind": "identical-definition",
+      "body": "struct SceneNode { const void * const * vtable ; unsigned value04 ; unsigned value08 ; struct SceneNode * parent ; struct PoolList children ; struct PoolList links ; struct SceneVec3 position ; struct SceneVec3 angles ; struct SceneVec2 scale ; struct SceneVec2 offset ; struct Matrix34 local ; struct Matrix34 world ; struct SceneNode * next ; unsigned char alpha ; unsigned char inherited_alpha ; union SceneMode mode ; unsigned char flags ; char name [ 17 ] ; char secondary_name [ 9 ] ; unsigned char reservedd2 [ 2 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_runtime.h",
+          "body": "struct SceneNode { const void * const * vtable ; unsigned value04 ; unsigned value08 ; struct SceneNode * parent ; struct PoolList children ; struct PoolList links ; struct SceneVec3 position ; struct SceneVec3 angles ; struct SceneVec2 scale ; struct SceneVec2 offset ; struct Matrix34 local ; struct Matrix34 world ; struct SceneNode * next ; unsigned char alpha ; unsigned char inherited_alpha ; union SceneMode mode ; unsigned char flags ; char name [ 17 ] ; char secondary_name [ 9 ] ; unsigned char reservedd2 [ 2 ] ; }",
+          "line": 29
+        }
+      ],
+      "matching_headers": [
+        "include/game/scene_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001273a0.c",
+      "type": "GpuVertexAttribute",
+      "line": 6,
+      "source_sha256": "1b561d15ef97d841bf1212c64816b35ff87932497e62e254bbcadf0fffbecc62",
+      "kind": "identical-definition",
+      "body": "struct GpuVertexAttribute { unsigned offset ; unsigned components ; unsigned format ; unsigned stride ; unsigned buffer ; unsigned char normalized ; unsigned char enabled ; unsigned char reserved16 [ 2 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct GpuVertexAttribute { unsigned offset ; unsigned components ; unsigned format ; unsigned stride ; unsigned buffer ; unsigned char normalized ; unsigned char enabled ; unsigned char reserved16 [ 2 ] ; }",
+          "line": 107
+        }
+      ],
+      "matching_headers": [
+        "include/game/render_state.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001273a0.c",
+      "type": "GpuState",
+      "line": 16,
+      "source_sha256": "1b561d15ef97d841bf1212c64816b35ff87932497e62e254bbcadf0fffbecc62",
+      "kind": "different-definition",
+      "body": "struct GpuState { unsigned dirty ; unsigned char reserved04 [ 8 ] ; unsigned char force_update ; unsigned char reserved0d [ 0xd ] ; unsigned char feature6502 ; unsigned char reserved1b [ 5 ] ; int viewport_x ; int viewport_y ; int viewport_width ; int viewport_height ; unsigned char viewport_dirty ; unsigned char reserved31 [ 3 ] ; unsigned front_face ; unsigned cull_face ; unsigned char cull_enabled ; unsigned char reserved3d [ 0x17 ] ; unsigned char polygon_offset_enabled ; unsigned char reserved55 [ 0x403 ] ; struct GpuVertexAttribute attributes [ 16 ] ; unsigned element_buffer ; unsigned array_buffer ; unsigned deferred_buffer ; unsigned char reserved5e4 [ 0x34 ] ; unsigned source_color ; unsigned source_alpha ; unsigned destination_color ; unsigned destination_alpha ; unsigned char reserved628 [ 0x20 ] ; unsigned char scissor_enabled ; unsigned char reserved649 ; unsigned char stencil_enabled ; unsigned char depth_enabled ; unsigned char blend_enabled ; unsigned char logic_enabled ; unsigned char reserved64e ; unsigned char feature6780 ; unsigned char reserved650 [ 0x10 ] ; float clear_color [ 4 ] ; unsigned char reserved670 [ 0x24 ] ; unsigned char feature67a0 ; unsigned char reserved695 [ 0xdb ] ; unsigned control ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct GpuState { unsigned dirty ; unsigned char reserved04 [ 0x1c ] ; int viewport_x ; int viewport_y ; int viewport_width ; int viewport_height ; unsigned char viewport_dirty ; unsigned char reserved31 [ 0x27 ] ; unsigned active_texture ; unsigned char reserved5c [ 0x3fc ] ; struct GpuVertexAttribute attributes [ 16 ] ; unsigned element_buffer ; unsigned array_buffer ; unsigned deferred_buffer ; unsigned char reserved5e4 [ 0x7c ] ; float clear_color [ 4 ] ; unsigned char reserved670 [ 0x100 ] ; unsigned control ; }",
+          "line": 118
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/resume_binding_insertposition.cpp",
+      "type": "LayoutBinding",
+      "line": 5,
+      "source_sha256": "9558ba1460fbde2877981b927bd0aec338f705f2b2884783ff6ebc3c85cea2eb",
+      "kind": "identical-definition",
+      "body": "struct LayoutBinding { const void * vtable ; PoolLink link ; unsigned count ; float frame ; void * first_allocation ; void * second_allocation ; unsigned short flags ; }",
+      "canonical": [
+        {
+          "header": "include/game/layout_binding.h",
+          "body": "struct LayoutBinding { const void * vtable ; PoolLink link ; unsigned count ; float frame ; void * first_allocation ; void * second_allocation ; unsigned short flags ; }",
+          "line": 10
+        }
+      ],
+      "matching_headers": [
+        "include/game/layout_binding.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/scene_method_byte.cpp",
+      "type": "SynchronizationOwner",
+      "line": 9,
+      "source_sha256": "848d1eaff60506b14090596a55228974f4e1c665979a96c8671923c4696aa74d",
+      "kind": "different-definition",
+      "body": "struct SynchronizationOwner { const void * vtable ; struct SynchronizationState synchronization ; }",
+      "canonical": [
+        {
+          "header": "include/game/synchronization.h",
+          "body": "struct SynchronizationOwner { const void * vtable ; struct SignalState synchronization ; }",
+          "line": 13
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/scene_method_byte.cpp",
+      "type": "SceneController",
+      "line": 13,
+      "source_sha256": "848d1eaff60506b14090596a55228974f4e1c665979a96c8671923c4696aa74d",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneController { const void * vtable ; unsigned char reserved04 [ 0x21fc - 4 ] ; ~ SceneController ( ) ; }",
+          "line": 101
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/scene_method_byte.cpp",
+      "type": "SceneEngine",
+      "line": 14,
+      "source_sha256": "848d1eaff60506b14090596a55228974f4e1c665979a96c8671923c4696aa74d",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneEngine { const void * vtable ; unsigned char reserved04 [ 0x4d ] ; unsigned char inhibited ; unsigned char reserved52 [ 0x32 ] ; struct PoolList active ; ~ SceneEngine ( ) ; }",
+          "line": 51
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/scene_method_byte.cpp",
+      "type": "AudioVoiceGroup",
+      "line": 16,
+      "source_sha256": "848d1eaff60506b14090596a55228974f4e1c665979a96c8671923c4696aa74d",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioVoiceGroup { struct AudioChannel * channels [ 2 ] ; int count ; void ( * callback ) ( struct AudioVoiceGroup * group , int event , void * context ) ; void * context ; unsigned char active ; unsigned char flag15 ; unsigned char flag16 ; signed char flag17 ; unsigned char flag18 ; unsigned char reserved19 ; unsigned char allocating ; unsigned char allocation_failed ; struct RecordState * record ; unsigned short dirty ; unsigned char reserved22 ; signed char mode23 ; float value24 , value28 ; unsigned char option2c ; unsigned char option2d ; unsigned char reserved2e [ 2 ] ; float value30 ; float value34 ; float value38 ; float value3c ; int priority ; float value44 ; float sends [ 2 ] ; unsigned char format ; unsigned char reserved51 [ 7 ] ; struct PoolLink link ; }",
+          "line": 96
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/scene_method_byte.cpp",
+      "type": "SceneController",
+      "line": 31,
+      "source_sha256": "848d1eaff60506b14090596a55228974f4e1c665979a96c8671923c4696aa74d",
+      "kind": "different-definition",
+      "body": "struct SceneController { struct SynchronizationOwner base ; unsigned char reserved08 [ 4 ] ; unsigned char initialized ; unsigned char update_pending ; unsigned char enabled ; unsigned char notified ; unsigned char reserved10 [ 0x44 - 0x10 ] ; const void * secondary_vtable ; unsigned char reserved48 [ 8 ] ; unsigned char active ; unsigned char reserved51 ; unsigned char releasing ; unsigned char reserved53 ; signed char propagated_enabled ; unsigned char awaiting_engine ; unsigned char reserved56 ; unsigned char reset_pending ; unsigned char reserved58 [ 8 ] ; struct SceneEngine * engine ; struct HandleArena * arena ; unsigned char reserved68 [ 0x220 - 0x68 ] ; unsigned slot_count ; unsigned work_count ; struct SceneControllerSlot slots [ 8 ] ; unsigned char reserved2068 [ 0x21fc - 0x2068 ] ; struct SceneWork * workRecords ( ) { return reinterpret_cast < struct SceneWork * > ( reserved2068 ) ; } void propagateEnabled ( unsigned char enabled ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneController { const void * vtable ; unsigned char reserved04 [ 0x21fc - 4 ] ; ~ SceneController ( ) ; }",
+          "line": 101
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0020f858.cpp",
+      "type": "NameTable",
+      "line": 7,
+      "source_sha256": "2e14b52e8a45f884e2c0ed9c1d0694ddcc5aee66941dad8313c2606a13e5eaf8",
+      "kind": "different-definition",
+      "body": "struct NameTable { const NameTableVTable * vtable ; int kind ; int category ; int identifier ; const char * name ; int count ; const char * * names ; NameTable ( ) ; NameTable ( int category , int identifier , const char * name , int count , ... ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/screen.h",
+          "body": "struct NameTable { const struct NameTableVTable * vtable ; int kind ; int category ; int identifier ; const char * name ; int count ; const char * * names ; NameTable ( ) ; NameTable ( int category , int identifier , const char * name , int count , ... ) ; }",
+          "line": 287
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0020f858.cpp",
+      "type": "AnimationContext",
+      "line": 21,
+      "source_sha256": "2e14b52e8a45f884e2c0ed9c1d0694ddcc5aee66941dad8313c2606a13e5eaf8",
+      "kind": "different-definition",
+      "body": "struct AnimationContext { const NameTable * first ; const NameTable * table ; const NameTable * terminator ; }",
+      "canonical": [
+        {
+          "header": "include/game/screen.h",
+          "body": "struct AnimationContext { unsigned int reserved00 ; const struct NameTable * table ; }",
+          "line": 270
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00196114.c",
+      "type": "CommandSystem",
+      "line": 4,
+      "source_sha256": "9651751105919f07dc0f8e693bf8ff3280de8751cf08a6e3b2bfa4ae27d3ca83",
+      "kind": "different-definition",
+      "body": "struct CommandSystem { unsigned char reserved00 [ 0x124 ] ; int resource_index ; }",
+      "canonical": [
+        {
+          "header": "include/game/bss_0049ecf0.h",
+          "body": "struct CommandSystem { unsigned char reserved00 [ 8 ] ; int display_heights [ 2 ] ; unsigned char initialized ; unsigned char pending ; unsigned char enabled ; unsigned char reserved13 [ 5 ] ; unsigned char ready ; unsigned char reserved19 [ 3 ] ; struct CommandQueue * queues [ 32 ] ; struct CommandQueue * writing ; struct CommandQueue * executing ; struct CommandResource * resources [ 32 ] ; int resource_index ; struct CommandResource * selected [ 3 ] ; unsigned values [ 3 ] ; unsigned modes [ 3 ] ; unsigned char reserved14c [ 8 ] ; int begin_counter ; int counter ; void ( * begin_callback ) ( int event ) ; void ( * callback ) ( int event ) ; int display_mode ; }",
+          "line": 50
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0016a888.cpp",
+      "type": "SoundLoaderState",
+      "line": 6,
+      "source_sha256": "4ae57147d82095ea695ed60635e938e4538cadbdf7dab618ef5a25ff318d8a2d",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/sound_loader.h",
+          "body": "struct SoundLoaderState { const SoundLoaderVTable * vtable ; const SoundArchive * archive ; unsigned char reserved08 [ 0x200 ] ; unsigned short loaded_count ; unsigned char state ; unsigned char reserved20b ; }",
+          "line": 20
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0016a104.cpp",
+      "type": "SoundLoaderState",
+      "line": 6,
+      "source_sha256": "eed7f8f7f0d834f7ecc9786ff76738f44f03ee4c42ebf7511d1dce70e204b189",
+      "kind": "identical-definition",
+      "body": "struct SoundLoaderState { const SoundLoaderVTable * vtable ; const SoundArchive * archive ; unsigned char reserved08 [ 0x200 ] ; unsigned short loaded_count ; unsigned char state ; unsigned char reserved20b ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_loader.h",
+          "body": "struct SoundLoaderState { const SoundLoaderVTable * vtable ; const SoundArchive * archive ; unsigned char reserved08 [ 0x200 ] ; unsigned short loaded_count ; unsigned char state ; unsigned char reserved20b ; }",
+          "line": 20
+        }
+      ],
+      "matching_headers": [
+        "include/game/sound_loader.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0016a104.cpp",
+      "type": "SoundLoaderCacheEntry",
+      "line": 14,
+      "source_sha256": "eed7f8f7f0d834f7ecc9786ff76738f44f03ee4c42ebf7511d1dce70e204b189",
+      "kind": "identical-definition",
+      "body": "struct SoundLoaderCacheEntry { unsigned file_id ; const void * file ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_loader.h",
+          "body": "struct SoundLoaderCacheEntry { unsigned file_id ; const void * file ; }",
+          "line": 36
+        }
+      ],
+      "matching_headers": [
+        "include/game/sound_loader.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0016a104.cpp",
+      "type": "CachedSoundLoaderState",
+      "line": 18,
+      "source_sha256": "eed7f8f7f0d834f7ecc9786ff76738f44f03ee4c42ebf7511d1dce70e204b189",
+      "kind": "identical-definition",
+      "body": "struct CachedSoundLoaderState { const void * heap_vtable ; unsigned used ; unsigned limit ; SoundLoaderState loader ; SoundLoaderCacheEntry cache [ 9 ] ; bool active ; bool released ; CachedSoundLoaderState ( ) ; ~ CachedSoundLoaderState ( ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_loader.h",
+          "body": "struct CachedSoundLoaderState { const void * heap_vtable ; unsigned used ; unsigned limit ; SoundLoaderState loader ; SoundLoaderCacheEntry cache [ 9 ] ; bool active ; bool released ; CachedSoundLoaderState ( ) ; ~ CachedSoundLoaderState ( ) ; }",
+          "line": 40
+        }
+      ],
+      "matching_headers": [
+        "include/game/sound_loader.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0011073c.c",
+      "type": "MappedMemoryBlock",
+      "line": 6,
+      "source_sha256": "db2fbc375600c454b8a3a648b930ef7a890a724fb692052ed419ceacdbe6edfe",
+      "kind": "different-definition",
+      "body": "struct MappedMemoryBlock { struct MappedMemoryBlock * next ; struct MappedMemoryBlock * previous ; void * address ; unsigned int size ; unsigned char read_only ; unsigned char reserved [ 3 ] ; CtrHandle handle ; unsigned char mapped ; }",
+      "canonical": [
+        {
+          "header": "include/game/memory_arena.h",
+          "body": "struct MappedMemoryBlock { struct MappedMemoryBlock * next , * previous ; void * address ; unsigned size ; unsigned char read_only ; unsigned char reserved11 [ 3 ] ; CtrHandle handle ; unsigned char mapped ; }",
+          "line": 7
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0011073c.c",
+      "type": "MemoryArena",
+      "line": 16,
+      "source_sha256": "db2fbc375600c454b8a3a648b930ef7a890a724fb692052ed419ceacdbe6edfe",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/memory_arena.h",
+          "body": "struct MemoryArena { unsigned char * begin , * end ; struct MappedMemoryBlock * current ; struct StreamMutex mutex ; }",
+          "line": 16
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001773cc.c",
+      "type": "PackedRecord",
+      "line": 3,
+      "source_sha256": "2c5db0d871bd86ccffa4bd1bcd5aa81db1a1aec3137f004b0f49f4360b193355",
+      "kind": "identical-definition",
+      "body": "struct PackedRecord { int text_offset ; unsigned reserved04 [ 2 ] ; int value ; unsigned short identifier ; unsigned char reserved12 ; signed char flag ; }",
+      "canonical": [
+        {
+          "header": "include/game/packed_records.h",
+          "body": "struct PackedRecord { int text_offset ; unsigned reserved04 [ 2 ] ; int value ; unsigned short identifier ; unsigned char reserved12 ; signed char flag ; }",
+          "line": 4
+        }
+      ],
+      "matching_headers": [
+        "include/game/packed_records.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001773cc.c",
+      "type": "PackedRecordSet",
+      "line": 11,
+      "source_sha256": "2c5db0d871bd86ccffa4bd1bcd5aa81db1a1aec3137f004b0f49f4360b193355",
+      "kind": "identical-definition",
+      "body": "struct PackedRecordSet { unsigned char reserved00 [ 0x0c ] ; struct PackedRecord * records ; int count ; }",
+      "canonical": [
+        {
+          "header": "include/game/packed_records.h",
+          "body": "struct PackedRecordSet { unsigned char reserved00 [ 0x0c ] ; struct PackedRecord * records ; int count ; }",
+          "line": 12
+        }
+      ],
+      "matching_headers": [
+        "include/game/packed_records.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0014d308.cpp",
+      "type": "PoolIterator",
+      "line": 20,
+      "source_sha256": "4627c64a3d9354b0b4f9d4c4af0c230b949316b88f6c0c0c911aa454230e02e2",
+      "kind": "different-definition",
+      "body": "class PoolIterator { PoolLink * node ; public : explicit PoolIterator ( PoolLink * p ) : node ( p ) { } PoolLink * get ( ) const { return node ; } PoolIterator & operator ++ ( ) { node = node -> next ; return * this ; } PoolIterator operator ++ ( int ) { const PoolIterator old ( * this ) ; ++ * this ; return old ; } friend bool operator == ( PoolIterator a , PoolIterator b ) { return a . node == b . node ; } friend bool operator != ( PoolIterator a , PoolIterator b ) { return ! ( a == b ) ; } }",
+      "canonical": [
+        {
+          "header": "include/game/sound.h",
+          "body": "struct PoolIterator { struct PoolLink * node ; }",
+          "line": 14
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/scene_targets.cpp",
+      "type": "Pane",
+      "line": 7,
+      "source_sha256": "d7edb6e0ccc16ad83997be04ea024604a1a852d064516a7805a305dc0a3e5190",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/layout.h",
+          "body": "struct Pane { unsigned char reserved00 [ 5 ] ; unsigned char alignment ; unsigned char reserved06 [ 0x12 ] ; int extent ; unsigned char reserved1c [ 0x4c ] ; struct AudioChannelState * style ; }",
+          "line": 7
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0010239c.c",
+      "type": "ScheduledTask",
+      "line": 4,
+      "source_sha256": "057af4e57acee927b58497a945c04386910ab2009a90fa4d8577995ae4c8883d",
+      "kind": "different-definition",
+      "body": "struct ScheduledTask { short enabled ; short previous , next ; unsigned short priority ; void ( * callback ) ( void ) ; int wait ; int repeat ; int reserved14 ; }",
+      "canonical": [
+        {
+          "header": "include/game/scheduler.h",
+          "body": "struct ScheduledTask { unsigned short enabled ; short previous , next ; unsigned short priority ; struct ScheduledTaskBinding binding ; int repeat ; int reserved14 ; }",
+          "line": 9
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0010239c.c",
+      "type": "Scheduler",
+      "line": 13,
+      "source_sha256": "057af4e57acee927b58497a945c04386910ab2009a90fa4d8577995ae4c8883d",
+      "kind": "different-definition",
+      "body": "struct Scheduler { struct ScheduledTask tasks [ 64 ] ; int current ; int next ; short end , begin ; int dispatch_mode ; }",
+      "canonical": [
+        {
+          "header": "include/game/scheduler.h",
+          "body": "struct Scheduler { struct ScheduledTask tasks [ 64 ] ; int current ; int next ; short end , begin ; int pending ; }",
+          "line": 17
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00190b1c.c",
+      "type": "W6CategoryItem",
+      "line": 9,
+      "source_sha256": "e2bfba8808ea653095bfac29751062ca62950d632471a40eb48b9f9d9a44a8d3",
+      "kind": "different-definition",
+      "body": "struct W6CategoryItem { int kind ; short x , y , width , height ; }",
+      "canonical": [
+        {
+          "header": "include/game/selection.h",
+          "body": "struct W6CategoryItem { int kind ; short values [ 2 ] [ 2 ] ; }",
+          "line": 50
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00190b1c.c",
+      "type": "W6Category",
+      "line": 13,
+      "source_sha256": "e2bfba8808ea653095bfac29751062ca62950d632471a40eb48b9f9d9a44a8d3",
+      "kind": "different-definition",
+      "body": "struct W6Category { int reserved00 ; short count ; short reserved06 ; struct W6CategoryRecord records [ 9 ] ; short reserved62 ; struct W6CategoryItem items [ 12 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/selection.h",
+          "body": "struct W6Category { short identifier , group_count , count , value ; struct CategoryPattern patterns [ 9 ] ; unsigned char reserved62 [ 2 ] ; struct W6CategoryItem items [ 12 ] ; }",
+          "line": 52
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00190c1c.c",
+      "type": "W6CategoryItem",
+      "line": 11,
+      "source_sha256": "681c59a154981aef5068e7c22fbc36809043cfaa7d1175cb9b2c20a58ad84237",
+      "kind": "different-definition",
+      "body": "struct W6CategoryItem { int kind ; short x , y , width , height ; }",
+      "canonical": [
+        {
+          "header": "include/game/selection.h",
+          "body": "struct W6CategoryItem { int kind ; short values [ 2 ] [ 2 ] ; }",
+          "line": 50
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00190c1c.c",
+      "type": "W6Category",
+      "line": 15,
+      "source_sha256": "681c59a154981aef5068e7c22fbc36809043cfaa7d1175cb9b2c20a58ad84237",
+      "kind": "different-definition",
+      "body": "struct W6Category { int reserved00 ; short count ; short reserved06 ; struct W6CategoryRecord records [ 9 ] ; short reserved62 ; struct W6CategoryItem items [ 12 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/selection.h",
+          "body": "struct W6Category { short identifier , group_count , count , value ; struct CategoryPattern patterns [ 9 ] ; unsigned char reserved62 [ 2 ] ; struct W6CategoryItem items [ 12 ] ; }",
+          "line": 52
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00185f70.c",
+      "type": "PendingState",
+      "line": 4,
+      "source_sha256": "9f95428e5a79a4ee2d8644f26dbd1cb2e6b6055af6b40925948cc1abc6252de7",
+      "kind": "different-definition",
+      "body": "struct PendingState { unsigned char reserved00 ; unsigned char pending ; signed char blocking ; unsigned char reserved03 ; unsigned char completion ; }",
+      "canonical": [
+        {
+          "header": "include/game/service_state.h",
+          "body": "struct PendingState { unsigned char reserved00 ; unsigned char pending ; signed char blocking ; unsigned char graphics_active ; unsigned char reserved04 [ 4 ] ; struct ServiceWaitObject * wait_object ; }",
+          "line": 59
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001efd08.cpp",
+      "type": "FontInformation",
+      "line": 17,
+      "source_sha256": "834d19b85f3855069a72a6b0a1a853f9ba7e4f9696681649217f224223a6561f",
+      "kind": "different-definition",
+      "body": "struct FontInformation { unsigned char type , lineFeed ; unsigned short alternate ; struct FontCharWidths defaultWidths ; unsigned char encoding ; struct FontGlyphData * glyphs ; const struct FontWidthBlock * widths ; const struct FontCodeMap * maps ; }",
+      "canonical": [
+        {
+          "header": "include/game/font_resource.h",
+          "body": "struct FontInformation { unsigned char reserved00 ; signed char field01 ; unsigned char reserved02 [ 5 ] ; unsigned char field07 ; struct FontGlyphInfo * glyphs ; unsigned char reserved0c [ 8 ] ; unsigned char field14 ; unsigned char field15 ; unsigned char field16 ; }",
+          "line": 135
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001efeac.cpp",
+      "type": "FontInformation",
+      "line": 17,
+      "source_sha256": "52351128c9a6e087f9753f98bec4ba29f1e14f4fb7377bc8bcb8327761ff541c",
+      "kind": "different-definition",
+      "body": "struct FontInformation { unsigned char type , lineFeed ; unsigned short alternate ; struct FontCharWidths defaultWidths ; unsigned char encoding ; struct FontGlyphData * glyphs ; const struct FontWidthBlock * widths ; const struct FontCodeMap * maps ; }",
+      "canonical": [
+        {
+          "header": "include/game/font_resource.h",
+          "body": "struct FontInformation { unsigned char reserved00 ; signed char field01 ; unsigned char reserved02 [ 5 ] ; unsigned char field07 ; struct FontGlyphInfo * glyphs ; unsigned char reserved0c [ 8 ] ; unsigned char field14 ; unsigned char field15 ; unsigned char field16 ; }",
+          "line": 135
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001f4b58.cpp",
+      "type": "FontInformation",
+      "line": 17,
+      "source_sha256": "6bf7035386899012a947fb77ca28460ac0bd5550d171ed0881ed2fa006dcb919",
+      "kind": "different-definition",
+      "body": "struct FontInformation { unsigned char type , lineFeed ; unsigned short alternate ; struct FontCharWidths defaultWidths ; unsigned char encoding ; struct FontGlyphData * glyphs ; const struct FontWidthBlock * widths ; const struct FontCodeMap * maps ; }",
+      "canonical": [
+        {
+          "header": "include/game/font_resource.h",
+          "body": "struct FontInformation { unsigned char reserved00 ; signed char field01 ; unsigned char reserved02 [ 5 ] ; unsigned char field07 ; struct FontGlyphInfo * glyphs ; unsigned char reserved0c [ 8 ] ; unsigned char field14 ; unsigned char field15 ; unsigned char field16 ; }",
+          "line": 135
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0019e414.c",
+      "type": "GpuVertexAttribute",
+      "line": 3,
+      "source_sha256": "e7ce0263f09b211020ef2553cfd26b30be34cceba495f893ba9938d112d3e404",
+      "kind": "different-definition",
+      "body": "struct GpuVertexAttribute { unsigned offset , components , format , stride , buffer ; unsigned char normalized , enabled , reserved16 [ 2 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct GpuVertexAttribute { unsigned offset ; unsigned components ; unsigned format ; unsigned stride ; unsigned buffer ; unsigned char normalized ; unsigned char enabled ; unsigned char reserved16 [ 2 ] ; }",
+          "line": 107
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0019e414.c",
+      "type": "GpuState",
+      "line": 8,
+      "source_sha256": "e7ce0263f09b211020ef2553cfd26b30be34cceba495f893ba9938d112d3e404",
+      "kind": "different-definition",
+      "body": "struct GpuState { unsigned dirty ; unsigned requested ; unsigned excluded ; unsigned char reserved0c [ 0x14 ] ; int viewport_x , viewport_y , viewport_width , viewport_height ; unsigned char viewport_dirty ; unsigned char reserved31 [ 0xdb ] ; unsigned first_constants [ 33 ] ; unsigned second_constants [ 33 ] ; unsigned char reserved214 [ 0x244 ] ; struct GpuVertexAttribute attributes [ 16 ] ; unsigned element_buffer , array_buffer , deferred_buffer ; unsigned char reserved5e4 [ 0x7c ] ; float clear_color [ 4 ] ; unsigned char reserved670 [ 0x100 ] ; unsigned control ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct GpuState { unsigned dirty ; unsigned char reserved04 [ 0x1c ] ; int viewport_x ; int viewport_y ; int viewport_width ; int viewport_height ; unsigned char viewport_dirty ; unsigned char reserved31 [ 0x27 ] ; unsigned active_texture ; unsigned char reserved5c [ 0x3fc ] ; struct GpuVertexAttribute attributes [ 16 ] ; unsigned element_buffer ; unsigned array_buffer ; unsigned deferred_buffer ; unsigned char reserved5e4 [ 0x7c ] ; float clear_color [ 4 ] ; unsigned char reserved670 [ 0x100 ] ; unsigned control ; }",
+          "line": 118
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d2c84.c",
+      "type": "SoundInstance",
+      "line": 3,
+      "source_sha256": "b6031af22efe78d36f6781287ac7eff05c525950d9e5d29c4af4e74305d38977",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstance { const struct SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; struct SoundHandle * handle ; struct SoundHandle * secondary_handle ; unsigned char reserved10 [ 8 ] ; unsigned selection_state ; unsigned char reserved1c [ 0x34 ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x3c ] ; struct PoolLink player_link ; struct PoolLink selection_link ; }",
+          "line": 34
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d2c84.c",
+      "type": "SoundHandle",
+      "line": 5,
+      "source_sha256": "b6031af22efe78d36f6781287ac7eff05c525950d9e5d29c4af4e74305d38977",
+      "kind": "identical-definition",
+      "body": "struct SoundHandle { struct SoundInstance * sound ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundHandle { struct SoundInstance * sound ; }",
+          "line": 25
+        }
+      ],
+      "matching_headers": [
+        "include/game/sound_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001d2c84.c",
+      "type": "SoundInstanceVTable",
+      "line": 8,
+      "source_sha256": "b6031af22efe78d36f6781287ac7eff05c525950d9e5d29c4af4e74305d38977",
+      "kind": "different-definition",
+      "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( struct SoundInstance * sound ) ; unsigned char reserved14 [ 0x10 ] ; void ( * priority_changed ) ( struct SoundInstance * sound ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( struct SoundInstance * sound ) ; }",
+          "line": 29
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d2c84.c",
+      "type": "SoundInstance",
+      "line": 17,
+      "source_sha256": "b6031af22efe78d36f6781287ac7eff05c525950d9e5d29c4af4e74305d38977",
+      "kind": "different-definition",
+      "body": "struct SoundInstance { const struct SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; struct SoundHandle * handle ; struct SoundHandle * secondary_handle ; struct SoundPlayer * player ; unsigned char reserved14 [ 0x3c ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x3c ] ; struct PoolLink player_link ; struct PoolLink selection_link ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstance { const struct SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; struct SoundHandle * handle ; struct SoundHandle * secondary_handle ; unsigned char reserved10 [ 8 ] ; unsigned selection_state ; unsigned char reserved1c [ 0x34 ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x3c ] ; struct PoolLink player_link ; struct PoolLink selection_link ; }",
+          "line": 34
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001176e0.cpp",
+      "type": "HeapArena",
+      "line": 4,
+      "source_sha256": "ec89ccea2b9c070d0f2d8972fa16f2234fbe6df8353d331e367f4034158b94df",
+      "kind": "different-definition",
+      "body": "struct HeapArena { const struct W15fVTable * vtable ; unsigned int state04 , state08 , state0c , state10 , state14 , state18 ; unsigned char reserved1c [ 0x38 ] ; unsigned allocations ; unsigned char * lower ; unsigned size ; }",
+      "canonical": [
+        {
+          "header": "include/game/exp_heap.h",
+          "body": "struct HeapArena { struct ManagedExpHeap base ; unsigned char * lower ; unsigned size ; }",
+          "line": 63
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00148a9c.cpp",
+      "type": "ServiceBufferPair",
+      "line": 9,
+      "source_sha256": "216b50554f0b207c153ff3d4db0a8cec44ca3418229d9eb3c473c891b127c3e3",
+      "kind": "identical-definition",
+      "body": "struct ServiceBufferPair { unsigned int first , second ; }",
+      "canonical": [
+        {
+          "header": "include/game/service_runtime.h",
+          "body": "struct ServiceBufferPair { unsigned int first , second ; }",
+          "line": 93
+        }
+      ],
+      "matching_headers": [
+        "include/game/service_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_00148a9c.cpp",
+      "type": "ServiceCoordinator",
+      "line": 12,
+      "source_sha256": "216b50554f0b207c153ff3d4db0a8cec44ca3418229d9eb3c473c891b127c3e3",
+      "kind": "different-definition",
+      "body": "struct ServiceCoordinator { CtrHandle ready_event ; CtrHandle completion_event ; struct StreamMutex mutex ; unsigned char reserved14 [ 0x109c - 0x14 ] ; struct CoordinatorRequest * completion_slots [ 150 ] ; struct ServiceBufferPair buffers [ 5 ] ; unsigned char enabled , pending ; unsigned short serial , current_buffer , completion_slot ; int expected ; unsigned int extra ; unsigned char reserved132c [ 0x15b0 - 0x132c ] ; unsigned char publish ; }",
+      "canonical": [
+        {
+          "header": "include/game/service_runtime.h",
+          "body": "struct ServiceCoordinator { CtrHandle ready_event , completion_event ; struct StreamMutex mutex ; unsigned char reserved14 [ 0x109c - 0x14 ] ; union { unsigned short * completion_slots [ 150 ] ; struct { unsigned short * reserved109c [ 2 ] ; struct AudioDspParameterBlock * voice_parameters [ 2 ] ; struct AudioDspReply * replies [ 2 ] ; struct AudioDspParameterBlock * auxiliary_parameters [ 2 ] [ 24 ] ; } audio ; } storage ; struct ServiceBufferPair buffers [ 5 ] ; unsigned char enabled , pending ; unsigned short serial , current_buffer , completion_slot ; int expected ; unsigned extra ; unsigned char reserved132c [ 0x15b0 - 0x132c ] ; unsigned char publish ; }",
+          "line": 94
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00155e20.cpp",
+      "type": "ServiceBufferPair",
+      "line": 17,
+      "source_sha256": "0590c9cf3ddad1ec679284e68aaf320f52177f4f8fc4eacbb1baa2a9b0c3cfd5",
+      "kind": "identical-definition",
+      "body": "struct ServiceBufferPair { unsigned int first , second ; }",
+      "canonical": [
+        {
+          "header": "include/game/service_runtime.h",
+          "body": "struct ServiceBufferPair { unsigned int first , second ; }",
+          "line": 93
+        }
+      ],
+      "matching_headers": [
+        "include/game/service_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_00155e20.cpp",
+      "type": "ServiceCoordinator",
+      "line": 20,
+      "source_sha256": "0590c9cf3ddad1ec679284e68aaf320f52177f4f8fc4eacbb1baa2a9b0c3cfd5",
+      "kind": "different-definition",
+      "body": "struct ServiceCoordinator { CtrHandle ready_event ; CtrHandle completion_event ; struct StreamMutex mutex ; unsigned char reserved14 [ 0x109c - 0x14 ] ; union { struct CoordinatorRequest * completion_slots [ 150 ] ; struct CoordinatorChannelSlots channels ; } ; struct ServiceBufferPair buffers [ 5 ] ; unsigned char enabled , pending ; unsigned short serial , current_buffer , completion_slot ; int expected ; unsigned int extra ; unsigned char reserved132c [ 0x15b0 - 0x132c ] ; unsigned char publish ; }",
+      "canonical": [
+        {
+          "header": "include/game/service_runtime.h",
+          "body": "struct ServiceCoordinator { CtrHandle ready_event , completion_event ; struct StreamMutex mutex ; unsigned char reserved14 [ 0x109c - 0x14 ] ; union { unsigned short * completion_slots [ 150 ] ; struct { unsigned short * reserved109c [ 2 ] ; struct AudioDspParameterBlock * voice_parameters [ 2 ] ; struct AudioDspReply * replies [ 2 ] ; struct AudioDspParameterBlock * auxiliary_parameters [ 2 ] [ 24 ] ; } audio ; } storage ; struct ServiceBufferPair buffers [ 5 ] ; unsigned char enabled , pending ; unsigned short serial , current_buffer , completion_slot ; int expected ; unsigned extra ; unsigned char reserved132c [ 0x15b0 - 0x132c ] ; unsigned char publish ; }",
+          "line": 94
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001c4a8c.cpp",
+      "type": "ResourceSize",
+      "line": 3,
+      "source_sha256": "6b4c8ecffde645e197e629897c4853d22e5765c7a0510f20affb79f3018758a6",
+      "kind": "different-definition",
+      "body": "struct ResourceSize { unsigned low , high ; unsigned long long get ( ) const { return ( ( unsigned long long ) high << 32 ) | low ; } void set ( unsigned long long value ) { low = ( unsigned ) value ; high = ( unsigned ) ( value >> 32 ) ; } }",
+      "canonical": [
+        {
+          "header": "include/game/resource.h",
+          "body": "struct ResourceSize { unsigned low ; unsigned high ; unsigned long long get ( ) const { return ( ( unsigned long long ) high << 32 ) | low ; } void set ( unsigned long long value ) { low = ( unsigned ) value ; high = ( unsigned ) ( value >> 32 ) ; } }",
+          "line": 13
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001c4a8c.cpp",
+      "type": "Resource",
+      "line": 11,
+      "source_sha256": "6b4c8ecffde645e197e629897c4853d22e5765c7a0510f20affb79f3018758a6",
+      "kind": "different-definition",
+      "body": "class Resource { public : virtual unsigned read ( unsigned * transferred , unsigned long long offset , void * buffer , unsigned size ) ; virtual Result write ( int * transferred , long long offset , const void * buffer , unsigned size , int options ) ; virtual void slot02 ( ) ; virtual Result get_size ( ResourceSize * size ) ; virtual void slot04 ( ) ; virtual void slot05 ( ) ; virtual void slot06 ( ) ; virtual void slot07 ( ) ; virtual void slot08 ( ) ; virtual void slot09 ( ) ; virtual void slot10 ( ) ; virtual void slot11 ( ) ; virtual void release ( ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/resource.h",
+          "body": "class Resource { public : virtual unsigned read ( unsigned * transferred , unsigned long long offset , void * buffer , unsigned size ) ; virtual void slot01 ( ) ; virtual void slot02 ( ) ; virtual Result get_size ( ResourceSize * size ) ; virtual void slot04 ( ) ; virtual void slot05 ( ) ; virtual void slot06 ( ) ; virtual void slot07 ( ) ; virtual void slot08 ( ) ; virtual void slot09 ( ) ; virtual void slot10 ( ) ; virtual void slot11 ( ) ; virtual void release ( ) ; }",
+          "line": 20
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001f2ac8.c",
+      "type": "SoundArchiveInfo",
+      "line": 1,
+      "source_sha256": "a2c99b8cdaf7ab8a204534ca8d229aeb50115138b5fac7bdf60283f983cdd7e4",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/archive.h",
+          "body": "struct SoundArchiveInfo { unsigned reserved00 ; int sound_table_offset ; unsigned reserved08 ; int range_table_offset ; unsigned reserved10 ; int third_table_offset ; unsigned char reserved18 [ 0x14 ] ; unsigned file_table_offset ; unsigned reserved30 ; unsigned count_table_offset ; unsigned reserved38 ; unsigned player_info_offset ; }",
+          "line": 200
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001f2ac8.c",
+      "type": "SoundArchiveReader",
+      "line": 4,
+      "source_sha256": "a2c99b8cdaf7ab8a204534ca8d229aeb50115138b5fac7bdf60283f983cdd7e4",
+      "kind": "different-definition",
+      "body": "struct SoundArchiveReader { const void * vtable ; unsigned reserved04 ; unsigned version ; unsigned char reserved0c [ 0x2c ] ; const struct SoundArchiveInfo * lookup_info ; const struct SoundArchiveInfo * info ; }",
+      "canonical": [
+        {
+          "header": "include/game/archive.h",
+          "body": "struct SoundArchiveReader { const void * vtable ; unsigned reserved04 ; unsigned version ; unsigned char reserved0c [ 0x30 ] ; const struct SoundArchiveInfo * info ; }",
+          "line": 215
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0012f84c.cpp",
+      "type": "GraphicsContext",
+      "line": 5,
+      "source_sha256": "61538e48237a7c09c37dcdd61b6c35afed125030cc2356d9bd7cc9836692c59e",
+      "kind": "different-definition",
+      "body": "struct GraphicsContext { StreamMutex mutex ; unsigned char reserved0c [ 0x64 - 0x0c ] ; SignalState completion ; unsigned char reserved6c [ 0x0a ] ; unsigned char state ; }",
+      "canonical": [
+        {
+          "header": "include/game/graphics_state.h",
+          "body": "struct GraphicsContext { unsigned char reserved00 [ 0x5c ] ; struct DisplayBuffer * buffers [ 6 ] ; unsigned char reserved74 ; signed char status ; }",
+          "line": 10
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001c599c.cpp",
+      "type": "AdpcmCoefficients",
+      "line": 3,
+      "source_sha256": "73bd7d66b1e14092c746bf4bc77bd7a5870f16abc04fa9fe1177f7076fdc5c27",
+      "kind": "identical-definition",
+      "body": "struct AdpcmCoefficients { short pairs [ 8 ] [ 2 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AdpcmCoefficients { short pairs [ 8 ] [ 2 ] ; }",
+          "line": 49
+        }
+      ],
+      "matching_headers": [
+        "include/game/audio_voice.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001c599c.cpp",
+      "type": "AudioSlot",
+      "line": 6,
+      "source_sha256": "73bd7d66b1e14092c746bf4bc77bd7a5870f16abc04fa9fe1177f7076fdc5c27",
+      "kind": "different-definition",
+      "body": "struct AudioSlot { unsigned char reserved00 [ 0x10 ] ; signed char mode ; unsigned char state ; unsigned char reserved12 [ 2 ] ; AudioSlot * next ; unsigned char reserved18 [ 0x18 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioSlot { unsigned char reserved00 [ 0x10 ] ; signed char mode ; unsigned char state ; unsigned char reserved12 [ 2 ] ; struct AudioSlot * next ; unsigned char reserved18 [ 0x18 ] ; }",
+          "line": 141
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001c599c.cpp",
+      "type": "AudioChannelState",
+      "line": 16,
+      "source_sha256": "73bd7d66b1e14092c746bf4bc77bd7a5870f16abc04fa9fe1177f7076fdc5c27",
+      "kind": "different-definition",
+      "body": "struct AudioChannelState { unsigned char reserved00 [ 0x1e ] ; unsigned short flags1e ; unsigned char reserved20 [ 0x10 ] ; AudioSlot * head ; unsigned char reserved34 [ 0x6c - 0x34 ] ; unsigned short flags ; unsigned char reserved6e ; unsigned char dirty ; StreamMutex mutex ; AdpcmCoefficients coefficients ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioChannelState { unsigned int channel ; unsigned short generation ; unsigned short value06 ; unsigned int value08 ; unsigned char active ; unsigned char mode ; unsigned char flag0e ; unsigned char flag0f ; unsigned int value10 ; struct AudioBiquadCoefficients biquad ; unsigned short flags1e ; unsigned int sample_rate ; float value24 ; unsigned char reserved28 [ 4 ] ; unsigned int value2c ; unsigned int value30 ; unsigned short value34 ; unsigned short value36 ; float value38 ; float value3c ; float values40 [ 10 ] ; float value68 ; unsigned short flags ; unsigned char flag6e ; unsigned char flag6f ; struct StreamMutex mutex ; struct AdpcmCoefficients coefficients ; }",
+          "line": 53
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001c4bdc.cpp",
+      "type": "StreamLockGuard",
+      "line": 24,
+      "source_sha256": "be86b47dc296db64f400a3debb7749c4a7213bf72eb5fc88783dfc9a3ca7feb2",
+      "kind": "different-definition",
+      "body": "struct StreamLockGuard { struct StreamMutex * mutex ; }",
+      "canonical": [
+        {
+          "header": "include/game/exp_heap.h",
+          "body": "struct StreamLockGuard { struct StreamMutex * mutex ; explicit StreamLockGuard ( struct StreamMutex * value ) : mutex ( value ) { func_00192bd8 ( mutex ) ; } ~ StreamLockGuard ( ) { func_00195d74 ( mutex ) ; } }",
+          "line": 68
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0013cfdc.c",
+      "type": "SubmissionState",
+      "line": 7,
+      "source_sha256": "6c4bd3b6b598a46e6b54967055f20dad98283cb7aaf11f1023e98e80a09c05e8",
+      "kind": "identical-definition",
+      "body": "struct SubmissionState { unsigned command_mode ; unsigned enabled ; unsigned texture_state ; unsigned feature_mask ; }",
+      "canonical": [
+        {
+          "header": "include/game/render_state.h",
+          "body": "struct SubmissionState { unsigned command_mode ; unsigned enabled ; unsigned texture_state ; unsigned feature_mask ; }",
+          "line": 50
+        }
+      ],
+      "matching_headers": [
+        "include/game/render_state.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_00162f78.cpp",
+      "type": "SceneController",
+      "line": 2,
+      "source_sha256": "d22846b871d7ffc73aff6131a9cc0e99b4e9b308db25e1ff78f1615f59d6e428",
+      "kind": "different-definition",
+      "body": "struct SceneController { const SceneControllerVTable * vtable ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneController { const void * vtable ; unsigned char reserved04 [ 0x21fc - 4 ] ; ~ SceneController ( ) ; }",
+          "line": 101
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001a29f4.cpp",
+      "type": "SceneController",
+      "line": 2,
+      "source_sha256": "39f734cc34ac9f3193d7d106ae9414324b1360e54ffbc0b805b8a5b80896c367",
+      "kind": "different-definition",
+      "body": "struct SceneController { const SceneControllerVTable * vtable ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneController { const void * vtable ; unsigned char reserved04 [ 0x21fc - 4 ] ; ~ SceneController ( ) ; }",
+          "line": 101
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001a7420.cpp",
+      "type": "SceneController",
+      "line": 2,
+      "source_sha256": "747dc78739e6555db56a12a6f7223f178102fea32a044639310491ae7f8e43d7",
+      "kind": "different-definition",
+      "body": "struct SceneController { const SceneControllerVTable * vtable ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneController { const void * vtable ; unsigned char reserved04 [ 0x21fc - 4 ] ; ~ SceneController ( ) ; }",
+          "line": 101
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001ab51c.cpp",
+      "type": "SceneController",
+      "line": 2,
+      "source_sha256": "20d8a758b51a8388a063ac91ed1cc59b6a39b6e55cc2b2b50aa0834307afb903",
+      "kind": "different-definition",
+      "body": "struct SceneController { const SceneControllerVTable * vtable ; }",
+      "canonical": [
+        {
+          "header": "include/game/scene_lifecycle.h",
+          "body": "struct SceneController { const void * vtable ; unsigned char reserved04 [ 0x21fc - 4 ] ; ~ SceneController ( ) ; }",
+          "line": 101
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001e37b8.cpp",
+      "type": "Heap",
+      "line": 3,
+      "source_sha256": "5fe0b957731efedd0b8513922b5809f0bc02fccaa208038131d0fa4c0bbd9549",
+      "kind": "different-definition",
+      "body": "class Heap { public : virtual ~ Heap ( ) ; virtual void * allocate ( unsigned int size , unsigned int alignment ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/heap_interface.h",
+          "body": "class Heap { public : virtual ~ Heap ( ) ; virtual void * allocate ( unsigned int size , unsigned int alignment ) ; virtual void release ( void * allocation ) ; }",
+          "line": 8
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00104fc4.c",
+      "type": "ResourceArray",
+      "line": 5,
+      "source_sha256": "6a8350f2b89a0f7727466fec926b8dcf89d25493fc2699cd0eaadbe07dd64231",
+      "kind": "identical-definition",
+      "body": "struct ResourceArray { void * buffer ; unsigned int count ; unsigned int capacity ; unsigned int state ; }",
+      "canonical": [
+        {
+          "header": "include/game/material.h",
+          "body": "struct ResourceArray { void * buffer ; unsigned int count ; unsigned int capacity ; unsigned int state ; }",
+          "line": 51
+        }
+      ],
+      "matching_headers": [
+        "include/game/material.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_00103978.c",
+      "type": "ResourceTableEntry",
+      "line": 5,
+      "source_sha256": "f12f36818ff54cf239fda9d4631c3e529332362e34a855bb564e8f2d43bdb73d",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/resource_tables.h",
+          "body": "struct ResourceTableEntry { int active ; void * allocation ; struct ResourceObject * object ; unsigned char reserved [ 3 ] ; unsigned char flag ; unsigned char tail [ 8 ] ; }",
+          "line": 13
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00103978.c",
+      "type": "FontResource",
+      "line": 6,
+      "source_sha256": "f12f36818ff54cf239fda9d4631c3e529332362e34a855bb564e8f2d43bdb73d",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/font.h",
+          "body": "struct FontResource { const struct FontVTable * vtable ; struct FontFile * file ; struct FontInformation * information ; struct FontTexture * textures ; unsigned flags ; unsigned short reserved14 , reserved16 ; }",
+          "line": 44
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00103978.c",
+      "type": "ResourceTable",
+      "line": 9,
+      "source_sha256": "f12f36818ff54cf239fda9d4631c3e529332362e34a855bb564e8f2d43bdb73d",
+      "kind": "different-definition",
+      "body": "struct ResourceTable { struct ResourceTableEntry * entries ; int count ; int activeCount ; unsigned char reserved0c [ 4 ] ; unsigned field10 , field14 , field18 , field1c ; unsigned char reserved20 [ 0x14 ] ; struct FontResource * font ; unsigned char reserved38 [ 0x14 ] ; void * defaultSheets ; unsigned char firstEnabled ; unsigned char reserved51 [ 3 ] ; void * firstSheets ; uintptr_t firstResource ; int firstIndex ; unsigned char secondEnabled ; unsigned char reserved61 [ 3 ] ; void * secondSheets ; uintptr_t secondResource ; int secondIndex ; }",
+      "canonical": [
+        {
+          "header": "include/game/resource_tables.h",
+          "body": "struct ResourceTable { struct ResourceTableEntry * entries ; int count ; int activeCount ; unsigned char reserved0c [ 0x28 ] ; struct FontResource * font ; float width , height ; unsigned char mode , flag41 , flag42 , flag43 , flag44 , flag45 ; unsigned char reserved46 [ 6 ] ; void * defaultSheets ; unsigned char firstEnabled ; unsigned char reserved51 [ 3 ] ; void * firstSheets ; uintptr_t firstResource ; int firstIndex ; unsigned char secondEnabled ; unsigned char reserved61 [ 3 ] ; void * secondSheets ; uintptr_t secondResource ; int secondIndex ; }",
+          "line": 22
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00110548.c",
+      "type": "Command",
+      "line": 4,
+      "source_sha256": "36fd943a7664cc45c9836a38d6593680e18039efcb414d9bc692db55747c2d1f",
+      "kind": "different-definition",
+      "body": "struct Command { unsigned char kind , reserved01 , ready , reserved03 ; const void * source ; unsigned size ; unsigned flags ; unsigned char reserved10 [ 12 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/bss_0049ecf0.h",
+          "body": "struct Command { unsigned char kind ; unsigned char reserved01 ; unsigned char ready ; unsigned char reserved03 ; const void * source ; unsigned size ; unsigned flags ; unsigned char reserved10 [ 12 ] ; }",
+          "line": 8
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00110548.c",
+      "type": "CommandQueue",
+      "line": 11,
+      "source_sha256": "36fd943a7664cc45c9836a38d6593680e18039efcb414d9bc692db55747c2d1f",
+      "kind": "different-definition",
+      "body": "struct CommandQueue { unsigned char reserved00 [ 4 ] ; unsigned char * base ; unsigned char reserved08 [ 4 ] ; unsigned offset ; unsigned char reserved10 [ 4 ] ; unsigned committed_offset ; struct Command * commands ; unsigned char reserved1c [ 4 ] ; int count ; int completed_count ; int execution_threshold ; unsigned mode ; }",
+      "canonical": [
+        {
+          "header": "include/game/bss_0049ecf0.h",
+          "body": "struct CommandQueue { unsigned id ; unsigned char * base ; unsigned capacity ; unsigned offset ; unsigned committed_bytes ; unsigned committed_offset ; struct Command * commands ; unsigned char reserved1c [ 4 ] ; int count ; int completed_count ; int cursor ; unsigned flags ; unsigned state30 ; unsigned state34 ; void ( * callback ) ( void ) ; unsigned reserved3c ; struct CommandQueue * next ; }",
+          "line": 30
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00110548.c",
+      "type": "CommandSystem",
+      "line": 25,
+      "source_sha256": "36fd943a7664cc45c9836a38d6593680e18039efcb414d9bc692db55747c2d1f",
+      "kind": "different-definition",
+      "body": "struct CommandSystem { unsigned char reserved00 [ 0x11 ] ; unsigned char pending , enabled ; unsigned char reserved13 [ 5 ] ; unsigned char ready ; unsigned char reserved19 [ 0x83 ] ; struct CommandQueue * writing ; struct CommandQueue * executing ; unsigned char reserveda4 [ 0xb4 ] ; int counter ; unsigned char reserved15c [ 4 ] ; void ( * callback ) ( int event ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/bss_0049ecf0.h",
+          "body": "struct CommandSystem { unsigned char reserved00 [ 8 ] ; int display_heights [ 2 ] ; unsigned char initialized ; unsigned char pending ; unsigned char enabled ; unsigned char reserved13 [ 5 ] ; unsigned char ready ; unsigned char reserved19 [ 3 ] ; struct CommandQueue * queues [ 32 ] ; struct CommandQueue * writing ; struct CommandQueue * executing ; struct CommandResource * resources [ 32 ] ; int resource_index ; struct CommandResource * selected [ 3 ] ; unsigned values [ 3 ] ; unsigned modes [ 3 ] ; unsigned char reserved14c [ 8 ] ; int begin_counter ; int counter ; void ( * begin_callback ) ( int event ) ; void ( * callback ) ( int event ) ; int display_mode ; }",
+          "line": 50
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00177520.c",
+      "type": "MessageEntry",
+      "line": 5,
+      "source_sha256": "f72a3e1ef633a6f395824ff80e4c44ddf22cf63cec4765bc59d243d2bb3593d5",
+      "kind": "different-definition",
+      "body": "struct MessageEntry { struct DisplayObject * object ; unsigned short * output ; float width ; float spacing ; float x , y ; float animation_x , animation_y ; }",
+      "canonical": [
+        {
+          "header": "include/game/messages.h",
+          "body": "struct MessageEntry { struct DisplayObject * object ; unsigned short * output ; float width , spacing , x , y , animation_x , animation_y ; }",
+          "line": 4
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_00177520.c",
+      "type": "MessageLayout",
+      "line": 13,
+      "source_sha256": "f72a3e1ef633a6f395824ff80e4c44ddf22cf63cec4765bc59d243d2bb3593d5",
+      "kind": "different-definition",
+      "body": "struct MessageLayout { struct MessageEntry * entries [ 3 ] ; float x , y ; unsigned char reserved14 [ 0xc ] ; int lines ; unsigned char reserved24 [ 4 ] ; unsigned short * text ; }",
+      "canonical": [
+        {
+          "header": "include/game/messages.h",
+          "body": "struct MessageLayout { struct MessageEntry * entries [ 3 ] ; float x , y ; unsigned char reserved14 [ 0x0c ] ; int lines ; unsigned char reserved24 [ 4 ] ; unsigned short * text ; }",
+          "line": 9
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d3bcc.cpp",
+      "type": "SoundInstance",
+      "line": 3,
+      "source_sha256": "1557722d0de21a4b58df285514769dce86440f662e660b241bf423fc8dec55e3",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstance { const struct SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; struct SoundHandle * handle ; struct SoundHandle * secondary_handle ; unsigned char reserved10 [ 8 ] ; unsigned selection_state ; unsigned char reserved1c [ 0x34 ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x3c ] ; struct PoolLink player_link ; struct PoolLink selection_link ; }",
+          "line": 34
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d3bcc.cpp",
+      "type": "SoundHandle",
+      "line": 4,
+      "source_sha256": "1557722d0de21a4b58df285514769dce86440f662e660b241bf423fc8dec55e3",
+      "kind": "different-definition",
+      "body": "struct SoundHandle { SoundInstance * sound ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundHandle { struct SoundInstance * sound ; }",
+          "line": 25
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d3bcc.cpp",
+      "type": "SoundInstanceVTable",
+      "line": 5,
+      "source_sha256": "1557722d0de21a4b58df285514769dce86440f662e660b241bf423fc8dec55e3",
+      "kind": "different-definition",
+      "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( SoundInstance * sound ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( struct SoundInstance * sound ) ; }",
+          "line": 29
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d3bcc.cpp",
+      "type": "SoundInstance",
+      "line": 11,
+      "source_sha256": "1557722d0de21a4b58df285514769dce86440f662e660b241bf423fc8dec55e3",
+      "kind": "different-definition",
+      "body": "struct SoundInstance { const SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; SoundHandle * handle ; SoundHandle * secondary_handle ; unsigned char reserved10 [ 0x40 ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x2c ] ; PoolLink pool_link ; unsigned char reserved100 [ 8 ] ; PoolLink player_link ; PoolLink selection_link ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstance { const struct SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; struct SoundHandle * handle ; struct SoundHandle * secondary_handle ; unsigned char reserved10 [ 8 ] ; unsigned selection_state ; unsigned char reserved1c [ 0x34 ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x3c ] ; struct PoolLink player_link ; struct PoolLink selection_link ; }",
+          "line": 34
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d9c14.cpp",
+      "type": "SoundInstance",
+      "line": 3,
+      "source_sha256": "5f98bbefc021b3a6b3d4f69cb138f1bd4a97f92fa0fad5eca7969fda5dd14237",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstance { const struct SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; struct SoundHandle * handle ; struct SoundHandle * secondary_handle ; unsigned char reserved10 [ 8 ] ; unsigned selection_state ; unsigned char reserved1c [ 0x34 ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x3c ] ; struct PoolLink player_link ; struct PoolLink selection_link ; }",
+          "line": 34
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d9c14.cpp",
+      "type": "SoundHandle",
+      "line": 4,
+      "source_sha256": "5f98bbefc021b3a6b3d4f69cb138f1bd4a97f92fa0fad5eca7969fda5dd14237",
+      "kind": "different-definition",
+      "body": "struct SoundHandle { SoundInstance * sound ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundHandle { struct SoundInstance * sound ; }",
+          "line": 25
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d9c14.cpp",
+      "type": "SoundInstanceVTable",
+      "line": 5,
+      "source_sha256": "5f98bbefc021b3a6b3d4f69cb138f1bd4a97f92fa0fad5eca7969fda5dd14237",
+      "kind": "different-definition",
+      "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( SoundInstance * sound ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( struct SoundInstance * sound ) ; }",
+          "line": 29
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001d9c14.cpp",
+      "type": "SoundInstance",
+      "line": 11,
+      "source_sha256": "5f98bbefc021b3a6b3d4f69cb138f1bd4a97f92fa0fad5eca7969fda5dd14237",
+      "kind": "different-definition",
+      "body": "struct SoundInstance { const SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; SoundHandle * handle ; SoundHandle * secondary_handle ; unsigned char reserved10 [ 0x40 ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x2c ] ; PoolLink pool_link ; unsigned char reserved100 [ 8 ] ; PoolLink player_link ; PoolLink selection_link ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstance { const struct SoundInstanceVTable * vtable ; unsigned char reserved04 [ 4 ] ; struct SoundHandle * handle ; struct SoundHandle * secondary_handle ; unsigned char reserved10 [ 8 ] ; unsigned selection_state ; unsigned char reserved1c [ 0x34 ] ; int priority_offset ; unsigned char reserved54 [ 0x49 ] ; unsigned char priority ; unsigned char reserved9e [ 0x2a ] ; float volume ; unsigned char reservedcc [ 0x3c ] ; struct PoolLink player_link ; struct PoolLink selection_link ; }",
+          "line": 34
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0019f0c4.cpp",
+      "type": "RenderTarget",
+      "line": 5,
+      "source_sha256": "4a85c547daa40aae6575376ce92e20e3fe9da933326a89f921abc82c681c18d0",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/drawing_system.h",
+          "body": "struct RenderTarget { const struct RenderTargetVTable * vtable ; }",
+          "line": 9
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_0019f0c4.cpp",
+      "type": "DrawingSystem",
+      "line": 14,
+      "source_sha256": "4a85c547daa40aae6575376ce92e20e3fe9da933326a89f921abc82c681c18d0",
+      "kind": "different-definition",
+      "body": "struct DrawingSystem { unsigned char reserved00 [ 4 ] ; unsigned char initialized ; unsigned char reserved05 [ 7 ] ; unsigned mode ; W23JDrawingBuffers * ready ; unsigned char reserved14 [ 0x90 ] ; RenderTarget * target ; }",
+      "canonical": [
+        {
+          "header": "include/game/drawing_system.h",
+          "body": "struct DrawingSystem { unsigned status ; unsigned char initialized ; unsigned char mode_changed ; unsigned char reserved06 [ 2 ] ; unsigned visibility_mask ; unsigned mode ; unsigned ready ; unsigned flags ; unsigned char reserved18 [ 0x8c ] ; struct RenderTarget * target ; unsigned active ; unsigned char reservedac [ 0x19c ] ; unsigned current ; unsigned requested ; unsigned phase ; }",
+          "line": 12
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/func_001e42fc.c",
+      "type": "W8DisplaySet",
+      "line": 8,
+      "source_sha256": "56fb87636200cc5882584fe69349078e5c2ad10c05e2eb386e6752e41e6875e6",
+      "kind": "forward",
+      "body": null,
+      "canonical": [
+        {
+          "header": "include/game/screen.h",
+          "body": "struct W8DisplaySet { unsigned char reserved00 [ 0x1300 ] ; struct W8DisplayHandle * handles [ ] ; }",
+          "line": 254
+        }
+      ],
+      "matching_headers": []
+    },
+    {
+      "source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "type": "BinaryFileHeader",
+      "line": 3,
+      "source_sha256": "cd09b7e677fa7c6920464f6fa25807c6a79a5bcb39548326e46915e021775e88",
+      "kind": "different-definition",
+      "body": "struct BinaryFileHeader { unsigned signature ; unsigned short byte_order ; unsigned short header_size ; unsigned version ; unsigned file_size ; unsigned short block_count ; unsigned short reserved12 ; struct ArchiveBlockReference blocks [ ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/font_resource.h",
+          "body": "struct BinaryFileHeader { unsigned signature ; unsigned short byte_order ; unsigned short header_size ; unsigned version ; unsigned file_size ; unsigned short block_count ; unsigned short reserved12 ; unsigned char blocks [ ] ; }",
+          "line": 68
+        }
+      ],
+      "matching_headers": []
+    }
+  ],
+  "qualification": "Static qualified identity only; no native compilation, semantic owner equivalence or ABI-layout proof is claimed."
+}

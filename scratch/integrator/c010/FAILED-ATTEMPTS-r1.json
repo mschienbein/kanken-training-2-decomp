@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "scope": "c010 integration tooling/source-edit events; not author measurements or acceptance gates",
+  "events": [
+    {
+      "stage": "names-needs-list-inventory",
+      "outcome": "TypeError: cannot use a dict as a dict key",
+      "effect": "A needs_names row used structured dictionaries rather than strings. No source/config edit or compiler command occurred; inventory was corrected to preserve both schemas."
+    },
+    {
+      "stage": "dynamic-hashline-overlay-invocation",
+      "outcome": "TypeError: tool.edit expects a dict of arguments, got str",
+      "effect": "No edit applied. The same generated patch was submitted with the required patch argument dictionary, then applied once."
+    },
+    {
+      "stage": "declaration-plan-r1",
+      "outcome": "Static regex included ordinary call statements",
+      "effect": "Never applied; retained as declaration-plan-r1.json. Replaced with a stricter declaration-prefix plan."
+    },
+    {
+      "stage": "declaration-plan-r2",
+      "outcome": "AST preview included executable case-label statements",
+      "effect": "Entire 334-replacement proposal rejected before application. R3 excludes case/control prefixes and only its 319 actual declarations were applied."
+    },
+    {
+      "stage": "complete-struct-AST-consolidation",
+      "outcome": "No replacements made; 20 of 28 patterns reported multiple AST nodes for the definition plus semicolon",
+      "effect": "No AST changes applied. The existing interface scanner tokenized complete statement spans for surgical edits; plans and all exact resulting source edits are retained."
+    },
+    {
+      "stage": "func_00147264-field-migration",
+      "outcome": "An incorrectly selected closing-brace line caused the edit tool to retain the old pool->size assignment along with the new storage_size assignment",
+      "effect": "Read the returned source boundary and removed the obsolete assignment before any compiler run; reported the surprising repair through tool QA. This is not a MATCH or compiler failure."
+    },
+    {
+      "stage": "main-inplace-merge-incident",
+      "outcome": "No affected c010 invocation observed",
+      "effect": "C010 uses its isolated tools and no ImportError/IndentationError measurement was produced in the announced main merge-conflict window. No incident retry was performed."
+    }
+  ]
+}

@@ -18,6 +18,19 @@ Current entry on top; older entries are kept as history.
   six such functions matches. A residual-family study found validated idioms (typed storage
   accessors, genuine same-TU callee visibility, helper argument order) and precise negatives
   (VFP load writeback, exclusive-store status register).
+- **c010 interface cutover (candidate only):** shared headers replace local declarations,
+  retain caller-evidenced inputs, and expose real initial subobjects instead of receiver casts.
+  `scratch/integrator/c010/g3-unify/G3-UNIFY-r1.json` records the reconciliations and source-bound
+  v6/L1 witnesses. The modal/phase dispatchers `001debb4`/`001e42fc` and the overlapping indexed
+  owner in `00172994` remain explicitly deferred; no common owner, union or array bound is invented.
+- **c010 pre-review reconciliation (unaccepted):** genuine native character-reader members and
+  a typed noninvoking cache-registration helper replace the corresponding free-function facades
+  and destructor cast. The shared archive search's `noinline` spelling is explicitly
+  **[INFERENCE]**, applying to all six functions of that unit. A further 66 NEW functions in
+  65 units are explicitly deferred, never accepted identities; current candidate counts and
+  exact evidence live in `scratch/integrator/c010/prereview-fixes/`.
+  Surviving scene/allocator/sound/font interface obligations, the variadic audit-parser fix,
+  and the finalized c009-r4 resource-dispatch/owner cutover remain preparation prerequisites.
 - **Next:** c009 (~678 functions), c010 (~548), c011 and a v8-selected model checkpoint;
   catalogue v10-r4 (raw-SVC repair plus 12 more runtime-library owners) is in review.
 

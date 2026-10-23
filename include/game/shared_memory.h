@@ -1,6 +1,6 @@
 #ifndef GAME_SHARED_MEMORY_H
 #define GAME_SHARED_MEMORY_H
-#include "ctr/svc.h"
+#include "ctr/ipc.h"
 struct SharedMemory {
     unsigned state;
     unsigned reserved04;
@@ -14,13 +14,12 @@ struct SharedMemory {
  * to this same mapping record. The second symbol names its handle word. */
 struct SharedMemoryMapping {
     struct SharedMemory *address;
-    CtrHandle handle;
+    struct StaticHandle handle;
 };
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern struct SharedMemoryMapping data_00242d88;
-extern CtrHandle data_00242d8c;
 extern CtrResult func_001151b8(CtrHandle *handle, struct SharedMemory **address);
 extern CtrResult func_0010bf88(void);
 extern unsigned func_0013e71c(void);

@@ -5,7 +5,7 @@
 
 void func_001af154(struct Screen *screen, int current, int total)
 {
-    struct DisplayObject *object = screen->slots[3]->object;
+    struct DisplayObject *object = widget_display(screen->slots[3]);
     if (object && total != 0) {
         int percentage = (int)((float)current / (float)total * 100.0f);
         func_0017a968(object, bss_0024716c[10], 0, 0);

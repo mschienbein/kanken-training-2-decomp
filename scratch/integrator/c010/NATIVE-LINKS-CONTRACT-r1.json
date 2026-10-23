@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "status": "native-animation-list-member-return-cutover-closed-by-bounded-witnesses-not-accepted",
+  "branch": "c010-native-links",
+  "base_commit": "a3062ee4a9e71bf1bf5913eb07748ab0750a5238",
+  "author": "NativeLinksCodex",
+  "commit_identity": "mschienbein <mschienbein@users.noreply.github.com>",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "parent_source_ready": {
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/SOURCE-READY-r68.json": "9e46e1a3bb5414c678526e600a96a9c4f34df8c3f3219e5dc09e739c29df418b",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/NEW-DEFERRALS-r67.json": "6d7cdc5f04faa5f94845dcc111544b8e8b8dc9477ac325993195af82d3c6b091",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/HANDOFF.json": "54fb83751e208a9231f91ec20ec41b912bf829509c107729705f99e93c040d5a"
+  },
+  "changed_scope": {
+    "sources": {
+      "src/wave8/func_001cff50.cpp": "ff941e91543d1f0c8fdfb23906318301cff3668e12f3b4f9ec580cb6c4230442",
+      "src/wave8/func_001cfdac.cpp": "1117436fcedf4016d46d2acb8c100db482a9c550e213748a333a84e51dc8faeb",
+      "src/wave8/func_001cfd94.cpp": "cf2149bd9058d897e83e5c976e4a92530511e2350d4f61e80c2a1c66e9bcafb4",
+      "src/checkpoint10/func_0016b58c.cpp": "e0be813072b0e24586172f2de0df5c5c00ff6d3751ad24a93a64f5ce8410adcc",
+      "src/checkpoint10/collect-r2/func_001cff58.cpp": "848d2d6edd583a78d47d08544bf45c9000114c878c2dfeed3773b94e529a2ab4"
+    },
+    "headers": {
+      "include/game/layout.h": "c81cebe06a5d9ede6227bca2ce106100ef1e2ab77a2d419ed645d295cb9bbd6d"
+    },
+    "candidate_manifest": {
+      "path": "config/candidates/c010.json",
+      "sha256": "b159999ba9360bc4a2a6ab799d842fc3c6a1edf4aa54c1312d8f485384bfc809"
+    },
+    "documentation": {
+      "THIRD_PARTY.md": "c41c22aa0dc597343acebf9987a156200d8d88aa2c1a85fbd0e7c6fc67eb221c"
+    },
+    "handoff": "scratch/integrator/c010/HANDOFF.json",
+    "deferrals": "scratch/integrator/c010/NEW-DEFERRALS-native-links-r1.json"
+  },
+  "contract": {
+    "lookup": "nw::lyt::AnimationLink *nw::lyt::internal::FindAnimationLink(nw::lyt::AnimationList *, nw::lyt::AnimTransform *)",
+    "native_list": "The existing nw::lyt::AnimationList specialization owns native AnimationLink nodes at link offset0. No new alias, wrapper, overload or second definition is introduced.",
+    "members": [
+      "LayoutMaterial.animation_links and LayoutPane.animation_links are actual native AnimationList fields in C++; their independent target owner prefixes are not equated with native Material/Pane.",
+      "LayoutAnimationOwner.animations uses the same native list; its existing virtual childCount/child/detach shapes remain otherwise unchanged and detach now receives the same native AnimTransform pointer."
+    ],
+    "legacy_unbind": "extern-C func_0016b5fc(nw::lyt::AnimationList *, nw::lyt::AnimTransform *) retains the existing address identity. No native UnbindAnimationLink binding, overload, C forwarding body or new credit is invented.",
+    "accepted_lookup_returns": "001cff50 and001cfdac return the exact native AnimationLink pointer from the sole provider; both owners and transform inputs are nonconst to use the existing native contract without casts.",
+    "c_boundary": "Unused C animation transform/link/list shadows and old const helper declarations are retired. C sees opaque LayoutMaterial/LayoutPane owners; the distinct LayoutListNode used by dimensions is preserved. Every direct C/C++ layout-header dependent was witnessed."
+  },
+  "pre_edit_source_reference_inventory": {
+    "lookup_consumers": [
+      "src/wave8/func_001cff50.cpp",
+      "src/wave8/func_001cfdac.cpp"
+    ],
+    "legacy_unbind_consumers": [
+      "src/wave8/func_001cfd94.cpp",
+      "src/checkpoint10/func_0016b58c.cpp"
+    ],
+    "native_unbind_consumer_already_on_canonical_contract": [
+      "src/nw4c/lyt_Pane__UnbindAnimation.cpp"
+    ],
+    "other_actual_owner_or_node_users": [
+      "src/wave8/func_001f01a0.cpp",
+      "src/wave8/func_001f01a8.cpp",
+      "src/wave8/func_001f01b0.cpp",
+      "include/game/screen.h",
+      "src/wave17/func_0016f4ec.c"
+    ],
+    "declarations": [
+      "include/game/layout.h",
+      "include/nw/lyt/lyt_Animation.h",
+      "include/nw/lyt/lyt_Types.h"
+    ],
+    "original_only_unbind_caller": {
+      "function": "func_0016a998",
+      "size": 220,
+      "observation": "Actual original call at+204 passes unchanged receiver+0x1c and null animation. No current source definition/accepted claim/c010 candidate for0016a998 exists; no implementation or alias is fabricated. Its callers use the unchanged lifecycle endpoint.",
+      "source_declaration": "include/game/layout_lifecycle.h"
+    },
+    "all_direct_header_dependents": "scratch/integrator/c010/native-links-scope-r1.json",
+    "limits": "The bounded incoming original-control-reference query includes explicit branches and exact-boundary fallthrough. Indirect/data references are not claimed exhaustive; Main retains whole original virtual/callback adjudication."
+  },
+  "identity_evidence": {
+    "name": "_ZN2nw3lyt8internal17FindAnimationLinkEPNS_2ut8LinkListINS0_13AnimationLinkELl0EEEPNS0_13AnimTransformE",
+    "address": 1900376,
+    "proof": "Existing same-address emitted self-definition, never edited-call spelling.",
+    "admitted_record": "scratch/integrator/c010/names-admitted-r1.json",
+    "original_receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4024/match/func_001cff58/recovery-final/game/func_001cff58.result.json",
+    "original_receipt_sha256": "fb49c2198f574055a96748a26cba1a773ccae55fc7f938f6fd6e96dbe29abec7",
+    "original_object_sha256": "89a469263b7f85e4a435b0382f647c3a6cf468412c6db43704e9eaf0ccf0544c",
+    "original_symbol": [
+      {
+        "name": "_ZN2nw3lyt8internal17FindAnimationLinkEPNS_2ut8LinkListINS0_13AnimationLinkELl0EEEPNS0_13AnimTransformE",
+        "value": 0,
+        "size": 56,
+        "binding": "STB_GLOBAL",
+        "section_index": 1,
+        "section_size": 56
+      }
+    ],
+    "names_changes": [],
+    "qualification": "[INFERENCE] Historical native spelling/class/role remain qualified as in the existing admission; the old self object and receipt are not relabeled as fresh validation."
+  },
+  "natural_storage_and_return_evidence": [
+    "The original lookup reads list+4, traverses native link.next+0, compares the unchanged transform against link+8, and has no node writes. The fresh sole native provider MATCHes all56B at the existing bound address.",
+    "Original material lookup and unbind tails both project the same material+4 list. Original pane lookup and0016b58c project+0x1c; exact-boundary fallthrough reaches the lookup/unbind provider respectively.",
+    "The actual original0016b5fc provider reads the same node transform+8, calls existing native-backed iterator erase00191178 with that list/node, then clears transform+8, index+12 and disable+14. A null animation selects all links. This matches native AnimationLink.Reset fields, not merely equal owner offsets.",
+    "Existing current native list provider src/checkpoint10/ut_LinkList.cpp and its three accepted moves remain untouched. No new native unbind identity is inferred from the old helper name.",
+    "Natural provider source and returned node identity establish the shared AnimationLink pointer contract; wrapper field offsets alone are not used as nominal class evidence."
+  ],
+  "ownership": {
+    "accepted_revised_owners": {
+      "func_001cff50": "src/wave8/func_001cff50.cpp",
+      "func_001cfdac": "src/wave8/func_001cfdac.cpp",
+      "func_001cfd94": "src/wave8/func_001cfd94.cpp"
+    },
+    "new_destination": {
+      "function": "func_001cff58",
+      "source": "src/checkpoint10/collect-r2/func_001cff58.cpp",
+      "profile": "game",
+      "size": 56
+    },
+    "candidate_revised_owner": {
+      "function": "func_0016b58c",
+      "source": "src/checkpoint10/func_0016b58c.cpp"
+    },
+    "new_moves": [],
+    "original_moves": [
+      {
+        "function": "func_0018d868",
+        "from": "src/wave7/func_0018d868.c",
+        "to": "src/checkpoint10/ut_LinkList.cpp"
+      },
+      {
+        "function": "func_00191154",
+        "from": "src/wave6/func_00191154.c",
+        "to": "src/checkpoint10/ut_LinkList.cpp"
+      },
+      {
+        "function": "func_00191178",
+        "from": "src/wave6/func_00191178.c",
+        "to": "src/checkpoint10/ut_LinkList.cpp"
+      },
+      {
+        "function": "func_001dc574",
+        "from": "src/wave12/func_001dc574.c",
+        "to": "src/checkpoint10/collect-r2/func_001dc4a4.c"
+      },
+      {
+        "function": "func_001dc90c",
+        "from": "src/wave12/func_001dc90c.c",
+        "to": "src/checkpoint10/collect-r2/func_001dc4a4.c"
+      },
+      {
+        "function": "func_001f014c",
+        "from": "src/wave14/func_001f014c.c",
+        "to": "src/wave14/func_001f014c.cpp"
+      },
+      {
+        "function": "func_001f0158",
+        "from": "src/wave14/func_001f0158.c",
+        "to": "src/wave14/func_001f0158.cpp"
+      },
+      {
+        "function": "func_001f017c",
+        "from": "src/wave14/func_001f017c.c",
+        "to": "src/wave14/func_001f017c.cpp"
+      },
+      {
+        "function": "func_001f0188",
+        "from": "src/wave14/func_001f0188.c",
+        "to": "src/wave14/func_001f0188.cpp"
+      },
+      {
+        "function": "func_001f0194",
+        "from": "src/wave14/func_001f0194.c",
+        "to": "src/wave14/func_001f0194.cpp"
+      }
+    ],
+    "bounded_emitted_ownership": "Each fresh primary object emits exactly its own one function. Only the restored provider emits the native FindAnimationLink; no native/C duplicate is emitted in the four consumer objects. Whole-tree emitted ownership remains a Main full-build gate.",
+    "accepted_manifest_unchanged_sha256": "e7af84243d2315512084ff76699230d0dc21155e8b3c699c535edcf5793d4fc4",
+    "accepted_identities_preserved_structurally": 1621,
+    "composition": {
+      "original_units": 496,
+      "original_claims": 509,
+      "current_units": 497,
+      "current_claims": 510,
+      "original_units_preserved_verbatim": true,
+      "original_moves_preserved_verbatim": true,
+      "original_move_count": 10,
+      "accepted_manifest_unchanged": true,
+      "names_manifest_unchanged": true,
+      "qualification": "Structural candidate/immutable-file bookkeeping only, not a whole-ledger ownership or semantic audit."
+    }
+  },
+  "reservation_boundary": {
+    "unchanged_source_hashes": {
+      "src/checkpoint10/func_001c7760.cpp": "6ca3a01c9ac026963a558b0fcd1c3954005dae48c8e49366d793b9f816a5b83c",
+      "src/checkpoint10/func_001c8a40.cpp": "7a65a8c02c2ac77d4627733b70bc59347c6199d2567c4e650bc4144ed4afd663"
+    },
+    "c011": "001c7760/001c7fa0 native-pair and001c8a40 dependent reservation unchanged; no new release/credit implied.",
+    "textures": "No texture aggregate source/provider/header/slot identity is changed; all texture deferral rows remain verbatim."
+  },
+  "evidence": {
+    "inputs": "scratch/integrator/c010/native-links-inputs-r1.json",
+    "original_facts": "scratch/integrator/c010/native-links-fact-queries-r1.json",
+    "object_facts": "scratch/integrator/c010/native-links-object-facts-r1.json",
+    "witness_index": "scratch/integrator/c010/NATIVE-LINKS-WITNESSES-r1.json",
+    "driver": "scratch/integrator/c010/native-links-match-driver-r1.json"
+  },
+  "exercised_verification": {
+    "actual_driver_exit": 0,
+    "unit_count": 16,
+    "unit_actual_exit_counts": {
+      "0": 16
+    },
+    "all_claimed_functions_match": true,
+    "primary_extents": {
+      "func_0016b58c": 112,
+      "func_001cfd94": 8,
+      "func_001cfdac": 8,
+      "func_001cff50": 8,
+      "func_001cff58": 56
+    },
+    "show": 0,
+    "profiles": "15 game and1 sdk, from exact accepted/predecessor/c010 metadata",
+    "models": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "failed_match_attempts": [],
+    "preserved_diagnostic_attempts": "The actual original-query exits and the initial metadata KeyError/corrected predecessor lookup are retained; earlier C010 graphics/native failures are not modified."
+  },
+  "checks_not_run": [
+    "whole-ledger interfaces/native/signatures/MATCH",
+    "whole original callback/indirect audit",
+    "argcheck",
+    "full builds",
+    "test suite",
+    "prepare",
+    "independent reviews",
+    "finalize",
+    "verify",
+    "push"
+  ],
+  "remaining_main_commands": "scratch/integrator/c010/REMAINING-HEAVY-COMMANDS-native-links-r1.json",
+  "acceptance_boundary": "001cff58 entered this branch candidate manifest only after the complete sixteen-unit bounded run returned exit0 with all claims MATCH. This is a coherent source contract cutover, not checkpoint acceptance or a whole-ledger gate pass."
+}

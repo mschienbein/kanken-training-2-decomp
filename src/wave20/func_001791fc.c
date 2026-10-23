@@ -13,14 +13,16 @@ void func_001791fc(struct CarouselScreen *screen, int enabled)
 {
     struct WidgetSlot *slot = screen->slots[0];
     struct DisplayObject *object;
+    struct ResourceEvent *event;
     if (slot == 0 || slot->object == 0)
         return;
     screen->position = 0;
     screen->selection = -1;
     func_001b4ec8(screen, 0, 0);
-    object = slot->object;
-    if (object == 0)
+    event = slot->object;
+    if (event == 0)
         return;
+    object = &event->base;
     {
         int type = func_0017a9a0(object, 0);
         if (type == 3)

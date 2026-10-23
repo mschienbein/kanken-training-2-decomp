@@ -1,0 +1,34 @@
+{
+  "source": "src/nw4c/lyt_Window.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_001ceda8",
+    "func_001cee94"
+  ],
+  "author": "nw4c2",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/lyt_Window.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/117"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "f160d15674e7bbd864d975f04df4f3e4b569ec743f5b92f3c4c9d0ac98857b54",
+  "receipt": "scratch/g3u-pr5/117/lyt_Window.result.json",
+  "receipt_sha256": "0972329edf5682d23b13882616e8d5e1a2f81a05d73bb1a6ec439f2791412293",
+  "extra_source_sha256": {},
+  "output": "MATCH    _ZN2nw3lyt6Window11SetVtxColorEjNS_2ut6Color8E @ 0x1ceda8 size 0x10/0x10\nMATCH    _ZN2nw3lyt6Window18SetVtxColorElementEjh @ 0x1cee94 size 0x18/0x18\n"
+}

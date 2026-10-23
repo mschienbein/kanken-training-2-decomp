@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/bounded-scope-r3-closure-r3.json",
+  "scope_sha256": "9a512de465d29c1dfb62620fbb43b35445d85394fc0060b6da0519ccb039dc9d",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_units": 1,
+  "completed_units": 1,
+  "paused": false,
+  "match_units": 1,
+  "exit_counts": {
+    "0": 1
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_0010b5cc.c",
+      "profile": "game",
+      "functions": [
+        "func_0010b5cc"
+      ],
+      "author": "w22h",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_0010b5cc.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r3-closure/scratch/integrator/c010/bounded-r3-closure-r3/checkpoint10/func_0010b5cc"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_0010b5cc @ 0x10b5cc size 0x24/0x24\n",
+      "receipt": "scratch/integrator/c010/bounded-r3-closure-r3/checkpoint10/func_0010b5cc/func_0010b5cc.result.json",
+      "source_sha256": "7362ffc98a51c73a0ca13c06d234fc28d49eecb15f1ec4c5732bd7a4e2458ae0",
+      "extra_source_sha256": {},
+      "receipt_sha256": "e2829830203283fe701b56dbcadca820a2e69a961326ce8c93b34c50d9d3c992"
+    }
+  ]
+}

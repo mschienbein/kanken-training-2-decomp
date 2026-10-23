@@ -2,7 +2,6 @@
 
 extern void func_0019cecc(void *destination, unsigned size);
 extern struct PipelineConfiguration *func_0018c6d4(void);
-extern void (*data_002429f8)(unsigned module, unsigned kind, unsigned id, void *memory);
 
 int func_0011d260(struct PipelineStorage *storage)
 {

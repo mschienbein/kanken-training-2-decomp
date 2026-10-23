@@ -1,0 +1,34 @@
+{
+  "source": "src/wave17/func_00190688.c",
+  "profile": "sdk",
+  "functions": [
+    "func_00190688"
+  ],
+  "author": "w17h",
+  "qualification": "[INFERENCE] The frozen sdk recipe reproduces this ordinary function; historical SDK ownership is not authenticated. C-only mutation-procedure result is unspecified and MUST be discarded.",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/wave17/func_00190688.c",
+    "--profile",
+    "sdk",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/465"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "e27224a3261368b64878a71ace636cf4fe7a689a228bb611fc95a15fcad46df6",
+  "receipt": "scratch/g3u-pr5/465/func_00190688.result.json",
+  "receipt_sha256": "bfc97799d03c87987d6c9db9d005778cc2a96ea549efb9aef88e76865ea6548f",
+  "extra_source_sha256": {},
+  "output": "MATCH    func_00190688 @ 0x190688 size 0x20/0x20\n"
+}
