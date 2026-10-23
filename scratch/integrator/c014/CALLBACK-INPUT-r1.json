@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "parent_closure": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json",
+  "parent_closure_sha256": "a9bbac9992ea67218441d6918899d69029b286897d5de0662df7e13e680fd13e",
+  "requested_provider_rows": [
+    {
+      "address": "0x00154674",
+      "name": "func_00154674",
+      "aliases": [
+        "func_00154674"
+      ],
+      "ledger_state": "UNCLAIMED",
+      "prior_prepared_claim": false,
+      "runtime_parameter_type": "function(pointer to (struct AudioChannel), pointer to (struct AudioVoiceGroup)) -> void",
+      "declared_provider_type": "NO_LEDGER_PROVIDER",
+      "comparison": "UNCLAIMED_PROVIDER",
+      "current_NEW_or_revised_closed": true
+    }
+  ],
+  "original_invoking_runtime_rows": [
+    {
+      "caller": "0x00153960",
+      "site": "0x001539c4",
+      "entrypoint": "0x00153fec",
+      "category": "project_callback_api",
+      "callback_parameter_index": 1,
+      "runtime_parameter_type": "function(pointer to (struct AudioChannel), pointer to (struct AudioVoiceGroup)) -> void",
+      "argument_fact": {
+        "kind": "function_address",
+        "address": "0x00154674",
+        "owner": "0x00154674",
+        "names": [
+          "func_00154674"
+        ]
+      },
+      "providers": [
+        {
+          "address": "0x00154674",
+          "name": "func_00154674",
+          "aliases": [
+            "func_00154674"
+          ],
+          "ledger_state": "UNCLAIMED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "function(pointer to (struct AudioChannel), pointer to (struct AudioVoiceGroup)) -> void",
+          "declared_provider_type": "NO_LEDGER_PROVIDER",
+          "comparison": "UNCLAIMED_PROVIDER",
+          "current_NEW_or_revised_closed": true
+        }
+      ],
+      "array_semantics": null,
+      "source_binding": {
+        "kind": "uncredited original caller; intentionally included"
+      }
+    },
+    {
+      "caller": "0x00153fec",
+      "site": "0x00153ffc",
+      "entrypoint": "0x00154838",
+      "category": "project_callback_api",
+      "callback_parameter_index": 2,
+      "runtime_parameter_type": "function(pointer to (struct AudioChannel), pointer to (struct AudioVoiceGroup)) -> void",
+      "argument_fact": {
+        "kind": "parameter",
+        "function": "0x00153fec",
+        "register": "r1"
+      },
+      "providers": [
+        {
+          "address": "0x00154624",
+          "name": "func_00154624",
+          "aliases": [
+            "func_00154624"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "function(pointer to (struct AudioChannel), pointer to (struct AudioVoiceGroup)) -> void",
+          "source": "src/wave7/func_00154624.c",
+          "declared_provider_type": "function(pointer to (struct AudioChannel), pointer to (struct AudioVoiceGroup)) -> void",
+          "declaration_site": {
+            "source": "src/wave7/func_00154624.c",
+            "line": 3
+          },
+          "source_sha256": "318aad0eddeab92203106e82dece57606a1ffd274cd912e3f06a6719ded025d0",
+          "comparison": "EXACT_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        {
+          "address": "0x00154674",
+          "name": "func_00154674",
+          "aliases": [
+            "func_00154674"
+          ],
+          "ledger_state": "UNCLAIMED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "function(pointer to (struct AudioChannel), pointer to (struct AudioVoiceGroup)) -> void",
+          "declared_provider_type": "NO_LEDGER_PROVIDER",
+          "comparison": "UNCLAIMED_PROVIDER",
+          "current_NEW_or_revised_closed": true
+        }
+      ],
+      "array_semantics": null,
+      "source_binding": {
+        "source": "src/wave16/func_00153fec.c",
+        "kind": "credited source body; final whole-proposal MATCH binds original callsite, including implicit compiler/runtime calls"
+      }
+    }
+  ],
+  "required_new_callback_contract": "void func_00154674(AudioChannel*,AudioVoiceGroup*)",
+  "unclaimed_is_not_closed_by_bytes": true,
+  "no_opaque_provider_waiver_extended": true
+}

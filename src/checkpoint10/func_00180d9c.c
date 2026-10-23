@@ -16,7 +16,7 @@ void func_00180d9c(struct ServiceCoordinator *coordinator, int index, float valu
     if (func_0018f018()) {
         struct AudioDspParameterBlock *parameters =
             coordinator->storage.audio.voice_parameters[coordinator->completion_slot];
-        set_volume(&parameters->volume, index, value);
+        set_volume(&parameters->settings.volume, index, value);
         if (index == 0)
             parameters->flags |= 0x1000000;
         else if (index == 1)

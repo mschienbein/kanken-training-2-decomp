@@ -29,6 +29,7 @@ struct StreamQueue;
 
 #include "game/audio_filter.h"
 #include "game/pool_list.h"
+#include "game/task_pool.h"
 #include "game/stream_manager.h"
 
 #include <stdbool.h>
@@ -253,6 +254,7 @@ struct TaskPool;
 extern "C" {
 #endif
 extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
+extern void func_00154674(struct AudioChannel *element, struct AudioVoiceGroup *group);
 extern void func_001d9178(struct AudioVoice *voice, int increment);
 extern void func_001d9530(struct AudioVoice *voice);
 

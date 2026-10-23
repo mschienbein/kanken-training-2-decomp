@@ -1,16 +1,5 @@
-#include "game/screen.h"
+#include "game/image_activation.h"
 
-struct EffectPresetMasks {
-    unsigned packed_masks[3];
-    unsigned short fallback;
-};
-
-struct W19EffectPresetBlock {
-    unsigned char reserved00[0x4c];
-    struct EffectPresetMasks masks;
-};
-
-extern const struct W19EffectPresetBlock data_002181c0;
 
 static __inline void apply_mask(struct W10DrawingInput *effects, unsigned short mask)
 {

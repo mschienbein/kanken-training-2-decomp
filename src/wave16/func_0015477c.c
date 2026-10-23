@@ -3,10 +3,6 @@
 
 struct AudioChannel;
 
-struct TaskPool {
-    unsigned int reserved00;
-    struct PoolList active;
-};
 
 #include <stddef.h>
 

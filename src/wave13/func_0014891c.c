@@ -16,7 +16,7 @@ int func_0014891c(struct ServiceCoordinator *context, unsigned int value)
             value = 0x7fffu;
         parameters =
             context->storage.audio.voice_parameters[context->completion_slot];
-        parameters->value1c = value;
+        parameters->settings.value1c = value;
         parameters->flags |= 0x20000000u;
         func_00182204();
         return 1;
