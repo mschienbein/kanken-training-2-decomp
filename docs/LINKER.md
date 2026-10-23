@@ -958,10 +958,30 @@ review, finalize and history without adding a fake empty rewrite dictionary; a m
 receipt missing the same field still refuses. Verification/evidence is recorded in
 `scratch/integrator/linker-unref/evidence-v18.json` and `AUDIT-v18.json`.
 
-The real integration check uses a detached scratch worktree at Main's pinned integration
-target merged locally with this branch, not hand-assembled source/header snapshots.
-Neither GATES file is amended, and no production full build, full suite, adoption, main
-mutation or push is authorized by this proposal.
+The integration proof uses fresh detached worktrees and local `--no-ff` merges of source
+commit `4a071371`, with no accepted source/header/receipt restoration:
+
+- Last finalized/pushed target **`a443fef1`**, local merge **`52901fa3`**:
+  `.venv/bin/python -B tools/accept.py verify` **exit 0**, all **10 accepted checkpoints**
+  bound; all linker/accept/build modules **527 tests, exit 0, OK**.
+- Pending **`7a975a0d`** (c010-r7 PREPARED), plain versus local merge **`cd294f88`**:
+  both verification commands **exit 1** at missing `src/wave12/func_001dc574.c`.
+  Complete live source/header/unit/ledger inventories contain the same **273** failures
+  and identical accepted-record hashes, with **zero added failures**. These prepared-state
+  failures are not relabelled as successful historical verification. The merged target's
+  linker/accept/build modules also pass **527 tests, exit 0**.
+- A fresh bounded build on the finalized merge writes only metadata to
+  `build/linker-unref-v18-bounded-r4/`: **exit 0**, exact D1 **100 B at `0x001acbb4`**,
+  one target-null U1 action for **108 B D0 + 8 B own exidx**. The existing d8aef63a author
+  fixture is referenced only through scratch paths, never as accepted-source hydration.
+  Direct matcher controls give MenuResetScene **exit 0 / MATCH 100 B**, and MenuScene
+  **exit 2 / live vtable refusal**, without an elimination action.
+
+Both merge-tree checks and local merges exit 0 without conflicts. The original branch
+history/source-drift failure, the first incomplete synthetic-fixture test run and the
+first external-manifest bounded setup failure are retained in the evidence. Neither GATES
+file is amended; no production full build, full suite, adoption, main mutation or push
+is performed.
 
 ## Sources
 
