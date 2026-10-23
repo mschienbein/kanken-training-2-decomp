@@ -265,6 +265,8 @@ extern void func_0016a3e0(struct SoundInstance *sound);
 extern void func_001d3bcc(struct SequenceSoundControl *sound);
 extern void func_001d9c14(struct WaveSoundControl *sound);
 extern void func_001d3230(struct SequencePoolSound *sound);
+extern void func_001d2f90(struct SequenceSound *sound, const void *data,
+    const struct SequenceStartOptions *options);
 extern void func_0016a560(struct SoundInstance *sound);
 extern void func_001d38ac(struct SequenceSoundControl *sound);
 extern void func_001d9a0c(struct WaveSoundControl *sound);

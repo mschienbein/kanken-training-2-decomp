@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "status": "source-candidate-and-complete-current-metadata-ready-for-Main-only-heavy-gates-not-accepted",
+  "branch": "c011-r3-closure",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r3-closure",
+  "base_commit": "64fae9d",
+  "merged_predecessor_commit": "8575e16",
+  "c009_r3_integrated_source_commit": "b7bb6d9",
+  "model": "openai-codex/gpt-6.1-sol:max",
+  "nested_agents_or_provider_fallback": false,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "gate_revision_sha256": "df9147d5721d9a4fb2d43e63604126e602e8d37a695691ee6350f15e31f98639",
+  "candidate_manifest": "config/candidates/c011.json",
+  "candidate_manifest_sha256": "66880cecfd42a8b959545dc32df2b667d52dc8e5e6392c1df0e6305dc223a97a",
+  "candidate_manifest_preserved_verbatim": true,
+  "counts": {
+    "accepted_units": 1562,
+    "accepted_functions": 1621,
+    "accepted_bytes": 195908,
+    "c009_r3_units": 2243,
+    "c009_r3_functions": 2296,
+    "c009_r3_bytes": 252692,
+    "predecessor_units": 2731,
+    "predecessor_functions": 2797,
+    "predecessor_bytes": 300112,
+    "c010_new_functions": 501,
+    "c010_new_bytes": 47420,
+    "candidate_units": 95,
+    "candidate_functions": 113,
+    "new_functions": 103,
+    "new_bytes": 14776,
+    "moves": 10,
+    "moved_bytes": 984,
+    "complete_units": 2821,
+    "complete_functions": 2900,
+    "complete_bytes": 314888,
+    "helper_only_units": 22,
+    "remaining_deferrals": 84,
+    "deferred_bytes": 17228
+  },
+  "current_composition": "scratch/integrator/c011-r3/composition-r1.json",
+  "dry_ledger": "scratch/integrator/c011-r3/dry-matches-r1.json",
+  "complete_match_scope": "scratch/integrator/c011-r3/complete-match-scope-r1.json",
+  "direct_match_scope": "scratch/integrator/c011-r3/direct-match-scope-r1.json",
+  "direct_units": 1561,
+  "header_plan": "scratch/integrator/c011-r3/planner-r1/affected-header-plan-r1.json",
+  "header_scope": "scratch/integrator/c011-r3/planner-r1/affected-header-match-scope-r1.json",
+  "header_units": 2661,
+  "header_functions": 2722,
+  "helper_only_units": 22,
+  "helper_recipes": 25,
+  "R1_dependencies": "scratch/integrator/c011-r3/R1-DEPENDENCIES-r1.json",
+  "fresh_bounded_R1_dependent_callers": 26,
+  "witness_index": "scratch/integrator/c011-r3/MATCH-WITNESS-INDEX-r1.json",
+  "bounded_current_contexts": 219,
+  "bounded_actual_final_exit_counts": {
+    "0": 217,
+    "1": 2
+  },
+  "all_actual_match_invocations": 223,
+  "all_actual_match_exit_counts": {
+    "0": 217,
+    "1": 4,
+    "2": 2
+  },
+  "source_ready": "scratch/integrator/c011-r3/SOURCE-READY-r1.json",
+  "remaining_deferrals": "scratch/integrator/c011-r3/DEFERRALS-r1.json",
+  "newly_closed_deferrals": [],
+  "remaining_heavy_commands": "scratch/integrator/c011-r3/REMAINING-HEAVY-COMMANDS-r1.json",
+  "original_slot_hint_map": "scratch/integrator/c011-r3/source-slot-map-r1.json",
+  "slot_hints": 29,
+  "absent_unselected_deferred_hints": [
+    {
+      "site": "0010239c:001023f4",
+      "source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0010239c.c",
+      "historical_source_sha256": null
+    }
+  ],
+  "authoritative_inputs": {
+    "c010_handoff": {
+      "path": "scratch/integrator/c010/HANDOFF.json",
+      "sha256": "4d721abc66d5df15a14ec363edd0528f6b6c4376b83c2c1f80a4947ea3a6247c"
+    },
+    "c009_r3_handoff": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009-r3/scratch/integrator/c009-r3/HANDOFF.json",
+      "sha256": "154e6f482a88d82458f47bfca2a2064300664433a48aed671b81d7b3baa0482b"
+    },
+    "c009_r3_callback_closure": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009-r3/scratch/integrator/c009-r3/callback-contract-closure-r1.json",
+      "sha256": "49e531b485ee7757289f2750b5ed57b06f34608b4b4c25fb55eaf01590a1194a"
+    },
+    "c011_previous_result": {
+      "path": "scratch/integrator/c011/COMMITTED-RESULT-r9.json",
+      "sha256": "dc2a926364a513ae8fc46ff6d638ad2fb8b810e1bba8edda8c2d118b5d37ffe4"
+    },
+    "c011_previous_destination_closure": {
+      "path": "scratch/integrator/c011/DESTINATION-CLOSURE-r9.json",
+      "sha256": "ce0f3d22b95d42e93153f54f7e8c49ab5eb98e95ba91989d2d118eae495de9bf"
+    }
+  },
+  "records_sha256": {
+    "MERGE-TREE-r1.json": "988e5cb34b3b7f1aef179713228be168ea98f2f3609ef152afd8af228b14825e",
+    "MERGE-r1.json": "7f8c77591c9ae23b91f9f23e0d6b6952afa2f76a56ad73c8622531e16b0052b5",
+    "MERGE-DECISIONS-r1.json": "7ef5c40f4afc4e498928911137cc1f163850b47b3c008d509e9bbf14059c64f3",
+    "composition-r1.json": "0eacd308ff59781126c6fe776a0c672764731da2269a7e1827a6efec13a10ef7",
+    "predecessor-matches-r1.json": "00015920b8bf670f297577a137b79a3cba22f1e6d06fbb71af08846cfabb9e8c",
+    "dry-matches-r1.json": "7a94b212b3d9f144e77852ee1588b03df406933c74add95ecc0fcbff05def6d2",
+    "CURRENT-INVENTORY-r1.json": "c49a35e4ae32223a6e56151583626c458a45256934912ff39ad7db4e9bc58187",
+    "direct-match-scope-r1.json": "eff47ffa6e7d3f598f70516e9ce600fc8258d86513e437e66acb180f8f5f84e7",
+    "complete-match-scope-r1.json": "9a60369fdd13fe361dd7f9cb4a5aa27d8bf32cd585a9c1e1b0cc83d9f7b7e0a6",
+    "HELPER-RECIPES-r1.json": "ab939cb6606aa766cbdd432843f0fcd824064551f534fbf702192943599ca40d",
+    "R1-DEPENDENCIES-r1.json": "10610c292057acd2c9c704c5fa3c0578fb9fdaacecfb8c6f7242315325a20b40",
+    "MATCH-WITNESS-INDEX-r1.json": "280b0a54897ad40a76e06bf92e454a5ad1b9d332f0feabe7c583fa23a4daa62b",
+    "linker-rewrites-bounded-r1.json": "e21b279aa211dcdf4036b5dfec63fa4ebbbb03677fe4baca3bc8f687d7042440",
+    "DEFERRALS-r1.json": "c634800c7d2842e7464e796dc483cac68f4edba7296668c4dacd8d54793b18d7",
+    "SOURCE-READY-r1.json": "5726c7a08156f7abcc3ad4a8aeb0f76356d6faea161e732102234d61ee40071b",
+    "source-slot-map-r1.json": "3ab05312b5c24fc51021c30b51ebf09964423d2c30fc426c4a6cd08517f3a486",
+    "REMAINING-HEAVY-COMMANDS-r1.json": "ad41e07325e869d71a58bdf5c9e2d05bebd956f0eb3c415af6ff617bea074ba4",
+    "planner-r1/HANDOFF.json": "ce30d6e4b6e6b713ac4e298b89f628529d378730bd6c5ff1229fbc6f4893b221",
+    "planner-r1/affected-header-plan-r1.json": "50b52a85c7813997747bc094edef8bbf281a5a52016d970d8aecf422dcc45ceb",
+    "planner-r1/affected-header-match-scope-r1.json": "0a896966428f8793cd85b2425f7ab3d63a90854f91fd5d1ac8f68cfeaf65bc54"
+  },
+  "documentation_update": {
+    "path": "docs/RESUME.md",
+    "sha256": "392a843477958dd372bb811a37bbaf0001098b2c91528b416c4cd671f6a37569"
+  },
+  "qualifications": [
+    "All103 original C011 new identities, ten moves and84 deferrals are preserved. 00138274 uses the real StaticHandle.handle member;001e8934 uses the actual shared item fields. No accepted/predecessor identity is dropped or structurally duplicated.",
+    "Genuine integer providers, C int(void) slots and actual C-only unspecified-result procedures are retained without consuming their results. Queue/signaling stayvoid. Existing non-invoking typed registration helpers and the genuine void*(void*) vector provider are reused unchanged.",
+    "The corrected predecessor scheduler contract does not by itself close np039: genuine C same-TU control296/44B and external-contract control44/44B,+12 both exit1; complete original C++ context obligations remain. All84 author-source hashes remain current and reachable.",
+    "Two final bounded actual exit1 units have matching credited targets and separate uncredited context mismatches001dc400/0015ad74. No label is changed toexit0 and neither context is credited elsewhere.",
+    "The219 fresh bounded contexts and26 current R1 dependent callers are not full-ledger/header/native/argcheck/ownership acceptance. Main must run the whole2821-unit context and all recorded gates.",
+    "Raw receipts can contain generated instruction-word fields; they and objects remain private. Published projections omit word fields and bind complete private receipt hashes.",
+    "The current candidate still expects proper finalized c009-r3+C010 predecessor owners. Intervening Main or peer source/header/composition changes require complete fresh rN metadata and reopened dependent witnesses, not reuse of this frozen projection."
+  ],
+  "not_exercised": [
+    "heavy checks",
+    "full builds",
+    "full test suite",
+    "whole-ledger/native/G3/argcheck/original-slot audits",
+    "prepare",
+    "reviews",
+    "finalize",
+    "push"
+  ],
+  "canonical_state_unchanged": true,
+  "write_boundary": "Only this new worktree was edited; main, scratch/worktrees/c011, other worktrees, frozen private inputs and accepted records/history were not edited."
+}

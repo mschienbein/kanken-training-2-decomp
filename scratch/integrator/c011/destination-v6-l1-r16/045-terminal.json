@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/group_ownership_cleanup-r9.cpp",
+  "source_sha256": "9361fcfc1c833a6d621b338b7e72ad39d7d8ed296956b66c4cc6bdfd09fe26ce",
+  "profile": "game",
+  "credited_functions": [
+    "func_001cc1e4"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/group_ownership_cleanup-r9.cpp",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/045-group_ownership_cleanup-r9"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.242515,
+  "stdout": "MATCH    func_001cc1e4 @ 0x1cc1e4 size 0x68/0x68\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/045-group_ownership_cleanup-r9/group_ownership_cleanup-r9.result.json",
+  "result_sha256": "9b8df9edcab7303ee45198c245af88b984656666181ad2b87ffa58a1247b9d2e",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001cc1e4",
+      "status": "match",
+      "size": 104,
+      "candidate_size": 104,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

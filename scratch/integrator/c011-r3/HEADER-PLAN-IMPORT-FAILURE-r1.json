@@ -1,0 +1,15 @@
+{
+  "operation": "Import existing plan_header_closure helper into Eval Python kernel",
+  "tool_cell_exit_code": 1,
+  "error": "ModuleNotFoundError: No module named pycparser",
+  "input_records_already_written": [
+    "composition-r1.json",
+    "predecessor-matches-r1.json",
+    "dry-matches-r1.json",
+    "complete-match-scope-r1.json",
+    "direct-match-scope-r1.json",
+    "HELPER-RECIPES-r1.json",
+    "planner-r1/HANDOFF.json"
+  ],
+  "remediation": "Execute the existing helper with the mandated main-checkout project interpreter, not the Eval kernel."
+}

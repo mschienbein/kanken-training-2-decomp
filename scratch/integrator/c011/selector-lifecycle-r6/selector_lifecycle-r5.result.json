@@ -1,0 +1,62 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/scratch/integrator/c011/canonical-inputs/selector_lifecycle-r5.cpp",
+ "source_sha256": "e13aca6d176cc7f3ba72b0e66867d893ffbc4997632c887fd0e816901e562402",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "7d9a721b2e9695c7b60ddefc5896c8939609ce5fb0819096c681cad3065b2638",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v2",
+ "literal_model": "none",
+ "literal_rebindings": [],
+ "proposed_names": {
+  "path": "scratch/integrator/c011/NAMES-SELECTOR-PROPOSED-r5.json",
+  "sha256": "993ed04a3f7f36745f1278e22439983eae81ef6aba16edd32e567e854698bff6"
+ },
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "func_001af370",
+   "address": 1766256,
+   "size": 180,
+   "candidate_size": 180,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 136,
+     "rule": "inline_nop",
+     "target": 1461948,
+     "word": "0xe1a00000"
+    },
+    {
+     "offset": 148,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  },
+  {
+   "name": "_ZN10W6SelectorD1Ev",
+   "address": 1766740,
+   "size": 72,
+   "candidate_size": 68,
+   "status": "mismatch",
+   "first_diff": 0,
+   "linker_rewrites": []
+  }
+ ]
+}

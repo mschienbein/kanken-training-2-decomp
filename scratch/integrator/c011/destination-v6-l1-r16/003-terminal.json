@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/func_001d90c8-native.cpp",
+  "source_sha256": "bbaf3bcbaba796c0a42258833c39fe98e88a09bf68c5409368714b6efd7aba03",
+  "profile": "game",
+  "credited_functions": [
+    "func_001d90c8"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/func_001d90c8-native.cpp",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/003-func_001d90c8-native"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.132627,
+  "stdout": "MATCH    _ZN18ReusablePoolR413067releaseEP20ReusableObjectR41306 @ 0x1d90c8 size 0x3c/0x3c\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/003-func_001d90c8-native/func_001d90c8-native.result.json",
+  "result_sha256": "b71f7b9ea3e442056b6529fb4278df72208e7fb0509063485b13962f5217f374",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001d90c8",
+      "status": "match",
+      "size": 60,
+      "candidate_size": 60,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

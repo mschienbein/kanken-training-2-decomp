@@ -89,6 +89,13 @@ struct TextureDisplayBinding {
     struct Material **material;
 };
 
+/* [INFERENCE] Fixed render-mode command descriptor, copied as 78 words. */
+struct RenderModeCommands {
+    unsigned reserved00[0x2c];
+    unsigned mode;
+    unsigned reservedb4[0x21];
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -106,6 +113,10 @@ void func_0017fc7c(struct Material *material, unsigned char count);
 void func_0014c5c4(struct DisplayPane *pane, struct Material **material,
                   int resource, int replace);
 extern unsigned char *data_00242fc8;
+extern struct RenderModeCommands data_002432b8;
+extern unsigned char *func_001846f8(unsigned char *destination,
+                                  const struct RenderModeCommands *source);
+extern unsigned func_0014025c(int mode);
 extern const unsigned data_00243148[0x5c];
 extern void func_0018e764(void *destination, const void *source, unsigned size);
 extern void func_00181100(struct BoundDisplayObject *object, int resource, int replace);

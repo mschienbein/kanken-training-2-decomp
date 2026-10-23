@@ -249,6 +249,10 @@ extern struct ServiceWorker *func_00182f88(void);
 extern void func_00182210(void);
 extern void func_00182204(void);
 extern int func_0018f018(void);
+extern int func_0014cc9c(struct ServiceCommandQueueW22E *queue, int channel,
+    float value);
+extern int func_0014cd18(struct ServiceCommandQueueW22E *queue, int channel,
+    const struct AdpcmCoefficients *source);
 extern void func_0017e7a0(struct ServiceOutput *output, int channel, unsigned value);
 extern void func_0014fa0c(struct ServiceOutput *output, int channel, float value);
 extern void func_00148220(struct ServiceWorker *backend);

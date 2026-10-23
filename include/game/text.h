@@ -15,6 +15,11 @@ struct TextTable {
     unsigned char reserved29[3];
 };
 
+/* [INFERENCE] Serialized prefix; an ordinary TextTable begins immediately after. */
+struct W8TextTable {
+    unsigned char reserved00[0x84];
+};
+
 struct MenuItem {
     struct TextTable text;
     unsigned char reserved2c[0xdc];
@@ -42,6 +47,7 @@ extern const unsigned short *func_00179090(const struct MenuItem *item);
 extern const unsigned short *func_001791e0(const struct TextTable *table, int index);
 extern unsigned short *func_00178f28(unsigned short *destination, unsigned byte_limit,
                                     const unsigned short *source);
+extern const unsigned short *func_00178f5c(const struct W8TextTable *table, int index);
 /* [INFERENCE] Candidate-only item accessor identities remain unrecovered. */
 int r41279_item_identifier(const struct MenuItem *item);
 int r41279_item_category(const struct MenuItem *item);

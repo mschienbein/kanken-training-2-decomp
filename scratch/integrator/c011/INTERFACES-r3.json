@@ -1,0 +1,440 @@
+{
+  "coverage": {
+    "const_writes": "typed lvalues, const-address casts and simple local pointer aliases",
+    "cpp": "qualified class-definition agreement across units and project headers (ODR, token-level; namespaces, enclosing classes and template specializations; unnamed namespaces unit-local), no forward declaration of a header-defined qualified class without that header, and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
+    "not_covered": [
+      "whole-program/heap alias analysis and pointer arithmetic",
+      "interprocedural or branch-sensitive alias propagation",
+      "writes inside called functions or assembly"
+    ]
+  },
+  "disagreements": [
+    {
+      "kind": "odr",
+      "name": "class ArchiveDirectoryHandle",
+      "sites": [
+        {
+          "line": 34,
+          "source": "include/game/archive_runtime.h",
+          "type": "class definition (header)"
+        },
+        {
+          "line": 39,
+          "source": "include/game/archive_runtime.h",
+          "type": "class definition (header)"
+        }
+      ]
+    }
+  ],
+  "policy": [],
+  "schema_version": 1,
+  "unchecked": [
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint10/func_001c7760.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/archive_external-r3.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_00117684.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_00164b34.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_0016c0f8.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_001809f4.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_001b6904.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_001c6440.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_001c7fa0.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_001d4e2c.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/func_001d90c8-native.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/fx_delay-r3.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/lyt_delete_animation.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/material_dtor-r3.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/pair_collection.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/scalar_collection.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/slot_teardown.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/retries/func_0010b804.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave14/func_0010b628.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave14/func_00121e80.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave8/func_001f18b8.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave8/func_001f18c0.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave8/func_001f18c8.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave8/func_001f2010.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave8/func_001f2018.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave8/func_001f2020.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/wave8/func_001f2028.cpp"
+    }
+  ],
+  "units": [
+    {
+      "checked": false,
+      "sha256": "6035021e9ca99d3ce6a3ecb8edfd63919c36916b629b41e649621b1c814fddde",
+      "source": "src/checkpoint10/func_001c7760.cpp"
+    },
+    {
+      "checked": true,
+      "sha256": "feac0f411f1fee646326ead607a86208998301e6183afe1d2d959de94503d9c2",
+      "source": "src/checkpoint10/func_001d0348.c"
+    },
+    {
+      "checked": true,
+      "sha256": "64cca166695cb922709489ac404549e1a2a9acb33d87b3f7e52c816fc333478a",
+      "source": "src/checkpoint10/func_001d2234.c"
+    },
+    {
+      "checked": true,
+      "sha256": "905bffea6a92f5b8f29ff9b9a3e1c490d9efc41a755283c796de788794e0da43",
+      "source": "src/checkpoint10/func_001f478c.c"
+    },
+    {
+      "checked": true,
+      "sha256": "8509d2cab567a577fe1af46903207cebce32ca709c1c75724ee68480a6ba185e",
+      "source": "src/checkpoint11/archive_block_queries-r3.c"
+    },
+    {
+      "checked": false,
+      "sha256": "a5d69994a63ca2746b3ad58f83a28ddf7303111179faef7f717d513369138e9f",
+      "source": "src/checkpoint11/archive_external-r3.cpp"
+    },
+    {
+      "checked": true,
+      "sha256": "88c28c7a76b65288e203300b9a2b89a0d429a535b9aa191248c5deb471cecc36",
+      "source": "src/checkpoint11/aux_channel_publication-r3.c"
+    },
+    {
+      "checked": true,
+      "sha256": "62e0f084508ac18377a7267da1306e6c0d63344ae02fa55150c256e8a8bedfa6",
+      "source": "src/checkpoint11/func_0010bed4.c"
+    },
+    {
+      "checked": false,
+      "sha256": "a70cc3783c2f6288e89f75292345a734eaf9bd166e01059eac514eaee090b5c5",
+      "source": "src/checkpoint11/func_00117684.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "98c8568c0efe356cd088373b9adc20338479385e4ca942a6e199a2d17de96db4",
+      "source": "src/checkpoint11/func_00164b34.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "010547f54d24736226d589d58c7f0e7efd1e58fa2e60c433391e17ad53c95746",
+      "source": "src/checkpoint11/func_0016c0f8.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "fa1ed2b6991a74417cb61462667da3fd34bd1e47feff7c35cb36a2feb357ebd0",
+      "source": "src/checkpoint11/func_001809f4.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "a5f28e2ab7f26b6f12f6acc96c6808cd68e734e24bef582297a6cce0bfa8ccfa",
+      "source": "src/checkpoint11/func_001b6904.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "de00b95618d4fffbbd4ceeb5621cd3828d44b1f2e0e30487bd40f7e3e05f886f",
+      "source": "src/checkpoint11/func_001c6440.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "85e75ea7a6a340850c1df6fffa7568de73102bea7bd2c78117a589cded4a76ac",
+      "source": "src/checkpoint11/func_001c7fa0.cpp"
+    },
+    {
+      "checked": true,
+      "sha256": "a1b309ab730c685771fd88fe69b337e304635ea38e9613caa0bd1a750c3dd606",
+      "source": "src/checkpoint11/func_001d033c.c"
+    },
+    {
+      "checked": true,
+      "sha256": "50c67d05210f44948f868e963d1c8087b09d712a0aad66dc8254c549c4735bcb",
+      "source": "src/checkpoint11/func_001d222c.c"
+    },
+    {
+      "checked": false,
+      "sha256": "807d93d797d4d014b9d7dae034c3ac5f437e140cadbfd0eceaa759ebc130acbe",
+      "source": "src/checkpoint11/func_001d4e2c.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "bbaf3bcbaba796c0a42258833c39fe98e88a09bf68c5409368714b6efd7aba03",
+      "source": "src/checkpoint11/func_001d90c8-native.cpp"
+    },
+    {
+      "checked": true,
+      "sha256": "4248813cbc4d8c71ee668001ba59a8bc4a195fbac05ee17c9e271011661a6d08",
+      "source": "src/checkpoint11/func_001f4784.c"
+    },
+    {
+      "checked": false,
+      "sha256": "c30c3dba7b0b84d5b944d271ddbfa2226b4f5e518d1315ff1b4c0ae62b68e7ee",
+      "source": "src/checkpoint11/fx_delay-r3.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "e0c1cbb4615955fdf87b32936108c9631ce4a9090848bd9c1496ef2e94b1b7e5",
+      "source": "src/checkpoint11/lyt_delete_animation.cpp"
+    },
+    {
+      "checked": true,
+      "sha256": "584671c2bc045b824e26761e67956231c39777f2113a56e7314d83d9d7712207",
+      "source": "src/checkpoint11/material_deleting-r3.c"
+    },
+    {
+      "checked": false,
+      "sha256": "3029d01d149713dc7aea4b0be6907128eef21b24627c339f539dc4d0f106a26a",
+      "source": "src/checkpoint11/material_dtor-r3.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "e1737b1ee80cf82c8a7e95659f2a4d2bd3649672ddd5f4f995636e01df7f9be0",
+      "source": "src/checkpoint11/pair_collection.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "d7b945e0bd6008771c8636b3e07b6583330f624071feb5f12e870602b5f3605a",
+      "source": "src/checkpoint11/scalar_collection.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "8e40e3b137ddaef39bda7a3600c841d9d94157f81527ed03fbfc75c04a812434",
+      "source": "src/checkpoint11/slot_teardown.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "55cfb5030d427c4c52c1a40c93b79352165cf8eda2648cc680ab7f4f5613431f",
+      "source": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "fec2cdebecdfcc7b8bb0c8461787c626b699863952531d49e24a0c36cb845b38",
+      "source": "src/retries/func_0010b804.cpp"
+    },
+    {
+      "checked": true,
+      "sha256": "8cc5567d25084f9c4b53db76b4402641c93fd2cf8156d5e20d535501822e2834",
+      "source": "src/sdk/func_0010bf74.c"
+    },
+    {
+      "checked": true,
+      "sha256": "904b6ccd676a86317ab22085d2bfe5809b04685b87aa4828c03e6e0fa7478627",
+      "source": "src/wave11/func_001135e8.c"
+    },
+    {
+      "checked": true,
+      "sha256": "425b6d0cd272f01211ff3697bffd0e55242d59ead564f3e7eddffa0f226e23b1",
+      "source": "src/wave13/func_00148800.c"
+    },
+    {
+      "checked": true,
+      "sha256": "7a532d5c7c4089d063589cb931e7bf05d27278038e2a37ec11c756b454b50a8d",
+      "source": "src/wave13/func_00148854.c"
+    },
+    {
+      "checked": true,
+      "sha256": "edee6a59b3a0534a763e45e4d8d1b2097aca2816d9725a0840007016ec717fc1",
+      "source": "src/wave13/func_001488bc.c"
+    },
+    {
+      "checked": true,
+      "sha256": "6045601e3eae8c69edeb497bf4c4d8f314c1ab817e6fcb25cb37099a2372e1ee",
+      "source": "src/wave13/func_0014891c.c"
+    },
+    {
+      "checked": true,
+      "sha256": "6d44ea6b3250bf4e6e74df8ca6d884694ae1b7a945b83d8c8f8a3296d0ab5223",
+      "source": "src/wave13/func_00148988.c"
+    },
+    {
+      "checked": true,
+      "sha256": "7b437f5eb401e5553f3c4f61b9d88b91bbd5c09afcb65d2ce4f78fe4d07423fa",
+      "source": "src/wave13/func_001489e8.c"
+    },
+    {
+      "checked": true,
+      "sha256": "1e4b1b66a4c0662d38e775fceeff5eab34880138b9d2abe8df70d39c8a8ac901",
+      "source": "src/wave13/func_00148a3c.c"
+    },
+    {
+      "checked": true,
+      "sha256": "7cd0716f5e3c5a4d0674094417503074589533ac7c4adf43974104d085cd8c89",
+      "source": "src/wave13/func_00152560.c"
+    },
+    {
+      "checked": true,
+      "sha256": "f982bdda7f4389536489619c2ebf5ec26bd27cf26eee24d3aae6846992fcde11",
+      "source": "src/wave13/func_001549d8.c"
+    },
+    {
+      "checked": false,
+      "sha256": "37ac65eb71cd33816b7543b95b63f8106b1fc3b36a94fb11b94e8a9c0d52b4ed",
+      "source": "src/wave14/func_0010b628.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "a3c9a96b2034341179b4cc9019b4654e78889d191abeb1dd7fe93518541846a7",
+      "source": "src/wave14/func_00121e80.cpp"
+    },
+    {
+      "checked": true,
+      "sha256": "6f28bd6542e8ad3cb469ffc62b897b0e50e7601a43563e2618aeae7f6bcfca35",
+      "source": "src/wave14/func_0012d43c.c"
+    },
+    {
+      "checked": true,
+      "sha256": "57ec94173a34b400dc48e696de9dca7c668c84c432e25bfccd69c6932ea2608a",
+      "source": "src/wave14/func_00186538.c"
+    },
+    {
+      "checked": true,
+      "sha256": "9547749ebcfa9d1807111e77b695212136e92721c6dc4c2bdd0811546ba1ea40",
+      "source": "src/wave16/func_0010bf60.c"
+    },
+    {
+      "checked": true,
+      "sha256": "4006d3156c1be22cf87b61a3351f5f3eb4c0c04d8587fae938fb44a2ef1d1278",
+      "source": "src/wave16/func_0012d0a4.c"
+    },
+    {
+      "checked": false,
+      "sha256": "7179316ba8ba0040378a531d1ce3bb1727dfacbaa7adafbaf1892423bdb3a0c0",
+      "source": "src/wave8/func_001f18b8.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "1648dbd674ceab6e1c43c038f46f04b51e4ea32d82202ad7211020d2229dfa33",
+      "source": "src/wave8/func_001f18c0.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "1fa4c5ed90e884d274eda7a147e83c0b505307c35766b4b558a99236fd66b539",
+      "source": "src/wave8/func_001f18c8.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "00a43c3cdf8efd8b561ec62cb6ea28f81b80cbd17a238bc5ba76906c7f80a69b",
+      "source": "src/wave8/func_001f2010.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "7cc077fab462d508311fa98a141b771e49d9eafc154dace288ae37190ced1f54",
+      "source": "src/wave8/func_001f2018.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "a293bfffd27a9cf0b702a72d4aa6381795926802da5ed95e58f4e70634638c4e",
+      "source": "src/wave8/func_001f2020.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "4d9b5d7334038debe6d39a53cdd451c18e8946b21331348fc95e1cdda37983d0",
+      "source": "src/wave8/func_001f2028.cpp"
+    }
+  ]
+}

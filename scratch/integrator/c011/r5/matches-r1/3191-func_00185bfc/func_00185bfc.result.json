@@ -1,0 +1,73 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/wave7/func_00185bfc.c",
+ "source_sha256": "9ff3a82aae77725358c0b697a6ff4911827ce19a66c693b74c7fdcd9ef810dda",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "f0dbe9fbff8ddc6161c6aa134e15f4baa26add36c565fc319e9968861b209ab4",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/object_registration/stream_manager.c",
+   "source_sha256": "ff08f2295c679ff5a266ef4ad6bed125c86ca31d9eab7a2ce41eb945b885e5ad",
+   "object_sha256": "00d4416a742f7f25bfea3f078ff9907285238d02888cdbea1a00811210acc325"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_stream_manager_cleanup"
+   ],
+   "section": "i.register_stream_manager_cleanup",
+   "size": 4,
+   "object": "scratch/integrator/c011/r5/matches-r1/3191-func_00185bfc/extra-0-stream_manager.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00185bfc",
+   "address": 1596412,
+   "size": 92,
+   "candidate_size": 92,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 52,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_stream_manager_cleanup"
+      ],
+      "section": "i.register_stream_manager_cleanup",
+      "size": 4,
+      "object": "scratch/integrator/c011/r5/matches-r1/3191-func_00185bfc/extra-0-stream_manager.o"
+     }
+    },
+    {
+     "offset": 60,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

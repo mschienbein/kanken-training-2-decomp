@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/func_001bd68c/func_001bd68c.cpp",
+ "source_sha256": "e38a262bfc9cbe5a3c5016ec74d6c4318919ddc4b391e6612dc3eb3c5d137960",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "78739d8e623d442e72c7d1630ddca9881357dcdebaaa989b06dcc9db8bdbcfa8",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/func_001bd68c/drawing_state.c",
+   "source_sha256": "241e8241f60875e0a31998380046ffbd5cdeb9eb7dc7af96d719b8343c8ca1be",
+   "object_sha256": "e4c1cfc9e9b1f7e2398bb3fc6d9a5777ac2caa62700515bccd5789fc78d21530"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "r41262_drawing_state"
+   ],
+   "section": "i.r41262_drawing_state",
+   "size": 8,
+   "object": "scratch/integrator/c011/r5/matches-r1/4280-func_001bd68c/extra-0-drawing_state.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001bd68c",
+   "address": 1824396,
+   "size": 696,
+   "candidate_size": 696,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 516,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe59008c4",
+     "removed_callee": {
+      "symbols": [
+       "r41262_drawing_state"
+      ],
+      "section": "i.r41262_drawing_state",
+      "size": 8,
+      "object": "scratch/integrator/c011/r5/matches-r1/4280-func_001bd68c/extra-0-drawing_state.o"
+     }
+    }
+   ]
+  }
+ ]
+}
