@@ -1942,6 +1942,30 @@
       "reason": "Canonical ctypes1-r4 revision, or compatible c012 typed text-resource table revision; Main/ctypes accepted model retained. Prepare discovers actual revisions by source hash.",
       "component": "c012-compatible-resource-table",
       "surviving_source_hash_revision": true
+    },
+    {
+      "author": "w7h",
+      "functions": [
+        "func_00169920"
+      ],
+      "profile": "game",
+      "source": "src/wave7/func_00169920.c",
+      "component": "c012-r5 Main",
+      "reason": "Declaration-only revision: c012-r5 credits the callee, so the caller's local extern moved to the shared header (interfaces inline-declaration policy). Body unchanged; MATCH re-proved (scratch/integrator/c012/r5/main-decl-move-r1/).",
+      "surviving_source_hash_revision": true,
+      "current_source_sha256": "555ef3d846e804a012cfefd48c7b7a89418b4f98b8dd62392eb2370d0f84523d"
+    },
+    {
+      "author": "Wave3Author0",
+      "functions": [
+        "func_00196a94"
+      ],
+      "profile": "game",
+      "source": "src/wave3/func_00196a94.c",
+      "component": "c012-r5 Main",
+      "reason": "Declaration-only revision: c012-r5 credits the callee, so the caller's local extern moved to the shared header (interfaces inline-declaration policy). Body unchanged; MATCH re-proved (scratch/integrator/c012/r5/main-decl-move-r1/).",
+      "surviving_source_hash_revision": true,
+      "current_source_sha256": "86be04dba204febc9f0864bb1b8cd54b43193c85d7405059e46293aabc7d8667"
     }
   ],
   "surviving_revised_accepted_units": [
@@ -2612,6 +2636,28 @@
       "accepted_source_sha256": "5efbe31658c60225f11314ed8ac48a10afc1ed8b7d91b34c9341afb1f7a9d262",
       "current_source_sha256": "4daf645575cef8327a3b2b5320c927b654f1381a72633dfb150bc1afd03b91f3",
       "reason": "Canonical ctypes1-r4 revision, or compatible c012 typed text-resource table revision; Main/ctypes accepted model retained. Prepare discovers actual revisions by source hash."
+    },
+    {
+      "source": "src/wave7/func_00169920.c",
+      "profile": "game",
+      "functions": [
+        "func_00169920"
+      ],
+      "author": "w7h",
+      "accepted_source_sha256": "4bc7a8944ca0a886a7e55cce5bf92b927a9b2c4bbf676166a3754601218d393c",
+      "current_source_sha256": "555ef3d846e804a012cfefd48c7b7a89418b4f98b8dd62392eb2370d0f84523d",
+      "reason": "Declaration-only revision by Main: callee newly credited in c012-r5, local extern moved to the shared header; body unchanged, MATCH re-proved."
+    },
+    {
+      "source": "src/wave3/func_00196a94.c",
+      "profile": "game",
+      "functions": [
+        "func_00196a94"
+      ],
+      "author": "Wave3Author0",
+      "accepted_source_sha256": "fd337e268ec635a7c86f1b2cef7e7466672318b2af3a5adfc75de49ab34a7908",
+      "current_source_sha256": "86be04dba204febc9f0864bb1b8cd54b43193c85d7405059e46293aabc7d8667",
+      "reason": "Declaration-only revision by Main: callee newly credited in c012-r5, local extern moved to the shared header; body unchanged, MATCH re-proved."
     }
   ]
 }

@@ -1,7 +1,7 @@
 #include "game/functions.h"
+#include "game/command_buffer.h"
 
 extern void func_0019c9d4(unsigned queue);
-extern void func_0019c920(void);
 
 void func_00196a94(unsigned queue)
 {
