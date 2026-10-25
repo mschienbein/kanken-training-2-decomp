@@ -2,6 +2,24 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-25 (evening) — catalogue v15 adopted; residue table generator landed
+
+**Accepted:** 2,796 functions / 305,008 B (seq 13, unchanged). Denominator **v15** (history v12):
+4,546 creditable functions / 1,120,094 B (**27.23%**, unchanged). Gates **v1.20**.
+
+- **Catalogue v15** identifies the unknown range R03 (`001005fa`–`0010060a`, 16 B) as the Thumb
+  library function `_snputc`, the callee of the image's `snprintf`.
+  - Unresolved bytes fall from 114 B in 11 ranges to 98 B in 10.
+  - The anomaly at `0x0010d2b8` stays documented.
+  - Creditable totals are unchanged.
+  - Review: `docs/catalogue/REVIEW-v15.md`, PASS_WITH_QUALIFICATIONS, no findings.
+- **Residue table generator:** `tools/residue.py`, tested by `tests/test_residue.py`. Landed after
+  three review rounds; r1 and r2 failed, r3 passed.
+  - It puts every creditable function that is not accepted into exactly one evidence-backed
+    residue class.
+  - The final table goes in this file after the remaining checkpoints land.
+- Full suite on the merged state: 1,164 tests, 1 skipped, 0 failed modules.
+
 ## 2026-10-25 — c012-r6 accepted (+26 functions); 4.1 libraries; three user rulings
 
 **Accepted:** 2,796 functions / 305,008 B (seq 13: … c011-r11, c012-r6). Denominator **v14**:
