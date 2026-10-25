@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "source_commit": "d9e7cf629",
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015",
+  "purpose": "Whole-ledger interfaces check for c015: c012-r5 reserved prepared ledger plus18 NEW functions/2220 bytes, after complete903-context/920-function v6+L1 closure PASS, all lint leads adjudicated and source pre-review recorded. No accepted ledger or acceptance record is changed.",
+  "argv": [
+    "nice", "-n", "10", ".venv/bin/python", "tools/interfaces.py", "check",
+    "--matches", "scratch/integrator/c015/PROPOSED-LEDGER.json",
+    "--allow-unchecked-cpp", "--json", "scratch/integrator/c015/INTERFACES-r1.json"
+  ],
+  "durable_launch_argv": [
+    ".venv/bin/python", "tools/jobs.py", "run", "--name", "c015-interfaces-r1", "--",
+    "nice", "-n", "10", ".venv/bin/python", "tools/interfaces.py", "check",
+    "--matches", "scratch/integrator/c015/PROPOSED-LEDGER.json",
+    "--allow-unchecked-cpp", "--json", "scratch/integrator/c015/INTERFACES-r1.json"
+  ],
+  "output_paths": [
+    "scratch/integrator/c015/INTERFACES-r1.json",
+    "scratch/jobs/c015-interfaces-r1/exit",
+    "scratch/integrator/c015/INTERFACES-RUN-r1.json",
+    "scratch/integrator/c015/HEAVY-SLOT-RELEASED.json"
+  ],
+  "authorization": "Run only after HEAVY-SLOT-GRANTED.json appears in this worktree evidence directory AND Main confirms. No other heavy jobs are launched by this worker."
+}

@@ -6,7 +6,7 @@
   "base": "18efd7bb0b76ffe63b7a4fca4d013e3ae8e490a7",
   "source_commit": "14866d881",
   "candidate_manifest": "config/candidates/c015.json",
-  "candidate_manifest_sha256": "bb86220cd8ce2e98cad354ea4b14d0ee6877cc7b61f41ed70f048fe06d788f50",
+  "candidate_manifest_sha256": "0a10bb963d95797bf713f7e76d31328916f82b173e8a519c3e241b2e9d2b9362",
   "proposed_ledger": "scratch/integrator/c015/PROPOSED-LEDGER.json",
   "proposed_ledger_sha256": "cc522f3ce222d5cc8ac7830c7c114938b55d49e7caff579853523682128beb04",
   "candidate_not_accepted": true,
@@ -156,14 +156,12 @@
   "moves": [],
   "move_reason": "All accepted additions MATCH in their own translation units; no same-TU rehoming is needed.",
   "revised_units": {
-    "count": 901,
+    "count": 1,
     "source_changed": [
       "src/checkpoint10/func_00132344.c"
     ],
-    "source_and_include_scope": "config/candidates/c015.json revised_accepted_units and surviving_revised_accepted_units",
-    "reason": "Shared canonical declarations/real member cutovers and the native Group self-name admission; preserve all c012 ownership and credit.",
-    "functions": 902,
-    "helper_only_units": 15
+    "functions": 1,
+    "reason": "Only the accepted GPU transfer wrapper replaces its local declaration with the canonical shared header."
   },
   "holds": [
     {
@@ -530,11 +528,12 @@
     "counts": {
       "new_functions": 18,
       "new_bytes": 2220,
-      "revised_units": 901,
       "holds": 27,
       "contexts": 903,
       "scope_units": 919,
-      "scope_functions": 920
+      "scope_functions": 920,
+      "source_revised_units": 1,
+      "header_closure_units": 900
     },
     "exit_counts": {
       "0": 903
@@ -563,7 +562,19 @@
     "deleted_scratch_object_and_dependency_files": 4619,
     "remaining": 0
   },
-  "interfaces": "Whole-ledger request is created only after this evidence commit; not run until Main grants the slot and confirms. The durable jobs exit record is the authority after running.",
+  "interfaces": {
+    "actual_exit_code": 0,
+    "job": "c015-interfaces-r1",
+    "record": "INTERFACES-RUN-r1.json",
+    "report": "INTERFACES-r1.json",
+    "units": 2740,
+    "unchecked_cpp_units": 764,
+    "disagreements": 0,
+    "policy_items": 0,
+    "slot_released": true,
+    "qualification": "--allow-unchecked-cpp, with native/shared-interface manual pre-review; the auditor does not claim full C++ declaration/const-write checking.",
+    "valid_after_manifest_only_commit": true
+  },
   "not_run": [
     "accept.py prepare/finalize or accepted-ledger writes",
     "Full image builds",
@@ -578,7 +589,26 @@
     "PRE-REVIEW.json",
     "MODEL-REVIEW.json",
     "LINT-DISPOSITIONS.json",
-    "CLEANUP.json"
+    "CLEANUP.json",
+    "HEADER-CLOSURE-REPROOFS.json",
+    "MANIFEST-SCOPE-CORRECTION.json",
+    "CHANGED-HEADERS.json",
+    "NAMES-ADMISSION.json",
+    "BASELINE-RESERVATION-NOTE.json",
+    "INTERFACES-RUN-r1.json",
+    "DURABLE-JOB-EXIT.json",
+    "HEAVY-SLOT-RELEASED.json"
   ],
-  "source_policy": "No casts around holds, no invented callees, no new union/memcpy reinterpretation, no runtime byte-offset owner recovery, no second model. Callback providers use exactly the invoking interface. No original bytes/packets/disassembly are emitted."
+  "source_policy": "No casts around holds, no invented callees, no new union/memcpy reinterpretation, no runtime byte-offset owner recovery, no second model. Callback providers use exactly the invoking interface. No original bytes/packets/disassembly are emitted.",
+  "header_closure_reproofs": {
+    "count": 900,
+    "functions": 901,
+    "helper_only_units": 15,
+    "evidence": "HEADER-CLOSURE-REPROOFS.json",
+    "reason": "Hash-identical accepted/prepared sources re-proved only for canonical header/name closure, per Main request; not source-revised units."
+  },
+  "manifest_scope_correction": "MANIFEST-SCOPE-CORRECTION.json: scope-only inventory correction leaves every source/header, names binding and proposed interfaces ledger unchanged, so both closure and granted interfaces evidence remain valid for the later commit.",
+  "changed_headers": "CHANGED-HEADERS.json (15 exact paths, hashes, reasons and proof references)",
+  "name_admissions": "NAMES-ADMISSION.json (3 canonical native Group self/vtable bindings only)",
+  "baseline_notice": "BASELINE-RESERVATION-NOTE.json: Main retains every c012 claim as reserved and will explicitly request rebase after c012-r6 finalizes."
 }
