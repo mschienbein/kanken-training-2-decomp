@@ -527,6 +527,48 @@ class ResidueTest(unittest.TestCase):
         self.assertEqual(by_name[self.names[7]]["status_class"], "pending_intake")
         self.assertNotIn("callback_signature", by_name[self.names[5]]["blocker_classes"])
 
+    def test_nm41_grouped_names_preserves_scoped_headers_and_contract_conflicts(self) -> None:
+        rows = [self.row(index, 0, status="match") for index in (5, 6, 7)]
+        self.author("nm41", rows)
+        headers = [
+            {"target": self.names[5], "suggested_header": "include/game/cleanup.h",
+             "need": "Reconcile the native resource owner and canonical header declarations"},
+            {"target": self.names[5], "scope": "Inherited complete TU",
+             "need": "Remove inherited local header declarations after contract reconciliation"},
+            {"target": self.names[6], "suggested_header": "include/game/service_state.h",
+             "need": "Promote this target's canonical header declarations"}]
+        conflicts = [
+            {"target": self.names[5], "symbols": ["AppletCallbacks"],
+             "existing_header": "include/game/service_callbacks.h",
+             "need": "PRIVATE_NM41_GROUPED_NEED reconcile canonical callback signatures"},
+            {"target": self.names[5], "symbols": ["ObjectPool"],
+             "existing_header": "include/game/object_pool.h",
+             "need": "Resolve native owner type identity before integration"},
+            {"target": self.names[5], "symbols": ["PlaybackNode", "SoundInstance"],
+             "existing_header": "include/game/sound_runtime.h",
+             "need": "Reconcile the native receiver and sound owner contract"},
+            {"target": self.names[5], "symbols": ["func_00124874"],
+             "need": "Select the unique companion owner before granting credit"}]
+        for names_group in ([], ["CanonicalSymbol"], [{"symbol": "CanonicalSymbol"}]):
+            with self.subTest(names_group=names_group):
+                doc = {"functions": rows, "integration_needs": {
+                    "headers": headers, "names": names_group, "contract_conflicts": conflicts,
+                    "resolved_canonical_adaptations": [
+                        {"target": self.names[7], "change": "Canonical native owner contract already resolved"}],
+                    "catalogue_issues": [],
+                    "unmatched_targets": "Unrelated sibling needs no new header or contract"}}
+                self.put("scratch/authors/nm41/RESULT.json", doc)
+                self.assertCountEqual(residue.scoped_needs(doc, rows[0], self.names[5]),
+                                      [*headers[:2], *conflicts])
+                report = self.report()
+                by_name = {row["function"]: row for row in report["rows"]}
+                self.assertEqual(by_name[self.names[5]]["status_class"], "held_contract")
+                self.assertIn("callback_signature", by_name[self.names[5]]["blocker_classes"])
+                self.assertEqual(by_name[self.names[6]]["status_class"], "held_contract")
+                self.assertNotIn("callback_signature", by_name[self.names[6]]["blocker_classes"])
+                self.assertEqual(by_name[self.names[7]]["status_class"], "pending_intake")
+                self.assertNotIn("PRIVATE_NM41_GROUPED_NEED", residue.canonical(report).decode())
+
     def test_need_ids_resolve_unscoped_records_but_respect_explicit_scope(self) -> None:
         self.author("np212", [self.row(i, 0, status="match") for i in (5, 6, 7)])
         self.put("scratch/authors/np212/RESULT.json", {
@@ -656,19 +698,29 @@ class ResidueTest(unittest.TestCase):
         report = self.report()
         directory = self.root / "scratch/integrator/residue"
         original_open = Path.open
+        original_link = residue.os.link
         for revision, suffix in ((3, "json"), (4, "md")):
             target = directory / f"RESIDUE-r{revision}.{suffix}"
             marker = b"another immutable metadata draft\n"
             inserted = False
+            def insert_competitor() -> None:
+                nonlocal inserted
+                if not inserted:
+                    inserted = True
+                    with original_open(target, "xb") as handle:
+                        handle.write(marker)
             def interleave(path: Path, mode: str = "r", *args: object, **kwargs: object):
                 nonlocal inserted
                 if path == target and mode in ("wb", "xb") and not inserted:
-                    inserted = True
-                    with original_open(path, "xb") as handle:
-                        handle.write(marker)
+                    insert_competitor()
                 return original_open(path, mode, *args, **kwargs)
+            def interleave_link(source: Path, destination: Path, *args: object, **kwargs: object):
+                if destination == target:
+                    insert_competitor()
+                return original_link(source, destination, *args, **kwargs)
             with self.subTest(suffix=suffix), patch.object(residue, "generate", return_value=report), \
-                    patch.object(Path, "open", interleave), patch("builtins.print"):
+                    patch.object(Path, "open", interleave), patch.object(residue.os, "link", interleave_link), \
+                    patch("builtins.print"):
                 with self.assertRaises(SystemExit) as caught:
                     residue.main(["--root", str(self.root), "--revision", str(revision)])
                 self.assertEqual(caught.exception.code, 1)
@@ -676,6 +728,105 @@ class ResidueTest(unittest.TestCase):
             self.assertEqual(target.read_bytes(), marker)
             other = directory / f"RESIDUE-r{revision}.{'md' if suffix == 'json' else 'json'}"
             self.assertFalse(other.exists())
+
+    def test_idempotent_competitor_cannot_lose_a_successful_draft_pair(self) -> None:
+        report = self.report()
+        directory = self.root / "scratch/integrator/residue"
+        destination = directory / "RESIDUE-r9.json"
+        destination_md = destination.with_suffix(".md")
+        argv = ["--root", str(self.root), "--revision", "9"]
+        original_open, original_link = Path.open, residue.os.link
+        interleaved = False
+        competitor = {}
+        def compete() -> None:
+            nonlocal interleaved
+            if interleaved:
+                return
+            interleaved = True
+            try:
+                competitor["exit"] = residue.main(argv)
+            except SystemExit as exc:
+                competitor["exit"] = exc.code
+            competitor["complete_pair"] = destination.exists() and destination_md.exists()
+        def interleave_open(path: Path, mode: str = "r", *args: object, **kwargs: object):
+            if path == destination_md and mode == "xb":
+                compete()
+            return original_open(path, mode, *args, **kwargs)
+        def interleave_link(source: Path, target: Path, *args: object, **kwargs: object):
+            if target == destination_md:
+                compete()
+            return original_link(source, target, *args, **kwargs)
+        with patch.object(residue, "generate", return_value=report), patch("builtins.print"):
+            with patch.object(Path, "open", interleave_open), \
+                    patch.object(residue.os, "link", interleave_link):
+                try:
+                    outer_exit = residue.main(argv)
+                except SystemExit as exc:
+                    outer_exit = exc.code
+            self.assertTrue(interleaved)
+            self.assertIn(0, (outer_exit, competitor["exit"]))
+            if competitor["exit"] == 0:
+                self.assertTrue(competitor["complete_pair"])
+            self.assertEqual(destination.read_bytes(), residue.canonical(report))
+            self.assertEqual(destination_md.read_bytes(), residue.markdown(report).encode())
+            self.assertEqual(residue.main(argv), 0)  # Completed pairs remain idempotently reusable.
+
+    def test_draft_publication_stages_both_complete_files_before_exposing_either(self) -> None:
+        report = self.report()
+        directory = self.root / "scratch/integrator/residue"
+        expected = {"RESIDUE-r9.json": residue.canonical(report),
+                    "RESIDUE-r9.md": residue.markdown(report).encode()}
+        original_link = residue.os.link
+        published = []
+        def inspect_link(source: Path, destination: Path, *args: object, **kwargs: object):
+            source, destination = Path(source), Path(destination)
+            for filename, data in expected.items():
+                self.assertEqual((source.parent / filename).read_bytes(), data)
+            if not published:
+                self.assertTrue(all(not (directory / filename).exists() for filename in expected))
+            result = original_link(source, destination, *args, **kwargs)
+            published.append(destination.name)
+            return result
+        with patch.object(residue, "generate", return_value=report), patch("builtins.print"), \
+                patch.object(residue.os, "link", inspect_link):
+            self.assertEqual(residue.main(["--root", str(self.root), "--revision", "9"]), 0)
+        self.assertCountEqual(published, expected)
+        self.assertFalse(any(path.is_dir() for path in directory.iterdir()))
+
+    def test_failed_publication_never_removes_competitor_replacements(self) -> None:
+        report = self.report()
+        directory = self.root / "scratch/integrator/residue"
+        destination = directory / "RESIDUE-r9.json"
+        destination_md = destination.with_suffix(".md")
+        original_open, original_link = Path.open, residue.os.link
+        replaced = False
+        marker = b"competing immutable draft\n"
+        def replace_pair() -> None:
+            nonlocal replaced
+            if replaced:
+                return
+            replaced = True
+            destination.unlink()
+            for path in (destination, destination_md):
+                with original_open(path, "xb") as handle:
+                    handle.write(marker)
+        def interleave_open(path: Path, mode: str = "r", *args: object, **kwargs: object):
+            if path == destination_md and mode == "xb":
+                replace_pair()
+            return original_open(path, mode, *args, **kwargs)
+        def interleave_link(source: Path, target: Path, *args: object, **kwargs: object):
+            if target == destination_md:
+                replace_pair()
+            return original_link(source, target, *args, **kwargs)
+        with patch.object(residue, "generate", return_value=report), patch("builtins.print"), \
+                patch.object(Path, "open", interleave_open), \
+                patch.object(residue.os, "link", interleave_link):
+            with self.assertRaises(SystemExit) as caught:
+                residue.main(["--root", str(self.root), "--revision", "9"])
+        self.assertEqual(caught.exception.code, 1)
+        self.assertTrue(replaced)
+        self.assertEqual(destination.read_bytes(), marker)
+        self.assertEqual(destination_md.read_bytes(), marker)
 
     def test_missing_required_metadata_refuses_instead_of_silent_empty_residue(self) -> None:
         (self.root / "scratch/integrator/census-20261021-r3/LADDER.json").unlink()

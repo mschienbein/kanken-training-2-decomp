@@ -5,9 +5,9 @@ private scratch records::
 
     .venv/bin/python scratch/worktrees/residue-table/tools/residue.py --root .
 
-Only scratch/integrator/residue/RESIDUE-r2.{json,md} is written by default. No compiler,
-matcher, ROM, packet, diff, source, or disassembly input is opened. The JSON binds
-all consumed inputs by SHA-256 and pins branch manifests to immutable commits.
+Drafts and revision-lock metadata are written only under scratch/integrator/residue/.
+No compiler, matcher, ROM, packet, diff, source, or disassembly input is opened.
+The JSON binds all consumed inputs by SHA-256 and pins branch manifests to immutable commits.
 The same input bytes and branch tips produce identical output bytes; filesystem
 mtimes, wall-clock time, absolute checkout paths and directory order are ignored.
 
@@ -45,20 +45,25 @@ uses its hash-bound prepared manifest. Explicit current manifest withdrawals
 remain residue holds even if another manifest claims the function.
 scratch/integrator/USER-RULING-HOLDS.json optionally records dedicated ruling
 holds; missing user-supplied resources are ordinary blockers, not policy rulings.
-Draft files are exclusively created; an existing differing or concurrently
-created draft is never overwritten.
+Draft pairs are staged completely, then exclusively published under a nonblocking
+revision lock. Other invocations cannot reuse a partially published pair. The lock
+file is retained so every writer locks the same inode; closing it releases the lock.
+Existing differing drafts are never overwritten, and rollback removes only this
+invocation's links, never replacements created by another writer.
 """
 from __future__ import annotations
 
 import argparse
 from collections import Counter
 from dataclasses import dataclass, field
+import fcntl
 import hashlib
 import json
 import os
 from pathlib import Path
 import re
 import subprocess
+import tempfile
 from typing import Any, Iterator
 
 
@@ -245,7 +250,7 @@ def meaningful_need(value: Any) -> bool:
 
 
 def scoped_needs(doc: dict, row: dict, name: str) -> list[Any]:
-    """Resolve explicit scopes and row-referenced need IDs, never sibling prose."""
+    """Resolve identity-bearing scopes/IDs; names metadata groups do not scope siblings."""
     references = {item for key in ("integration_needs", "integration_need_ids")
                   for item in (row.get(key) if isinstance(row.get(key), list) else [])
                   if isinstance(item, str)}
@@ -256,9 +261,10 @@ def scoped_needs(doc: dict, row: dict, name: str) -> list[Any]:
                 visit(child)
         elif isinstance(value, dict):
             scope_keys = ("function", "name", "address", "target", "functions", "names", "targets")
-            if any(key in value for key in scope_keys):
-                names = {identity(item) for key in scope_keys for item in
-                         (value[key] if isinstance(value.get(key), list) else [value.get(key)])}
+            names = {scoped_name for key in scope_keys for item in
+                     (value[key] if isinstance(value.get(key), list) else [value.get(key)])
+                     if (scoped_name := identity(item)) is not None}
+            if names:
                 if name in names and meaningful_need(value):
                     needs.append(value)
                 return
@@ -271,7 +277,8 @@ def scoped_needs(doc: dict, row: dict, name: str) -> list[Any]:
                         needs.append(child)
                 elif key in references and meaningful_need(child):
                     needs.append(child)
-                elif isinstance(child, (dict, list)):
+                elif (not key.startswith("resolved_") and not CLOSED_RE.search(key) and
+                      isinstance(child, (dict, list))):
                     visit(child)
     for key in NEEDS_KEYS:
         visit(doc.get(key))
@@ -1222,6 +1229,46 @@ def markdown(report: dict) -> str:
     return "\n".join(lines)
 
 
+def write_draft_pair(output: Path, revision: int, outputs: dict[Path, bytes]) -> None:
+    """Publish completed metadata files while owning the entire revision pair."""
+    # Keep this inode: unlinking a lock lets another process lock a different file.
+    with (output / f".RESIDUE-r{revision}.lock").open("a") as lock:
+        try:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise ValueError(f"immutable draft revision r{revision} already has a writer") from exc
+        missing = {}
+        for path, data in outputs.items():
+            if path.exists():
+                if path.read_bytes() != data:
+                    raise ValueError(f"refusing to overwrite different immutable draft: {path.name}")
+            else:
+                missing[path] = data
+        if not missing:
+            return
+        with tempfile.TemporaryDirectory(prefix=f".RESIDUE-r{revision}-", dir=output) as temporary:
+            staged = {}
+            for path, data in missing.items():
+                candidate = Path(temporary) / path.name
+                with candidate.open("xb") as handle:
+                    handle.write(data)
+                staged[path] = candidate
+            created = []
+            try:
+                for path, candidate in staged.items():
+                    os.link(candidate, path)  # Exclusive publication of complete bytes; never truncates.
+                    created.append((path, candidate))
+            except OSError:
+                for path, candidate in created:
+                    try:
+                        current, owned = path.lstat(), candidate.stat()
+                        if (current.st_dev, current.st_ino) == (owned.st_dev, owned.st_ino):
+                            path.unlink()
+                    except FileNotFoundError:
+                        pass
+                raise
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -1241,23 +1288,10 @@ def main(argv: list[str] | None = None) -> int:
     output.mkdir(parents=True, exist_ok=True)
     outputs = {output / f"RESIDUE-r{args.revision}.json": canonical(report),
                output / f"RESIDUE-r{args.revision}.md": markdown(report).encode("utf-8")}
-    existing = set()
-    for path, data in outputs.items():
-        if path.exists():
-            if path.read_bytes() != data:
-                parser.exit(1, f"refusing to overwrite different immutable draft: {path.name}\n")
-            existing.add(path)
-    created = []
     try:
-        for path, data in outputs.items():
-            if path not in existing:
-                with path.open("xb") as handle:
-                    created.append(path)
-                    handle.write(data)
-    except OSError as exc:
-        for path in created:
-            path.unlink()
-        parser.exit(1, f"immutable draft creation failed: {exc.__class__.__name__}\n")
+        write_draft_pair(output, args.revision, outputs)
+    except (OSError, ValueError) as exc:
+        parser.exit(1, f"immutable draft creation failed: {exc}\n")
     print(json.dumps({"summary_by_class": report["summary_by_class"],
                       "incomplete_ladder_count": report["incomplete_ladder_count"],
                       "incomplete_by_missing_step": report["incomplete_by_missing_step"],
