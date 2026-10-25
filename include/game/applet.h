@@ -12,7 +12,7 @@ struct SharedAppletState;
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 struct SharedAppletState {
     bool initialized;
-    bool available;
+    unsigned char event;
     unsigned char reserved02[2];
     unsigned handle;
     void *memory;
@@ -56,7 +56,8 @@ extern unsigned func_00192b44(unsigned *handle, const char *name,
 extern void func_001155f8(void *memory);
 extern void func_00115608(void);
 extern unsigned char *func_0011561c(void);
-extern void func_00115628(bool available);
+/* The receive event is forwarded as a full word and stored as one byte. */
+extern void func_00115628(int event);
 extern void func_0011587c(unsigned handle);
 extern void func_00122ae0(void);
 extern int func_0012fda0(unsigned int flags);

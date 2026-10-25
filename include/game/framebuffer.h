@@ -13,6 +13,20 @@ struct DisplayFramebufferPair {
     struct DisplayFramebuffer display[2];
 };
 
+/* [INFERENCE] Display-service payload roles, evidenced by 00142e70 and
+ * 001233d0. This is a 32-byte command value, not a native framebuffer owner. */
+struct DisplayMemoryLayout {
+    unsigned size;
+    unsigned char stereo;
+    unsigned char reserved05[3];
+    unsigned left_offset;
+    unsigned right_offset;
+    unsigned lower_format;
+    unsigned reserved14;
+    unsigned reserved18;
+    unsigned upper_format;
+};
+
 struct FramebufferResource {
     const void *vtable;
     void *allocator;
@@ -88,6 +102,15 @@ extern "C" {
 #endif
 extern struct OffscreenState bss_00495c04;
 extern void func_00137b84(struct DisplayFramebufferPair *output);
+extern void func_00142b8c(struct DisplayFramebufferPair *output);
+extern struct DisplayMemoryLayout bss_0049ee8c;
+extern int func_001233d0(unsigned channel);
+extern int func_00142bf0(unsigned channel, long long timeout);
+extern void func_00142e70(struct DisplayMemoryLayout *layout);
+extern int func_00185fc0(unsigned channel, unsigned command, const void *buffer,
+    unsigned size, unsigned value, long long timeout);
+extern int func_00142d74(unsigned expected, unsigned *output_value);
+extern int func_00142fa4(void *buffer, unsigned size);
 extern void *func_00142a54(void *storage);
 #ifdef __cplusplus
 }
