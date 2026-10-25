@@ -1,9 +1,8 @@
 /* SPDX-License-Identifier: GPL-3.0-only
  * Adapted from NintendoWare4Ctr contributors, pinned commit
- * 15ddb5632db5a6f0d2f46e3827fc78df468684bd (gfx_SceneNode.h,
- * lyt_Animation.cpp, lyt_Pane.cpp, lyt_Group.cpp).
- * Modified 2026-10-17: selected address-bound entries, shared natural helpers,
- * and the existing canonical ABI views. Historical TU membership is [INFERENCE].
+ * 15ddb5632db5a6f0d2f46e3827fc78df468684bd (lyt_Group.cpp).
+ * Modified: canonical native types and private construction/range operations.
+ * Historical TU membership and helper spellings remain [INFERENCE].
  */
 #include <preinclude.h>
 #include <nw/lyt/lyt_Group.h>
@@ -29,6 +28,10 @@ inline void Group::AppendPane(Pane *pane)
         m_PaneLinkList.PushBack(link);
     }
 }
+/* Serialized Group records carry paneNum fixed-width names immediately after
+ * the complete header. This boundary reads that file tail, never a runtime
+ * object overlay. Extent/alignment checks are absent in the original; [INFERENCE]
+ * callers provide a complete, aligned record array. */
 struct GroupPaneNames {
     const char (*names)[ResourceNameStrMax];
     explicit GroupPaneNames(const res::Group *resource)

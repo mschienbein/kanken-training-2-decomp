@@ -3,6 +3,7 @@
 
 #include "game/exp_heap.h"
 #include "game/heap_interface.h"
+#include "game/vram_allocator.h"
 
 struct HeapRange {
     unsigned char *lower;
@@ -12,7 +13,9 @@ struct HeapRange {
 /* The arena/range layout is shared with the original address-dispatching
  * deallocator. The allocation-list prefix remains opaque here. */
 struct HeapManager {
-    unsigned char reserved00[0x640];
+    unsigned reserved00;
+    struct VramAllocator vram;
+    unsigned char reserved634[0x0c];
     struct HeapArena primary[3];
     unsigned reserved760[2];
     struct HeapRange ranges[3];

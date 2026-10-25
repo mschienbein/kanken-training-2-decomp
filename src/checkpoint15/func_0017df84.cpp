@@ -6,17 +6,9 @@ struct TaskIterator {
     PoolLink *node;
     explicit TaskIterator(PoolLink *value) : node(value) {}
 };
-static TaskIterator insert_link(PoolList &list, TaskIterator position, PoolLink &node)
-{
-    return TaskIterator(func_00191154(&list, position.node, &node));
-}
 static TaskIterator append_link(PoolList &list, PoolLink &node)
 {
     return TaskIterator(func_00191154(&list, &list.sentinel, &node));
-}
-static TaskIterator erase_link(PoolList &list, TaskIterator position)
-{
-    return TaskIterator(func_0018d868(&list, position.node));
 }
 }
 

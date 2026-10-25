@@ -3,10 +3,11 @@
 #define NW_RELEASE
 #include <nw/lyt/lyt_TexResource.h>
 #include "game/font_resource.h"
+#include "game/heap_manager.h"
 static int has_bank_a(unsigned size)
-{ return func_00149494(&bss_004952f4, size, 0x80); }
+{ return func_00149494(&bss_004952f0.vram, size, 0x80); }
 static int has_bank_b(unsigned size)
-{ return func_001494b8(&bss_004952f4, size, 0x80); }
+{ return func_001494b8(&bss_004952f0.vram, size, 0x80); }
 static void configure_image(unsigned size, int prefer_vram, nw::lyt::TexResource &reader)
 {
     if (prefer_vram) {
