@@ -1,4 +1,15 @@
-# c012 known issues and qualifications — r6
+# c012-r6 — accepted (history seq 13); combined ctypes1 + c012 known issues and qualifications
+
+**Accepted 2026-10-25 as history seq 13:** 2,796 functions / 305,008 B (+26 functions / 3,988 B over
+c011-r11), denominator v14. Prepared at 4194a785 (prepare.json sha256 42f911ff…; 42 new units, 64
+revised units, 31 moves). Reviews codex-b and codex-a are both PASS_WITH_QUALIFICATIONS with 0
+findings (accept/c012-r6/reviews/). Every qualification in those records stands.
+- r5 (18efd7bb) failed both reviews on 3 blockers. The functions 001e395c, 001e722c and 001f4cf8 are
+  held and uncredited, and the 43 deleted evidence files were restored.
+- Rulings from 2026-10-25 that may later reopen held families: explicit typed dispatch tables
+  (docs/rulings/2026-10-25-explicit-dispatch-tables.md); Thumb linker model
+  (docs/rulings/2026-10-25-thumb-linker-model.md).
+The text below is the candidate record.
 
 ## Current r6 remediation
 

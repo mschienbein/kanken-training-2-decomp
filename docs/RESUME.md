@@ -2,7 +2,28 @@
 
 Current entry on top.
 
-## 2026-10-23 (night) — resumed with 2 subagents; denominator v14 adopted (current)
+## 2026-10-25 — c012-r6 accepted; 8 subagents (current)
+
+**State:** `docs/STATUS.md` top entry. Accepted 2,796 functions / 305,008 B (seq 13, c012-r6);
+denominator v14; gates v1.20. **Concurrency cap: 8 subagents** (user, 2026-10-25), all on the
+`subagent` role (`openai-codex/gpt-6.1-sol:max`). The user asked to clean up after every batch to
+save disk space.
+
+Live state: `scratch/integrator/PIPELINE-LIVE-20261023.md`, top section "RESUMED (2026-10-25)".
+After a kernel loss, reload `scratch/integrator/rotation.py` and then
+`scratch/integrator/main_helpers.py`, both by absolute path.
+
+Next, in order:
+1. **Land the residue tool:** `residue-table` at 48bd37d0 passed review. Merge it and run the suite.
+2. **c015:** rebase onto main, then argcheck, prepare and two reviewers.
+3. **Catalogue v15:** adopt on PASS, between checkpoints. Then a catalogue revision with the
+   strict 4.1 identities (`_ZdaPv`; `snprintf` after v15).
+4. **Linker v19** (Thumb weak-undefined calls; branch `linker-thumb`): suite, implementation review,
+   exact-text review, adoption, then the two printf helpers.
+5. **c016:** explicit dispatch tables, from `scratch/integrator/dispatch-plan/`.
+6. Permuter sweeps 11 and 12; final residue table in STATUS.
+
+## 2026-10-23 (night) — resumed with 2 subagents; denominator v14 adopted
 
 **State:** `docs/STATUS.md` top entry. Accepted 2,770 functions / 301,020 B (seq 12, c011-r11);
 denominator **v14** (4,546 / 1,120,094 B); gates v1.20. Same host and inputs as below.
