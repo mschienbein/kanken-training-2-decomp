@@ -175,3 +175,32 @@ native C and C++ execution comparisons. The C regressions remain in `test_permut
 Compiler tests skip without the pinned compiler/launcher; image tests
 also skip without private `orig/code.bin` and `orig/exheader.bin`. All temporary artifacts stay
 in `scratch/`; no full build or full test suite is required.
+
+## Residue accounting
+
+`tools/residue.py --root . --revision N` joins metadata only and writes immutable
+`scratch/integrator/residue/RESIDUE-rN.json` and `.md` drafts. The Markdown is one
+STATUS-ready section: accepted/pending/class totals, per-class function tables,
+and the carried catalogue unknown ranges/anomaly. Unknown evidence must match
+the current catalogue intervals exactly; the anomaly overlaps an unknown range
+and is not counted twice. Documentation under the unresolved-bytes ruling grants
+no byte credit or classification.
+
+`ruled_residue` requires both an active user-ruling hold and an explicit user
+decision to keep a function named in its Function table as documented residue.
+The ruling path is retained in `resolved_policy_question_by`; it resolves policy,
+not search rungs. Open policy questions remain `awaits_user_ruling`. Optional
+recon/survey/wave/dispatch dispositions add hash-bound exact-blocker pointers,
+never a new hold, acceptance, rung completion, or class change.
+
+`tools/census_supplements.py --root .` is the canonical supplement builder; the
+private `scratch/integrator/census-supplements/build.py` delegates to it. Explicit
+Main batches for rungs 1–3 still need delivered, current-extent target RESULT
+rows and batch/RESULT hash bindings. rv01–rv12, fx01–fx05 and dt01–dt04 are
+supplemental revisits only; fs10 is an explicit step-2 witness. Run the focused
+metadata tests with `.venv/bin/python -m unittest tests.test_residue`.
+Historical supplement witnesses for a now non-C function are retained separately,
+not silently dropped or credited: the current catalogue must carry the exact
+same identity/extent and explicit non-C classification evidence, and the original
+Main batch, delivered target row and hash bindings are still verified. Unknown,
+unclassified, changed-extent or unverifiable identities remain fatal.
