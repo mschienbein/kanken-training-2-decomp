@@ -1,16 +1,6 @@
 #include <string.h>
 
-struct AttributeMapping { const char *name; const char *value; };
-struct AttributeRecord {
-    unsigned char reserved00[0x18];
-    const struct AttributeMapping *entries;
-    unsigned entry_count;
-    unsigned reserved20;
-    const unsigned short *children;
-    unsigned child_count;
-    unsigned reserved2c;
-};
-struct AttributeCursor { const struct AttributeRecord *record; };
+#include "game/property_text.h"
 
 static const struct AttributeRecord *attribute_record(const struct AttributeCursor *cursor)
 {
