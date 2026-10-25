@@ -1,4 +1,5 @@
 #include "game/matrix.h"
+#include "game/command_buffer.h"
 union Matrix44Command {
     struct Matrix44 matrix;
     unsigned words[16];
@@ -10,7 +11,6 @@ struct ProjectionState {
     union Matrix44Command coefficients;
     unsigned suffix[5];
 };
-extern unsigned char *data_00242fc8;
 extern void func_00192720(void *destination, const void *source, unsigned size);
 
 void func_00114778(struct ProjectionState *state, const struct Matrix44 *matrix)

@@ -1,15 +1,4 @@
-#include "game/runtime.h"
-
-struct IdentifierNode {
-    int identifier;
-    unsigned reserved04;
-    struct IdentifierNode *next;
-};
-struct IdentifierRegistry {
-    int count;
-    unsigned char reserved04[0x14];
-    struct IdentifierNode sentinel;
-};
+#include "game/object_pool.h"
 
 void func_0019f518(struct IdentifierRegistry *registry, int identifier)
 {

@@ -1,7 +1,7 @@
 #include "game/functions.h"
 #include "game/bss_0049ecf0.h"
+#include "game/command_buffer.h"
 
-extern unsigned char *data_00242fc8;
 
 
 void func_0019b574(unsigned parameter, unsigned *value)

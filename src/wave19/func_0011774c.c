@@ -1,16 +1,4 @@
-#include "game/runtime.h"
-
-struct OwnerIdentifierNode {
-    int identifier;
-    unsigned reserved04;
-    struct OwnerIdentifierNode *next;
-};
-struct OwnerIdentifierRegistry {
-    unsigned reserved00;
-    int count;
-    unsigned char reserved08[0x31c];
-    struct OwnerIdentifierNode sentinel;
-};
+#include "game/object_pool.h"
 
 int func_0011774c(struct OwnerIdentifierRegistry *registry, int identifier)
 {

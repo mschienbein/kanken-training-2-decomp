@@ -1,4 +1,5 @@
 #include "game/matrix.h"
+#include "game/command_buffer.h"
 union Matrix34Command {
     struct Matrix34 matrix;
     unsigned words[12];
@@ -25,7 +26,6 @@ struct ModelMatrixState {
     unsigned prefix[2];
     union ModelMatrixPacket packet;
 };
-extern unsigned char *data_00242fc8;
 extern void func_00192720(void *destination, const void *source, unsigned size);
 
 void func_001147c0(struct ModelMatrixState *state, const struct Matrix34 *matrix)
