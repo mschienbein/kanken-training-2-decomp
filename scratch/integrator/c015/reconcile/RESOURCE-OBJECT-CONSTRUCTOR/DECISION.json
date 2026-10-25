@@ -1,0 +1,16 @@
+{
+  "family": "RESOURCE-OBJECT-CONSTRUCTOR",
+  "outcome": "held-evidence",
+  "members": [
+    "func_00143318"
+  ],
+  "reason": "The source manually installs data_002240dc in a C-style ResourceObject record, but resource_objects.h already defines a different actual virtual ResourceObject owner. No original-evidenced actually undefined key or complete installed table/provider transaction is supplied; adding an undefined destructor/key only to externalize a table is forbidden.",
+  "selected_sources": [
+    "scratch/authors/w15e/src/func_00143318.cpp"
+  ],
+  "canonical_evidence": [
+    "Reconcile the constructor with canonical ResourceObject native virtual owner and exact external table/key-function binding; do not redeclare the canonical class as a manual vptr record."
+  ],
+  "accepted_changes": [],
+  "proofs": "No source retaining known incompatible callable/storage models is collected or compiled."
+}
