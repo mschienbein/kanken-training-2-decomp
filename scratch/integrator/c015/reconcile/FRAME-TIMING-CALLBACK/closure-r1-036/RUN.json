@@ -1,0 +1,43 @@
+{
+  "source": "src/checkpoint10/func_001d1c10.c",
+  "profile": "middleware",
+  "functions": [
+    "func_001d1c10"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/func_001d1c10.c",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/FRAME-TIMING-CALLBACK/closure-r1-036"
+  ],
+  "exit_code": 0,
+  "source_sha256": "11161cd3da373ec8450f88a4123e0a376c82ee61ac76fb12fbfab4169543d833",
+  "receipt": "scratch/integrator/c015/reconcile/FRAME-TIMING-CALLBACK/closure-r1-036/func_001d1c10.result.json",
+  "receipt_sha256": "bc2daf616da2d117957b600fdb8f557a2bbb54867966b94162f1e428aa715737",
+  "statuses": [
+    {
+      "name": "func_001d1c10",
+      "address": 1907728,
+      "size": 132,
+      "candidate_size": 132,
+      "status": "match",
+      "first_diff": null
+    }
+  ],
+  "all_required_match": true,
+  "stdout": "MATCH    func_001d1c10 @ 0x1d1c10 size 0x84/0x84 [armlink5-inline-branchnop-v6: 2 inline_nop]\n",
+  "stderr": ""
+}

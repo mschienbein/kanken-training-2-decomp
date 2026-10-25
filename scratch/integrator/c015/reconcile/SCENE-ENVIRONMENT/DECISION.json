@@ -1,0 +1,27 @@
+{
+  "family": "SCENE-ENVIRONMENT",
+  "outcome": "held-canonical-mismatch",
+  "members": [
+    "func_0012450c"
+  ],
+  "reason": "The honest canonical SceneEnvironment::Reset definition (real member arrays, no overlay) keeps the164-byte extent but mismatches at+5 under game/v6/L1. The native array/tail field layout cannot be changed merely to reproduce the private retail storage view; no native name is admitted.",
+  "canonical_trial": "native_reset.cpp",
+  "trial_overlay": "names-trial.json (not config/names.json)",
+  "proof": {
+    "actual_exit_code": 1,
+    "receipt": "proof-r1/native_reset.result.json",
+    "functions": [
+      {
+        "name": "_ZN2nw3gfx16SceneEnvironment5ResetEv",
+        "address": 1197324,
+        "size": 164,
+        "candidate_size": 164,
+        "status": "mismatch",
+        "first_diff": 5
+      }
+    ]
+  },
+  "accepted_changes": [],
+  "names_admitted": [],
+  "policy": "Do not restore SceneEnvironmentStorage or reinterpret native SceneEnvironment pointers."
+}

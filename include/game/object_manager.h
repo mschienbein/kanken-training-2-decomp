@@ -8,6 +8,7 @@ struct StreamMutex;
 
 
 #include "game/stream_manager.h"
+#include "game/frame_time.h"
 #ifdef __cplusplus
 #include <preinclude.h>
 #include <nw/ut/ut_LinkList.h>
@@ -17,7 +18,8 @@ struct StreamMutex;
 
 struct ObjectManager {
     unsigned char reserved00[0x1b8];
-    unsigned field1b8, field1bc, field1c0;
+    struct FrameTime *samples;
+    int capacity, count;
     struct StreamMutex lock;
     unsigned char reserved1d0[0x0c];
     struct PoolList active;                 /* 0x1dc */
@@ -25,7 +27,8 @@ struct ObjectManager {
     void *callback_context;
     unsigned char reserved1f0[4];
     unsigned char running;
-    unsigned char reserved1f5[2];
+    unsigned char reserved1f5;
+    unsigned char frame_sampling_enabled;
     unsigned char stopping;
     unsigned reserved1f8;
     unsigned voice_requests;
