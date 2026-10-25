@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "group_id": "NATIVE-PRIMITIVE",
+  "status": "reconciled-candidate-not-accepted",
+  "new_functions": ["func_001387f4"],
+  "new_bytes": 152,
+  "accepted_functions_revised": ["func_001306c8"],
+  "moves": [{"function": "func_001306c8", "from": "src/checkpoint10/func_001306c8.c", "to": "src/checkpoint10/func_001306c8.cpp"}],
+  "contract": "Canonical nw::gfx::RenderContext::RenderPrimitive consumes a genuine ResPrimitive value, calls its SetupDrawCommand(bool) member, and iterates canonical ResIndexStreamArray. The local RenderContext/RenderShader/RenderShaderResource/RenderDrawList/RenderDrawCommand models and C member facade are gone. game/render_commands.h publishes int func_00140298(CommandBufferInfo*, ResIndexStreamData*, bool).",
+  "names": [
+    {"symbol": "_ZN2nw3gfx13RenderContext15RenderPrimitiveENS0_3res12ResPrimitiveE", "identity": "func_001306c8", "basis": "whole-unit 240-byte same-address self-definition", "qualification": "[INFERENCE] Historical member identity/spelling."},
+    {"symbol": "_ZN2nw3gfx8internal17FastWordCopyAsm_6EPjS2_", "identity": "func_0018423c", "basis": "adopted catalogue v14 complete public-assembly-macro classification", "qualification": "[INFERENCE] Public native spelling; no new C/library credit."}
+  ],
+  "checks": [
+    {"source": "src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp", "profile": "game", "receipt": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/final-setup-r1/gfx_ResPrimitive__SetupDrawCommand.result.json", "exit_code": 0, "complete_emitted_functions_match": true, "bytes": 152},
+    {"source": "src/checkpoint10/func_001306c8.cpp", "profile": "game", "receipt": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/final-caller-r1/func_001306c8.result.json", "exit_code": 0, "complete_emitted_functions_match": true, "bytes": 240}
+  ],
+  "linker_model": "armlink5-inline-branchnop-v6",
+  "literal_model": "anonymous-string-records-v1",
+  "d0_or_vtable_emission_required": false,
+  "source_policy": "No runtime-object byte offsets, punning, casts between object models, steering, invented callees, callback adapters, artificial key function or destructor/vtable emission. Canonical serialized resource offsets retain original trusted-file bounds/alignment assumptions [INFERENCE].",
+  "objects_deleted": true,
+  "acceptance": "Main owns full receipt preparation, caller audit and independent review. The focused matcher evidence grants no accepted credit."
+}

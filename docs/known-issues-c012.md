@@ -11,6 +11,19 @@ findings (accept/c012-r6/reviews/). Every qualification in those records stands.
   (docs/rulings/2026-10-25-thumb-linker-model.md).
 The text below is the candidate record.
 
+## Standalone hold reconciliation candidates (2026-10-25)
+
+`config/candidates/held-fixes.json` records later proposed contract repairs, not
+accepted c012 credit. The native `ResPrimitive::SetupDrawCommand` candidate
+(`001387f4`, 152 B) now has a byte-identical accepted caller transaction:
+`001306c8` moves explicitly from C to C++ and becomes the canonical
+`RenderContext::RenderPrimitive(ResPrimitive)` member. The renderer/resource
+shadow records and C member facade are retired; both complete units MATCH.
+The native word-copy binding uses the already adopted catalogue-v14 assembly
+identity and earns no additional credit. Evidence and exact remaining standalone
+holds are under `scratch/integrator/held-fixes/`; Main still owns checkpoint
+preparation and independent acceptance review.
+
 ## Current r6 remediation
 
 Revision r6 starts from c012-r5 `4c14ff9f` and retains the explicit **v6 / L1**
