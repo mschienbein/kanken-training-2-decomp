@@ -31,8 +31,8 @@ inside the bound reopens an older above-bound refusal. Unknown residuals do not
 waive step 4; sweep policies cannot change the bound.
 
 Free-form author/hold text is used ONLY to assign a small diagnosis/blocker
-vocabulary. It is never copied into outputs. Reviewed ruling table leads and
-catalogue unknown-range explanations are the only curated prose exceptions.
+vocabulary. It is never copied into outputs. Structured ruling lead labels and
+catalogue unknown-range explanations are the only curated text exceptions.
 Optional disposition records add exact-blocker pointers, never holds or classes.
 Evidence paths/pointers, hashes, identities, sizes, residual counts, batch IDs
 and states are otherwise the output allowlist.
@@ -48,8 +48,9 @@ uses its hash-bound prepared manifest. Explicit current manifest withdrawals
 remain residue holds even if another manifest claims the function.
 scratch/integrator/USER-RULING-HOLDS.json optionally records dedicated ruling
 holds; missing user-supplied resources are ordinary blockers, not policy rulings.
-An explicit user decision to keep named functions as documented residue resolves
-only user-ruling holds; unrelated holds and unnamed functions are not exempted.
+A schema-1 JSON companion naming its existing ruling Markdown and exact
+creditable functions is the sole authority for documented-residue user decisions.
+Prose never grants ruled_residue; only structured user-ruling holds can resolve.
 Supplemental revisit witnesses retain post-ladder author provenance without
 completing any objective rung. The Markdown draft is one STATUS-ready section.
 Draft pairs are staged completely, then exclusively published under a nonblocking
@@ -79,7 +80,8 @@ REQUIRED_STEPS = (*AUTHOR_STEPS, "4")
 EXTRA_STEPS = ("5", "5b", "5c")
 STEPS = (*REQUIRED_STEPS, *EXTRA_STEPS)
 # Permuter sweeps that share the sweep-10 summary schema; sweep-10 is required, later ones optional.
-PERMUTER_SWEEPS = (("sweep-10", True), ("sweep-11", False), ("sweep-12", False))
+PERMUTER_SWEEPS = (("sweep-10", True), ("sweep-11", False),
+                   ("sweep-12", False), ("sweep-13", False))
 BANDS = ("0 (held)", "1-16", "17-64", "65-256", ">256", "unknown")
 CLASSES = ("held_contract", "header_blocked", "near_miss_exhausted",
            "never_matched_exhausted", "awaits_user_ruling", "ruled_residue",
@@ -344,37 +346,6 @@ def walk_rows(value: Any, pointer: str = "") -> Iterator[tuple[dict, str]]:
                 yield from walk_rows(val, f"{pointer}/{index}")
 
 
-def residue_rulings(document: str) -> dict[str, dict]:
-    """Read names only from a Function table governed by an explicit user decision."""
-    result = {}
-    authorized = False
-    function_table = False
-    paragraph = ""
-    for number, line in enumerate(document.splitlines(), 1):
-        clean = line.replace("*", "").replace("`", "").strip()
-        if clean.startswith("#"):
-            authorized = function_table = False
-            paragraph = ""
-        elif clean.startswith("|"):
-            cells = [cell.strip() for cell in clean.strip("|").split("|")]
-            if cells[0].lower() == "function":
-                function_table = authorized
-            elif function_table and (name := identity(cells[0])):
-                entry = {"line": number}
-                if len(cells) > 2 and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_ -]*", cells[2]):
-                    entry["best_library_lead"] = cells[2]
-                result[name] = entry
-        elif clean:
-            function_table = False
-            paragraph += " " + clean
-            decision = re.search(r"\b(?:stay|remain)\s+(?:in the residue table as\s+)?"
-                                 r"documented residue\b", paragraph, re.I)
-            if (re.search(r"\bDecision\s*\(user\b", paragraph, re.I) and decision and
-                    not re.search(r"\b(?:not|never)\s*$", paragraph[:decision.start()], re.I)):
-                authorized = True
-        else:
-            paragraph = ""
-    return result
 
 
 def pointer_value(document: Any, pointer: str) -> Any:
@@ -535,6 +506,38 @@ class Joiner:
                     "header_blocked", "canonical_header_blocked", "current_header_compile_blocked"))
                 self.add_hold(name, need_text, evidence, "author_integration_need", blocked)
 
+    def load_rulings(self) -> None:
+        """Read grant authority only from structured companions, never Markdown prose."""
+        base = self.root / "docs/rulings"
+        for path in sorted(base.glob("*.md")):
+            label = path.relative_to(self.root).as_posix()
+            self.rulings[label] = self.inputs.load(label)
+        for path in sorted(base.glob("*.json")):
+            label = path.relative_to(self.root).as_posix()
+            doc = self.inputs.load(label)
+            ruling = path.with_suffix(".md").relative_to(self.root).as_posix()
+            if not isinstance(doc, dict):
+                continue
+            if (type(doc.get("schema_version")) is not int or doc["schema_version"] != 1 or
+                    doc.get("ruling") != ruling or doc.get("decided_by") != "user" or
+                    doc.get("decision") != "documented_residue"):
+                continue
+            if self.inputs.load(ruling) is None:
+                continue
+            names = doc.get("functions")
+            if (not isinstance(names, list) or not names or
+                    any(not isinstance(name, str) or not FUNCTION_RE.fullmatch(name) or
+                        identity(name) != name or name not in self.functions for name in names) or
+                    len(set(names)) != len(names)):
+                continue
+            leads = doc.get("best_library_leads", {})
+            for index, name in enumerate(names):
+                entry = {"ruling": ruling, "evidence": f"{label}#/functions/{index}"}
+                lead = leads.get(name) if isinstance(leads, dict) else None
+                if isinstance(lead, str) and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_ -]*", lead):
+                    entry["best_library_lead"] = lead
+                self.residue_decisions.setdefault(name, []).append(entry)
+
     def add_hold(self, name: str, prose: str, evidence: str, basis: str,
                  blocks_authoring: bool = False, user_ruling: bool = False,
                  user_resource: bool = False) -> None:
@@ -547,7 +550,7 @@ class Joiner:
             prose, re.I))
         if user_ruling or user_resource:
             classes = sorted(set(classes) | {"user_prerequisite"})
-        decisions = self.residue_decisions.get(name, []) if awaiting else []
+        decisions = self.residue_decisions.get(name, []) if user_ruling else []
         resolved_by = [entry["ruling"] for entry in decisions]
         if decisions:
             awaiting = False
@@ -555,7 +558,8 @@ class Joiner:
             resolved_by = [p for p in self.rulings if "armcc-extensions" in p]
             awaiting = not resolved_by
         hold = {"blocker_classes": classes, "evidence": evidence, "basis": basis,
-                "awaits_user_ruling": awaiting, "blocks_authoring": blocks_authoring}
+                "awaits_user_ruling": awaiting, "blocks_authoring": blocks_authoring,
+                "user_ruling_hold": user_ruling}
         if resolved_by:
             hold["resolved_policy_question_by"] = sorted(resolved_by)
         if decisions:
@@ -901,6 +905,16 @@ class Joiner:
             bound = integer(doc.get("policy", {}).get("operational_differing_byte_cap"))
             if bound != PERMUTER_BOUND:
                 raise ValueError(f"{label}: permuter cap must be the frozen {PERMUTER_BOUND} B bound")
+            input_label = f"scratch/permute/{sweep}/INPUTS.json"
+            has_binding = "input_list" in doc or "input_list_sha256" in doc
+            frozen = self.inputs.load(input_label, required=has_binding)
+            if frozen is not None:
+                if (not isinstance(frozen, dict) or
+                        integer(frozen.get("policy", {}).get("operational_differing_byte_cap")) != PERMUTER_BOUND):
+                    raise ValueError(f"{input_label}: frozen permuter cap must be {PERMUTER_BOUND} B")
+            if has_binding and (doc.get("input_list") != input_label or
+                                doc.get("input_list_sha256") != self.inputs.hashes.get(input_label)):
+                raise ValueError(f"{label}: frozen INPUTS hash binding disagrees")
             self.load_sweep(sweep, label, doc)
 
     def load_sweep(self, sweep: str, label: str, doc: dict) -> None:
@@ -1405,13 +1419,7 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
         join.functions[name] = Function(row["size"])
     accepted = {name for unit in ledger["units"] for value in unit.get("functions", [])
                 if (name := identity(value)) in join.functions}
-    for path in sorted((join.root / "docs/rulings").glob("*.md")):
-        label = path.relative_to(join.root).as_posix()
-        join.rulings[label] = join.inputs.load(label)
-        for name, entry in residue_rulings(join.rulings[label]).items():
-            join.residue_decisions.setdefault(name, []).append({
-                "ruling": label, "evidence": f"{label}#L{entry['line']}",
-                **{key: value for key, value in entry.items() if key != "line"}})
+    join.load_rulings()
     join.select_pending(default_pending(join.inputs) if pending is None else pending)
     join.load_batches()
     join.load_census()
@@ -1451,7 +1459,7 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
                        "context_result_does_not_complete_target_rung": True,
                        "step4_dispositions": ["completed", "not_applicable", "adapter_refused"],
                        "pending_intake_requires": "direct author status match, zero residual, frozen profile, no recorded hold",
-                       "ruled_residue_requires": "an active user-ruling hold and a named function table governed by an explicit documented-residue user decision",
+                       "ruled_residue_requires": "a structured user-ruling hold and a valid schema-1 user documented_residue companion naming the existing ruling Markdown and exact creditable functions; never prose",
                        "disposition_evidence_changes_classes": False,
                        "supplemental_revisits_complete_rungs": False,
                        "incomplete_list_includes": "all missing search rungs plus pending intake/context-only contract review"},
@@ -1524,7 +1532,7 @@ def markdown(report: dict) -> str:
               "", "Residual bands are reported, not remeasured; unknowns are never guessed. "
               "The 0 (held) band includes held and pending-intake exact bodies. "
               "Blocker labels marked [INFERENCE] are keyword summaries; exact-blocker pointers are authoritative.",
-              "", "Only a named, explicit documented-residue user decision resolves a user-ruling hold. "
+              "", "Only a structured documented_residue user decision naming the function and an existing ruling Markdown resolves a structured user-ruling hold; prose never grants this class. "
               "It does not mark missing ladder rungs completed. Optional disposition evidence never changes a class. "
               "Revisit witnesses add provenance only, not objective rung completion.",
               "", f"Actionable incomplete-ladder/intake functions: **{report['incomplete_ladder_count']:,}**. "

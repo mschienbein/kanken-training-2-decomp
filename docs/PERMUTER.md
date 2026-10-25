@@ -186,15 +186,24 @@ the current catalogue intervals exactly; the anomaly overlaps an unknown range
 and is not counted twice. Documentation under the unresolved-bytes ruling grants
 no byte credit or classification.
 
-`ruled_residue` requires both an active user-ruling hold and an explicit user
-decision to keep a function named in its Function table as documented residue.
-The ruling path is retained in `resolved_policy_question_by`; it resolves policy,
-not search rungs. Open policy questions remain `awaits_user_ruling`. Optional
+`ruled_residue` requires a structured user-ruling hold and a JSON companion beside
+its existing ruling Markdown (`docs/rulings/<name>.json` and `<name>.md`). The
+companion must contain integer `schema_version: 1`, the exact Markdown `ruling`
+path, `decided_by: "user"`, `decision: "documented_residue"` and a nonempty,
+duplicate-free `functions` list of exact current creditable names. Missing fields,
+unknown functions, other decision values, a missing Markdown file or a non-user
+hold grant nothing. Prose is never parsed for a grant. Both files are hash-bound;
+optional structured `best_library_leads` labels supply display metadata only.
+The Markdown path remains in `resolved_policy_question_by`; the companion's exact
+function pointer supplies grant evidence. This resolves policy, not search rungs.
+Open policy questions remain `awaits_user_ruling`. Optional
 recon/survey/wave/dispatch dispositions add hash-bound exact-blocker pointers,
 never a new hold, acceptance, rung completion, or class change.
 
-The sweep-10 summary is required; sweep-11 and sweep-12 summaries are optional,
-hash-bound step-4 inputs. A current-extent `plateau`, `exhausted` or `match`
+The sweep-10 summary is required; sweep-11, sweep-12 and sweep-13 summaries are
+optional, hash-bound step-4 inputs. Their frozen `INPUTS.json` metadata is also
+bound when present; a summary's declared input path/hash must match it, and both
+policies must retain the frozen 32 B cap. A current-extent `plateau`, `exhausted` or `match`
 records completed search. An explicit current-extent `adapter_refused` gives
 step 4 a boundary disposition, not a search. Pending/planned or stale-extent
 records never complete the rung; all sweeps use the same frozen 32 B cap.

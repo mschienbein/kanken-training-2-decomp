@@ -393,6 +393,56 @@ class ResidueTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "frozen 32 B"):
                     self.report()
 
+    def test_sweep13_binds_frozen_inputs_and_preserves_pending_and_refusal_rules(self) -> None:
+        label = "scratch/permute/sweep-13/summary.json"
+        inputs = "scratch/permute/sweep-13/INPUTS.json"
+        self.census([3, 4, 5, 6, 7, 8], ["initial", "2", "3"])
+        self.author("w02", [self.row(index, 12) for index in (3, 4, 5, 6, 7)] + [self.row(8, 80)])
+        self.put(inputs, {"policy": {"operational_differing_byte_cap": 32},
+                          "assignment_rows": [{"function": self.names[index]} for index in range(3, 9)]})
+        self.put(label, {"policy": {"operational_differing_byte_cap": 32},
+                         "input_list": inputs, "input_list_sha256": residue.digest((self.root / inputs).read_bytes()),
+                         "rows": {
+                             self.names[3]: {"size": 32, "state": "pending"},
+                             self.names[4]: {"size": 32, "state": "adapter_refused"},
+                             self.names[5]: {"size": 28, "state": "adapter_refused"},
+                             self.names[6]: {"size": 32, "state": "plateau"},
+                             self.names[7]: {"size": 32, "state": "exhausted"},
+                             self.names[8]: {"size": 32, "state": "not_applicable_operational_boundary"}}})
+        report = self.report()
+        for source in (inputs, label):
+            self.assertEqual(report["input_hashes"][source], residue.digest((self.root / source).read_bytes()))
+        by_name = {row["function"]: row for row in report["rows"]}
+        for index in (3, 5):
+            self.assertEqual(by_name[self.names[index]]["status_class"], "ladder_incomplete")
+        refused = by_name[self.names[4]]
+        self.assertEqual(refused["permuter"]["disposition"], "adapter_refused")
+        self.assertFalse(refused["permuter"]["search_completed"])
+        for index in (6, 7):
+            self.assertTrue(by_name[self.names[index]]["permuter"]["search_completed"])
+            self.assertIn("sweep-13", by_name[self.names[index]]["ladder"]["4"]["attempted_batches"])
+        above_bound = by_name[self.names[8]]
+        self.assertEqual(above_bound["permuter"]["disposition"], "not_applicable")
+        self.assertFalse(above_bound["permuter"]["search_completed"])
+        self.put(inputs, {"policy": {"operational_differing_byte_cap": 32}, "changed": True})
+        with self.assertRaisesRegex(ValueError, "hash binding"):
+            self.report()
+
+    def test_frozen_sweep_bindings_refuse_missing_inputs_and_wrong_caps(self) -> None:
+        for number in (11, 12, 13):
+            with self.subTest(sweep=number):
+                label = f"scratch/permute/sweep-{number}/summary.json"
+                inputs = f"scratch/permute/sweep-{number}/INPUTS.json"
+                self.put(label, {"policy": {"operational_differing_byte_cap": 32}, "rows": {},
+                                 "input_list": inputs, "input_list_sha256": "0" * 64})
+                with self.assertRaisesRegex(ValueError, "required metadata input missing"):
+                    self.report()
+                self.put(inputs, {"policy": {"operational_differing_byte_cap": 64}})
+                with self.assertRaisesRegex(ValueError, "frozen permuter cap"):
+                    self.report()
+                self.put(label, {"policy": {"operational_differing_byte_cap": 32}, "rows": {}})
+                (self.root / inputs).unlink()
+
     def test_census_identity_reconciliation_preserves_mapping_gaps(self) -> None:
         self.put("scratch/integrator/census-20261021-r3/LADDER.json", {
             "rows": [
@@ -675,7 +725,7 @@ class ResidueTest(unittest.TestCase):
         self.author("w01", [self.row(9, 20)])
         for cap in (16, 64, 0, None, True):
             with self.subTest(cap=cap):
-                for sweep in ("sweep-10", "sweep-11", "sweep-12"):
+                for sweep in ("sweep-10", "sweep-11", "sweep-12", "sweep-13"):
                     self.put(f"scratch/permute/{sweep}/summary.json", {
                         "policy": {"operational_differing_byte_cap": cap}, "rows": {}})
                 with self.assertRaises(ValueError):
@@ -891,12 +941,17 @@ class ResidueTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "required metadata input missing"):
             self.report()
 
-    def ruling(self, index: int, decision: str = "stay in the residue table as documented residue") -> str:
-        label = "docs/rulings/2026-10-25-runtime-residue.md"
+    def ruling(self, index: int, decision: str = "documented_residue",
+               stem: str = "2026-10-25-runtime-residue") -> str:
+        label = f"docs/rulings/{stem}.md"
         self.put(label, f"# Runtime decision\n\n**Decision (user, 2026-10-25).** "
-                 f"The functions below {decision}.\n\n"
+                 f"The functions below stay documented residue.\n\n"
                  "| Function | Size | Best lead |\n|---|---:|---|\n"
                  f"| `{self.names[index]}` | 32 | `_runtime_helper` |\n")
+        self.put(label.removesuffix(".md") + ".json", {
+            "schema_version": 1, "ruling": label, "decided_by": "user",
+            "decision": decision, "functions": [self.names[index]],
+            "best_library_leads": {self.names[index]: "_runtime_helper"}})
         return label
 
     def ruling_hold(self, index: int = 5) -> None:
@@ -919,8 +974,12 @@ class ResidueTest(unittest.TestCase):
         self.assertEqual(row["actionable_items"], [])
         self.assertNotIn(self.names[5], [r["function"] for r in report["incomplete_ladder"]])
         self.assertIn(label, report["input_hashes"])
+        companion = label.removesuffix(".md") + ".json"
+        self.assertIn(companion, report["input_hashes"])
+        self.assertEqual(row["ruled_residue_evidence"][0]["evidence"], companion + "#/functions/0")
+        self.assertTrue(row["holds"][0]["user_ruling_hold"])
 
-    def test_residue_ruling_must_name_the_held_function_in_its_table(self) -> None:
+    def test_residue_companion_must_list_the_held_function(self) -> None:
         label = self.ruling(6)
         self.ruling_hold()
         self.put(label, (self.root / label).read_text() + f"\nUnrelated mention of {self.names[5]}.\n")
@@ -928,12 +987,15 @@ class ResidueTest(unittest.TestCase):
         self.assertEqual(row["status_class"], "awaits_user_ruling")
         self.assertEqual(row["resolved_policy_question_by"], [])
 
-    def test_named_function_without_explicit_residue_disposition_stays_open(self) -> None:
-        self.ruling(5, "await a library identity review; their final disposition is undecided")
+    def test_negative_companion_decisions_leave_the_policy_question_open(self) -> None:
         self.ruling_hold()
-        row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
-        self.assertEqual(row["status_class"], "awaits_user_ruling")
-        self.assertFalse(row["ruled_residue_evidence"])
+        for decision in ("not_documented_residue", "undecided", "not allowed to remain documented residue"):
+            with self.subTest(decision=decision):
+                self.ruling(5, decision)
+                row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+                self.assertEqual(row["status_class"], "awaits_user_ruling")
+                self.assertFalse(row["ruled_residue_evidence"])
+                self.assertEqual(row["resolved_policy_question_by"], [])
 
     def test_residue_ruling_does_not_resolve_an_unrelated_contract_or_resource_hold(self) -> None:
         self.ruling(5)
@@ -943,6 +1005,89 @@ class ResidueTest(unittest.TestCase):
                 {"category": "user-input", "detail": "User-supplied archive missing"}]}]})
         row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
         self.assertEqual(row["status_class"], "held_contract")
+        self.assertEqual(row["resolved_policy_question_by"], [])
+        self.assertFalse(row["ruled_residue_evidence"])
+
+    def test_residue_companion_requires_every_field_and_only_known_functions(self) -> None:
+        self.ruling_hold()
+        fields = ("schema_version", "ruling", "decided_by", "decision", "functions")
+        invalid = (
+            {"schema_version": True}, {"schema_version": 2}, {"decided_by": "assistant"},
+            {"ruling": "docs/rulings/other.md"}, {"functions": [self.names[5], "func_00ffffff"]},
+            {"functions": [self.names[1]]}, {"functions": [self.names[5], self.names[5]]},
+            {"functions": self.names[5]}, {"functions": []}, {"functions": [None]})
+        for change in (*fields, *invalid):
+            with self.subTest(change=change):
+                label = self.ruling(5).removesuffix(".md") + ".json"
+                companion = json.loads((self.root / label).read_bytes())
+                if isinstance(change, str):
+                    del companion[change]
+                else:
+                    companion.update(change)
+                self.put(label, companion)
+                row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+                self.assertEqual(row["status_class"], "awaits_user_ruling")
+                self.assertFalse(row["ruled_residue_evidence"])
+
+    def test_residue_companion_cannot_grant_without_its_named_markdown(self) -> None:
+        label = self.ruling(5)
+        self.ruling_hold()
+        (self.root / label).unlink()
+        report = self.report()
+        row = next(row for row in report["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "awaits_user_ruling")
+        self.assertEqual(row["resolved_policy_question_by"], [])
+        self.assertIn(label, report["absent_optional_inputs"])
+        self.assertIn(label.removesuffix(".md") + ".json", report["input_hashes"])
+
+    def test_two_companions_do_not_transfer_one_decision_to_another(self) -> None:
+        approved = self.ruling(5, stem="approved")
+        undecided = self.ruling(6, decision="undecided", stem="undecided")
+        self.put(residue.USER_RULING_HOLDS, {"holds": [
+            {"function": self.names[index], "size": 32} for index in (5, 6)]})
+        by_name = {row["function"]: row for row in self.report()["rows"]}
+        self.assertEqual(by_name[self.names[5]]["status_class"], "ruled_residue")
+        self.assertEqual(by_name[self.names[5]]["resolved_policy_question_by"], [approved])
+        self.assertEqual(by_name[self.names[6]]["status_class"], "awaits_user_ruling")
+        self.assertNotIn(undecided, by_name[self.names[5]]["resolved_policy_question_by"])
+        self.assertEqual(by_name[self.names[6]]["resolved_policy_question_by"], [])
+
+    def test_negative_prose_without_a_companion_never_grants(self) -> None:
+        label = self.ruling(5)
+        (self.root / (label.removesuffix(".md") + ".json")).unlink()
+        self.put(label, "# Runtime decision\n\n**Decision (user).** "
+                 "The following functions are not allowed to remain documented residue.\n\n"
+                 "| Function | Size |\n|---|---:|\n"
+                 f"| {self.names[5]} | 32 |\n")
+        self.ruling_hold()
+        row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "awaits_user_ruling")
+        self.assertEqual(row["resolved_policy_question_by"], [])
+        self.assertEqual(row["actionable_items"], list(residue.REQUIRED_STEPS))
+
+    def test_later_decisions_and_non_function_prose_tables_cannot_grant(self) -> None:
+        label = self.ruling(5)
+        self.put(label, (self.root / label).read_text() +
+                 "\n**Decision (user).** The next functions are undecided.\n\n"
+                 "| Function | Size |\n|---|---:|\n"
+                 f"| {self.names[6]} | 32 |\n\n"
+                 "| Unrelated record | Size |\n|---|---:|\n"
+                 f"| {self.names[7]} | 32 |\n")
+        self.put(residue.USER_RULING_HOLDS, {"holds": [
+            {"function": self.names[index], "size": 32} for index in (5, 6, 7)]})
+        by_name = {row["function"]: row for row in self.report()["rows"]}
+        self.assertEqual(by_name[self.names[5]]["status_class"], "ruled_residue")
+        for index in (6, 7):
+            self.assertEqual(by_name[self.names[index]]["status_class"], "awaits_user_ruling")
+            self.assertFalse(by_name[self.names[index]]["ruled_residue_evidence"])
+
+    def test_ruling_companion_cannot_turn_a_prose_only_hold_into_a_user_ruling_hold(self) -> None:
+        self.ruling(5)
+        self.put("scratch/integrator/c010/contract-deferrals.json", [
+            {"function": self.names[5], "reason": "native owner awaits user ruling"}])
+        row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "awaits_user_ruling")
+        self.assertFalse(any(hold["user_ruling_hold"] for hold in row["holds"]))
         self.assertEqual(row["resolved_policy_question_by"], [])
         self.assertFalse(row["ruled_residue_evidence"])
 
