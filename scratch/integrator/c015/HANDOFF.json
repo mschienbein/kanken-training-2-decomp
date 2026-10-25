@@ -3,12 +3,12 @@
   "checkpoint": "c015",
   "branch": "c015",
   "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015",
-  "base": "18efd7bb0b76ffe63b7a4fca4d013e3ae8e490a7",
-  "source_commit": "0836c0b56",
+  "base": "ea985bcb37576c3347debe84579993a8f228352b",
+  "source_commit": "110a1158fb28a7b58f8b2f22d71d7a9ea94d05e6",
   "candidate_manifest": "config/candidates/c015.json",
-  "candidate_manifest_sha256": "869cc4b43c5afce9e975a0a69dace63bc5852da99c48a436c1ff7a8960ee8001",
+  "candidate_manifest_sha256": "7c45d0a9b3c09050e2c89e9bfb352b5b11ff7750a420e5bc5d7b10964dc76283",
   "proposed_ledger": "scratch/integrator/c015/PROPOSED-LEDGER.json",
-  "proposed_ledger_sha256": "3c7731fd6dc9837588ee84339ba99f2cb4fef9465335b994e4da465f4f9201eb",
+  "proposed_ledger_sha256": "fbe60aee38c353675d003241b4d7b3fda498b8550f745d8bedc0bf1f2f14e5b6",
   "candidate_not_accepted": true,
   "selection": {
     "linker_model": "armlink5-inline-branchnop-v6",
@@ -159,17 +159,103 @@
       "source": "src/checkpoint15/func_0016bf90.c",
       "profile": "game",
       "reason": "Collect the exact canonical L044TrainingFrame/WidgetSlot allocation source; existing ResourceEvent and NameTable interfaces require no header or names adoption."
+    },
+    {
+      "function": "func_00145e3c",
+      "bytes": 72,
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_00145e3c.cpp",
+      "profile": "middleware",
+      "reason": "Reconcile the resource service family to its current typed state/session fields and exact cleanup callback interface."
+    },
+    {
+      "function": "func_0018ef74",
+      "bytes": 164,
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_0018ef74.c",
+      "profile": "game",
+      "reason": "Reconcile the resource service family to its current typed state/session fields and exact cleanup callback interface."
+    },
+    {
+      "function": "func_001c5530",
+      "bytes": 172,
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c",
+      "profile": "game",
+      "reason": "Reconcile the resource service family to its current typed state/session fields and exact cleanup callback interface."
+    },
+    {
+      "function": "func_001026dc",
+      "bytes": 448,
+      "source": "src/checkpoint15/reconcile/SINF-BINDING/func_001026dc.c",
+      "profile": "game",
+      "reason": "Publish one camera record owner and bind the standard hard-float math endpoints from adopted complete library identity witnesses, not guessed polynomial semantics."
+    },
+    {
+      "function": "func_001137c4",
+      "bytes": 296,
+      "source": "src/checkpoint15/reconcile/INPUT-SERVICE/func_001137c4.c",
+      "profile": "sdk",
+      "reason": "Use the actual InputService aggregate, typed shared-memory banks, StaticHandle member and exact unsigned six-output provider contract."
+    },
+    {
+      "function": "func_0014b85c",
+      "bytes": 124,
+      "source": "src/checkpoint15/reconcile/FRAME-TIMING-CALLBACK/func_0014b85c.c",
+      "profile": "game",
+      "reason": "Exact generic ServiceWorker update callback, with its original ObjectManager context and real sample/count/enable fields; second FrameTimingState model retired."
+    },
+    {
+      "function": "func_001c19e0",
+      "bytes": 64,
+      "source": "src/checkpoint15/reconcile/RESOURCE-CACHE-CONSTRUCTOR/func_001c19e0.cpp",
+      "profile": "middleware",
+      "reason": "Publish the distinct four-record cache owner and its opaque stored table address, with no native-table or callable-slot claim."
     }
   ],
   "moves": [],
   "move_reason": "All accepted additions MATCH in their own translation units; no same-TU rehoming is needed.",
   "revised_units": {
-    "count": 1,
-    "source_changed": [
-      "src/checkpoint10/func_00132344.c"
+    "count": 3,
+    "units": [
+      {
+        "source": "src/checkpoint10/func_00132344.c",
+        "profile": "game",
+        "functions": [
+          "func_00132344"
+        ],
+        "author": "w22i",
+        "accepted_source_sha256": "09b6991912e47f87610d48faa50cfc9b6329286cf65d232546e242734b934084",
+        "current_source_sha256": "0d263f1fde99a1fc39cb9092d475d8e913fcc6aa82e9ad53b512cd0f871c156d",
+        "reason": "Shared GPU-command declaration migration changes source.",
+        "header_dependencies_changed": [
+          "include/game/graphics_state.h"
+        ],
+        "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      },
+      {
+        "source": "src/checkpoint10/func_00121838.c",
+        "profile": "game",
+        "functions": [
+          "func_00121838"
+        ],
+        "author": "r41212",
+        "accepted_source_sha256": "836fee065f3243683f1471f84a6d27e520a07d34e3c52ae59a8f0442f243f888",
+        "current_source_sha256": "88c52db0434e6bfaf300047bfb109fa77380233e93cd4552851f44ad279036fc",
+        "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
+        "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      },
+      {
+        "source": "src/wave11/func_001312a4.c",
+        "profile": "game",
+        "functions": [
+          "func_001312a4"
+        ],
+        "author": "w11d",
+        "accepted_source_sha256": "facf1b07b1317c0db8a8e9f23b9e78e10da9be11026a50569e7b95c74835aae8",
+        "current_source_sha256": "c3d0571bb1fda989ba6ac3b0d20a445b8de2a1feb3cc920d5b62689d2d5c1256",
+        "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
+        "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      }
     ],
-    "functions": 1,
-    "reason": "Only the accepted GPU transfer wrapper replaces its local declaration with the canonical shared header."
+    "reason": "Only source-hash changes versus finalized main are formal revised accepted units."
   },
   "holds": [
     {
@@ -526,45 +612,232 @@
       "author_source": "scratch/authors/nm87/src/func_0017418c.c",
       "author_receipt": "scratch/authors/nm87/match/func_0017418c/40-delivered/func_0017418c.result.json",
       "evidence": "scratch/integrator/c015/NOTIFICATION-UNION-HOLD.json"
+    },
+    {
+      "function": "func_001ae908",
+      "target_bytes": 220,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "CONTROL-TRIPLET",
+      "author_source": "scratch/authors/w22g/src/func_001ae908.cpp",
+      "author_receipt": "scratch/authors/w22g/match/func_001ae908/06-game/func_001ae908.result.json",
+      "category": "contract-evidence",
+      "reason": "Canonical triplet identity is settled, but full enclosing-owner/input and native TouchBounds provider contracts remain incompatible; no cast/alias or second owner is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/CONTROL-TRIPLET/DECISION.json"
+    },
+    {
+      "function": "func_001b43bc",
+      "target_bytes": 300,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "CONTROL-TRIPLET",
+      "author_source": "scratch/authors/w22g/src/func_001b43bc.cpp",
+      "author_receipt": "scratch/authors/w22g/match/func_001b43bc/05-game/func_001b43bc.result.json",
+      "category": "contract-evidence",
+      "reason": "Canonical triplet identity is settled, but full enclosing-owner/input and native TouchBounds provider contracts remain incompatible; no cast/alias or second owner is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/CONTROL-TRIPLET/DECISION.json"
+    },
+    {
+      "function": "func_001b6310",
+      "target_bytes": 220,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "CONTROL-TRIPLET",
+      "author_source": "scratch/authors/w22g/src/func_001b6310.cpp",
+      "author_receipt": "scratch/authors/w22g/match/func_001b6310/06-game/func_001b6310.result.json",
+      "category": "contract-evidence",
+      "reason": "Canonical triplet identity is settled, but full enclosing-owner/input and native TouchBounds provider contracts remain incompatible; no cast/alias or second owner is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/CONTROL-TRIPLET/DECISION.json"
+    },
+    {
+      "function": "func_001d67c8",
+      "target_bytes": 248,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "STREAM-LOAD",
+      "author_source": "scratch/authors/nf042/src/023-final-stream-commands.cpp",
+      "author_receipt": "scratch/authors/nf042/match/023-final-stream-commands/023-final-stream-commands.result.json",
+      "category": "contract-evidence",
+      "reason": "The shared six-input loader signature is decided by its body, but the dispatcher publishes incompatible whole-owner/setup/data-pointer views. Neither selected source supplies the request/header producer or decoder/arena provider needed to establish genuine subobjects and exact callbacks; no cast or invented event lifetime is admissible.",
+      "evidence": "scratch/integrator/c015/reconcile/STREAM-LOAD/DECISION.json"
+    },
+    {
+      "function": "func_001d7318",
+      "target_bytes": 1060,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "STREAM-LOAD",
+      "author_source": "scratch/authors/nf042/src/024-final-stream-block.cpp",
+      "author_receipt": "scratch/authors/nf042/match/024-final-stream-block/024-final-stream-block.result.json",
+      "category": "contract-evidence",
+      "reason": "The shared six-input loader signature is decided by its body, but the dispatcher publishes incompatible whole-owner/setup/data-pointer views. Neither selected source supplies the request/header producer or decoder/arena provider needed to establish genuine subobjects and exact callbacks; no cast or invented event lifetime is admissible.",
+      "evidence": "scratch/integrator/c015/reconcile/STREAM-LOAD/DECISION.json"
+    },
+    {
+      "function": "func_0012450c",
+      "target_bytes": 164,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "SCENE-ENVIRONMENT",
+      "author_source": "scratch/authors/np166/src/func_0012450c.cpp",
+      "author_receipt": "scratch/authors/np166/match/func_0012450c-final-delivery/func_0012450c.result.json",
+      "category": "canonical-retype-mismatch",
+      "reason": "The honest canonical SceneEnvironment::Reset definition (real member arrays, no overlay) keeps the164-byte extent but mismatches at+5 under game/v6/L1. The native array/tail field layout cannot be changed merely to reproduce the private retail storage view; no native name is admitted.",
+      "evidence": "scratch/integrator/c015/reconcile/SCENE-ENVIRONMENT/DECISION.json"
+    },
+    {
+      "function": "func_001cfdb4",
+      "target_bytes": 36,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "CHILD-VIRTUAL",
+      "author_source": "scratch/authors/w19h/src/func_001cfdb4.cpp",
+      "author_receipt": null,
+      "category": "contract-evidence",
+      "reason": "Semantic inventory identifies the setter cell at0x2244a0 in the0x224480 table installed by MaterialInit-related producers. Native Material/AnimationLink remains a lead, not a permitted second C/native Material model: exact slot providers and original key/table identity are not closed; the coherent MATERIAL-NATIVE-MOVE transaction budgets13 accepted units (>5). The guessed int-selector interface is not published.",
+      "evidence": "scratch/integrator/c015/reconcile/CHILD-VIRTUAL/DECISION.json"
+    },
+    {
+      "function": "func_00143318",
+      "target_bytes": 16,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "RESOURCE-OBJECT-CONSTRUCTOR",
+      "author_source": "scratch/authors/w15e/src/func_00143318.cpp",
+      "author_receipt": null,
+      "category": "contract-evidence",
+      "reason": "The source manually installs data_002240dc in a C-style ResourceObject record, but resource_objects.h already defines a different actual virtual ResourceObject owner. No original-evidenced actually undefined key or complete installed table/provider transaction is supplied; adding an undefined destructor/key only to externalize a table is forbidden.",
+      "evidence": "scratch/integrator/c015/reconcile/RESOURCE-OBJECT-CONSTRUCTOR/DECISION.json"
+    },
+    {
+      "function": "func_001c1094",
+      "target_bytes": 96,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "RESULT-COLLECTION",
+      "author_source": "scratch/authors/np143/final/func_001c1c18/func_001c09e8.cpp",
+      "author_receipt": "scratch/authors/np143/match/final-func_001c1c18/func_001c09e8.result.json",
+      "category": "contract-evidence",
+      "reason": "The full source atom still casts return-this cleanup providers to ObjectDestructor, reinterprets DisplayRegistration.object from DisplayObject* to ResourceEvent*, and conflicts with the current L044TrainingFrame func_001c1190 receiver. The real entry/registration/provider contract is not established by the three cleanup body matches; do not invent new typed registration callees or publish vector shadows.",
+      "evidence": "scratch/integrator/c015/reconcile/RESULT-COLLECTION/DECISION.json"
+    },
+    {
+      "function": "func_001c15a4",
+      "target_bytes": 92,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "RESULT-COLLECTION",
+      "author_source": "scratch/authors/np143/final/func_001c1c18/func_001c09e8.cpp",
+      "author_receipt": "scratch/authors/np143/match/final-func_001c1c18/func_001c09e8.result.json",
+      "category": "contract-evidence",
+      "reason": "The full source atom still casts return-this cleanup providers to ObjectDestructor, reinterprets DisplayRegistration.object from DisplayObject* to ResourceEvent*, and conflicts with the current L044TrainingFrame func_001c1190 receiver. The real entry/registration/provider contract is not established by the three cleanup body matches; do not invent new typed registration callees or publish vector shadows.",
+      "evidence": "scratch/integrator/c015/reconcile/RESULT-COLLECTION/DECISION.json"
+    },
+    {
+      "function": "func_001c1c18",
+      "target_bytes": 92,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "RESULT-COLLECTION",
+      "author_source": "scratch/authors/np143/final/func_001c1c18/func_001c09e8.cpp",
+      "author_receipt": "scratch/authors/np143/match/final-func_001c1c18/func_001c09e8.result.json",
+      "category": "contract-evidence",
+      "reason": "The full source atom still casts return-this cleanup providers to ObjectDestructor, reinterprets DisplayRegistration.object from DisplayObject* to ResourceEvent*, and conflicts with the current L044TrainingFrame func_001c1190 receiver. The real entry/registration/provider contract is not established by the three cleanup body matches; do not invent new typed registration callees or publish vector shadows.",
+      "evidence": "scratch/integrator/c015/reconcile/RESULT-COLLECTION/DECISION.json"
+    },
+    {
+      "function": "func_001d51c0",
+      "target_bytes": 196,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "STREAM-VOICE-OWNER",
+      "author_source": "scratch/authors/w23i/src/func_001d51c0.cpp",
+      "author_receipt": "scratch/authors/w23i/match/func_001d51c0/final/func_001d51c0.result.json",
+      "category": "contract-evidence",
+      "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/STREAM-VOICE-OWNER/DECISION.json"
+    },
+    {
+      "function": "func_001d54b0",
+      "target_bytes": 120,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "STREAM-VOICE-OWNER",
+      "author_source": "scratch/authors/w23i/src/func_001d54b0.cpp",
+      "author_receipt": "scratch/authors/w23i/match/func_001d54b0/final/func_001d54b0.result.json",
+      "category": "contract-evidence",
+      "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/STREAM-VOICE-OWNER/DECISION.json"
+    },
+    {
+      "function": "func_001d7edc",
+      "target_bytes": 128,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "STREAM-VOICE-OWNER",
+      "author_source": "scratch/authors/tu842/src/sound_parameters_tu28.cpp",
+      "author_receipt": "scratch/authors/tu842/match/parameters28-final-middleware/sound_parameters_tu28.result.json",
+      "category": "contract-evidence",
+      "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/STREAM-VOICE-OWNER/DECISION.json"
+    },
+    {
+      "function": "func_001d7f5c",
+      "target_bytes": 332,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "STREAM-VOICE-OWNER",
+      "author_source": "scratch/authors/tu447/src/scene_targets.cpp",
+      "author_receipt": "scratch/authors/tu447/match/12-scene-targets-middleware/scene_targets.result.json",
+      "category": "contract-evidence",
+      "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/STREAM-VOICE-OWNER/DECISION.json"
+    },
+    {
+      "function": "func_001d80b0",
+      "target_bytes": 316,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "STREAM-VOICE-OWNER",
+      "author_source": "scratch/authors/r4062/att/scene_method_byte.cpp",
+      "author_receipt": null,
+      "category": "contract-evidence",
+      "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/STREAM-VOICE-OWNER/DECISION.json"
+    },
+    {
+      "function": "func_001d82b0",
+      "target_bytes": 232,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "STREAM-VOICE-OWNER",
+      "author_source": "scratch/authors/tu865/src/scene_controller.cpp",
+      "author_receipt": "scratch/authors/tu865/match/34-final-native-controller/scene_controller.result.json",
+      "category": "contract-evidence",
+      "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/STREAM-VOICE-OWNER/DECISION.json"
     }
   ],
   "closure": {
-    "scope": "COMPLETE-SCOPE-r5.json",
-    "record": "closure-r6/results.json",
-    "summary": "PROOF-SUMMARY.json",
-    "actual_driver_exit_code": 0,
-    "counts": {
-      "new_functions": 19,
-      "new_bytes": 2364,
-      "holds": 27,
-      "contexts": 904,
-      "scope_units": 920,
-      "scope_functions": 921,
-      "source_revised_units": 1,
-      "header_closure_units": 900
-    },
-    "exit_counts": {
-      "0": 904
-    },
-    "all_required_functions": "MATCH",
-    "no_accepted_receipt_gate_claim": true,
-    "composition": "Original903-context/920-function proof plus the1-context/1-function nm160 proof. Existing source/header/name inputs are unchanged; no prior include closure changes.",
-    "addition": "additions/nm160/INTAKE.json"
+    "historical_initial": "PROOF-SUMMARY.json plus additions/nm160/INTAKE.json",
+    "reconciliation": "reconcile/HANDOFF.json",
+    "rebase": "reconcile/REBASE-CLOSURE.json",
+    "current_catalogue_claims": "reconcile/CURRENT-CATALOGUE-CLAIMS.json",
+    "all_current_new_functions_match": true,
+    "selection": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    }
   },
   "lint": {
-    "report": "POLICY-LINT.json",
-    "dispositions": "LINT-DISPOSITIONS.json",
-    "actual_exit_code": 0,
-    "pattern_hits": 3,
-    "proximity_hits": 10,
+    "base": "18efd7bb",
+    "actual_exit": 0,
+    "pattern_leads": 7,
+    "proximity_leads": 13,
     "second_models": 0,
     "unadjudicated": 0,
-    "addition": {
-      "report": "additions/nm160/POLICY-LINT.json",
-      "dispositions": "additions/nm160/LINT-DISPOSITIONS.json",
-      "actual_exit_code": 0,
-      "new_leads": 0
-    }
+    "report": "POLICY-LINT-FINAL-r1.json",
+    "dispositions": "LINT-DISPOSITIONS-FINAL.json"
   },
   "pre_review": {
     "record": "PRE-REVIEW.json",
@@ -581,18 +854,8 @@
     "addition_record": "additions/nm160/CLEANUP.json"
   },
   "interfaces": {
-    "actual_exit_code": 0,
-    "job": "c015-interfaces-r1",
-    "record": "INTERFACES-RUN-r1.json",
-    "report": "INTERFACES-r1.json",
-    "units": 2740,
-    "unchecked_cpp_units": 764,
-    "disagreements": 0,
-    "policy_items": 0,
-    "slot_released": true,
-    "qualification": "--allow-unchecked-cpp, with native/shared-interface manual pre-review; the auditor does not claim full C++ declaration/const-write checking.",
-    "valid_after_manifest_only_commit": false,
-    "scope": "Historical pre-nm160 ledger only, retained as PROPOSED-LEDGER-r3.json. Main explicitly defers the updated interfaces audit to prepare on the rebased merge."
+    "rerun": false,
+    "authority": "Main runs interfaces/argcheck/prepare on this rebased candidate; the historical pre-addition exit0 audit is not claimed current."
   },
   "not_run": [
     "accept.py prepare/finalize or accepted-ledger writes",
@@ -622,14 +885,21 @@
   ],
   "source_policy": "No casts around holds, no invented callees, no new union/memcpy reinterpretation, no runtime byte-offset owner recovery, no second model. Callback providers use exactly the invoking interface. No original bytes/packets/disassembly are emitted.",
   "header_closure_reproofs": {
-    "count": 900,
-    "functions": 901,
-    "helper_only_units": 15,
-    "evidence": "HEADER-CLOSURE-REPROOFS.json",
-    "reason": "Hash-identical accepted/prepared sources re-proved only for canonical header/name closure, per Main request; not source-revised units."
+    "count": 1614,
+    "evidence": "reconcile/HEADER-CLOSURE-REPROOFS-CURRENT.json",
+    "method": "Complete incremental changed-header contexts plus source/include and catalogue identity carry after the merge."
   },
-  "manifest_scope_correction": "MANIFEST-SCOPE-CORRECTION.json: scope-only inventory correction leaves every source/header, names binding and proposed interfaces ledger unchanged, so both closure and granted interfaces evidence remain valid for the later commit.",
-  "changed_headers": "CHANGED-HEADERS.json (15 exact paths, hashes, reasons and proof references)",
-  "name_admissions": "NAMES-ADMISSION.json (3 canonical native Group self/vtable bindings only)",
-  "baseline_notice": "BASELINE-RESERVATION-NOTE.json: Main retains every c012 claim as reserved and will explicitly request rebase after c012-r6 finalizes."
+  "manifest_scope_correction": "Formal revised rows are source-hash changes only; all current base/catalogue references are refreshed to ea985bcb/v15/history12. Immutable old receipts are carried, not rewritten.",
+  "changed_headers": "reconcile/CURRENT-CATALOGUE-CLAIMS.json (22 paths/hashes)",
+  "name_admissions": "reconcile/NAMES-ADMISSION-FINAL.json (5 additions; no changed existing addresses)",
+  "baseline_notice": "Finalized c012-r6 is merged through ea985bcb. Its three withdrawn r5 claims are removed from the proposal and remain uncredited by c015.",
+  "catalogue": {
+    "version": "v15",
+    "sha256": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980",
+    "denominator_history_version": 12,
+    "history_sha256": "83fbd0e6747c2e2cf889c3cd987ce968c594ed1e862b6942a97c4f549489bace"
+  },
+  "reconciliation": "reconcile/HANDOFF.json",
+  "family_dispositions": "FAMILY-DISPOSITIONS.json",
+  "scope_ownership": "Only ranks1\u201314 plus existing collected units. Ranks15\u201319 investigation files are evidence only for reserved c016/later owners, not candidate holds."
 }

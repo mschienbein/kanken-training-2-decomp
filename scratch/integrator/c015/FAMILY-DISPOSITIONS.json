@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "base": "18efd7bb",
+  "base": "ea985bcb37576c3347debe84579993a8f228352b",
   "starting_commit": "2dcf86af0",
   "plan": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/contract-plan/FAMILIES.json",
   "plan_sha256": "4deaf004c474b0265b5c9b5f4f2651de8935624f1b42fb3aa1fc135538842c4f",
@@ -8,7 +8,8 @@
   "starting_new_bytes": 2364,
   "budget": {
     "new_function_target_about": 100,
-    "maximum_identified_accepted_migrations_per_family": 5
+    "maximum_identified_accepted_migrations_per_family": 5,
+    "stop_reason": "Main scope reservation/stopping instruction, before the original approximate100-NEW limit."
   },
   "families": [
     {
@@ -107,12 +108,14 @@
     {
       "family": "ANIMATION-BINDING",
       "rank": 8,
-      "outcome": "skipped-ruling",
+      "outcome": "skipped-reserved-after-ruling-update",
       "members_credited": [],
       "members_held": [],
       "accepted_revisions": [],
       "reason": "Explicit native table/key-function ruling block; no direct or transitive waiver is inferred.",
-      "evidence": "reconcile/ANIMATION-BINDING/DECISION.json"
+      "evidence": "reconcile/ANIMATION-BINDING/DECISION.json",
+      "historical_outcome": "skipped-ruling",
+      "ruling_update": "ea985bcb adds the explicit typed dispatch-table ruling. Main explicitly stops this pass; old skip evidence is retained and no claim is reopened."
     },
     {
       "family": "RESOURCE-CACHE-CONSTRUCTOR",
@@ -153,12 +156,14 @@
     {
       "family": "SCENE-VIRTUAL",
       "rank": 12,
-      "outcome": "skipped-ruling",
+      "outcome": "skipped-reserved-after-ruling-update",
       "members_credited": [],
       "members_held": [],
       "accepted_revisions": [],
       "reason": "Direct CM2-F01 ruling blocker; no source or native slot admission attempted.",
-      "evidence": "reconcile/SCENE-VIRTUAL/DECISION.json"
+      "evidence": "reconcile/SCENE-VIRTUAL/DECISION.json",
+      "historical_outcome": "skipped-ruling",
+      "ruling_update": "ea985bcb adds the explicit typed dispatch-table ruling. Main explicitly stops this pass; old skip evidence is retained and no claim is reopened."
     },
     {
       "family": "RESULT-COLLECTION",
@@ -206,7 +211,10 @@
       ],
       "accepted_revisions": [],
       "reason": "The three empty callback inputs were already corrected by c012, but the six static atoms still request native destructor aliases rather than actual native provider definitions. The24-slot cleanup is currently a receiver-return WidgetController function, whereas the static owner allocates different four-byte WidgetRef objects; the generic registration/native destructor/type transaction is not proved. Do not alias return-only/no-argument/C functions to native destructors or invent registration helpers.",
-      "evidence": "reconcile/STATIC-NATIVE-LIFETIMES/DECISION.json"
+      "evidence": "reconcile/STATIC-NATIVE-LIFETIMES/DECISION.json",
+      "evidence_only": true,
+      "excluded_from_candidate_claims": true,
+      "owner": "later giant-component waves"
     },
     {
       "family": "HEAP-FACTORIES",
@@ -222,7 +230,10 @@
       ],
       "accepted_revisions": [],
       "reason": "The input Heap can use heap_interface.h, but all five concrete product classes require new inferred external _ZTV bindings with only declared undefined destructors. No original-evidenced actually undefined key and complete product provider identity is supplied. Merely declaring a destructor undefined to make an external table link is not evidence; no product table name is admitted.",
-      "evidence": "reconcile/HEAP-FACTORIES/DECISION.json"
+      "evidence": "reconcile/HEAP-FACTORIES/DECISION.json",
+      "evidence_only": true,
+      "excluded_from_candidate_claims": true,
+      "owner": "recon-small / c016"
     },
     {
       "family": "COMMAND-CURSORS",
@@ -235,7 +246,10 @@
       ],
       "accepted_revisions": [],
       "reason": "W19CommandBuffer contains invented reserved virtual declarations and a void*-to-interface cast. command_buffer.h explicitly distinguishes the existing W15iRenderer begin/end protocol; same slots and pointer widths do not establish owner identity or byte-count versus flag contracts. Actual installed tables and exact reserve/commit providers remain unproved.",
-      "evidence": "reconcile/COMMAND-CURSORS/DECISION.json"
+      "evidence": "reconcile/COMMAND-CURSORS/DECISION.json",
+      "evidence_only": true,
+      "excluded_from_candidate_claims": true,
+      "owner": "recon-small / c016"
     },
     {
       "family": "GFX-OWNING-ARRAY",
@@ -247,7 +261,10 @@
       ],
       "accepted_revisions": [],
       "reason": "The selected destructor models a polymorphic owner as a manual vtable word plus reserved base storage. Canonical GfxPtr/MoveArray members are usable, but the actual enclosing native owner/base/key/table identity is not established by that storage shape. No second UiResourceContext ABI shadow, manual native-vptr reset or unsupported self-name/table admission is collected.",
-      "evidence": "reconcile/GFX-OWNING-ARRAY/DECISION.json"
+      "evidence": "reconcile/GFX-OWNING-ARRAY/DECISION.json",
+      "evidence_only": true,
+      "excluded_from_candidate_claims": true,
+      "owner": "recon-small / c016"
     },
     {
       "family": "SNPRINTF-BINDING",
@@ -259,10 +276,33 @@
       ],
       "accepted_revisions": [],
       "reason": "The required __2snprintf binding targets an unclassified60-byte Thumb function at0x00100360. Current catalogue supplies no independent library identity witness for that helper; an inherited overlay and formatter call-site semantics do not prove the exact helper name/ABI. No external name is invented.",
-      "evidence": "reconcile/SNPRINTF-BINDING/DECISION.json"
+      "evidence": "reconcile/SNPRINTF-BINDING/DECISION.json",
+      "evidence_only": true,
+      "excluded_from_candidate_claims": true,
+      "owner": "recon-small / c016"
     }
   ],
   "current_new_functions": 26,
   "current_new_bytes": 3704,
-  "current_holds": 59
+  "current_holds": 44,
+  "catalogue_version": "v15",
+  "catalogue_sha256": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980",
+  "denominator_history_version": 12,
+  "assigned_families": [
+    "CONTROL-TRIPLET",
+    "SERVICE-RESOURCE",
+    "STREAM-LOAD",
+    "SINF-BINDING",
+    "INPUT-SERVICE",
+    "SCENE-ENVIRONMENT",
+    "FRAME-TIMING-CALLBACK",
+    "ANIMATION-BINDING",
+    "RESOURCE-CACHE-CONSTRUCTOR",
+    "CHILD-VIRTUAL",
+    "RESOURCE-OBJECT-CONSTRUCTOR",
+    "SCENE-VIRTUAL",
+    "RESULT-COLLECTION",
+    "STREAM-VOICE-OWNER"
+  ],
+  "stopping_authority": "Main explicitly limits c015 to its first14 ranked families plus already collected functions; ranks15 onward are reserved to c016/later waves. No further reconciliation is attempted."
 }

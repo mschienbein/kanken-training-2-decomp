@@ -1,0 +1,31 @@
+{
+  "main_instruction": "c015 stops after its14 ranked families and existing collected units; no new rank15+ work.",
+  "c015_families": [
+    "CONTROL-TRIPLET",
+    "SERVICE-RESOURCE",
+    "STREAM-LOAD",
+    "SINF-BINDING",
+    "INPUT-SERVICE",
+    "SCENE-ENVIRONMENT",
+    "FRAME-TIMING-CALLBACK",
+    "ANIMATION-BINDING",
+    "RESOURCE-CACHE-CONSTRUCTOR",
+    "CHILD-VIRTUAL",
+    "RESOURCE-OBJECT-CONSTRUCTOR",
+    "SCENE-VIRTUAL",
+    "RESULT-COLLECTION",
+    "STREAM-VOICE-OWNER"
+  ],
+  "external_evidence_only": [
+    "COMMAND-CURSORS",
+    "GFX-OWNING-ARRAY",
+    "HEAP-FACTORIES",
+    "SNPRINTF-BINDING",
+    "STATIC-NATIVE-LIFETIMES"
+  ],
+  "removed_external_hold_claims": 15,
+  "retained_c015_holds": 44,
+  "new_ruling": "docs/rulings/2026-10-25-explicit-dispatch-tables.md allows qualified explicit typed tables only with complete evidence/exact providers.",
+  "historical_skip_handling": "ANIMATION-BINDING and SCENE-VIRTUAL historical ruling skips are retained as evidence; current outcome is reserved/stopped by Main, not a claim that the new ruling is unavailable.",
+  "no_new_dispatch_admission": true
+}

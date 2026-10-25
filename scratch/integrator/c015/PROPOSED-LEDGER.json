@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "Proposed only: c012-r5 prepared ledger plus c015 harvested NEW units; no accepted ledger is modified.",
+  "note": "Proposed c015 ledger on finalized c012-r6/main ea985bcb, catalogue v15; accepted identities retain their exact finalized ownership.",
   "units": [
     {
       "source": "src/pilot/pilot_a.c",
@@ -21670,22 +21670,6 @@
       "author": "C012IntakeCodex census-20261021-r2"
     },
     {
-      "source": "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001e395c"
-      ],
-      "author": "C012IntakeCodex census-20261021-r2"
-    },
-    {
-      "source": "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001e722c"
-      ],
-      "author": "C012IntakeCodex census-20261021-r2"
-    },
-    {
       "source": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
       "profile": "game",
       "functions": [
@@ -21795,15 +21779,6 @@
         "func_001e5d38"
       ],
       "author": "nf217-cmodels2-shared-item-category"
-    },
-    {
-      "source": "src/wave20/func_001f4cf8.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001f4cf8"
-      ],
-      "author": "types-compose",
-      "qualification": "NEW re-entry of exactly the PF06-excluded reader: native Font::GetCharStrmReader(wchar_t) returns actual CharStrmReader member descriptors from data_0021c64c; native CP1252/UTF16 providers are bound through explicit moves, and UTF16 consumes the witnessed wchar_t producer API. This does not close the opaque game FontVTable/data_00223d98 or re-enter the four excluded wrappers. Unobserved historical callee identity remains [INFERENCE]."
     },
     {
       "source": "src/wave18/func_0014c2cc.cpp",
