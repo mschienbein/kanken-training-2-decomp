@@ -21,11 +21,14 @@ the authority for steps 1-3; its initial/svc-initial/svc-retry labels map to the
 objective's first rung. After the census cut, only verified census supplements
 (scratch/integrator/census-supplements/S*.json) add rungs 1-3: each witness must
 name a Main-recorded batch of that explicit step that targets the function and a
-delivered target RESULT row for it, or the run refuses. Batch-name prefixes never
-establish those three rungs.
-Step 4 dispositions are completed search, not_applicable above the bound, or an
-evidenced adapter_refused attempt. An improved seed inside the bound reopens an
-older above-bound refusal. Unknown residuals do not waive step 4.
+delivered target RESULT row for it, or the run refuses. Declared and selected
+measurement extents must agree with the catalogue, and each supplement's recorded
+batch/RESULT SHA-256 bindings must agree with the consumed bytes. Batch-name
+prefixes never establish those three rungs.
+Step 4 dispositions are completed search, not_applicable above the frozen 32 B
+bound, or an explicit, current-extent adapter_refused record. An improved seed
+inside the bound reopens an older above-bound refusal. Unknown residuals do not
+waive step 4; sweep policies cannot change the bound.
 
 Free-form author/hold text is used ONLY to assign a small diagnosis/blocker
 vocabulary. It is never copied into outputs. Evidence paths/pointers, hashes,
@@ -33,6 +36,17 @@ identities, sizes, residual counts, batch IDs and states are the output allowlis
 These are reported metadata, not re-derived source/receipt acceptance. Exact
 unheld direct author MATCHes under frozen profiles are pending_intake; Main must
 collect/review them. They share the actionable list with missing ladder rungs.
+
+Current pending manifests are configured by the optional private
+scratch/integrator/residue/PENDING-MANIFESTS.json (manifests: branches/path;
+hold_manifests: current local manifest paths). Defaults are c012-r6 -> c012-r5 ->
+c012 and c015, never superseded checkpoints. A finalized latest c012 on Main
+uses its hash-bound prepared manifest. Explicit current manifest withdrawals
+remain residue holds even if another manifest claims the function.
+scratch/integrator/USER-RULING-HOLDS.json optionally records dedicated ruling
+holds; missing user-supplied resources are ordinary blockers, not policy rulings.
+Draft files are exclusively created; an existing differing or concurrently
+created draft is never overwritten.
 """
 from __future__ import annotations
 
@@ -62,6 +76,10 @@ FROZEN_PROFILES = frozenset(("game", "sdk", "middleware"))
 FUNCTION_RE = re.compile(r"func_([0-9a-fA-F]{8})\Z")
 BATCH_RE = re.compile(r"[A-Za-z][A-Za-z0-9_-]*\Z")
 SUPPLEMENT_DIR = "scratch/integrator/census-supplements"
+PENDING_CONFIG = "scratch/integrator/residue/PENDING-MANIFESTS.json"
+USER_RULING_HOLDS = "scratch/integrator/USER-RULING-HOLDS.json"
+PERMUTER_BOUND = 32
+EXTENT_KEYS = ("target_bytes", "size", "target_size", "measured_target_size")
 WITNESS_STATUSES = ("match", "mismatch", "library_candidate", "extent")
 HOLD_NAME_RE = re.compile(r"defer|handoff|dispositions", re.I)
 HOLD_RE = re.compile(r"defer|held|hold|withheld|blocked|unresolved", re.I)
@@ -183,6 +201,17 @@ def residual(row: dict) -> tuple[int | None, str | None, int | None]:
     return None, None, None
 
 
+def reported_extents(row: dict) -> list[int]:
+    """Read all declared extents and only the selected measurement's extents."""
+    extents = [size for key in EXTENT_KEYS if (size := integer(row.get(key))) is not None]
+    _, metric, _ = residual(row)
+    selected = row.get(metric.split(".", 1)[0]) if metric else None
+    if isinstance(selected, dict):
+        extents.extend(size for key in EXTENT_KEYS
+                       if (size := integer(selected.get(key))) is not None)
+    return extents
+
+
 def text(value: Any) -> str:
     if isinstance(value, str):
         return value
@@ -213,6 +242,40 @@ def meaningful_need(value: Any) -> bool:
     if re.fullmatch(r"no (?:new |additional |shared |canonical )?(?:header|names?|integration|contract)(?:[ /a-z-]*)(?:needed|required|changes|issues)", stripped):
         return False
     return True
+
+
+def scoped_needs(doc: dict, row: dict, name: str) -> list[Any]:
+    """Resolve explicit scopes and row-referenced need IDs, never sibling prose."""
+    references = {item for key in ("integration_needs", "integration_need_ids")
+                  for item in (row.get(key) if isinstance(row.get(key), list) else [])
+                  if isinstance(item, str)}
+    needs = []
+    def visit(value: Any) -> None:
+        if isinstance(value, list):
+            for child in value:
+                visit(child)
+        elif isinstance(value, dict):
+            scope_keys = ("function", "name", "address", "target", "functions", "names", "targets")
+            if any(key in value for key in scope_keys):
+                names = {identity(item) for key in scope_keys for item in
+                         (value[key] if isinstance(value.get(key), list) else [value.get(key)])}
+                if name in names and meaningful_need(value):
+                    needs.append(value)
+                return
+            if value.get("id") in references:
+                needs.append(value)
+                return
+            for key, child in value.items():
+                if identity(key):
+                    if identity(key) == name and meaningful_need(child):
+                        needs.append(child)
+                elif key in references and meaningful_need(child):
+                    needs.append(child)
+                elif isinstance(child, (dict, list)):
+                    visit(child)
+    for key in NEEDS_KEYS:
+        visit(doc.get(key))
+    return needs
 
 
 def safe_path(value: Any, root: Path) -> str | None:
@@ -332,6 +395,16 @@ class Joiner:
         self.rulings: dict[str, str] = {}
         self.catalogue_rows: dict[str, dict] = {}
         self.census_reconciliation: dict = {}
+        self.withdrawn: set[str] = set()
+
+    def current_extent(self, name: str, row: dict, evidence: str,
+                       required: bool = False) -> bool:
+        extents = reported_extents(row)
+        if (required and not extents) or any(size != self.functions[name].size for size in extents):
+            self.functions[name].stale_evidence.add(evidence)
+            self.functions[name].evidence.add(evidence)
+            return False
+        return True
 
     def observe(self, name: str, row: dict, evidence: str, batch: str | None,
                 origin: str, default_status: str | None = None) -> None:
@@ -346,10 +419,8 @@ class Joiner:
                         break
                     if key == "prev_author" and BATCH_RE.fullmatch(value):
                         batch = value
-        size = integer(row.get("target_bytes", row.get("size", row.get("target_size"))))
-        count, metric, measured_size = residual(row)
-        if (size is not None and size != target.size) or (measured_size is not None and measured_size != target.size):
-            target.stale_evidence.add(evidence)
+        count, metric, _ = residual(row)
+        if not self.current_extent(name, row, evidence):
             return
         status = str(row.get("status", default_status or "unknown")).lower()
         if status in ("match", "context_match") and count is None:
@@ -377,14 +448,16 @@ class Joiner:
                 self.add_hold(name, need_text, evidence, "author_integration_need", blocked)
 
     def add_hold(self, name: str, prose: str, evidence: str, basis: str,
-                 blocks_authoring: bool = False, user_blocked: bool = False) -> None:
+                 blocks_authoring: bool = False, user_ruling: bool = False,
+                 user_resource: bool = False) -> None:
         classes = sorted(k for k, pattern in BLOCKER_PATTERNS.items() if re.search(pattern, prose, re.I))
         if not classes:
             classes = ["contract_type"]
-        awaiting = user_blocked or bool(re.search(
-            r"await(?:s|ing)? (?:a |the )?(?:user )?(?:ruling|decision)|user (?:ruling|decision) (?:required|needed)",
+        awaiting = user_ruling or bool(re.search(
+            r"(?:await(?:s|ing)?|requires?|needs?) (?:a |the )?(?:user )?(?:ruling|decision)|"
+            r"user (?:ruling|decision) (?:required|needed)",
             prose, re.I))
-        if user_blocked:
+        if user_ruling or user_resource:
             classes = sorted(set(classes) | {"user_prerequisite"})
         resolved_by = []
         if awaiting and re.search(r"__svc|cp15|named.register|armcc.extension|compiler.intrinsic", prose, re.I):
@@ -397,6 +470,45 @@ class Joiner:
         self.functions[name].holds.append(hold)
         self.functions[name].evidence.add(evidence)
         self.functions[name].families.update(k for k, pattern in FAMILY_PATTERNS.items() if re.search(pattern, prose, re.I))
+
+    def manifest_holds(self, label: str, doc: dict) -> None:
+        for row, pointer in walk_rows({"holds": doc.get("holds", [])}):
+            name = identity(row)
+            evidence = f"{label}#{pointer}"
+            if name in self.functions and self.current_extent(name, row, evidence):
+                self.withdrawn.add(name)
+                self.add_hold(name, relevant_text(row), evidence, "current_manifest_hold")
+
+    def finalized_c012(self, path: str, selected: dict | None) -> tuple[dict, dict] | None:
+        if path != "config/candidates/c012.json":
+            return None
+        commit = self.inputs.branch_commit("main")
+        if commit is None:
+            return None
+        paths = self.inputs.branch_paths(commit, "accept")
+        checkpoints = [(int(match[2] or 0), match[1]) for candidate in paths
+                       if (match := re.fullmatch(r"accept/(c012(?:-r(\d+))?)/(?:prepare|finalize)\.json", candidate))]
+        if not checkpoints:
+            return None
+        revision, checkpoint = max(checkpoints)
+        selected_revision = re.fullmatch(r"c012-r(\d+)", selected["branch"]) if selected else None
+        if selected_revision and int(selected_revision[1]) > revision:
+            return None
+        directory = f"accept/{checkpoint}"
+        if f"{directory}/finalize.json" not in paths:
+            return None  # A prepared latest revision does not resurrect an older finalized scope.
+        finalized_label, finalized = self.inputs.branch_json(commit, f"{directory}/finalize.json")
+        _, prepared = self.inputs.branch_json(commit, f"{directory}/prepare.json")
+        prepared_commit = prepared.get("commit")
+        if (finalized.get("checkpoint") != checkpoint or prepared.get("candidates") != path or
+                not isinstance(prepared_commit, str) or not re.fullmatch(r"[0-9a-f]{40}", prepared_commit)):
+            raise ValueError(f"{finalized_label}: invalid finalized manifest binding")
+        label, doc = self.inputs.branch_json(prepared_commit, path)
+        if self.inputs.hashes[label] != prepared.get("candidates_sha256"):
+            raise ValueError(f"{finalized_label}: prepared candidate hash binding disagrees")
+        return ({"branch": "main", "commit": prepared_commit, "path": path, "input": label,
+                 "fallback_from": [], "finalized_checkpoint": checkpoint,
+                 "finalized_input": finalized_label}, doc)
 
     def select_pending(self, specs: list[tuple[tuple[str, ...], str]]) -> None:
         for branches, path in specs:
@@ -413,12 +525,18 @@ class Joiner:
                 label, doc = self.inputs.branch_json(commit, path)
                 selected = {"branch": branch, "commit": commit, "path": path,
                             "input": label, "fallback_from": tried[:-1]}
+                break
+            finalized = self.finalized_c012(path, selected)
+            if finalized:
+                selected, doc = finalized
+            if selected is not None:
+                label = selected["input"]
+                self.manifest_holds(label, doc)
                 for unit in doc.get("units", []):
                     for value in unit.get("functions", []):
                         name = identity(value)
                         if name in self.functions:
                             self.pending.setdefault(name, []).append(label)
-                break
             if selected is None:
                 raise ValueError(f"no committed pending manifest: {','.join(branches)}:{path}")
             self.pending_sources.append(selected)
@@ -548,6 +666,15 @@ class Joiner:
         for path in sorted((self.root / SUPPLEMENT_DIR).glob("S*.json")):
             label = path.relative_to(self.root).as_posix()
             doc = self.inputs.load(label)
+            bindings = doc.get("input_sha256")
+            if not isinstance(bindings, dict):
+                raise ValueError(f"{label}: supplement needs input hash bindings")
+            for source, expected in bindings.items():
+                if not re.fullmatch(r"scratch/(?:integrator/batches/[A-Za-z0-9_-]+\.json|authors/[A-Za-z0-9_-]+/RESULT\.json)", source):
+                    raise ValueError(f"{label}: invalid witness input hash binding")
+                self.inputs.load(source, required=True)
+                if self.inputs.hashes[source] != expected:
+                    raise ValueError(f"{label}: input hash binding disagrees for {source}")
             for index, row in enumerate(doc.get("rows", [])):
                 name = identity(row)
                 evidence = f"{label}#/rows/{index}"
@@ -560,6 +687,13 @@ class Joiner:
                     if step not in AUTHOR_STEPS or not entries:
                         raise ValueError(f"{evidence}: supplements witness only rungs 1-3, with evidence")
                     for entry in entries:
+                        batch = entry.get("batch") if isinstance(entry, dict) else None
+                        if not isinstance(batch, str) or not BATCH_RE.fullmatch(batch):
+                            raise ValueError(f"{evidence}: witness needs a batch id")
+                        required = (f"scratch/integrator/batches/{batch}.json",
+                                    f"scratch/authors/{batch}/RESULT.json")
+                        if any(source not in bindings for source in required):
+                            raise ValueError(f"{evidence}: witness is missing a required input hash binding")
                         self.verify_witness(name, step, entry, evidence)
                         target.attempts[step].add(entry["batch"])
                     target.completed.add(step)
@@ -583,8 +717,7 @@ class Joiner:
         delivered = rows[index]
         if identity(delivered) != name or delivered.get("status") not in WITNESS_STATUSES:
             raise ValueError(f"{evidence}: {batch} row {index} is not a delivered target result for {name}")
-        size = integer(delivered.get("size"))
-        if size is not None and size != self.functions[name].size:
+        if not self.current_extent(name, delivered, evidence):
             raise ValueError(f"{evidence}: {batch} row {index} measured a different extent")
 
     def load_authors(self) -> None:
@@ -599,36 +732,26 @@ class Joiner:
                 if name not in self.functions:
                     continue
                 evidence = f"{label}#/functions/{index}"
-                scoped = doc.get("integration_needs", {})
-                needs = []
-                if isinstance(scoped, dict):
-                    if meaningful_need(scoped.get(name)):
-                        needs.append(scoped[name])
-                    for group in scoped.values():
-                        if isinstance(group, dict) and meaningful_need(group.get(name)):
-                            needs.append(group[name])
+                needs = scoped_needs(doc, row, name)
                 if needs:
                     row = {**row, "integration_needs": [row.get("integration_needs"), *needs]}
                 self.observe(name, row, evidence, batch, "author")
                 if step in EXTRA_STEPS and name in targets and row.get("status") in ("match", "mismatch", "library_candidate", "extent"):
-                    size = integer(row.get("size"))
-                    if size is None or size == self.functions[name].size:
+                    if self.current_extent(name, row, evidence):
                         self.functions[name].completed.add(step)
                         self.functions[name].attempts[step].add(batch)
                         self.functions[name].step_evidence[step].add(evidence)
 
     def load_permuter(self) -> None:
-        self.permuter_bound = None
+        self.permuter_bound = PERMUTER_BOUND
         for sweep, required in PERMUTER_SWEEPS:
             label = f"scratch/permute/{sweep}/summary.json"
             doc = self.inputs.load(label, required=required)
             if doc is None:
                 continue
-            bound = integer(doc.get("policy", {}).get("operational_differing_byte_cap")) or 32
-            if self.permuter_bound is None:
-                self.permuter_bound = bound
-            elif bound != self.permuter_bound:
-                raise ValueError(f"{label}: permuter bound {bound} differs from {self.permuter_bound}")
+            bound = integer(doc.get("policy", {}).get("operational_differing_byte_cap"))
+            if bound != PERMUTER_BOUND:
+                raise ValueError(f"{label}: permuter cap must be the frozen {PERMUTER_BOUND} B bound")
             self.load_sweep(sweep, label, doc)
 
     def load_sweep(self, sweep: str, label: str, doc: dict) -> None:
@@ -646,11 +769,26 @@ class Joiner:
             if name not in self.functions:
                 continue
             evidence = f"{label}#/rows/{key}"
+            target = self.functions[name]
+            final_rows = [(final, f"{evidence}/final_functions/{index}")
+                          for index, final in enumerate(row.get("final_functions") or [])
+                          if identity(final) == name]
+            applicability = row.get("applicability", {})
+            seed = applicability.get("residual_evidence", {})
+            records = [(row, evidence), *final_rows]
+            if isinstance(seed, dict):
+                records.append((seed, f"{evidence}/applicability"))
+            current = [self.current_extent(name, record, pointer) for record, pointer in records]
+            terminal = row.get("state") in ("adapter_refused", "plateau", "exhausted", "match")
+            if (identity(key) not in (None, name) or not all(current) or
+                    (terminal and not any(reported_extents(record) for record, _ in records))):
+                target.stale_evidence.add(evidence)
+                target.evidence.add(evidence)
+                continue
             state = row.get("state")
             if state not in ("adapter_refused", "plateau", "exhausted", "match",
                              "not_applicable_operational_boundary", "skipped_claimed", "pending"):
                 state = "unclassified"
-            target = self.functions[name]
             target.permuter.append({"state": state, "evidence": evidence,
                                    "above_bound": row.get("stop_reason") == "source_bound_residual_above_32_differing_bytes"})
             target.evidence.add(evidence)
@@ -677,8 +815,11 @@ class Joiner:
             doc = self.inputs.load(label)
             for row, pointer in walk_rows(doc):
                 name = identity(row)
-                if name in self.functions and re.search(r"refus|adapter", relevant_text(row), re.I):
+                outcomes = [row[key] for key in ("status", "state", "outcome") if key in row]
+                if name in self.functions and outcomes and all(value == "adapter_refused" for value in outcomes):
                     evidence = f"{label}#{pointer}"
+                    if not self.current_extent(name, row, evidence, required=True):
+                        continue
                     self.functions[name].permuter.append({"state": "adapter_refused", "evidence": evidence, "above_bound": False})
                     self.functions[name].attempts["4"].add("step4-nm")
                     self.functions[name].step_evidence["4"].add(evidence)
@@ -739,7 +880,23 @@ class Joiner:
                     label, doc = self.inputs.branch_json(selected["commit"], path)
                     self.holds_from(label, doc)
 
+        config = self.inputs.load(PENDING_CONFIG) or {}
+        for label in config.get("hold_manifests", ["config/candidates/c011.json"]):
+            doc = self.inputs.load(label)
+            if doc is not None:
+                self.manifest_holds(label, doc)
+        for name in self.withdrawn:
+            self.pending.pop(name, None)
+
     def load_user_holds(self) -> None:
+        dedicated = self.inputs.load(USER_RULING_HOLDS)
+        if dedicated is not None:
+            for row, pointer in walk_rows(dedicated):
+                name = identity(row)
+                evidence = f"{USER_RULING_HOLDS}#{pointer}"
+                if name in self.functions and self.current_extent(name, row, evidence):
+                    self.add_hold(name, relevant_text(row), evidence,
+                                  "recorded_user_ruling", user_ruling=True)
         # Structured policy categories cannot be recovered from contract keywords.
         for label in ("scratch/integrator/escalation/LEDGER.json",
                       "scratch/integrator/escalation/MODEL_QUEUES.json",
@@ -752,17 +909,21 @@ class Joiner:
                 name = identity(row)
                 if name not in self.functions:
                     continue
-                if (size := integer(row.get("size"))) is not None and size != self.functions[name].size:
+                if not self.current_extent(name, row, f"{label}#{pointer}"):
                     continue
                 for index, blocker in enumerate(row.get("blockers", [])):
                     if not isinstance(blocker, dict):
                         continue
-                    if blocker.get("category") in ("user-ruling", "user-prerequisite", "user-input"):
+                    category = blocker.get("category")
+                    if category in ("user-ruling", "user-prerequisite", "user-input"):
                         self.add_hold(name, text(blocker), f"{label}#{pointer}/blockers/{index}",
-                                      "recorded_user_prerequisite", user_blocked=True)
+                                      "recorded_user_prerequisite", user_ruling=category == "user-ruling",
+                                      user_resource=category != "user-ruling")
                 if row.get("awaits_user_ruling") is True or row.get("awaits_user_input") is True:
                     self.add_hold(name, relevant_text(row), f"{label}#{pointer}",
-                                  "recorded_user_prerequisite", user_blocked=True)
+                                  "recorded_user_prerequisite",
+                                  user_ruling=row.get("awaits_user_ruling") is True,
+                                  user_resource=row.get("awaits_user_input") is True)
         documents = dict(self.rulings)
         for label in ("docs/RESUME.md", "docs/STATUS.md",
                       "scratch/integrator/escalation/SUMMARY.md"):
@@ -784,7 +945,7 @@ class Joiner:
                 for name in sorted({name for token in tokens if (name := identity(token))}):
                     if name in self.functions:
                         self.add_hold(name, context, f"{label}#L{first + 1}-L{last}",
-                                      "documented_user_prerequisite", user_blocked=True)
+                                      "documented_user_prerequisite", user_resource=True)
 
     def load_harvest(self) -> None:
         label = "scratch/integrator/HARVEST-LIST.json"
@@ -794,7 +955,7 @@ class Joiner:
         for index, entry in enumerate(doc):
             if not isinstance(entry, str):
                 continue
-            match = re.fullmatch(r"([A-Za-z0-9_-]+):(func_[0-9a-fA-F]{8})\((.*)\)", entry)
+            match = re.match(r"([A-Za-z0-9_-]+):(func_[0-9a-fA-F]{8})\((.*)\)", entry, re.S)
             if not match:
                 raise ValueError(f"unrecognized harvest entry: {label}#/{index}")
             batch, raw_name, detail = match.groups()
@@ -802,7 +963,8 @@ class Joiner:
             if name not in self.functions:
                 continue
             evidence = f"{label}#/{index}"
-            state = detail.split(";", 1)[0].strip()
+            detail += " " + entry[match.end():]
+            state = match[3].split(";", 1)[0].strip()
             conflict = bool(re.search(r"conflict|contract|reconcil|\bvs\b|blocked|conditional|held|ownership|punning|reinterpret", detail, re.I))
             self.functions[name].harvest.append({"batch": batch, "state": state if state in ("held", "pending", "conditional", "c013") else "other",
                                                 "noted_contract_conflict": conflict, "evidence": evidence})
@@ -907,11 +1069,12 @@ class Joiner:
         return rows, actionable
 
 
-def default_pending() -> list[tuple[tuple[str, ...], str]]:
-    return [(("c011-r8",), "config/candidates/c011.json"),
-            (("c012-r4", "c012"), "config/candidates/c012.json"),
-            (("types-compose-r3",), "config/candidates/ctypes1.json"),
-            (("cmodels2-r5",), "config/candidates/cmodels2.json")]
+def default_pending(inputs: Inputs) -> list[tuple[tuple[str, ...], str]]:
+    doc = inputs.load(PENDING_CONFIG)
+    manifests = doc.get("manifests", []) if doc is not None else [
+        {"branches": ["c012-r6", "c012-r5", "c012"], "path": "config/candidates/c012.json"},
+        {"branches": ["c015"], "path": "config/candidates/c015.json"}]
+    return [(tuple(spec["branches"]), spec["path"]) for spec in manifests]
 
 
 def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = None,
@@ -935,7 +1098,7 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
     for path in sorted((join.root / "docs/rulings").glob("*.md")):
         label = path.relative_to(join.root).as_posix()
         join.rulings[label] = join.inputs.load(label)
-    join.select_pending(default_pending() if pending is None else pending)
+    join.select_pending(default_pending(join.inputs) if pending is None else pending)
     join.load_batches()
     join.load_census()
     join.load_census_supplements()
@@ -1024,9 +1187,9 @@ def markdown(report: dict) -> str:
         lines.append(f"| `{gap['function']}` | {gap['current_size']} | {gap.get('census_size', 'absent')} |")
     lines += ["", "## Interpretation", "",
               "- Exhaustion requires only objective steps 1 (retry pool), 2 (fresh author with best attempt/diff), 3 (whole-TU neighbours), and dispositioned step 4. Steps 5/5b/5c are recorded extras, not prerequisites.",
-              "- Census `completed_steps` is authoritative through its cut, independently of whether a completion-evidence array exists. Census `initial`/`svc-initial`/`svc-retry` map to objective step 1. After the cut, a verified census supplement may add rungs 1-3: every witness names a Main-recorded batch of that explicit step targeting the function and its delivered target RESULT row. No early-rung completion is inferred from a batch prefix or assignment.",
-              "- Step 4 is dispositioned by a completed search, an evidenced adapter refusal, or a current best residual above the frozen permuter bound. Refusal/exclusion is not a search. An improved seed inside the bound reopens an old above-bound exclusion; unknown residuals do not waive step 4.",
-              "- `held_contract` means an exact reported body plus a recorded contract/type/policy hold, not accepted C. `header_blocked` requires an explicit authoring/compile block, not an ordinary adoption-time header request; it may still have missing ladder rungs. Only the selected best author's integration needs remain active, while older needs stay in historical evidence.",
+              "- Census `completed_steps` is authoritative through its cut, independently of whether a completion-evidence array exists. Census `initial`/`svc-initial`/`svc-retry` map to objective step 1. After the cut, a verified census supplement may add rungs 1-3: every witness names a Main-recorded batch of that explicit step targeting the function and its delivered target RESULT row, with matching declared/selected measurement extents and original batch/RESULT SHA-256 bindings. No early-rung completion is inferred from a batch prefix or assignment.",
+              "- Step 4 is dispositioned by a completed search, an explicit current-extent adapter refusal, or a current best residual above the frozen 32 B permuter bound. Sweep caps cannot change that bound. Refusal/exclusion is not a search; plans do not count as refusals. An improved seed inside the bound reopens an old above-bound exclusion; unknown residuals do not waive step 4.",
+              "- `held_contract` means an exact reported body plus a recorded contract/type/policy hold, not accepted C. `header_blocked` requires an explicit authoring/compile block, not an ordinary adoption-time header request; it may still have missing ladder rungs. Only the selected best author's scoped/ID-resolved integration needs remain active, while older needs stay in historical evidence. Current manifest withdrawals cannot be hidden by pending ownership; user-supplied resource prerequisites are not user rulings.",
               "- `pending_intake` is a direct unheld author MATCH under a frozen profile, outside all pending manifests. It is actionable collection work, not an exhausted search or accepted credit.",
               "- Free-form source/author/hold text is not copied. Diagnosis/blocker families are [INFERENCE] keyword labels; the evidence pointers are the authority. Residuals are selected reported outcomes, not remeasured. Old-extent observations are excluded.",
               "- The actionable list includes every remaining required search rung, pending intake, and exact context-only contract review. A held exact body needs contract work rather than another author search.",
@@ -1078,12 +1241,23 @@ def main(argv: list[str] | None = None) -> int:
     output.mkdir(parents=True, exist_ok=True)
     outputs = {output / f"RESIDUE-r{args.revision}.json": canonical(report),
                output / f"RESIDUE-r{args.revision}.md": markdown(report).encode("utf-8")}
+    existing = set()
     for path, data in outputs.items():
-        if path.exists() and path.read_bytes() != data:
-            parser.exit(1, f"refusing to overwrite different immutable draft: {path.name}\n")
-    for path, data in outputs.items():
-        if not path.exists():
-            path.write_bytes(data)
+        if path.exists():
+            if path.read_bytes() != data:
+                parser.exit(1, f"refusing to overwrite different immutable draft: {path.name}\n")
+            existing.add(path)
+    created = []
+    try:
+        for path, data in outputs.items():
+            if path not in existing:
+                with path.open("xb") as handle:
+                    created.append(path)
+                    handle.write(data)
+    except OSError as exc:
+        for path in created:
+            path.unlink()
+        parser.exit(1, f"immutable draft creation failed: {exc.__class__.__name__}\n")
     print(json.dumps({"summary_by_class": report["summary_by_class"],
                       "incomplete_ladder_count": report["incomplete_ladder_count"],
                       "incomplete_by_missing_step": report["incomplete_by_missing_step"],

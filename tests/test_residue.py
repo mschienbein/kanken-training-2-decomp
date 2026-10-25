@@ -52,6 +52,20 @@ class ResidueTest(unittest.TestCase):
                       "completed_steps": steps, "completion_evidence": {}}
                      for index in indices]})
 
+    def supplement(self, delivered: dict | None = None) -> dict:
+        batch_path = "scratch/integrator/batches/fa90.json"
+        result_path = "scratch/authors/fa90/RESULT.json"
+        self.put(batch_path, {"created_by": "Main", "step": "1",
+                              "functions": [{"function": self.names[9]}]})
+        self.put(result_path, {"functions": [delivered or self.row(9, 6)]})
+        doc = {"input_sha256": {
+            path: residue.digest((self.root / path).read_bytes())
+            for path in (batch_path, result_path)},
+            "rows": [{"function": self.names[9], "target_bytes": 32,
+                      "completion_evidence": {"1": [{"batch": "fa90", "result_row": 0}]}}]}
+        self.put("scratch/integrator/census-supplements/S01.json", doc)
+        return doc
+
     def report(self) -> dict:
         return residue.generate(self.root, pending=[])
 
@@ -82,7 +96,7 @@ class ResidueTest(unittest.TestCase):
         self.census([6, 7], ["initial", "2", "3"])
         self.put("scratch/permute/sweep-10/summary.json", {
             "policy": {"operational_differing_byte_cap": 32},
-            "rows": {self.names[6]: {"function": self.names[6], "state": "plateau"}}})
+            "rows": {self.names[6]: {"function": self.names[6], "size": 32, "state": "plateau"}}})
         self.put("scratch/integrator/c010/contract-deferrals.json", [
             {"function": self.names[8], "reason": "awaits user ruling on unresolved policy"}])
         report = self.report()
@@ -151,7 +165,7 @@ class ResidueTest(unittest.TestCase):
     def test_adapter_refusal_is_a_boundary_not_completed_search(self) -> None:
         self.author("nm06", [self.row(15, 6)])
         self.put("scratch/permute/step4-nm/refusal.json", {
-            "function": self.names[15], "status": "adapter_refused"})
+            "function": self.names[15], "size": 32, "status": "adapter_refused"})
         row = next(row for row in self.report()["rows"] if row["function"] == self.names[15])
         self.assertEqual(row["permuter"]["state"], "adapter_refused")
         self.assertTrue(row["permuter"]["boundary_not_search"])
@@ -213,8 +227,11 @@ class ResidueTest(unittest.TestCase):
         self.assertFalse(unwitnessed["ladder"]["1"]["completed"])
 
         def witness(step: str = "1", row: int = 1, size: int = 32) -> None:
-            self.put(supplement, {"rows": [{"function": name, "target_bytes": size,
-                                            "completion_evidence": {step: [{"batch": "fa90", "result_row": row}]}}]})
+            paths = ("scratch/integrator/batches/fa90.json", "scratch/authors/fa90/RESULT.json")
+            self.put(supplement, {"input_sha256": {
+                path: residue.digest((self.root / path).read_bytes()) for path in paths},
+                "rows": [{"function": name, "target_bytes": size,
+                          "completion_evidence": {step: [{"batch": "fa90", "result_row": row}]}}]})
 
         witness()
         witnessed = next(row for row in self.report()["rows"] if row["function"] == name)
@@ -244,7 +261,10 @@ class ResidueTest(unittest.TestCase):
         def git(_inputs: residue.Inputs, *args: str) -> bytes:
             queried.append(args)
             if args[0] == "rev-parse":
-                return (commits[args[-1].rsplit("/", 1)[-1]] + "\n").encode()
+                branch = args[-1].rsplit("/", 1)[-1]
+                if branch not in commits:
+                    raise ValueError("branch absent")
+                return (commits[branch] + "\n").encode()
             if args[0] == "ls-tree":
                 if args[-1] == "config/candidates" and args[4] == "b" * 40:
                     return (manifest_path + "\0").encode()
@@ -283,7 +303,7 @@ class ResidueTest(unittest.TestCase):
         self.author("w01", [self.row(5, 12), self.row(6, 80)])
         self.put("scratch/permute/sweep-10/summary.json", {
             "policy": {"operational_differing_byte_cap": 32},
-            "rows": {self.names[5]: {"function": self.names[5], "state": "exhausted"}}})
+            "rows": {self.names[5]: {"function": self.names[5], "size": 32, "state": "exhausted"}}})
         by_name = {row["function"]: row for row in self.report()["rows"]}
         self.assertEqual(by_name[self.names[5]]["status_class"], "near_miss_exhausted")
         self.assertEqual(by_name[self.names[6]]["status_class"], "never_matched_exhausted")
@@ -301,8 +321,8 @@ class ResidueTest(unittest.TestCase):
         self.author("w02", [self.row(7, 12), self.row(8, 12)])
         self.put("scratch/permute/sweep-11/summary.json", {
             "policy": {"operational_differing_byte_cap": 32},
-            "rows": {self.names[7]: {"function": self.names[7], "state": "plateau"},
-                     self.names[8]: {"function": self.names[8], "state": "pending"}}})
+            "rows": {self.names[7]: {"function": self.names[7], "size": 32, "state": "plateau"},
+                     self.names[8]: {"function": self.names[8], "size": 32, "state": "pending"}}})
         by_name = {row["function"]: row for row in self.report()["rows"]}
         searched, pending = by_name[self.names[7]], by_name[self.names[8]]
         self.assertTrue(searched["ladder"]["4"]["completed"])
@@ -332,7 +352,7 @@ class ResidueTest(unittest.TestCase):
         self.assertFalse(any(by_name[self.names[5]]["ladder"][step]["completed"] for step in ("1", "2", "3")))
         self.assertFalse(by_name[self.names[5]]["census"]["extent_agrees"])
 
-    def test_structured_and_documented_user_dependencies_are_not_contract_holds(self) -> None:
+    def test_user_rulings_and_documented_resources_have_distinct_dispositions(self) -> None:
         self.put("scratch/integrator/escalation/LEDGER.json", {"functions": [
             {"function": self.names[5], "size": 32, "blockers": [
                 {"category": "user-ruling", "code": "thumb_identity_standard",
@@ -343,8 +363,10 @@ class ResidueTest(unittest.TestCase):
                  f"{self.names[6]} needs the user-provided ARMCC 4.1 b791 runtime library.\n")
         report = self.report()
         by_name = {row["function"]: row for row in report["rows"]}
+        self.assertEqual(by_name[self.names[5]]["status_class"], "awaits_user_ruling")
+        self.assertEqual(by_name[self.names[6]]["status_class"], "ladder_incomplete")
+        self.assertFalse(any(h["awaits_user_ruling"] for h in by_name[self.names[6]]["holds"]))
         for index in (5, 6):
-            self.assertEqual(by_name[self.names[index]]["status_class"], "awaits_user_ruling")
             self.assertIn("user_prerequisite", by_name[self.names[index]]["blocker_classes"])
         self.assertIn("docs/RESUME.md#L1-L1", by_name[self.names[6]]["evidence"])
         self.assertNotIn(self.names[1], by_name)
@@ -378,6 +400,282 @@ class ResidueTest(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 residue.main(["--root", str(self.root)])
         self.assertEqual((directory / "RESIDUE-r2.json").read_bytes(), expected)
+
+    def test_annotated_harvest_prefixes_preserve_holds_without_copying_notes(self) -> None:
+        self.author("nm07", [self.row(5, 0, status="match")])
+        for annotation in ("(pending; PRIVATE_HANDOFF) -> folded into c015; receiver contract held",
+                           "(pending; receiver contract held; PRIVATE_HANDOFF -> folded into c015)"):
+            with self.subTest(annotation=annotation):
+                self.put("scratch/integrator/HARVEST-LIST.json", [f"nm07:{self.names[5]}{annotation}"])
+                report = self.report()
+                row = next(r for r in report["rows"] if r["function"] == self.names[5])
+                self.assertEqual(row["harvest"][0]["state"], "pending")
+                self.assertEqual(row["status_class"], "held_contract")
+                self.assertNotIn("PRIVATE_HANDOFF", residue.canonical(report).decode())
+        self.put("scratch/integrator/HARVEST-LIST.json", ["nm07:not_a_function(pending) -> c015"])
+        with self.assertRaises(ValueError):
+            self.report()
+
+    def test_default_pending_uses_current_config_and_manifest_withdrawals(self) -> None:
+        self.author("nm01", [self.row(5, 0, status="match"), self.row(6, 0, status="match"),
+                             self.row(7, 0, status="match")])
+        config = {"manifests": [
+            {"branches": ["c012-r6", "c012-r5", "c012"], "path": "config/candidates/c012.json"},
+            {"branches": ["c015"], "path": "config/candidates/c015.json"}],
+            "hold_manifests": ["config/candidates/c011.json"]}
+        self.put("scratch/integrator/residue/PENDING-MANIFESTS.json", config)
+        self.put("config/candidates/c011.json", {
+            "holds": [{"function": self.names[7], "reason": "native receiver contract held"}]})
+        branches = ("c012-r6", "c012-r5", "c012", "c015", "c011-r8",
+                    "c012-r4", "types-compose-r3", "cmodels2-r5", "main")
+        commits = {branch: f"{index + 1:040x}" for index, branch in enumerate(branches)}
+        queried = []
+        def git(_inputs: residue.Inputs, *args: str) -> bytes:
+            queried.append(args)
+            if args[0] == "rev-parse":
+                return (commits[args[-1].removeprefix("refs/heads/")] + "\n").encode()
+            if args[0] == "ls-tree":
+                return (("\0".join("config/candidates/" + name + ".json" for name in
+                                  ("c011", "c012", "c015", "ctypes1", "cmodels2")) + "\0").encode()
+                        if args[-1] == "config/candidates" else b"")
+            if args[0] == "show":
+                commit, path = args[1].split(":", 1)
+                if commit == commits["c012-r6"]:
+                    doc = {"units": [{"functions": [self.names[2], self.names[5]]}],
+                           "holds": [{"function": self.names[5], "reason": "native receiver contract held"}]}
+                elif commit == commits["c015"]:
+                    doc = {"units": [{"functions": [self.names[3]]}],
+                           "holds": [{"function": self.names[6], "reason": "canonical header contract held"}]}
+                else:
+                    doc = {"units": [{"functions": self.names[5:8]}]}
+                return json.dumps(doc).encode()
+            self.fail(f"unexpected metadata query {args!r}")
+        with patch.object(residue.Inputs, "git", git):
+            report = residue.generate(self.root)
+            self.assertEqual({r["function"] for r in report["pending_checkpoint"]["rows"]},
+                             {self.names[2], self.names[3]})
+            by_name = {r["function"]: r for r in report["rows"]}
+            for index in (5, 6, 7):
+                self.assertEqual(by_name[self.names[index]]["status_class"], "held_contract")
+            self.assertEqual([r["branch"] for r in report["pending_checkpoint"]["sources"]],
+                             ["c012-r6", "c015"])
+            self.assertIn("scratch/integrator/residue/PENDING-MANIFESTS.json", report["input_hashes"])
+            config["manifests"] = config["manifests"][1:]
+            self.put("scratch/integrator/residue/PENDING-MANIFESTS.json", config)
+            queried.clear()
+            edited = residue.generate(self.root)
+        self.assertEqual({r["function"] for r in edited["pending_checkpoint"]["rows"]}, {self.names[3]})
+        self.assertFalse(any("c012" in arg for query in queried for arg in query))
+
+    def test_current_c012_fallback_and_finalized_main_snapshot(self) -> None:
+        path = "config/candidates/c012.json"
+        self.put("scratch/integrator/residue/PENDING-MANIFESTS.json", {"manifests": [
+            {"branches": ["c012-r6", "c012-r5", "c012"], "path": path}]})
+        self.author("nm01", [self.row(5, 0, status="match")])
+        main_commit, branch_commit, prepared_commit = ("a" * 40, "b" * 40, "c" * 40)
+        finalized_doc = {"units": [{"functions": [self.names[2]]}],
+                         "holds": [{"function": self.names[5], "reason": "native contract held"}]}
+        finalized_raw = json.dumps(finalized_doc).encode()
+        finalized = False
+        queried = []
+        def git(_inputs: residue.Inputs, *args: str) -> bytes:
+            queried.append(args)
+            if args[0] == "rev-parse":
+                branch = args[-1].removeprefix("refs/heads/")
+                if branch == "main":
+                    return (main_commit + "\n").encode()
+                if branch == "c012-r5":
+                    return (branch_commit + "\n").encode()
+                raise ValueError("branch absent")
+            if args[0] == "ls-tree":
+                if args[-1] == "accept" and finalized:
+                    return b"accept/c012-r5/finalize.json\0accept/c012-r6/prepare.json\0accept/c012-r6/finalize.json\0"
+                return (path + "\0").encode() if args[-1] == "config/candidates" else b""
+            if args[0] == "show":
+                commit, source = args[1].split(":", 1)
+                if source.endswith("/finalize.json"):
+                    return json.dumps({"checkpoint": "c012-r6"}).encode()
+                if source.endswith("/prepare.json"):
+                    return json.dumps({"commit": prepared_commit, "candidates": path,
+                                       "candidates_sha256": residue.digest(finalized_raw)}).encode()
+                if commit == prepared_commit:
+                    return finalized_raw
+                return json.dumps({"units": [{"functions": [self.names[5]]}]}).encode()
+            self.fail(f"unexpected metadata query {args!r}")
+        with patch.object(residue.Inputs, "git", git):
+            fallback = residue.generate(self.root)
+            self.assertEqual(fallback["pending_checkpoint"]["sources"][0]["branch"], "c012-r5")
+            self.assertEqual(fallback["pending_checkpoint"]["sources"][0]["fallback_from"], ["c012-r6"])
+            finalized = True
+            report = residue.generate(self.root)
+        self.assertEqual({r["function"] for r in report["pending_checkpoint"]["rows"]}, {self.names[2]})
+        self.assertEqual(next(r for r in report["rows"] if r["function"] == self.names[5])["status_class"],
+                         "held_contract")
+        self.assertTrue(any(key.endswith("accept/c012-r6/finalize.json") for key in report["input_hashes"]))
+        self.assertIn(("show", f"{prepared_commit}:{path}"), queried)
+
+    def test_scoped_list_needs_do_not_apply_to_unrelated_siblings(self) -> None:
+        self.author("nm03", [self.row(i, 0, status="match") for i in (5, 6, 7)])
+        self.put("scratch/authors/nm03/RESULT.json", {
+            "functions": [self.row(i, 0, status="match") for i in (5, 6, 7)],
+            "integration_needs": {
+                "headers": [{"functions": [self.names[5]], "summary": "native receiver contract unresolved"}],
+                "contract_conflicts": [{"target": self.names[6], "summary": "canonical callback contract conflict"}]}})
+        by_name = {r["function"]: r for r in self.report()["rows"]}
+        self.assertEqual(by_name[self.names[5]]["status_class"], "held_contract")
+        self.assertEqual(by_name[self.names[6]]["status_class"], "held_contract")
+        self.assertEqual(by_name[self.names[7]]["status_class"], "pending_intake")
+        self.assertNotIn("callback_signature", by_name[self.names[5]]["blocker_classes"])
+
+    def test_need_ids_resolve_unscoped_records_but_respect_explicit_scope(self) -> None:
+        self.author("np212", [self.row(i, 0, status="match") for i in (5, 6, 7)])
+        self.put("scratch/authors/np212/RESULT.json", {
+            "functions": [self.row(5, 0, status="match", integration_needs=["I05", "I06"]),
+                          self.row(6, 0, status="match"),
+                          self.row(7, 0, status="match", integration_need_ids=["I07"])],
+            "integration_needs": [
+                {"id": "I05", "functions": [self.names[5]], "summary": "native owner contract unresolved"},
+                {"id": "I06", "target": self.names[6], "summary": "callback signature conflict"},
+                {"id": "I07", "summary": "canonical header declaration conflict"}]})
+        by_name = {r["function"]: r for r in self.report()["rows"]}
+        for index in (5, 6, 7):
+            self.assertEqual(by_name[self.names[index]]["status_class"], "held_contract")
+        self.assertNotIn("callback_signature", by_name[self.names[5]]["blocker_classes"])
+        self.assertIn("canonical_header", by_name[self.names[7]]["blocker_classes"])
+
+    def test_supplement_rejects_stale_selected_or_declared_extents(self) -> None:
+        for extra in ({"target_bytes": 28}, {"target_size": 28}, {"measured_target_size": 28},
+                      {"residual": {"target_size": 28, "differing_bytes": 6}},
+                      {"residual": {"target_size": 32, "measured_target_size": 28, "differing_bytes": 6}}):
+            with self.subTest(extra=extra):
+                self.supplement(self.row(9, 6, **extra))
+                with self.assertRaisesRegex(ValueError, "extent"):
+                    self.report()
+
+    def test_supplement_refuses_changed_or_missing_input_hash_bindings(self) -> None:
+        label = "scratch/integrator/census-supplements/S01.json"
+        for source in ("scratch/integrator/batches/fa90.json", "scratch/authors/fa90/RESULT.json"):
+            for change in ("changed_bytes", "wrong_hash", "missing_binding"):
+                with self.subTest(source=source, change=change):
+                    doc = self.supplement()
+                    if change == "changed_bytes":
+                        current = json.loads((self.root / source).read_bytes())
+                        self.put(source, {**current, "notes": "different metadata with unchanged identity"})
+                    elif change == "wrong_hash":
+                        doc["input_sha256"][source] = "0" * 64
+                        self.put(label, doc)
+                    else:
+                        del doc["input_sha256"][source]
+                        self.put(label, doc)
+                    with self.assertRaisesRegex(ValueError, "hash|binding"):
+                        self.report()
+
+    def test_all_sweeps_must_use_the_frozen_32_byte_cap(self) -> None:
+        self.census([9], ["initial", "2", "3"])
+        self.author("w01", [self.row(9, 20)])
+        for cap in (16, 64, 0, None, True):
+            with self.subTest(cap=cap):
+                for sweep in ("sweep-10", "sweep-11"):
+                    self.put(f"scratch/permute/{sweep}/summary.json", {
+                        "policy": {"operational_differing_byte_cap": cap}, "rows": {}})
+                with self.assertRaises(ValueError):
+                    self.report()
+
+    def test_stale_sweep_extents_cannot_disposition_step4(self) -> None:
+        self.census([9], ["initial", "2", "3"])
+        self.author("w01", [self.row(9, 6)])
+        for state in ("plateau", "exhausted", "match", "adapter_refused"):
+            for extent in ({"size": 28}, {"size": 32, "final_functions": [self.row(9, 6, size=28)]},
+                           {"size": 32, "applicability": {"residual_evidence": {"target_size": 28}}},
+                           {}):
+                with self.subTest(state=state, extent=extent):
+                    self.put("scratch/permute/sweep-10/summary.json", {
+                        "policy": {"operational_differing_byte_cap": 32},
+                        "rows": {self.names[9]: {"function": self.names[9], "state": state, **extent}}})
+                    row = next(r for r in self.report()["rows"] if r["function"] == self.names[9])
+                    self.assertIn("4", row["missing_steps"])
+                    self.assertFalse(row["permuter"]["search_completed"])
+                    self.assertIsNone(row["permuter"]["disposition"])
+                    self.assertTrue(row["stale_extent_evidence"])
+
+    def test_adapter_plans_are_not_explicit_refusals(self) -> None:
+        self.census([9], ["initial", "2", "3"])
+        self.author("w01", [self.row(9, 6)])
+        for status in ("pending", "planned", "awaiting_adapter", "refused"):
+            with self.subTest(status=status):
+                self.put("scratch/permute/step4-nm/outcome.json", {
+                    "function": self.names[9], "size": 32, "status": status,
+                    "notes": "PRIVATE_ADAPTER_NOTE adapter preflight planned; no refusal attempt"})
+                report = self.report()
+                row = next(r for r in report["rows"] if r["function"] == self.names[9])
+                self.assertEqual(row["status_class"], "ladder_incomplete")
+                self.assertIn("4", row["missing_steps"])
+                self.assertNotIn("PRIVATE_ADAPTER_NOTE", residue.canonical(report).decode())
+
+    def test_explicit_adapter_refusals_require_current_extent(self) -> None:
+        self.author("w01", [self.row(9, 6)])
+        for extent in ({}, {"size": 28}, {"size": 32, "measured_target_size": 28}, {"size": 32}):
+            with self.subTest(extent=extent):
+                self.put("scratch/permute/step4-nm/outcome.json", {
+                    "function": self.names[9], "status": "adapter_refused", **extent})
+                row = next(r for r in self.report()["rows"] if r["function"] == self.names[9])
+                self.assertEqual(row["permuter"]["disposition"],
+                                 "adapter_refused" if extent == {"size": 32} else None)
+
+    def test_user_input_categories_do_not_exempt_missing_ladder_rungs(self) -> None:
+        self.put("scratch/integrator/escalation/LEDGER.json", {"functions": [
+            {"function": self.names[5], "size": 32, "blockers": [
+                {"category": "user-input", "detail": "User-supplied runtime archive missing"}]},
+            {"function": self.names[6], "size": 32, "blockers": [
+                {"category": "user-prerequisite", "detail": "User-supplied runtime archive missing"}]},
+            {"function": self.names[7], "size": 32, "awaits_user_input": True}]})
+        by_name = {r["function"]: r for r in self.report()["rows"]}
+        for index in (5, 6, 7):
+            row = by_name[self.names[index]]
+            self.assertEqual(row["status_class"], "ladder_incomplete")
+            self.assertEqual(row["missing_steps"], list(residue.REQUIRED_STEPS))
+            self.assertFalse(any(h["awaits_user_ruling"] for h in row["holds"]))
+            self.assertIn("user_prerequisite", row["blocker_classes"])
+
+    def test_dedicated_user_ruling_holds_are_optional_and_extent_scoped(self) -> None:
+        self.assertFalse(next(r for r in self.report()["rows"] if r["function"] == self.names[5])["holds"])
+        label = "scratch/integrator/USER-RULING-HOLDS.json"
+        self.put(label, {"holds": [
+            {"function": self.names[5], "size": 32, "awaits_user_ruling": True,
+             "reason": "No frozen Thumb profile; user ruling required", "evidence": ["scratch/authors/fs01/RESULT.json"]},
+            {"function": self.names[6], "size": 28, "awaits_user_ruling": True,
+             "reason": "Stale extent must not create a current exemption"}]})
+        report = self.report()
+        by_name = {r["function"]: r for r in report["rows"]}
+        self.assertEqual(by_name[self.names[5]]["status_class"], "awaits_user_ruling")
+        self.assertIn(label + "#/holds/0", by_name[self.names[5]]["evidence"])
+        self.assertNotEqual(by_name[self.names[6]]["status_class"], "awaits_user_ruling")
+        self.assertIn(label, report["input_hashes"])
+
+    def test_concurrent_draft_creation_never_overwrites_or_leaves_a_mixed_pair(self) -> None:
+        report = self.report()
+        directory = self.root / "scratch/integrator/residue"
+        original_open = Path.open
+        for revision, suffix in ((3, "json"), (4, "md")):
+            target = directory / f"RESIDUE-r{revision}.{suffix}"
+            marker = b"another immutable metadata draft\n"
+            inserted = False
+            def interleave(path: Path, mode: str = "r", *args: object, **kwargs: object):
+                nonlocal inserted
+                if path == target and mode in ("wb", "xb") and not inserted:
+                    inserted = True
+                    with original_open(path, "xb") as handle:
+                        handle.write(marker)
+                return original_open(path, mode, *args, **kwargs)
+            with self.subTest(suffix=suffix), patch.object(residue, "generate", return_value=report), \
+                    patch.object(Path, "open", interleave), patch("builtins.print"):
+                with self.assertRaises(SystemExit) as caught:
+                    residue.main(["--root", str(self.root), "--revision", str(revision)])
+                self.assertEqual(caught.exception.code, 1)
+            self.assertTrue(inserted)
+            self.assertEqual(target.read_bytes(), marker)
+            other = directory / f"RESIDUE-r{revision}.{'md' if suffix == 'json' else 'json'}"
+            self.assertFalse(other.exists())
 
     def test_missing_required_metadata_refuses_instead_of_silent_empty_residue(self) -> None:
         (self.root / "scratch/integrator/census-20261021-r3/LADDER.json").unlink()
