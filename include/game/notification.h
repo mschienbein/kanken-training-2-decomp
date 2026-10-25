@@ -113,7 +113,6 @@ extern unsigned short *func_00172008(int index);
 extern void func_00172d48(int index);
 extern void func_0016fccc(int selection);
 extern int func_001758d4(void);
-extern unsigned func_0017418c(void);
 extern void func_001dbb70(int track, unsigned char category, unsigned short x,
                          unsigned short y, unsigned char kind);
 /* [INFERENCE] Calendar key is a full word, compared with the serialized day. */

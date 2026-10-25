@@ -21,15 +21,6 @@
       "reason": "Reuse canonical DateTime and preserve the typed duration/component operation; no reinterpretation."
     },
     {
-      "source": "src/checkpoint15/func_0017418c.c",
-      "profile": "game",
-      "functions": [
-        "func_0017418c"
-      ],
-      "author": "nm87",
-      "reason": "Reuse SavedNotification and the same UTF-16 grade member written by func_001dbca0; promote the shared mask declaration and migrate its accepted caller."
-    },
-    {
       "source": "src/checkpoint15/func_00147390.cpp",
       "profile": "middleware",
       "functions": [
@@ -518,6 +509,18 @@
       "author_source": "scratch/authors/nm108/src/func_001b8238/02-shared-real-option-callback/func_001b8238.c",
       "author_receipt": "scratch/authors/nm108/match/001b8238/02-shared-real-option-callback/game/func_001b8238.result.json",
       "evidence": "scratch/integrator/c015/PRE-REVIEW-FINAL-HOLDS.json"
+    },
+    {
+      "function": "func_0017418c",
+      "target_bytes": 108,
+      "status": "uncredited-NEW-hold",
+      "component": "c015",
+      "author": "nm87",
+      "category": "inherited-notification-union-storage",
+      "reason": "The matching target selects NotificationStorage.text while the same SavedNotification payload is also the fields/selection/word union model in notification.h. The grade setter uses the same text element, but that alone does not establish one complete typed payload model. The standing no-union-punning rule is not waived for a new caller of an inherited storage view; hold instead of extending that unresolved root contract.",
+      "author_source": "scratch/authors/nm87/src/func_0017418c.c",
+      "author_receipt": "scratch/authors/nm87/match/func_0017418c/40-delivered/func_0017418c.result.json",
+      "evidence": "scratch/integrator/c015/NOTIFICATION-UNION-HOLD.json"
     }
   ],
   "revised_accepted_units": [
@@ -623,21 +626,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/service_state.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave1/func_00134f04.c",
-      "profile": "game",
-      "functions": [
-        "func_00134f04"
-      ],
-      "author": "Wave1Author2",
-      "accepted_source_sha256": "9ea81a12f2fb16ea5ae20c561c65e6c8903f5757fe0d6ebefac60caec91a6da2",
-      "current_source_sha256": "9ea81a12f2fb16ea5ae20c561c65e6c8903f5757fe0d6ebefac60caec91a6da2",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -1448,36 +1436,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave5/func_0015d6e0.c",
-      "profile": "game",
-      "functions": [
-        "func_0015d6e0"
-      ],
-      "author": "Wave5Author2",
-      "accepted_source_sha256": "9f795450ec3a4c0508128d3e4e2169a7d7c94683e743b371b976e0ff595de9f1",
-      "current_source_sha256": "9f795450ec3a4c0508128d3e4e2169a7d7c94683e743b371b976e0ff595de9f1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave5/func_00172d48.c",
-      "profile": "game",
-      "functions": [
-        "func_00172d48"
-      ],
-      "author": "Wave5Author2",
-      "accepted_source_sha256": "89d25d88c5c9e6697ac65e7b3ccfa20d8f7cc91e09074a22d6c919ef0bb78f8a",
-      "current_source_sha256": "89d25d88c5c9e6697ac65e7b3ccfa20d8f7cc91e09074a22d6c919ef0bb78f8a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave5/func_0019058c.c",
       "profile": "game",
       "functions": [
@@ -1968,7 +1926,6 @@
       "current_source_sha256": "8dd68f554bfd94af799444b221bdb7fd4d5d84845e0fa5c0d6ff2bb3a5dc2262",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -2429,66 +2386,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave10/func_0016f9d8.c",
-      "profile": "game",
-      "functions": [
-        "func_0016f9d8"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "7d66ea064e206374ba2dbc5b44011c3a91838ed1acde0ee49768d8b5f70ac9b1",
-      "current_source_sha256": "7d66ea064e206374ba2dbc5b44011c3a91838ed1acde0ee49768d8b5f70ac9b1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_0016f9f0.c",
-      "profile": "game",
-      "functions": [
-        "func_0016f9f0"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "760dc47a6910eccdcad81494deb19e32ed0cabeb1551f5085629fab220cfaf18",
-      "current_source_sha256": "760dc47a6910eccdcad81494deb19e32ed0cabeb1551f5085629fab220cfaf18",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_0016fa08.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fa08"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "2db40874dd10a1294552cd24659abe5719d789ceb94f242bf4e923258322d616",
-      "current_source_sha256": "2db40874dd10a1294552cd24659abe5719d789ceb94f242bf4e923258322d616",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_0016fccc.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fccc"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "4d24469f7ac7e43940817422b9cef84c19bd13301997ae53ac418213a92ac54f",
-      "current_source_sha256": "4d24469f7ac7e43940817422b9cef84c19bd13301997ae53ac418213a92ac54f",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave10/func_0016fff8.c",
       "profile": "game",
       "functions": [
@@ -2530,51 +2427,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_00170e38.c",
-      "profile": "game",
-      "functions": [
-        "func_00170e38"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "45b01e8211968fd8fc61ba26a7c5ee08051f48a197721fb2d513257532377d95",
-      "current_source_sha256": "45b01e8211968fd8fc61ba26a7c5ee08051f48a197721fb2d513257532377d95",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_00173608.c",
-      "profile": "game",
-      "functions": [
-        "func_00173608"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "e52c458886489f91e8e7fcfc8ef4157ec7bf579397f4ba74ba53a668f50254e7",
-      "current_source_sha256": "e52c458886489f91e8e7fcfc8ef4157ec7bf579397f4ba74ba53a668f50254e7",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_001758d4.c",
-      "profile": "game",
-      "functions": [
-        "func_001758d4"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "ff9ae270791c6c4185e704363af09061a7a0d914179cc460aff028d64f8950ad",
-      "current_source_sha256": "ff9ae270791c6c4185e704363af09061a7a0d914179cc460aff028d64f8950ad",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -2773,7 +2625,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -2791,21 +2642,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_001dbcec.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbcec"
-      ],
-      "author": "w10h",
-      "accepted_source_sha256": "dae967406afa4c16781b389ae2ae27dd18fc7fcc861864eb82fccae56dbd0bdb",
-      "current_source_sha256": "dae967406afa4c16781b389ae2ae27dd18fc7fcc861864eb82fccae56dbd0bdb",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -2884,7 +2720,6 @@
       "current_source_sha256": "e06efd8eded912975dfe6e11db96d5004ee36d0d476825e22a601d0ab1e529d7",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -3172,7 +3007,6 @@
       "current_source_sha256": "9333c2f2bc181ce7082b5d04898b7a641f438b6bb617a322c677ee09e87b65c1",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -3204,7 +3038,6 @@
       "current_source_sha256": "4925e4613b0f7b726a1fedcc1476654b57cd9b172f075e1283aea7368717ccab",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -3236,24 +3069,8 @@
       "current_source_sha256": "05453ca36f40fce584a7782264b360fa48c65a18c3123e6b118264df7bf4b414",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave8/func_00172008.c",
-      "profile": "game",
-      "functions": [
-        "func_00172008"
-      ],
-      "author": "w8a",
-      "accepted_source_sha256": "e8add6046af9168870c99248098b31e78333ac21dde39aaaeb706b660a9e826a",
-      "current_source_sha256": "e8add6046af9168870c99248098b31e78333ac21dde39aaaeb706b660a9e826a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -3269,21 +3086,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave8/func_00174454.c",
-      "profile": "game",
-      "functions": [
-        "func_00174454"
-      ],
-      "author": "w8e",
-      "accepted_source_sha256": "baa1138ea0bcab69997050bfe65c4d169acd52912be6869f17a05cece8defe83",
-      "current_source_sha256": "baa1138ea0bcab69997050bfe65c4d169acd52912be6869f17a05cece8defe83",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -3439,21 +3241,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave8/func_00181250.c",
-      "profile": "game",
-      "functions": [
-        "func_00181250"
-      ],
-      "author": "w8e",
-      "accepted_source_sha256": "b96aa8b2d834b73ee1a73432edaf22d835a490aef0c34e96489916e00b1db84e",
-      "current_source_sha256": "b96aa8b2d834b73ee1a73432edaf22d835a490aef0c34e96489916e00b1db84e",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave8/func_0018290c.c",
       "profile": "game",
       "functions": [
@@ -3464,7 +3251,6 @@
       "current_source_sha256": "87d91ac50733936af071efc9233fa1dac565415daa6fb59d9d511e393df2acbd",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -3556,7 +3342,6 @@
       "current_source_sha256": "83f300453c3c15c26726646129c66d98794065b0208cbdc6f3b6b9aa8880e840",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -3573,7 +3358,6 @@
       "current_source_sha256": "2b2cec435160f6da6430b5433ed253bb2af4f112e9dcd4b83e888c61cdff7604",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -3620,7 +3404,6 @@
       "current_source_sha256": "215c2381465eb9f551b592936db6effca43b57abac5a0b35919c96f338d72e84",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -4920,7 +4703,6 @@
       "current_source_sha256": "f3d3c0afb96d64ce87ecc509d16e1f57e510784eab8f325927ed23a423b2fc95",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -4937,7 +4719,6 @@
       "current_source_sha256": "2d598241cc8799aa2be15d36a70daaa3aa8b8f2b0f4274da50a1776a23e0e4b6",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -5060,7 +4841,6 @@
       "current_source_sha256": "5674ea17966ae7287aead750c0105b8f0f82cda49bcb007641622a0e8b338f49",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -5818,7 +5598,6 @@
       "current_source_sha256": "bb42e13abf83eb57925c6fbbeeef600659847abc319b7ff14bc583f029fa7d3b",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -5880,7 +5659,6 @@
       "current_source_sha256": "be452e72be0ed99c3fc1598bfe874ce5ec2f2754e371aa21d8ff7bb04a541e59",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -6275,36 +6053,6 @@
       "header_dependencies_changed": [
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave14/func_00173748.c",
-      "profile": "game",
-      "functions": [
-        "func_00173748"
-      ],
-      "author": "w14f",
-      "accepted_source_sha256": "2453f679b2a9460d3076475a194bc2e0f1e528f26e2fde9897ce455e79181df4",
-      "current_source_sha256": "2453f679b2a9460d3076475a194bc2e0f1e528f26e2fde9897ce455e79181df4",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave14/func_001dbcb0.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbcb0"
-      ],
-      "author": "w14f",
-      "accepted_source_sha256": "0df45a9f1b8a172d39408556ceada19cd18c6179f24a1d36a29be997d1560133",
-      "current_source_sha256": "0df45a9f1b8a172d39408556ceada19cd18c6179f24a1d36a29be997d1560133",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -7126,7 +6874,6 @@
       "current_source_sha256": "ce8e90636dd5fe7f449a48c734c6f4b50cab4bd085402511e79fe22201154f90",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7279,7 +7026,6 @@
       "current_source_sha256": "7c91db4cceb9454be96e8048417e530850acc13b34f881341d1fe4f4f9206e5d",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7327,21 +7073,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/service_state.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/retries/func_001dbbd4.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbbd4"
-      ],
-      "author": "r327",
-      "accepted_source_sha256": "918013dcb2b920e38e75c012b19430811806ce6af203bf750fc5462e11a0eab9",
-      "current_source_sha256": "918013dcb2b920e38e75c012b19430811806ce6af203bf750fc5462e11a0eab9",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -7537,7 +7268,6 @@
       "current_source_sha256": "d094d97fd2c79d2c616d993304041066cf431219a2a09522e9d8ed0984478aa6",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7668,7 +7398,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7683,7 +7412,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7698,7 +7426,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7716,7 +7443,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7765,7 +7491,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7790,7 +7515,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7808,7 +7532,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -7879,10 +7602,9 @@
       ],
       "author": "L022",
       "accepted_source_sha256": "f2609f6636431e444637b6dd2088333e4e5179f8d33bcc508e8108299f98619e",
-      "current_source_sha256": "54bc67419d3c9ebcf8b77f6c4f132424c5a694f3fda17f93a0bc4ebdb8c6b405",
-      "reason": "Shared-declaration migration changes source.",
+      "current_source_sha256": "f2609f6636431e444637b6dd2088333e4e5179f8d33bcc508e8108299f98619e",
+      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -8142,21 +7864,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/service_state.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_0010e818.c",
-      "profile": "game",
-      "functions": [
-        "func_0010e818"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "8a90ecca67a486b21143e1dd0e60e36d5406e7809893f73e28291b5022b42e95",
-      "current_source_sha256": "8a90ecca67a486b21143e1dd0e60e36d5406e7809893f73e28291b5022b42e95",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -8630,7 +8337,6 @@
       "current_source_sha256": "8b797afd4167d85cf772d452dbec69371aa764d5634b05b95f5774a510f097be",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -8648,21 +8354,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/audio_dsp.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_00181e44.c",
-      "profile": "game",
-      "functions": [
-        "func_00181e44"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "8cc36f037b2d05fff7596c2d0d9c858f075f826b025fbe0c5dd0b44e0ba09eaf",
-      "current_source_sha256": "8cc36f037b2d05fff7596c2d0d9c858f075f826b025fbe0c5dd0b44e0ba09eaf",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -8874,51 +8565,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/wave_player.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_001dbca0.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbca0"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "a32cedef455139934e28f70c79401b4735a2718a729db9597b9ff1877925dd10",
-      "current_source_sha256": "a32cedef455139934e28f70c79401b4735a2718a729db9597b9ff1877925dd10",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_001dbf40.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbf40"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "bb66a1fcb227ce66f2b23f1c989fa55aac5eb7f2c757e6bd180bfac0d930b545",
-      "current_source_sha256": "bb66a1fcb227ce66f2b23f1c989fa55aac5eb7f2c757e6bd180bfac0d930b545",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_001dc204.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc204"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "8427614113ef2696b8c18b9ef4fe4369abf6e5d917641c541275f1c9fb97e424",
-      "current_source_sha256": "8427614113ef2696b8c18b9ef4fe4369abf6e5d917641c541275f1c9fb97e424",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -9330,51 +8976,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave16/func_00145690.c",
-      "profile": "game",
-      "functions": [
-        "func_00145690"
-      ],
-      "author": "c009-wave16",
-      "accepted_source_sha256": "954f8b94bb83d5821c5ca6f90c0f3e07ebabb8a53346e197539512def62d42ed",
-      "current_source_sha256": "954f8b94bb83d5821c5ca6f90c0f3e07ebabb8a53346e197539512def62d42ed",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave16/func_00168dbc.c",
-      "profile": "game",
-      "functions": [
-        "func_00168dbc"
-      ],
-      "author": "c009-wave16",
-      "accepted_source_sha256": "88e2487b16e81f361e616b015cc41fa9f10f597d050a736efcc0cf74880f81af",
-      "current_source_sha256": "88e2487b16e81f361e616b015cc41fa9f10f597d050a736efcc0cf74880f81af",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave16/func_00169b58.c",
-      "profile": "game",
-      "functions": [
-        "func_00169b58"
-      ],
-      "author": "c009-wave16",
-      "accepted_source_sha256": "089734ff0a286ed0477a3b5ba0c4aa31aa5e3c94fb6e5afb00cf34252320aeea",
-      "current_source_sha256": "089734ff0a286ed0477a3b5ba0c4aa31aa5e3c94fb6e5afb00cf34252320aeea",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave16/func_0016cb00.c",
       "profile": "game",
       "functions": [
@@ -9417,21 +9018,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave16/func_00174430.c",
-      "profile": "game",
-      "functions": [
-        "func_00174430"
-      ],
-      "author": "c009-wave16",
-      "accepted_source_sha256": "f452a1c904b7fed09c0984c73191ddba86692389e1fcbfe1418dc6634101b337",
-      "current_source_sha256": "f452a1c904b7fed09c0984c73191ddba86692389e1fcbfe1418dc6634101b337",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -9597,7 +9183,6 @@
       "current_source_sha256": "9ea23fa78804716eb5b85ac5675ff5a92e63271c06775dd7a0df5bcabcbaa776",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9614,7 +9199,6 @@
       "current_source_sha256": "c5e56a96a20f00035c21fc6988562aadf788efdf31d05d746e1d4b9d5e91d1c8",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9631,7 +9215,6 @@
       "current_source_sha256": "0fdda1e0a73dec1a8b9ad8abfb2718a7b1236684dc9f58d163e0adf3c77d31ae",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9648,7 +9231,6 @@
       "current_source_sha256": "b0b80e09fabc44e36dc2fbb1653d309ca53b6fefd067f4b803f09aa8e98c8ed5",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9665,7 +9247,6 @@
       "current_source_sha256": "24e310f399b98fc45980806ed6bf18fab05e0a7e875c50dddb2ce2190cf00e72",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9682,7 +9263,6 @@
       "current_source_sha256": "f6e3622ac5d1e1b06ed7ab3bd5495f03a5852ac551322c3b9cc84ed6ab85ad5c",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9699,7 +9279,6 @@
       "current_source_sha256": "48e75665fa4ca3b550b86dee1878db9bb2e0d791479117ac258a13660e535255",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9716,7 +9295,6 @@
       "current_source_sha256": "bcd914980f9093e638c000794466e0af0b5c9758965759781295c3f7af1e5159",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9733,7 +9311,6 @@
       "current_source_sha256": "73e258dfd5a1d9eb47fa2091d146852d1d2645a32a3c536ffe131272119406ed",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9750,7 +9327,6 @@
       "current_source_sha256": "84f2d94e243b15950c6222860db32cfd2bc0c2b97fffe671f8a52947dc08d9a9",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9767,7 +9343,6 @@
       "current_source_sha256": "79afbed26224a44c636d2f8346b930d2ca60a55022c957f8c93f6703fc51028e",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9784,7 +9359,6 @@
       "current_source_sha256": "a88a1eb7c5eb8982f01cd1555f48b8fde06093d394fc8c15c369bcee2beb2b39",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9801,7 +9375,6 @@
       "current_source_sha256": "b2c01c108527b658040e56b736aa8c93b248c12fbd101519c3e592ca3edf26a1",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9818,7 +9391,6 @@
       "current_source_sha256": "57ff5e5cc85b695c8ee174280fe36e12e16ee0b212b59cba92f16c6ecaf1d0e6",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9835,7 +9407,6 @@
       "current_source_sha256": "9cc10c0eb029e758039f6ef04244c1ce05f2042aaa8e541b44c2e76be69cf0dc",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9852,7 +9423,6 @@
       "current_source_sha256": "7bbc877ce17a281c9354963bf38d236067c37cca2ec951a05f9fdd190f3b8e9d",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9869,7 +9439,6 @@
       "current_source_sha256": "c8759b0e5394d15fa7a6873217208d41aa21aa3a23b0896cdeec17968097180d",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9886,7 +9455,6 @@
       "current_source_sha256": "ba5eae30c3e1d3a24a8b68dcd58c78cf5d824b8aaeaed835f6e449ce2277e9cb",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9903,7 +9471,6 @@
       "current_source_sha256": "1db033924d8c4a1675b51de75ddd08b755b7b9aebecd4e5327f8aa931f43baa5",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -9920,7 +9487,6 @@
       "current_source_sha256": "dfde5b3f0a557b787fb868427f988d38a279ea44af8831b0ce23bee606f4a0dc",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -10093,21 +9659,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave17/func_0015d6bc.c",
-      "profile": "game",
-      "functions": [
-        "func_0015d6bc"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "241023c00ff2825215f6ec11f62744e317138e38e8dafeacb0f88511d973da8d",
-      "current_source_sha256": "241023c00ff2825215f6ec11f62744e317138e38e8dafeacb0f88511d973da8d",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave17/func_0015dec4.c",
       "profile": "game",
       "functions": [
@@ -10213,51 +9764,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave17/func_0016f9c0.c",
-      "profile": "game",
-      "functions": [
-        "func_0016f9c0"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "44dbb91cd183a85f8300d7af67ec70215d23831024a26a1ab693109fa28e9a4f",
-      "current_source_sha256": "44dbb91cd183a85f8300d7af67ec70215d23831024a26a1ab693109fa28e9a4f",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_0016fa18.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fa18"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "93167d886b6e8c8bbd6fe49caff317370ab135aa28e1f565dc0a168d25566e46",
-      "current_source_sha256": "93167d886b6e8c8bbd6fe49caff317370ab135aa28e1f565dc0a168d25566e46",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_0016fa38.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fa38"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "5c1a7e10b73606a4c3a2c8ad32a9ce414dd1a1a4c6ff98ead70c55ba6729c32e",
-      "current_source_sha256": "5c1a7e10b73606a4c3a2c8ad32a9ce414dd1a1a4c6ff98ead70c55ba6729c32e",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave17/func_00171db8.c",
       "profile": "game",
       "functions": [
@@ -10300,7 +9806,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -10437,7 +9942,6 @@
       "current_source_sha256": "d1219db49b930c233be96bafaf0d76e103013987eb8d6fc362a9873a11f10326",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -10454,7 +9958,6 @@
       "current_source_sha256": "0580d56768396ccf87c5e59c9cc1f7c1ff3fee9a0b42c0367c973f5abbb3f2c0",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -10718,141 +10221,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave17/func_001dbaac.c",
-      "profile": "sdk",
-      "functions": [
-        "func_001dbaac"
-      ],
-      "author": "w17h",
-      "accepted_source_sha256": "0747a034dc25b3c6972fb661c74bcc3a824c44bae6f06824b850986d2643c72a",
-      "current_source_sha256": "0747a034dc25b3c6972fb661c74bcc3a824c44bae6f06824b850986d2643c72a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dbb50.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbb50"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "a7afbf2dcb3f78cdc206e90287752da74fd7bf4c51acaefb20917f012e9dc130",
-      "current_source_sha256": "a7afbf2dcb3f78cdc206e90287752da74fd7bf4c51acaefb20917f012e9dc130",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dbc84.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbc84"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "240006ff4f9c0988ae2b028733021208e36ec18b6c806b4cfa8117bff6f3d2b0",
-      "current_source_sha256": "240006ff4f9c0988ae2b028733021208e36ec18b6c806b4cfa8117bff6f3d2b0",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dbea8.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbea8"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "5ffa65cf5bff762580dbf71670eab8ce8c343e6ba2a247170213e01dbda83dd9",
-      "current_source_sha256": "5ffa65cf5bff762580dbf71670eab8ce8c343e6ba2a247170213e01dbda83dd9",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc064.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc064"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "d9c31412e95b709eb8b935ee1ded798bd2cc805b0fe8acebfb9eb479916c5817",
-      "current_source_sha256": "d9c31412e95b709eb8b935ee1ded798bd2cc805b0fe8acebfb9eb479916c5817",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc084.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc084"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "10e760c2ea5e05a49d0e4c1d0c035d0f39ac5aad2fd83440cf8c4f453ada283d",
-      "current_source_sha256": "10e760c2ea5e05a49d0e4c1d0c035d0f39ac5aad2fd83440cf8c4f453ada283d",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc240.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc240"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "6e42be5d798bfa7ceaf32661869bc7b4d1baa958fa8bf4d7593438425b095f29",
-      "current_source_sha256": "6e42be5d798bfa7ceaf32661869bc7b4d1baa958fa8bf4d7593438425b095f29",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc3a4.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc3a4"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "15c809892a34749999f9489ad066347e5fee517b9ec8091632a0f9836db57f7c",
-      "current_source_sha256": "15c809892a34749999f9489ad066347e5fee517b9ec8091632a0f9836db57f7c",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc954.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc954"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "d55ef1fa07478a90b379a7bb8affb0dc4f4efa659a2e0a6ff02c61467f767101",
-      "current_source_sha256": "d55ef1fa07478a90b379a7bb8affb0dc4f4efa659a2e0a6ff02c61467f767101",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave17/func_001dd388.c",
       "profile": "game",
       "functions": [
@@ -10895,7 +10263,6 @@
       "current_source_sha256": "f5a2b933b92ea532f9208e771f06a4c52cf8be873a9698b813f2fac48e450a59",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -10912,7 +10279,6 @@
       "current_source_sha256": "9def5cfdc76b3e586ed61b8f431971624c23d1eeac654504d6a43b9616dae661",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -10929,7 +10295,6 @@
       "current_source_sha256": "e010a3a84431433ded34a1cad9046ec4e972a7c33dbe05e2a9b5b6d0fcff1afb",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -10961,7 +10326,6 @@
       "current_source_sha256": "461f09264dd4f91b3350f089154638e766966fcbdb8bbc3337f6dafa546d9cc7",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -10994,51 +10358,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/graphics_state.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_00145658.c",
-      "profile": "game",
-      "functions": [
-        "func_00145658"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "263d4804f99561675af3de68b03da234f36294da801cd58fb8d739ff7426e8c1",
-      "current_source_sha256": "263d4804f99561675af3de68b03da234f36294da801cd58fb8d739ff7426e8c1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_001456a4.c",
-      "profile": "game",
-      "functions": [
-        "func_001456a4"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "5facf71b5e29a7a592e27bfd250424aa6ce0aac645554d79300b824673f91c5a",
-      "current_source_sha256": "5facf71b5e29a7a592e27bfd250424aa6ce0aac645554d79300b824673f91c5a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_00145810.c",
-      "profile": "game",
-      "functions": [
-        "func_00145810"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "ced46d3b2dc7cca78ad40fb697bc7ff25e0ad765790fb081cb03c0b9901f8ac8",
-      "current_source_sha256": "ced46d3b2dc7cca78ad40fb697bc7ff25e0ad765790fb081cb03c0b9901f8ac8",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -11118,21 +10437,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave18/func_0015d770.c",
-      "profile": "game",
-      "functions": [
-        "func_0015d770"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "6339c82b296101adabc27cf0138d36f48b6b8c9471f32f05ac7a756479955ae2",
-      "current_source_sha256": "6339c82b296101adabc27cf0138d36f48b6b8c9471f32f05ac7a756479955ae2",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave18/func_0015e260.c",
       "profile": "game",
       "functions": [
@@ -11175,51 +10479,6 @@
       "header_dependencies_changed": [
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_001682b4.c",
-      "profile": "game",
-      "functions": [
-        "func_001682b4"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "93ffd6d38321a52c86ccf202453cdf7735cafd0c3e45a119172665faee8265d1",
-      "current_source_sha256": "93ffd6d38321a52c86ccf202453cdf7735cafd0c3e45a119172665faee8265d1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_00169974.c",
-      "profile": "game",
-      "functions": [
-        "func_00169974"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "394990783f097c9c114dbc7bfcb0ea21dd31c92346260132ca49ee136909b401",
-      "current_source_sha256": "394990783f097c9c114dbc7bfcb0ea21dd31c92346260132ca49ee136909b401",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_0016d000.c",
-      "profile": "game",
-      "functions": [
-        "func_0016d000"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "bb4ceaddee084e32570d56626295b7700effed9d692093910f5db1f638abdda4",
-      "current_source_sha256": "bb4ceaddee084e32570d56626295b7700effed9d692093910f5db1f638abdda4",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -11269,36 +10528,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave18/func_0016f55c.c",
-      "profile": "game",
-      "functions": [
-        "func_0016f55c"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "4ac5928a4255528a3f849e2e75502650f9b14cf5a9779e3e5256eb8c5e64b479",
-      "current_source_sha256": "4ac5928a4255528a3f849e2e75502650f9b14cf5a9779e3e5256eb8c5e64b479",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_0016fca0.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fca0"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "8cb1adae2e1fbd9debb1d2ff4c3f714c6f374025e0778fed08e20f3cad092de2",
-      "current_source_sha256": "8cb1adae2e1fbd9debb1d2ff4c3f714c6f374025e0778fed08e20f3cad092de2",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave18/func_00170da0.cpp",
       "profile": "game",
       "functions": [
@@ -11344,21 +10573,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave18/func_00181224.c",
-      "profile": "game",
-      "functions": [
-        "func_00181224"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "26760bb1f25340f99920c7a5c3ae11c82f8dcc2af27cf78c63618f05503db6a1",
-      "current_source_sha256": "26760bb1f25340f99920c7a5c3ae11c82f8dcc2af27cf78c63618f05503db6a1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave18/func_001819f4.c",
       "profile": "game",
       "functions": [
@@ -11399,7 +10613,6 @@
       "current_source_sha256": "6ed470e7bb6909f324b869fac84ac214dff51b640faa5efd9dc81b8b68d66e27",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11416,7 +10629,6 @@
       "current_source_sha256": "e59fe1345c5354540843fc7c54d647c9fed7e75047e91ec6de40796a50514cb9",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11495,7 +10707,6 @@
       "current_source_sha256": "febc02ef8b7bd87688792c572ed335152465ba283a311f32ed80b276bf030238",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11512,7 +10723,6 @@
       "current_source_sha256": "5cc701607d9a4687fc00c26feae7b4c96d42d7cabc51bffef259bb4c7b68b7cf",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11529,7 +10739,6 @@
       "current_source_sha256": "bb511d54ec590b3c7b362a57c7139fce37ac4639e33040e69449086ede2195ea",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11546,7 +10755,6 @@
       "current_source_sha256": "6ca8c71f23609899672727299b9d97b83c98368dc9f39530c508b31b53b022a4",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11683,24 +10891,8 @@
       "current_source_sha256": "0c69737c04d3a9c07e0cee0a7ec058fece290a9b28abb0dc318f852cc92797e3",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_001dc0a4.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc0a4"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "2444246120998a27d9a6780865aca8192ba0d235e009c0cf896f6123ef0aa329",
-      "current_source_sha256": "2444246120998a27d9a6780865aca8192ba0d235e009c0cf896f6123ef0aa329",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -11761,7 +10953,6 @@
       "current_source_sha256": "0d3311eab49534eafef22c12ecf2b5bd83e76f6093189e9992de13186e9f9b01",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11778,7 +10969,6 @@
       "current_source_sha256": "e958d868ae728e2a5c87240c33cdc145d659f575d35b888eb33af95b949187bb",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11935,7 +11125,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -11953,7 +11142,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -12035,81 +11223,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave19/func_001db964.c",
-      "profile": "game",
-      "functions": [
-        "func_001db964"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "8a854a5788dc89e7c33b4c69afdd036ee803cffa3f1cffc52e10d1a4184d4aa0",
-      "current_source_sha256": "8a854a5788dc89e7c33b4c69afdd036ee803cffa3f1cffc52e10d1a4184d4aa0",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave19/func_001db9b0.c",
-      "profile": "game",
-      "functions": [
-        "func_001db9b0"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "245bd4f18f2f7cd941c21c2ff996641903b3ae92779e73231c30c4622da415ab",
-      "current_source_sha256": "245bd4f18f2f7cd941c21c2ff996641903b3ae92779e73231c30c4622da415ab",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave19/func_001dbacc.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbacc"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "9466ea4299ea20efd10568138cefbecab0a048bdb7a6b14fab5676d1ed23b9b2",
-      "current_source_sha256": "9466ea4299ea20efd10568138cefbecab0a048bdb7a6b14fab5676d1ed23b9b2",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave19/func_001dc258.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc258"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "268d0de6b9f9bcc624d50645f88b7501debd622c6ab2e64d64850ec0a9559481",
-      "current_source_sha256": "268d0de6b9f9bcc624d50645f88b7501debd622c6ab2e64d64850ec0a9559481",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave19/func_001dc318.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc318"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "9f7684b389e6b36b2e644ea25ec4451f070439547769a35708e4dd650cb369a0",
-      "current_source_sha256": "9f7684b389e6b36b2e644ea25ec4451f070439547769a35708e4dd650cb369a0",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave19/func_001e3050.cpp",
       "profile": "game",
       "functions": [
@@ -12121,7 +11234,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -13007,21 +12119,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/checkpoint10/func_001457d4.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001457d4"
-      ],
-      "author": "r41222",
-      "accepted_source_sha256": "1983e99c29df5026a9754be7212098bea43b2b1045e7c7941620e5aeb93b1c8a",
-      "current_source_sha256": "1983e99c29df5026a9754be7212098bea43b2b1045e7c7941620e5aeb93b1c8a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/checkpoint10/func_00147264.c",
       "profile": "middleware",
       "functions": [
@@ -13078,21 +12175,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_00167654.c",
-      "profile": "game",
-      "functions": [
-        "func_00167654"
-      ],
-      "author": "r41236",
-      "accepted_source_sha256": "8ad4430a9782319842f2537088f4db110e31f15bf8ca7e952d15b9541c2efd56",
-      "current_source_sha256": "8ad4430a9782319842f2537088f4db110e31f15bf8ca7e952d15b9541c2efd56",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -13200,7 +12282,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -13294,21 +12375,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc844.c",
-      "profile": "sdk",
-      "functions": [
-        "func_001dc844"
-      ],
-      "author": "r41278",
-      "accepted_source_sha256": "8ca4e2914265e71fdcb04b68d1cbaee321b274e3220bbc5055cec8255a84c3da",
-      "current_source_sha256": "8ca4e2914265e71fdcb04b68d1cbaee321b274e3220bbc5055cec8255a84c3da",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -13673,24 +12739,8 @@
       "current_source_sha256": "ee1d0796019a18fd31aad015f4a5270132ddd92808c50dbc8f6a43686c64a207",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc100.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc100"
-      ],
-      "author": "w22c",
-      "accepted_source_sha256": "3ddfff0d3c65bde65459c2c1cd317181fcace61f1907930b649add67f6ba63bb",
-      "current_source_sha256": "3ddfff0d3c65bde65459c2c1cd317181fcace61f1907930b649add67f6ba63bb",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -13793,7 +12843,7 @@
       "author": "w22i",
       "accepted_source_sha256": "09b6991912e47f87610d48faa50cfc9b6329286cf65d232546e242734b934084",
       "current_source_sha256": "0d263f1fde99a1fc39cb9092d475d8e913fcc6aa82e9ad53b512cd0f871c156d",
-      "reason": "Shared-declaration migration changes source.",
+      "reason": "Shared GPU-command declaration migration changes source.",
       "header_dependencies_changed": [
         "include/game/graphics_state.h"
       ],
@@ -13920,7 +12970,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -14079,66 +13128,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/checkpoint10/func_001dc180.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc180"
-      ],
-      "author": "w23j",
-      "accepted_source_sha256": "614ba0938a800379d06625a86c0b115f3edc9de92172f4bf726aa8a08ba6d29a",
-      "current_source_sha256": "614ba0938a800379d06625a86c0b115f3edc9de92172f4bf726aa8a08ba6d29a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc1ac.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc1ac"
-      ],
-      "author": "w23j",
-      "accepted_source_sha256": "201756cebf8d73f5262edc9cec91fb3a1c1e59d1058f9a8acd1b0450dc09953f",
-      "current_source_sha256": "201756cebf8d73f5262edc9cec91fb3a1c1e59d1058f9a8acd1b0450dc09953f",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc1d8.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc1d8"
-      ],
-      "author": "w23j",
-      "accepted_source_sha256": "612dbd27d86df5f7bb8707774d68dd9f7b7875afb329a1cd11b12c98fb43c87b",
-      "current_source_sha256": "612dbd27d86df5f7bb8707774d68dd9f7b7875afb329a1cd11b12c98fb43c87b",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc8e0.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc8e0"
-      ],
-      "author": "w23j",
-      "accepted_source_sha256": "ec461b54200a4d5bf4128c9cfac334152fe142c63838c70061c89d6d82e6654b",
-      "current_source_sha256": "ec461b54200a4d5bf4128c9cfac334152fe142c63838c70061c89d6d82e6654b",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/checkpoint10/func_00168dd0.c",
       "profile": "game",
       "functions": [
@@ -14150,7 +13139,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -14398,7 +13386,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -14636,21 +13623,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/checkpoint11/notification_history-r5.c",
-      "profile": "middleware",
-      "functions": [
-        "func_001dbb70"
-      ],
-      "author": "c011-integration",
-      "accepted_source_sha256": "4e912a5622d5e3cba1d0c4ac196b49abea857e2c3867e1e9a000b0ecb0fe48e9",
-      "current_source_sha256": "4e912a5622d5e3cba1d0c4ac196b49abea857e2c3867e1e9a000b0ecb0fe48e9",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/checkpoint11/service_registration-r5.cpp",
       "profile": "middleware",
       "functions": [
@@ -14692,22 +13664,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint11/func_001dc744_storage.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc744",
-        "func_001dc918"
-      ],
-      "author": "c011-integration",
-      "accepted_source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
-      "current_source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -14986,22 +13942,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/checkpoint11/intake-r7/np032/func_001dc3c4.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc3c4",
-        "func_001dc538"
-      ],
-      "author": "np032",
-      "accepted_source_sha256": "aee1edc16ee9bf27ab969406d5690b5c8e6b6599edfd77f2a5f92ca7f9560750",
-      "current_source_sha256": "aee1edc16ee9bf27ab969406d5690b5c8e6b6599edfd77f2a5f92ca7f9560750",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/checkpoint13/language.cpp",
       "profile": "middleware",
       "functions": [
@@ -15027,7 +13967,6 @@
       "current_source_sha256": "a40d13dec4d695920dc9777eb7244fa96fc15ebd52275841b408f52ccc3e6275",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -15166,7 +14105,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -15216,21 +14154,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint12/intake-r29/final_func_0016992c/func_0016992c.c",
-      "profile": "game",
-      "functions": [
-        "func_0016992c"
-      ],
-      "author": "C012IntakeCodex round-three exact intake",
-      "accepted_source_sha256": "5975df0c3cb34eb1e2eab15f8db4b0de4383c5303175676f88eb3f6ceb2de4d5",
-      "current_source_sha256": "5975df0c3cb34eb1e2eab15f8db4b0de4383c5303175676f88eb3f6ceb2de4d5",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -15292,7 +14215,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -15406,21 +14328,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave1/func_00134f04.c",
-      "profile": "game",
-      "functions": [
-        "func_00134f04"
-      ],
-      "author": "Wave1Author2",
-      "accepted_source_sha256": "9ea81a12f2fb16ea5ae20c561c65e6c8903f5757fe0d6ebefac60caec91a6da2",
-      "current_source_sha256": "9ea81a12f2fb16ea5ae20c561c65e6c8903f5757fe0d6ebefac60caec91a6da2",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave1/func_00196cb8.c",
       "profile": "game",
       "functions": [
@@ -16227,36 +15134,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave5/func_0015d6e0.c",
-      "profile": "game",
-      "functions": [
-        "func_0015d6e0"
-      ],
-      "author": "Wave5Author2",
-      "accepted_source_sha256": "9f795450ec3a4c0508128d3e4e2169a7d7c94683e743b371b976e0ff595de9f1",
-      "current_source_sha256": "9f795450ec3a4c0508128d3e4e2169a7d7c94683e743b371b976e0ff595de9f1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave5/func_00172d48.c",
-      "profile": "game",
-      "functions": [
-        "func_00172d48"
-      ],
-      "author": "Wave5Author2",
-      "accepted_source_sha256": "89d25d88c5c9e6697ac65e7b3ccfa20d8f7cc91e09074a22d6c919ef0bb78f8a",
-      "current_source_sha256": "89d25d88c5c9e6697ac65e7b3ccfa20d8f7cc91e09074a22d6c919ef0bb78f8a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave5/func_0019058c.c",
       "profile": "game",
       "functions": [
@@ -16747,7 +15624,6 @@
       "current_source_sha256": "8dd68f554bfd94af799444b221bdb7fd4d5d84845e0fa5c0d6ff2bb3a5dc2262",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -17208,66 +16084,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave10/func_0016f9d8.c",
-      "profile": "game",
-      "functions": [
-        "func_0016f9d8"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "7d66ea064e206374ba2dbc5b44011c3a91838ed1acde0ee49768d8b5f70ac9b1",
-      "current_source_sha256": "7d66ea064e206374ba2dbc5b44011c3a91838ed1acde0ee49768d8b5f70ac9b1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_0016f9f0.c",
-      "profile": "game",
-      "functions": [
-        "func_0016f9f0"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "760dc47a6910eccdcad81494deb19e32ed0cabeb1551f5085629fab220cfaf18",
-      "current_source_sha256": "760dc47a6910eccdcad81494deb19e32ed0cabeb1551f5085629fab220cfaf18",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_0016fa08.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fa08"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "2db40874dd10a1294552cd24659abe5719d789ceb94f242bf4e923258322d616",
-      "current_source_sha256": "2db40874dd10a1294552cd24659abe5719d789ceb94f242bf4e923258322d616",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_0016fccc.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fccc"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "4d24469f7ac7e43940817422b9cef84c19bd13301997ae53ac418213a92ac54f",
-      "current_source_sha256": "4d24469f7ac7e43940817422b9cef84c19bd13301997ae53ac418213a92ac54f",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave10/func_0016fff8.c",
       "profile": "game",
       "functions": [
@@ -17309,51 +16125,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_00170e38.c",
-      "profile": "game",
-      "functions": [
-        "func_00170e38"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "45b01e8211968fd8fc61ba26a7c5ee08051f48a197721fb2d513257532377d95",
-      "current_source_sha256": "45b01e8211968fd8fc61ba26a7c5ee08051f48a197721fb2d513257532377d95",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_00173608.c",
-      "profile": "game",
-      "functions": [
-        "func_00173608"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "e52c458886489f91e8e7fcfc8ef4157ec7bf579397f4ba74ba53a668f50254e7",
-      "current_source_sha256": "e52c458886489f91e8e7fcfc8ef4157ec7bf579397f4ba74ba53a668f50254e7",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_001758d4.c",
-      "profile": "game",
-      "functions": [
-        "func_001758d4"
-      ],
-      "author": "w10j",
-      "accepted_source_sha256": "ff9ae270791c6c4185e704363af09061a7a0d914179cc460aff028d64f8950ad",
-      "current_source_sha256": "ff9ae270791c6c4185e704363af09061a7a0d914179cc460aff028d64f8950ad",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -17552,7 +16323,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -17570,21 +16340,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave10/func_001dbcec.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbcec"
-      ],
-      "author": "w10h",
-      "accepted_source_sha256": "dae967406afa4c16781b389ae2ae27dd18fc7fcc861864eb82fccae56dbd0bdb",
-      "current_source_sha256": "dae967406afa4c16781b389ae2ae27dd18fc7fcc861864eb82fccae56dbd0bdb",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -17663,7 +16418,6 @@
       "current_source_sha256": "e06efd8eded912975dfe6e11db96d5004ee36d0d476825e22a601d0ab1e529d7",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -17951,7 +16705,6 @@
       "current_source_sha256": "9333c2f2bc181ce7082b5d04898b7a641f438b6bb617a322c677ee09e87b65c1",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -17983,7 +16736,6 @@
       "current_source_sha256": "4925e4613b0f7b726a1fedcc1476654b57cd9b172f075e1283aea7368717ccab",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -18015,24 +16767,8 @@
       "current_source_sha256": "05453ca36f40fce584a7782264b360fa48c65a18c3123e6b118264df7bf4b414",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave8/func_00172008.c",
-      "profile": "game",
-      "functions": [
-        "func_00172008"
-      ],
-      "author": "w8a",
-      "accepted_source_sha256": "e8add6046af9168870c99248098b31e78333ac21dde39aaaeb706b660a9e826a",
-      "current_source_sha256": "e8add6046af9168870c99248098b31e78333ac21dde39aaaeb706b660a9e826a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -18048,21 +16784,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave8/func_00174454.c",
-      "profile": "game",
-      "functions": [
-        "func_00174454"
-      ],
-      "author": "w8e",
-      "accepted_source_sha256": "baa1138ea0bcab69997050bfe65c4d169acd52912be6869f17a05cece8defe83",
-      "current_source_sha256": "baa1138ea0bcab69997050bfe65c4d169acd52912be6869f17a05cece8defe83",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -18218,21 +16939,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave8/func_00181250.c",
-      "profile": "game",
-      "functions": [
-        "func_00181250"
-      ],
-      "author": "w8e",
-      "accepted_source_sha256": "b96aa8b2d834b73ee1a73432edaf22d835a490aef0c34e96489916e00b1db84e",
-      "current_source_sha256": "b96aa8b2d834b73ee1a73432edaf22d835a490aef0c34e96489916e00b1db84e",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave8/func_0018290c.c",
       "profile": "game",
       "functions": [
@@ -18243,7 +16949,6 @@
       "current_source_sha256": "87d91ac50733936af071efc9233fa1dac565415daa6fb59d9d511e393df2acbd",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -18335,7 +17040,6 @@
       "current_source_sha256": "83f300453c3c15c26726646129c66d98794065b0208cbdc6f3b6b9aa8880e840",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -18352,7 +17056,6 @@
       "current_source_sha256": "2b2cec435160f6da6430b5433ed253bb2af4f112e9dcd4b83e888c61cdff7604",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -18399,7 +17102,6 @@
       "current_source_sha256": "215c2381465eb9f551b592936db6effca43b57abac5a0b35919c96f338d72e84",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -19699,7 +18401,6 @@
       "current_source_sha256": "f3d3c0afb96d64ce87ecc509d16e1f57e510784eab8f325927ed23a423b2fc95",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -19716,7 +18417,6 @@
       "current_source_sha256": "2d598241cc8799aa2be15d36a70daaa3aa8b8f2b0f4274da50a1776a23e0e4b6",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -19839,7 +18539,6 @@
       "current_source_sha256": "5674ea17966ae7287aead750c0105b8f0f82cda49bcb007641622a0e8b338f49",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -20597,7 +19296,6 @@
       "current_source_sha256": "bb42e13abf83eb57925c6fbbeeef600659847abc319b7ff14bc583f029fa7d3b",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -20659,7 +19357,6 @@
       "current_source_sha256": "be452e72be0ed99c3fc1598bfe874ce5ec2f2754e371aa21d8ff7bb04a541e59",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -21054,36 +19751,6 @@
       "header_dependencies_changed": [
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave14/func_00173748.c",
-      "profile": "game",
-      "functions": [
-        "func_00173748"
-      ],
-      "author": "w14f",
-      "accepted_source_sha256": "2453f679b2a9460d3076475a194bc2e0f1e528f26e2fde9897ce455e79181df4",
-      "current_source_sha256": "2453f679b2a9460d3076475a194bc2e0f1e528f26e2fde9897ce455e79181df4",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave14/func_001dbcb0.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbcb0"
-      ],
-      "author": "w14f",
-      "accepted_source_sha256": "0df45a9f1b8a172d39408556ceada19cd18c6179f24a1d36a29be997d1560133",
-      "current_source_sha256": "0df45a9f1b8a172d39408556ceada19cd18c6179f24a1d36a29be997d1560133",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -21905,7 +20572,6 @@
       "current_source_sha256": "ce8e90636dd5fe7f449a48c734c6f4b50cab4bd085402511e79fe22201154f90",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22058,7 +20724,6 @@
       "current_source_sha256": "7c91db4cceb9454be96e8048417e530850acc13b34f881341d1fe4f4f9206e5d",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22106,21 +20771,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/service_state.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/retries/func_001dbbd4.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbbd4"
-      ],
-      "author": "r327",
-      "accepted_source_sha256": "918013dcb2b920e38e75c012b19430811806ce6af203bf750fc5462e11a0eab9",
-      "current_source_sha256": "918013dcb2b920e38e75c012b19430811806ce6af203bf750fc5462e11a0eab9",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -22316,7 +20966,6 @@
       "current_source_sha256": "d094d97fd2c79d2c616d993304041066cf431219a2a09522e9d8ed0984478aa6",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22447,7 +21096,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22462,7 +21110,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22477,7 +21124,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22495,7 +21141,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22544,7 +21189,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22569,7 +21213,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22587,7 +21230,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22658,10 +21300,9 @@
       ],
       "author": "L022",
       "accepted_source_sha256": "f2609f6636431e444637b6dd2088333e4e5179f8d33bcc508e8108299f98619e",
-      "current_source_sha256": "54bc67419d3c9ebcf8b77f6c4f132424c5a694f3fda17f93a0bc4ebdb8c6b405",
-      "reason": "Shared-declaration migration changes source.",
+      "current_source_sha256": "f2609f6636431e444637b6dd2088333e4e5179f8d33bcc508e8108299f98619e",
+      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -22921,21 +21562,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/service_state.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_0010e818.c",
-      "profile": "game",
-      "functions": [
-        "func_0010e818"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "8a90ecca67a486b21143e1dd0e60e36d5406e7809893f73e28291b5022b42e95",
-      "current_source_sha256": "8a90ecca67a486b21143e1dd0e60e36d5406e7809893f73e28291b5022b42e95",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -23409,7 +22035,6 @@
       "current_source_sha256": "8b797afd4167d85cf772d452dbec69371aa764d5634b05b95f5774a510f097be",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -23427,21 +22052,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/audio_dsp.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_00181e44.c",
-      "profile": "game",
-      "functions": [
-        "func_00181e44"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "8cc36f037b2d05fff7596c2d0d9c858f075f826b025fbe0c5dd0b44e0ba09eaf",
-      "current_source_sha256": "8cc36f037b2d05fff7596c2d0d9c858f075f826b025fbe0c5dd0b44e0ba09eaf",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -23653,51 +22263,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/wave_player.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_001dbca0.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbca0"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "a32cedef455139934e28f70c79401b4735a2718a729db9597b9ff1877925dd10",
-      "current_source_sha256": "a32cedef455139934e28f70c79401b4735a2718a729db9597b9ff1877925dd10",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_001dbf40.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbf40"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "bb66a1fcb227ce66f2b23f1c989fa55aac5eb7f2c757e6bd180bfac0d930b545",
-      "current_source_sha256": "bb66a1fcb227ce66f2b23f1c989fa55aac5eb7f2c757e6bd180bfac0d930b545",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave15/func_001dc204.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc204"
-      ],
-      "author": "c009-wave15",
-      "accepted_source_sha256": "8427614113ef2696b8c18b9ef4fe4369abf6e5d917641c541275f1c9fb97e424",
-      "current_source_sha256": "8427614113ef2696b8c18b9ef4fe4369abf6e5d917641c541275f1c9fb97e424",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -24109,51 +22674,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave16/func_00145690.c",
-      "profile": "game",
-      "functions": [
-        "func_00145690"
-      ],
-      "author": "c009-wave16",
-      "accepted_source_sha256": "954f8b94bb83d5821c5ca6f90c0f3e07ebabb8a53346e197539512def62d42ed",
-      "current_source_sha256": "954f8b94bb83d5821c5ca6f90c0f3e07ebabb8a53346e197539512def62d42ed",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave16/func_00168dbc.c",
-      "profile": "game",
-      "functions": [
-        "func_00168dbc"
-      ],
-      "author": "c009-wave16",
-      "accepted_source_sha256": "88e2487b16e81f361e616b015cc41fa9f10f597d050a736efcc0cf74880f81af",
-      "current_source_sha256": "88e2487b16e81f361e616b015cc41fa9f10f597d050a736efcc0cf74880f81af",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave16/func_00169b58.c",
-      "profile": "game",
-      "functions": [
-        "func_00169b58"
-      ],
-      "author": "c009-wave16",
-      "accepted_source_sha256": "089734ff0a286ed0477a3b5ba0c4aa31aa5e3c94fb6e5afb00cf34252320aeea",
-      "current_source_sha256": "089734ff0a286ed0477a3b5ba0c4aa31aa5e3c94fb6e5afb00cf34252320aeea",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave16/func_0016cb00.c",
       "profile": "game",
       "functions": [
@@ -24196,21 +22716,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave16/func_00174430.c",
-      "profile": "game",
-      "functions": [
-        "func_00174430"
-      ],
-      "author": "c009-wave16",
-      "accepted_source_sha256": "f452a1c904b7fed09c0984c73191ddba86692389e1fcbfe1418dc6634101b337",
-      "current_source_sha256": "f452a1c904b7fed09c0984c73191ddba86692389e1fcbfe1418dc6634101b337",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -24376,7 +22881,6 @@
       "current_source_sha256": "9ea23fa78804716eb5b85ac5675ff5a92e63271c06775dd7a0df5bcabcbaa776",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24393,7 +22897,6 @@
       "current_source_sha256": "c5e56a96a20f00035c21fc6988562aadf788efdf31d05d746e1d4b9d5e91d1c8",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24410,7 +22913,6 @@
       "current_source_sha256": "0fdda1e0a73dec1a8b9ad8abfb2718a7b1236684dc9f58d163e0adf3c77d31ae",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24427,7 +22929,6 @@
       "current_source_sha256": "b0b80e09fabc44e36dc2fbb1653d309ca53b6fefd067f4b803f09aa8e98c8ed5",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24444,7 +22945,6 @@
       "current_source_sha256": "24e310f399b98fc45980806ed6bf18fab05e0a7e875c50dddb2ce2190cf00e72",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24461,7 +22961,6 @@
       "current_source_sha256": "f6e3622ac5d1e1b06ed7ab3bd5495f03a5852ac551322c3b9cc84ed6ab85ad5c",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24478,7 +22977,6 @@
       "current_source_sha256": "48e75665fa4ca3b550b86dee1878db9bb2e0d791479117ac258a13660e535255",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24495,7 +22993,6 @@
       "current_source_sha256": "bcd914980f9093e638c000794466e0af0b5c9758965759781295c3f7af1e5159",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24512,7 +23009,6 @@
       "current_source_sha256": "73e258dfd5a1d9eb47fa2091d146852d1d2645a32a3c536ffe131272119406ed",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24529,7 +23025,6 @@
       "current_source_sha256": "84f2d94e243b15950c6222860db32cfd2bc0c2b97fffe671f8a52947dc08d9a9",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24546,7 +23041,6 @@
       "current_source_sha256": "79afbed26224a44c636d2f8346b930d2ca60a55022c957f8c93f6703fc51028e",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24563,7 +23057,6 @@
       "current_source_sha256": "a88a1eb7c5eb8982f01cd1555f48b8fde06093d394fc8c15c369bcee2beb2b39",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24580,7 +23073,6 @@
       "current_source_sha256": "b2c01c108527b658040e56b736aa8c93b248c12fbd101519c3e592ca3edf26a1",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24597,7 +23089,6 @@
       "current_source_sha256": "57ff5e5cc85b695c8ee174280fe36e12e16ee0b212b59cba92f16c6ecaf1d0e6",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24614,7 +23105,6 @@
       "current_source_sha256": "9cc10c0eb029e758039f6ef04244c1ce05f2042aaa8e541b44c2e76be69cf0dc",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24631,7 +23121,6 @@
       "current_source_sha256": "7bbc877ce17a281c9354963bf38d236067c37cca2ec951a05f9fdd190f3b8e9d",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24648,7 +23137,6 @@
       "current_source_sha256": "c8759b0e5394d15fa7a6873217208d41aa21aa3a23b0896cdeec17968097180d",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24665,7 +23153,6 @@
       "current_source_sha256": "ba5eae30c3e1d3a24a8b68dcd58c78cf5d824b8aaeaed835f6e449ce2277e9cb",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24682,7 +23169,6 @@
       "current_source_sha256": "1db033924d8c4a1675b51de75ddd08b755b7b9aebecd4e5327f8aa931f43baa5",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24699,7 +23185,6 @@
       "current_source_sha256": "dfde5b3f0a557b787fb868427f988d38a279ea44af8831b0ce23bee606f4a0dc",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -24872,21 +23357,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave17/func_0015d6bc.c",
-      "profile": "game",
-      "functions": [
-        "func_0015d6bc"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "241023c00ff2825215f6ec11f62744e317138e38e8dafeacb0f88511d973da8d",
-      "current_source_sha256": "241023c00ff2825215f6ec11f62744e317138e38e8dafeacb0f88511d973da8d",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave17/func_0015dec4.c",
       "profile": "game",
       "functions": [
@@ -24992,51 +23462,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave17/func_0016f9c0.c",
-      "profile": "game",
-      "functions": [
-        "func_0016f9c0"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "44dbb91cd183a85f8300d7af67ec70215d23831024a26a1ab693109fa28e9a4f",
-      "current_source_sha256": "44dbb91cd183a85f8300d7af67ec70215d23831024a26a1ab693109fa28e9a4f",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_0016fa18.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fa18"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "93167d886b6e8c8bbd6fe49caff317370ab135aa28e1f565dc0a168d25566e46",
-      "current_source_sha256": "93167d886b6e8c8bbd6fe49caff317370ab135aa28e1f565dc0a168d25566e46",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_0016fa38.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fa38"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "5c1a7e10b73606a4c3a2c8ad32a9ce414dd1a1a4c6ff98ead70c55ba6729c32e",
-      "current_source_sha256": "5c1a7e10b73606a4c3a2c8ad32a9ce414dd1a1a4c6ff98ead70c55ba6729c32e",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave17/func_00171db8.c",
       "profile": "game",
       "functions": [
@@ -25079,7 +23504,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -25216,7 +23640,6 @@
       "current_source_sha256": "d1219db49b930c233be96bafaf0d76e103013987eb8d6fc362a9873a11f10326",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -25233,7 +23656,6 @@
       "current_source_sha256": "0580d56768396ccf87c5e59c9cc1f7c1ff3fee9a0b42c0367c973f5abbb3f2c0",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -25497,141 +23919,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave17/func_001dbaac.c",
-      "profile": "sdk",
-      "functions": [
-        "func_001dbaac"
-      ],
-      "author": "w17h",
-      "accepted_source_sha256": "0747a034dc25b3c6972fb661c74bcc3a824c44bae6f06824b850986d2643c72a",
-      "current_source_sha256": "0747a034dc25b3c6972fb661c74bcc3a824c44bae6f06824b850986d2643c72a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dbb50.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbb50"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "a7afbf2dcb3f78cdc206e90287752da74fd7bf4c51acaefb20917f012e9dc130",
-      "current_source_sha256": "a7afbf2dcb3f78cdc206e90287752da74fd7bf4c51acaefb20917f012e9dc130",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dbc84.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbc84"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "240006ff4f9c0988ae2b028733021208e36ec18b6c806b4cfa8117bff6f3d2b0",
-      "current_source_sha256": "240006ff4f9c0988ae2b028733021208e36ec18b6c806b4cfa8117bff6f3d2b0",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dbea8.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbea8"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "5ffa65cf5bff762580dbf71670eab8ce8c343e6ba2a247170213e01dbda83dd9",
-      "current_source_sha256": "5ffa65cf5bff762580dbf71670eab8ce8c343e6ba2a247170213e01dbda83dd9",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc064.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc064"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "d9c31412e95b709eb8b935ee1ded798bd2cc805b0fe8acebfb9eb479916c5817",
-      "current_source_sha256": "d9c31412e95b709eb8b935ee1ded798bd2cc805b0fe8acebfb9eb479916c5817",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc084.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc084"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "10e760c2ea5e05a49d0e4c1d0c035d0f39ac5aad2fd83440cf8c4f453ada283d",
-      "current_source_sha256": "10e760c2ea5e05a49d0e4c1d0c035d0f39ac5aad2fd83440cf8c4f453ada283d",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc240.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc240"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "6e42be5d798bfa7ceaf32661869bc7b4d1baa958fa8bf4d7593438425b095f29",
-      "current_source_sha256": "6e42be5d798bfa7ceaf32661869bc7b4d1baa958fa8bf4d7593438425b095f29",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc3a4.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc3a4"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "15c809892a34749999f9489ad066347e5fee517b9ec8091632a0f9836db57f7c",
-      "current_source_sha256": "15c809892a34749999f9489ad066347e5fee517b9ec8091632a0f9836db57f7c",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave17/func_001dc954.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc954"
-      ],
-      "author": "c009-wave17",
-      "accepted_source_sha256": "d55ef1fa07478a90b379a7bb8affb0dc4f4efa659a2e0a6ff02c61467f767101",
-      "current_source_sha256": "d55ef1fa07478a90b379a7bb8affb0dc4f4efa659a2e0a6ff02c61467f767101",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave17/func_001dd388.c",
       "profile": "game",
       "functions": [
@@ -25674,7 +23961,6 @@
       "current_source_sha256": "f5a2b933b92ea532f9208e771f06a4c52cf8be873a9698b813f2fac48e450a59",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -25691,7 +23977,6 @@
       "current_source_sha256": "9def5cfdc76b3e586ed61b8f431971624c23d1eeac654504d6a43b9616dae661",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -25708,7 +23993,6 @@
       "current_source_sha256": "e010a3a84431433ded34a1cad9046ec4e972a7c33dbe05e2a9b5b6d0fcff1afb",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -25740,7 +24024,6 @@
       "current_source_sha256": "461f09264dd4f91b3350f089154638e766966fcbdb8bbc3337f6dafa546d9cc7",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -25773,51 +24056,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/graphics_state.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_00145658.c",
-      "profile": "game",
-      "functions": [
-        "func_00145658"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "263d4804f99561675af3de68b03da234f36294da801cd58fb8d739ff7426e8c1",
-      "current_source_sha256": "263d4804f99561675af3de68b03da234f36294da801cd58fb8d739ff7426e8c1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_001456a4.c",
-      "profile": "game",
-      "functions": [
-        "func_001456a4"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "5facf71b5e29a7a592e27bfd250424aa6ce0aac645554d79300b824673f91c5a",
-      "current_source_sha256": "5facf71b5e29a7a592e27bfd250424aa6ce0aac645554d79300b824673f91c5a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_00145810.c",
-      "profile": "game",
-      "functions": [
-        "func_00145810"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "ced46d3b2dc7cca78ad40fb697bc7ff25e0ad765790fb081cb03c0b9901f8ac8",
-      "current_source_sha256": "ced46d3b2dc7cca78ad40fb697bc7ff25e0ad765790fb081cb03c0b9901f8ac8",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -25897,21 +24135,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave18/func_0015d770.c",
-      "profile": "game",
-      "functions": [
-        "func_0015d770"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "6339c82b296101adabc27cf0138d36f48b6b8c9471f32f05ac7a756479955ae2",
-      "current_source_sha256": "6339c82b296101adabc27cf0138d36f48b6b8c9471f32f05ac7a756479955ae2",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave18/func_0015e260.c",
       "profile": "game",
       "functions": [
@@ -25954,51 +24177,6 @@
       "header_dependencies_changed": [
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_001682b4.c",
-      "profile": "game",
-      "functions": [
-        "func_001682b4"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "93ffd6d38321a52c86ccf202453cdf7735cafd0c3e45a119172665faee8265d1",
-      "current_source_sha256": "93ffd6d38321a52c86ccf202453cdf7735cafd0c3e45a119172665faee8265d1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_00169974.c",
-      "profile": "game",
-      "functions": [
-        "func_00169974"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "394990783f097c9c114dbc7bfcb0ea21dd31c92346260132ca49ee136909b401",
-      "current_source_sha256": "394990783f097c9c114dbc7bfcb0ea21dd31c92346260132ca49ee136909b401",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_0016d000.c",
-      "profile": "game",
-      "functions": [
-        "func_0016d000"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "bb4ceaddee084e32570d56626295b7700effed9d692093910f5db1f638abdda4",
-      "current_source_sha256": "bb4ceaddee084e32570d56626295b7700effed9d692093910f5db1f638abdda4",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -26048,36 +24226,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave18/func_0016f55c.c",
-      "profile": "game",
-      "functions": [
-        "func_0016f55c"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "4ac5928a4255528a3f849e2e75502650f9b14cf5a9779e3e5256eb8c5e64b479",
-      "current_source_sha256": "4ac5928a4255528a3f849e2e75502650f9b14cf5a9779e3e5256eb8c5e64b479",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_0016fca0.c",
-      "profile": "game",
-      "functions": [
-        "func_0016fca0"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "8cb1adae2e1fbd9debb1d2ff4c3f714c6f374025e0778fed08e20f3cad092de2",
-      "current_source_sha256": "8cb1adae2e1fbd9debb1d2ff4c3f714c6f374025e0778fed08e20f3cad092de2",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave18/func_00170da0.cpp",
       "profile": "game",
       "functions": [
@@ -26123,21 +24271,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave18/func_00181224.c",
-      "profile": "game",
-      "functions": [
-        "func_00181224"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "26760bb1f25340f99920c7a5c3ae11c82f8dcc2af27cf78c63618f05503db6a1",
-      "current_source_sha256": "26760bb1f25340f99920c7a5c3ae11c82f8dcc2af27cf78c63618f05503db6a1",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave18/func_001819f4.c",
       "profile": "game",
       "functions": [
@@ -26178,7 +24311,6 @@
       "current_source_sha256": "6ed470e7bb6909f324b869fac84ac214dff51b640faa5efd9dc81b8b68d66e27",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26195,7 +24327,6 @@
       "current_source_sha256": "e59fe1345c5354540843fc7c54d647c9fed7e75047e91ec6de40796a50514cb9",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26274,7 +24405,6 @@
       "current_source_sha256": "febc02ef8b7bd87688792c572ed335152465ba283a311f32ed80b276bf030238",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26291,7 +24421,6 @@
       "current_source_sha256": "5cc701607d9a4687fc00c26feae7b4c96d42d7cabc51bffef259bb4c7b68b7cf",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26308,7 +24437,6 @@
       "current_source_sha256": "bb511d54ec590b3c7b362a57c7139fce37ac4639e33040e69449086ede2195ea",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26325,7 +24453,6 @@
       "current_source_sha256": "6ca8c71f23609899672727299b9d97b83c98368dc9f39530c508b31b53b022a4",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26462,24 +24589,8 @@
       "current_source_sha256": "0c69737c04d3a9c07e0cee0a7ec058fece290a9b28abb0dc318f852cc92797e3",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave18/func_001dc0a4.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc0a4"
-      ],
-      "author": "c009-wave18",
-      "accepted_source_sha256": "2444246120998a27d9a6780865aca8192ba0d235e009c0cf896f6123ef0aa329",
-      "current_source_sha256": "2444246120998a27d9a6780865aca8192ba0d235e009c0cf896f6123ef0aa329",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -26540,7 +24651,6 @@
       "current_source_sha256": "0d3311eab49534eafef22c12ecf2b5bd83e76f6093189e9992de13186e9f9b01",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26557,7 +24667,6 @@
       "current_source_sha256": "e958d868ae728e2a5c87240c33cdc145d659f575d35b888eb33af95b949187bb",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26714,7 +24823,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26732,7 +24840,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -26814,81 +24921,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/wave19/func_001db964.c",
-      "profile": "game",
-      "functions": [
-        "func_001db964"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "8a854a5788dc89e7c33b4c69afdd036ee803cffa3f1cffc52e10d1a4184d4aa0",
-      "current_source_sha256": "8a854a5788dc89e7c33b4c69afdd036ee803cffa3f1cffc52e10d1a4184d4aa0",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave19/func_001db9b0.c",
-      "profile": "game",
-      "functions": [
-        "func_001db9b0"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "245bd4f18f2f7cd941c21c2ff996641903b3ae92779e73231c30c4622da415ab",
-      "current_source_sha256": "245bd4f18f2f7cd941c21c2ff996641903b3ae92779e73231c30c4622da415ab",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave19/func_001dbacc.c",
-      "profile": "game",
-      "functions": [
-        "func_001dbacc"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "9466ea4299ea20efd10568138cefbecab0a048bdb7a6b14fab5676d1ed23b9b2",
-      "current_source_sha256": "9466ea4299ea20efd10568138cefbecab0a048bdb7a6b14fab5676d1ed23b9b2",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave19/func_001dc258.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc258"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "268d0de6b9f9bcc624d50645f88b7501debd622c6ab2e64d64850ec0a9559481",
-      "current_source_sha256": "268d0de6b9f9bcc624d50645f88b7501debd622c6ab2e64d64850ec0a9559481",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/wave19/func_001dc318.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc318"
-      ],
-      "author": "c009-wave19",
-      "accepted_source_sha256": "9f7684b389e6b36b2e644ea25ec4451f070439547769a35708e4dd650cb369a0",
-      "current_source_sha256": "9f7684b389e6b36b2e644ea25ec4451f070439547769a35708e4dd650cb369a0",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/wave19/func_001e3050.cpp",
       "profile": "game",
       "functions": [
@@ -26900,7 +24932,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -27786,21 +25817,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/checkpoint10/func_001457d4.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001457d4"
-      ],
-      "author": "r41222",
-      "accepted_source_sha256": "1983e99c29df5026a9754be7212098bea43b2b1045e7c7941620e5aeb93b1c8a",
-      "current_source_sha256": "1983e99c29df5026a9754be7212098bea43b2b1045e7c7941620e5aeb93b1c8a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/checkpoint10/func_00147264.c",
       "profile": "middleware",
       "functions": [
@@ -27857,21 +25873,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_00167654.c",
-      "profile": "game",
-      "functions": [
-        "func_00167654"
-      ],
-      "author": "r41236",
-      "accepted_source_sha256": "8ad4430a9782319842f2537088f4db110e31f15bf8ca7e952d15b9541c2efd56",
-      "current_source_sha256": "8ad4430a9782319842f2537088f4db110e31f15bf8ca7e952d15b9541c2efd56",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -27979,7 +25980,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -28073,21 +26073,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc844.c",
-      "profile": "sdk",
-      "functions": [
-        "func_001dc844"
-      ],
-      "author": "r41278",
-      "accepted_source_sha256": "8ca4e2914265e71fdcb04b68d1cbaee321b274e3220bbc5055cec8255a84c3da",
-      "current_source_sha256": "8ca4e2914265e71fdcb04b68d1cbaee321b274e3220bbc5055cec8255a84c3da",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -28452,24 +26437,8 @@
       "current_source_sha256": "ee1d0796019a18fd31aad015f4a5270132ddd92808c50dbc8f6a43686c64a207",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc100.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc100"
-      ],
-      "author": "w22c",
-      "accepted_source_sha256": "3ddfff0d3c65bde65459c2c1cd317181fcace61f1907930b649add67f6ba63bb",
-      "current_source_sha256": "3ddfff0d3c65bde65459c2c1cd317181fcace61f1907930b649add67f6ba63bb",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -28572,7 +26541,7 @@
       "author": "w22i",
       "accepted_source_sha256": "09b6991912e47f87610d48faa50cfc9b6329286cf65d232546e242734b934084",
       "current_source_sha256": "0d263f1fde99a1fc39cb9092d475d8e913fcc6aa82e9ad53b512cd0f871c156d",
-      "reason": "Shared-declaration migration changes source.",
+      "reason": "Shared GPU-command declaration migration changes source.",
       "header_dependencies_changed": [
         "include/game/graphics_state.h"
       ],
@@ -28699,7 +26668,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -28858,66 +26826,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/checkpoint10/func_001dc180.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc180"
-      ],
-      "author": "w23j",
-      "accepted_source_sha256": "614ba0938a800379d06625a86c0b115f3edc9de92172f4bf726aa8a08ba6d29a",
-      "current_source_sha256": "614ba0938a800379d06625a86c0b115f3edc9de92172f4bf726aa8a08ba6d29a",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc1ac.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc1ac"
-      ],
-      "author": "w23j",
-      "accepted_source_sha256": "201756cebf8d73f5262edc9cec91fb3a1c1e59d1058f9a8acd1b0450dc09953f",
-      "current_source_sha256": "201756cebf8d73f5262edc9cec91fb3a1c1e59d1058f9a8acd1b0450dc09953f",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc1d8.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc1d8"
-      ],
-      "author": "w23j",
-      "accepted_source_sha256": "612dbd27d86df5f7bb8707774d68dd9f7b7875afb329a1cd11b12c98fb43c87b",
-      "current_source_sha256": "612dbd27d86df5f7bb8707774d68dd9f7b7875afb329a1cd11b12c98fb43c87b",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint10/func_001dc8e0.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc8e0"
-      ],
-      "author": "w23j",
-      "accepted_source_sha256": "ec461b54200a4d5bf4128c9cfac334152fe142c63838c70061c89d6d82e6654b",
-      "current_source_sha256": "ec461b54200a4d5bf4128c9cfac334152fe142c63838c70061c89d6d82e6654b",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/checkpoint10/func_00168dd0.c",
       "profile": "game",
       "functions": [
@@ -28929,7 +26837,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -29177,7 +27084,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -29415,21 +27321,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/checkpoint11/notification_history-r5.c",
-      "profile": "middleware",
-      "functions": [
-        "func_001dbb70"
-      ],
-      "author": "c011-integration",
-      "accepted_source_sha256": "4e912a5622d5e3cba1d0c4ac196b49abea857e2c3867e1e9a000b0ecb0fe48e9",
-      "current_source_sha256": "4e912a5622d5e3cba1d0c4ac196b49abea857e2c3867e1e9a000b0ecb0fe48e9",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/checkpoint11/service_registration-r5.cpp",
       "profile": "middleware",
       "functions": [
@@ -29471,22 +27362,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint11/func_001dc744_storage.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc744",
-        "func_001dc918"
-      ],
-      "author": "c011-integration",
-      "accepted_source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
-      "current_source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -29765,22 +27640,6 @@
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
     {
-      "source": "src/checkpoint11/intake-r7/np032/func_001dc3c4.c",
-      "profile": "game",
-      "functions": [
-        "func_001dc3c4",
-        "func_001dc538"
-      ],
-      "author": "np032",
-      "accepted_source_sha256": "aee1edc16ee9bf27ab969406d5690b5c8e6b6599edfd77f2a5f92ca7f9560750",
-      "current_source_sha256": "aee1edc16ee9bf27ab969406d5690b5c8e6b6599edfd77f2a5f92ca7f9560750",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
       "source": "src/checkpoint13/language.cpp",
       "profile": "middleware",
       "functions": [
@@ -29806,7 +27665,6 @@
       "current_source_sha256": "a40d13dec4d695920dc9777eb7244fa96fc15ebd52275841b408f52ccc3e6275",
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -29945,7 +27803,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
@@ -29995,21 +27852,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/screen.h"
-      ],
-      "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
-    },
-    {
-      "source": "src/checkpoint12/intake-r29/final_func_0016992c/func_0016992c.c",
-      "profile": "game",
-      "functions": [
-        "func_0016992c"
-      ],
-      "author": "C012IntakeCodex round-three exact intake",
-      "accepted_source_sha256": "5975df0c3cb34eb1e2eab15f8db4b0de4383c5303175676f88eb3f6ceb2de4d5",
-      "current_source_sha256": "5975df0c3cb34eb1e2eab15f8db4b0de4383c5303175676f88eb3f6ceb2de4d5",
-      "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
-      "header_dependencies_changed": [
-        "include/game/notification.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
     },
@@ -30071,7 +27913,6 @@
       "reason": "Transitive canonical-header or native Group name-binding closure changed; no ownership or credit change.",
       "header_dependencies_changed": [
         "include/game/character_panel.h",
-        "include/game/notification.h",
         "include/game/screen.h",
         "include/game/selection.h"
       ],
