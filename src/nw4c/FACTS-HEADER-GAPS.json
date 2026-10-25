@@ -103,7 +103,18 @@
       "name": "nw::ut::FixedSizeArray::m_FixedSizeElements alignment",
       "date": "2026-10-25",
       "value": 32,
-      "qualification": "[INFERENCE] Cache-line alignment of the existing inline buffer, using MoveArray::MEMORY_ALIGNMENT, explains the retail array header, buffer, containing SceneEnvironment alignment and tail. No extra runtime fields, alternate owner model or manually positioned gaps are introduced.",
+      "qualification": "[INFERENCE] Cache-line alignment of the existing inline buffer, using the non-dependent os::IAllocator::CACHE_LINE_ALIGNMENT shared with MoveArray::MEMORY_ALIGNMENT, explains the retail array header, buffer, containing SceneEnvironment alignment and tail. ARMCC 4.1 requires the non-dependent alignment expression. No extra runtime fields, alternate owner model or manually positioned gaps are introduced.",
+      "compiler_compatibility": {
+        "alignment_expression": "os::IAllocator::CACHE_LINE_ALIGNMENT",
+        "reason": "Use the existing non-dependent allocator constant directly; the equivalent MoveArray<TElement>::MEMORY_ALIGNMENT attribute is rejected by ARMCC 4.1.",
+        "profiles_compiled_and_linked": ["game", "sdk", "middleware"],
+        "activate_context_game": "MATCH, 264 bytes; unchanged source and frozen game profile.",
+        "activate_context_sdk_and_middleware": "Both compile and link, with 264-byte extents and first source/profile residue at +9; no profile reassignment or MATCH is claimed.",
+        "reported_sdk_consumer": "The retained native func_0013ff20 source now compiles and links under sdk; residual 364/348 bytes, first at +0x18.",
+        "accepted_game_reproof": "29 units / 32 accepted functions, all MATCH.",
+        "accepted_middleware_reproof": "3 units / 6 accepted functions, all MATCH.",
+        "accepted_sdk_reproof": "No accepted ledger unit in the header dependency closure uses sdk; native instantiation was separately exercised above."
+      },
       "witnesses": [
         {
           "function": "func_00116960",

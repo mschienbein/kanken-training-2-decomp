@@ -421,8 +421,9 @@ private:
 
     /* [INFERENCE] Retail SceneEnvironment constructs its eight-pointer buffer
      * at +0x40, after the array header at +0x20. Cache-line alignment supplies
-     * both gaps and the containing object's alignment without padding fields. */
-    u8 m_FixedSizeElements[sizeof(TElement) * TSize] NW_ALIGN(MoveArray<TElement>::MEMORY_ALIGNMENT);
+     * both gaps and the containing object's alignment without padding fields.
+     * The non-dependent allocator constant also supports ARMCC 4.1. */
+    u8 m_FixedSizeElements[sizeof(TElement) * TSize] NW_ALIGN(os::IAllocator::CACHE_LINE_ALIGNMENT);
 };
 
 template<typename TElement>
