@@ -5,6 +5,8 @@
  * Modified 2026-10-17: standalone relative include paths.
  * Modified 2026-10-23: initialize fresh wrapped/variable capacity storage before
  * the existing bit-field setters, as witnessed by TransformNode::CreateCallbacks.
+ * Modified 2026-10-25: restore cache-line alignment of fixed inline storage,
+ * inferred from the retail SceneEnvironment constructor and reset layout.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -417,7 +419,10 @@ private:
     void swap(MoveArray<TElement>& array);
     TElement* release();
 
-    u8 m_FixedSizeElements[sizeof(TElement) * TSize];
+    /* [INFERENCE] Retail SceneEnvironment constructs its eight-pointer buffer
+     * at +0x40, after the array header at +0x20. Cache-line alignment supplies
+     * both gaps and the containing object's alignment without padding fields. */
+    u8 m_FixedSizeElements[sizeof(TElement) * TSize] NW_ALIGN(MoveArray<TElement>::MEMORY_ALIGNMENT);
 };
 
 template<typename TElement>

@@ -97,6 +97,68 @@
         "delay_length_initialization_sites": ["func_001d2790+0xa8", "func_001d2790+0xc4"],
         "delay_length_value": 160
       }
+    },
+    {
+      "header": "include/nw/ut/ut_MoveArray.h",
+      "name": "nw::ut::FixedSizeArray::m_FixedSizeElements alignment",
+      "date": "2026-10-25",
+      "value": 32,
+      "qualification": "[INFERENCE] Cache-line alignment of the existing inline buffer, using MoveArray::MEMORY_ALIGNMENT, explains the retail array header, buffer, containing SceneEnvironment alignment and tail. No extra runtime fields, alternate owner model or manually positioned gaps are introduced.",
+      "witnesses": [
+        {
+          "function": "func_00116960",
+          "role": "[INFERENCE] SceneEnvironment constructor: moves the four description arrays, initializes the named light/camera/count/dirty fields and resizes/clears the arrays.",
+          "array_header_site": "func_00116960+0x48",
+          "array_allocator_offset": "0x20",
+          "array_elements_offset": "0x24",
+          "inline_buffer_offset": "0x40",
+          "array_end_site": "func_00116960+0x4c",
+          "array_end_offset": "0x28",
+          "array_capacity_site": "func_00116960+0x5c",
+          "array_capacity_offset": "0x2c",
+          "array_capacity_and_kind": "0x80000008",
+          "fog_initialization_site": "func_00116960+0x58",
+          "fog_offset": "0x60",
+          "camera_initialization_site": "func_00116960+0x60",
+          "camera_offset": "0x64",
+          "camera_index_initialization_site": "func_00116960+0x9c",
+          "camera_index_offset": "0x78",
+          "light_set_index_offset": "0x9c",
+          "active_vertex_light_count_offset": "0xa0",
+          "active_fragment_light_count_offset": "0xa4",
+          "dirty_initialization_sites": ["func_00116960+0x118", "func_00116960+0x11c", "func_00116960+0x120", "func_00116960+0x124", "func_00116960+0x128"],
+          "dirty_offsets": ["0xa8", "0xa9", "0xaa", "0xab", "0xac"]
+        },
+        {
+          "function": "func_001163ac",
+          "scene_reset_call_site": "func_001163ac+0x20",
+          "scene_reset_callee": "func_0012450c",
+          "scene_environment_subobject_offset": "0x40",
+          "hash_reset_call_site": "func_001163ac+0x48",
+          "hash_reset_callee": "func_00191c94",
+          "material_hash_subobject_offset": "0x100",
+          "qualification": "Receiver base writeback is included when deriving the subobject address."
+        }
+      ],
+      "layout_consequences": {
+        "fixed_fragment_light_array_alignment": "0x20",
+        "fixed_fragment_light_array_size": "0x40",
+        "scene_environment_alignment": "0x20",
+        "scene_environment_size": "0xc0",
+        "render_context_dirty_offsets": ["0xe8", "0xe9", "0xea", "0xeb", "0xec"],
+        "render_context_material_hash_offset": "0x100"
+      },
+      "bounded_reproof": {
+        "base_commit": "ea985bcb",
+        "direct_accepted_scene_environment_users": 0,
+        "conservative_accepted_template_dependency_units": 30,
+        "related_accepted_units": 2,
+        "accepted_functions_reproved_match": 38,
+        "additional_emitted_library_functions_reproved_match": 1,
+        "activate_context": "Exact retained native game source now MATCH, 264 bytes, with its proposed self-definition binding only.",
+        "scene_environment_reset": "Exact c015 native source remains 164 bytes with 33 differing bytes, first at +5. Its field displacements now agree; register allocation and loop-setup order remain source residue.",
+        "admission": "Per-unit evidence only; no names, source ownership, checkpoint or acceptance credit is changed."
+      }
     }
   ]
 }
