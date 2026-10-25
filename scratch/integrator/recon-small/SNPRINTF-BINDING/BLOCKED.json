@@ -1,0 +1,22 @@
+{
+  "family": "SNPRINTF-BINDING",
+  "status": "blocked",
+  "reason": "Catalogue v15 proves the provider name __0snprintf, not the requested __2snprintf alias. Two honest __0snprintf caller trials, including the compiler-header nothrow/restrict/printf declaration contract, retain a 208-byte mismatch at +4. No unproved __2snprintf binding or codegen steering is admitted.",
+  "members": [
+    "func_00136510"
+  ],
+  "member_bytes": 208,
+  "evidence": [
+    "docs/catalogue/REPORT-v15.md:106-147",
+    "tools/catalogue_unknowns.py:110-113",
+    "scratch/authors/np132/names/func_00136510.json:4-6",
+    "scratch/integrator/recon-small/SNPRINTF-BINDING/native-entry-caller/service_identifier.result.json",
+    "scratch/integrator/recon-small/SNPRINTF-BINDING/native-entry-printf-contract/service_identifier.result.json"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": [
+    1,
+    1
+  ]
+}

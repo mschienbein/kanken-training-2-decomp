@@ -1,0 +1,18 @@
+{
+  "family": "REQUEST-EXCHANGE",
+  "status": "blocked",
+  "reason": "Deferred to the giant component: the retained five-input RequestWait declaration conflicts with the accepted six-input receive declaration in src/checkpoint10/func_0010d454.c, which belongs to APPLET-FRAMEBUFFER/NAMED-HANDLE-RESULT. [INFERENCE] Fresh decompiler evidence indicates two optional output pointers, a two-word stacked timeout and a full integer event-code result including -1. The original ABI proof and coordinated giant caller migration must precede this family.",
+  "members": [
+    "func_00190450"
+  ],
+  "member_bytes": 144,
+  "evidence": [
+    "scratch/authors/np024/variants/req13-reply-store-helper/request_exchange.cpp:29-43,50-66",
+    "src/checkpoint10/func_0010d454.c:6-16,39-48",
+    "scratch/decompile/122f92bd928eec11ac27fa669aa358f92cf2bc01360e01bf0b55e40f82bba96e/func_00191e18.c:3-4,35-43,60-61,70-80,191",
+    "scratch/integrator/contract-plan/COMPONENTS-after-c015.json: giant_component families APPLET-FRAMEBUFFER and NAMED-HANDLE-RESULT"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": "deferred-to-giant",
+  "match_exit_codes": []
+}

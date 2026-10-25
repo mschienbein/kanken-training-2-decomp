@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "Proposed c015 ledger on finalized c012-r6/main ea985bcb, catalogue v15; accepted identities retain their exact finalized ownership.",
+  "note": "Single dry c015 ledger: finalized c012-r6/main c3aa3cef plus31 NEW source functions, not acceptance credit.",
   "units": [
     {
       "source": "src/pilot/pilot_a.c",
@@ -22022,6 +22022,46 @@
       ],
       "author": "tu1028",
       "reason": "Publish the distinct four-record cache owner and its opaque stored table address, with no native-table or callable-slot claim."
+    },
+    {
+      "source": "src/checkpoint15/recon-small/property_lookup.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00112fb8"
+      ],
+      "author": "np266",
+      "family": "PROPERTY-LOOKUP",
+      "reason": "Centralize the shared AttributeMapping and the distinct property table/reference and caller-evidenced 64-byte hidden result. No owner alias or storage reinterpretation."
+    },
+    {
+      "source": "src/checkpoint15/recon-small/filesystem_worker.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0010af8c"
+      ],
+      "author": "r4041",
+      "family": "FILESYSTEM-WORKER",
+      "reason": "Use the one canonical OptionalAllocation root, its actual allocation pointer/count and value/state/stop members, the 44-byte work-item element, and the exact void(void*,void*) invoking thread callback."
+    },
+    {
+      "source": "src/checkpoint15/recon-small/category_variadic.c",
+      "profile": "game",
+      "functions": [
+        "func_00190d0c",
+        "func_00190d68"
+      ],
+      "author": "w19i",
+      "family": "VAARG-PARSER",
+      "reason": "Use actual W6Category.group_count/patterns and count/items with standard va_arg; current G3 supports type operands. Remove the historical incompatible W19CategoryCodes overlay."
+    },
+    {
+      "source": "src/checkpoint15/optional-rv02/func_00122680.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00122680"
+      ],
+      "author": "rv02",
+      "reason": "Optional rv02 dependency-free scalar screening match; tools/collect.py copied and re-derived it cleanly under explicit v6/L1."
     }
   ]
 }

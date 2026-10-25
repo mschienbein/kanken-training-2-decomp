@@ -1,0 +1,26 @@
+{
+  "family": "THREAD-ENTRY",
+  "status": "blocked",
+  "reason": "The exact invoking void(void*,void*) contract is established and already published, but the current canonical C++ source, a natural C version and a job-factored version all compile to 220 rather than 216 bytes. Dropping the unused context restores only the historical incompatible source shape and is forbidden; this is a remaining source-search hold, not an unresolved callback signature.",
+  "members": [
+    "func_00107ce4"
+  ],
+  "member_bytes": 216,
+  "evidence": [
+    "include/game/input_device.h:69-74",
+    "include/game/stream_worker.h:34-35",
+    "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json: func_00107ce4 exact runtime parameter type",
+    "src/checkpoint10/func_00107ce4.cpp:3-24",
+    "scratch/integrator/recon-small/THREAD-ENTRY/func_00107ce4/func_00107ce4.result.json",
+    "scratch/integrator/recon-small/THREAD-ENTRY/canonical-c-entry-declarations/stream_worker.result.json",
+    "scratch/integrator/recon-small/THREAD-ENTRY/canonical-job-helper/stream_worker_job.result.json"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": [
+    1,
+    2,
+    1,
+    1
+  ]
+}

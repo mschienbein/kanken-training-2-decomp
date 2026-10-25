@@ -1,0 +1,52 @@
+{
+  "source": "src/checkpoint15/recon-small/category_variadic.c",
+  "profile": "game",
+  "functions": [
+    "func_00190d0c",
+    "func_00190d68"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint15/recon-small/category_variadic.c",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-002"
+  ],
+  "exit_code": 0,
+  "source_sha256": "832661ce83d60d3b79e4bc01a742783c69a06df3b8f19e7869ed72a133a12d59",
+  "receipt": "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-002/category_variadic.result.json",
+  "receipt_sha256": "2769d2ef14c7961035cb37bd49e98159f5226d7748cec6062be26d1b3edaf3d4",
+  "statuses": [
+    {
+      "name": "func_00190d0c",
+      "address": 1641740,
+      "size": 92,
+      "candidate_size": 92,
+      "status": "match",
+      "first_diff": null
+    },
+    {
+      "name": "func_00190d68",
+      "address": 1641832,
+      "size": 88,
+      "candidate_size": 88,
+      "status": "match",
+      "first_diff": null
+    }
+  ],
+  "all_required_match": true,
+  "stdout": "MATCH    func_00190d0c @ 0x190d0c size 0x5c/0x5c\nMATCH    func_00190d68 @ 0x190d68 size 0x58/0x58\n",
+  "stderr": ""
+}

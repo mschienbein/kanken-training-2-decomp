@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "agent": "rv02",
+  "origin_result": "scratch/authors/rv02/RESULT.json",
+  "origin_result_sha256": "cb200e98c175792ff989cb464bc7dc61a416b4aad58bbded5a0e59c4f1b45e9b",
+  "note": "Only the requested MATCH row; normalize source to its absolute author path for collection from this separate worktree. Source contents are unchanged.",
+  "functions": [
+    {
+      "address": "0x00122680",
+      "name": "func_00122680",
+      "size": 264,
+      "isa": "arm",
+      "status": "match",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/rv02/src/func_00122680.c",
+      "profile": "middleware",
+      "receipt": "scratch/authors/rv02/match/func_00122680/final/func_00122680.result.json",
+      "source_sha256": "78f11d04578b35cbdf4440d3b09f12b078e78048413d90c9259f6cdb4feaf896",
+      "receipt_sha256": "d6d4c9a95c6df425879e03afb1b901c25ffc12291575aeb2561704e73318645e",
+      "object_sha256": "f136eb3887f705dced45356791de903ad5c9aa13ec6783fb1aa1a543e4c6ebf2",
+      "exit_code": 0,
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "attempts": 10,
+      "attempt_exit_counts": {
+        "1": 7,
+        "0": 3
+      },
+      "matcher_seconds": 4.23162,
+      "minutes": 0.070527,
+      "timing_basis": "Sequential matcher subprocess wall time only; source/contract analysis time is not measured.",
+      "residual": {
+        "candidate_size": 264,
+        "target_size": 264,
+        "differing_bytes": 0,
+        "differing_words": 0,
+        "changed_word_offsets": [],
+        "first_difference_offset": null,
+        "extent_delta": 0
+      },
+      "notes": "revisit: MATCH, 264/264 bytes, default v2/none, confirmed by the final run of exactly the delivered source. The natural direct minimum/short-domain exits plus explicit composite-rejection continue edges resolve both inherited differing bytes, including the former early-return versus remainder-11 allocation tradeoff. An independently spelled rejection disjunction also matches. The unsigned wrapping 100-candidate scan, divisor set and odd fallback are preserved; this is not generalized into a primality test. profile witness: only middleware matches among the three frozen profiles; ownership inferred [INFERENCE]. The function is self-contained, has no headers or external symbols, and requires no names overlay, callback-provider contract, PMF class or other canonical contract change.",
+      "names": null,
+      "needs_names": [],
+      "extra_sources": [],
+      "original_best": {
+        "batch": "nm13",
+        "evidence": "scratch/authors/nm13/RESULT.json#/functions/1",
+        "metric": "residual.differing_bytes",
+        "origin": "author",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nm13/match/func_00122680/final/middleware/func_00122680.result.json",
+        "residual_bytes": 2,
+        "source": "scratch/authors/nm13/src/func_00122680.c",
+        "status": "mismatch"
+      },
+      "diagnosis": "scratch/authors/rv02/DIAGNOSIS.json",
+      "attempt_log": "scratch/authors/rv02/ATTEMPTS.json",
+      "canonical_contract_dependencies": [],
+      "external_symbol_dependencies": [],
+      "caller_contract": {
+        "declaration": "unsigned func_00122680(unsigned value)",
+        "evidence": "Single scalar input and consumed scalar results in func_00120e40; inherited diagnosis scratch/authors/nm13/RESULT.json and private current packet. No canonical-header change is needed."
+      }
+    }
+  ]
+}

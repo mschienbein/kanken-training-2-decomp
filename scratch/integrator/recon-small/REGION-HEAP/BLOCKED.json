@@ -1,0 +1,19 @@
+{
+  "family": "REGION-HEAP",
+  "status": "blocked",
+  "reason": "The void/full-word mode and retained empty-hook input are already canonical. The remaining conflict is real native ownership: func_0018216c is accepted nw::ut::HeapBase::FillFreeMemory, while the source calls it as a C function on a competing RegionHeap layout. The native HeapBase/FrameHeap clients and hook/lifetime closure have not been migrated; no C-to-native alias or owner cast is admitted.",
+  "members": [
+    "func_00146758"
+  ],
+  "member_bytes": 140,
+  "evidence": [
+    "include/game/region_heap.h:23-41,69-76",
+    "include/nw/ut/ut_FrameHeap.h:23-54",
+    "src/nw4c/ut_HeapBase.cpp:94-100",
+    "config/names.json: _ZN2nw2ut8HeapBase14FillFreeMemoryEPvj",
+    "scratch/authors/r4000/src/func_00146758.c:3-24,27-41"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

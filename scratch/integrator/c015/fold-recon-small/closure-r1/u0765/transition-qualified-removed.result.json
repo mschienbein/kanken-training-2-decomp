@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_00172e00/transition-qualified-removed.cpp",
+ "source_sha256": "efa8e8efbf66784568c376e7970174fe3b0136390c377472b4bb01e60a567cb3",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "b85c35a805d1af0da3b1f721be621fefe54300816a2c80905995ce8bad20842b",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "8fbf9c14089dc98e25a4dd918f47f08ee0bb032c16c4e06917ad85028681f3ee",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_00172e00/transition-C-setter.c",
+   "source_sha256": "4495a88e6ed8dbeed4be158af55169eef2872e38330944c961aeb17b2979fc9f",
+   "object_sha256": "03fc7d1d93c8921a76483f83d6f90756e5543e3643bca1c9dc8a3bb2816e39c9"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "set_completion"
+   ],
+   "section": "i.set_completion",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0765/extra-0-transition-C-setter.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00172e00",
+   "address": 1519104,
+   "size": 96,
+   "candidate_size": 96,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 4,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5801034",
+     "removed_callee": {
+      "symbols": [
+       "set_completion"
+      ],
+      "section": "i.set_completion",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0765/extra-0-transition-C-setter.o"
+     }
+    }
+   ]
+  }
+ ]
+}

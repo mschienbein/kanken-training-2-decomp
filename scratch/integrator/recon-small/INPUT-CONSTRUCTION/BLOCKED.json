@@ -1,0 +1,22 @@
+{
+  "family": "INPUT-CONSTRUCTION",
+  "status": "blocked",
+  "reason": "The two author overlays bind the same InputBufferState C1 constructor to different accepted providers (001149a8 versus 00123b38). The canonical C providers and the two distinct containing storage owners are evidenced, but their actual native subobject/class identities and installed table protocol are not reconciled. No duplicate constructor name/address or C-to-native provider alias is admitted.",
+  "members": [
+    "func_0010cc0c",
+    "func_00116eb0"
+  ],
+  "member_bytes": 280,
+  "evidence": [
+    "include/game/input_device.h:33-66,116-129",
+    "src/pilot/pilot_a.c:8-18",
+    "src/wave13/func_00123b38.c",
+    "src/wave13/func_0010e2c8.cpp:2-6",
+    "scratch/authors/tu1074/src/func_0010cc0c.cpp:8-27,51-66",
+    "scratch/authors/nf158/src/func_00116eb0.cpp:38-42",
+    "scratch/integrator/contract-plan/FAMILIES.json: INPUT-CONSTRUCTION names_binding_plan"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

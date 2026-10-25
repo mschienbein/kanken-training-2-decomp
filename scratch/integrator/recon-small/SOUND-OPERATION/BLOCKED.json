@@ -1,0 +1,17 @@
+{
+  "family": "SOUND-OPERATION",
+  "status": "deferred-until-c015",
+  "reason": "The actual SoundVoiceObject native member/slot and its subobjects require the accepted constructor owner src/retries/func_0014bd20.cpp, which is explicitly reserved by c015. This unit was not modified; reconcile only after the c015 cutover lands.",
+  "members": [
+    "func_001d7e6c"
+  ],
+  "member_bytes": 112,
+  "evidence": [
+    "scratch/integrator/contract-plan/COMPONENTS-after-c015.json: SOUND-OPERATION overlaps_c015_units",
+    "scratch/authors/w23h/src/func_001d7e6c.c:9-35",
+    "src/retries/func_0014bd20.cpp:1-13",
+    "include/game/sound_voice.h: SoundVoiceObject"
+  ],
+  "canonical_edits_retained": false,
+  "reserved_accepted_unit": "src/retries/func_0014bd20.cpp"
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "c015 on finalized main ea985bcb (c012-r6 sequence13), catalogue v15/denominator history12. NEW26 functions/3704 bytes. Every c012-r6 held identity stays uncredited by c015. revised_accepted_units contains only the three actual source-hash changes; header-only proof inventory is in HEADER-CLOSURE-REPROOFS.json and reconcile family evidence. Historical proof hashes remain immutable and are carried to this base by reconcile/REBASE-CLOSURE.json. Ranks15-19 investigation records are evidence for their separately reserved owners, not c015 claims. Main runs argcheck, interfaces and prepare; the old interfaces result covers only the earlier18-function snapshot.",
+  "note": "Single c015 candidate on finalized main c3aa3cef (c012-r6 sequence13), catalogue v16/denominator history13. Folded recon-small47945ebc claims/revisions/moves and its47 holds; config/candidates/c016.json retired. Optional rv02:00122680 was cleanly collected. The checkpoint remains explicit v6/L1; folded sources are freshly re-proved at src/checkpoint15/recon-small. func_0019e08c is library _ZdaPv and is never claimed. Formal revised rows are source-hash changes only. One updated whole-ledger interfaces audit is requested for the final dry ledger; Main owns argcheck/prepare/finalize.",
   "units": [
     {
       "source": "src/checkpoint15/func_00136958.c",
@@ -235,6 +235,46 @@
       ],
       "author": "tu1028",
       "reason": "Publish the distinct four-record cache owner and its opaque stored table address, with no native-table or callable-slot claim."
+    },
+    {
+      "source": "src/checkpoint15/recon-small/property_lookup.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00112fb8"
+      ],
+      "author": "np266",
+      "family": "PROPERTY-LOOKUP",
+      "reason": "Centralize the shared AttributeMapping and the distinct property table/reference and caller-evidenced 64-byte hidden result. No owner alias or storage reinterpretation."
+    },
+    {
+      "source": "src/checkpoint15/recon-small/filesystem_worker.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0010af8c"
+      ],
+      "author": "r4041",
+      "family": "FILESYSTEM-WORKER",
+      "reason": "Use the one canonical OptionalAllocation root, its actual allocation pointer/count and value/state/stop members, the 44-byte work-item element, and the exact void(void*,void*) invoking thread callback."
+    },
+    {
+      "source": "src/checkpoint15/recon-small/category_variadic.c",
+      "profile": "game",
+      "functions": [
+        "func_00190d0c",
+        "func_00190d68"
+      ],
+      "author": "w19i",
+      "family": "VAARG-PARSER",
+      "reason": "Use actual W6Category.group_count/patterns and count/items with standard va_arg; current G3 supports type operands. Remove the historical incompatible W19CategoryCodes overlay."
+    },
+    {
+      "source": "src/checkpoint15/optional-rv02/func_00122680.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00122680"
+      ],
+      "author": "rv02",
+      "reason": "Optional rv02 dependency-free scalar screening match; tools/collect.py copied and re-derived it cleanly under explicit v6/L1."
     }
   ],
   "moves": [],
@@ -797,6 +837,570 @@
       "category": "contract-evidence",
       "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
       "evidence": "scratch/integrator/c015/reconcile/STREAM-VOICE-OWNER/DECISION.json"
+    },
+    {
+      "function": "func_001e3794",
+      "target_bytes": 36,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "GRAPHICS-HEAP",
+      "author": "w22c",
+      "category": "blocked",
+      "reason": "The installed heap slots are identified, but data_002426d0 still has incompatible GraphicsHeap, W19RegisteredObject and native Heap owner publications. The destructor/registration callback and installed native providers have not been reconciled into one exact protocol; no one-pointer alias or cast is admitted.",
+      "author_source": "scratch/authors/w22c/src/func_001e3794.c",
+      "evidence": "scratch/integrator/recon-small/GRAPHICS-HEAP/BLOCKED.json"
+    },
+    {
+      "function": "func_001e37b8",
+      "target_bytes": 36,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "GRAPHICS-HEAP",
+      "author": "w23e",
+      "category": "blocked",
+      "reason": "The installed heap slots are identified, but data_002426d0 still has incompatible GraphicsHeap, W19RegisteredObject and native Heap owner publications. The destructor/registration callback and installed native providers have not been reconciled into one exact protocol; no one-pointer alias or cast is admitted.",
+      "author_source": "scratch/authors/w23e/src/func_001e37b8.cpp",
+      "evidence": "scratch/integrator/recon-small/GRAPHICS-HEAP/BLOCKED.json"
+    },
+    {
+      "function": "func_001f5780",
+      "target_bytes": 84,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "GRAPHICS-HEAP",
+      "author": "r4029",
+      "category": "blocked",
+      "reason": "The installed heap slots are identified, but data_002426d0 still has incompatible GraphicsHeap, W19RegisteredObject and native Heap owner publications. The destructor/registration callback and installed native providers have not been reconciled into one exact protocol; no one-pointer alias or cast is admitted.",
+      "author_source": "scratch/authors/r4029/src/func_001f5780.cpp",
+      "evidence": "scratch/integrator/recon-small/GRAPHICS-HEAP/BLOCKED.json"
+    },
+    {
+      "function": "func_0010d500",
+      "target_bytes": 64,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "HEAP-FACTORIES",
+      "author": "w20b",
+      "category": "blocked",
+      "reason": "This connected family requires the unresolved GRAPHICS-HEAP native allocating-owner/provider cutover. The five proposed concrete external tables have destructor-only author classes, while the actual accepted Heap protocol includes allocate and release; table pointers alone do not establish the full class/key/provider contracts.",
+      "author_source": "scratch/authors/w20b/src/func_0010d500.cpp",
+      "evidence": "scratch/integrator/recon-small/HEAP-FACTORIES/BLOCKED.json"
+    },
+    {
+      "function": "func_0010dcb0",
+      "target_bytes": 56,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "HEAP-FACTORIES",
+      "author": "w20b",
+      "category": "blocked",
+      "reason": "This connected family requires the unresolved GRAPHICS-HEAP native allocating-owner/provider cutover. The five proposed concrete external tables have destructor-only author classes, while the actual accepted Heap protocol includes allocate and release; table pointers alone do not establish the full class/key/provider contracts.",
+      "author_source": "scratch/authors/w20b/src/func_0010dcb0.cpp",
+      "evidence": "scratch/integrator/recon-small/HEAP-FACTORIES/BLOCKED.json"
+    },
+    {
+      "function": "func_0010dce8",
+      "target_bytes": 56,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "HEAP-FACTORIES",
+      "author": "w20b",
+      "category": "blocked",
+      "reason": "This connected family requires the unresolved GRAPHICS-HEAP native allocating-owner/provider cutover. The five proposed concrete external tables have destructor-only author classes, while the actual accepted Heap protocol includes allocate and release; table pointers alone do not establish the full class/key/provider contracts.",
+      "author_source": "scratch/authors/w20b/src/func_0010dce8.cpp",
+      "evidence": "scratch/integrator/recon-small/HEAP-FACTORIES/BLOCKED.json"
+    },
+    {
+      "function": "func_0010dd20",
+      "target_bytes": 56,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "HEAP-FACTORIES",
+      "author": "w20b",
+      "category": "blocked",
+      "reason": "This connected family requires the unresolved GRAPHICS-HEAP native allocating-owner/provider cutover. The five proposed concrete external tables have destructor-only author classes, while the actual accepted Heap protocol includes allocate and release; table pointers alone do not establish the full class/key/provider contracts.",
+      "author_source": "scratch/authors/w20b/src/func_0010dd20.cpp",
+      "evidence": "scratch/integrator/recon-small/HEAP-FACTORIES/BLOCKED.json"
+    },
+    {
+      "function": "func_00116be4",
+      "target_bytes": 56,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "HEAP-FACTORIES",
+      "author": "w20b",
+      "category": "blocked",
+      "reason": "This connected family requires the unresolved GRAPHICS-HEAP native allocating-owner/provider cutover. The five proposed concrete external tables have destructor-only author classes, while the actual accepted Heap protocol includes allocate and release; table pointers alone do not establish the full class/key/provider contracts.",
+      "author_source": "scratch/authors/w20b/src/func_00116be4.cpp",
+      "evidence": "scratch/integrator/recon-small/HEAP-FACTORIES/BLOCKED.json"
+    },
+    {
+      "function": "func_001dacc0",
+      "target_bytes": 40,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "COMMAND-CURSORS",
+      "author": "w19j",
+      "category": "blocked",
+      "reason": "Fresh original pointer-cell evidence ties both cursor wrappers to the two InputDeviceVTable publications. Their full real receiver/provider protocol remains unresolved with INPUT-CONSTRUCTION; the author W19CommandBuffer class invents unused virtual signatures and cannot be published as a second owner or guessed callable table.",
+      "author_source": "scratch/authors/w19j/src/func_001dacc0.cpp",
+      "evidence": "scratch/integrator/recon-small/COMMAND-CURSORS/BLOCKED.json"
+    },
+    {
+      "function": "func_001dadc4",
+      "target_bytes": 40,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "COMMAND-CURSORS",
+      "author": "w19j",
+      "category": "blocked",
+      "reason": "Fresh original pointer-cell evidence ties both cursor wrappers to the two InputDeviceVTable publications. Their full real receiver/provider protocol remains unresolved with INPUT-CONSTRUCTION; the author W19CommandBuffer class invents unused virtual signatures and cannot be published as a second owner or guessed callable table.",
+      "author_source": "scratch/authors/w19j/src/func_001dadc4.cpp",
+      "evidence": "scratch/integrator/recon-small/COMMAND-CURSORS/BLOCKED.json"
+    },
+    {
+      "function": "func_001c6440",
+      "target_bytes": 360,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "GFX-OWNING-ARRAY",
+      "author": "r41303",
+      "category": "blocked",
+      "reason": "The author UiResourceContext explicitly resets an opaque vptr and has no genuine virtual owner/key protocol. Its nested two-word array prefix is evidenced, but neither a canonical containing native owner nor an original-evidenced undefined key and complete table protocol is established. Promoting that storage class would retain the forbidden second native-owner model.",
+      "author_source": "scratch/authors/r41303/src/func_001c6440.cpp",
+      "evidence": "scratch/integrator/recon-small/GFX-OWNING-ARRAY/BLOCKED.json"
+    },
+    {
+      "function": "func_00136510",
+      "target_bytes": 208,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "SNPRINTF-BINDING",
+      "author": "np132",
+      "category": "blocked",
+      "reason": "Catalogue v15 proves the provider name __0snprintf, not the requested __2snprintf alias. Two honest __0snprintf caller trials, including the compiler-header nothrow/restrict/printf declaration contract, retain a 208-byte mismatch at +4. No unproved __2snprintf binding or codegen steering is admitted.",
+      "author_source": "scratch/authors/np132/variants/func_00136510/captured-entry-kind.cpp",
+      "evidence": "scratch/integrator/recon-small/SNPRINTF-BINDING/BLOCKED.json"
+    },
+    {
+      "function": "func_0014a9dc",
+      "target_bytes": 184,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "HWR-OUTPUT",
+      "author": "r41224",
+      "category": "blocked",
+      "reason": "The output root is established, but it combines a full-width flags write with an accepted halfword mode update. A natural unsigned-word masked update changes accepted 0014a98c from 76 to 88 bytes; a natural two-halfword configuration subobject preserves 0014a98c but changes target 0014a9dc from 184 to 196 bytes. No type-punning, scalar alias, union view, byte cast or whole-output-record assignment is admitted.",
+      "author_source": "scratch/authors/r41224/src/func_0014a9dc.c",
+      "evidence": "scratch/integrator/recon-small/HWR-OUTPUT/BLOCKED.json"
+    },
+    {
+      "function": "func_001d7e6c",
+      "target_bytes": 112,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "SOUND-OPERATION",
+      "author": "w23h",
+      "category": "deferred-until-c015",
+      "reason": "The actual SoundVoiceObject native member/slot and its subobjects require the accepted constructor owner src/retries/func_0014bd20.cpp, which is explicitly reserved by c015. This unit was not modified; reconcile only after the c015 cutover lands. Fold-in note: c015 did not perform the unresolved SoundVoiceObject cutover; the underlying owner/provider contract remains held, rather than a current inter-agent reservation.",
+      "author_source": "scratch/authors/w23h/src/func_001d7e6c.c",
+      "evidence": "scratch/integrator/recon-small/SOUND-OPERATION/BLOCKED.json"
+    },
+    {
+      "function": "func_0010cc0c",
+      "target_bytes": 136,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "INPUT-CONSTRUCTION",
+      "author": "tu1074",
+      "category": "blocked",
+      "reason": "The two author overlays bind the same InputBufferState C1 constructor to different accepted providers (001149a8 versus 00123b38). The canonical C providers and the two distinct containing storage owners are evidenced, but their actual native subobject/class identities and installed table protocol are not reconciled. No duplicate constructor name/address or C-to-native provider alias is admitted.",
+      "author_source": "scratch/authors/tu1074/src/func_0010cc0c.cpp",
+      "evidence": "scratch/integrator/recon-small/INPUT-CONSTRUCTION/BLOCKED.json"
+    },
+    {
+      "function": "func_00116eb0",
+      "target_bytes": 144,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "INPUT-CONSTRUCTION",
+      "author": "nf158",
+      "category": "blocked",
+      "reason": "The two author overlays bind the same InputBufferState C1 constructor to different accepted providers (001149a8 versus 00123b38). The canonical C providers and the two distinct containing storage owners are evidenced, but their actual native subobject/class identities and installed table protocol are not reconciled. No duplicate constructor name/address or C-to-native provider alias is admitted.",
+      "author_source": "scratch/authors/nf158/src/func_00116eb0.cpp",
+      "evidence": "scratch/integrator/recon-small/INPUT-CONSTRUCTION/BLOCKED.json"
+    },
+    {
+      "function": "func_00101f64",
+      "target_bytes": 272,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w23g",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w23g/src/func_00101f64.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_0010cc94",
+      "target_bytes": 24,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w18h",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w18h/src/func_0010cc94.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_00113e20",
+      "target_bytes": 88,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w22j",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w22j/src/func_00113e20.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_00131540",
+      "target_bytes": 44,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w20c",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w20c/src/func_00131540.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_0013156c",
+      "target_bytes": 64,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w20b",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w20b/src/func_0013156c.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_0013ea40",
+      "target_bytes": 116,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "nf169",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/nf169/src/func_0013ea40.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_0019d9d8",
+      "target_bytes": 60,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w22e",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w22e/src/func_0019d9d8.c",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001cf83c",
+      "target_bytes": 312,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w22a",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w22a/src/func_001cf83c_dirty.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001da39c",
+      "target_bytes": 208,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "r4068",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/r4068/attempts/func_001da39c/canonical-virtual-glyph-source.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001daf74",
+      "target_bytes": 60,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "tu664",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/tu664/src/func_001daf74.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001db3ec",
+      "target_bytes": 24,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w18a",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w18a/src/func_001db3ec.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001efcec",
+      "target_bytes": 28,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w19f",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w19f/src/func_001efcec.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001efd08",
+      "target_bytes": 120,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w21c",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w21c/src/func_001efd08.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001efeac",
+      "target_bytes": 56,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w21c",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w21c/src/func_001efeac.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001f4920",
+      "target_bytes": 44,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w20c",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w20c/src/func_001f4920.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001f4994",
+      "target_bytes": 28,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w19f",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w19f/src/func_001f4994.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001f49b0",
+      "target_bytes": 124,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "nf047",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/nf047/src/func_001f49b0/func_001f49b0.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001f4b58",
+      "target_bytes": 56,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "FONT-SLOTS",
+      "author": "w21c",
+      "category": "blocked",
+      "reason": "No single exact callable FontVTable is established for the actual installed font owners. The author family includes an appended decoder/cache FontMapResource contrary to the canonical embedded cache and an unsigned advance byte contrary to canonical GlyphWidths, plus guessed encoding/cleanup slots. The 18-member transaction stays wholly held rather than partially completing the deliberately opaque table.",
+      "author_source": "scratch/authors/w21c/src/func_001f4b58.cpp",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "function": "func_001af644",
+      "target_bytes": 248,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "TEXT-WRITER-CURSOR",
+      "author": "nf198",
+      "category": "blocked",
+      "reason": "The target duplicates existing TextFlowState as MarkupStateR41258, uses a different flag access width, and requires two W20TextWriter/font helper contracts not yet cut over to the real native writer/font providers. The accepted TextWriterState copies also remain a separate writer representation. No cross-member memcpy/punning or second writer/tag-state model is retained.",
+      "author_source": "scratch/authors/nf198/src/func_001af644.cpp",
+      "evidence": "scratch/integrator/recon-small/TEXT-WRITER-CURSOR/BLOCKED.json"
+    },
+    {
+      "function": "func_001532e8",
+      "target_bytes": 208,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "STREAM-PLAYER-STOP",
+      "author": "np014",
+      "category": "blocked",
+      "reason": "The canonical StreamPlayer has an opaque table, while the author installs a speculative native Stop slot after five invented virtual declarations. The actual slot +0x14 provider/full receiver protocol and the reserved prefetch-reference source-atom lifetime have not been established; no guessed native table or division-runtime alias is admitted.",
+      "author_source": "scratch/authors/np014/final/stream.cpp",
+      "evidence": "scratch/integrator/recon-small/STREAM-PLAYER-STOP/BLOCKED.json"
+    },
+    {
+      "function": "func_0014b4b0",
+      "target_bytes": 156,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "DRAWING-ARRAY-RUNTIME",
+      "author": "nf173",
+      "category": "blocked",
+      "reason": "The array callback protocol is already void*(void*) in current accepted providers, but the retained source still uses erased void callbacks and forbidden byte-offset recovery of Picture/auxiliary-player parents. Native TexCoordAry is the actual accepted buffer constructor, not DisplayVertexArray; the actual Picture +4 layout difference and auxiliary task owner are unresolved. Retyping callbacks alone would not close this source atom.",
+      "author_source": "scratch/authors/nf173/src/func_0014b4b0-a04.cpp",
+      "evidence": "scratch/integrator/recon-small/DRAWING-ARRAY-RUNTIME/BLOCKED.json"
+    },
+    {
+      "function": "func_00190450",
+      "target_bytes": 144,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "REQUEST-EXCHANGE",
+      "author": "np024",
+      "category": "deferred-to-giant",
+      "reason": "Deferred to the giant component: the retained five-input RequestWait declaration conflicts with the accepted six-input receive declaration in src/checkpoint10/func_0010d454.c, which belongs to APPLET-FRAMEBUFFER/NAMED-HANDLE-RESULT. [INFERENCE] Fresh decompiler evidence indicates two optional output pointers, a two-word stacked timeout and a full integer event-code result including -1. The original ABI proof and coordinated giant caller migration must precede this family.",
+      "author_source": "scratch/authors/np024/variants/req13-reply-store-helper/request_exchange.cpp",
+      "evidence": "scratch/integrator/recon-small/REQUEST-EXCHANGE/BLOCKED.json"
+    },
+    {
+      "function": "func_001d28f4",
+      "target_bytes": 120,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "REVERB-CONTEXT",
+      "author": "nf260",
+      "category": "blocked",
+      "reason": "The accepted Finalize is already the real nw::snd::FxReverb provider, but the target/caller still use a competing ResourceCleanup/CompositeResource byte-overlay owner inside opaque LargeResourceElement. A genuine FxReverb destructor/containing-object lifetime and external table/key transaction is not established; keeping the C facade or container-of casts would violate the single-owner rule.",
+      "author_source": "scratch/authors/nf260/src/func_001d273c.cpp",
+      "evidence": "scratch/integrator/recon-small/REVERB-CONTEXT/BLOCKED.json"
+    },
+    {
+      "function": "func_001b4f58",
+      "target_bytes": 196,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "SLOT-BANK",
+      "author": "nf036",
+      "category": "blocked",
+      "reason": "The actual ControlTriplet, MaskDimensions and InputRectangle/C initializer contracts can be selected without the unproved TouchBounds constructor alias, but the canonical C-bounds trial remains a 196-byte mismatch at +13 and a natural local-bounds trial is 184 versus 196 bytes. The original complete source atom also contains c015-reserved func_001b6c90. No alias or steering is admitted to recover the historical witness.",
+      "author_source": "scratch/authors/nf036/src/controllers.cpp",
+      "evidence": "scratch/integrator/recon-small/SLOT-BANK/BLOCKED.json"
+    },
+    {
+      "function": "func_0017e6c8",
+      "target_bytes": 156,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "SCALAR-CONVERTERS",
+      "author": "nf125",
+      "category": "blocked",
+      "reason": "The exact float(float) provider interface is settled, but the accepted producer proves only five named callback cells followed by zeroed reserved storage. The target indexes that storage with an unchecked byte mode. Neither a real trailing callback-array extent nor the original index domain is established; no struct-to-array alias, invented bound or byte-offset selector is admitted.",
+      "author_source": "scratch/authors/nf125/variants/scalar-factor_local.c",
+      "evidence": "scratch/integrator/recon-small/SCALAR-CONVERTERS/BLOCKED.json"
+    },
+    {
+      "function": "func_00104804",
+      "target_bytes": 548,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "GRAPHICS-RESOURCES",
+      "author": "r4018",
+      "category": "blocked",
+      "reason": "The target treats every +0x10..+0x30 slot as CleanupElement*, but the canonical root distinguishes renderer, scalar words and GraphicsResource pointers. The accepted initializer only zeroes the middle words and does not prove their nonzero producers/types or exact release providers. No all-pointer array or unrelated cleanup receiver is admitted.",
+      "author_source": "scratch/authors/r4018/src/func_00104804.cpp",
+      "evidence": "scratch/integrator/recon-small/GRAPHICS-RESOURCES/BLOCKED.json"
+    },
+    {
+      "function": "func_0016b6a4",
+      "target_bytes": 200,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "DIRECTORY-NATIVE-IDENTITY",
+      "author": "w12g",
+      "category": "blocked",
+      "reason": "The proposed U8Directory cleanup call is actually bound to an accepted FileInputStream capability query bool(const FileInputStream*). A constant/equal-byte erased call does not establish a directory cleanup identity; the real directory provider/lifetime remains unknown, and no stream-to-directory alias or invented callee is admitted.",
+      "author_source": "scratch/authors/w12g/src/func_0016b6a4.c",
+      "evidence": "scratch/integrator/recon-small/DIRECTORY-NATIVE-IDENTITY/BLOCKED.json"
+    },
+    {
+      "function": "func_00146758",
+      "target_bytes": 140,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "REGION-HEAP",
+      "author": "r4000",
+      "category": "blocked",
+      "reason": "The void/full-word mode and retained empty-hook input are already canonical. The remaining conflict is real native ownership: func_0018216c is accepted nw::ut::HeapBase::FillFreeMemory, while the source calls it as a C function on a competing RegionHeap layout. The native HeapBase/FrameHeap clients and hook/lifetime closure have not been migrated; no C-to-native alias or owner cast is admitted.",
+      "author_source": "scratch/authors/r4000/src/func_00146758.c",
+      "evidence": "scratch/integrator/recon-small/REGION-HEAP/BLOCKED.json"
+    },
+    {
+      "function": "func_00181a4c",
+      "target_bytes": 96,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "WORK-COMMAND",
+      "author": "r4024",
+      "category": "blocked",
+      "reason": "The fifth stacked word and command operands are not one proved scalar/pointer/token contract: accepted callers pass integer 4/128, while the author reads and stores the float arm of a union solely to reproduce VFP copies. Recover the actual operation-dependent variants and consumers before migration; inactive-arm punning and narrowing to an easier caller subset are forbidden.",
+      "author_source": "scratch/authors/r4024/src/func_00181a4c.c",
+      "evidence": "scratch/integrator/recon-small/WORK-COMMAND/BLOCKED.json"
+    },
+    {
+      "function": "func_00107ce4",
+      "target_bytes": 216,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "THREAD-ENTRY",
+      "author": "w22g",
+      "category": "blocked",
+      "reason": "The exact invoking void(void*,void*) contract is established and already published, but the current canonical C++ source, a natural C version and a job-factored version all compile to 220 rather than 216 bytes. Dropping the unused context restores only the historical incompatible source shape and is forbidden; this is a remaining source-search hold, not an unresolved callback signature.",
+      "author_source": "scratch/authors/w22g/src/func_00107ce4.cpp",
+      "evidence": "scratch/integrator/recon-small/THREAD-ENTRY/BLOCKED.json"
+    },
+    {
+      "function": "func_0014b54c",
+      "target_bytes": 64,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-folded-recon-small",
+      "family": "TEVSTAGE-RUNTIME",
+      "author": "tu574",
+      "category": "blocked",
+      "reason": "The exact EABI void*(void*) provider contract and canonical three-word TevStage layout are established, but honest canonical callback trials remain nonmatching: direct Set initialization is 172 versus 64 bytes and placement construction is 180 versus 64, under both game and middleware. No native constructor alias, material facade or codegen steering is admitted.",
+      "author_source": "scratch/authors/tu574/src/func_0014b54c.cpp",
+      "evidence": "scratch/integrator/recon-small/TEVSTAGE-RUNTIME/BLOCKED.json"
     }
   ],
   "revised_accepted_units": [
@@ -813,7 +1417,7 @@
       "header_dependencies_changed": [
         "include/game/graphics_state.h"
       ],
-      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
     },
     {
       "source": "src/checkpoint10/func_00121838.c",
@@ -825,7 +1429,7 @@
       "accepted_source_sha256": "836fee065f3243683f1471f84a6d27e520a07d34e3c52ae59a8f0442f243f888",
       "current_source_sha256": "88c52db0434e6bfaf300047bfb109fa77380233e93cd4552851f44ad279036fc",
       "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
-      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
     },
     {
       "source": "src/wave11/func_001312a4.c",
@@ -837,7 +1441,50 @@
       "accepted_source_sha256": "facf1b07b1317c0db8a8e9f23b9e78e10da9be11026a50569e7b95c74835aae8",
       "current_source_sha256": "c3d0571bb1fda989ba6ac3b0d20a445b8de2a1feb3cc920d5b62689d2d5c1256",
       "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
-      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
+    },
+    {
+      "source": "src/checkpoint11/intake-r7/np024/attributes_accessors.c",
+      "profile": "game",
+      "functions": [
+        "func_0018fdfc",
+        "func_0018fed0"
+      ],
+      "reason": "PROPERTY-LOOKUP: remove the local AttributeMapping/AttributeRecord/AttributeCursor copies and include their canonical shared declarations.",
+      "current_source_sha256": "6286d9a5de1e223c4b52dd819719040b761b190a4f8346e0d6a09156226245ca",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "bdcdaee10e93f3cf25984c24d682849213566006f269431adf433d19143c8fa1"
+    },
+    {
+      "source": "src/sdk2/func_001267c0.c",
+      "profile": "sdk",
+      "functions": [
+        "func_001267c0"
+      ],
+      "reason": "PROPERTY-LOOKUP: centralize the identical AttributeMapping and genuine attribute owner/table/cursor layout.",
+      "current_source_sha256": "d5cae32f8458698690e17893d316b83c6dfd72f3800f4b07146946219eda48f0",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "260df20973e7516196ed6e97fa4a2633a460e50e61d5adfedc0d305cbc0ff93f"
+    },
+    {
+      "source": "src/wave9/func_001267f4.c",
+      "profile": "game",
+      "functions": [
+        "func_001267f4"
+      ],
+      "reason": "PROPERTY-LOOKUP: include the one canonical AttributeMapping/AttributeRecord/AttributeCursor contract.",
+      "current_source_sha256": "21751bcf011ca3d8395c59406aa3704ca251a662569fb6027803d71cf3eabe19",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "577f00f9a3d54b2fb75ce6a71db9dc4c5d3db27ecc83ee7465657aabd2117682"
     }
   ],
   "surviving_revised_accepted_units": [
@@ -854,7 +1501,7 @@
       "header_dependencies_changed": [
         "include/game/graphics_state.h"
       ],
-      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
     },
     {
       "source": "src/checkpoint10/func_00121838.c",
@@ -866,7 +1513,7 @@
       "accepted_source_sha256": "836fee065f3243683f1471f84a6d27e520a07d34e3c52ae59a8f0442f243f888",
       "current_source_sha256": "88c52db0434e6bfaf300047bfb109fa77380233e93cd4552851f44ad279036fc",
       "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
-      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
     },
     {
       "source": "src/wave11/func_001312a4.c",
@@ -878,12 +1525,55 @@
       "accepted_source_sha256": "facf1b07b1317c0db8a8e9f23b9e78e10da9be11026a50569e7b95c74835aae8",
       "current_source_sha256": "c3d0571bb1fda989ba6ac3b0d20a445b8de2a1feb3cc920d5b62689d2d5c1256",
       "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
-      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
+    },
+    {
+      "source": "src/checkpoint11/intake-r7/np024/attributes_accessors.c",
+      "profile": "game",
+      "functions": [
+        "func_0018fdfc",
+        "func_0018fed0"
+      ],
+      "reason": "PROPERTY-LOOKUP: remove the local AttributeMapping/AttributeRecord/AttributeCursor copies and include their canonical shared declarations.",
+      "current_source_sha256": "6286d9a5de1e223c4b52dd819719040b761b190a4f8346e0d6a09156226245ca",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "bdcdaee10e93f3cf25984c24d682849213566006f269431adf433d19143c8fa1"
+    },
+    {
+      "source": "src/sdk2/func_001267c0.c",
+      "profile": "sdk",
+      "functions": [
+        "func_001267c0"
+      ],
+      "reason": "PROPERTY-LOOKUP: centralize the identical AttributeMapping and genuine attribute owner/table/cursor layout.",
+      "current_source_sha256": "d5cae32f8458698690e17893d316b83c6dfd72f3800f4b07146946219eda48f0",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "260df20973e7516196ed6e97fa4a2633a460e50e61d5adfedc0d305cbc0ff93f"
+    },
+    {
+      "source": "src/wave9/func_001267f4.c",
+      "profile": "game",
+      "functions": [
+        "func_001267f4"
+      ],
+      "reason": "PROPERTY-LOOKUP: include the one canonical AttributeMapping/AttributeRecord/AttributeCursor contract.",
+      "current_source_sha256": "21751bcf011ca3d8395c59406aa3704ca251a662569fb6027803d71cf3eabe19",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "577f00f9a3d54b2fb75ce6a71db9dc4c5d3db27ecc83ee7465657aabd2117682"
     }
   ],
-  "base_commit": "ea985bcb37576c3347debe84579993a8f228352b",
-  "catalogue_version": "v15",
-  "catalogue_sha256": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980",
-  "denominator_history_version": 12,
-  "denominator_history_sha256": "83fbd0e6747c2e2cf889c3cd987ce968c594ed1e862b6942a97c4f549489bace"
+  "base_commit": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+  "catalogue_version": "v16",
+  "catalogue_sha256": "8fbf9c14089dc98e25a4dd918f47f08ee0bb032c16c4e06917ad85028681f3ee",
+  "denominator_history_version": 13,
+  "denominator_history_sha256": "f5b0229ef64b3d872784ae2cc103cab28d3d3f8ca4deeab652c0b128e9b0a5a3"
 }

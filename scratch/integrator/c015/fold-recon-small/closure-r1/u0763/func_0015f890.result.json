@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_0015f890/func_0015f890.cpp",
+ "source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "af264f868d499b293a1e0421a3f7a901eeee7c5fee919bb652ba38a9ec04f491",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "8fbf9c14089dc98e25a4dd918f47f08ee0bb032c16c4e06917ad85028681f3ee",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_0015f890/text_base_destruction.c",
+   "source_sha256": "7b40bed65b4fdd4e73f2d91997d442bdfe2056ae3c813d02413f7a7d6f37128c",
+   "object_sha256": "1a4082a09cdbe20144f2e510e7f8a28708131244ebe5dc989e9bb1067430b361"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "completeTextResourceDestruction"
+   ],
+   "section": "i.completeTextResourceDestruction",
+   "size": 4,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0763/extra-0-text_base_destruction.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_0015f890",
+   "address": 1439888,
+   "size": 44,
+   "candidate_size": 44,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 28,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "completeTextResourceDestruction"
+      ],
+      "section": "i.completeTextResourceDestruction",
+      "size": 4,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0763/extra-0-text_base_destruction.o"
+     }
+    }
+   ]
+  }
+ ]
+}
