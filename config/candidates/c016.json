@@ -1,57 +1,629 @@
 {
   "schema_version": 1,
-  "base_commit": "d93aa6c7",
-  "note": "c016 native graphics intake: scene-env alignment prerequisite at 70e33056 plus HARVEST-LIST entries 63-66. The five incoming sources re-derived through tools/collect.py under default v2/none; checkpoint closure proofs use the existing explicit v6/L1 selection. Native identities are qualified [INFERENCE]. No scene-native, scene-font or c015 claims, and no library _ZdaPv, are credited. Main owns prepare, independent review and finalization. Private per-function reconciliation and header-only re-proofs live under scratch/integrator/c016/.",
+  "base_commit": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+  "note": "c016 merged native graphics/current-contract intake at author snapshot770c4d16346a665e983122cf34ffcbd3387a6598: scene-env70e33056, initial fx01/fx03 harvest, held-fixes545491034e, wave-w1e9d1337a and wave-w317c9e343c. Exactly10 NEW functions/2216 B,12 in-place accepted source revisions and1 accepted240-byte move to a native member;10 holds/1924 B. Initial five graphics sources re-derived via collect.py under default v2/none; checkpoint dependency proofs preserve explicit v6/L1. Native identities and unrecovered historical source names remain [INFERENCE]. Library _ZdaPv, c015 claims, scene-native, scene-font and gate-failed W2 remain excluded. Main owns argcheck/prepare/review/finalize. Private reconciliation, original ABI witnesses and unchanged-source HEADER-CLOSURE-REPROOFS records live under scratch/integrator/c016/.",
   "units": [
     {
       "source": "src/checkpoint16/func_00115f5c.cpp",
       "profile": "game",
-      "functions": ["func_00115f5c"],
+      "functions": [
+        "func_00115f5c"
+      ],
       "author": "fx01",
       "reason": "Use canonical MeshRenderer/RenderContext/Model and resource shape wrappers; retain every material, ordinary/particle branch and native method argument. The particle downcast is within the native model hierarchy, not an alternate owner view."
     },
     {
       "source": "src/checkpoint16/func_001240c8.cpp",
       "profile": "game",
-      "functions": ["func_001240c8"],
+      "functions": [
+        "func_001240c8"
+      ],
       "author": "fx01",
       "reason": "Use native RenderContext::ActivateVertexAttribute(ResMesh), the real command-cache/IR-scale arrays and ShaderProgram Boolean interfaces. The ClearVertexAttribute provider retains exactly void(void)."
     },
     {
       "source": "src/checkpoint16/func_001307b8.cpp",
       "profile": "game",
-      "functions": ["func_001307b8"],
+      "functions": [
+        "func_001307b8"
+      ],
       "author": "fx01",
       "reason": "Use native RenderContext and actual Model::NormalMatrix/cache members; keep the established matrix34Identity static and canonical float matrix-upload contracts with no new data alias. Its inherited guard-release identity qualification is retained."
     },
     {
       "source": "src/checkpoint16/func_001303a8.cpp",
       "profile": "game",
-      "functions": ["func_001303a8"],
+      "functions": [
+        "func_001303a8"
+      ],
       "author": "fx03",
       "reason": "Use canonical MeshRenderer/SkeletalModel/Skeleton/ResPrimitiveSet and ResDicPatricia values, with exact matrix-pose and float-copy provider contracts. Adopt only the three evidenced fx03 native bindings."
     },
     {
       "source": "src/checkpoint16/activate_context.cpp",
       "profile": "game",
-      "functions": ["func_001305c0"],
+      "functions": [
+        "func_001305c0"
+      ],
       "author": "scene-env",
       "reason": "Use the corrected canonical SceneEnvironment/RenderContext layout and exact IMaterialActivator virtual interface. Publish native address-named ShaderProgram/RenderContext/MaterialHash endpoint declarations in game/render_context.h; remove all local integration declarations."
+    },
+    {
+      "source": "src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001387f4"
+      ],
+      "author": "tu491",
+      "reason": "Canonical ResPrimitive::SetupDrawCommand(bool) with real index-stream resource/command-buffer types and a fully reconciled accepted native caller.",
+      "evidence": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/RECONCILED.json"
+    },
+    {
+      "source": "src/checkpoint10/func_001306c8.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001306c8"
+      ],
+      "author": "HeldFixesCodex",
+      "reason": "Explicit destination for the complete accepted caller identity; native value-wrapper/member operation replaces all descriptive renderer and serialized-resource models.",
+      "evidence": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/RECONCILED.json"
+    },
+    {
+      "source": "src/contracts/w1/func_00117ad8.c",
+      "profile": "sdk",
+      "functions": [
+        "func_00117ad8"
+      ],
+      "author": "np040 / WaveW1Codex",
+      "reason": "Retire the duplicate filesystem token/protocol declarations; use the current FileArchiveHandle, complete 64-bit token, writable count/ArchiveInfo outputs and six-input provider without changing the author cursor atom."
+    },
+    {
+      "source": "src/contracts/w1/func_0011ef60.c",
+      "profile": "game",
+      "functions": [
+        "func_0011ef60"
+      ],
+      "author": "r4043 / WaveW1Codex",
+      "reason": "Use current TransitionState.active@0x18, the real one-millisecond sleep, void(void) shutdown callback and all five typed callback slots; supplied zero values remain null callbacks."
+    },
+    {
+      "source": "src/wave20/func_001233d0.c",
+      "profile": "game",
+      "functions": [
+        "func_001233d0"
+      ],
+      "author": "WaveW3Codex",
+      "reason": "RQ-G04: canonical pair and exact generic callback; original uninitialized fields preserved."
+    },
+    {
+      "source": "src/wave20/func_00190450.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00190450"
+      ],
+      "author": "WaveW3Codex",
+      "reason": "RQ-G01..03: full event result, genuine optional outputs and canonical aligned timeout."
     }
   ],
-  "moves": [],
+  "moves": [
+    {
+      "function": "func_001306c8",
+      "from": "src/checkpoint10/func_001306c8.c",
+      "to": "src/checkpoint10/func_001306c8.cpp"
+    }
+  ],
   "revised_accepted_units": [
     {
       "source": "src/checkpoint10/func_00191c94.cpp",
       "profile": "game",
-      "functions": ["func_00191c94"],
+      "functions": [
+        "func_00191c94"
+      ],
       "author": "r4001",
       "accepted_source_sha256": "3548208a0e5140e7e1e3c4ebf84385d5d06052239676b021c43e7bb027f04094",
       "current_source_sha256": "69e744954901f6367f59898feba315a0568dcd07795eddff0c0a7f210e4b5cfc",
       "reason": "Replace the obsolete RenderCache model with the actual RenderContext::MaterialHash receiver and eleven named native members; preserve the exact flag-to-field mapping and existing unsigned flags interface.",
-      "header_dependencies_changed": ["include/game/command_buffer.h", "include/game/render_context.h"],
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h",
+        "include/game/render_context.h"
+      ],
       "baseline": "d93aa6c7"
+    },
+    {
+      "source": "src/checkpoint10/func_001306c8.cpp",
+      "previous_source": "src/checkpoint10/func_001306c8.c",
+      "profile": "game",
+      "functions": [
+        "func_001306c8"
+      ],
+      "author": "HeldFixesCodex",
+      "prior_author": "r4036",
+      "accepted_source_sha256": "0a4f89533986391beec185b6283d8fd0e17c884a64cfbf016ee16cc626d92595",
+      "current_source_sha256": "8dbbc277dc695a5622aef7de638da5b1fcac2c6c75eb43692fe8ebb960b82e2e",
+      "reason": "Replace the C renderer/resource shadow models and member facade with the byte-identical canonical native RenderContext::RenderPrimitive(ResPrimitive) member; the content-preserving path move is explicit in moves.",
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "evidence": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/RECONCILED.json"
+    },
+    {
+      "source": "src/large/func_0010de68.c",
+      "profile": "game",
+      "functions": [
+        "func_0010de68"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "dc68941212d384ee5c009aee4b204d3188f6f42b4a4755c86350e208a20eb2f5",
+      "current_source_sha256": "6ba55ab7e48c7606f588d1ba86a0dadf3bcb3974109254648495996646fd17bd",
+      "reason": "Move the actual ShaderResource definition to its existing shader header without changing binary extent, selected pointer, allocation or program fields. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/shader.h"
+      ]
+    },
+    {
+      "source": "src/wave16/func_00107140.c",
+      "profile": "game",
+      "functions": [
+        "func_00107140"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "f40369bb8a2cb417d438dae970b44f93fcd104b1928e1947792be55559bb6e29",
+      "current_source_sha256": "3ff23956ea5b0f1ad4302dbadaaa87ff071de4e982503cae8c385879ed7d9c5b",
+      "reason": "Retire the identical void func_00135f1c(int) local declaration in favor of startup.h:118. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/startup.h"
+      ]
+    },
+    {
+      "source": "src/wave18/func_0019b574.c",
+      "profile": "game",
+      "functions": [
+        "func_0019b574"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "61cfbbc6974197e214351a67076fe656d9ba5a5a289b57903698320494100c5f",
+      "current_source_sha256": "2688ad4ff8287afc793de68f9b507115bf1504118597380ff403720c5de12003",
+      "reason": "Retire the identical unsigned-char cursor extern and include its existing canonical header; do not change cursor storage to word pointers. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave19/func_0011774c.c",
+      "profile": "game",
+      "functions": [
+        "func_0011774c"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "463cc013275d76c935247aed8503587b1ddb4c5f91fa6b7980ebbe5d71bc5283",
+      "current_source_sha256": "a5c52b812d2eb89b1756a332467762d1d7a29d21fafe5c61377871ee9415b7d4",
+      "reason": "Publish the distinct OwnerIdentifierNode/OwnerIdentifierRegistry and int(registry*,int) prototype; retain the actual returned count and all existing fatal-handler calls. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/object_pool.h"
+      ]
+    },
+    {
+      "source": "src/wave19/func_0019f518.c",
+      "profile": "game",
+      "functions": [
+        "func_0019f518"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "9d49df4721503ffc6906fc889ee497bdc10170013f55709ae4e2a91da61b2613",
+      "current_source_sha256": "09b77b66a5bf8af14b49014a2309d97fa02b810055277c0803aeda37f747fbfd",
+      "reason": "Publish the exact IdentifierNode/IdentifierRegistry definition and void(registry*,int) prototype; remove the identical local definitions, with no key representation or body change. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/object_pool.h"
+      ]
+    },
+    {
+      "source": "src/wave5/func_00114778.c",
+      "profile": "game",
+      "functions": [
+        "func_00114778"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "3ccfc3fd0d12792f6a826a40db6cd2b0ad8cbbf19c0577587203cc158cb079ab",
+      "current_source_sha256": "fc6b7a1c38e0825d8515ac825a2d4bce50543ed87dc7e804382228d263ddfb8c",
+      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; body and byte-cursor protocol stay unchanged. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave5/func_001147c0.c",
+      "profile": "game",
+      "functions": [
+        "func_001147c0"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "9de96086d1079ef07e8ff9ed6fde38c246111f985fb9e16f7db3db6c48cad116",
+      "current_source_sha256": "330b02fd0de3cabc6d5ce2f2f9d58f4f576f3924a0c6aa5ed37cab4f0123e10d",
+      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; preserve direct byte publication. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave8/func_001d4174.c",
+      "profile": "game",
+      "functions": [
+        "func_001d4174"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "40ff826fec0189c563f81b93939d8301062e0c0835988d8e2b2a433e07a5e4d3",
+      "current_source_sha256": "af3eda98acda827deaab43da3d2ae95f340b27ef2f0f125802d260c9c8bb8c20",
+      "reason": "Retire the identical SoundArchiveRequestState local definition and publish/use its exact void(state*,ArchiveHandle*) declaration; do not equate the record with native SoundArchiveLoader. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/archive_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0010d454.c",
+      "profile": "game",
+      "functions": [
+        "func_0010d454"
+      ],
+      "author": "r4031",
+      "accepted_source_sha256": "a5229d69cdd5140ec52304626d2070f35d2538fe9fb93ab9060115bdb3dd37ad",
+      "current_source_sha256": "1e4cec0268e342a9a02927efe7ef6997fcd5f5892671a811af289c1c3de9eb52",
+      "reason": "RQ-G03: consume and forward the complete event result; exact six-input receive protocol replaces the incorrect bool declaration.",
+      "header_dependencies_changed": [
+        "include/game/service_protocol.h",
+        "include/game/applet.h"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+    },
+    {
+      "source": "src/wave14/func_00115628.c",
+      "profile": "game",
+      "functions": [
+        "func_00115628"
+      ],
+      "author": "w14a",
+      "accepted_source_sha256": "802d41418bd077021de6a713bfd9c8c42104534980f1b70b89aa99d7004e2dda",
+      "current_source_sha256": "e15ad4002771a0a7ca0f360a75c896c0bd8aca33507540c3af0862b7013c5b79",
+      "reason": "RQ-G03 evidenced closure authorized by Main: the sole caller forwards full r0; replace bool normalization model with full-word event input and explicit byte storage.",
+      "header_dependencies_changed": [
+        "include/game/applet.h"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+    },
+    {
+      "source": "src/wave5/func_00145840.c",
+      "profile": "game",
+      "functions": [
+        "func_00145840"
+      ],
+      "author": "Wave5Author1",
+      "accepted_source_sha256": "ca44c922e757fd719ab4892de52a78f720dd62ecda7cc0a91199dfc34d2e8a9b",
+      "current_source_sha256": "db0ee650c4fb009095a527c9b4cff3e65a8181b2ffc4d6434c1d617c93e21f51",
+      "reason": "RQ-G03: retire the identical local request-exchange declaration in favor of service_state.h; initializer and call body remain unchanged.",
+      "header_dependencies_changed": [
+        "include/game/service_state.h"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
     }
   ],
-  "holds": []
+  "holds": [
+    {
+      "function": "func_0014381c",
+      "target_bytes": 64,
+      "status": "uncredited-NEW-hold",
+      "component": "held-fixes",
+      "group": "SOUND-DATA-MANAGER",
+      "category": "native-table-lifetime-and-D0-boundary",
+      "reason": "The constructor MATCH is only an external _ZTV address witness, not an adopted complete multiple-inheritance table/provider family. Accepted001d0324 calls the freeing operation after loader cleanup, so adopting it as the native lifetime provider would require a deleting-destructor (D0) transaction, expressly excluded here. Actual complete primary/secondary table extent, destructor/key and all slot/client contracts remain unproved; an invented undefined key or alias onto DirectSoundLoaderState, PointerTableOwner or EventDispatcher is forbidden.",
+      "prerequisite": "A separately authorized native lifetime/VFE transaction and independently evidenced complete table/provider/receiver closure; no new D0 provider or flag/profile/linker override is introduced in held-fixes.",
+      "evidence": "scratch/integrator/held-fixes/SOUND-DATA-MANAGER/BLOCKED.json"
+    },
+    {
+      "function": "func_001d3f58",
+      "target_bytes": 72,
+      "status": "uncredited-NEW-hold",
+      "component": "held-fixes",
+      "group": "MEMORY-FILE-STREAM",
+      "category": "unproved-native-lifetime-and-installed-slot-closure",
+      "reason": "Read already MATCHes, but four accepted capabilities still use the separate MemoryInputStream owner (signed position/size). The canonical MemoryFileStream header explicitly introduced an out-of-line implicit destructor to externalize its VFE-stripped table; the survey supplies no original-backed destructor/key, complete installed table extent or inherited IOStream/FileStream provider adoption. Merely moving inline capabilities out of the header would extend that unresolved native-key/table contract and assign the two indistinguishable true-return providers to guessed slots. A partial Read/capability cutover, second owner, receiver alias, or artificial external key is not allowed.",
+      "prerequisite": "Establish the real lifetime/key and complete installed slot identities (including inherited stream providers), then migrate every provider/client and retire MemoryInputStream atomically. If genuine native emission needs D0, it must wait for the separately authorized gate revision.",
+      "evidence": "scratch/integrator/held-fixes/MEMORY-FILE-STREAM/BLOCKED.json"
+    },
+    {
+      "function": "func_001cbf34",
+      "target_bytes": 168,
+      "status": "uncredited-NEW-hold",
+      "component": "held-fixes",
+      "group": "LAYOUT-BINARY-PROTOCOL",
+      "category": "canonical-native-intrusive-list-and-serialized-provider-closure",
+      "reason": "The genuine native bool IsValidBinaryFile(const nw::ut::BinaryFileHeader*,u32,u32,u16) remains different from accepted int001813a0(const game BinaryFileHeader*,unsigned,unsigned,unsigned). More importantly Layout::Build requires native Pane::AppendChild; accepted001822fc instead consumes RegistrationOwner/RegistrationEntry with PoolList/PoolLink and calls C00191154(PoolList*,PoolLink*,PoolLink*) returning PoolLink*. The native LinkListImpl::insert uses native iterator/Node types, and the current LinkList<Pane,TNOffset>::PushBack path recovers the node using runtime byte-offset arithmetic. There is no canonical cast-free list/provider transaction establishing those as one owner. A native-name alias, copied header, byte-offset helper or partial validator-only adoption cannot reconcile this two-function group.",
+      "prerequisite": "One canonical serialized-header/validator contract with all file clients, plus evidenced native Pane/list insertion providers and a source-policy-safe real-node operation, all dependent callers moved/reproved atomically. No native or C slot alias is supplied.",
+      "evidence": "scratch/integrator/held-fixes/LAYOUT-BINARY-PROTOCOL/BLOCKED.json"
+    },
+    {
+      "function": "func_001ce9e8",
+      "target_bytes": 676,
+      "status": "uncredited-NEW-hold",
+      "component": "held-fixes",
+      "group": "LAYOUT-BINARY-PROTOCOL",
+      "category": "canonical-native-intrusive-list-and-serialized-provider-closure",
+      "reason": "The genuine native bool IsValidBinaryFile(const nw::ut::BinaryFileHeader*,u32,u32,u16) remains different from accepted int001813a0(const game BinaryFileHeader*,unsigned,unsigned,unsigned). More importantly Layout::Build requires native Pane::AppendChild; accepted001822fc instead consumes RegistrationOwner/RegistrationEntry with PoolList/PoolLink and calls C00191154(PoolList*,PoolLink*,PoolLink*) returning PoolLink*. The native LinkListImpl::insert uses native iterator/Node types, and the current LinkList<Pane,TNOffset>::PushBack path recovers the node using runtime byte-offset arithmetic. There is no canonical cast-free list/provider transaction establishing those as one owner. A native-name alias, copied header, byte-offset helper or partial validator-only adoption cannot reconcile this two-function group.",
+      "prerequisite": "One canonical serialized-header/validator contract with all file clients, plus evidenced native Pane/list insertion providers and a source-policy-safe real-node operation, all dependent callers moved/reproved atomically. No native or C slot alias is supplied.",
+      "evidence": "scratch/integrator/held-fixes/LAYOUT-BINARY-PROTOCOL/BLOCKED.json"
+    },
+    {
+      "function": "func_001266e4",
+      "target_bytes": 72,
+      "status": "uncredited-NEW-hold",
+      "component": "held-fixes",
+      "group": "SERVICE-RESULT-FILTERS",
+      "category": "whole-emitted-translator-context-still-mismatches",
+      "reason": "A new canonical whole-TU probe uses the complete nf134/np170 translation graph with the sole ServiceResult owner, without ResourceResult/FileDevice shadows or an imported short translator. Both filters MATCH under frozen middleware, but the co-emitted real0019e81c translator still mismatches (584/584 bytes, first difference+413). Removing the redundant selected Result copy is a natural simplification, but its translator is548/584 bytes and mismatches at+1. Neither whole TU passes; no passing target subset or unaccepted mismatching callee is imported.",
+      "prerequisite": "One natural exact complete translator/filter source atom under a frozen shared profile, or natural exact filters with only the external canonical translator. No steering, effects annotation, fabricated helper/binding or narrower source closure.",
+      "evidence": "scratch/integrator/held-fixes/SERVICE-RESULT-FILTERS/BLOCKED.json"
+    },
+    {
+      "function": "func_0012672c",
+      "target_bytes": 148,
+      "status": "uncredited-NEW-hold",
+      "component": "held-fixes",
+      "group": "SERVICE-RESULT-FILTERS",
+      "category": "whole-emitted-translator-context-still-mismatches",
+      "reason": "A new canonical whole-TU probe uses the complete nf134/np170 translation graph with the sole ServiceResult owner, without ResourceResult/FileDevice shadows or an imported short translator. Both filters MATCH under frozen middleware, but the co-emitted real0019e81c translator still mismatches (584/584 bytes, first difference+413). Removing the redundant selected Result copy is a natural simplification, but its translator is548/584 bytes and mismatches at+1. Neither whole TU passes; no passing target subset or unaccepted mismatching callee is imported.",
+      "prerequisite": "One natural exact complete translator/filter source atom under a frozen shared profile, or natural exact filters with only the external canonical translator. No steering, effects annotation, fabricated helper/binding or narrower source closure.",
+      "evidence": "scratch/integrator/held-fixes/SERVICE-RESULT-FILTERS/BLOCKED.json"
+    },
+    {
+      "function": "func_0017418c",
+      "target_bytes": 108,
+      "status": "uncredited-NEW-hold",
+      "component": "held-fixes",
+      "group": "GRADE-MASK",
+      "category": "inherited-notification-union-punning",
+      "reason": "The isolated MATCH reads SavedNotification.payload.storage.text[0x18]. That same NotificationStorage is also modeled/accessed as words, NotificationFields and NotificationSelection. The newer c015 manifest explicitly retains this source-policy hold. A matching UTF-16 grade load or same-element setter does not establish one complete producer-evidenced typed payload. New use of the inherited union as an alternate storage view violates the standing no-punning/one-model rule.",
+      "prerequisite": "One producer-evidenced canonical notification payload, with the complete word/text/fields/selection client cutover and byte-identical dependent accepted units; no alias, memcpy reinterpretation or new union view.",
+      "evidence": "scratch/integrator/held-fixes/GRADE-MASK/BLOCKED.json"
+    },
+    {
+      "function": "func_001b8238",
+      "target_bytes": 492,
+      "status": "uncredited-NEW-hold",
+      "component": "held-fixes",
+      "group": "TRAINING-OPTIONS",
+      "category": "inherited-training-control-union-punning",
+      "reason": "The source reads both TrainingScreen.controls.list and controls.animation in state13. TrainingControls overlays unrelated W6ListController* and AnimationOwner* pointers and its header explicitly disclaims common historical receiver identity. The newer c015 manifest therefore holds this exact source. Setter callback signatures are already void(int), but exact callbacks do not establish a real common controller owner or permit extending inherited union punning.",
+      "prerequisite": "One producer-evidenced controller class/subobject model covering both list queries and animation status, then the complete TrainingScreen/callee/provider/client cutover under the standing rules.",
+      "evidence": "scratch/integrator/held-fixes/TRAINING-OPTIONS/BLOCKED.json"
+    },
+    {
+      "function": "func_001c5a08",
+      "target_bytes": 20,
+      "status": "gate-failed",
+      "component": "W1-A / FORWARD-FULLWORD",
+      "author": "w13e / WaveW1Codex",
+      "category": "canonical-full-word-input-codegen",
+      "reason": "The honest current-contract unsigned-input source with AudioChannelState.flag0e and flags compiles to20/20 B but differs in2 bytes at offsets9 and13 (first+0x9). The explicit low-byte local and C++ source-language witness preserve the residual; the game/middleware witnesses do not match, and sdk differs from+0. No narrowed byte-formal API, second owner or steering is admitted.",
+      "author_source": "scratch/authors/w13e/src/func_001c5a08.c",
+      "canonical_source": "scratch/integrator/wave-w1/residue/FORWARD-FULLWORD/func_001c5a08.c",
+      "canonical_trial_receipts": [
+        "scratch/integrator/wave-w1/matches/r1/func_001c5a08/func_001c5a08.result.json",
+        "scratch/integrator/wave-w1/matches/r2/func_001c5a08-middleware/func_001c5a08.result.json",
+        "scratch/integrator/wave-w1/matches/r2/func_001c5a08-sdk/func_001c5a08.result.json",
+        "scratch/integrator/wave-w1/matches/r3/func_001c5a08-game/func_001c5a08.result.json",
+        "scratch/integrator/wave-w1/matches/r4/func_001c5a08-game/func_001c5a08.result.json"
+      ],
+      "evidence": "scratch/integrator/wave-w1/FAILED-CANONICAL-TRANSACTION.json"
+    },
+    {
+      "function": "func_0012f5a0",
+      "target_bytes": 104,
+      "status": "gate-failed",
+      "component": "W1-D / GRAPHICS-RELAY",
+      "author": "r41384 / WaveW1Codex",
+      "category": "canonical-scalar-relay-transaction-codegen",
+      "reason": "The current CtrResult return, exact int-enabled relay provider and real GraphicsContext.relay projection produce104/104 B with a residual at+0x2d (earlier direct scalar form100/104). The accepted00137b48 single-word repair independently fails: direct bit24 update48/60 B first+0x8; high-octet scalar extraction60/60 B first+0xd. The original accepted unit and opaque graphics header are retained byte-for-byte, not claimed revised, and neither class-return/reset-owner shadow nor union-view new source is restored.",
+      "author_source": "scratch/authors/r41384/src/func_0012f5a0.c",
+      "canonical_source": "scratch/integrator/wave-w1/residue/GRAPHICS-RELAY/func_0012f5a0.c",
+      "canonical_trial_receipts": [
+        "scratch/integrator/wave-w1/matches/r1/func_00137b48/func_00137b48.result.json",
+        "scratch/integrator/wave-w1/matches/r1/func_0012f5a0/func_0012f5a0.result.json",
+        "scratch/integrator/wave-w1/matches/r2/func_00137b48-game/func_00137b48.result.json",
+        "scratch/integrator/wave-w1/matches/r2/func_0012f5a0-game/func_0012f5a0.result.json",
+        "scratch/integrator/wave-w1/matches/r3/func_00137b48-game/func_00137b48.result.json",
+        "scratch/integrator/wave-w1/matches/r3/func_0012f5a0-game/func_0012f5a0.result.json",
+        "scratch/integrator/wave-w1/matches/r4/func_00137b48-game/func_00137b48.result.json",
+        "scratch/integrator/wave-w1/matches/r4/func_0012f5a0-game/func_0012f5a0.result.json"
+      ],
+      "evidence": "scratch/integrator/wave-w1/FAILED-CANONICAL-TRANSACTION.json"
+    }
+  ],
+  "catalogue_version": "v16",
+  "catalogue_sha256": "8fbf9c14089dc98e25a4dd918f47f08ee0bb032c16c4e06917ad85028681f3ee",
+  "required_selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "surviving_revised_accepted_units": [
+    {
+      "source": "src/checkpoint10/func_00191c94.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00191c94"
+      ],
+      "author": "r4001",
+      "accepted_source_sha256": "3548208a0e5140e7e1e3c4ebf84385d5d06052239676b021c43e7bb027f04094",
+      "current_source_sha256": "69e744954901f6367f59898feba315a0568dcd07795eddff0c0a7f210e4b5cfc",
+      "reason": "Replace the obsolete RenderCache model with the actual RenderContext::MaterialHash receiver and eleven named native members; preserve the exact flag-to-field mapping and existing unsigned flags interface.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h",
+        "include/game/render_context.h"
+      ],
+      "baseline": "d93aa6c7"
+    },
+    {
+      "source": "src/large/func_0010de68.c",
+      "profile": "game",
+      "functions": [
+        "func_0010de68"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "dc68941212d384ee5c009aee4b204d3188f6f42b4a4755c86350e208a20eb2f5",
+      "current_source_sha256": "6ba55ab7e48c7606f588d1ba86a0dadf3bcb3974109254648495996646fd17bd",
+      "reason": "Move the actual ShaderResource definition to its existing shader header without changing binary extent, selected pointer, allocation or program fields. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/shader.h"
+      ]
+    },
+    {
+      "source": "src/wave16/func_00107140.c",
+      "profile": "game",
+      "functions": [
+        "func_00107140"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "f40369bb8a2cb417d438dae970b44f93fcd104b1928e1947792be55559bb6e29",
+      "current_source_sha256": "3ff23956ea5b0f1ad4302dbadaaa87ff071de4e982503cae8c385879ed7d9c5b",
+      "reason": "Retire the identical void func_00135f1c(int) local declaration in favor of startup.h:118. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/startup.h"
+      ]
+    },
+    {
+      "source": "src/wave18/func_0019b574.c",
+      "profile": "game",
+      "functions": [
+        "func_0019b574"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "61cfbbc6974197e214351a67076fe656d9ba5a5a289b57903698320494100c5f",
+      "current_source_sha256": "2688ad4ff8287afc793de68f9b507115bf1504118597380ff403720c5de12003",
+      "reason": "Retire the identical unsigned-char cursor extern and include its existing canonical header; do not change cursor storage to word pointers. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave19/func_0011774c.c",
+      "profile": "game",
+      "functions": [
+        "func_0011774c"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "463cc013275d76c935247aed8503587b1ddb4c5f91fa6b7980ebbe5d71bc5283",
+      "current_source_sha256": "a5c52b812d2eb89b1756a332467762d1d7a29d21fafe5c61377871ee9415b7d4",
+      "reason": "Publish the distinct OwnerIdentifierNode/OwnerIdentifierRegistry and int(registry*,int) prototype; retain the actual returned count and all existing fatal-handler calls. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/object_pool.h"
+      ]
+    },
+    {
+      "source": "src/wave19/func_0019f518.c",
+      "profile": "game",
+      "functions": [
+        "func_0019f518"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "9d49df4721503ffc6906fc889ee497bdc10170013f55709ae4e2a91da61b2613",
+      "current_source_sha256": "09b77b66a5bf8af14b49014a2309d97fa02b810055277c0803aeda37f747fbfd",
+      "reason": "Publish the exact IdentifierNode/IdentifierRegistry definition and void(registry*,int) prototype; remove the identical local definitions, with no key representation or body change. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/object_pool.h"
+      ]
+    },
+    {
+      "source": "src/wave5/func_00114778.c",
+      "profile": "game",
+      "functions": [
+        "func_00114778"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "3ccfc3fd0d12792f6a826a40db6cd2b0ad8cbbf19c0577587203cc158cb079ab",
+      "current_source_sha256": "fc6b7a1c38e0825d8515ac825a2d4bce50543ed87dc7e804382228d263ddfb8c",
+      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; body and byte-cursor protocol stay unchanged. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave5/func_001147c0.c",
+      "profile": "game",
+      "functions": [
+        "func_001147c0"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "9de96086d1079ef07e8ff9ed6fde38c246111f985fb9e16f7db3db6c48cad116",
+      "current_source_sha256": "330b02fd0de3cabc6d5ce2f2f9d58f4f576f3924a0c6aa5ed37cab4f0123e10d",
+      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; preserve direct byte publication. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave8/func_001d4174.c",
+      "profile": "game",
+      "functions": [
+        "func_001d4174"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "40ff826fec0189c563f81b93939d8301062e0c0835988d8e2b2a433e07a5e4d3",
+      "current_source_sha256": "af3eda98acda827deaab43da3d2ae95f340b27ef2f0f125802d260c9c8bb8c20",
+      "reason": "Retire the identical SoundArchiveRequestState local definition and publish/use its exact void(state*,ArchiveHandle*) declaration; do not equate the record with native SoundArchiveLoader. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/archive_runtime.h"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_0010d454.c",
+      "profile": "game",
+      "functions": [
+        "func_0010d454"
+      ],
+      "author": "r4031",
+      "accepted_source_sha256": "a5229d69cdd5140ec52304626d2070f35d2538fe9fb93ab9060115bdb3dd37ad",
+      "current_source_sha256": "1e4cec0268e342a9a02927efe7ef6997fcd5f5892671a811af289c1c3de9eb52",
+      "reason": "RQ-G03: consume and forward the complete event result; exact six-input receive protocol replaces the incorrect bool declaration.",
+      "header_dependencies_changed": [
+        "include/game/service_protocol.h",
+        "include/game/applet.h"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+    },
+    {
+      "source": "src/wave14/func_00115628.c",
+      "profile": "game",
+      "functions": [
+        "func_00115628"
+      ],
+      "author": "w14a",
+      "accepted_source_sha256": "802d41418bd077021de6a713bfd9c8c42104534980f1b70b89aa99d7004e2dda",
+      "current_source_sha256": "e15ad4002771a0a7ca0f360a75c896c0bd8aca33507540c3af0862b7013c5b79",
+      "reason": "RQ-G03 evidenced closure authorized by Main: the sole caller forwards full r0; replace bool normalization model with full-word event input and explicit byte storage.",
+      "header_dependencies_changed": [
+        "include/game/applet.h"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+    },
+    {
+      "source": "src/wave5/func_00145840.c",
+      "profile": "game",
+      "functions": [
+        "func_00145840"
+      ],
+      "author": "Wave5Author1",
+      "accepted_source_sha256": "ca44c922e757fd719ab4892de52a78f720dd62ecda7cc0a91199dfc34d2e8a9b",
+      "current_source_sha256": "db0ee650c4fb009095a527c9b4cff3e65a8181b2ffc4d6434c1d617c93e21f51",
+      "reason": "RQ-G03: retire the identical local request-exchange declaration in favor of service_state.h; initializer and call body remain unchanged.",
+      "header_dependencies_changed": [
+        "include/game/service_state.h"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+    }
+  ],
+  "totals": {
+    "new_functions": 10,
+    "new_bytes": 2216,
+    "in_place_revised_accepted_units": 12,
+    "native_moved_accepted_units": 1,
+    "accepted_moves": 1,
+    "moved_bytes": 240,
+    "holds": 10,
+    "held_bytes": 1924
+  }
 }
