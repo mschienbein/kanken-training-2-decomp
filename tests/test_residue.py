@@ -336,6 +336,63 @@ class ResidueTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.report()
 
+    def test_sweep12_dispositions_are_hash_bound_extent_scoped_and_not_plans(self) -> None:
+        label = "scratch/permute/sweep-12/summary.json"
+        self.assertIn(label, self.report()["absent_optional_inputs"])
+        self.census(list(range(3, 16)), ["initial", "2", "3"])
+        self.author("w02", [self.row(index, 12) for index in range(3, 16)])
+        rows = {
+            self.names[3]: {"size": 32, "state": "plateau"},
+            self.names[4]: {"size": 32, "state": "exhausted"},
+            self.names[5]: {"size": 32, "state": "match"},
+            self.names[6]: {"size": 32, "state": "adapter_refused"},
+            self.names[7]: {"size": 32, "state": "pending"},
+            self.names[8]: {"size": 32, "state": "planned_adapter_refusal"},
+            self.names[9]: {"size": 28, "state": "adapter_refused"},
+            self.names[10]: {"state": "adapter_refused"},
+            self.names[11]: {"size": 32, "state": "adapter_refused",
+                            "final_functions": [self.row(11, 6, size=28)]},
+            self.names[12]: {"size": 32, "state": "plateau",
+                            "applicability": {"residual_evidence": {"target_size": 28}}},
+            self.names[13]: {"size": 32, "state": "not_applicable_operational_boundary",
+                            "stop_reason": "source_bound_residual_above_32_differing_bytes"},
+            self.names[14]: {"size": 32, "state": "pending",
+                            "stop_reason": "adapter_refused planned; no completed attempt"},
+            self.names[15]: {"state": "plateau",
+                            "applicability": {"residual_evidence": {"target_size": 32}}}}
+        self.put(label, {"policy": {"operational_differing_byte_cap": 32}, "rows": rows})
+        report = self.report()
+        self.assertEqual(report["input_hashes"][label], residue.digest((self.root / label).read_bytes()))
+        by_name = {row["function"]: row for row in report["rows"]}
+        for index in (3, 4, 5, 15):
+            row = by_name[self.names[index]]
+            self.assertTrue(row["ladder"]["4"]["completed"])
+            self.assertTrue(row["permuter"]["search_completed"])
+            self.assertEqual(row["permuter"]["disposition"], "completed")
+            self.assertIn("sweep-12", row["ladder"]["4"]["attempted_batches"])
+            self.assertEqual(row["status_class"], "near_miss_exhausted")
+        refused = by_name[self.names[6]]
+        self.assertTrue(refused["ladder"]["4"]["completed"])
+        self.assertFalse(refused["permuter"]["search_completed"])
+        self.assertEqual(refused["permuter"]["disposition"], "adapter_refused")
+        self.assertTrue(refused["permuter"]["boundary_not_search"])
+        for index in range(7, 15):
+            row = by_name[self.names[index]]
+            self.assertIn("4", row["missing_steps"])
+            self.assertIsNone(row["permuter"]["disposition"])
+            self.assertEqual(row["status_class"], "ladder_incomplete")
+        self.assertEqual(by_name[self.names[13]]["permuter"]["state"], "reopened_inside_bound")
+        for index in (9, 10, 11, 12):
+            self.assertTrue(by_name[self.names[index]]["stale_extent_evidence"])
+
+    def test_sweep12_cannot_override_the_frozen_permuter_cap(self) -> None:
+        label = "scratch/permute/sweep-12/summary.json"
+        for cap in (16, 64, None, True):
+            with self.subTest(cap=cap):
+                self.put(label, {"policy": {"operational_differing_byte_cap": cap}, "rows": {}})
+                with self.assertRaisesRegex(ValueError, "frozen 32 B"):
+                    self.report()
+
     def test_census_identity_reconciliation_preserves_mapping_gaps(self) -> None:
         self.put("scratch/integrator/census-20261021-r3/LADDER.json", {
             "rows": [
@@ -618,7 +675,7 @@ class ResidueTest(unittest.TestCase):
         self.author("w01", [self.row(9, 20)])
         for cap in (16, 64, 0, None, True):
             with self.subTest(cap=cap):
-                for sweep in ("sweep-10", "sweep-11"):
+                for sweep in ("sweep-10", "sweep-11", "sweep-12"):
                     self.put(f"scratch/permute/{sweep}/summary.json", {
                         "policy": {"operational_differing_byte_cap": cap}, "rows": {}})
                 with self.assertRaises(ValueError):

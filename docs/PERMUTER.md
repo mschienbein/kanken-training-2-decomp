@@ -193,6 +193,12 @@ not search rungs. Open policy questions remain `awaits_user_ruling`. Optional
 recon/survey/wave/dispatch dispositions add hash-bound exact-blocker pointers,
 never a new hold, acceptance, rung completion, or class change.
 
+The sweep-10 summary is required; sweep-11 and sweep-12 summaries are optional,
+hash-bound step-4 inputs. A current-extent `plateau`, `exhausted` or `match`
+records completed search. An explicit current-extent `adapter_refused` gives
+step 4 a boundary disposition, not a search. Pending/planned or stale-extent
+records never complete the rung; all sweeps use the same frozen 32 B cap.
+
 `tools/census_supplements.py --root .` is the canonical supplement builder; the
 private `scratch/integrator/census-supplements/build.py` delegates to it. Explicit
 Main batches for rungs 1–3 still need delivered, current-extent target RESULT

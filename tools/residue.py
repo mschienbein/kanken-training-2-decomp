@@ -79,7 +79,7 @@ REQUIRED_STEPS = (*AUTHOR_STEPS, "4")
 EXTRA_STEPS = ("5", "5b", "5c")
 STEPS = (*REQUIRED_STEPS, *EXTRA_STEPS)
 # Permuter sweeps that share the sweep-10 summary schema; sweep-10 is required, later ones optional.
-PERMUTER_SWEEPS = (("sweep-10", True), ("sweep-11", False))
+PERMUTER_SWEEPS = (("sweep-10", True), ("sweep-11", False), ("sweep-12", False))
 BANDS = ("0 (held)", "1-16", "17-64", "65-256", ">256", "unknown")
 CLASSES = ("held_contract", "header_blocked", "near_miss_exhausted",
            "never_matched_exhausted", "awaits_user_ruling", "ruled_residue",
