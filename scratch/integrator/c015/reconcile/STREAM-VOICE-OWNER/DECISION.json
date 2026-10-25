@@ -1,0 +1,24 @@
+{
+  "family": "STREAM-VOICE-OWNER",
+  "outcome": "held-evidence",
+  "members": [
+    "func_001d51c0",
+    "func_001d54b0",
+    "func_001d7edc",
+    "func_001d7f5c",
+    "func_001d80b0",
+    "func_001d82b0"
+  ],
+  "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+  "canonical_owner_evidence": [
+    "include/game/sequence.h already owns AnimationTrack and AudioVoice endpoint types; old SceneController declarations disagree.",
+    "include/game/sound_voice.h and accepted func_0014bd20 establish two polymorphic bases,8 element records and the2068-byte SoundVoiceObject member.",
+    "scene_lifecycle.h preserves a21fc-byte SceneController allocation extent.",
+    "scene_targets.cpp workGroups() reinterprets this+1 at2068; scene_method_byte.cpp instead reinterprets reserved2068 inside21fc; neither supplies a proven actual work-record owner/capacity.",
+    "scene_controller.cpp reinterprets SoundVoiceBase as an unrelated synchronization prefix and adds native slot/destructor ownership not established by current definitions."
+  ],
+  "additional_track_boundary": "AnimationTrack.activity is still a pointer/count union; new cleanup uses require a coherent pointer owner cutover and exact destructor slot contract, not merely renaming SceneChild.",
+  "accepted_changes": [],
+  "names_admitted": [],
+  "proofs": "No known mixed-owner/punning source is compiled or collected."
+}

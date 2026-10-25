@@ -1,0 +1,46 @@
+{
+  "source": "src/models/transition_setters/func_001a8048_value_setter.c",
+  "profile": "game",
+  "functions": [
+    "func_001a8048"
+  ],
+  "extra_sources": [
+    "src/models/transition_setters/transition_active.c"
+  ],
+  "function_owners": {
+    "func_001a8048": "src/models/transition_setters/func_001a8048_value_setter.c"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/models/transition_setters/func_001a8048_value_setter.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u0796",
+    "--extra-source",
+    "src/models/transition_setters/transition_active.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.322591,
+  "source_sha256": "4163d4a549b8d9eb174f76dfed879b9422f10a8cf9d1fd32e1bd56a08ba6e4c8",
+  "extra_source_sha256": {
+    "src/models/transition_setters/transition_active.c": "697fe1ec9968e3c15dbae989ed0f4b91a0f046a4ce31962d5b519a0e88c0fa1f"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u0796/func_001a8048_value_setter.result.json",
+  "receipt_sha256": "178ea51cf16e406ae17ca541fa28f968f74bbe905fb159c87864eeb577a139b1",
+  "output": "MATCH    func_001a8048 @ 0x1a8048 size 0x19c/0x19c [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  transition_active (8 bytes; i.transition_active)\n",
+  "stderr": ""
+}

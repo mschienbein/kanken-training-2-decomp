@@ -1,0 +1,31 @@
+{
+  "family": "FILESYSTEM-WORKER",
+  "status": "reconciled",
+  "reason": "The existing OptionalAllocation owns the worker allocation/count and result/state. Add only its actually accessed stop word at +0x14; keep the real allocation subobject, convert its raw allocation pointer to the 44-byte item type, preserve the original signed count comparison by a value conversion, and retain the exact two-input thread entry protocol.",
+  "members": [
+    "func_0010af8c"
+  ],
+  "member_bytes": 340,
+  "evidence": [
+    "include/game/runtime.h:40-53",
+    "src/wave16/func_00104dd8.c:6-7",
+    "src/wave17/func_00145b20.c:5",
+    "scratch/authors/r4041/src/func_0010af8c.cpp:51-91",
+    "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json: provider_contract_table func_0010af8c runtime_parameter_type void(void*,void*)"
+  ],
+  "new_source": "src/checkpoint16/filesystem_worker.cpp",
+  "revised_accepted_units": [],
+  "header_dependent_reproofs": [
+    "src/wave16/func_00104dd8.c",
+    "src/wave17/func_00145b20.c"
+  ],
+  "qualifications": [
+    "[INFERENCE] Work-item member names and diagnostic helper factoring are descriptive. __current_pc is an approved compiler intrinsic."
+  ],
+  "match_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ]
+}

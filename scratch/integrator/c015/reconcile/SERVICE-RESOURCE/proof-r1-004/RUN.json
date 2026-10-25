@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint10/func_001f580c_default.c",
+  "profile": "middleware",
+  "functions": [
+    "func_001f580c"
+  ],
+  "extra_sources": [
+    "src/models/object_registration/resource_service_lock.c"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/func_001f580c_default.c",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-004",
+    "--extra-source",
+    "src/models/object_registration/resource_service_lock.c"
+  ],
+  "exit_code": 0,
+  "source_sha256": "cef8b5072f0df1af3e7f93b863cd771e069cccb8d7170cf82067fd781b97fa1b",
+  "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-004/func_001f580c_default.result.json",
+  "receipt_sha256": "378ae3450d284e4aecc03365c348be1e7fa41386ddd4e24d3841cbdbfc7b52c0",
+  "statuses": [
+    {
+      "name": "func_001f580c",
+      "address": 2054156,
+      "size": 96,
+      "candidate_size": 96,
+      "status": "match",
+      "first_diff": null
+    }
+  ],
+  "all_required_match": true,
+  "stdout": "MATCH    func_001f580c @ 0x1f580c size 0x60/0x60 [armlink5-inline-branchnop-v6: 1 inline_nop]\nREMOVED  register_resource_service_lock_cleanup (4 bytes; i.register_resource_service_lock_cleanup)\n",
+  "stderr": ""
+}

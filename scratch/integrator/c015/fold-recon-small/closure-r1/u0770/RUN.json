@@ -1,0 +1,46 @@
+{
+  "source": "src/models/func_001b9f18/func_001b9f18.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001b9f18"
+  ],
+  "extra_sources": [
+    "src/models/func_001b9f18/drawing_state.c"
+  ],
+  "function_owners": {
+    "func_001b9f18": "src/models/func_001b9f18/func_001b9f18.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001b9f18/func_001b9f18.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0770",
+    "--extra-source",
+    "src/models/func_001b9f18/drawing_state.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.591262,
+  "source_sha256": "94c67dabe1fa64a26abc442d1925cd8706334ea6bf8f740ac8250ca4be238a77",
+  "extra_source_sha256": {
+    "src/models/func_001b9f18/drawing_state.c": "32d417284339e827c46b284b3716531b419ec0c1ed1c1a7ea3981963824644dc"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c015/fold-recon-small/closure-r1/u0770/func_001b9f18.result.json",
+  "receipt_sha256": "f5c2de38c8ff20413642ca21d50038c049ec4c58ddc1d7a83cdf72f3faaac98d",
+  "output": "MATCH    func_001b9f18 @ 0x1b9f18 size 0x2bc/0x2bc [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  scene_drawing_state (8 bytes; i.scene_drawing_state)\n",
+  "stderr": ""
+}

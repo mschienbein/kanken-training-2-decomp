@@ -1,6 +1,4 @@
-extern void func_001376fc(void *start0, unsigned value0, void *end0,
-    unsigned width0, void *start1, unsigned value1, void *end1,
-    unsigned width1);
+#include "game/graphics_state.h"
 
 void func_00132344(void *start0, unsigned value0, void *end0,
     unsigned width0, void *start1, unsigned value1, void *end1,

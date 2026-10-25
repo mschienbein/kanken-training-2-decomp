@@ -1,0 +1,43 @@
+{
+  "source": "src/wave13/func_001838ec.c",
+  "profile": "game",
+  "functions": [
+    "func_001838ec"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/wave13/func_001838ec.c",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/FRAME-TIMING-CALLBACK/closure-r1-020"
+  ],
+  "exit_code": 0,
+  "source_sha256": "af92bca18727f635b276a9e08579f8f15e7078be246e7bee2a4d90ea54a8a229",
+  "receipt": "scratch/integrator/c015/reconcile/FRAME-TIMING-CALLBACK/closure-r1-020/func_001838ec.result.json",
+  "receipt_sha256": "6cab10d5d056b2b22d4f8e907d1c930de5c366a38ea1633cd4f99b6568154541",
+  "statuses": [
+    {
+      "name": "func_001838ec",
+      "address": 1587436,
+      "size": 20,
+      "candidate_size": 20,
+      "status": "match",
+      "first_diff": null
+    }
+  ],
+  "all_required_match": true,
+  "stdout": "MATCH    func_001838ec @ 0x1838ec size 0x14/0x14 [armlink5-inline-branchnop-v6: 1 branchnop]\n",
+  "stderr": ""
+}

@@ -1,0 +1,43 @@
+{
+  "holds": [
+    {
+      "function": "func_0013e18c",
+      "target_bytes": 212,
+      "status": "uncredited-NEW-hold",
+      "component": "c015",
+      "author": "nm77",
+      "category": "canonical-owner-member-mismatch",
+      "reason": "The standalone native texture operation MATCHes only with an independent bss_004952f4 extern. Policy lint exposes that address inside HeapManager at +4. The proved real member cutover bss_004952f0.vram no longer MATCHes (closure-r3: 216/212 bytes, first difference52, exit1); do not restore a second object root or introduce a codegen alias. Canonical heap/font headers are restored and the candidate is held.",
+      "author_source": "scratch/authors/nm77/src/func_0013e18c.cpp",
+      "author_receipt": "scratch/authors/nm77/match/func_0013e18c/final-delivered/func_0013e18c.result.json",
+      "evidence": "scratch/integrator/c015/PRE-REVIEW-FINAL-HOLDS.json"
+    },
+    {
+      "function": "func_001b8238",
+      "target_bytes": 492,
+      "status": "uncredited-NEW-hold",
+      "component": "c015",
+      "author": "nm108",
+      "category": "inherited-union-view-would-be-new-punning",
+      "reason": "The target uses both TrainingScreen.controls.list and .animation in state13. Current TrainingControls is a union of unrelated W6ListController * and AnimationOwner * views of the same pointer, not an evidenced shared controller class. Exact bytes do not authorize this new union punning; hold until one producer-evidenced controller model replaces that inherited union.",
+      "author_source": "scratch/authors/nm108/src/func_001b8238/02-shared-real-option-callback/func_001b8238.c",
+      "author_receipt": "scratch/authors/nm108/match/001b8238/02-shared-real-option-callback/game/func_001b8238.result.json",
+      "evidence": "scratch/integrator/c015/PRE-REVIEW-FINAL-HOLDS.json"
+    }
+  ],
+  "superseded_source_commit": "d0e20187b",
+  "closure_r3": {
+    "result": "FAIL",
+    "actual_exit_code": 1,
+    "contexts": 1002,
+    "required_functions": 1027,
+    "matched_functions": 1026,
+    "exit_counts": {
+      "0": 1001,
+      "1": 1
+    }
+  },
+  "canonical_field_trial": "held-trials/func_0013e18c-final-canonical.cpp",
+  "union_source_trial": "held-trials/func_001b8238-final-canonical.c",
+  "scope_repair": "Remove both candidates and revert now-unneeded heap/font/vram declarations; rerun the complete final closure."
+}

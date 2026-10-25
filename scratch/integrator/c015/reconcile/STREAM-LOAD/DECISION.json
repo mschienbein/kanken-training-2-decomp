@@ -1,0 +1,18 @@
+{
+  "family": "STREAM-LOAD",
+  "outcome": "held-evidence",
+  "members": [
+    "func_001d67c8",
+    "func_001d7318"
+  ],
+  "decided_endpoint": "int(StreamLoadState *, StreamLoadResult *, void **buffers, unsigned capacity, unsigned advance, int request_option)",
+  "blocking_witnesses": [
+    "023-final-stream-commands.cpp:8-25,65-69,94-107 names whole StreamVoice/StreamVoiceSetup and pointer-valued fourth input.",
+    "024-final-stream-block.cpp:30-63,90-99,137-138 reads block/codec state and requires the incompatible state/result/buffer/scalar contract.",
+    "The event allocator returns a StreamEvent * which the dispatcher reinterprets as a complete StreamVoiceEvent; the actual arena/result lifetime is not constructed or proved.",
+    "BlockDecoder skip/read slot providers are not established by either selected source; co-emitted001d9a34 is a mismatch."
+  ],
+  "reason": "The shared six-input loader signature is decided by its body, but the dispatcher publishes incompatible whole-owner/setup/data-pointer views. Neither selected source supplies the request/header producer or decoder/arena provider needed to establish genuine subobjects and exact callbacks; no cast or invented event lifetime is admissible.",
+  "changes": [],
+  "proofs": "No incompatible mixed-contract source is compiled or collected."
+}

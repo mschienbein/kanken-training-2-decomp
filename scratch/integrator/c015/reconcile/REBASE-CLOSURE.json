@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "old_base": "18efd7bb",
+  "pre_merge_source_commit": "bb6397f4f",
+  "merge_commit": "110a1158fb28a7b58f8b2f22d71d7a9ea94d05e6",
+  "new_main_base": "ea985bcb37576c3347debe84579993a8f228352b",
+  "strategy": "Non-rewriting merge commit; no force or history rewrite.",
+  "catalogue": {
+    "version": "v15",
+    "sha256": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980",
+    "denominator_history_version": 12,
+    "history_sha256": "83fbd0e6747c2e2cf889c3cd987ce968c594ed1e862b6942a97c4f549489bace"
+  },
+  "changed_source_or_include_paths": [
+    "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+    "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp",
+    "src/wave20/func_001f4cf8.cpp",
+    "include/game/scene_parameters.h"
+  ],
+  "withdrawn_c012_r5_functions": [
+    "func_001e395c",
+    "func_001e722c",
+    "func_001f4cf8"
+  ],
+  "affected_surviving_units": [],
+  "new_matcher_commands_required": 0,
+  "reason": "The merge removes exactly the three withdrawn source units and their scene_parameters.h header; none is in the finalized ledger or any c015 live source/include closure. All surviving sources and transitive project includes are byte-identical to pre-merge inputs.",
+  "changed_existing_name_addresses": [],
+  "surviving_function_extent_or_entry_changes": [],
+  "catalogue_addition": [
+    {
+      "function": "func_001005fa",
+      "kind": "library",
+      "size": 16,
+      "identity": "_snputc"
+    }
+  ],
+  "catalogue_carry": "All current ledger/C15 identities retain address,size,ISA,code ranges,pools,literals and entries. The added_snputc library owner receives no c015 credit. Existing receipts retain their actual historical hashes; this current identity/input closure carries them to v15.",
+  "headers_and_sources_after_merge": "No new source/header edit is made during this scope/base refresh.",
+  "accepted_ledger_authority": "config/matches.json from finalized c012-r6, not the old prepared c012-r5 proposal."
+}

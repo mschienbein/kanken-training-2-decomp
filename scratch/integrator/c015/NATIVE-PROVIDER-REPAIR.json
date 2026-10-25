@@ -1,0 +1,44 @@
+{
+  "source": "src/checkpoint15/func_001c8994.cpp",
+  "provider": "src/checkpoint10/collect-r2/func_001c7ab4.cpp: native nw::gfx::res::ResVertexAttribute::Cleanup()",
+  "repair": "Call attribute.Cleanup() with its exact native member interface; remove the C free-function declaration alias for that provider. func_001c78f8 remains the actual explicitly typed C wrapper.",
+  "proof": {
+    "source": "src/checkpoint15/func_001c8994.cpp",
+    "profile": "game",
+    "functions": [
+      "func_001c8994"
+    ],
+    "argv": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+      "tools/match.py",
+      "src/checkpoint15/func_001c8994.cpp",
+      "--profile",
+      "game",
+      "--out",
+      "scratch/integrator/c015/proofs/r4-native-provider/func_001c8994",
+      "--show",
+      "0",
+      "--linker-model",
+      "armlink5-inline-branchnop-v6",
+      "--literal-model",
+      "anonymous-string-records-v1"
+    ],
+    "exit": 0,
+    "receipt": "scratch/integrator/c015/proofs/r4-native-provider/func_001c8994/func_001c8994.result.json",
+    "source_sha256": "4051c322f1812e7ddc16257d10bf9ce8535c8df5736e2fa3ef8150df5a024541",
+    "output": "MATCH    func_001c8994 @ 0x1c8994 size 0xac/0xac\n",
+    "statuses": [
+      {
+        "name": "func_001c8994",
+        "size": 172,
+        "candidate_size": 172,
+        "status": "match"
+      }
+    ]
+  },
+  "superseded_closure": "closure-r4 was stopped before source/header changes; no PASS is claimed.",
+  "source_commit_before_repair": "399f706c8"
+}

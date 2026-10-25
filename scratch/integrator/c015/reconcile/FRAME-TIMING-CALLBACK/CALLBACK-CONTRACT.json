@@ -1,0 +1,233 @@
+{
+  "family": "FRAME-TIMING-CALLBACK",
+  "exact_invoking_type": "void(void *)",
+  "canonical_field": "service_runtime.h ServiceWorker.update/update_context at+0x20/+0x24",
+  "actual_publication": "ORIGINAL-CALLBACK-STORES.json proves func_0014b17c stores incoming r2/r3 to those exact fields.",
+  "forwarding": [
+    {
+      "caller": "func_00147124",
+      "callee": "func_0014852c",
+      "site": "0x147228",
+      "arguments": {
+        "r0": {
+          "caller_frame": "func_00147124",
+          "offset": -60
+        },
+        "r1": {
+          "address_or_scalar": "0x14b85c"
+        },
+        "r2": {
+          "address_or_scalar": "0x4b8fa8"
+        }
+      },
+      "stack": {
+        "0": {
+          "address_or_scalar": "0x149474"
+        },
+        "4": {
+          "address_or_scalar": "0x4b8fa8"
+        },
+        "8": {
+          "loaded_from": {
+            "caller_frame": "func_00147124",
+            "offset": 12
+          }
+        },
+        "12": {
+          "parameter_of": "func_00147124",
+          "register": "r1"
+        },
+        "16": {
+          "parameter_of": "func_00147124",
+          "register": "r2"
+        },
+        "20": {
+          "parameter_of": "func_00147124",
+          "register": "r3"
+        },
+        "24": {
+          "loaded_from": {
+            "caller_frame": "func_00147124",
+            "offset": 0
+          }
+        },
+        "28": {
+          "loaded_from": {
+            "caller_frame": "func_00147124",
+            "offset": 4
+          }
+        }
+      }
+    },
+    {
+      "caller": "func_0014852c",
+      "callee": "func_00182f88",
+      "site": "0x14854c",
+      "arguments": {
+        "r0": {
+          "caller_frame": "func_0014852c",
+          "offset": 0
+        },
+        "r1": {
+          "parameter_of": "func_0014852c",
+          "register": "r1"
+        },
+        "r2": {
+          "parameter_of": "func_0014852c",
+          "register": "r2"
+        },
+        "r3": {
+          "parameter_of": "func_0014852c",
+          "register": "r3"
+        }
+      },
+      "stack": {}
+    },
+    {
+      "caller": "func_0014852c",
+      "callee": "func_0014b17c",
+      "site": "0x148560",
+      "arguments": {
+        "r0": {
+          "return_of": "func_00182f88",
+          "site": "0x14854c",
+          "register": "r0"
+        },
+        "r1": {
+          "parameter_of": "func_0014852c",
+          "register": "r0"
+        },
+        "r2": {
+          "parameter_of": "func_0014852c",
+          "register": "r1"
+        },
+        "r3": {
+          "parameter_of": "func_0014852c",
+          "register": "r2"
+        }
+      },
+      "stack": {
+        "0": {
+          "parameter_of": "func_0014852c",
+          "register": "r3"
+        },
+        "4": {
+          "loaded_from": {
+            "caller_frame": "func_0014852c",
+            "offset": 0
+          }
+        },
+        "8": {
+          "loaded_from": {
+            "caller_frame": "func_0014852c",
+            "offset": 4
+          }
+        },
+        "12": {
+          "loaded_from": {
+            "caller_frame": "func_0014852c",
+            "offset": 8
+          }
+        }
+      }
+    }
+  ],
+  "actual_invocations": [
+    {
+      "owner": "0x0014fa48",
+      "site": "0x0014fb4c",
+      "invoked_value": {
+        "kind": "load",
+        "storage": {
+          "kind": "offset",
+          "base": {
+            "kind": "parameter",
+            "function": "0x0014fa48",
+            "register": "r0"
+          },
+          "offset": 32
+        }
+      },
+      "arguments": {
+        "r0": {
+          "kind": "load",
+          "storage": {
+            "kind": "offset",
+            "base": {
+              "kind": "parameter",
+              "function": "0x0014fa48",
+              "register": "r0"
+            },
+            "offset": 36
+          }
+        },
+        "r1": {
+          "kind": "load",
+          "storage": {
+            "kind": "offset",
+            "base": {
+              "kind": "parameter",
+              "function": "0x0014fa48",
+              "register": "r0"
+            },
+            "offset": 32
+          }
+        },
+        "r2": {
+          "kind": "unknown"
+        },
+        "r3": {
+          "kind": "unknown"
+        }
+      }
+    }
+  ],
+  "complete_graph_sibling_inventory": [
+    {
+      "caller": "0x00147124",
+      "site": "0x00147228",
+      "entrypoint": "0x0014852c",
+      "category": "unmodeled_existing_custom_runtime",
+      "callback_parameter_index": 1,
+      "runtime_parameter_type": "UNESTABLISHED: frame-timing callback forwarded to0014b17c",
+      "argument_fact": {
+        "kind": "function_address",
+        "address": "0x0014b85c",
+        "owner": "0x0014b85c",
+        "names": [
+          "func_0014b85c"
+        ]
+      },
+      "providers": [
+        {
+          "address": "0x0014b85c",
+          "name": "func_0014b85c",
+          "aliases": [
+            "func_0014b85c"
+          ],
+          "ledger_state": "DEFERRED_NEW",
+          "prior_prepared_claim": true,
+          "runtime_parameter_type": "UNESTABLISHED: frame-timing callback forwarded to0014b17c",
+          "source": "src/checkpoint10/func_0014b85c.c",
+          "declared_provider_type": "function(pointer to (struct FrameTimingState)) -> void",
+          "declaration_site": {
+            "source": "src/checkpoint10/func_0014b85c.c",
+            "line": 12
+          },
+          "source_sha256": "982034432f4af5896e972b64cd615c9f793398876fb1def5c26b6e606c067f15",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        }
+      ],
+      "array_semantics": null,
+      "source_binding": {
+        "kind": "uncredited original caller; intentionally included"
+      }
+    }
+  ],
+  "unique_provider": "func_0014b85c",
+  "actual_context_owner": "Original registration supplies0x004b8fa8; accepted src/wave4/func_00185d1c.c defines that allocation as canonical ObjectManager.",
+  "owner_cutover": "Refine ObjectManager sample pointer/count/enable fields and retire the second FrameTimingState model; no alias or cast is introduced.",
+  "runtime_policy": "Do not specialize or modify the shared runtime. Provider itself adopts the already canonical void(void *) interface.",
+  "semantic_only": true
+}

@@ -1,0 +1,22 @@
+{
+  "family": "TEXT-WRITER-CURSOR",
+  "status": "blocked",
+  "reason": "The target duplicates existing TextFlowState as MarkupStateR41258, uses a different flag access width, and requires two W20TextWriter/font helper contracts not yet cut over to the real native writer/font providers. The accepted TextWriterState copies also remain a separate writer representation. No cross-member memcpy/punning or second writer/tag-state model is retained.",
+  "members": [
+    "func_001af644"
+  ],
+  "member_bytes": 248,
+  "evidence": [
+    "include/game/text_flow.h:7-30",
+    "include/game/text_writer.h:14-35",
+    "include/nw/font/font_CharWriter.h:159-170",
+    "scratch/authors/nf198/src/func_001af644.cpp:7-27,50-64",
+    "src/wave20/func_0017a690.cpp:30-33",
+    "src/wave20/func_0017a6c8.cpp:30-33",
+    "src/wave20/func_00134190.cpp:6-23",
+    "src/wave20/func_00216518.cpp:6-23"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

@@ -1,0 +1,320 @@
+{
+  "schema_version": 1,
+  "base_commit": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+  "folded_commit": "47945ebcfaefbb84838b5ef2e8b924e4a0e53714",
+  "merge_commit": "909c6ca0d19f5ce30bb73388207878760590b67e",
+  "merge_conflicts": false,
+  "retired_manifest": "config/candidates/c016.json",
+  "archived_manifest": "C016-INPUT.json",
+  "relocated_unaccepted_sources": {
+    "src/checkpoint16/property_lookup.cpp": "src/checkpoint15/recon-small/property_lookup.cpp",
+    "src/checkpoint16/filesystem_worker.cpp": "src/checkpoint15/recon-small/filesystem_worker.cpp",
+    "src/checkpoint16/category_variadic.c": "src/checkpoint15/recon-small/category_variadic.c"
+  },
+  "new_small_functions": 4,
+  "new_small_bytes": 752,
+  "optional_rv02": {
+    "included": true,
+    "function": "func_00122680",
+    "bytes": 264,
+    "collector_exit_code": 0,
+    "collector_record": "RV02-COLLECTED.json",
+    "reason": "tools/collect.py took the exact dependency-free row cleanly; fresh destination proof also MATCHes."
+  },
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "new_claim_proofs": [
+    {
+      "source": "src/checkpoint15/recon-small/property_lookup.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00112fb8"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/recon-small/property_lookup.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-000"
+      ],
+      "exit_code": 0,
+      "source_sha256": "b6b1dfffa1952d4f7a67f89c05d0d5d11cbe70d530e90eb443ed03e260abb062",
+      "receipt": "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-000/property_lookup.result.json",
+      "receipt_sha256": "4ede973ee89ef7dce2246a7fe0bac0369d6381264e9e2f4e8a39446776cd94ac",
+      "statuses": [
+        {
+          "name": "func_00112fb8",
+          "address": 1126328,
+          "size": 232,
+          "candidate_size": 232,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_00112fb8 @ 0x112fb8 size 0xe8/0xe8\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/checkpoint15/recon-small/filesystem_worker.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0010af8c"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/recon-small/filesystem_worker.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-001"
+      ],
+      "exit_code": 0,
+      "source_sha256": "6f76c072b14e9d67af1fb8def998379816e624b10b0d71eebec14ed8b61ded54",
+      "receipt": "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-001/filesystem_worker.result.json",
+      "receipt_sha256": "3dcd19517f45f76bf32526d1c76d8084ca1995138487ac2f900632fac572aff8",
+      "statuses": [
+        {
+          "name": "func_0010af8c",
+          "address": 1093516,
+          "size": 340,
+          "candidate_size": 340,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_0010af8c @ 0x10af8c size 0x154/0x154\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/checkpoint15/recon-small/category_variadic.c",
+      "profile": "game",
+      "functions": [
+        "func_00190d0c",
+        "func_00190d68"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/recon-small/category_variadic.c",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-002"
+      ],
+      "exit_code": 0,
+      "source_sha256": "832661ce83d60d3b79e4bc01a742783c69a06df3b8f19e7869ed72a133a12d59",
+      "receipt": "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-002/category_variadic.result.json",
+      "receipt_sha256": "2769d2ef14c7961035cb37bd49e98159f5226d7748cec6062be26d1b3edaf3d4",
+      "statuses": [
+        {
+          "name": "func_00190d0c",
+          "address": 1641740,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "match",
+          "first_diff": null
+        },
+        {
+          "name": "func_00190d68",
+          "address": 1641832,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_00190d0c @ 0x190d0c size 0x5c/0x5c\nMATCH    func_00190d68 @ 0x190d68 size 0x58/0x58\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/checkpoint15/optional-rv02/func_00122680.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00122680"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/optional-rv02/func_00122680.c",
+        "--profile",
+        "middleware",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-003"
+      ],
+      "exit_code": 0,
+      "source_sha256": "78f11d04578b35cbdf4440d3b09f12b078e78048413d90c9259f6cdb4feaf896",
+      "receipt": "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-003/func_00122680.result.json",
+      "receipt_sha256": "112ea1b6d9c779a83f4cc43e42bf10ad41f203b861dc99aa3b7607730f367b72",
+      "statuses": [
+        {
+          "name": "func_00122680",
+          "address": 1189504,
+          "size": 264,
+          "candidate_size": 264,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_00122680 @ 0x122680 size 0x108/0x108\n",
+      "stderr": ""
+    }
+  ],
+  "complete_dependent_closure": {
+    "record": "closure-r1/results.json",
+    "actual_driver_exit_code": 0,
+    "contexts": 1416,
+    "functions": 1452,
+    "exit_counts": {
+      "0": 1416
+    },
+    "result": "PASS"
+  },
+  "formal_source_revisions": [
+    {
+      "source": "src/checkpoint10/func_00132344.c",
+      "profile": "game",
+      "functions": [
+        "func_00132344"
+      ],
+      "author": "w22i",
+      "accepted_source_sha256": "09b6991912e47f87610d48faa50cfc9b6329286cf65d232546e242734b934084",
+      "current_source_sha256": "0d263f1fde99a1fc39cb9092d475d8e913fcc6aa82e9ad53b512cd0f871c156d",
+      "reason": "Shared GPU-command declaration migration changes source.",
+      "header_dependencies_changed": [
+        "include/game/graphics_state.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
+    },
+    {
+      "source": "src/checkpoint10/func_00121838.c",
+      "profile": "game",
+      "functions": [
+        "func_00121838"
+      ],
+      "author": "r41212",
+      "accepted_source_sha256": "836fee065f3243683f1471f84a6d27e520a07d34e3c52ae59a8f0442f243f888",
+      "current_source_sha256": "88c52db0434e6bfaf300047bfb109fa77380233e93cd4552851f44ad279036fc",
+      "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
+    },
+    {
+      "source": "src/wave11/func_001312a4.c",
+      "profile": "game",
+      "functions": [
+        "func_001312a4"
+      ],
+      "author": "w11d",
+      "accepted_source_sha256": "facf1b07b1317c0db8a8e9f23b9e78e10da9be11026a50569e7b95c74835aae8",
+      "current_source_sha256": "c3d0571bb1fda989ba6ac3b0d20a445b8de2a1feb3cc920d5b62689d2d5c1256",
+      "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a"
+    },
+    {
+      "source": "src/checkpoint11/intake-r7/np024/attributes_accessors.c",
+      "profile": "game",
+      "functions": [
+        "func_0018fdfc",
+        "func_0018fed0"
+      ],
+      "reason": "PROPERTY-LOOKUP: remove the local AttributeMapping/AttributeRecord/AttributeCursor copies and include their canonical shared declarations.",
+      "current_source_sha256": "6286d9a5de1e223c4b52dd819719040b761b190a4f8346e0d6a09156226245ca",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "bdcdaee10e93f3cf25984c24d682849213566006f269431adf433d19143c8fa1"
+    },
+    {
+      "source": "src/sdk2/func_001267c0.c",
+      "profile": "sdk",
+      "functions": [
+        "func_001267c0"
+      ],
+      "reason": "PROPERTY-LOOKUP: centralize the identical AttributeMapping and genuine attribute owner/table/cursor layout.",
+      "current_source_sha256": "d5cae32f8458698690e17893d316b83c6dfd72f3800f4b07146946219eda48f0",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "260df20973e7516196ed6e97fa4a2633a460e50e61d5adfedc0d305cbc0ff93f"
+    },
+    {
+      "source": "src/wave9/func_001267f4.c",
+      "profile": "game",
+      "functions": [
+        "func_001267f4"
+      ],
+      "reason": "PROPERTY-LOOKUP: include the one canonical AttributeMapping/AttributeRecord/AttributeCursor contract.",
+      "current_source_sha256": "21751bcf011ca3d8395c59406aa3704ca251a662569fb6027803d71cf3eabe19",
+      "header_dependencies_changed": [
+        "include/game/property_text.h"
+      ],
+      "baseline": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+      "accepted_source_sha256": "577f00f9a3d54b2fb75ce6a71db9dc4c5d3db27ecc83ee7465657aabd2117682"
+    }
+  ],
+  "moves": [],
+  "holds_folded": 47,
+  "total_holds": 91,
+  "library_exclusion": {
+    "function": "func_0019e08c",
+    "kind": "library",
+    "identity": "_ZdaPv",
+    "catalogue_version": "v16",
+    "credited": false
+  },
+  "new_totals": {
+    "functions": 31,
+    "bytes": 4720
+  },
+  "source_review": "Read the three imported source atoms and their canonical property/worker/category declarations. Exact two-input thread callback, actual allocation/stop owner,64-byte hidden result and standard va_arg remain typed. No new alias, punning or invented callee."
+}

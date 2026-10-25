@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_001bd68c/func_001bd68c.cpp",
+ "source_sha256": "e38a262bfc9cbe5a3c5016ec74d6c4318919ddc4b391e6612dc3eb3c5d137960",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "d18224ea239e921265d7f905830758399383b9e5b43e6db3719f059cc6b161ee",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_001bd68c/drawing_state.c",
+   "source_sha256": "241e8241f60875e0a31998380046ffbd5cdeb9eb7dc7af96d719b8343c8ca1be",
+   "object_sha256": "cfb6c444c777330626b67bb55086eb268babe83ba860479d882c47c077cf4f5e"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "r41262_drawing_state"
+   ],
+   "section": "i.r41262_drawing_state",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/closure-r6/u0451/extra-0-drawing_state.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001bd68c",
+   "address": 1824396,
+   "size": 696,
+   "candidate_size": 696,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 516,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe59008c4",
+     "removed_callee": {
+      "symbols": [
+       "r41262_drawing_state"
+      ],
+      "section": "i.r41262_drawing_state",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/closure-r6/u0451/extra-0-drawing_state.o"
+     }
+    }
+   ]
+  }
+ ]
+}

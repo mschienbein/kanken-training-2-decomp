@@ -1,0 +1,39 @@
+[
+  {
+    "source": "scratch/integrator/c015/held-trials/func_001b4870.c",
+    "profile": "game",
+    "functions": [
+      "func_001b4870"
+    ],
+    "argv": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+      "tools/match.py",
+      "scratch/integrator/c015/held-trials/func_001b4870.c",
+      "--profile",
+      "game",
+      "--out",
+      "scratch/integrator/c015/proofs/r3-exact-callback/func_001b4870",
+      "--show",
+      "0",
+      "--linker-model",
+      "armlink5-inline-branchnop-v6",
+      "--literal-model",
+      "anonymous-string-records-v1"
+    ],
+    "exit": 1,
+    "receipt": "scratch/integrator/c015/proofs/r3-exact-callback/func_001b4870/func_001b4870.result.json",
+    "source_sha256": "d08d047e01a91ea8dc031a6e7c39ad06b8efc37fdb0d5dc24bfbe13ed0bef3ae",
+    "output": "MISMATCH func_001b4870 @ 0x1b4870 size 0x54/0x58 first difference at +0x5\n",
+    "statuses": [
+      {
+        "name": "func_001b4870",
+        "size": 88,
+        "candidate_size": 84,
+        "status": "mismatch"
+      }
+    ]
+  }
+]

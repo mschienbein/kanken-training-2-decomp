@@ -1,0 +1,73 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/wave19/func_00167284.c",
+ "source_sha256": "ff10da281247559b755c33e573aa207d8350525ed53c6b5a764e6156cf80d787",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "0cb1360396fee585c2b1cd4901ddf859031ba54b9c3e3f9274525193b01ada3f",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "8fbf9c14089dc98e25a4dd918f47f08ee0bb032c16c4e06917ad85028681f3ee",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/object_registration/animation_state.c",
+   "source_sha256": "52ac1278c1f71c6fb826fe161c8561b6edfe5b84f5c46f5a332986963676950b",
+   "object_sha256": "8b1c3111bb70ec893eb6a4777bf6cb58fa550ea2f951fb55cc2e83ef1ba51dfc"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_animation_state_cleanup"
+   ],
+   "section": "i.register_animation_state_cleanup",
+   "size": 4,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u1110/extra-0-animation_state.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00167284",
+   "address": 1471108,
+   "size": 88,
+   "candidate_size": 88,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 52,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_animation_state_cleanup"
+      ],
+      "section": "i.register_animation_state_cleanup",
+      "size": 4,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u1110/extra-0-animation_state.o"
+     }
+    },
+    {
+     "offset": 60,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

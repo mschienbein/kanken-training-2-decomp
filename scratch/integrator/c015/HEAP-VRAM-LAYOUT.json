@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "-c",
+    "import sys; from pathlib import Path; sys.path.insert(0, 'tools'); import toolchain; toolchain.compile_source(toolchain.load_profiles()['game'], Path('scratch/integrator/c015/probes/heap_layout.c').resolve(), Path('scratch/integrator/c015/probes/heap_layout.o').resolve(), cache=False)"
+  ],
+  "exit_code": 0,
+  "source": "scratch/integrator/c015/probes/heap_layout.c",
+  "source_sha256": "9aebf0556ef0e99fab517c5586e3c1b7312824c17ac3d915f1716346740a33df",
+  "assertions": {
+    "sizeof(VramAllocator)": 1584,
+    "offsetof(HeapManager,vram)": 4,
+    "offsetof(HeapManager,primary)": 1600
+  },
+  "stdout": "",
+  "stderr": "",
+  "producer_evidence": "scratch/authors/nm85/src/startup_tu.cpp shows the same complete manager root and +4/+0x634 constructor-prefix boundary; the scalar typed bank probes retain the original root+4 address. No bss_004952f4 alias remains."
+}

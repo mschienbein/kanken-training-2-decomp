@@ -1,0 +1,20 @@
+{
+  "family": "WORK-COMMAND",
+  "status": "blocked",
+  "reason": "The fifth stacked word and command operands are not one proved scalar/pointer/token contract: accepted callers pass integer 4/128, while the author reads and stores the float arm of a union solely to reproduce VFP copies. Recover the actual operation-dependent variants and consumers before migration; inactive-arm punning and narrowing to an easier caller subset are forbidden.",
+  "members": [
+    "func_00181a4c"
+  ],
+  "member_bytes": 96,
+  "evidence": [
+    "scratch/authors/r4024/src/func_00181a4c.c:1-22,37-52",
+    "src/wave11/func_001772dc.c:5",
+    "src/wave11/func_001774e0.c:5",
+    "src/checkpoint10/func_001458b8.c:16",
+    "src/checkpoint10/func_00145928.c:16",
+    "src/wave17/func_001865ec.c:6-11"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

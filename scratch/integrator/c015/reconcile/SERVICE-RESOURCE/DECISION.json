@@ -1,0 +1,323 @@
+{
+  "family": "SERVICE-RESOURCE",
+  "outcome": "collected",
+  "members": [
+    "func_00145e3c",
+    "func_0018ef74",
+    "func_001c5530"
+  ],
+  "new_functions": 3,
+  "new_bytes": 408,
+  "canonical_changes": [
+    "Use ResourceServiceState.session/published/deferred fields, not hidden byte or scalar-pointer views.",
+    "Cleanup provider exactly void(void *) with retained unused context.",
+    "Centralize lock and command prototypes in service_lock.h; migrate the accepted local declarations."
+  ],
+  "accepted_source_revisions": [
+    "src/checkpoint10/func_00121838.c"
+  ],
+  "changed_headers": [
+    "include/game/service_lock.h"
+  ],
+  "proofs": [
+    {
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_00145e3c.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_00145e3c"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_00145e3c.cpp",
+        "--profile",
+        "middleware",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-000"
+      ],
+      "exit_code": 0,
+      "source_sha256": "7a6397be9f01bb4d565b328f0fb803f11e7dfef450831bb4e8eedf20d2cc55f8",
+      "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-000/func_00145e3c.result.json",
+      "receipt_sha256": "612bee87197e5763e4297ac898de34f6f0f9e0c24bc4f6e05dde544df116f7bf",
+      "statuses": [
+        {
+          "name": "func_00145e3c",
+          "address": 1334844,
+          "size": 72,
+          "candidate_size": 72,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_00145e3c @ 0x145e3c size 0x48/0x48\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_0018ef74.c",
+      "profile": "game",
+      "functions": [
+        "func_0018ef74"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_0018ef74.c",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-001"
+      ],
+      "exit_code": 1,
+      "source_sha256": "c55c7a9c6fabfe23c3c3d69933d3b986170b9c06fbb185e08db80f5671537490",
+      "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-001/func_0018ef74.result.json",
+      "receipt_sha256": "c2eb976d508604260bf22bb495ffe377a1956bd94713d5647810efb4d916397c",
+      "statuses": [
+        {
+          "name": "func_0018ef74",
+          "address": 1634164,
+          "size": 164,
+          "candidate_size": 164,
+          "status": "mismatch",
+          "first_diff": 12
+        }
+      ],
+      "all_required_match": false,
+      "stdout": "MISMATCH func_0018ef74 @ 0x18ef74 size 0xa4/0xa4 first difference at +0xc\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c",
+      "profile": "game",
+      "functions": [
+        "func_001c5530"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-002"
+      ],
+      "exit_code": 2,
+      "source_sha256": "8f3f4a963517e614e234970d36b41c8b3fe228bfefab8ae92d609e225010849f",
+      "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-002/func_001c5530.result.json",
+      "receipt_sha256": "2e258ef92600787d9d4c326bb5cae8ef4314a8d0f7db24ffc0aff76a2f7361e1",
+      "statuses": [],
+      "all_required_match": false,
+      "stdout": "",
+      "stderr": "error: armcc failed (1) on func_001c5530.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c\", line 19: Error:  #268: declaration may not appear after executable statement in block\n      int active = data_00242afc.published &\n      ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c: 0 warnings, 1 error\n\n"
+    },
+    {
+      "source": "src/checkpoint10/func_00121838.c",
+      "profile": "game",
+      "functions": [
+        "func_00121838"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_00121838.c",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-003"
+      ],
+      "exit_code": 0,
+      "source_sha256": "88c52db0434e6bfaf300047bfb109fa77380233e93cd4552851f44ad279036fc",
+      "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-003/func_00121838.result.json",
+      "receipt_sha256": "103dc9c846ba2f8529efc3cf679ecb78b1f88b0fcc6473616473080c3bba569e",
+      "statuses": [
+        {
+          "name": "func_00121838",
+          "address": 1185848,
+          "size": 172,
+          "candidate_size": 172,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_00121838 @ 0x121838 size 0xac/0xac\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/checkpoint10/func_001f580c_default.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001f580c"
+      ],
+      "extra_sources": [
+        "src/models/object_registration/resource_service_lock.c"
+      ],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_001f580c_default.c",
+        "--profile",
+        "middleware",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-004",
+        "--extra-source",
+        "src/models/object_registration/resource_service_lock.c"
+      ],
+      "exit_code": 0,
+      "source_sha256": "cef8b5072f0df1af3e7f93b863cd771e069cccb8d7170cf82067fd781b97fa1b",
+      "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-004/func_001f580c_default.result.json",
+      "receipt_sha256": "378ae3450d284e4aecc03365c348be1e7fa41386ddd4e24d3841cbdbfc7b52c0",
+      "statuses": [
+        {
+          "name": "func_001f580c",
+          "address": 2054156,
+          "size": 96,
+          "candidate_size": 96,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_001f580c @ 0x1f580c size 0x60/0x60 [armlink5-inline-branchnop-v6: 1 inline_nop]\nREMOVED  register_resource_service_lock_cleanup (4 bytes; i.register_resource_service_lock_cleanup)\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_0018ef74.c",
+      "profile": "game",
+      "functions": [
+        "func_0018ef74"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_0018ef74.c",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r2-001"
+      ],
+      "exit_code": 0,
+      "source_sha256": "b73fd796341343de965fd1fdf949cff6a4c2fc04f6e9c1c63f695b44b754afce",
+      "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r2-001/func_0018ef74.result.json",
+      "receipt_sha256": "cfad50bf17625c73e8e094aa79dff3c1ff1417a0f3b28da9266f465e6a1d6546",
+      "statuses": [
+        {
+          "name": "func_0018ef74",
+          "address": 1634164,
+          "size": 164,
+          "candidate_size": 164,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_0018ef74 @ 0x18ef74 size 0xa4/0xa4\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c",
+      "profile": "game",
+      "functions": [
+        "func_001c5530"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r2-002"
+      ],
+      "exit_code": 0,
+      "source_sha256": "469a7ca977315fd366cdd581cf28052d89d549247cf231f877452955d3472f95",
+      "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r2-002/func_001c5530.result.json",
+      "receipt_sha256": "0fda4ec9bc1fbd23b0d9bb55e346bc303fb0082da32336f246d3188c01ac88e2",
+      "statuses": [
+        {
+          "name": "func_001c5530",
+          "address": 1856816,
+          "size": 172,
+          "candidate_size": 172,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_001c5530 @ 0x1c5530 size 0xac/0xac\n",
+      "stderr": ""
+    }
+  ],
+  "closure": "Three NEW units plus both retained service_lock dependents; all final comparisons MATCH with v6/L1.",
+  "preserved_failed_attempts": "Unsigned pending promotion caused an initial mismatch; preserve the original signed byte value interpretation with a numeric signed-char conversion. C90 declaration placement failure fixed without semantic changes.",
+  "source_policy": "No pointer casts, alternate owners, invented callees, native aliases or incompatible callbacks."
+}

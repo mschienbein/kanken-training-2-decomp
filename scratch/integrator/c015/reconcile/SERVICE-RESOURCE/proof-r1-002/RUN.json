@@ -1,0 +1,34 @@
+{
+  "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c",
+  "profile": "game",
+  "functions": [
+    "func_001c5530"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-002"
+  ],
+  "exit_code": 2,
+  "source_sha256": "8f3f4a963517e614e234970d36b41c8b3fe228bfefab8ae92d609e225010849f",
+  "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-002/func_001c5530.result.json",
+  "receipt_sha256": "2e258ef92600787d9d4c326bb5cae8ef4314a8d0f7db24ffc0aff76a2f7361e1",
+  "statuses": [],
+  "all_required_match": false,
+  "stdout": "",
+  "stderr": "error: armcc failed (1) on func_001c5530.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c\", line 19: Error:  #268: declaration may not appear after executable statement in block\n      int active = data_00242afc.published &\n      ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c: 0 warnings, 1 error\n\n"
+}

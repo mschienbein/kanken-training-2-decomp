@@ -1,0 +1,380 @@
+{
+  "harvest_rows": 58,
+  "residue_pending_rows": 16,
+  "overlap": 14,
+  "unique_functions": 61,
+  "new_functions": 19,
+  "new_bytes": 2364,
+  "holds": 27,
+  "excluded_accepted": 13,
+  "excluded_c012_reserved": 2,
+  "rows": [
+    {
+      "function": "func_001d9820",
+      "batch": "np272",
+      "disposition": "HOLD",
+      "reason": "The held ConstructedPaneObject uses implicit native TimingConstructor/RuntimeMember array-constructor callbacks, while reset_reference.h exposes the exact void *(*)(void *) runtime interface. No producer-evidenced shared pane lifecycle owner or exact callback-provider cutover exists; do not adopt the local second owner model or constructor aliases."
+    },
+    {
+      "function": "func_0012e68c",
+      "batch": "np274",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_0010aa28",
+      "batch": "np293",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_001c65e4",
+      "batch": "np294",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_001d01dc",
+      "batch": "nm02",
+      "disposition": "HOLD",
+      "reason": "The draft includes a second Tu1007Window model and binds native SoundArchive::GetWaveArchiveCount over the C SoundArchive endpoint retained by archive.h. Current canonical archive/native owner identity and count receiver are not reconciled. Removing unrelated Window context does not establish the missing native archive endpoint contract."
+    },
+    {
+      "function": "func_001f4408",
+      "batch": "nm01",
+      "disposition": "HOLD",
+      "reason": "The recorded bank hold remains: SplitRegions calculates references by a locally computed header/padded-bounds displacement rather than following a carried reference offset. Canonical BankFile still lacks the evidenced split/range record descriptors; the serialized-offset qualification explicitly leaves this family held."
+    },
+    {
+      "function": "func_001f46d0",
+      "batch": "nm01",
+      "disposition": "HOLD",
+      "reason": "Same unresolved SplitRegions/GetRegion contract as func_001f4408; both functions share the same author TU. No duplicate source or credit is imported."
+    },
+    {
+      "function": "func_001f29b4",
+      "batch": "nm12",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_00122360",
+      "batch": "nm11",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_00154674",
+      "batch": "nm08",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_00136450",
+      "batch": "nm22",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_00192a7c",
+      "batch": "nm25",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_001ae140",
+      "batch": "nm20",
+      "disposition": "HOLD",
+      "reason": "resource_descriptors.h declares bss_00247098 as ResourceDescriptor *[13], but command_state.h func_0017a938 consumes NameTable pointers. These are different layouts/classes; no cast, type alias, or unproven common dispatcher is introduced."
+    },
+    {
+      "function": "func_0014aa94",
+      "batch": "nm29",
+      "disposition": "HOLD",
+      "reason": "The author upload reinterpret_casts canonical C Material * to nw::lyt::Material * and computes a byte displacement into runtime parameter storage. material.h and the native class remain separate models; exact matching cannot justify that conversion."
+    },
+    {
+      "function": "func_00157500",
+      "batch": "nm34",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_0017df84",
+      "batch": "nm32",
+      "disposition": "NEW",
+      "reason": "Replace the request signal-word reinterpretation with a real embedded SignalState; promote the exact notification declaration and remove unrelated pool-release context."
+    },
+    {
+      "function": "func_0018191c",
+      "batch": "nm32",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_001acb38",
+      "batch": "nm35",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_0014cc1c",
+      "batch": "nm35",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_0014242c",
+      "batch": "nm35",
+      "disposition": "accepted",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_00147390",
+      "batch": "nm38",
+      "disposition": "NEW",
+      "reason": "Centralize ChannelBuffer and compile only its natural aligned-channel-span initialization; unrelated author context is not credited."
+    },
+    {
+      "function": "func_001b6c90",
+      "batch": "nm38",
+      "disposition": "NEW",
+      "reason": "Complete canonical MenuOptionGroup with its six real DisplayHandle pointers and reuse canonical ResourceEvent/NameTable allocation."
+    },
+    {
+      "function": "func_001c8994",
+      "batch": "nm44",
+      "disposition": "NEW",
+      "reason": "Use canonical native resource wrappers and attribute.Cleanup() with the exact retained native provider type; share only the genuine C primitive-set wrapper and omit already-accepted setup context."
+    },
+    {
+      "function": "func_00124b0c",
+      "batch": "nm41",
+      "disposition": "HOLD",
+      "reason": "The matching cleanup invents Resource728/Resource488/Resource12952 virtual slot00/destroy classes for pool elements and calls destroy at the destructor slot. The invoking native destructor/provider identities and the canonical resource-owner/pool element classes are not established; uncalled placeholder slots and a second native object model are not imported."
+    },
+    {
+      "function": "func_0013e260",
+      "batch": "nm41",
+      "disposition": "NEW",
+      "reason": "Use canonical unsigned IPC wire words and CtrResult conversions instead of union views; retain the exact handle-marshalling operation."
+    },
+    {
+      "function": "func_0016e798",
+      "batch": "nm49",
+      "disposition": "NEW",
+      "reason": "Promote the exact WidgetController value setter and CharacterPanel entry; access the real embedded controller without a Screen cast."
+    },
+    {
+      "function": "func_001ea6d8",
+      "batch": "nm46",
+      "disposition": "HOLD",
+      "reason": "The old input-prefix blocker has changed: input.h now has PointerState. However the target still uses a separate HorizontalLabelLayout/HorizontalLabelGroup model, passes BoundDisplayObject as unrelated DisplayData to the size query, and copies a vector struct into float-array runtime storage. No compatible canonical horizontal/display ownership contract establishes these operations."
+    },
+    {
+      "function": "func_0010b598",
+      "batch": "nm51",
+      "disposition": "NEW",
+      "reason": "Complete the evidenced 0x4c FramebufferState and its four real 16-byte resource records in framebuffer.h."
+    },
+    {
+      "function": "func_00143710",
+      "batch": "nm52",
+      "disposition": "HOLD",
+      "reason": "SoundDataManager is canonical native NW, but its const nw::snd::SoundArchive * is passed to func_0014a35c, whose retained definition and archive.h require the C SoundArchive owner. No native/C archive cast or alias is allowed."
+    },
+    {
+      "function": "func_0016d6dc",
+      "batch": "nm61",
+      "disposition": "HOLD",
+      "reason": "SearchMenu is a second model of the TrainingScreen supplied by its caller; pages is passed to func_00172a14 despite its canonical L041Dialog receiver. CharacterPanel-to-Screen casts and the unbound inferred L034_set_input_enabled removal also remain unevidenced."
+    },
+    {
+      "function": "func_0010e3a0",
+      "batch": "nm60",
+      "disposition": "HOLD",
+      "reason": "SortScene.updateAt supplies SortUpdateEntry to func_00124874, whose separate authored sound-group receiver is not established as that type. The three native SortBucket constructor callbacks also do not have the canonical array runtime callback type. No offset-based SortObject owner recovery is imported."
+    },
+    {
+      "function": "func_00136958",
+      "batch": "nm60",
+      "disposition": "NEW",
+      "reason": "Preserve the exact natural newline writer/count operation; no shared owner model or callee contract is changed."
+    },
+    {
+      "function": "func_001d2204",
+      "batch": "nm57",
+      "disposition": "NEW",
+      "reason": "Centralize the complete enclosing/secondary/tertiary lifetime model; retain true subobject destruction order and opaque address-only table declarations."
+    },
+    {
+      "function": "func_001efaac",
+      "batch": "nm57",
+      "disposition": "NEW",
+      "reason": "Reuse canonical DateTime and preserve the typed duration/component operation; no reinterpretation."
+    },
+    {
+      "function": "func_001812f8",
+      "batch": "nm62",
+      "disposition": "HOLD",
+      "reason": "Replacing byte-subtraction owner recovery from the returned completion queue with the two real StreamManager queue members no longer MATCHes: r1 canonical trial exits 1, target/candidate extents 48/48. The original author form remains forbidden owner recovery; do not cast around it."
+    },
+    {
+      "function": "func_001b4870",
+      "batch": "nm62",
+      "disposition": "HOLD",
+      "reason": "The clean typed WidgetController receiver-return form MATCHes, but nf077 retains the same address as an atexit destructor provider. The exact invoking ObjectDestructor interface is void(void *); the canonical void(void *) trial exits 1. Receiver-return versus destructor contracts cannot be hidden behind a callback cast."
+    },
+    {
+      "function": "func_001563a0",
+      "batch": "nm68",
+      "disposition": "HOLD",
+      "reason": "The author reinterprets AudioChannelState as AudioRecordQueueView and RecordState as AudioRecordLinkView. Current audio_voice.h instead owns pending as AudioSlot * and RecordState.value as an unsigned word; next-pointer/sequence/state roles are not a shared canonical cutover. Do not add aliases or union views."
+    },
+    {
+      "function": "func_00174210",
+      "batch": "nm72",
+      "disposition": "NEW",
+      "reason": "Complete W6Selector with its actual eight-byte SelectorReference; reuse canonical event/base dispatch interfaces."
+    },
+    {
+      "function": "func_001d9050",
+      "batch": "nm81",
+      "disposition": "HOLD",
+      "reason": "The local PlaybackVTableGroup belongs to SequencePlayer and restores data_00224940 through SequencePlayerVTable *, whereas the canonical wave-player path stores the shared base table opaquely. Exact common base/slot provider identity is not established, and the full draft also reinterprets playback/timing/task owners. No second table/object view is admitted."
+    },
+    {
+      "function": "func_001d8638",
+      "batch": "nm81",
+      "disposition": "HOLD",
+      "reason": "The reset function uses four reinterpret_cast views of SequencePlayer (BaseState, SequencePlaybackFlags, SequenceTiming, SequenceVariableState). Current sequence.h does not embed the real BaseState, typed ramp or volatile variable owner; a same-offset overlay is not an evidenced base/subobject model."
+    },
+    {
+      "function": "func_0013e18c",
+      "batch": "nm77",
+      "disposition": "HOLD",
+      "reason": "The standalone native texture operation MATCHes only with an independent bss_004952f4 extern. Policy lint exposes that address inside HeapManager at +4. The proved real member cutover bss_004952f0.vram no longer MATCHes (closure-r3: 216/212 bytes, first difference52, exit1); do not restore a second object root or introduce a codegen alias. Canonical heap/font headers are restored and the candidate is held."
+    },
+    {
+      "function": "func_0014ce8c",
+      "batch": "nm78",
+      "disposition": "NEW",
+      "reason": "Retype the native shadow member into the canonical ServiceCoordinator endpoint and its real settings.coefficients subobject; omit the conflicting profiling companion."
+    },
+    {
+      "function": "func_001376fc",
+      "batch": "nm82",
+      "disposition": "NEW",
+      "reason": "Replace union command and GraphicsContext overlay with one GraphicsTransferCommand wire record and a real commands member; migrate the accepted wrapper declaration."
+    },
+    {
+      "function": "func_00145da8",
+      "batch": "nm82",
+      "disposition": "HOLD",
+      "reason": "The source reinterprets StreamCriticalSection::unsigned state as int * to func_00185108. The shared atomic-word and signed arbiter pointer contract is not reconciled; the draft also contains a nonmatching acquisition companion. No cast is used to bypass the signed storage boundary."
+    },
+    {
+      "function": "func_001d603c",
+      "batch": "nm84",
+      "disposition": "NEW",
+      "reason": "Reuse canonical W15iWavePlayer and centralize its contiguous WavePlayerType address-point group; no alternate player model."
+    },
+    {
+      "function": "func_0017418c",
+      "batch": "nm87",
+      "disposition": "HOLD",
+      "reason": "The matching target selects NotificationStorage.text while the same SavedNotification payload is also the fields/selection/word union model in notification.h. The grade setter uses the same text element, but that alone does not establish one complete typed payload model. The standing no-union-punning rule is not waived for a new caller of an inherited storage view; hold instead of extending that unresolved root contract."
+    },
+    {
+      "function": "func_001f586c",
+      "batch": "nm85",
+      "disposition": "NEW",
+      "reason": "Copy CtrHandle to the identical CtrHandle field type, use the exact void(void *) cleanup provider without a cast, and reuse shared registration/mutex interfaces."
+    },
+    {
+      "function": "func_0017e3d8",
+      "batch": "nm102",
+      "disposition": "HOLD",
+      "reason": "The dispatcher requires void (AnimationTrack::*)(float), but canonical AnimationTrack is the C-backed sequence track, not an established native setter class. Slot/provider definitions and the full member-method table contract must be migrated together; the author wrappers are mismatches, not a license to invent member-callee identities."
+    },
+    {
+      "function": "func_00149474",
+      "batch": "nm110",
+      "disposition": "NEW",
+      "reason": "Replace ManagerCallbackView with the real ObjectManager callback/context members and preserve the exact ServiceWorker void(void *) provider interface."
+    },
+    {
+      "function": "func_001b8238",
+      "batch": "nm108",
+      "disposition": "HOLD",
+      "reason": "The target uses both TrainingScreen.controls.list and .animation in state13. Current TrainingControls is a union of unrelated W6ListController * and AnimationOwner * views of the same pointer, not an evidenced shared controller class. Exact bytes do not authorize this new union punning; hold until one producer-evidenced controller model replaces that inherited union."
+    },
+    {
+      "function": "func_0016f288",
+      "batch": "nm111",
+      "disposition": "HOLD",
+      "reason": "The delivered canonical-looking source is a mismatch. Its separate v6-qualified MATCH requires a newly outlined set_input_rectangle helper whose historical callee identity is not evidenced. The source also redeclares TouchMotion and AnimationState instead of the current input/w11_control owners. No invented callee is admitted."
+    },
+    {
+      "function": "func_00216594",
+      "batch": "nm116",
+      "disposition": "HOLD",
+      "reason": "Retyping the native WideWriter/nw::ut::Rect source to the sole current TextWriterState/TextBounds/UTF-16 endpoint and direct cursor members no longer MATCHes under v6/L1: r2 trial exits 1. Reintroducing the native second writer model or pointer casts is not permitted."
+    },
+    {
+      "function": "func_001b6a0c",
+      "batch": "nm118",
+      "disposition": "HOLD",
+      "reason": "The draft redeclares bss_002471f8 as NameTable *[14], whereas resource_descriptors.h and its initializer own ResourceDescriptor *[14]. func_0017a938 takes NameTable pointers. Header identity is not established by equal pointer width."
+    },
+    {
+      "function": "func_00196144",
+      "batch": "nm118",
+      "disposition": "HOLD",
+      "reason": "The target byte-computes ResourceRegistrationSlot and overlays RegistrationCountSlot; it also replaces BoundDisplayObject.bindings with DisplayRegistrationBinding/Node, using enabled at +0xa0 where the canonical object has a binding pointer. No tag/producer proof supplies the missing registration node identity."
+    },
+    {
+      "function": "func_001ab680",
+      "batch": "tr22",
+      "disposition": "c012-reserved",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_001d5864",
+      "batch": "tr23",
+      "disposition": "c012-reserved",
+      "reason": "Already accepted at18efd7bb or reserved to c012-r5; no c015 credit."
+    },
+    {
+      "function": "func_001652ec",
+      "batch": "nm129",
+      "disposition": "NEW",
+      "reason": "Centralize Tu582Vector2/Orientation and their declarations; omit the nonmatching companion and retain the natural returned dimension value."
+    },
+    {
+      "function": "func_001cdcfc",
+      "batch": "nm143",
+      "disposition": "NEW",
+      "reason": "Retain canonical native Group/PaneLink and the serialized fixed-name tail operation; admit only constructor self-aliases and the own vtable binding."
+    },
+    {
+      "function": "func_001686dc",
+      "batch": "np212",
+      "disposition": "HOLD",
+      "reason": "np212 requires PracticeItemText/PracticeItem in place of text.h/item_text.h canonical objects and a private PracticeScreen/controller hierarchy. Recorded caller/receiver and item-field cutovers remain unresolved; no casts or second object models are imported."
+    },
+    {
+      "function": "func_001cb088",
+      "batch": "np225",
+      "disposition": "HOLD",
+      "reason": "The draft constructs R41270AnimGroupStorage/R41270ArrayStorage beside canonical nw::gfx::AnimGroup/MoveArray. The canonical default MoveArray constructor still reads uninitialized capacity through setters and native virtual lifetime/key-function providers are not reconciled for selected v6. The local fully-zeroed ABI shadow is not admissible."
+    },
+    {
+      "function": "func_0016bf90",
+      "batch": "nm160",
+      "disposition": "NEW",
+      "reason": "Collect the exact canonical L044TrainingFrame/WidgetSlot allocation source; existing ResourceEvent and NameTable interfaces require no header or names adoption."
+    }
+  ],
+  "additional_author_rows": 1
+}

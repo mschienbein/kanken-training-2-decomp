@@ -1,0 +1,42 @@
+{
+  "source": "src/pilot/loop_cleanup.c",
+  "profile": "game",
+  "functions": [
+    "func_00103258",
+    "func_00103358"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_00103258": "src/pilot/loop_cleanup.c",
+    "func_00103358": "src/pilot/loop_cleanup.c"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/pilot/loop_cleanup.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0002"
+  ],
+  "exit_code": 0,
+  "seconds": 1.900679,
+  "source_sha256": "b0176f82d011e0378bf88cdc180d90b7b281554348dc7545ffa2709c2f9e2a9a",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c015/fold-recon-small/closure-r1/u0002/loop_cleanup.result.json",
+  "receipt_sha256": "d954165cdccf7f92b3cfa70ebab5c46a7aba11eeb604d07006275e43509879b7",
+  "output": "MATCH    func_00103258 @ 0x103258 size 0x88/0x88\nMATCH    func_00103358 @ 0x103358 size 0x74/0x74\n",
+  "stderr": ""
+}

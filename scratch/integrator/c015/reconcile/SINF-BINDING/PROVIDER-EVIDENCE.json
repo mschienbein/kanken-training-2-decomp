@@ -1,0 +1,113 @@
+{
+  "family": "SINF-BINDING",
+  "independent_identity": "Current adopted catalogue (v14), not the camera authors earlier polynomial inference. Both complete providers have kind library and agreeing archive/member/symbol relocated-body witnesses.",
+  "providers": [
+    {
+      "function": "func_0019d074",
+      "kind": "library",
+      "size": 376,
+      "classification_evidence": {
+        "address": 1691764,
+        "basis": "known_library",
+        "evidence": "scratch/libid/proposal-504b82-r5/owners.json: owner 0x0019d074; scratch/libid/analysis-504b82-r2/relocation-evidence.json",
+        "identity": "__hardfp_cosf",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "isa": "arm",
+        "kind": "library",
+        "known_library_identity": "Arm Compiler 5.04 update 2 build 82 licensed runtime archive; entire catalogue extent and ISA agree under explicit relocation masks; relocated body re-encodes exactly. Archive/member/symbol and digests are retained in library_witness.",
+        "library_witness": {
+          "archive": "/home/michael/code/kanken-training-2-decomp/.cache/armlib/5.04-b82/lib/armlib/m_4m.l",
+          "archive_member": "cosf.o",
+          "image_body_sha256": "0a025be178bcd178dc9b42d1aef6739311d1c76d2f1f086f7a1a8f2e71de0ef3",
+          "mask_sha256": "b382ca489682971ad3663cc02f50e8d2928cc577c0136a2dbe43a14cf927eec2",
+          "masked_body_sha256": "81b017616bec9e04123421e46b0c3e1f52e374d3ec00e69e2d642da60cd16188",
+          "match_index": 28922,
+          "matches": "scratch/libid/final-504b82-r2/matches.json",
+          "member_offset": 237884,
+          "member_sha256": "b6d82bea137b785142b65059ad10735b597ca9ca56fd0d9e624c0683f5387ec2",
+          "object_body_sha256": "4d0abe49fcf547877197d074b27a5dfdf2159dc5fa5e49389d65381854202f5d",
+          "relocation_agreement": "verified",
+          "relocation_evidence": "scratch/libid/analysis-504b82-r2/relocation-evidence.json",
+          "symbol": "__hardfp_cosf"
+        },
+        "original_extent_sha256": "0a025be178bcd178dc9b42d1aef6739311d1c76d2f1f086f7a1a8f2e71de0ef3",
+        "qualification": "Unadopted proposal requiring independent review. Whole-function byte identity is proved, not the original historical archive variant. External retargets, if inferred, are explicit in relocation evidence. No accepted/candidate credit or boundaries changed.",
+        "size": 376
+      }
+    },
+    {
+      "function": "func_0019d1ec",
+      "kind": "library",
+      "size": 456,
+      "classification_evidence": {
+        "address": 1692140,
+        "basis": "known_library",
+        "evidence": "scratch/libid/proposal-504b82-r5/owners.json: owner 0x0019d1ec; scratch/libid/analysis-504b82-r2/relocation-evidence.json",
+        "identity": "__hardfp_sinf",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "isa": "arm",
+        "kind": "library",
+        "known_library_identity": "Arm Compiler 5.04 update 2 build 82 licensed runtime archive; entire catalogue extent and ISA agree under explicit relocation masks; relocated body re-encodes exactly. Archive/member/symbol and digests are retained in library_witness.",
+        "library_witness": {
+          "archive": "/home/michael/code/kanken-training-2-decomp/.cache/armlib/5.04-b82/lib/armlib/m_4m.l",
+          "archive_member": "sinf.o",
+          "image_body_sha256": "9cede515f458023ea79975d410c902737fa70a59ae550329ef6538637ff4b6a4",
+          "mask_sha256": "2fb64bcee76b0d0a54fb78cb85e2e8167d3d85b4376d56a19c7357b7ac685cc6",
+          "masked_body_sha256": "ccee939fff4bed0c121c1f43a59063bd2e475a87ef1c850795b12a2ee0a4b799",
+          "match_index": 28923,
+          "matches": "scratch/libid/final-504b82-r2/matches.json",
+          "member_offset": 664780,
+          "member_sha256": "ff125c76db318761aab01d225e67f4a5dfdf66586a6a902a09f854394c62da9b",
+          "object_body_sha256": "0ece4a2e2b3392b534095f2e4eefe0caef0126ce503dd1497ad22c88f916fcec",
+          "relocation_agreement": "verified",
+          "relocation_evidence": "scratch/libid/analysis-504b82-r2/relocation-evidence.json",
+          "symbol": "__hardfp_sinf"
+        },
+        "original_extent_sha256": "9cede515f458023ea79975d410c902737fa70a59ae550329ef6538637ff4b6a4",
+        "qualification": "Unadopted proposal requiring independent review. Whole-function byte identity is proved, not the original historical archive variant. External retargets, if inferred, are explicit in relocation evidence. No accepted/candidate credit or boundaries changed.",
+        "size": 456
+      }
+    }
+  ],
+  "catalogue_sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+  "abi_probe": {
+    "exit_code": 0,
+    "source": "scratch/integrator/c015/reconcile/SINF-BINDING/math_abi_probe.c",
+    "source_sha256": "bddca8452b6ed3433090d3026b975665669968a3c07ae9ca9e9413687ea66f48",
+    "result": {
+      "source_signature": "float(float)",
+      "compiler_profile": "game",
+      "undefined_symbols": [
+        "__hardfp_cosf",
+        "__hardfp_sinf",
+        "Lib$$Request$$armlib"
+      ],
+      "elf_machine": "EM_ARM"
+    },
+    "stderr": ""
+  },
+  "original_parameter_provenance": [
+    {
+      "caller": "func_0019d074",
+      "callee": "func_001180b8",
+      "argument": "r1",
+      "origin": {
+        "parameter_of": "func_0019d074",
+        "register": "s0"
+      }
+    },
+    {
+      "caller": "func_0019d1ec",
+      "callee": "func_001180b8",
+      "argument": "r1",
+      "origin": {
+        "parameter_of": "func_0019d1ec",
+        "register": "s0"
+      }
+    }
+  ],
+  "provenance_source": "scratch/research/indirect-callable-types/ORIGINAL-WITNESSES.json direct_call_argument_origins; only semantic register-origin metadata, no bytes or instructions.",
+  "historical_qualification": "The older unadopted-proposal wording carried in classification metadata does not identify the historical archive variant; no such variant or new denominator credit is claimed. The current catalogue identities and full-extent library witnesses are the admission authority.",
+  "accepted_camera_producer": "src/wave3/func_001b3340.c is the exact generic return-this array callback and defines no competing camera layout.",
+  "existing_trig_consumers": "Source search in the current src tree finds no sinf/cosf/__hardfp_sinf/__hardfp_cosf call sites before this addition, so no accepted declaration or include closure changes."
+}

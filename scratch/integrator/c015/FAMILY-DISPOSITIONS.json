@@ -1,0 +1,578 @@
+{
+  "schema_version": 1,
+  "base": "c3aa3cefbee5e17e2f3314dbde080ad3f6065a3a",
+  "starting_commit": "2dcf86af0",
+  "plan": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/contract-plan/FAMILIES.json",
+  "plan_sha256": "4deaf004c474b0265b5c9b5f4f2651de8935624f1b42fb3aa1fc135538842c4f",
+  "starting_new_functions": 19,
+  "starting_new_bytes": 2364,
+  "budget": {
+    "new_function_target_about": 100,
+    "maximum_identified_accepted_migrations_per_family": 5,
+    "stop_reason": "Main scope reservation/stopping instruction, before the original approximate100-NEW limit."
+  },
+  "families": [
+    {
+      "family": "CONTROL-TRIPLET",
+      "rank": 1,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001ae908",
+        "func_001b43bc",
+        "func_001b6310"
+      ],
+      "accepted_revisions": [],
+      "reason": "Canonical triplet identity is settled, but full enclosing-owner/input and native TouchBounds provider contracts remain incompatible; no cast/alias or second owner is introduced.",
+      "evidence": "reconcile/CONTROL-TRIPLET/DECISION.json"
+    },
+    {
+      "family": "SERVICE-RESOURCE",
+      "rank": 2,
+      "outcome": "collected",
+      "members_credited": [
+        "func_00145e3c",
+        "func_0018ef74",
+        "func_001c5530"
+      ],
+      "members_held": [],
+      "accepted_revisions": [
+        "src/checkpoint10/func_00121838.c"
+      ],
+      "reason": "Current typed service state resolves the stale hold; exact cleanup callback and shared primitive declarations reproduce all three members and both dependent units.",
+      "evidence": "reconcile/SERVICE-RESOURCE/DECISION.json"
+    },
+    {
+      "family": "STREAM-LOAD",
+      "rank": 3,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001d67c8",
+        "func_001d7318"
+      ],
+      "accepted_revisions": [],
+      "reason": "The shared six-input loader signature is decided by its body, but the dispatcher publishes incompatible whole-owner/setup/data-pointer views. Neither selected source supplies the request/header producer or decoder/arena provider needed to establish genuine subobjects and exact callbacks; no cast or invented event lifetime is admissible.",
+      "evidence": "reconcile/STREAM-LOAD/DECISION.json"
+    },
+    {
+      "family": "SINF-BINDING",
+      "rank": 4,
+      "outcome": "collected",
+      "members_credited": [
+        "func_001026dc"
+      ],
+      "members_held": [],
+      "accepted_revisions": [],
+      "reason": "The adopted catalogue provides the independently witnessed complete library definitions; the compiler math.h probe confirms the exact emitted hard-float symbols. Canonical camera publication reproduces all448 bytes.",
+      "evidence": "reconcile/SINF-BINDING/DECISION.json"
+    },
+    {
+      "family": "INPUT-SERVICE",
+      "rank": 5,
+      "outcome": "collected",
+      "members_credited": [
+        "func_001137c4"
+      ],
+      "members_held": [],
+      "accepted_revisions": [],
+      "reason": "Typed aggregate, exact static handle/result interface and real mapped-bank owner replace stale overlap/offset views; all1439 contexts/1473 functions re-prove, including the final commented target.",
+      "evidence": "reconcile/INPUT-SERVICE/DECISION.json"
+    },
+    {
+      "family": "SCENE-ENVIRONMENT",
+      "rank": 6,
+      "outcome": "held-canonical-mismatch",
+      "members_credited": [],
+      "members_held": [
+        "func_0012450c"
+      ],
+      "accepted_revisions": [],
+      "reason": "The honest canonical SceneEnvironment::Reset definition (real member arrays, no overlay) keeps the164-byte extent but mismatches at+5 under game/v6/L1. The native array/tail field layout cannot be changed merely to reproduce the private retail storage view; no native name is admitted.",
+      "evidence": "reconcile/SCENE-ENVIRONMENT/DECISION.json"
+    },
+    {
+      "family": "FRAME-TIMING-CALLBACK",
+      "rank": 7,
+      "outcome": "collected",
+      "members_credited": [
+        "func_0014b85c"
+      ],
+      "members_held": [],
+      "accepted_revisions": [
+        "src/wave11/func_001312a4.c"
+      ],
+      "reason": "Original storage/invocation semantics establish exact ServiceWorker void(void *) callback; the registered context is the existing ObjectManager, so unify the timing model and re-prove all43 contexts.",
+      "evidence": "reconcile/FRAME-TIMING-CALLBACK/DECISION.json"
+    },
+    {
+      "family": "ANIMATION-BINDING",
+      "rank": 8,
+      "outcome": "skipped-reserved-after-ruling-update",
+      "members_credited": [],
+      "members_held": [],
+      "accepted_revisions": [],
+      "reason": "Explicit native table/key-function ruling block; no direct or transitive waiver is inferred.",
+      "evidence": "reconcile/ANIMATION-BINDING/DECISION.json",
+      "historical_outcome": "skipped-ruling",
+      "ruling_update": "ea985bcb adds the explicit typed dispatch-table ruling. Main explicitly stops this pass; old skip evidence is retained and no claim is reopened."
+    },
+    {
+      "family": "RESOURCE-CACHE-CONSTRUCTOR",
+      "rank": 9,
+      "outcome": "collected",
+      "members_credited": [
+        "func_001c19e0"
+      ],
+      "members_held": [],
+      "accepted_revisions": [],
+      "reason": "One distinct four-record owner with opaque address-only table; target and existing header dependent both MATCH.",
+      "evidence": "reconcile/RESOURCE-CACHE-CONSTRUCTOR/DECISION.json"
+    },
+    {
+      "family": "CHILD-VIRTUAL",
+      "rank": 10,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001cfdb4"
+      ],
+      "accepted_revisions": [],
+      "reason": "Semantic inventory identifies the setter cell at0x2244a0 in the0x224480 table installed by MaterialInit-related producers. Native Material/AnimationLink remains a lead, not a permitted second C/native Material model: exact slot providers and original key/table identity are not closed; the coherent MATERIAL-NATIVE-MOVE transaction budgets13 accepted units (>5). The guessed int-selector interface is not published.",
+      "evidence": "reconcile/CHILD-VIRTUAL/DECISION.json"
+    },
+    {
+      "family": "RESOURCE-OBJECT-CONSTRUCTOR",
+      "rank": 11,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_00143318"
+      ],
+      "accepted_revisions": [],
+      "reason": "The source manually installs data_002240dc in a C-style ResourceObject record, but resource_objects.h already defines a different actual virtual ResourceObject owner. No original-evidenced actually undefined key or complete installed table/provider transaction is supplied; adding an undefined destructor/key only to externalize a table is forbidden.",
+      "evidence": "reconcile/RESOURCE-OBJECT-CONSTRUCTOR/DECISION.json"
+    },
+    {
+      "family": "SCENE-VIRTUAL",
+      "rank": 12,
+      "outcome": "skipped-reserved-after-ruling-update",
+      "members_credited": [],
+      "members_held": [],
+      "accepted_revisions": [],
+      "reason": "Direct CM2-F01 ruling blocker; no source or native slot admission attempted.",
+      "evidence": "reconcile/SCENE-VIRTUAL/DECISION.json",
+      "historical_outcome": "skipped-ruling",
+      "ruling_update": "ea985bcb adds the explicit typed dispatch-table ruling. Main explicitly stops this pass; old skip evidence is retained and no claim is reopened."
+    },
+    {
+      "family": "RESULT-COLLECTION",
+      "rank": 13,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001c1094",
+        "func_001c15a4",
+        "func_001c1c18"
+      ],
+      "accepted_revisions": [],
+      "reason": "The full source atom still casts return-this cleanup providers to ObjectDestructor, reinterprets DisplayRegistration.object from DisplayObject* to ResourceEvent*, and conflicts with the current L044TrainingFrame func_001c1190 receiver. The real entry/registration/provider contract is not established by the three cleanup body matches; do not invent new typed registration callees or publish vector shadows.",
+      "evidence": "reconcile/RESULT-COLLECTION/DECISION.json"
+    },
+    {
+      "family": "STREAM-VOICE-OWNER",
+      "rank": 14,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001d51c0",
+        "func_001d54b0",
+        "func_001d7edc",
+        "func_001d7f5c",
+        "func_001d80b0",
+        "func_001d82b0"
+      ],
+      "accepted_revisions": [],
+      "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+      "evidence": "reconcile/STREAM-VOICE-OWNER/DECISION.json"
+    },
+    {
+      "family": "STATIC-NATIVE-LIFETIMES",
+      "rank": 15,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_0015eae0",
+        "func_001671d4",
+        "func_001aea80",
+        "func_001dca5c",
+        "func_001dce40",
+        "func_001e3380"
+      ],
+      "accepted_revisions": [],
+      "reason": "The three empty callback inputs were already corrected by c012, but the six static atoms still request native destructor aliases rather than actual native provider definitions. The24-slot cleanup is currently a receiver-return WidgetController function, whereas the static owner allocates different four-byte WidgetRef objects; the generic registration/native destructor/type transaction is not proved. Do not alias return-only/no-argument/C functions to native destructors or invent registration helpers.",
+      "evidence": "reconcile/STATIC-NATIVE-LIFETIMES/DECISION.json",
+      "evidence_only": true,
+      "excluded_from_candidate_claims": true,
+      "owner": "later giant-component waves"
+    },
+    {
+      "family": "HEAP-FACTORIES",
+      "rank": 16,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_0010d500",
+        "func_0010dcb0",
+        "func_0010dce8",
+        "func_0010dd20",
+        "func_00116be4"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/HEAP-FACTORIES/BLOCKED.json",
+      "owner": "c015 folded recon-small"
+    },
+    {
+      "family": "COMMAND-CURSORS",
+      "rank": 17,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_001dacc0",
+        "func_001dadc4"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/COMMAND-CURSORS/BLOCKED.json",
+      "owner": "c015 folded recon-small"
+    },
+    {
+      "family": "GFX-OWNING-ARRAY",
+      "rank": 18,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_001c6440"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/GFX-OWNING-ARRAY/BLOCKED.json",
+      "owner": "c015 folded recon-small"
+    },
+    {
+      "family": "SNPRINTF-BINDING",
+      "rank": 19,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_00136510"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/SNPRINTF-BINDING/BLOCKED.json",
+      "owner": "c015 folded recon-small"
+    },
+    {
+      "family": "HWR-OUTPUT",
+      "rank": 20,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_0014a9dc"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/HWR-OUTPUT/BLOCKED.json"
+    },
+    {
+      "family": "SOUND-OPERATION",
+      "rank": 23,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_001d7e6c"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/SOUND-OPERATION/BLOCKED.json"
+    },
+    {
+      "family": "INPUT-CONSTRUCTION",
+      "rank": 29,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_0010cc0c",
+        "func_00116eb0"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/INPUT-CONSTRUCTION/BLOCKED.json"
+    },
+    {
+      "family": "FONT-SLOTS",
+      "rank": 30,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_00101f64",
+        "func_0010cc94",
+        "func_00113e20",
+        "func_00131540",
+        "func_0013156c",
+        "func_0013ea40",
+        "func_0019d9d8",
+        "func_001cf83c",
+        "func_001da39c",
+        "func_001daf74",
+        "func_001db3ec",
+        "func_001efcec",
+        "func_001efd08",
+        "func_001efeac",
+        "func_001f4920",
+        "func_001f4994",
+        "func_001f49b0",
+        "func_001f4b58"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json"
+    },
+    {
+      "family": "GRAPHICS-HEAP",
+      "rank": 31,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_001e3794",
+        "func_001e37b8",
+        "func_001f5780"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/GRAPHICS-HEAP/BLOCKED.json"
+    },
+    {
+      "family": "FILESYSTEM-WORKER",
+      "rank": 35,
+      "outcome": "collected-folded-recon-small",
+      "members_credited": [
+        "func_0010af8c"
+      ],
+      "members_held": [],
+      "accepted_revisions": [],
+      "reason": "Merged cleanly and freshly re-proved at c015 destinations under v6/L1, with the complete changed include closure.",
+      "evidence": "fold-recon-small/HANDOFF.json"
+    },
+    {
+      "family": "TEXT-WRITER-CURSOR",
+      "rank": 36,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_001af644"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/TEXT-WRITER-CURSOR/BLOCKED.json"
+    },
+    {
+      "family": "STREAM-PLAYER-STOP",
+      "rank": 37,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_001532e8"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/STREAM-PLAYER-STOP/BLOCKED.json"
+    },
+    {
+      "family": "DRAWING-ARRAY-RUNTIME",
+      "rank": 40,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_0014b4b0"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/DRAWING-ARRAY-RUNTIME/BLOCKED.json"
+    },
+    {
+      "family": "REQUEST-EXCHANGE",
+      "rank": 41,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_00190450"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/REQUEST-EXCHANGE/BLOCKED.json"
+    },
+    {
+      "family": "REVERB-CONTEXT",
+      "rank": 42,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_001d28f4"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/REVERB-CONTEXT/BLOCKED.json"
+    },
+    {
+      "family": "PROPERTY-LOOKUP",
+      "rank": 49,
+      "outcome": "collected-folded-recon-small",
+      "members_credited": [
+        "func_00112fb8"
+      ],
+      "members_held": [],
+      "accepted_revisions": [
+        "src/checkpoint11/intake-r7/np024/attributes_accessors.c",
+        "src/sdk2/func_001267c0.c",
+        "src/wave9/func_001267f4.c"
+      ],
+      "reason": "Merged cleanly and freshly re-proved at c015 destinations under v6/L1, with the complete changed include closure.",
+      "evidence": "fold-recon-small/HANDOFF.json"
+    },
+    {
+      "family": "SLOT-BANK",
+      "rank": 50,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_001b4f58"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/SLOT-BANK/BLOCKED.json"
+    },
+    {
+      "family": "SCALAR-CONVERTERS",
+      "rank": 52,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_0017e6c8"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/SCALAR-CONVERTERS/BLOCKED.json"
+    },
+    {
+      "family": "GRAPHICS-RESOURCES",
+      "rank": 60,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_00104804"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/GRAPHICS-RESOURCES/BLOCKED.json"
+    },
+    {
+      "family": "DIRECTORY-NATIVE-IDENTITY",
+      "rank": 74,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_0016b6a4"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/DIRECTORY-NATIVE-IDENTITY/BLOCKED.json"
+    },
+    {
+      "family": "REGION-HEAP",
+      "rank": 93,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_00146758"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/REGION-HEAP/BLOCKED.json"
+    },
+    {
+      "family": "WORK-COMMAND",
+      "rank": 101,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_00181a4c"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/WORK-COMMAND/BLOCKED.json"
+    },
+    {
+      "family": "THREAD-ENTRY",
+      "rank": 161,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_00107ce4"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/THREAD-ENTRY/BLOCKED.json"
+    },
+    {
+      "family": "VAARG-PARSER",
+      "rank": 162,
+      "outcome": "collected-folded-recon-small",
+      "members_credited": [
+        "func_00190d0c",
+        "func_00190d68"
+      ],
+      "members_held": [],
+      "accepted_revisions": [],
+      "reason": "Merged cleanly and freshly re-proved at c015 destinations under v6/L1, with the complete changed include closure.",
+      "evidence": "fold-recon-small/HANDOFF.json"
+    },
+    {
+      "family": "TEVSTAGE-RUNTIME",
+      "rank": 166,
+      "outcome": "held-folded-recon-small",
+      "members_credited": [],
+      "members_held": [
+        "func_0014b54c"
+      ],
+      "accepted_revisions": [],
+      "reason": "Folded recon-small blocked family; exact current reasons are preserved in the single c015 holds and the imported BLOCKED.json.",
+      "evidence": "scratch/integrator/recon-small/TEVSTAGE-RUNTIME/BLOCKED.json"
+    }
+  ],
+  "current_new_functions": 31,
+  "current_new_bytes": 4720,
+  "current_holds": 91,
+  "catalogue_version": "v16",
+  "catalogue_sha256": "8fbf9c14089dc98e25a4dd918f47f08ee0bb032c16c4e06917ad85028681f3ee",
+  "denominator_history_version": 13,
+  "assigned_families": [
+    "CONTROL-TRIPLET",
+    "SERVICE-RESOURCE",
+    "STREAM-LOAD",
+    "SINF-BINDING",
+    "INPUT-SERVICE",
+    "SCENE-ENVIRONMENT",
+    "FRAME-TIMING-CALLBACK",
+    "ANIMATION-BINDING",
+    "RESOURCE-CACHE-CONSTRUCTOR",
+    "CHILD-VIRTUAL",
+    "RESOURCE-OBJECT-CONSTRUCTOR",
+    "SCENE-VIRTUAL",
+    "RESULT-COLLECTION",
+    "STREAM-VOICE-OWNER"
+  ],
+  "stopping_authority": "Main explicitly limits c015 to its first14 ranked families plus already collected functions; ranks15 onward are reserved to c016/later waves. No further reconciliation is attempted.",
+  "latest_scope_authority": "Main additionally folds recon-small47945ebc (four functions) and optional clean rv02 into the one c015 review cycle."
+}

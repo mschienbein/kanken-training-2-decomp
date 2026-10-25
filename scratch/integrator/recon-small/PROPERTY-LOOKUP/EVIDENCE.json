@@ -1,0 +1,25 @@
+{
+  "family": "PROPERTY-LOOKUP",
+  "status": "reconciled",
+  "canonical_header": "include/game/property_text.h",
+  "decision": "Use the identical AttributeMapping in the accepted attribute accessors; keep PropertyTable distinct from AttributeTable and PropertyReference distinct from AttributeOwner. Preserve the caller-evidenced 64-byte hidden aggregate return.",
+  "evidence": [
+    "scratch/authors/np266/src/func_00112fb8.cpp:3-11,29-35",
+    "scratch/authors/nf098/RESULT.json: func_00112fb8 integration_needs, citing separate result/reference buffers in caller func_00109a48",
+    "src/checkpoint11/intake-r7/np024/attributes_accessors.c: original identical AttributeMapping/AttributeRecord/AttributeCursor declarations",
+    "src/sdk2/func_001267c0.c: original AttributeTable and AttributeOwner declarations",
+    "src/wave9/func_001267f4.c: original identical AttributeRecord/AttributeCursor declarations"
+  ],
+  "qualifications": ["[INFERENCE] Property/type descriptive names and unused PropertyReference prefix are not historical identity claims."],
+  "revised_accepted_units": [
+    "src/checkpoint11/intake-r7/np024/attributes_accessors.c",
+    "src/sdk2/func_001267c0.c",
+    "src/wave9/func_001267f4.c"
+  ],
+  "matches": [
+    {"source": "src/checkpoint16/property_lookup.cpp", "exit_code": 0, "functions": ["func_00112fb8"]},
+    {"source": "src/checkpoint11/intake-r7/np024/attributes_accessors.c", "exit_code": 0, "functions": ["func_0018fdfc", "func_0018fed0"]},
+    {"source": "src/sdk2/func_001267c0.c", "profile": "sdk", "exit_code": 0, "functions": ["func_001267c0"]},
+    {"source": "src/wave9/func_001267f4.c", "exit_code": 0, "functions": ["func_001267f4"]}
+  ]
+}

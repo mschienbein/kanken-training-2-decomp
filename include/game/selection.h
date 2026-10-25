@@ -64,7 +64,17 @@ struct W6Category {
     struct W6CategoryItem items[12];
 };
 
-struct W6Selector;
+/* [INFERENCE] Allocation and replacement use an eight-byte selector reference,
+ * distinct from the four-byte generic DisplayHandle. */
+struct SelectorReference {
+    struct ResourceEvent *object;
+    unsigned reserved04;
+};
+struct W6Selector {
+    unsigned char reserved00[0x1c];
+    struct SelectorReference *handle;
+    const struct NameTable *const *resources;
+};
 struct W6HandlePanel10;
 struct W6SelectionScreen {
     unsigned char reserved00[0x4c];
@@ -138,6 +148,8 @@ extern void func_001e981c(void *screen, int group_index, int index, int value);
 extern void func_00173d8c(struct W6HandlePanel10 *panel, int resource);
 extern void func_00190b1c(int category, int kind, int x, int y, int width, int height);
 extern void func_00190c1c(int category, int kind, int count, ...);
+extern void func_00190d0c(int category, int count, ...);
+extern void func_00190d68(int category, int count, ...);
 #ifdef __cplusplus
 }
 #endif

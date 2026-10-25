@@ -13,6 +13,19 @@ struct DisplayFramebufferPair {
     struct DisplayFramebuffer display[2];
 };
 
+/* [INFERENCE] Resource roles are unrecovered; initialization fixes their widths. */
+struct ResourceCollectionEntry {
+    void *object;
+    unsigned first, second, third;
+};
+struct FramebufferState {
+    unsigned reserved00;
+    unsigned char active;
+    unsigned char reserved05[3];
+    unsigned mode;
+    struct ResourceCollectionEntry entries[4];
+};
+
 struct FramebufferResource {
     const void *vtable;
     void *allocator;
@@ -89,6 +102,7 @@ extern "C" {
 extern struct OffscreenState bss_00495c04;
 extern void func_00137b84(struct DisplayFramebufferPair *output);
 extern void *func_00142a54(void *storage);
+extern void func_0010b598(struct FramebufferState *collection);
 #ifdef __cplusplus
 }
 #endif

@@ -1,0 +1,78 @@
+{
+  "family": "INPUT-SERVICE",
+  "outcome": "collected",
+  "members": [
+    "func_001137c4"
+  ],
+  "new_bytes": 296,
+  "canonical_changes": [
+    "Reuse the current complete InputService aggregate and its real handle/ring members.",
+    "Use StaticHandle.data_0024311c.handle and the actual unsigned six-output provider interface; convert only its scalar result.",
+    "Publish one InputSharedMemory owner with five typed opaque bank spans; member addresses replace source byte offsets. No alternative service/root declaration remains."
+  ],
+  "changed_headers": [
+    "include/game/input.h",
+    "include/game/input_memory.h"
+  ],
+  "accepted_source_revisions": [],
+  "opaque_memory_qualification": "Only the five bank spans and mapped publication order are established. Internal record contents and writer semantics remain opaque; no payload or second object view is defined.",
+  "preserved_bug": "The original ignores the map return before publishing bank addresses; comment records it without adding validation.",
+  "proof": {
+    "driver_exit_code": 0,
+    "contexts": 1439,
+    "functions": 1473,
+    "result": "PASS",
+    "record": "closure-r1/results.json",
+    "exit_counts": {
+      "0": 1439
+    }
+  },
+  "comment_only_source_binding": {
+    "scope_r1_source_snapshot": "SOURCE-r1.c",
+    "fresh_final_source_proof": {
+      "source": "src/checkpoint15/reconcile/INPUT-SERVICE/func_001137c4.c",
+      "profile": "sdk",
+      "functions": [
+        "func_001137c4"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/reconcile/INPUT-SERVICE/func_001137c4.c",
+        "--profile",
+        "sdk",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/INPUT-SERVICE/proof-r2-comment"
+      ],
+      "exit_code": 0,
+      "source_sha256": "8bbfc940c061997b23a1d49ca64746e335c6652ed0601a17bc8774aff2c54e9f",
+      "receipt": "scratch/integrator/c015/reconcile/INPUT-SERVICE/proof-r2-comment/func_001137c4.result.json",
+      "receipt_sha256": "8d579c104430fc2d5e03ba2fd114150bd624013a8b372af56719e8c7fb3fc42c",
+      "statuses": [
+        {
+          "name": "func_001137c4",
+          "address": 1128388,
+          "size": 296,
+          "candidate_size": 296,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_001137c4 @ 0x1137c4 size 0x128/0x128\n",
+      "stderr": ""
+    },
+    "other_sources_headers": "Unchanged after the full dependent proof; only an ORIGINAL BUG comment was added to the NEW unit."
+  },
+  "pre_review": "Actual typed owner and memory fields; no pointer cast, runtime byte offset, union view, extra owner, invented callee or changed callback; inherited assert helper annotation unchanged."
+}

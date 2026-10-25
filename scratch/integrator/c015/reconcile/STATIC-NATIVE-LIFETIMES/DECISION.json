@@ -1,0 +1,28 @@
+{
+  "family": "STATIC-NATIVE-LIFETIMES",
+  "outcome": "held-evidence",
+  "members": [
+    "func_0015eae0",
+    "func_001671d4",
+    "func_001aea80",
+    "func_001dca5c",
+    "func_001dce40",
+    "func_001e3380"
+  ],
+  "reason": "The three empty callback inputs were already corrected by c012, but the six static atoms still request native destructor aliases rather than actual native provider definitions. The24-slot cleanup is currently a receiver-return WidgetController function, whereas the static owner allocates different four-byte WidgetRef objects; the generic registration/native destructor/type transaction is not proved. Do not alias return-only/no-argument/C functions to native destructors or invent registration helpers.",
+  "selected_sources": [
+    "scratch/authors/w19g/src/func_0015eae0.cpp",
+    "scratch/authors/w19g/src/func_001671d4.cpp",
+    "scratch/authors/w19g/src/func_001aea80.cpp",
+    "scratch/authors/w19g/src/func_001dca5c.cpp",
+    "scratch/authors/w19g/src/func_001dce40.cpp",
+    "scratch/authors/w19g/src/func_001e3380.cpp"
+  ],
+  "current_contract_boundary": [
+    "Establish the actual generic registration runtime identity and adopt each real native static owner/destructor provider at its evidenced callback address, migrating accepted return-only owners to exactly typed object-input providers. Do not alias the canonical three-input registration or no-argument functions to native destructors.",
+    "Current canonical declaration witnesses, author integration requirements and the exact cited holds are the evidence boundaries. A historical body MATCH never selects a conflicting receiver, callback return or native class. Where ownership is unproved, the current accepted contract remains in force; no speculative alias is selected."
+  ],
+  "accepted_changes": [],
+  "names_admitted": [],
+  "proofs": "No retained invalid owner/callback/native-name model is compiled or collected."
+}

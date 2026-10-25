@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "job": "c015-interfaces-r1",
+  "durable_command": {
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      ".venv/bin/python",
+      "tools/interfaces.py",
+      "check",
+      "--matches",
+      "scratch/integrator/c015/PROPOSED-LEDGER.json",
+      "--allow-unchecked-cpp",
+      "--json",
+      "scratch/integrator/c015/INTERFACES-r1.json"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015",
+    "started_utc": "2026-10-25T17:08:23Z"
+  },
+  "grant": {
+    "schema_version": 1,
+    "granted_by": "Main",
+    "granted_utc": "2026-10-25T17:07:20Z",
+    "request_sha256": "d865a2d80a5ac44696f72395781eb54446adb4329449a7ea0153c67219fb5f35",
+    "argv": [
+      "nice",
+      "-n",
+      "10",
+      ".venv/bin/python",
+      "tools/interfaces.py",
+      "check",
+      "--matches",
+      "scratch/integrator/c015/PROPOSED-LEDGER.json",
+      "--allow-unchecked-cpp",
+      "--json",
+      "scratch/integrator/c015/INTERFACES-r1.json"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015",
+    "label": "c015 interfaces r1",
+    "message": "GRANT: exactly the requested command, once. Publish HEAVY-SLOT-RELEASED.json with released=true, the actual exit code, command and output paths immediately after."
+  },
+  "request_sha256": "d865a2d80a5ac44696f72395781eb54446adb4329449a7ea0153c67219fb5f35",
+  "requested_command_exact": true,
+  "actual_exit_code": 0,
+  "job_exit": {
+    "exit_code": 0,
+    "finished_utc": "2026-10-25T17:25:05Z",
+    "seconds": 1002.5
+  },
+  "released": true,
+  "release_record": "HEAVY-SLOT-RELEASED.json",
+  "report": "INTERFACES-r1.json",
+  "report_sha256": "0e28a90d9a5f64904b149569113ded0065afecf95de48b8f857478f5703588a4",
+  "job_log_sha256": "c72eed1ed6f4a152f4509a832eecee956e65fa17093dda92c7250a761b01c087",
+  "units": 2740,
+  "unchecked_cpp_units": 764,
+  "disagreements": 0,
+  "policy_items": 0,
+  "cpp_qualification": "qualified class-definition agreement across units and project headers (ODR, token-level; namespaces, enclosing classes and template specializations; unnamed namespaces unit-local), no forward declaration of a header-defined qualified class without that header, and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
+  "post_run_commit_validity": "Main requested a manifest-only scope correction while the audit ran. No source/header, names binding or proposed-ledger input changed, so this exact interfaces result remains valid for the new commit."
+}

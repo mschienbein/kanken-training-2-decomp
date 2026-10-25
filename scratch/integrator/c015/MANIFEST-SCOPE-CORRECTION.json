@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "requested_by": "Main; commit only after the granted interfaces job finishes.",
+  "old_manifest": "CANDIDATE-MANIFEST-SCOPE-r1.json",
+  "old_manifest_sha256": "bb86220cd8ce2e98cad354ea4b14d0ee6877cc7b61f41ed70f048fe06d788f50",
+  "new_manifest_sha256": "0a10bb963d95797bf713f7e76d31328916f82b173e8a519c3e241b2e9d2b9362",
+  "source_revised_units": 1,
+  "header_closure_units": 900,
+  "unchanged": [
+    "Every src/ and include/ file",
+    "config/names.json bindings",
+    "Candidate units, moves and holds",
+    "PROPOSED-LEDGER.json interfaces input"
+  ],
+  "changed": [
+    "Only candidate manifest note and the two revised-unit inventory arrays",
+    "The unchanged-source900-row inventory is moved to HEADER-CLOSURE-REPROOFS.json."
+  ],
+  "proof_validity": "The completed903-context/920-function closure remains the proof of the exact same source/header/configuration algorithm inputs; its old manifest is retained by hash. The granted interfaces job reads the unchanged proposed ledger, not this manifest, so its result remains valid for the later commit."
+}

@@ -1,0 +1,43 @@
+{
+  "source": "src/checkpoint15/recon-small/filesystem_worker.cpp",
+  "profile": "game",
+  "functions": [
+    "func_0010af8c"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint15/recon-small/filesystem_worker.cpp",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-001"
+  ],
+  "exit_code": 0,
+  "source_sha256": "6f76c072b14e9d67af1fb8def998379816e624b10b0d71eebec14ed8b61ded54",
+  "receipt": "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-001/filesystem_worker.result.json",
+  "receipt_sha256": "3dcd19517f45f76bf32526d1c76d8084ca1995138487ac2f900632fac572aff8",
+  "statuses": [
+    {
+      "name": "func_0010af8c",
+      "address": 1093516,
+      "size": 340,
+      "candidate_size": 340,
+      "status": "match",
+      "first_diff": null
+    }
+  ],
+  "all_required_match": true,
+  "stdout": "MATCH    func_0010af8c @ 0x10af8c size 0x154/0x154\n",
+  "stderr": ""
+}
