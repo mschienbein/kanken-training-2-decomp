@@ -1,0 +1,188 @@
+{
+ "base": "4a4da5cd",
+ "head": "HEAD",
+ "counts": {
+  "c_pointer_cast": 8,
+  "memcpy": 3,
+  "static_cast_pointer": 6,
+  "union": 2,
+  "volatile": 4
+ },
+ "hits": {
+  "union": [
+   {
+    "file": "include/game/graphics_state.h",
+    "line": 14,
+    "text": "union GraphicsRelayHeader;"
+   },
+   {
+    "file": "include/game/graphics_state.h",
+    "line": 17,
+    "text": "union GraphicsRelayHeader *header;"
+   }
+  ],
+  "volatile": [
+   {
+    "file": "include/game/input.h",
+    "line": 25,
+    "text": "const volatile struct TouchRing *ring;"
+   },
+   {
+    "file": "include/game/input.h",
+    "line": 29,
+    "text": "const volatile struct SensorRing *ring;"
+   },
+   {
+    "file": "include/game/input.h",
+    "line": 34,
+    "text": "const volatile struct MotionRing *ring;"
+   },
+   {
+    "file": "include/game/input.h",
+    "line": 38,
+    "text": "const volatile struct AuxiliaryInputRing *ring;"
+   }
+  ],
+  "c_pointer_cast": [
+   {
+    "file": "src/checkpoint12/intake-r22/final_func_00116e30/func_00116e30.c",
+    "line": 5,
+    "text": "return (const struct HwrResourceCounts *)((const unsigned *)file + file->count_offset_words + 2);"
+   },
+   {
+    "file": "src/checkpoint12/intake-r22/final_func_00116e30/func_00116e30.c",
+    "line": 18,
+    "text": "((const unsigned char *)file + file->metadata_offset);"
+   },
+   {
+    "file": "src/wave14/func_001677a4.cpp",
+    "line": 12,
+    "text": "list->objects = (MenuItem **)func_00193110(count * sizeof(MenuItem *), data_002232d5);"
+   },
+   {
+    "file": "src/wave14/func_001677a4.cpp",
+    "line": 13,
+    "text": "list->values = (unsigned short **)func_00193110(list->count * sizeof(unsigned short *), data_002232d5);"
+   },
+   {
+    "file": "src/wave14/func_001677a4.cpp",
+    "line": 14,
+    "text": "list->flags = (unsigned char *)func_00193110(list->count, data_002232d5);"
+   },
+   {
+    "file": "src/wave14/func_001677a4.cpp",
+    "line": 16,
+    "text": "MenuItem *object = (MenuItem *)func_0019d788(sizeof(MenuItem));"
+   },
+   {
+    "file": "src/wave14/func_001677a4.cpp",
+    "line": 20,
+    "text": "list->values[index] = (unsigned short *)func_00193110(8 * sizeof(unsigned short), data_002232d5);"
+   },
+   {
+    "file": "src/wave9/func_0019d8c4.c",
+    "line": 14,
+    "text": "glyph = (struct FontGlyphInfo *)block->data;"
+   }
+  ],
+  "static_cast_pointer": [
+   {
+    "file": "src/checkpoint12/intake-r22/final_func_00153ebc/func_00153ebc.cpp",
+    "line": 8,
+    "text": "return static_cast<const PrefetchFileBlock *>(file->GetBlock(0x4000));"
+   },
+   {
+    "file": "src/wave12/func_00156dac.cpp",
+    "line": 8,
+    "text": "AudioCounter *counter = static_cast<AudioCounter *>(storage);"
+   },
+   {
+    "file": "src/wave17/func_00134170.cpp",
+    "line": 7,
+    "text": "ResettableManager *manager = static_cast<ResettableManager *>(storage);"
+   },
+   {
+    "file": "src/wave20/func_00149270.cpp",
+    "line": 9,
+    "text": "struct WorkerThread *worker = static_cast<struct WorkerThread *>(argument);"
+   },
+   {
+    "file": "src/wave8/func_00167860.cpp",
+    "line": 6,
+    "text": "list->entries = static_cast<ItemPage **>(func_00193110(count * sizeof(*list->entries), data_002232d5));"
+   },
+   {
+    "file": "src/wave8/func_00167860.cpp",
+    "line": 9,
+    "text": "ItemPage *entry = static_cast<ItemPage *>(func_0019d788(sizeof(ItemPage)));"
+   }
+  ],
+  "memcpy": [
+   {
+    "file": "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+    "line": 9,
+    "text": "memcpy(&touch->previous, &touch->reference, sizeof(touch->previous));"
+   },
+   {
+    "file": "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+    "line": 17,
+    "text": "{ memcpy(&reference, &touch.reference, sizeof(reference)); }"
+   },
+   {
+    "file": "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+    "line": 19,
+    "text": "{ memcpy(&touch.previous, &reference, sizeof(reference)); }"
+   }
+  ]
+ },
+ "second_models": {},
+ "proximity": [
+  {
+   "symbol": "bss_004e31cc",
+   "declared_as": [
+    "struct RuntimeLibraryContext"
+   ],
+   "within_0x200": [
+    "bss_004e3004",
+    "bss_004e3224",
+    "bss_004e3254",
+    "bss_004e32ec"
+   ]
+  },
+  {
+   "symbol": "data_0021dffc",
+   "declared_as": [
+    "float []"
+   ],
+   "within_0x200": [
+    "data_0021dfcc",
+    "data_0021e02c"
+   ]
+  },
+  {
+   "symbol": "data_0021e02c",
+   "declared_as": [
+    "float []"
+   ],
+   "within_0x200": [
+    "data_0021dfcc",
+    "data_0021dffc"
+   ]
+  },
+  {
+   "symbol": "data_00223508",
+   "declared_as": [
+    "struct W22TextResourcesVTable"
+   ],
+   "within_0x200": [
+    "data_002234dc",
+    "data_002234f4",
+    "data_002235c8",
+    "data_002235f4",
+    "data_0022360c",
+    "data_00223664",
+    "data_00223678"
+   ]
+  }
+ ]
+}

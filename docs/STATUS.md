@@ -2,6 +2,55 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-25 (evening) — catalogue v15 adopted; residue table generator landed
+
+**Accepted:** 2,796 functions / 305,008 B (seq 13, unchanged). Denominator **v15** (history v12):
+4,546 creditable functions / 1,120,094 B (**27.23%**, unchanged). Gates **v1.20**.
+
+- **Catalogue v15** identifies the unknown range R03 (`001005fa`–`0010060a`, 16 B) as the Thumb
+  library function `_snputc`, the callee of the image's `snprintf`.
+  - Unresolved bytes fall from 114 B in 11 ranges to 98 B in 10.
+  - The anomaly at `0x0010d2b8` stays documented.
+  - Creditable totals are unchanged.
+  - Review: `docs/catalogue/REVIEW-v15.md`, PASS_WITH_QUALIFICATIONS, no findings.
+- **Residue table generator:** `tools/residue.py`, tested by `tests/test_residue.py`. Landed after
+  three review rounds; r1 and r2 failed, r3 passed.
+  - It puts every creditable function that is not accepted into exactly one evidence-backed
+    residue class.
+  - The final table goes in this file after the remaining checkpoints land.
+- Full suite on the merged state: 1,164 tests, 1 skipped, 0 failed modules.
+
+## 2026-10-25 — c012-r6 accepted (+26 functions); 4.1 libraries; three user rulings
+
+**Accepted:** 2,796 functions / 305,008 B (seq 13: … c011-r11, c012-r6). Denominator **v14**:
+4,546 creditable functions / 1,120,094 B (**27.23%**). Gates **v1.20**.
+
+- **c012-r6** combines ctypes1 r4 (63 revised accepted units, typed callback providers) with
+  c012 r4 (new functions and 31 accepted moves). It adds 26 functions / 3,988 B.
+  - r5 failed both reviews: two scene member-callback initialisers and a native font reader
+    called through mismatched provider types, and the merge deleted 43 unrelated evidence files.
+    r6 holds those 3 functions and restores the files. Both reviews PASS_WITH_QUALIFICATIONS
+    with no findings.
+  - Before prepare, Main moved two caller declarations into shared headers, and an
+    adjudication agent fixed one genuine pointer/value contract defect (`func_001543b8`).
+- **User rulings** (docs/rulings/):
+  - explicit typed dispatch tables are allowed, under conditions;
+  - unresolved catalogue bytes are resolved by documenting them as residue;
+  - the Thumb library candidates waited for the ARM Compiler 4.1 libraries;
+  - the linker model will be extended to Thumb branch-to-NOP through a gate revision.
+- **ARM Compiler 4.1 libraries** (builds 791 and 894, MD5-verified downloads from Arm) are now
+  local. The strict sweep proves `_ZdaPv` (`func_0019e08c`).
+  - Two printf helpers wait for the Thumb linker model (weak-undefined call resolution).
+  - `snprintf` waits for catalogue v15, which proves its callee `_snputc`.
+- **In progress:**
+  - c015 (19+ new functions, plus held-contract reconciliation);
+  - catalogue v15, in review (suite passes);
+  - the linker v19 implementation (Thumb weak-undefined calls);
+  - a migration design for the scene and menu dispatch tables (87 functions unlocked by the
+    ruling, less 7 PMF functions that stay blocked);
+  - the residue table generator, which passed review and lands next;
+  - permuter sweeps 11 and 12.
+
 ## 2026-10-23 (night) — denominator v14 adopted; resumed with 2 subagents
 
 **Accepted:** 2,770 functions / 301,020 B (seq 12, unchanged). Denominator **v14** (history v11):

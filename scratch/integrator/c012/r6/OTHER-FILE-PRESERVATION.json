@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "finding_ids": [
+    "codex-a:F03",
+    "codex-b:F03"
+  ],
+  "base": "4a4da5cd",
+  "verified_head": "945681dbaca722be311ee88d30889d08de7ab9c3",
+  "restoration": "RESTORATION.json",
+  "restoration_sha256": "e98eafedde93144ac94f788de20e5a678fe22a7321db31d3ae8be409857c4bb5",
+  "restored_file_count": 43,
+  "default_name_status_command": [
+    "git",
+    "diff",
+    "--name-status",
+    "4a4da5cd",
+    "HEAD"
+  ],
+  "default_D_rows": [
+    "src/wave10/func_0014a380.c",
+    "src/wave10/func_0014b438.c",
+    "src/wave18/func_0014c2cc.c",
+    "src/wave2/func_0018ce64.c",
+    "src/wave7/func_0014a394.cpp"
+  ],
+  "complete_deletions_command": [
+    "git",
+    "diff",
+    "--name-status",
+    "--no-renames",
+    "4a4da5cd",
+    "HEAD"
+  ],
+  "retired_old_source_paths": [
+    "src/checkpoint10/collect-r2/func_0019ecf8.c",
+    "src/checkpoint10/collect-r2/func_0021092c.cpp",
+    "src/checkpoint10/func_001757dc.c",
+    "src/checkpoint10/func_001db960.c",
+    "src/wave10/func_0014a380.c",
+    "src/wave10/func_0014b438.c",
+    "src/wave14/func_00115344.c",
+    "src/wave14/func_0012d43c.c",
+    "src/wave14/func_00186538.c",
+    "src/wave16/func_00126f44.c",
+    "src/wave18/func_0014c2cc.c",
+    "src/wave2/func_0018ce64.c",
+    "src/wave3/empty_functions.c",
+    "src/wave6/func_0019dc20.c",
+    "src/wave7/func_0014a394.cpp",
+    "src/wave7/func_001dac84.c",
+    "src/wave9/func_001409c0.c"
+  ],
+  "retired_old_source_count": 17,
+  "all_deletions_are_declared_moves_old_sources": true,
+  "non_move_deletions": [],
+  "declared_move_count": 31,
+  "new_evidence_only_commit_cannot_introduce_other_deletions": true
+}

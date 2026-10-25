@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "scope": "REPROOF-SCOPE.json",
+  "scope_sha256": "86055b73e0e812e199c83327239fd995e0b7d20c769c9eb085025b0e0de933b0",
+  "required_changed_surviving_contexts": 0,
+  "additional_focused_boundary_contexts": 6,
+  "sequential": true,
+  "nice": 10,
+  "runs": [
+    {
+      "index": 0,
+      "source": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
+      "source_sha256": "a683fb420a08447bb3ac49ede97982f4f78d556cdfa1b2ee87edcaa2712ab726",
+      "profile": "game",
+      "expected_functions": [
+        "func_001757dc"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
+        "--profile",
+        "game",
+        "--out",
+        "scratch/integrator/c012/r6/proofs/u000",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.149,
+      "stdout": "MATCH    func_001757dc @ 0x1757dc size 0x5c/0x5c\n",
+      "stderr": "",
+      "result": "scratch/integrator/c012/r6/proofs/u000/func_001757dc.result.json",
+      "result_sha256": "bcf2a80eae21818729bd86ec927f2ed556dd377501a06418b3f22c933f90c77a",
+      "functions": [
+        {
+          "name": "func_001757dc",
+          "address": 1529820,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "scratch_artifacts": [
+        {
+          "path": "scratch/integrator/c012/r6/proofs/u000/func_001757dc.o",
+          "sha256": "cc4a7369ba6eb2cabefaa7976ee8ac4a95d351c558e584b203dacb53247ee343",
+          "size": 2232
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "source": "src/wave19/func_001e387c.cpp",
+      "source_sha256": "306c6fa0971d2911cfcd4efe971db0ded28f8daeea8fe8ed51ee1e8ca83d072f",
+      "profile": "game",
+      "expected_functions": [
+        "func_001e387c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/match.py",
+        "src/wave19/func_001e387c.cpp",
+        "--profile",
+        "game",
+        "--out",
+        "scratch/integrator/c012/r6/proofs/u001",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.136,
+      "stdout": "MATCH    func_001e387c @ 0x1e387c size 0xe0/0xe0\n",
+      "stderr": "",
+      "result": "scratch/integrator/c012/r6/proofs/u001/func_001e387c.result.json",
+      "result_sha256": "912f688073e6c9babe8b613bb28c222cd83e7bcfac000d43154628e5ab81d7ea",
+      "functions": [
+        {
+          "name": "func_001e387c",
+          "address": 1980540,
+          "size": 224,
+          "candidate_size": 224,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "scratch_artifacts": [
+        {
+          "path": "scratch/integrator/c012/r6/proofs/u001/func_001e387c.o",
+          "sha256": "2027f59ce470ddbfc69db85343e7c0bb5e1061f42fa76696d2ca78adf4371799",
+          "size": 3180
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "source": "src/wave19/func_001e716c.cpp",
+      "source_sha256": "0359c8720570eaf6cf278df44cd83ed8609d3cf235efdde957ae3edb20a10aff",
+      "profile": "game",
+      "expected_functions": [
+        "func_001e716c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/match.py",
+        "src/wave19/func_001e716c.cpp",
+        "--profile",
+        "game",
+        "--out",
+        "scratch/integrator/c012/r6/proofs/u002",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.139,
+      "stdout": "MATCH    func_001e716c @ 0x1e716c size 0xc0/0xc0\n",
+      "stderr": "",
+      "result": "scratch/integrator/c012/r6/proofs/u002/func_001e716c.result.json",
+      "result_sha256": "3e6f6b9fe163aeaef046a713160417f3e2650e1533c2c9a34829ebb60784aafb",
+      "functions": [
+        {
+          "name": "func_001e716c",
+          "address": 1995116,
+          "size": 192,
+          "candidate_size": 192,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "scratch_artifacts": [
+        {
+          "path": "scratch/integrator/c012/r6/proofs/u002/func_001e716c.o",
+          "sha256": "7fa61f21b2e6da05c8057c916b7cda09e25d92dd0c64f14f0287473280d062fb",
+          "size": 3064
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "source": "src/wave12/func_001efe90.c",
+      "source_sha256": "ed29c91dc8bd89bc9510182910ece029b100ea2a27f1b2f3d54a04f9f1b9b62a",
+      "profile": "game",
+      "expected_functions": [
+        "func_001efe90"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/match.py",
+        "src/wave12/func_001efe90.c",
+        "--profile",
+        "game",
+        "--out",
+        "scratch/integrator/c012/r6/proofs/u003",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.134,
+      "stdout": "MATCH    func_001efe90 @ 0x1efe90 size 0xc/0xc\n",
+      "stderr": "",
+      "result": "scratch/integrator/c012/r6/proofs/u003/func_001efe90.result.json",
+      "result_sha256": "576bc06d208a087043c368ec5d3ceaf05b3eface78131502f0afc920120ac076",
+      "functions": [
+        {
+          "name": "func_001efe90",
+          "address": 2031248,
+          "size": 12,
+          "candidate_size": 12,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "scratch_artifacts": [
+        {
+          "path": "scratch/integrator/c012/r6/proofs/u003/func_001efe90.o",
+          "sha256": "0b62d0a151e0981cf16b9b6c451320c545ca4edb52fb69149b6236656924c7b9",
+          "size": 1928
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "source": "src/wave12/func_001f4b3c.c",
+      "source_sha256": "e9581636fc597c11ded2b3c7abd1e90fbd70a1321c3951a4fa346cc71b90fefa",
+      "profile": "game",
+      "expected_functions": [
+        "func_001f4b3c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/match.py",
+        "src/wave12/func_001f4b3c.c",
+        "--profile",
+        "game",
+        "--out",
+        "scratch/integrator/c012/r6/proofs/u004",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.132,
+      "stdout": "MATCH    func_001f4b3c @ 0x1f4b3c size 0xc/0xc\n",
+      "stderr": "",
+      "result": "scratch/integrator/c012/r6/proofs/u004/func_001f4b3c.result.json",
+      "result_sha256": "cdd92344921af0082e1c11ef89f009d4a89bbe1890b805b0e2808049e1b9cd95",
+      "functions": [
+        {
+          "name": "func_001f4b3c",
+          "address": 2050876,
+          "size": 12,
+          "candidate_size": 12,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "scratch_artifacts": [
+        {
+          "path": "scratch/integrator/c012/r6/proofs/u004/func_001f4b3c.o",
+          "sha256": "653b9825202cbabd95a4061a8160d90063e7f750827566d378c95292afb1cd49",
+          "size": 1928
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+      "source_sha256": "e96372bf88b46931821c73415df2f9ed5c1c00e725431710dd8f4fc0f914e035",
+      "profile": "middleware",
+      "expected_functions": [
+        "func_00113e78",
+        "func_001f0008",
+        "func_001f0018"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/match.py",
+        "src/nw4c/font_ResFontBase_ctor.cpp",
+        "--profile",
+        "middleware",
+        "--out",
+        "scratch/integrator/c012/r6/proofs/u005",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.133,
+      "stdout": "MATCH    _ZN2nw4font11ResFontBaseC1Ev @ 0x113e78 size 0x34/0x34\nMATCH    _ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtLargeEv @ 0x1f0008 size 0x10/0x10\nMATCH    _ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtSmallEv @ 0x1f0018 size 0x10/0x10\n",
+      "stderr": "",
+      "result": "scratch/integrator/c012/r6/proofs/u005/font_ResFontBase_ctor.result.json",
+      "result_sha256": "9c5954f42ad553b5dace1a4498567e02477fae9d6bd047bef88c4efe02d78d44",
+      "functions": [
+        {
+          "name": "_ZN2nw4font11ResFontBaseC1Ev",
+          "address": 1130104,
+          "size": 52,
+          "candidate_size": 52,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtLargeEv",
+          "address": 2031624,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtSmallEv",
+          "address": 2031640,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "scratch_artifacts": [
+        {
+          "path": "scratch/integrator/c012/r6/proofs/u005/font_ResFontBase_ctor.o",
+          "sha256": "f25227cbbc686dc4213a8ffebd1d92c6cee046fc831afb9d4d37ed660b91deb2",
+          "size": 3480
+        }
+      ]
+    }
+  ],
+  "exit_counts": {
+    "0": 6
+  },
+  "function_comparisons": 8,
+  "unique_functions": 8,
+  "all_emitted_comparisons_MATCH": true,
+  "driver_exit_code": 0,
+  "original_payload_retained": false
+}
