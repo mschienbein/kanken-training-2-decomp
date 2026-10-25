@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "source_commit": "8f2be9c38",
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015",
+  "purpose": "Main-requested updated whole-ledger dry interfaces audit after clean recon-small fold and optional rv02 collection:31 NEW/4720 bytes, finalized c012-r6/main c3aa3cef, catalogue v16. All1416 touched contexts/1452 functions MATCH under explicit v6/L1; final source policy leads are fully adjudicated. _ZdaPv is excluded.",
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    ".venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/c015/PROPOSED-LEDGER.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/c015/fold-recon-small/INTERFACES-r2.json"
+  ],
+  "durable_launch_argv": [
+    ".venv/bin/python",
+    "tools/jobs.py",
+    "run",
+    "--name",
+    "c015-interfaces-r2",
+    "--",
+    "nice",
+    "-n",
+    "10",
+    ".venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/c015/PROPOSED-LEDGER.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/c015/fold-recon-small/INTERFACES-r2.json"
+  ],
+  "dry_ledger_sha256": "ad32d2e09565b7560d910600448264603425047798bc3b0a991e72e621675b46",
+  "manifest_sha256": "9e11354fb0cb67d858ccbc75ffdf6d2366e91fe5478f4c7c4161a8d82f26ce63",
+  "output_paths": [
+    "scratch/integrator/c015/fold-recon-small/INTERFACES-r2.json",
+    "scratch/jobs/c015-interfaces-r2/exit",
+    "scratch/integrator/c015/HEAVY-SLOT-RELEASED-r2.json",
+    "scratch/integrator/c015/fold-recon-small/INTERFACES-RUN-r2.json"
+  ],
+  "authorization": "Fresh HEAVY-SLOT-GRANTED-r2.json and Main confirmation required; prior r1 grant was already consumed.",
+  "release": "A kernel inotify watcher publishes the r2 slot-release record immediately after the durable exit marker."
+}
