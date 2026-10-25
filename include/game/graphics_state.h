@@ -16,12 +16,27 @@ struct GraphicsRelayRing {
     unsigned reserved;
     union GraphicsRelayHeader *header;
 };
+
+/* One typed GPU wire command; pointer-valued inputs are serialized as words.
+ * [INFERENCE] Descriptive field names, not an alternative runtime-object view. */
+struct GraphicsTransferCommand {
+    struct { unsigned char opcode, reserved01, reserved02, channel; } header;
+    unsigned parameters[6];
+    struct { unsigned short first, second; } final;
+};
+struct GraphicsCommandTemplate {
+    unsigned char channel;
+    unsigned char reserved01[3];
+    const struct GraphicsTransferCommand *command;
+};
+struct GraphicsCommandQueue { void *shared; };
 struct GraphicsContext {
     struct StreamMutex mutex;
     unsigned char reserved0c[0x30 - 0x0c];
     struct GraphicsRelayRing relay;
     struct MappedMemoryBlock mapping;
-    unsigned char reserved54[8];
+    unsigned reserved54;
+    struct GraphicsCommandQueue commands;
     struct DisplayBuffer *buffers[2];
     struct SignalState completion;
     unsigned char reserved6c[8];
@@ -58,6 +73,12 @@ extern void func_00137b48(struct GraphicsRelayRing *ring, int enabled);
 extern CtrResult func_0012f5a0(void);
 extern int func_001847f8(void);
 extern int func_00187818(void);
+extern struct GraphicsCommandTemplate data_00243784;
+extern int func_00182bb0(struct GraphicsCommandQueue *queue,
+                        const struct GraphicsTransferCommand *command);
+extern void func_001376fc(void *start0, unsigned value0, void *end0,
+                         unsigned width0, void *start1, unsigned value1,
+                         void *end1, unsigned width1);
 #ifdef __cplusplus
 }
 #endif

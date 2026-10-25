@@ -1,6 +1,7 @@
 #ifndef GAME_STATIC_OBJECTS_H
 #define GAME_STATIC_OBJECTS_H
 
+#include "game/service_runtime.h"
 struct W15fObjectA;
 struct W15fObjectB;
 struct W15fVTable;
@@ -31,6 +32,11 @@ W15fObjectB *func_001aff80(W15fObjectB *object);
 extern struct W19RegisteredObject data_002426cc;
 extern const void *const data_00224dcc[];
 void func_001f5780(void);
+extern struct StreamMutex bss_004b1280;
+extern CtrHandle data_00242be8;
+extern const struct InvalidHandleRecord data_0021ac34;
+void func_001c519c(void *storage);
+void func_001f586c(void);
 }
 #endif
 

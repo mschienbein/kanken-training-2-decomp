@@ -56,6 +56,8 @@ extern int func_00155ab4(struct ServiceCoordinator *coordinator, int channel,
     short count);
 extern int func_0014cc1c(struct ServiceCoordinator *coordinator, int channel,
     int mode, unsigned char option);
+extern int func_0014ce8c(struct ServiceCoordinator *coordinator, int channel,
+    short b0, short b1, short b2, short a1, short a2);
 #ifdef __cplusplus
 }
 #endif

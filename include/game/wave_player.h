@@ -85,10 +85,19 @@ struct W15iStreamSound {
     W15iStreamItem *item;
 };
 
+/* [INFERENCE] The three installed address points share this contiguous group. */
+struct WavePlayerType {
+    unsigned primary[12];
+    unsigned registry[5];
+    unsigned manager[7];
+};
+
 extern "C" {
 
 
 extern const unsigned data_00224aac[];
+extern const WavePlayerType data_002248e0;
+extern const unsigned data_00224940[];
 extern W15iWavePlayer *func_001d603c(W15iWavePlayer *player);
 extern void func_001d5f1c(W15iWavePlayer *player);
 /* [INFERENCE] Unlocated wave hook; the natural cleanup supplies this player. */

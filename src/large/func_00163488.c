@@ -1,5 +1,6 @@
 #include "game/functions.h"
 #include "game/selection.h"
+#include "game/notification.h"
 
 struct GradeOptionScreen {
     unsigned char reserved00[0x48];
@@ -9,7 +10,6 @@ struct GradeOptionScreen {
     struct W6Selector *selector;
 };
 
-extern unsigned func_0017418c(void);
 
 
 

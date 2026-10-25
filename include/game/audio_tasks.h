@@ -31,7 +31,7 @@ struct AudioWorkItem;
 struct AudioWorkRequest {
     const void *type;
     struct PoolLink link;
-    unsigned signal_state, signal_count;
+    struct SignalState signal;
     unsigned char active;
     unsigned char reserved15[3];
     struct AudioWorkItem *owner, *context;
@@ -78,6 +78,7 @@ extern void func_001d6b24(unsigned id);
 extern void func_001d6678(unsigned id);
 extern void func_0017df84(struct AudioTaskManager *manager,
                           struct AudioWorkRequest *request, unsigned category);
+extern int func_0014a7e0(struct StreamQueue *queue, void *value);
 #ifdef __cplusplus
 }
 #endif

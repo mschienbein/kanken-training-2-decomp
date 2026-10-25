@@ -64,7 +64,17 @@ struct W6Category {
     struct W6CategoryItem items[12];
 };
 
-struct W6Selector;
+/* [INFERENCE] Allocation and replacement use an eight-byte selector reference,
+ * distinct from the four-byte generic DisplayHandle. */
+struct SelectorReference {
+    struct ResourceEvent *object;
+    unsigned reserved04;
+};
+struct W6Selector {
+    unsigned char reserved00[0x1c];
+    struct SelectorReference *handle;
+    const struct NameTable *const *resources;
+};
 struct W6HandlePanel10;
 struct W6SelectionScreen {
     unsigned char reserved00[0x4c];

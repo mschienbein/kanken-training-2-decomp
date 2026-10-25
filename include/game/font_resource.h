@@ -159,6 +159,8 @@ extern const struct BankInstrumentInfo *func_001f23f8(const struct SoundRecord *
 extern void *func_001177fc(struct VramAllocator *allocator, unsigned size, unsigned alignment);
 extern int func_00149494(struct VramAllocator *allocator, unsigned size, unsigned alignment);
 extern int func_001494b8(struct VramAllocator *allocator, unsigned size, unsigned alignment);
+extern struct VramAllocator bss_004952f4;
+extern void func_0013e18c(void *data, unsigned size, int prefer_vram);
 extern void func_001d2e04(struct SoundFileBuffer *buffer);
 extern void func_001d5c8c(struct SoundUpdateFlag *object);
 extern void func_001d89a0(struct SoundUpdateFlag *object);

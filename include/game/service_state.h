@@ -142,6 +142,7 @@ extern unsigned func_00192794(void);
 extern int func_00195e84(void);
 extern void func_00185f70(int enabled);
 extern void func_0018ef74(void);
+extern CtrResult func_0013e260(const void *buffer, unsigned flags);
 #ifdef __cplusplus
 }
 #endif
