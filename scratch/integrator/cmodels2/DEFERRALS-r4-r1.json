@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "new_deferral_functions": 1,
+    "new_deferral_bytes": 296,
+    "inherited_tracked_holds": 9,
+    "inherited_tracked_hold_bytes": 4464,
+    "total_tracked_holds": 10,
+    "total_tracked_hold_bytes": 4760,
+    "remaining_candidate_units": 5,
+    "remaining_new_functions": 4,
+    "remaining_new_bytes": 596,
+    "unresolved_blocker_findings": 2,
+    "resolved_findings": 2,
+    "protected_identity_deferrals": 0,
+    "reproof_runs": 101,
+    "reproof_exit_0": 100,
+    "unique_functions_match": 103,
+    "unique_matched_bytes": 17392,
+    "retained_prereview_required_functions": 39,
+    "remaining_prereview_required_functions_all_exact": true,
+    "c009_owned_font_holds": 4,
+    "c009_owned_font_hold_bytes": 144,
+    "c011_owned_font_holds": 2,
+    "c011_owned_font_hold_bytes": 364,
+    "predecessor_owned_holds_counted_as_new_cmodels2": false,
+    "reproof_exit_2": 1,
+    "additional_inherited_compile_blockers": 1
+  },
+  "inherited_holds": [
+    {
+      "function": "func_0017a49c",
+      "target_size": 76,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001ab680",
+      "target_size": 2212,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001acc88",
+      "target_size": 176,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001acf28",
+      "target_size": 200,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001bc5ac",
+      "target_size": 924,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001d5694",
+      "target_size": 284,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "func_001d5694 remains c011-owned; listed here only because it is one of the nine tracked cmodels2 prereview holds."
+    },
+    {
+      "function": "func_001d5864",
+      "target_size": 348,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001db404",
+      "target_size": 48,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001ef89c",
+      "target_size": 196,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    }
+  ],
+  "new_holds": [
+    {
+      "function": "func_001e958c",
+      "target_size": 296,
+      "finding": "CM2-F02",
+      "source": "src/models2/menu_resources/menu_teardown.cpp",
+      "preserved_source": "scratch/integrator/cmodels2/deferred-r4/menu_teardown.cpp",
+      "source_sha256": "0d10940a421d8caa12ba6c5b13a21dcdf25aad0f504121ce84010ebd4fee0f8b",
+      "accepted_or_prepared_identity": false,
+      "helpers_quarantined": [
+        "src/models2/menu_resources/ui_geometry.cpp"
+      ],
+      "header_quarantined": "include/game/menu_resources.h"
+    }
+  ],
+  "separately_owned_predecessor_holds": [
+    {
+      "owner": "c009-r5",
+      "functions": [
+        "func_00131540",
+        "func_001f4920",
+        "func_001efcec",
+        "func_001f4994"
+      ],
+      "count": 4,
+      "bytes": 144,
+      "counted_as_cmodels2": false
+    },
+    {
+      "owner": "c011-r4",
+      "functions": [
+        "func_0013ea40",
+        "func_001af644"
+      ],
+      "count": 2,
+      "bytes": 364,
+      "counted_as_cmodels2": false,
+      "note": "Only the two font-dependent c011 NEW holds are applied here to keep c009-r5 opacity. The rest of c011-r4 is a later predecessor rebase, not merged as an unfinalized contract."
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 #define GAME_INPUT_H
 
 #include <stdbool.h>
+#include "ctr/svc.h"
+#include "game/memory_arena.h"
 
 struct InputController;
 
@@ -13,9 +15,38 @@ struct InputCalibration {
 };
 
 struct ButtonRing;
+struct TouchRing;
+struct SensorRing;
+struct MotionRing;
+struct AuxiliaryInputRing;
+struct MotionInputVTable;
+struct TouchInputService {
+    CtrHandle handle;
+    const volatile struct TouchRing *ring;
+};
+struct SensorInputService {
+    CtrHandle handle;
+    const volatile struct SensorRing *ring;
+};
+struct MotionInputService {
+    const struct MotionInputVTable *vtable;
+    CtrHandle handle;
+    const volatile struct MotionRing *ring;
+};
+struct AuxiliaryInputService {
+    CtrHandle handle;
+    const volatile struct AuxiliaryInputRing *ring;
+};
+/* Initializer001f58d4 and cleanup001c5690 establish this complete aggregate;
+ * getter0010c12c returns its actual touch subobject at +8. */
 struct InputService {
-    unsigned handle;
+    CtrHandle handle;
     const volatile struct ButtonRing *ring;
+    struct TouchInputService touch;
+    struct SensorInputService sensor;
+    struct MotionInputService motion;
+    struct AuxiliaryInputService auxiliary;
+    struct MappedMemoryBlock mapping;
 };
 
 struct InputReader {
@@ -48,7 +79,7 @@ struct InputPoint {
     float x, y;
 };
 
-struct InputSnapshot {
+struct PointerState {
     bool active, released;
     unsigned char reserved02[2];
     struct InputPoint position;
@@ -58,6 +89,10 @@ struct InputSnapshot {
     bool tracking;
     unsigned char reserved19[3];
     struct InputPoint start_position;
+};
+
+struct InputSnapshot {
+    struct PointerState pointer;
     struct InputRectangle rectangle;
     unsigned int state;
 };
@@ -121,6 +156,16 @@ struct TouchDeviceState {
     struct InputPoint position;
 };
 
+/* [INFERENCE] Tracking extends the canonical coordinate/state snapshot.
+ * Only the held/reference/history tail is newly witnessed here. */
+struct TouchMotion {
+    struct InputSnapshot sample;
+    int held;
+    float reference;
+    float previous;
+};
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -144,10 +189,11 @@ extern int func_00121354(void);
 extern void func_00123a64(struct ButtonSample *sample);
 extern void func_00123a70(unsigned *held, unsigned *pressed, unsigned *released);
 extern struct TouchDeviceState bss_004972d8;
-extern void func_00170418(struct InputSnapshot *input);
+extern void func_00170418(struct PointerState *input);
 extern int func_0016ec14(const struct InputMode *mode);
 extern int func_001703c4(const struct InputRectangle *rectangle, float x, float y);
 extern int func_001e9af8(struct W22UiItem *item, const struct InputSnapshot *input);
+extern int func_0016f08c(struct TouchMotion *touch);
 #ifdef __cplusplus
 }
 #endif

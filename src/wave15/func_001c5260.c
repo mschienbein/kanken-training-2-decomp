@@ -1,5 +1,7 @@
-/* [INFERENCE] No surviving caller establishes a return value. */
-void func_001c5260(unsigned *value)
+/* The invoking array ABI returns the original element storage. */
+void *func_001c5260(void *storage)
 {
+    unsigned *value = storage;
     *value = 0;
+    return storage;
 }

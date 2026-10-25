@@ -29,6 +29,7 @@ extern void func_0018d8c4(unsigned char *cursor);
 extern void func_00191c94(struct RenderCache *cache, unsigned flags);
 extern void func_0018d894(struct W15iRenderer *renderer,
                           struct MatrixObject *render_info, unsigned flags);
+extern void func_0019c920(void);
 #ifdef __cplusplus
 }
 #endif

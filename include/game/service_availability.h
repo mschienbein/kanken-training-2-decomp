@@ -41,6 +41,24 @@ extern unsigned func_0010c33c(void);
 extern void func_0010c338(void);
 extern unsigned func_00121ddc(unsigned value);
 extern unsigned func_00121da0(unsigned value);
+/* [INFERENCE] Preserve the flat forwarding ABI, including the separately
+ * forwarded final buffer word; no synthetic request-object interface. */
+extern struct Result func_00136f38(
+    unsigned input1, unsigned input2, const void *input3,
+    unsigned input4, const void *input5, unsigned input6,
+    void *input7, unsigned input8, void *input9,
+    unsigned input10, const void *input11, unsigned input12,
+    void *input13, unsigned input14, void *input15,
+    unsigned input16, unsigned *input17, const void *input18,
+    void *input19, unsigned input20);
+extern struct Result func_0012f050(
+    unsigned argument1, unsigned argument2, const void *argument3,
+    unsigned argument4, const void *argument5, unsigned argument6,
+    void *argument7, unsigned argument8, void *argument9,
+    unsigned argument10, const void *argument11, unsigned argument12,
+    void *argument13, unsigned argument14, void *argument15,
+    unsigned argument16, unsigned *argument17, void *argument18,
+    unsigned argument19);
 #ifdef __cplusplus
 }
 #endif

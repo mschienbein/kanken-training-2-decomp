@@ -1,0 +1,89 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/func_001730ec/func_001730ec_removed.c",
+ "source_sha256": "8e85116907b06b33eaeba46698afb23d9c24f95360cb7c390e0db711d6e81714",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "b720ef3e16ae25c8a5ee2a47a7b6aaad04c9432c9fee69a5ab3575d20d7101d1",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/func_001730ec/item_accessors.c",
+   "source_sha256": "3dea631b293bfdf7f941db3de7bf2f42f73e001ac8ed65f39d282131b70e7ff3",
+   "object_sha256": "b4b346c5c4b02c6552de3e9aeae67c3540cc58a88747d2f614a31abd2f82fd6a"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "w19_item_category"
+   ],
+   "section": "i.w19_item_category",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u1512/extra-0-item_accessors.o"
+  },
+  {
+   "symbols": [
+    "w19_item_value"
+   ],
+   "section": "i.w19_item_value",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u1512/extra-0-item_accessors.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001730ec",
+   "address": 1519852,
+   "size": 116,
+   "candidate_size": 116,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 64,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d000d6",
+     "removed_callee": {
+      "symbols": [
+       "w19_item_category"
+      ],
+      "section": "i.w19_item_category",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u1512/extra-0-item_accessors.o"
+     }
+    },
+    {
+     "offset": 84,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe590000c",
+     "removed_callee": {
+      "symbols": [
+       "w19_item_value"
+      ],
+      "section": "i.w19_item_value",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u1512/extra-0-item_accessors.o"
+     }
+    }
+   ]
+  }
+ ]
+}

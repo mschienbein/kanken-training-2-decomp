@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "source_branch": "types-compose-r2",
+  "source_commit": "72af47d20314648c5fc42fd5e98f694f71a26d9e",
+  "target_branch": "c011-r8",
+  "target_commit": "f9ea308e21e3d9faa439631ac56189e3b28e62d2",
+  "common_ancestor": "f78df90632d86c1f48eb90b4ca2aacc5a23b50bc",
+  "source_manifest_sha256": "c34fedf10e0c81067a4daa63fb493a2f6ceddf028fb8b1d40fb543c538258217",
+  "base_ledger_sha256": "72032f735271e20dd938707120df0285ea5ad24c95cf48ef4e9ceaa3c2a7d448",
+  "base_context_sha256": "844e7337661d2666ad3a60d3aa7692dd1288fbc2888e1e0f6cd125125fa1579e",
+  "prereview": "scratch/prereview/ctypes1-r2/PREREVIEW.json",
+  "prereview_sha256": "6ca7aea7a5bd89318313f48c735c16fb54c88b7679994961522f0db1712b0067",
+  "seal_sha256": "3bb2519bd0319acd6e49b2f38e5948fcd0b142b093cf559788aeafbd24afb9d3",
+  "creation_and_merge_exits": {
+    "branch_absence_check": 1,
+    "worktree_add": 0,
+    "merge": 1
+  },
+  "conflicts": [
+    "config/names.json"
+  ],
+  "name_resolution": [
+    {
+      "symbol": "_ZN2nw3lyt13DeleteTextureERKNS0_11TextureInfoE",
+      "decision": "incoming own-definition delta composed",
+      "entry": {
+        "address": 1884124,
+        "evidence": "Own native DeleteTexture(const TextureInfo&) provider MATCH116B at001cbfdc, scratch/integrator/types-fontgfx/match/texture-delete-r1. The actual TextureContainer allocation constructs TextureInfo at entry+88; no first-word complete-object alias is retained."
+      }
+    },
+    {
+      "symbol": "_ZNK2nw4font4Font17GetCharStrmReaderEw",
+      "decision": "incoming own-definition delta composed",
+      "entry": {
+        "address": 2051320,
+        "evidence": "c009: src/wave20/func_001f4cf8.cpp defines the frozen native nw::font::Font::GetCharStrmReader(wchar_t) const API at this address; whole-function 64-byte MATCH under the frozen game profile is scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json. The hidden aggregate result, const Font receiver and unused wchar_t dummy are retained. This is a same-address own definition, not an external callee alias; original private identity remains qualified."
+      }
+    }
+  ],
+  "Main_context": "c010-r8 finalized seq11; v1.20 adopted on Main5820254f. Prescribed c011-r8 source snapshot retains v1.19 tooling/text; no algorithm/default changes or v18 selection are made by this worker. Main retains adopted v1.20 on integration.",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "no_agents_or_heavy_gates": true
+}

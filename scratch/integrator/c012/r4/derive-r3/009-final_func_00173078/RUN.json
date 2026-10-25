@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r29/final_func_00173078/func_00173078.cpp",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r3/009-final_func_00173078",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+    "--extra-source",
+    "src/checkpoint12/intake-r29/final_func_00173078/item_page_kind.c"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.231483,
+  "source": "src/checkpoint12/intake-r29/final_func_00173078/func_00173078.cpp",
+  "source_sha256": "ced31c4d660e79979ea351421b0eb3f2fc47dbc14b6f6673c19355cabaf09b27",
+  "claimed_functions": [
+    "func_00173078"
+  ],
+  "profile": "game",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [
+    {
+      "source": "src/checkpoint12/intake-r29/final_func_00173078/item_page_kind.c",
+      "sha256": "9729a9eea87704347b1b332835ff69b5fd67010cd90e7d8d5a1b83f9de5200f0"
+    }
+  ],
+  "receipt": "scratch/integrator/c012/r4/derive-r3/009-final_func_00173078/func_00173078.result.json",
+  "receipt_sha256": "35cce1d7bbe9e7440e357780bd8086230f140e23b98b15824c3befbda24830fc",
+  "functions": [
+    {
+      "name": "func_00173078",
+      "address": 1519736,
+      "size": 116,
+      "candidate_size": 116,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": [
+        {
+          "offset": 64,
+          "rule": "inline_insn",
+          "target": null,
+          "word": "0xe1d000d6",
+          "removed_callee": {
+            "symbols": [
+              "item_page_kind"
+            ],
+            "section": "i.item_page_kind",
+            "size": 8,
+            "object": "scratch/integrator/c012/r4/derive-r3/009-final_func_00173078/extra-0-item_page_kind.o"
+          }
+        }
+      ]
+    }
+  ],
+  "removed_callees": [
+    {
+      "symbols": [
+        "item_page_kind"
+      ],
+      "section": "i.item_page_kind",
+      "size": 8,
+      "object": "scratch/integrator/c012/r4/derive-r3/009-final_func_00173078/extra-0-item_page_kind.o"
+    }
+  ],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    func_00173078 @ 0x173078 size 0x74/0x74 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  item_page_kind (8 bytes; i.item_page_kind)\n",
+  "stderr": ""
+}

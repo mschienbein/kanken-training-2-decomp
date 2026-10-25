@@ -1,6 +1,8 @@
 #ifndef GAME_FRAMEBUFFER_H
 #define GAME_FRAMEBUFFER_H
 
+/* Display-service values, distinct from every GL/native graphics owner below.
+ * Original 001233d0 constructs two 16-byte elements through 00142a54. */
 struct DisplayFramebuffer {
     void *left;
     void *right;
@@ -86,6 +88,7 @@ extern "C" {
 #endif
 extern struct OffscreenState bss_00495c04;
 extern void func_00137b84(struct DisplayFramebufferPair *output);
+extern void *func_00142a54(void *storage);
 #ifdef __cplusplus
 }
 #endif

@@ -1,0 +1,40 @@
+{
+  "source": "src/checkpoint11/gpu_buffer_descriptor-r9.c",
+  "profile": "middleware",
+  "functions": [
+    "func_001223c0"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_001223c0": "src/checkpoint11/gpu_buffer_descriptor-r9.c"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/gpu_buffer_descriptor-r9.c",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u2603"
+  ],
+  "exit_code": 0,
+  "seconds": 0.278353,
+  "source_sha256": "8a8a1bcd3da70a96c5134adbb37eb968dccc0780633d2bb8bea76223565e10d1",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u2603/gpu_buffer_descriptor-r9.result.json",
+  "receipt_sha256": "a894df4c25b2fb48abdd0e88b393503ec8e86d3ef8531c350ecbc38bb5c5a7eb",
+  "output": "MATCH    func_001223c0 @ 0x1223c0 size 0x3c/0x3c\n",
+  "stderr": ""
+}

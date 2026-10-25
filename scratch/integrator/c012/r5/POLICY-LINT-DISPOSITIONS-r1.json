@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "status": "ALL_HITS_JUSTIFIED_NO_SOURCE_CHANGE_REQUIRED",
+  "lint_source_commit": "43fbd7e537ea027f8f3a9d86c11e4283400da2f1",
+  "base": "69854e8e",
+  "lint_exit_code": 0,
+  "report": "POLICY-LINT.json",
+  "report_sha256": "33732a8b5bf56a4ab093a9a7ec2b823a586ec65387e8f831f08b71d29df64b4a",
+  "source_hit_count": 23,
+  "proximity_hit_count": 6,
+  "second_model_hits": {},
+  "unresolved_hits": [],
+  "source_hits": [
+    {
+      "id": "L001",
+      "category": "union",
+      "file": "include/game/graphics_state.h",
+      "line": 14,
+      "text": "union GraphicsRelayHeader;",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "9c707e86a797451caaa0eeb5758ae0266c531598e943837296351bd39796da86",
+      "code_change_required": false,
+      "basis": "Only an incomplete union tag and pointer to that opaque tag are declared. No union body/member view, alternate representation, access, cast or pun is added; the prepared relay header stays opaque.",
+      "evidence": [
+        "include/game/graphics_state.h:12-18",
+        "scratch/prereview/ctypes1-r4/FAILURE-CLASS-SCREEN.json"
+      ]
+    },
+    {
+      "id": "L002",
+      "category": "union",
+      "file": "include/game/graphics_state.h",
+      "line": 17,
+      "text": "union GraphicsRelayHeader *header;",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "9c707e86a797451caaa0eeb5758ae0266c531598e943837296351bd39796da86",
+      "code_change_required": false,
+      "basis": "Only an incomplete union tag and pointer to that opaque tag are declared. No union body/member view, alternate representation, access, cast or pun is added; the prepared relay header stays opaque.",
+      "evidence": [
+        "include/game/graphics_state.h:12-18",
+        "scratch/prereview/ctypes1-r4/FAILURE-CLASS-SCREEN.json"
+      ]
+    },
+    {
+      "id": "L003",
+      "category": "volatile",
+      "file": "include/game/input.h",
+      "line": 25,
+      "text": "const volatile struct TouchRing *ring;",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "5e25f0c5214a0358ce04f93f29ad80c7cc7b6df3554ee17fe2dd512befcd1efb",
+      "code_change_required": false,
+      "basis": "const volatile qualifies existing externally produced shared input-ring storage through canonical touch/sensor/motion/auxiliary services and their mapped-memory aggregate. It is not a local steering variable, forced reload/barrier or code-generation-only volatile. Canonical ctypes model is retained.",
+      "qualification": "[INFERENCE] Existing shared producer ownership/synchronization roles are retained; no new memory-order guarantee is asserted.",
+      "evidence": [
+        "include/game/input.h:InputService and mapped rings",
+        "scratch/prereview/ctypes1-r4/PREREVIEW.json",
+        "HEADER-RESOLUTIONS-r1.json"
+      ]
+    },
+    {
+      "id": "L004",
+      "category": "volatile",
+      "file": "include/game/input.h",
+      "line": 29,
+      "text": "const volatile struct SensorRing *ring;",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "5e25f0c5214a0358ce04f93f29ad80c7cc7b6df3554ee17fe2dd512befcd1efb",
+      "code_change_required": false,
+      "basis": "const volatile qualifies existing externally produced shared input-ring storage through canonical touch/sensor/motion/auxiliary services and their mapped-memory aggregate. It is not a local steering variable, forced reload/barrier or code-generation-only volatile. Canonical ctypes model is retained.",
+      "qualification": "[INFERENCE] Existing shared producer ownership/synchronization roles are retained; no new memory-order guarantee is asserted.",
+      "evidence": [
+        "include/game/input.h:InputService and mapped rings",
+        "scratch/prereview/ctypes1-r4/PREREVIEW.json",
+        "HEADER-RESOLUTIONS-r1.json"
+      ]
+    },
+    {
+      "id": "L005",
+      "category": "volatile",
+      "file": "include/game/input.h",
+      "line": 34,
+      "text": "const volatile struct MotionRing *ring;",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "5e25f0c5214a0358ce04f93f29ad80c7cc7b6df3554ee17fe2dd512befcd1efb",
+      "code_change_required": false,
+      "basis": "const volatile qualifies existing externally produced shared input-ring storage through canonical touch/sensor/motion/auxiliary services and their mapped-memory aggregate. It is not a local steering variable, forced reload/barrier or code-generation-only volatile. Canonical ctypes model is retained.",
+      "qualification": "[INFERENCE] Existing shared producer ownership/synchronization roles are retained; no new memory-order guarantee is asserted.",
+      "evidence": [
+        "include/game/input.h:InputService and mapped rings",
+        "scratch/prereview/ctypes1-r4/PREREVIEW.json",
+        "HEADER-RESOLUTIONS-r1.json"
+      ]
+    },
+    {
+      "id": "L006",
+      "category": "volatile",
+      "file": "include/game/input.h",
+      "line": 38,
+      "text": "const volatile struct AuxiliaryInputRing *ring;",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "5e25f0c5214a0358ce04f93f29ad80c7cc7b6df3554ee17fe2dd512befcd1efb",
+      "code_change_required": false,
+      "basis": "const volatile qualifies existing externally produced shared input-ring storage through canonical touch/sensor/motion/auxiliary services and their mapped-memory aggregate. It is not a local steering variable, forced reload/barrier or code-generation-only volatile. Canonical ctypes model is retained.",
+      "qualification": "[INFERENCE] Existing shared producer ownership/synchronization roles are retained; no new memory-order guarantee is asserted.",
+      "evidence": [
+        "include/game/input.h:InputService and mapped rings",
+        "scratch/prereview/ctypes1-r4/PREREVIEW.json",
+        "HEADER-RESOLUTIONS-r1.json"
+      ]
+    },
+    {
+      "id": "L007",
+      "category": "c_pointer_cast",
+      "file": "src/checkpoint12/intake-r22/final_func_00116e30/func_00116e30.c",
+      "line": 5,
+      "text": "return (const struct HwrResourceCounts *)((const unsigned *)file + file->count_offset_words + 2);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "07c0f5c7d3ebef936402fd6d5822f246cdddaee5f8d66367bcb48aadbc9b3242",
+      "code_change_required": false,
+      "basis": "Main serialized-format ruling, not runtime-object offset recovery. The count_offset_words and metadata_offset are read from the serialized HWR record; each boundary yields the documented typed counts/metadata record, then typed use only. No runtime overlay, union view or second model.",
+      "qualification": "[INFERENCE] Original trusted bounds/alignment remain; no additional validation. Canonical C HWR format has no offset resolver; the existing small typed local counts helper is used.",
+      "evidence": [
+        "docs/known-issues-c012.md:Qualified serialized-format rows",
+        "scratch/integrator/c012/r4/SERIALIZED-FORMAT-r1.json"
+      ]
+    },
+    {
+      "id": "L008",
+      "category": "c_pointer_cast",
+      "file": "src/checkpoint12/intake-r22/final_func_00116e30/func_00116e30.c",
+      "line": 18,
+      "text": "((const unsigned char *)file + file->metadata_offset);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "07c0f5c7d3ebef936402fd6d5822f246cdddaee5f8d66367bcb48aadbc9b3242",
+      "code_change_required": false,
+      "basis": "Main serialized-format ruling, not runtime-object offset recovery. The count_offset_words and metadata_offset are read from the serialized HWR record; each boundary yields the documented typed counts/metadata record, then typed use only. No runtime overlay, union view or second model.",
+      "qualification": "[INFERENCE] Original trusted bounds/alignment remain; no additional validation. Canonical C HWR format has no offset resolver; the existing small typed local counts helper is used.",
+      "evidence": [
+        "docs/known-issues-c012.md:Qualified serialized-format rows",
+        "scratch/integrator/c012/r4/SERIALIZED-FORMAT-r1.json"
+      ]
+    },
+    {
+      "id": "L009",
+      "category": "c_pointer_cast",
+      "file": "src/wave14/func_001677a4.cpp",
+      "line": 12,
+      "text": "list->objects = (MenuItem **)func_00193110(count * sizeof(MenuItem *), data_002232d5);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "625d240bd05cd070736391bd3945af01626211f091d561e730075e72b8fa3ba3",
+      "code_change_required": false,
+      "basis": "Allocator result establishes a new MenuItem* pointer array of count elements. These are fresh-allocation type boundaries, not downcasts or overlays of existing runtime objects. Canonical ItemPage/unsigned-short rows are the ctypes model.",
+      "qualification": "[INFERENCE] Existing allocator alignment/ownership and original failure behavior preserved; no extra fallback or validation.",
+      "evidence": [
+        "src/wave14/func_001677a4.cpp",
+        "include/game/glyph_records.h",
+        "include/game/item_pages.h",
+        "scratch/prereview/ctypes1-r4/SEMANTIC-WITNESSES.json:func_001677a4"
+      ]
+    },
+    {
+      "id": "L010",
+      "category": "c_pointer_cast",
+      "file": "src/wave14/func_001677a4.cpp",
+      "line": 13,
+      "text": "list->values = (unsigned short **)func_00193110(list->count * sizeof(unsigned short *), data_002232d5);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "625d240bd05cd070736391bd3945af01626211f091d561e730075e72b8fa3ba3",
+      "code_change_required": false,
+      "basis": "Allocator result establishes a new unsigned-short* row-pointer array of count elements. These are fresh-allocation type boundaries, not downcasts or overlays of existing runtime objects. Canonical ItemPage/unsigned-short rows are the ctypes model.",
+      "qualification": "[INFERENCE] Existing allocator alignment/ownership and original failure behavior preserved; no extra fallback or validation.",
+      "evidence": [
+        "src/wave14/func_001677a4.cpp",
+        "include/game/glyph_records.h",
+        "include/game/item_pages.h",
+        "scratch/prereview/ctypes1-r4/SEMANTIC-WITNESSES.json:func_001677a4"
+      ]
+    },
+    {
+      "id": "L011",
+      "category": "c_pointer_cast",
+      "file": "src/wave14/func_001677a4.cpp",
+      "line": 14,
+      "text": "list->flags = (unsigned char *)func_00193110(list->count, data_002232d5);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "625d240bd05cd070736391bd3945af01626211f091d561e730075e72b8fa3ba3",
+      "code_change_required": false,
+      "basis": "Allocator result establishes the count-byte flags array. These are fresh-allocation type boundaries, not downcasts or overlays of existing runtime objects. Canonical ItemPage/unsigned-short rows are the ctypes model.",
+      "qualification": "[INFERENCE] Existing allocator alignment/ownership and original failure behavior preserved; no extra fallback or validation.",
+      "evidence": [
+        "src/wave14/func_001677a4.cpp",
+        "include/game/glyph_records.h",
+        "include/game/item_pages.h",
+        "scratch/prereview/ctypes1-r4/SEMANTIC-WITNESSES.json:func_001677a4"
+      ]
+    },
+    {
+      "id": "L012",
+      "category": "c_pointer_cast",
+      "file": "src/wave14/func_001677a4.cpp",
+      "line": 16,
+      "text": "MenuItem *object = (MenuItem *)func_0019d788(sizeof(MenuItem));",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "625d240bd05cd070736391bd3945af01626211f091d561e730075e72b8fa3ba3",
+      "code_change_required": false,
+      "basis": "Allocator returns fresh sizeof(MenuItem) storage, then actual typed func001eb6bc initializes that object. These are fresh-allocation type boundaries, not downcasts or overlays of existing runtime objects. Canonical ItemPage/unsigned-short rows are the ctypes model.",
+      "qualification": "[INFERENCE] Existing allocator alignment/ownership and original failure behavior preserved; no extra fallback or validation.",
+      "evidence": [
+        "src/wave14/func_001677a4.cpp",
+        "include/game/glyph_records.h",
+        "include/game/item_pages.h",
+        "scratch/prereview/ctypes1-r4/SEMANTIC-WITNESSES.json:func_001677a4"
+      ]
+    },
+    {
+      "id": "L013",
+      "category": "c_pointer_cast",
+      "file": "src/wave14/func_001677a4.cpp",
+      "line": 20,
+      "text": "list->values[index] = (unsigned short *)func_00193110(8 * sizeof(unsigned short), data_002232d5);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "625d240bd05cd070736391bd3945af01626211f091d561e730075e72b8fa3ba3",
+      "code_change_required": false,
+      "basis": "Allocator result establishes exactly eight unsigned-short code units for this row, then typed memset initializes them. These are fresh-allocation type boundaries, not downcasts or overlays of existing runtime objects. Canonical ItemPage/unsigned-short rows are the ctypes model.",
+      "qualification": "[INFERENCE] Existing allocator alignment/ownership and original failure behavior preserved; no extra fallback or validation.",
+      "evidence": [
+        "src/wave14/func_001677a4.cpp",
+        "include/game/glyph_records.h",
+        "include/game/item_pages.h",
+        "scratch/prereview/ctypes1-r4/SEMANTIC-WITNESSES.json:func_001677a4"
+      ]
+    },
+    {
+      "id": "L014",
+      "category": "c_pointer_cast",
+      "file": "src/wave9/func_0019d8c4.c",
+      "line": 14,
+      "text": "glyph = (struct FontGlyphInfo *)block->data;",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "4daf645575cef8327a3b2b5320c927b654f1381a72633dfb150bc1afd03b91f3",
+      "code_change_required": false,
+      "basis": "Serialized FontBlock payload boundary, selected by TGLP format signature 0x504c4754. headerSize and subsequent block.size come from serialized records. FontGlyphInfo is the single documented serialized payload type, not either runtime font class; after conversion only typed sheet_count is read.",
+      "qualification": "[INFERENCE] Original valid-file/block bounds and alignment are trusted. Canonical C font.h defines FontFile/FontBlock/FontGlyphInfo and its validator, with no block-address resolver helper; no new byte walker or shadow format model is introduced.",
+      "evidence": [
+        "src/wave9/func_0019d8c4.c",
+        "include/game/font.h",
+        "scratch/prereview/ctypes1-r4/PREREVIEW.json:func_0019d8c4"
+      ]
+    },
+    {
+      "id": "L015",
+      "category": "static_cast_pointer",
+      "file": "src/checkpoint12/intake-r22/final_func_00153ebc/func_00153ebc.cpp",
+      "line": 8,
+      "text": "return static_cast<const PrefetchFileBlock *>(file->GetBlock(0x4000));",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "ce118eff970c27efa6640065b52b86855490613f0afa9d14c16ee93353e24700",
+      "code_change_required": false,
+      "basis": "Canonical serialized CSPT resolver file->GetBlock(0x4000) returns an opaque block, converted once to documented PrefetchFileBlock. The selector is a format tag, not a runtime-object byte offset.",
+      "qualification": "[INFERENCE] Original valid-file/table alignment and bounds; no data credit or runtime class overlay.",
+      "evidence": [
+        "docs/known-issues-c012.md:Qualified serialized-format rows",
+        "include/nw/snd/snd_PrefetchFile.h"
+      ]
+    },
+    {
+      "id": "L016",
+      "category": "static_cast_pointer",
+      "file": "src/wave12/func_00156dac.cpp",
+      "line": 8,
+      "text": "AudioCounter *counter = static_cast<AudioCounter *>(storage);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "0a75a408ce7899f20f6d7b7d1a6d8ec11adba7d21cfbdae49b299be0d617492f",
+      "code_change_required": false,
+      "basis": "Actual generic array initializer interface void*(void*) receives storage and restores the existing canonical AudioCounter type only at that generic boundary, writes its 64-bit value, returns the same object. No incompatible callback type or native-constructor alias is introduced. Canonical ctypes source and its scoped prereview PASS are retained.",
+      "qualification": "[INFERENCE] Descriptive AudioCounter identity follows the eight-byte constructor and paired writes documented in the canonical source; exact bytes alone do not recover the historical class name.",
+      "evidence": [
+        "src/wave12/func_00156dac.cpp",
+        "include/game/audio_voice.h:AudioCounter",
+        "scratch/prereview/ctypes1-r4/PREREVIEW.json:func_00156dac"
+      ]
+    },
+    {
+      "id": "L017",
+      "category": "static_cast_pointer",
+      "file": "src/wave17/func_00134170.cpp",
+      "line": 7,
+      "text": "ResettableManager *manager = static_cast<ResettableManager *>(storage);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "c0261c98bc19f521e5672ba43021ffcaeff590595112da178792e6c4203b930b",
+      "code_change_required": false,
+      "basis": "Actual generic cleanup interface void(void*) restores its canonical ResettableManager receiver at the ABI boundary. ResettableManager has one genuine AllocatorBase initial base; the subsequent typed base cleanup uses implicit base conversion, not an unrelated alias or fake native callee. Canonical ctypes source and scoped prereview PASS are retained.",
+      "qualification": "[INFERENCE] Descriptive owner name and retained layout roles remain qualified; no new native virtual family or callback cast is claimed.",
+      "evidence": [
+        "src/wave17/func_00134170.cpp",
+        "include/game/resettable_manager.h",
+        "src/wave17/func_00183234.cpp",
+        "scratch/prereview/ctypes1-r4/PREREVIEW.json:func_00134170"
+      ]
+    },
+    {
+      "id": "L018",
+      "category": "static_cast_pointer",
+      "file": "src/wave20/func_00149270.cpp",
+      "line": 9,
+      "text": "struct WorkerThread *worker = static_cast<struct WorkerThread *>(argument);",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "3cbec43813715b215a3b487a91b33a97cef48230ff6173cbcb618076eb2582fb",
+      "code_change_required": false,
+      "basis": "The actual two-input thread entry void(void*,void*) recovers its writable canonical WorkerThread receiver from the erased runtime argument, not from another class. All stop_requested/lock uses stay through that one model; context input is retained. Canonical ctypes entry and scoped prereview PASS are unchanged.",
+      "qualification": "Generic trampoline/ownership roles remain inherited typed-contract qualifications; no const erasure, incompatible entry cast or narrowed one-input callback.",
+      "evidence": [
+        "src/wave20/func_00149270.cpp",
+        "include/game/waitable_handle.h:WorkerThread",
+        "src/wave12/func_00144960.c",
+        "scratch/prereview/ctypes1-r4/PREREVIEW.json:func_00149270"
+      ]
+    },
+    {
+      "id": "L019",
+      "category": "static_cast_pointer",
+      "file": "src/wave8/func_00167860.cpp",
+      "line": 6,
+      "text": "list->entries = static_cast<ItemPage **>(func_00193110(count * sizeof(*list->entries), data_002232d5));",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "0c1a368fd070733b7e8c02bd1cb8d1e0a449caed08c920179c4461b5008b3c35",
+      "code_change_required": false,
+      "basis": "Fresh allocation of the canonical ItemPage pointer array or sizeof(ItemPage) storage, immediately initialized through actual typed func0015f84c. No cast from an unrelated class or prior typed object.",
+      "qualification": "Allocator behavior and the original unchecked array-allocation bug are preserved.",
+      "evidence": [
+        "src/wave8/func_00167860.cpp",
+        "include/game/item_entries.h",
+        "scratch/prereview/ctypes1-r4/SEMANTIC-WITNESSES.json:func_00167860"
+      ]
+    },
+    {
+      "id": "L020",
+      "category": "static_cast_pointer",
+      "file": "src/wave8/func_00167860.cpp",
+      "line": 9,
+      "text": "ItemPage *entry = static_cast<ItemPage *>(func_0019d788(sizeof(ItemPage)));",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "0c1a368fd070733b7e8c02bd1cb8d1e0a449caed08c920179c4461b5008b3c35",
+      "code_change_required": false,
+      "basis": "Fresh allocation of the canonical ItemPage pointer array or sizeof(ItemPage) storage, immediately initialized through actual typed func0015f84c. No cast from an unrelated class or prior typed object.",
+      "qualification": "Allocator behavior and the original unchecked array-allocation bug are preserved.",
+      "evidence": [
+        "src/wave8/func_00167860.cpp",
+        "include/game/item_entries.h",
+        "scratch/prereview/ctypes1-r4/SEMANTIC-WITNESSES.json:func_00167860"
+      ]
+    },
+    {
+      "id": "L021",
+      "category": "memcpy",
+      "file": "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+      "line": 9,
+      "text": "memcpy(&touch->previous, &touch->reference, sizeof(touch->previous));",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "a8206fceed26d075f6358ed1b92ecd64c7f07272ce2d9b22517c2fdff6d8ba8d",
+      "code_change_required": false,
+      "basis": "Copies exactly one float value representation between float objects of the same type and sizeof(float), preserving the already-approved float-to-float tracking history. No integer/byte-storage reinterpretation, prefix overlay, runtime class view or owner recovery. The coordinate reference is to the actual canonical InputSnapshot.pointer.position subobject.",
+      "qualification": "Historical helper/source identity remains [INFERENCE]; this is not a claim of recovered original outlining.",
+      "evidence": [
+        "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+        "include/game/input.h",
+        "docs/known-issues-c012.md:Current combined scope"
+      ]
+    },
+    {
+      "id": "L022",
+      "category": "memcpy",
+      "file": "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+      "line": 17,
+      "text": "{ memcpy(&reference, &touch.reference, sizeof(reference)); }",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "a8206fceed26d075f6358ed1b92ecd64c7f07272ce2d9b22517c2fdff6d8ba8d",
+      "code_change_required": false,
+      "basis": "Copies exactly one float value representation between float objects of the same type and sizeof(float), preserving the already-approved float-to-float tracking history. No integer/byte-storage reinterpretation, prefix overlay, runtime class view or owner recovery. The coordinate reference is to the actual canonical InputSnapshot.pointer.position subobject.",
+      "qualification": "Historical helper/source identity remains [INFERENCE]; this is not a claim of recovered original outlining.",
+      "evidence": [
+        "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+        "include/game/input.h",
+        "docs/known-issues-c012.md:Current combined scope"
+      ]
+    },
+    {
+      "id": "L023",
+      "category": "memcpy",
+      "file": "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+      "line": 19,
+      "text": "{ memcpy(&touch.previous, &reference, sizeof(reference)); }",
+      "verdict": "JUSTIFIED",
+      "source_sha256": "a8206fceed26d075f6358ed1b92ecd64c7f07272ce2d9b22517c2fdff6d8ba8d",
+      "code_change_required": false,
+      "basis": "Copies exactly one float value representation between float objects of the same type and sizeof(float), preserving the already-approved float-to-float tracking history. No integer/byte-storage reinterpretation, prefix overlay, runtime class view or owner recovery. The coordinate reference is to the actual canonical InputSnapshot.pointer.position subobject.",
+      "qualification": "Historical helper/source identity remains [INFERENCE]; this is not a claim of recovered original outlining.",
+      "evidence": [
+        "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+        "include/game/input.h",
+        "docs/known-issues-c012.md:Current combined scope"
+      ]
+    }
+  ],
+  "proximity_hits": [
+    {
+      "id": "P001",
+      "symbol": "bss_004e31cc",
+      "declared_as": [
+        "struct RuntimeLibraryContext"
+      ],
+      "within_0x200": [
+        "bss_004e3004",
+        "bss_004e3224",
+        "bss_004e3254",
+        "bss_004e32ec"
+      ],
+      "verdict": "JUSTIFIED_WITH_QUALIFICATION",
+      "code_change_required": false,
+      "basis": "One opaque RuntimeLibraryContext address declaration and an address getter only: no member, extent, allocation, alternate storage view or neighbor overlay is introduced. Proximity does not establish aliasing or object extent.",
+      "qualification": "[INFERENCE] Concrete context extent/owner layout remains unrecovered and is deliberately not modeled.",
+      "evidence": [
+        "include/game/runtime_library_context.h",
+        "config/candidates/c012.json:func_0019f904"
+      ]
+    },
+    {
+      "id": "P002",
+      "symbol": "data_002184b8",
+      "declared_as": [
+        "MemberCallback"
+      ],
+      "within_0x200": [
+        "data_00218498",
+        "data_002184b0"
+      ],
+      "verdict": "JUSTIFIED_WITH_QUALIFICATION",
+      "code_change_required": false,
+      "basis": "Actual native MemberCallback descriptors, passed to the existing native member dispatcher by genuine CallbackTarget-derived parameter scenes. Each separately referenced descriptor uses the canonical ARMCC member-pointer type, never hand-decoded fields. Neighbor descriptor declarations have distinct addresses; no overlapping second model or data credit is introduced.",
+      "qualification": "[INFERENCE] Complete descriptor-table extent/historical TU is not inferred from address proximity. Existing full scene/hierarchy qualifications remain; unchanged accepted CM2 issues are not repaired.",
+      "evidence": [
+        "include/game/scene_parameters.h",
+        "include/game/deferred_callback.h",
+        "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+        "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp"
+      ]
+    },
+    {
+      "id": "P003",
+      "symbol": "data_00218888",
+      "declared_as": [
+        "MemberCallback"
+      ],
+      "within_0x200": [
+        "data_00218718",
+        "data_00218860",
+        "data_00218868",
+        "data_002188d0",
+        "data_002188d8",
+        "data_002188e0",
+        "data_002188e8"
+      ],
+      "verdict": "JUSTIFIED_WITH_QUALIFICATION",
+      "code_change_required": false,
+      "basis": "Actual native MemberCallback descriptors, passed to the existing native member dispatcher by genuine CallbackTarget-derived parameter scenes. Each separately referenced descriptor uses the canonical ARMCC member-pointer type, never hand-decoded fields. Neighbor descriptor declarations have distinct addresses; no overlapping second model or data credit is introduced.",
+      "qualification": "[INFERENCE] Complete descriptor-table extent/historical TU is not inferred from address proximity. Existing full scene/hierarchy qualifications remain; unchanged accepted CM2 issues are not repaired.",
+      "evidence": [
+        "include/game/scene_parameters.h",
+        "include/game/deferred_callback.h",
+        "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+        "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp"
+      ]
+    },
+    {
+      "id": "P004",
+      "symbol": "data_0021dffc",
+      "declared_as": [
+        "float []"
+      ],
+      "within_0x200": [
+        "data_0021dfcc",
+        "data_0021e02c"
+      ],
+      "verdict": "JUSTIFIED_WITH_QUALIFICATION",
+      "code_change_required": false,
+      "basis": "Existing canonical pitch-ratio float tables are independently referenced with explicit bounds12 and256 in accepted func0014feac. The12-float table at21dffc ends exactly at21e02c; this is adjacency, not overlap or a runtime owner cast. Shared declarations retain const float elements, no second type or data credit.",
+      "qualification": "Original table values and complete provenance are not printed or reclassified by this lint disposition.",
+      "evidence": [
+        "src/checkpoint10/func_0014feac.cpp",
+        "src/checkpoint11/sound_scale_lookup-r3.cpp",
+        "include/game/audio_scale.h"
+      ]
+    },
+    {
+      "id": "P005",
+      "symbol": "data_0021e02c",
+      "declared_as": [
+        "float []"
+      ],
+      "within_0x200": [
+        "data_0021dfcc",
+        "data_0021dffc"
+      ],
+      "verdict": "JUSTIFIED_WITH_QUALIFICATION",
+      "code_change_required": false,
+      "basis": "Existing canonical pitch-ratio float tables are independently referenced with explicit bounds12 and256 in accepted func0014feac. The12-float table at21dffc ends exactly at21e02c; this is adjacency, not overlap or a runtime owner cast. Shared declarations retain const float elements, no second type or data credit.",
+      "qualification": "Original table values and complete provenance are not printed or reclassified by this lint disposition.",
+      "evidence": [
+        "src/checkpoint10/func_0014feac.cpp",
+        "src/checkpoint11/sound_scale_lookup-r3.cpp",
+        "include/game/audio_scale.h"
+      ]
+    },
+    {
+      "id": "P006",
+      "symbol": "data_00223508",
+      "declared_as": [
+        "struct W22TextResourcesVTable"
+      ],
+      "within_0x200": [
+        "data_002234dc",
+        "data_002234f4",
+        "data_002235c8",
+        "data_002235f4",
+        "data_0022360c",
+        "data_00223664",
+        "data_00223678"
+      ],
+      "verdict": "JUSTIFIED_WITH_QUALIFICATION",
+      "code_change_required": false,
+      "basis": "Existing W22TextResources address point has one explicit typed callable-table model. Live cell is void(W22TextResources*); the null/VFE cell has no invented arity. No native-class/vtable name binding or data credit. Neighbor proximity is not used as an independent ownership proof.",
+      "qualification": "CM2-F04[INFERENCE] eight-byte address-point extent is preserved as a qualification, not promoted to proven full native-table/class identity.",
+      "evidence": [
+        "include/game/text_resources.h:W22TextResourcesVTable",
+        "src/models/func_0015f890/func_0015f890.cpp",
+        "docs/known-issues-c012.md:CM2-F04"
+      ]
+    }
+  ],
+  "independent_review_claim": false,
+  "source_or_header_edits_after_full_proof": []
+}

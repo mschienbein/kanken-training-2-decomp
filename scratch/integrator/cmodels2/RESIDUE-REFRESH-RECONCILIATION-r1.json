@@ -1,0 +1,1907 @@
+{
+  "schema_version": 1,
+  "basis": "Metadata-only comparison against preserved model-sweep-2 coverage and current candidate/deferral evidence; no blanket scope expansion or rematching.",
+  "refresh": {
+    "path": "scratch/integrator/residue-table/OUT.json",
+    "sha256": "fc7d07eca6da2aeed09dc55016ef95f6fc656aa08c5b859da5f0aaf277fef988",
+    "input_snapshot_sha256": "c7d2195973fbc67945a9b205eb4c620de898c53770be634a6203f69cb910716c"
+  },
+  "frozen_pool": {
+    "path": "scratch/model-sweep-2/summary.json",
+    "sha256": "d20985fabb51bc1706b3eeac5aca1b48c925a9f99c2711b9c8737e14712845bb",
+    "functions": 132,
+    "bytes": 148272
+  },
+  "counts": {
+    "refresh_model_qualified_functions": 30,
+    "refresh_model_qualified_bytes": 56788,
+    "recorded_model_MATCH": 5,
+    "named_model_requests": 25,
+    "same_pool_source_hash": 17,
+    "alternate_pool_source_hash": 8,
+    "absent_from_pool": 5
+  },
+  "rows": [
+    {
+      "function": "func_0011e99c",
+      "size": 1248,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/L012/src/func_0011e99c.cpp",
+      "refresh_source_sha256": "e5ad6d13f27906b2ccccf8838cca58278513d2267f68a4904c1825790711cf91",
+      "pool_source": "scratch/authors/r41103/selected/func_0011e99c.cpp",
+      "pool_source_sha256": "df0d5d2592db4fc03ec4923a4cf1e322db123ecdc49fcbf6d91f6e6fc0ec7bff",
+      "same_source": false,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_0011e99c/v6-L1/func_0011e99c.result.json",
+          "receipt_sha256": "c6b9622830adfdc4f6d6b063e6f8ab6ba0db2f69127d9e660469fbd294da0646",
+          "source_sha256": "df0d5d2592db4fc03ec4923a4cf1e322db123ecdc49fcbf6d91f6e6fc0ec7bff"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_0011e99c/v8-L1/func_0011e99c.result.json",
+          "receipt_sha256": "ec4fa189e766f60d159ef1bfae2df4afa10c0f0b2b2990b21304dddec66d296c",
+          "source_sha256": "df0d5d2592db4fc03ec4923a4cf1e322db123ecdc49fcbf6d91f6e6fc0ec7bff"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "L012",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/L012/names.json",
+        "names_overlay": "scratch/authors/L012/names.json",
+        "profile": "game",
+        "receipt": "scratch/integrator/mismatch-census/0011e99c/func_0011e99c.result.json",
+        "receipt_catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+        "receipt_target_size": 1248,
+        "record": "scratch/integrator/mismatch-census.json",
+        "residual": {
+          "compiled_size": 1184,
+          "differing_bytes": 1102,
+          "differing_words": 306,
+          "first_difference_offset": 16,
+          "target_size": 1248
+        },
+        "row_index": null,
+        "source": "scratch/authors/L012/src/func_0011e99c.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "e5ad6d13f27906b2ccccf8838cca58278513d2267f68a4904c1825790711cf91",
+        "status": "mismatch"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_001383e8",
+      "size": 184,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/nf058/src/func_001383e8__t11.cpp",
+      "refresh_source_sha256": "3902accd30dc95b9f1e2ac46b783391c5057e9c7fc6a4967e3a6de924e188120",
+      "pool_source": null,
+      "pool_source_sha256": null,
+      "same_source": false,
+      "routing_disposition": null,
+      "selected_measurements": [],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v8"
+      ],
+      "dispatch_evidence": {
+        "author": "nf058",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "5de2b158629c92e74e39650e08f868c900ab904eb07dac22e8a96ce5efb70133",
+            "profile": "game",
+            "source": "scratch/authors/nf058/helpers/heap_lock.cpp",
+            "source_sha256": "5de2b158629c92e74e39650e08f868c900ab904eb07dac22e8a96ce5efb70133"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "none",
+        "names": "scratch/authors/nf058/names.json",
+        "names_overlay": "scratch/authors/nf058/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/nf058/match/func_001383e8/26-final-qualified-v8/game/func_001383e8__t11.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 184,
+        "record": "scratch/authors/nf058/RESULT.json",
+        "residual": {
+          "compiled_size": 184,
+          "differing_bytes": 12,
+          "differing_words": 11,
+          "first_difference_offset": 25,
+          "target_size": 184
+        },
+        "row_index": 2,
+        "source": "scratch/authors/nf058/src/func_001383e8__t11.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "3902accd30dc95b9f1e2ac46b783391c5057e9c7fc6a4967e3a6de924e188120",
+        "status": "mismatch",
+        "target_selector": "func_001383e8"
+      },
+      "current_disposition": "recorded-v8-nonmatch-preserved",
+      "resolution": "The newer absent-row source already has an explicit v8/none mismatch; no new model MATCH is claimed and no unchanged source is rerun."
+    },
+    {
+      "function": "func_0013d560",
+      "size": 1164,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/r41116/src/func_0013d560.c",
+      "refresh_source_sha256": "ade7e9c7087e1a4145a8044145fe3181f307664188f5126f2fe4417d21ab42e4",
+      "pool_source": "scratch/authors/r41116/src/func_0013d560.c",
+      "pool_source_sha256": "ade7e9c7087e1a4145a8044145fe3181f307664188f5126f2fe4417d21ab42e4",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_0013d560/v6-L1/func_0013d560.result.json",
+          "receipt_sha256": "cf6ecd900855d0ceff85eaeabfae1143598a4ee0a53f03481744339f8f023c7a",
+          "source_sha256": "ade7e9c7087e1a4145a8044145fe3181f307664188f5126f2fe4417d21ab42e4"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_0013d560/v8-L1/func_0013d560.result.json",
+          "receipt_sha256": "07379caf7cf56b5ab5c8ef55bc766a7eedb9401b9438582b3624f9256cea662b",
+          "source_sha256": "ade7e9c7087e1a4145a8044145fe3181f307664188f5126f2fe4417d21ab42e4"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "r41116",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": null,
+        "profile": "game",
+        "receipt": "scratch/authors/r41116/match/final-game/func_0013d560.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 1164,
+        "record": "scratch/authors/r41116/RESULT.json",
+        "residual": {
+          "compiled_size": 1164,
+          "differing_bytes": 603,
+          "differing_words": 225,
+          "first_difference_offset": 8,
+          "target_size": 1164
+        },
+        "row_index": 0,
+        "source": "scratch/authors/r41116/src/func_0013d560.c",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "ade7e9c7087e1a4145a8044145fe3181f307664188f5126f2fe4417d21ab42e4",
+        "status": "mismatch",
+        "target_selector": "func_0013d560"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001456e4",
+      "size": 240,
+      "refresh_class": "model-qualified MATCH",
+      "refresh_source": "scratch/authors/w16d/v3/func_001456e4.c",
+      "refresh_source_sha256": "d6f6e6538f233a5a14a8d7cfe2ee2bc6c168a58e972f2d19045c29e6ce96f390",
+      "pool_source": "scratch/authors/w16d/v3/func_001456e4.c",
+      "pool_source_sha256": "d6f6e6538f233a5a14a8d7cfe2ee2bc6c168a58e972f2d19045c29e6ce96f390",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001456e4/v6-L1/func_001456e4.result.json",
+          "receipt_sha256": "a9f0a05ad72a06628cec99c7f8a4379e8ed189facc3ae05a13504444f4a4d50e",
+          "source_sha256": "d6f6e6538f233a5a14a8d7cfe2ee2bc6c168a58e972f2d19045c29e6ce96f390"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001456e4/v8-L1/func_001456e4.result.json",
+          "receipt_sha256": "40ca31c2f1db015b7b4b77a992af939c4d26c7ed7164e881426b7da15d0b4b67",
+          "source_sha256": "d6f6e6538f233a5a14a8d7cfe2ee2bc6c168a58e972f2d19045c29e6ce96f390"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v3"
+      ],
+      "dispatch_evidence": {
+        "author": "w16d",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "741268db3866768ffd0b4649251f55aefccbc3639ce7d60bac98f0f908a9bed4",
+            "profile": "game",
+            "source": "scratch/authors/w16d/v3/display_metadata.c",
+            "source_sha256": "741268db3866768ffd0b4649251f55aefccbc3639ce7d60bac98f0f908a9bed4"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v3",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": null,
+        "profile": "game",
+        "receipt": "scratch/authors/w16d/match/func_001456e4/v3-final/func_001456e4.result.json",
+        "receipt_catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+        "receipt_target_size": 240,
+        "record": "scratch/authors/w16d/RESULT.json",
+        "residual": {
+          "compiled_size": 240,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "target_size": 240
+        },
+        "row_index": 8,
+        "source": "scratch/authors/w16d/v3/func_001456e4.c",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "d6f6e6538f233a5a14a8d7cfe2ee2bc6c168a58e972f2d19045c29e6ce96f390",
+        "status": "match",
+        "target_selector": "func_001456e4"
+      },
+      "current_disposition": "admitted-canonical-v8-L1-match",
+      "resolution": "The unchanged author executable logic now uses the already accepted DisplayQueueFlags global; the preserved compile refusal was a stale private declaration, not a model limitation.",
+      "current_evidence": "scratch/integrator/cmodels2/DISPLAY-001456E4-r1.json"
+    },
+    {
+      "function": "func_00150778",
+      "size": 1248,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/r3L19/src/func_00150778.cpp",
+      "refresh_source_sha256": "daa8dd5a404064180f428a8660085a701baedebed75652f57762fd3f337514fb",
+      "pool_source": "scratch/authors/tu993/src/retained/func_00150778.cpp",
+      "pool_source_sha256": "874e7b17cca28d0d8f82f87ef796347d4ebb68d836f679261287a4b812eeeb0e",
+      "same_source": false,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_00150778/v6-L1/func_00150778.result.json",
+          "receipt_sha256": "2b63110a5496f7421aadbf51dec545ffc315c14ae9c3b35f9271c0870f4b05c1",
+          "source_sha256": "874e7b17cca28d0d8f82f87ef796347d4ebb68d836f679261287a4b812eeeb0e"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_00150778/v8-L1/func_00150778.result.json",
+          "receipt_sha256": "ab03b3ad1d5a987b7bf533bab94e17dbc53ce3872cdf9883f1b5f59833b50dce",
+          "source_sha256": "874e7b17cca28d0d8f82f87ef796347d4ebb68d836f679261287a4b812eeeb0e"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "r3L19",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/r3L19/names.json",
+        "names_overlay": "scratch/authors/r3L19/names.json",
+        "profile": "middleware",
+        "receipt": "scratch/authors/r3L19/match/func_00150778/final-middleware/func_00150778.result.json",
+        "receipt_catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+        "receipt_target_size": 1248,
+        "record": "scratch/authors/r3L19/RESULT.json",
+        "residual": {
+          "compiled_size": 1224,
+          "first_difference_offset": 1,
+          "target_size": 1248
+        },
+        "row_index": 2,
+        "source": "scratch/authors/r3L19/src/func_00150778.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "daa8dd5a404064180f428a8660085a701baedebed75652f57762fd3f337514fb",
+        "status": "mismatch",
+        "target_selector": "func_00150778"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_00169018",
+      "size": 144,
+      "refresh_class": "model-qualified MATCH",
+      "refresh_source": "scratch/authors/tu1091/src/func_00169018.c",
+      "refresh_source_sha256": "b2dfaf624e38037a9e6865704e23c50461d1b3fc1de5f46095af0ad4368475e3",
+      "pool_source": null,
+      "pool_source_sha256": null,
+      "same_source": false,
+      "routing_disposition": null,
+      "selected_measurements": [],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v3"
+      ],
+      "dispatch_evidence": {
+        "author": "tu1091",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "d846723e7e980ee4d9436d1ce16be869ea03932035ea5449079ac79150421e31",
+            "profile": "game",
+            "source": "scratch/authors/tu1091/src/item_category.c",
+            "source_sha256": "d846723e7e980ee4d9436d1ce16be869ea03932035ea5449079ac79150421e31"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v3",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": null,
+        "profile": "game",
+        "receipt": "scratch/authors/tu1091/match/04-split-v3/func_00169018.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 144,
+        "record": "scratch/authors/tu1091/RESULT.json",
+        "residual": {
+          "compiled_size": 144,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "target_size": 144
+        },
+        "row_index": 0,
+        "source": "scratch/authors/tu1091/src/func_00169018.c",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "b2dfaf624e38037a9e6865704e23c50461d1b3fc1de5f46095af0ad4368475e3",
+        "status": "match",
+        "target_selector": "func_00169018"
+      },
+      "current_disposition": "admitted-typed-shared-owner-v8-L1-match",
+      "current_evidence": "scratch/integrator/cmodels2/VISIBILITY-00169018-r2.json",
+      "resolution": "Actual same-entry forwarding identifies the existing L041InitializeScreen receiver; one direct MessageLayout pointer serves positioning/visibility. The accepted signed-byte getter TU is reused with its existing caller. Bounded selected-model witness matches both new target and accepted helper-context caller; no source alias/cast/union or duplicate helper."
+    },
+    {
+      "function": "func_0016d6dc",
+      "size": 1036,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/nf066/src/func_0016d6dc.c",
+      "refresh_source_sha256": "fb56d32faf059d8bfb835a89ad86a169200e375d86824bd3dfcb1dfe23120c96",
+      "pool_source": null,
+      "pool_source_sha256": null,
+      "same_source": false,
+      "routing_disposition": null,
+      "selected_measurements": [],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v3"
+      ],
+      "dispatch_evidence": {
+        "author": "nf066",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "b644c9757a0c649ee14de082fcf929ae22722b21fdcaf5a7c1ef1ae46dea3a0e",
+            "profile": "game",
+            "source": "scratch/authors/nf066/src/menu_keyboard_set_input.c",
+            "source_sha256": "b644c9757a0c649ee14de082fcf929ae22722b21fdcaf5a7c1ef1ae46dea3a0e"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v3",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": null,
+        "profile": "game",
+        "receipt": "scratch/authors/nf066/match/076-main-delivered-v3/func_0016d6dc.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 1036,
+        "record": "scratch/authors/nf066/RESULT.json",
+        "residual": {
+          "compiled_size": 1036,
+          "differing_bytes": 9,
+          "differing_words": 3,
+          "first_difference_offset": 704,
+          "target_size": 1036
+        },
+        "row_index": 0,
+        "source": "scratch/authors/nf066/src/func_0016d6dc.c",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "fb56d32faf059d8bfb835a89ad86a169200e375d86824bd3dfcb1dfe23120c96",
+        "status": "mismatch",
+        "target_selector": "func_0016d6dc"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_00181748",
+      "size": 468,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/tu1023/final/src/func_00181748.cpp",
+      "refresh_source_sha256": "5da916c838e0bfbea31816635e810f012783a2d01156e995bef6f671318df6ab",
+      "pool_source": "scratch/authors/tu1023/final/src/func_00181748.cpp",
+      "pool_source_sha256": "5da916c838e0bfbea31816635e810f012783a2d01156e995bef6f671318df6ab",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_00181748/v6-L1/func_00181748.result.json",
+          "receipt_sha256": "512fa1fef8f8e131abef676fb6b68cf7828d8c63ce7c66397a747b3992f45b64",
+          "source_sha256": "5da916c838e0bfbea31816635e810f012783a2d01156e995bef6f671318df6ab"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_00181748/v8-L1/func_00181748.result.json",
+          "receipt_sha256": "468b7a89db9375ec283a84c1be80bfdc611505935c47537d779d86697e183cf1",
+          "source_sha256": "5da916c838e0bfbea31816635e810f012783a2d01156e995bef6f671318df6ab"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "tu1023",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/tu1023/names.json",
+        "names_overlay": "scratch/authors/tu1023/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/tu1023/match/09-shared-pool-lifetime-game/func_00181748.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 468,
+        "record": "scratch/authors/tu1023/RESULT.json",
+        "residual": {
+          "compiled_size": 468,
+          "differing_bytes": 208,
+          "differing_words": 77,
+          "first_difference_offset": 9,
+          "target_size": 468
+        },
+        "row_index": 0,
+        "source": "scratch/authors/tu1023/final/src/func_00181748.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "5da916c838e0bfbea31816635e810f012783a2d01156e995bef6f671318df6ab",
+        "status": "mismatch",
+        "target_selector": "func_00181748"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_00186afc",
+      "size": 1008,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/r41388/src/font-prerequisites/func_00186afc.cpp",
+      "refresh_source_sha256": "270b9fe202995ae1def3ba6bbff57cf82cb471d333544f253cab489e54a1e1e9",
+      "pool_source": "scratch/authors/r41388/src/font-prerequisites/func_00186afc.cpp",
+      "pool_source_sha256": "270b9fe202995ae1def3ba6bbff57cf82cb471d333544f253cab489e54a1e1e9",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_00186afc/v6-L1/func_00186afc.result.json",
+          "receipt_sha256": "fdaa11a3021728664e3f2868f729a49ada179a9b960234389d79ad1964452098",
+          "source_sha256": "270b9fe202995ae1def3ba6bbff57cf82cb471d333544f253cab489e54a1e1e9"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_00186afc/v8-L1/func_00186afc.result.json",
+          "receipt_sha256": "bf4473c1d865cc9c61b928b3b5f855d228d988f576f53e7bb8295a1c293a4ce5",
+          "source_sha256": "270b9fe202995ae1def3ba6bbff57cf82cb471d333544f253cab489e54a1e1e9"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "r41388",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/r41388/names.json",
+        "names_overlay": "scratch/authors/r41388/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/r41388/match/func_00186afc/font-prerequisites-game/func_00186afc.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 1008,
+        "record": "scratch/authors/r41388/RESULT.json",
+        "residual": {
+          "compiled_size": 1000,
+          "differing_bytes": 801,
+          "first_difference_offset": 12,
+          "target_size": 1008
+        },
+        "row_index": 5,
+        "source": "scratch/authors/r41388/src/font-prerequisites/func_00186afc.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "270b9fe202995ae1def3ba6bbff57cf82cb471d333544f253cab489e54a1e1e9",
+        "status": "mismatch",
+        "target_selector": "func_00186afc"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001a0550",
+      "size": 8900,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/s1a0550/src/func_001a0550.cpp",
+      "refresh_source_sha256": "1a457e54efc2b34ecb2f05b4f66762c8817603b90fc2c4182dd7d6c046b030d1",
+      "pool_source": "scratch/authors/r41151/src/func_001a0550.cpp",
+      "pool_source_sha256": "12ec6cdeb9b73eb1554c150a8dd8329dec67daebf2e01977370a2ea520d369f5",
+      "same_source": false,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001a0550/v6-L1/func_001a0550.result.json",
+          "receipt_sha256": "136e584530cbccbcadc269a4f26b1ec42dacb0af01513a8deeb8dc5e93e54b18",
+          "source_sha256": "12ec6cdeb9b73eb1554c150a8dd8329dec67daebf2e01977370a2ea520d369f5"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001a0550/v8-L1/func_001a0550.result.json",
+          "receipt_sha256": "2e2a142af40b5a57af115185c856b5bcd25c3a5233c5fda65f1524c54e503977",
+          "source_sha256": "12ec6cdeb9b73eb1554c150a8dd8329dec67daebf2e01977370a2ea520d369f5"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "s1a0550",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/s1a0550/names.json",
+        "names_overlay": "scratch/authors/s1a0550/names.json",
+        "profile": "game",
+        "receipt": "scratch/integrator/mismatch-census/001a0550/func_001a0550.result.json",
+        "receipt_catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+        "receipt_target_size": 8900,
+        "record": "scratch/integrator/mismatch-census.json",
+        "residual": {
+          "compiled_size": 8912,
+          "differing_bytes": 2406,
+          "differing_words": 701,
+          "first_difference_offset": 36,
+          "target_size": 8900
+        },
+        "row_index": null,
+        "source": "scratch/authors/s1a0550/src/func_001a0550.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "1a457e54efc2b34ecb2f05b4f66762c8817603b90fc2c4182dd7d6c046b030d1",
+        "status": "mismatch"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_001a43b8",
+      "size": 12336,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/r41198/src/func_001a43b8.cpp",
+      "refresh_source_sha256": "89a921328561a44a2e276dd58e9350204225a3ddad0ea05c248619a3501d07b0",
+      "pool_source": "scratch/authors/s1a43b8/src/func_001a43b8.cpp",
+      "pool_source_sha256": "c1d141692aaac800ad035b0920334a1064f425a3069c54ed7592d8cb4476508a",
+      "same_source": false,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001a43b8/v6-L1/func_001a43b8.result.json",
+          "receipt_sha256": "2d7298325bfa874e1b3200b7acb72a5f7e5ce12e43499d959c282e1a1aa3eadc",
+          "source_sha256": "c1d141692aaac800ad035b0920334a1064f425a3069c54ed7592d8cb4476508a"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001a43b8/v8-L1/func_001a43b8.result.json",
+          "receipt_sha256": "e2a1510dc4facbebba0c912517540e9f932b72b19cc01ebe15853a7d31a437c4",
+          "source_sha256": "c1d141692aaac800ad035b0920334a1064f425a3069c54ed7592d8cb4476508a"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "r41198",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": "scratch/authors/r41198/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/r41198/match/attempt018-sceneparameter5c-reference/func_001a43b8.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 12336,
+        "record": "scratch/authors/r41198/RESULT.json",
+        "residual": {
+          "compiled_size": 12196,
+          "first_difference_offset": 36,
+          "target_size": 12336
+        },
+        "row_index": 0,
+        "source": "scratch/authors/r41198/src/func_001a43b8.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "89a921328561a44a2e276dd58e9350204225a3ddad0ea05c248619a3501d07b0",
+        "status": "mismatch",
+        "target_selector": "func_001a43b8"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_001a7b54",
+      "size": 1268,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/nf076/src/func_001a7b54.c",
+      "refresh_source_sha256": "7c51e002bcebeedde2449cb3b773559ccfb8f7ddd037109983fa180067bb0b8b",
+      "pool_source": "scratch/authors/tu917/src/selection_screens_final.cpp",
+      "pool_source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821",
+      "same_source": false,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001a7b54/v6-L1/selection_screens_final.result.json",
+          "receipt_sha256": "c88d511ba3eb65598d5a0a725b12e405514c91d5194771d75e06904f7b256c59",
+          "source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001a7b54/v8-L1/selection_screens_final.result.json",
+          "receipt_sha256": "cf4ba87766d7c89243812880eedb93037a13e0c6c33b7a7c87beb6f00a625279",
+          "source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v8"
+      ],
+      "dispatch_evidence": {
+        "author": "nf076",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": null,
+        "profile": "game",
+        "receipt": "scratch/authors/nf076/match/large-29-final-default-c-visible-contracts/func_001a7b54.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 1268,
+        "record": "scratch/authors/nf076/RESULT.json",
+        "residual": {
+          "compiled_size": 1248,
+          "differing_bytes": 767,
+          "differing_words": 230,
+          "first_difference_offset": 32,
+          "target_size": 1268
+        },
+        "row_index": 0,
+        "source": "scratch/authors/nf076/src/func_001a7b54.c",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "7c51e002bcebeedde2449cb3b773559ccfb8f7ddd037109983fa180067bb0b8b",
+        "status": "mismatch",
+        "target_selector": "func_001a7b54"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_001a84e0",
+      "size": 12292,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/tu917/src/selection_screens_final.cpp",
+      "refresh_source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821",
+      "pool_source": "scratch/authors/tu917/src/selection_screens_final.cpp",
+      "pool_source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001a84e0/v6-L1/selection_screens_final.result.json",
+          "receipt_sha256": "c88d511ba3eb65598d5a0a725b12e405514c91d5194771d75e06904f7b256c59",
+          "source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001a84e0/v8-L1/selection_screens_final.result.json",
+          "receipt_sha256": "587e23edf462b841748db65c5553e3d9381b3e46011bac10440ba89b75530a67",
+          "source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v8"
+      ],
+      "dispatch_evidence": {
+        "author": "tu917",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "6023c06405ed62bfab3fccc53c37d3b0f3542e76adef27f3b0444732a4af2933",
+            "profile": "game",
+            "source": "scratch/authors/tu917/src/parameter_destructors_final.cpp",
+            "source_sha256": "6023c06405ed62bfab3fccc53c37d3b0f3542e76adef27f3b0444732a4af2933"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "none",
+        "names": "scratch/authors/tu917/names-02.json",
+        "names_overlay": "scratch/authors/tu917/names-02.json",
+        "profile": "game",
+        "receipt": "scratch/authors/tu917/match/42-delivery-v8/selection_screens_final.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 12292,
+        "record": "scratch/authors/tu917/RESULT.json",
+        "residual": {
+          "compiled_size": 12292,
+          "differing_bytes": 7648,
+          "differing_words": 2367,
+          "first_difference_offset": 116,
+          "target_size": 12292
+        },
+        "row_index": 1,
+        "source": "scratch/authors/tu917/src/selection_screens_final.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821",
+        "status": "mismatch",
+        "target_selector": "func_001a84e0"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001ab680",
+      "size": 2212,
+      "refresh_class": "model-qualified MATCH",
+      "refresh_source": "scratch/authors/r4052/src/func_001ab680_removed_setter.c",
+      "refresh_source_sha256": "e1b17befc264c00164665daee29f99fdc85e101429a85685476209d389808291",
+      "pool_source": "scratch/authors/r4052/src/func_001ab680_removed_setter.c",
+      "pool_source_sha256": "e1b17befc264c00164665daee29f99fdc85e101429a85685476209d389808291",
+      "same_source": true,
+      "routing_disposition": "inherited-typed-contract-deferral",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "match",
+          "target_match": true,
+          "target_status": "match",
+          "receipt": "scratch/model-sweep-2/func_001ab680/v6-L1/func_001ab680_removed_setter.result.json",
+          "receipt_sha256": "6d0c9fb491bbb147eb13b0920bdd752f9eb6bf56c6788f975e300e9d32ac0597",
+          "source_sha256": "e1b17befc264c00164665daee29f99fdc85e101429a85685476209d389808291"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "match",
+          "target_match": true,
+          "target_status": "match",
+          "receipt": "scratch/model-sweep-2/func_001ab680/v8-L1/func_001ab680_removed_setter.result.json",
+          "receipt_sha256": "c4dbd5d4f60bb237e1b56cb3a739cec08dcbb95d06cf07902227aacecd227d08",
+          "source_sha256": "e1b17befc264c00164665daee29f99fdc85e101429a85685476209d389808291"
+        }
+      ],
+      "recorded_models": [
+        "anonymous-string-records-v1",
+        "armlink5-inline-branchnop-v4",
+        "armlink5-inline-branchnop-v5"
+      ],
+      "dispatch_evidence": {
+        "author": "model-sweep-measurement",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "75e273ad52c1fbaa05c9a543cdde0120abada38e98b019ad81e5317552fd37cc",
+            "profile": "game",
+            "source": "scratch/authors/r4052/src/removed_content_setter.c",
+            "source_sha256": "75e273ad52c1fbaa05c9a543cdde0120abada38e98b019ad81e5317552fd37cc"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v4",
+        "literal_model": "anonymous-string-records-v1",
+        "names": null,
+        "names_overlay": null,
+        "profile": "game",
+        "receipt": "scratch/model-sweep/func_001ab680/v4-l1/func_001ab680_removed_setter.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 2212,
+        "record": "scratch/model-sweep/RESULTS.json",
+        "residual": {
+          "compiled_size": 2212,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "target_size": 2212
+        },
+        "row_index": 36,
+        "source": "scratch/authors/r4052/src/func_001ab680_removed_setter.c",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "e1b17befc264c00164665daee29f99fdc85e101429a85685476209d389808291",
+        "status": "match",
+        "target_selector": "func_001ab680"
+      },
+      "current_disposition": "confirmed-audio-typed-contract-deferral",
+      "current_evidence": "scratch/integrator/cmodels2/CONTRACT-DEFERRALS.json",
+      "resolution": "ResumeC010 confirmed prerequisite corrections do not release candidate ownership/adoption; all-consumer/G3/argcheck and independent model checkpoint review remain open."
+    },
+    {
+      "function": "func_001b4870",
+      "size": 88,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/nf077/inputs/func_001b4870/a00-baseline/func_001b4870.c",
+      "refresh_source_sha256": "101ffa90a82c3de8f465e6279e4c9690b50e832dfbed995482ebac1d4c536389",
+      "pool_source": null,
+      "pool_source_sha256": null,
+      "same_source": false,
+      "routing_disposition": null,
+      "selected_measurements": [],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "nf077",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": null,
+        "profile": "game",
+        "receipt": "scratch/authors/nf077/match/func_001b4870/a00-baseline/func_001b4870.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 88,
+        "record": "scratch/authors/nf077/RESULT.json",
+        "residual": {
+          "compiled_size": 88,
+          "differing_bytes": 9,
+          "differing_words": 8,
+          "first_difference_offset": 13,
+          "target_size": 88
+        },
+        "row_index": 2,
+        "source": "scratch/authors/nf077/inputs/func_001b4870/a00-baseline/func_001b4870.c",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "101ffa90a82c3de8f465e6279e4c9690b50e832dfbed995482ebac1d4c536389",
+        "status": "mismatch",
+        "target_selector": "func_001b4870"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_001b6ec4",
+      "size": 588,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/L033/src/func_001b6ec4.cpp",
+      "refresh_source_sha256": "1f443331e1ec2303b6b9cab631c6e83056d76865ee8a95c3461aaeefff2d0083",
+      "pool_source": "scratch/authors/L033/src/func_001b6ec4.cpp",
+      "pool_source_sha256": "1f443331e1ec2303b6b9cab631c6e83056d76865ee8a95c3461aaeefff2d0083",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001b6ec4/v6-L1/func_001b6ec4.result.json",
+          "receipt_sha256": "e61e8f974940517196b5d66f4e888f5190b9e5854807e9faef75ca7abd6f4fc8",
+          "source_sha256": "1f443331e1ec2303b6b9cab631c6e83056d76865ee8a95c3461aaeefff2d0083"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001b6ec4/v8-L1/func_001b6ec4.result.json",
+          "receipt_sha256": "08bfd148e268f9a42dd139805b94c20af4495faab1af57d6410052d0e1b86ee9",
+          "source_sha256": "1f443331e1ec2303b6b9cab631c6e83056d76865ee8a95c3461aaeefff2d0083"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "L033",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "profile": "middleware",
+        "receipt": null,
+        "record": "scratch/authors/L033/RESULT.json",
+        "residual": {
+          "target_size": 588
+        },
+        "row_index": 2,
+        "source": "scratch/authors/L033/src/func_001b6ec4.cpp",
+        "source_binding": "no_receipt",
+        "source_sha256": "1f443331e1ec2303b6b9cab631c6e83056d76865ee8a95c3461aaeefff2d0083",
+        "status": "mismatch",
+        "target_selector": "func_001b6ec4"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001b8c14",
+      "size": 908,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/tu970/variants/18-common-lifecycle-direct-visibility.cpp",
+      "refresh_source_sha256": "73cd8996bb752f6b46d97af9089e903ca4cc90bff31d06022b9eb35fe0fc71b1",
+      "pool_source": "scratch/authors/tu970/variants/18-common-lifecycle-direct-visibility.cpp",
+      "pool_source_sha256": "73cd8996bb752f6b46d97af9089e903ca4cc90bff31d06022b9eb35fe0fc71b1",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001b8c14/v6-L1/18-common-lifecycle-direct-visibility.result.json",
+          "receipt_sha256": "3e058263024a771d8cd61ff2c611414bf90382fa0fd005e5bd4ee466808e53b8",
+          "source_sha256": "73cd8996bb752f6b46d97af9089e903ca4cc90bff31d06022b9eb35fe0fc71b1"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001b8c14/v8-L1/18-common-lifecycle-direct-visibility.result.json",
+          "receipt_sha256": "881197878106e09d04ce42f3275e4c1414d0641dc9757aebe5ece056592f097f",
+          "source_sha256": "73cd8996bb752f6b46d97af9089e903ca4cc90bff31d06022b9eb35fe0fc71b1"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "tu970",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "cf5cdfaebd2cb301d79b81118ea2ee5130386df2c0ac8ecc6d686d61b8fc3e00",
+            "profile": "game",
+            "source": "scratch/authors/tu970/src/scene_getters.c",
+            "source_sha256": "cf5cdfaebd2cb301d79b81118ea2ee5130386df2c0ac8ecc6d686d61b8fc3e00"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": "scratch/authors/tu970/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/tu970/match/18-common-lifecycle-getters-v6/18-common-lifecycle-direct-visibility.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 908,
+        "record": "scratch/authors/tu970/RESULT.json",
+        "residual": {
+          "compiled_size": 908,
+          "differing_bytes": 315,
+          "differing_words": 95,
+          "first_difference_offset": 40,
+          "target_size": 908
+        },
+        "row_index": 1,
+        "source": "scratch/authors/tu970/variants/18-common-lifecycle-direct-visibility.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "73cd8996bb752f6b46d97af9089e903ca4cc90bff31d06022b9eb35fe0fc71b1",
+        "status": "mismatch",
+        "target_selector": "func_001b8c14"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001bbfc4",
+      "size": 604,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/tu970/variants/10-layer-first-transition.cpp",
+      "refresh_source_sha256": "e175f010af6c159c67fdae4520916f01a3a98f3ebefde8b375f361c4501576ec",
+      "pool_source": "scratch/authors/tu970/variants/10-layer-first-transition.cpp",
+      "pool_source_sha256": "e175f010af6c159c67fdae4520916f01a3a98f3ebefde8b375f361c4501576ec",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001bbfc4/v6-L1/10-layer-first-transition.result.json",
+          "receipt_sha256": "5abaf57361e88d87b366afeaa0f8af14822cbccba688e96103558bf7a0fcc1a9",
+          "source_sha256": "e175f010af6c159c67fdae4520916f01a3a98f3ebefde8b375f361c4501576ec"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001bbfc4/v8-L1/10-layer-first-transition.result.json",
+          "receipt_sha256": "f3a5623411363b690c05f68ab9f1b3ffe77f5dd28ce657bbe23755597403ab32",
+          "source_sha256": "e175f010af6c159c67fdae4520916f01a3a98f3ebefde8b375f361c4501576ec"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "tu970",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "e6ac4b0349e283750a3274c3359ff9420e8ae5e5db14be4fe01cc01f78bd2fc1",
+            "profile": "game",
+            "source": "scratch/authors/tu970/src/scene_accessors.c",
+            "source_sha256": "e6ac4b0349e283750a3274c3359ff9420e8ae5e5db14be4fe01cc01f78bd2fc1"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": "scratch/authors/tu970/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/tu970/match/10-layer-first-transition-v6/10-layer-first-transition.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 604,
+        "record": "scratch/authors/tu970/RESULT.json",
+        "residual": {
+          "compiled_size": 604,
+          "differing_bytes": 12,
+          "differing_words": 4,
+          "first_difference_offset": 581,
+          "target_size": 604
+        },
+        "row_index": 4,
+        "source": "scratch/authors/tu970/variants/10-layer-first-transition.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "e175f010af6c159c67fdae4520916f01a3a98f3ebefde8b375f361c4501576ec",
+        "status": "mismatch",
+        "target_selector": "func_001bbfc4"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001be68c",
+      "size": 2444,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/nf079/src/func_001be68c.cpp",
+      "refresh_source_sha256": "9d8821132df3bf2fb5beec98b2db84215b228a251d7bb0c36f0ad58ee6bce804",
+      "pool_source": "scratch/authors/r4020/src/func_001be68c.cpp",
+      "pool_source_sha256": "b596fa5334dc027c95052b9ff880a056bf16c94df273d5b529227f31f582fc9f",
+      "same_source": false,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001be68c/v6-L1/func_001be68c.result.json",
+          "receipt_sha256": "34233bfb0dbe743b192f6210500edca5090245d3d689fe78572563671c099e27",
+          "source_sha256": "b596fa5334dc027c95052b9ff880a056bf16c94df273d5b529227f31f582fc9f"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001be68c/v8-L1/func_001be68c.result.json",
+          "receipt_sha256": "16cb36cce6fa5059c9c7b3831cd2dccaa270d8829ad4a2a0c9a94a254efae38c",
+          "source_sha256": "b596fa5334dc027c95052b9ff880a056bf16c94df273d5b529227f31f582fc9f"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "nf079",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/nf079/setup-names.json",
+        "names_overlay": "scratch/authors/nf079/setup-names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/nf079/match/s25-final/func_001be68c.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 2444,
+        "record": "scratch/authors/nf079/RESULT.json",
+        "residual": {
+          "compiled_size": 2444,
+          "differing_bytes": 12,
+          "differing_words": 12,
+          "first_difference_offset": 925,
+          "target_size": 2444
+        },
+        "row_index": 2,
+        "source": "scratch/authors/nf079/src/func_001be68c.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "9d8821132df3bf2fb5beec98b2db84215b228a251d7bb0c36f0ad58ee6bce804",
+        "status": "mismatch",
+        "target_selector": "func_001be68c"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_001c7560",
+      "size": 488,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/tu1005/src/func_001c7560.cpp",
+      "refresh_source_sha256": "939f58a7a9344aeebb3e6ba2b70c629b718a695860f25ef66f90b3366f0110a7",
+      "pool_source": "scratch/authors/tu1005/src/func_001c7560.cpp",
+      "pool_source_sha256": "939f58a7a9344aeebb3e6ba2b70c629b718a695860f25ef66f90b3366f0110a7",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001c7560/v6-L1/func_001c7560.result.json",
+          "receipt_sha256": "ec5eea5ecd504be99999243bca0c222da353798b432e95bb9e0f274836357db3",
+          "source_sha256": "939f58a7a9344aeebb3e6ba2b70c629b718a695860f25ef66f90b3366f0110a7"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001c7560/v8-L1/func_001c7560.result.json",
+          "receipt_sha256": "5eea8fcba2a81e90b5c4066c4b24a29e0dc5059eb1ad1b0db3a5bcbeb68c62a8",
+          "source_sha256": "939f58a7a9344aeebb3e6ba2b70c629b718a695860f25ef66f90b3366f0110a7"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v8"
+      ],
+      "dispatch_evidence": {
+        "author": "tu1005",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "9bbd9a377f2e851c56a37888f2c698e1dd19640d521a3f6d731071ea4e0cefa5",
+            "profile": "game",
+            "source": "scratch/authors/tu1005/helpers/index_stream_command_size.cpp",
+            "source_sha256": "9bbd9a377f2e851c56a37888f2c698e1dd19640d521a3f6d731071ea4e0cefa5"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "none",
+        "names": "scratch/authors/tu1005/names.json",
+        "names_overlay": "scratch/authors/tu1005/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/tu1005/match/040-delivery-v8-game/func_001c7560.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 488,
+        "record": "scratch/authors/tu1005/RESULT.json",
+        "residual": {
+          "compiled_size": 488,
+          "differing_bytes": 112,
+          "first_difference_offset": 169,
+          "target_size": 488
+        },
+        "row_index": 0,
+        "source": "scratch/authors/tu1005/src/func_001c7560.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "939f58a7a9344aeebb3e6ba2b70c629b718a695860f25ef66f90b3366f0110a7",
+        "status": "mismatch",
+        "target_selector": "func_001c7560"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001cd344",
+      "size": 64,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/tu922/variants/final-shared-native-tu/func_001cd344_tu.cpp",
+      "refresh_source_sha256": "e9852aa30da8a0e5b4d5a8a273c9aa3f3a43d49c65cd1145da8b0996bf11d51e",
+      "pool_source": "scratch/authors/tu922/variants/final-shared-native-tu/func_001cd344_tu.cpp",
+      "pool_source_sha256": "e9852aa30da8a0e5b4d5a8a273c9aa3f3a43d49c65cd1145da8b0996bf11d51e",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001cd344/v6-L1/func_001cd344_tu.result.json",
+          "receipt_sha256": "4da026b6e82957fb211e4c25d350bca6ed068343640a1955d4a7227fd4105710",
+          "source_sha256": "e9852aa30da8a0e5b4d5a8a273c9aa3f3a43d49c65cd1145da8b0996bf11d51e"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001cd344/v8-L1/func_001cd344_tu.result.json",
+          "receipt_sha256": "ec7f3f715299625921b2930eb25f6f271c6e12e6f1789e81a1f38b9e091408c4",
+          "source_sha256": "e9852aa30da8a0e5b4d5a8a273c9aa3f3a43d49c65cd1145da8b0996bf11d51e"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "tu922",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/tu922/names-retail-textbox.json",
+        "names_overlay": "scratch/authors/tu922/names-retail-textbox.json",
+        "profile": "game",
+        "receipt": "scratch/authors/tu922/match/final-shared-native-tu/func_001cd344_tu.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 64,
+        "record": "scratch/authors/tu922/RESULT.json",
+        "residual": {
+          "compiled_size": 64,
+          "differing_bytes": 52,
+          "differing_words": 14,
+          "first_difference_offset": 0,
+          "target_size": 64
+        },
+        "row_index": 0,
+        "source": "scratch/authors/tu922/variants/final-shared-native-tu/func_001cd344_tu.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "e9852aa30da8a0e5b4d5a8a273c9aa3f3a43d49c65cd1145da8b0996bf11d51e",
+        "status": "mismatch",
+        "target_selector": "func_001cd344"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001cecb8",
+      "size": 240,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/nf144/src/lyt_runtime.cpp",
+      "refresh_source_sha256": "fe27773734e798ed6d3bec8d93df95debd862cead5ed272126027915a5fa9fda",
+      "pool_source": "scratch/authors/tu662/final/lyt_runtime.cpp",
+      "pool_source_sha256": "fb266632f6cb45d332e5c5dab73bf49154e459f1754a55a7b8887ec83079e892",
+      "same_source": false,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001cecb8/v6-L1/lyt_runtime.result.json",
+          "receipt_sha256": "1bfffb80a6756caa6d478718da5a4d6cb693ca13194e7d720e8d92a81045c172",
+          "source_sha256": "fb266632f6cb45d332e5c5dab73bf49154e459f1754a55a7b8887ec83079e892"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001cecb8/v8-L1/lyt_runtime.result.json",
+          "receipt_sha256": "ae94f21aeea1ec0d0d894704ff9bd809319dc34591fe358bdd3d1535b361b0e9",
+          "source_sha256": "fb266632f6cb45d332e5c5dab73bf49154e459f1754a55a7b8887ec83079e892"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "nf144",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/nf144/names.json",
+        "names_overlay": "scratch/authors/nf144/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/nf144/match/b26-final-layout-minimal/lyt_runtime.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 240,
+        "record": "scratch/authors/nf144/RESULT.json",
+        "residual": {
+          "compiled_size": 240,
+          "differing_bytes": 19,
+          "differing_words": 11,
+          "first_difference_offset": 129,
+          "target_size": 240
+        },
+        "row_index": 1,
+        "source": "scratch/authors/nf144/src/lyt_runtime.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "fe27773734e798ed6d3bec8d93df95debd862cead5ed272126027915a5fa9fda",
+        "status": "mismatch",
+        "target_selector": "func_001cecb8"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_001d0614",
+      "size": 4036,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/s1d0614/src/func_001d0614.cpp",
+      "refresh_source_sha256": "86d2018d086b62762d03f994a9a958b865b7fdc9016031fdf771f0536401e75f",
+      "pool_source": "scratch/authors/s1d0614/src/func_001d0614.cpp",
+      "pool_source_sha256": "86d2018d086b62762d03f994a9a958b865b7fdc9016031fdf771f0536401e75f",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001d0614/v6-L1/func_001d0614.result.json",
+          "receipt_sha256": "42e66af7d68db8fcd5c18a288d22277808d3b3088bbc5f48cd69641b4fc63519",
+          "source_sha256": "86d2018d086b62762d03f994a9a958b865b7fdc9016031fdf771f0536401e75f"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001d0614/v8-L1/func_001d0614.result.json",
+          "receipt_sha256": "3e349a47e1d2dedd68d52a492f74124683ca8031d8bad5342ea4ddfa0f8a566a",
+          "source_sha256": "86d2018d086b62762d03f994a9a958b865b7fdc9016031fdf771f0536401e75f"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "s1d0614",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/s1d0614/names.json",
+        "names_overlay": "scratch/authors/s1d0614/names.json",
+        "profile": "game",
+        "receipt": "scratch/integrator/mismatch-census/001d0614/func_001d0614.result.json",
+        "receipt_catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+        "receipt_target_size": 4036,
+        "record": "scratch/integrator/mismatch-census.json",
+        "residual": {
+          "compiled_size": 3988,
+          "differing_bytes": 3269,
+          "differing_words": 973,
+          "first_difference_offset": 4,
+          "target_size": 4036
+        },
+        "row_index": null,
+        "source": "scratch/authors/s1d0614/src/func_001d0614.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "86d2018d086b62762d03f994a9a958b865b7fdc9016031fdf771f0536401e75f",
+        "status": "mismatch"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001d5864",
+      "size": 348,
+      "refresh_class": "model-qualified MATCH",
+      "refresh_source": "scratch/authors/r4040/recovery/variants/d586_min_tie_v3/func_001d5864.c",
+      "refresh_source_sha256": "667b3e49d73e54a508b7f1657499c3525412792cdb127fe4f6e7a218f4dada77",
+      "pool_source": "scratch/authors/r4040/recovery/variants/d586_min_tie_v3/func_001d5864.c",
+      "pool_source_sha256": "667b3e49d73e54a508b7f1657499c3525412792cdb127fe4f6e7a218f4dada77",
+      "same_source": true,
+      "routing_disposition": "inherited-typed-contract-deferral",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "match",
+          "target_match": true,
+          "target_status": "match",
+          "receipt": "scratch/model-sweep-2/func_001d5864/v6-L1/func_001d5864.result.json",
+          "receipt_sha256": "8a2f71c7ea7ed94048d0075b80c016474e91d69998555e653c376368c2c92566",
+          "source_sha256": "667b3e49d73e54a508b7f1657499c3525412792cdb127fe4f6e7a218f4dada77"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "match",
+          "target_match": true,
+          "target_status": "match",
+          "receipt": "scratch/model-sweep-2/func_001d5864/v8-L1/func_001d5864.result.json",
+          "receipt_sha256": "e21ecfe14296c167f8c48bbd323749fb9fda295ea2958e5e97747c61d19f9aea",
+          "source_sha256": "667b3e49d73e54a508b7f1657499c3525412792cdb127fe4f6e7a218f4dada77"
+        }
+      ],
+      "recorded_models": [
+        "anonymous-string-records-v1",
+        "armlink5-inline-branchnop-v3",
+        "armlink5-inline-branchnop-v4",
+        "armlink5-inline-branchnop-v5"
+      ],
+      "dispatch_evidence": {
+        "author": "r4040",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "9e0b7311bcee626f0edb1fd75a4e9ead6f550e04cc9a636e9db78ed1a4984b4b",
+            "profile": "middleware",
+            "source": "scratch/authors/r4040/v3/set_sustain.c",
+            "source_sha256": "9e0b7311bcee626f0edb1fd75a4e9ead6f550e04cc9a636e9db78ed1a4984b4b"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v3",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": null,
+        "profile": "middleware",
+        "receipt": "scratch/authors/r4040/recovery/variants/d586_min_tie_v3/out/func_001d5864.result.json",
+        "receipt_catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+        "receipt_target_size": 348,
+        "record": "scratch/authors/r4040/RESULT.json",
+        "residual": {
+          "compiled_size": 348,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "target_size": 348
+        },
+        "row_index": 6,
+        "source": "scratch/authors/r4040/recovery/variants/d586_min_tie_v3/func_001d5864.c",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "667b3e49d73e54a508b7f1657499c3525412792cdb127fe4f6e7a218f4dada77",
+        "status": "match",
+        "target_selector": "func_001d5864"
+      },
+      "current_disposition": "confirmed-audio-typed-contract-deferral",
+      "current_evidence": "scratch/integrator/cmodels2/CONTRACT-DEFERRALS.json",
+      "resolution": "ResumeC010 confirmed prerequisite corrections do not release candidate ownership/adoption; all-consumer/G3/argcheck and independent model checkpoint review remain open."
+    },
+    {
+      "function": "func_001d8398",
+      "size": 576,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/tu1068/src/sound_callbacks_tu.cpp",
+      "refresh_source_sha256": "6c1bfc601de3d899e1c4ae8b1e819e05d99b02e83526d2cf45562bcd2a0c94c8",
+      "pool_source": null,
+      "pool_source_sha256": null,
+      "same_source": false,
+      "routing_disposition": null,
+      "selected_measurements": [],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "tu1068",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": "scratch/authors/tu1068/names-native-lifetime.json",
+        "profile": "middleware",
+        "receipt": "scratch/authors/tu1068/match/40-final-whole-tu-middleware/sound_callbacks_tu.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 576,
+        "record": "scratch/authors/tu1068/RESULT.json",
+        "residual": {
+          "compiled_size": 576,
+          "differing_bytes": 283,
+          "differing_words": 94,
+          "first_difference_offset": 4,
+          "target_size": 576
+        },
+        "row_index": 1,
+        "source": "scratch/authors/tu1068/src/sound_callbacks_tu.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "6c1bfc601de3d899e1c4ae8b1e819e05d99b02e83526d2cf45562bcd2a0c94c8",
+        "status": "mismatch",
+        "target_selector": "func_001d8398"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    },
+    {
+      "function": "func_001e395c",
+      "size": 408,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/r41307/src/func_001e395c_canonical_native_parameters.cpp",
+      "refresh_source_sha256": "c81523522922fec6952bcdfcdddaa9814d26c35e48f85b3296137964b7b46f94",
+      "pool_source": "scratch/authors/r41307/src/func_001e395c_canonical_native_parameters.cpp",
+      "pool_source_sha256": "c81523522922fec6952bcdfcdddaa9814d26c35e48f85b3296137964b7b46f94",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001e395c/v6-L1/func_001e395c_canonical_native_parameters.result.json",
+          "receipt_sha256": "3b5e3f962e2dbd1b0ec303f8a4d407eb5652fbb25a7f6e8320d74dd401dc2754",
+          "source_sha256": "c81523522922fec6952bcdfcdddaa9814d26c35e48f85b3296137964b7b46f94"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001e395c/v8-L1/func_001e395c_canonical_native_parameters.result.json",
+          "receipt_sha256": "f7cb78d25a9d8dcc0b14d06db0b7cc45c4abbf099b00763bd4b5518d9c8e473c",
+          "source_sha256": "c81523522922fec6952bcdfcdddaa9814d26c35e48f85b3296137964b7b46f94"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "r41307",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/r41307/names.json",
+        "names_overlay": "scratch/authors/r41307/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/r41307/match/func_001e395c/12-game/func_001e395c_canonical_native_parameters.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 408,
+        "record": "scratch/authors/r41307/RESULT.json",
+        "residual": {
+          "compiled_size": 380,
+          "differing_bytes": 311,
+          "differing_words": 86,
+          "first_difference_offset": 56,
+          "target_size": 408
+        },
+        "row_index": 5,
+        "source": "scratch/authors/r41307/src/func_001e395c_canonical_native_parameters.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "c81523522922fec6952bcdfcdddaa9814d26c35e48f85b3296137964b7b46f94",
+        "status": "mismatch",
+        "target_selector": "func_001e395c"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001e722c",
+      "size": 364,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/r41307/src/func_001e722c_canonical_trivial_lifetime.cpp",
+      "refresh_source_sha256": "4fffaaed6cd0359759be756b0b6dfeaaeb0904514ffa221964c5cb3453c9b0d7",
+      "pool_source": "scratch/authors/r41307/src/func_001e722c_canonical_trivial_lifetime.cpp",
+      "pool_source_sha256": "4fffaaed6cd0359759be756b0b6dfeaaeb0904514ffa221964c5cb3453c9b0d7",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001e722c/v6-L1/func_001e722c_canonical_trivial_lifetime.result.json",
+          "receipt_sha256": "678f0202aa8347b56bf319bd1672715a7848be3cac9fd377069881701d04bf9a",
+          "source_sha256": "4fffaaed6cd0359759be756b0b6dfeaaeb0904514ffa221964c5cb3453c9b0d7"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001e722c/v8-L1/func_001e722c_canonical_trivial_lifetime.result.json",
+          "receipt_sha256": "6b5c5e5fe801b34ef0507849418f3e5c3b8ce205295ba1324418ad64a39c7cf7",
+          "source_sha256": "4fffaaed6cd0359759be756b0b6dfeaaeb0904514ffa221964c5cb3453c9b0d7"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "r41307",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/r41307/names.json",
+        "names_overlay": "scratch/authors/r41307/names.json",
+        "profile": "game",
+        "receipt": "scratch/authors/r41307/match/func_001e722c/07-game/func_001e722c_canonical_trivial_lifetime.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 364,
+        "record": "scratch/authors/r41307/RESULT.json",
+        "residual": {
+          "compiled_size": 336,
+          "differing_bytes": 297,
+          "differing_words": 84,
+          "first_difference_offset": 24,
+          "target_size": 364
+        },
+        "row_index": 8,
+        "source": "scratch/authors/r41307/src/func_001e722c_canonical_trivial_lifetime.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "4fffaaed6cd0359759be756b0b6dfeaaeb0904514ffa221964c5cb3453c9b0d7",
+        "status": "mismatch",
+        "target_selector": "func_001e722c"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001e7db0",
+      "size": 348,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/r41307/src/func_001e7db0_canonical_trivial_lifetime.cpp",
+      "refresh_source_sha256": "a440e9ee1fd65549129511bb8e08358c0a38fcf73f0b5f86eeac10a3ebd50c06",
+      "pool_source": "scratch/authors/r41307/src/func_001e7db0_canonical_trivial_lifetime.cpp",
+      "pool_source_sha256": "a440e9ee1fd65549129511bb8e08358c0a38fcf73f0b5f86eeac10a3ebd50c06",
+      "same_source": true,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001e7db0/v6-L1/func_001e7db0_canonical_trivial_lifetime.result.json",
+          "receipt_sha256": "62cad10fd197878bfbd68fcfa1300cc34a1d395975abbf3c2611d27e4e8d5a30",
+          "source_sha256": "a440e9ee1fd65549129511bb8e08358c0a38fcf73f0b5f86eeac10a3ebd50c06"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "mismatch",
+          "target_match": false,
+          "target_status": "mismatch",
+          "receipt": "scratch/model-sweep-2/func_001e7db0/v8-L1/func_001e7db0_canonical_trivial_lifetime.result.json",
+          "receipt_sha256": "70a7fa1d173cc24597ef92e7abe7a7ed243698c70ee4619d6c30a7726ed56c84",
+          "source_sha256": "a440e9ee1fd65549129511bb8e08358c0a38fcf73f0b5f86eeac10a3ebd50c06"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "r41307",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/r41307/names.json",
+        "names_overlay": "scratch/authors/r41307/names.json",
+        "profile": "middleware",
+        "receipt": "scratch/authors/r41307/match/func_001e7db0/09-middleware/func_001e7db0_canonical_trivial_lifetime.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 348,
+        "record": "scratch/authors/r41307/RESULT.json",
+        "residual": {
+          "compiled_size": 320,
+          "differing_bytes": 282,
+          "differing_words": 80,
+          "first_difference_offset": 9,
+          "target_size": 348
+        },
+        "row_index": 9,
+        "source": "scratch/authors/r41307/src/func_001e7db0_canonical_trivial_lifetime.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "a440e9ee1fd65549129511bb8e08358c0a38fcf73f0b5f86eeac10a3ebd50c06",
+        "status": "mismatch",
+        "target_selector": "func_001e7db0"
+      },
+      "current_disposition": "completed-selected-model-nonmatch-preserved",
+      "resolution": "The exact source hash already has v6/L1 and v8/L1 required matrix outcomes. Metadata named-model-request does not undo those completed results or warrant rerunning unchanged input."
+    },
+    {
+      "function": "func_001e958c",
+      "size": 296,
+      "refresh_class": "model-qualified MATCH",
+      "refresh_source": "scratch/authors/nf045/src/menu_teardown.cpp",
+      "refresh_source_sha256": "35161b44addeefb1f79f199f2d108cf4b216ae3ea66d03d640eda13c8a0028f4",
+      "pool_source": "scratch/authors/tu894/src/menu_teardown.cpp",
+      "pool_source_sha256": "35161b44addeefb1f79f199f2d108cf4b216ae3ea66d03d640eda13c8a0028f4",
+      "same_source": true,
+      "routing_disposition": "admitted",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_001e958c/v6-L1/menu_teardown.result.json",
+          "receipt_sha256": "d1bcecb0a2fa0fa62e8974903d3a88482fc8f848fdfc49766abee4931cb9990d",
+          "source_sha256": "35161b44addeefb1f79f199f2d108cf4b216ae3ea66d03d640eda13c8a0028f4"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "match",
+          "target_match": true,
+          "target_status": "match",
+          "receipt": "scratch/model-sweep-2/func_001e958c/v8-L1/menu_teardown.result.json",
+          "receipt_sha256": "b5a0899bd99b57abaf27fd841d6a4e86c565b558018ee015ad62c06a62fa0ac6",
+          "source_sha256": "35161b44addeefb1f79f199f2d108cf4b216ae3ea66d03d640eda13c8a0028f4"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v7",
+        "armlink5-inline-branchnop-v8"
+      ],
+      "dispatch_evidence": {
+        "author": "nf045",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "cb23bed538cdf54a3bad8efc7b6e676fdb1954005e35128238567aa0d87a7edc",
+            "profile": "game",
+            "source": "scratch/authors/nf045/src/ui_geometry.cpp",
+            "source_sha256": "cb23bed538cdf54a3bad8efc7b6e676fdb1954005e35128238567aa0d87a7edc"
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v8",
+        "literal_model": "none",
+        "names": null,
+        "names_overlay": null,
+        "profile": "game",
+        "receipt": "scratch/authors/nf045/match/006-teardown-inherited-v8/menu_teardown.result.json",
+        "receipt_catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "receipt_target_size": 296,
+        "record": "scratch/authors/nf045/RESULT.json",
+        "residual": {
+          "compiled_size": 296,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "target_size": 296
+        },
+        "row_index": 0,
+        "source": "scratch/authors/nf045/src/menu_teardown.cpp",
+        "source_binding": "current_hash_matches_receipt",
+        "source_sha256": "35161b44addeefb1f79f199f2d108cf4b216ae3ea66d03d640eda13c8a0028f4",
+        "status": "match",
+        "target_selector": "func_001e958c"
+      },
+      "current_disposition": "admitted-surviving-isolated-v8-L1-match",
+      "current_evidence": "scratch/integrator/cmodels2/CANDIDATE-WITNESS.metadata.json",
+      "resolution": "Reuse preserved complete isolated unit/helper witness, not the mixed author-TU context MATCH; no source or receipt has changed."
+    },
+    {
+      "function": "func_002166cc",
+      "size": 1240,
+      "refresh_class": "named model measurement pending",
+      "refresh_source": "scratch/authors/L047/src/func_002166cc.cpp",
+      "refresh_source_sha256": "54d6e1ea4b08d37afa02e8f1bb50d4b1aee00f0b4c1234e0988485fd08d45a12",
+      "pool_source": "scratch/authors/r41404/src/func_002166cc.cpp",
+      "pool_source_sha256": "bb640b0512f351a09214e8540cae98920a93c535b999ecdb640b89a8cbbd95c6",
+      "same_source": false,
+      "routing_disposition": "no-model-match",
+      "selected_measurements": [
+        {
+          "pair": "v6-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_002166cc/v6-L1/func_002166cc.result.json",
+          "receipt_sha256": "e0bc1fecde6b110044b8ed98cb1bf2dc45407ec9e58138e79c752c4029deb4be",
+          "source_sha256": "bb640b0512f351a09214e8540cae98920a93c535b999ecdb640b89a8cbbd95c6"
+        },
+        {
+          "pair": "v8-L1",
+          "status": "refused",
+          "target_match": false,
+          "target_status": null,
+          "receipt": "scratch/model-sweep-2/func_002166cc/v8-L1/func_002166cc.result.json",
+          "receipt_sha256": "ccf2b3d033ea496542197917947710906139cca716be4e8aaa509765f0f6e6ef",
+          "source_sha256": "bb640b0512f351a09214e8540cae98920a93c535b999ecdb640b89a8cbbd95c6"
+        }
+      ],
+      "recorded_models": [
+        "armlink5-inline-branchnop-v6"
+      ],
+      "dispatch_evidence": {
+        "author": "L047",
+        "basis": "retained escalation evidence; not a fresh comparison",
+        "extra_sources": [
+          {
+            "current_source_sha256": "13e24870b2dc612a3c69fea49fd42b95a28c6b9ed88d40e6d00dfe9bee0c181e",
+            "profile": "middleware",
+            "source": "scratch/authors/L047/src/text_character_writer_destructor.cpp",
+            "source_sha256": null
+          }
+        ],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/L047/names.json",
+        "profile": "middleware",
+        "receipt": null,
+        "record": "scratch/authors/L047/RESULT.json",
+        "residual": {
+          "target_size": 1240
+        },
+        "row_index": 2,
+        "source": "scratch/authors/L047/src/func_002166cc.cpp",
+        "source_binding": "no_receipt",
+        "source_sha256": "54d6e1ea4b08d37afa02e8f1bb50d4b1aee00f0b4c1234e0988485fd08d45a12",
+        "status": "mismatch",
+        "target_selector": "func_002166cc"
+      },
+      "current_disposition": "named-model-request-no-selected-pair-match",
+      "resolution": "Refresh chose alternate or out-of-pool source evidence; a request is not a MATCH. Preserve the completed required-pair pool outcome (if present) and this distinct source hash without declaring it measured or inheriting a stale compile/ownership hold. Source exploration or blanket matrix reruns are not authorized by metadata accounting."
+    }
+  ],
+  "qualifications": [
+    "No model identifier is reinterpreted; recorded retired v5/v7 annotations remain historical only, never acceptance authority.",
+    "Historical MATCH and completed mismatches/refusals retain immutable evidence; changed input requires a new record.",
+    "Required selection remains explicit armlink5-inline-branchnop-v8 + anonymous-string-records-v1."
+  ],
+  "current_counts": {
+    "named-model-request-no-selected-pair-match": 11,
+    "recorded-v8-nonmatch-preserved": 1,
+    "completed-selected-model-nonmatch-preserved": 13,
+    "admitted-canonical-v8-L1-match": 1,
+    "admitted-typed-shared-owner-v8-L1-match": 1,
+    "confirmed-audio-typed-contract-deferral": 2,
+    "admitted-surviving-isolated-v8-L1-match": 1
+  }
+}

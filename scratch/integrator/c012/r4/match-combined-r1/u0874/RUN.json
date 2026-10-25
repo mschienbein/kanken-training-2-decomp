@@ -1,0 +1,40 @@
+{
+  "source": "src/nw4c/ut_HeapBase.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_001467e8",
+    "func_0014b444",
+    "func_0018216c",
+    "func_00182b18"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/ut_HeapBase.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u0874"
+  ],
+  "exit_code": 0,
+  "seconds": 0.169064,
+  "source_sha256": "60ff73b6d300cb04e212b05081e48ec546a438197ba392345ea06ccad8477d27",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u0874/ut_HeapBase.result.json",
+  "receipt_sha256": "c938298e47b43e5c2606796a7b5d6bb1d092195d29cf7c9b04a017f31c60e616",
+  "output": "MATCH    _ZN2nw2ut8HeapBase8FinalizeEv @ 0x1467e8 size 0x3c/0x3c\nMATCH    _ZN2nw2ut8HeapBase10InitializeEjPvS2_t @ 0x14b444 size 0x6c/0x6c\nMATCH    _ZN2nw2ut8HeapBase14FillFreeMemoryEPvj @ 0x18216c size 0x2c/0x2c\nMATCH    _ZN2nw2ut8HeapBase15FillAllocMemoryEPvj @ 0x182b18 size 0x44/0x44\n",
+  "stderr": ""
+}

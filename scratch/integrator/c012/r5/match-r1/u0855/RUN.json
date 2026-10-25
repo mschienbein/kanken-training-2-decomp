@@ -1,0 +1,44 @@
+{
+  "source": "src/nw4c/snd_BiquadFilterPresets.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_001f1e14",
+    "func_001f1e68",
+    "func_001f2494"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_001f1e14": "src/nw4c/snd_BiquadFilterPresets.cpp",
+    "func_001f1e68": "src/nw4c/snd_BiquadFilterPresets.cpp",
+    "func_001f2494": "src/nw4c/snd_BiquadFilterPresets.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/snd_BiquadFilterPresets.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u0855"
+  ],
+  "exit_code": 0,
+  "seconds": 0.394336,
+  "source_sha256": "66d82b18b984d9cd293758d10906cd021785f7671a38fe57aef0ceaa22cc831c",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u0855/snd_BiquadFilterPresets.result.json",
+  "receipt_sha256": "98f6073c198345b627901f645de4fccf747941af7dba8eba64d79fe81b83ff0c",
+  "output": "MATCH    _ZNK2nw3snd8internal15BiquadFilterHpf15GetCoefficientsEifPN2nn3snd3CTR24BiquadFilterCoefficientsE @ 0x1f1e14 size 0x54/0x54\nMATCH    _ZNK2nw3snd8internal15BiquadFilterLpf15GetCoefficientsEifPN2nn3snd3CTR24BiquadFilterCoefficientsE @ 0x1f1e68 size 0x54/0x54\nMATCH    _ZNK2nw3snd8internal18BiquadFilterBpf51215GetCoefficientsEifPN2nn3snd3CTR24BiquadFilterCoefficientsE @ 0x1f2494 size 0x64/0x64\n",
+  "stderr": ""
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "ADOPTED-SINGLE-MODEL",
+  "owner_sequence": "c011 -> ctypes1 -> c014 -> c012",
+  "peer_record": {
+    "path": "scratch/worktrees/c014/scratch/integrator/c014/TASK-POOL-AGREEMENT-r1.json",
+    "sha256": "93e6eaf30b89dfb1d7d778c554db852b074242dda44c4467c8d41f17874ade42"
+  },
+  "canonical_header": {
+    "path": "include/game/task_pool.h",
+    "sha256": "fdecc7599595eac61674d0984c21cb87d742d9cac4a8cd9b068972daf404115c",
+    "byte_identical_to_c014": true
+  },
+  "definition": "struct TaskPool { unsigned char initialized; unsigned char reserved01[3]; struct PoolList active; struct PoolList available; };",
+  "layout": {
+    "initialized": 0,
+    "active": 4,
+    "available": 16,
+    "known_prefix_bytes": 28,
+    "allocation_extent_proved": false
+  },
+  "list_contract": "PoolList.count is at +0, PoolLink sentinel at +4; PoolLink is {next, previous}. Both lists contain genuine AudioVoiceGroup.link nodes at +0x58, not native Voice/LinkList aliases.",
+  "accepted_C_prefix_migrations": [
+    {
+      "source": "src/wave16/func_00153fec.c",
+      "function": "func_00153fec",
+      "new_source_sha256": "80f5031229be9946f4cedf8fd871b54f8cf3f73bca61edae5269206466941386",
+      "focused_run": "scratch/integrator/c012/r4/derive-r3/014-wave16/RUN.json",
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave16/func_0015477c.c",
+      "function": "func_0015477c",
+      "new_source_sha256": "131608f72079d492c6a002df1f24656e6da83d3d968201f9c1467d3a1791fe84",
+      "focused_run": "scratch/integrator/c012/r4/derive-r3/015-wave16/RUN.json",
+      "exit_code": 0
+    }
+  ],
+  "c012_release": {
+    "function": "func_0017e764",
+    "source": "src/checkpoint12/intake-r29/final_existing_pool_release/pool_release.cpp",
+    "disposition": "c012-only definition/credit; exact focused MATCH after removing unrelated 0017df84 context",
+    "exit_code": 0
+  },
+  "drain": "00131464 stays held: prefix agreement does not authorize recovering AudioVoiceGroup through offsetof byte subtraction.",
+  "boundary": "No second TaskPool model, widened allocation extent, typed-voice alias or new container-of access is introduced. Existing accepted 0015477c body is unchanged by the shared-header migration."
+}

@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "branch": "cmodels2-r5",
+  "worktree": "scratch/worktrees/cmodels2-r5",
+  "base_commit": "5820254f",
+  "preserved_r4_head": "62f3ff4b",
+  "status": "BLOCKED_DO_NOT_PREPARE_NATIVE_KEY_FAMILY_NOT_EXACT",
+  "gate_revision": "v1.20",
+  "gate_adoption_commit": "5ea97031",
+  "accepted_base": {
+    "checkpoint": "c010-r8",
+    "history_sequence": 11,
+    "functions": 2682,
+    "bytes": 288580
+  },
+  "assignment_boundary": "No task/agent calls, nested agents, fallback, heavy gates or other-worktree edits. Accepted c010-r8 forms win every conflict and stale predecessor overlay.",
+  "counts": {
+    "accepted_functions_preserved": 2682,
+    "NEW_functions": 4,
+    "NEW_bytes": 596,
+    "proposed_functions": 2686,
+    "proposed_bytes": 289176,
+    "proposed_units": 2623,
+    "proposed_primary_units": 2598,
+    "proposed_helper_only_units": 25,
+    "revised_credited_functions": 4,
+    "revised_accepted_source_units_including_helpers": 6,
+    "revised_accepted_helper_only_units": 2,
+    "moves": 0,
+    "tracked_NEW_holds": 10,
+    "tracked_NEW_hold_bytes": 4760,
+    "accepted_native_destructor_forms_retained": 9,
+    "U1_units_admitted": 0,
+    "NEW_units_including_helper": 5,
+    "NEW_credited_units": 4,
+    "NEW_helper_only_units": 1,
+    "revised_credited_bytes": 280,
+    "revised_project_headers": 4,
+    "new_project_headers": 1,
+    "bounded_commands_exit0": 86,
+    "bounded_unique_functions_match": 93,
+    "bounded_unique_function_bytes": 16016,
+    "bounded_source_contexts": 117,
+    "bounded_primary_contexts": 92,
+    "bounded_helper_contexts": 25,
+    "changed_native_key_probe_commands": 9,
+    "changed_native_key_probe_exit1": 8,
+    "changed_native_key_probe_exit2": 1,
+    "known_unchanged_native_refusals_rerun": 0
+  },
+  "candidate_manifest": {
+    "path": "config/candidates/cmodels2.json",
+    "sha256": "efdb17fb7b058c85c0c22edae08f814819169fb09e4f4d2630391f82b2dda9fd"
+  },
+  "unit_model_selection": [
+    {
+      "source": "src/models2/display_initializer/func_001456e4.c",
+      "profile": "game",
+      "functions": [
+        "func_001456e4"
+      ],
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "U1_required": false
+    },
+    {
+      "source": "src/models2/display_initializer/display_metadata.c",
+      "profile": "game",
+      "functions": [],
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "U1_required": false
+    },
+    {
+      "source": "src/models2/training_visibility/func_00169018.c",
+      "profile": "game",
+      "functions": [
+        "func_00169018"
+      ],
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "U1_required": false
+    },
+    {
+      "source": "src/models2/menu_transition/func_00171208.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00171208"
+      ],
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "U1_required": false
+    },
+    {
+      "source": "src/models2/counted_resources/func_001e5d38.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001e5d38"
+      ],
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "U1_required": false
+    }
+  ],
+  "U1_unit_disposition": {
+    "model_available_and_adopted": true,
+    "admitted_units": [],
+    "tested_model": "armlink5-inline-branchnop-v18",
+    "reason": "A genuine inline-root/undefined-finish key arrangement emits no root D1 and leaves all eight derived D1s4B short. No accepted identity can be dropped, no native name may be rebound to a C free body, and no reference/slot may be suppressed or reordered. Keep all nine accepted destructor forms.",
+    "decision": {
+      "path": "scratch/integrator/cmodels2-r5/NATIVE-FAMILY-DECISION.json",
+      "sha256": "d152aa0a7eb00f87bb6efa51937d683a0537015de8cf26bc329350b7624247b1"
+    }
+  },
+  "new_functions": [
+    "func_001456e4",
+    "func_00169018",
+    "func_00171208",
+    "func_001e5d38"
+  ],
+  "revised_functions": [
+    "func_0015f890",
+    "func_00172e00",
+    "func_0015f5b0",
+    "func_001743d8"
+  ],
+  "revised_units": [
+    {
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0015f890"
+      ],
+      "accepted_source_sha256": "8fc747a274e476f700fb2d44d0332e248e52cbd0181e328c7f40d6f9a2ac0c14",
+      "current_source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae"
+    },
+    {
+      "source": "src/models/func_00172e00/transition-C-setter.c",
+      "profile": "game",
+      "functions": [],
+      "accepted_source_sha256": "4495a88e6ed8dbeed4be158af55169eef2872e38330944c961aeb17b2979fc9f",
+      "current_source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3"
+    },
+    {
+      "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00172e00"
+      ],
+      "accepted_source_sha256": "efa8e8efbf66784568c376e7970174fe3b0136390c377472b4bb01e60a567cb3",
+      "current_source_sha256": "3a81d25a069879ef6293913b66401d15eecfa12647ef2afaa60a853c18472d56"
+    },
+    {
+      "source": "src/models/func_001730ec/item_accessors.c",
+      "profile": "game",
+      "functions": [],
+      "accepted_source_sha256": "3dea631b293bfdf7f941db3de7bf2f42f73e001ac8ed65f39d282131b70e7ff3",
+      "current_source_sha256": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874"
+    },
+    {
+      "source": "src/wave19/func_0015f5b0.c",
+      "profile": "game",
+      "functions": [
+        "func_0015f5b0"
+      ],
+      "accepted_source_sha256": "e9c417a5c8c5bf9e05b50a82f6c76eee9452d4e8d298857055ee12bc1b5cf110",
+      "current_source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac"
+    },
+    {
+      "source": "src/wave19/func_001743d8.c",
+      "profile": "game",
+      "functions": [
+        "func_001743d8"
+      ],
+      "accepted_source_sha256": "0506975d8d7b0c01ce391a4a117bd60fe5a6ec9436f42be40a4712bf0e5d43dd",
+      "current_source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f"
+    }
+  ],
+  "moves": [],
+  "accepted_withdrawals": [],
+  "known_NEW_holds": [
+    {
+      "function": "func_0017a49c",
+      "target_size": 76,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001ab680",
+      "target_size": 2212,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001acc88",
+      "target_size": 176,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001acf28",
+      "target_size": 200,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001bc5ac",
+      "target_size": 924,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001d5694",
+      "target_size": 284,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "func_001d5694 remains c011-owned; listed here only because it is one of the nine tracked cmodels2 prereview holds."
+    },
+    {
+      "function": "func_001d5864",
+      "target_size": 348,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001db404",
+      "target_size": 48,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001ef89c",
+      "target_size": 196,
+      "status": "unchanged-uncredited-hold",
+      "historical_owner_note": "See inherited CONTRACT-DEFERRALS.json and SCOPE records."
+    },
+    {
+      "function": "func_001e958c",
+      "target_size": 296,
+      "finding": "CM2-F02",
+      "source": "src/models2/menu_resources/menu_teardown.cpp",
+      "preserved_source": "scratch/integrator/cmodels2/deferred-r4/menu_teardown.cpp",
+      "source_sha256": "0d10940a421d8caa12ba6c5b13a21dcdf25aad0f504121ce84010ebd4fee0f8b",
+      "accepted_or_prepared_identity": false,
+      "helpers_quarantined": [
+        "src/models2/menu_resources/ui_geometry.cpp"
+      ],
+      "header_quarantined": "include/game/menu_resources.h"
+    }
+  ],
+  "separately_owned_holds": [
+    {
+      "owner": "c009-r5",
+      "functions": [
+        "func_00131540",
+        "func_001f4920",
+        "func_001efcec",
+        "func_001f4994"
+      ],
+      "count": 4,
+      "bytes": 144,
+      "counted_as_cmodels2": false
+    },
+    {
+      "owner": "c011-r4",
+      "functions": [
+        "func_0013ea40",
+        "func_001af644"
+      ],
+      "count": 2,
+      "bytes": 364,
+      "counted_as_cmodels2": false,
+      "note": "Only the two font-dependent c011 NEW holds are applied here to keep c009-r5 opacity. The rest of c011-r4 is a later predecessor rebase, not merged as an unfinalized contract."
+    }
+  ],
+  "open_blockers": [
+    {
+      "id": "CM2-F01",
+      "reason": "Native lifecycle/table/provider family cannot close exactly while the accepted root D1 remains unrepresentable with an actually undefined key under the authorized no-slot-change pattern. All accepted forms/identities retained.",
+      "resolution_limit": "U1 adoption removes the old unavailable-model prerequisite, not the live native vtable reference or D1 equality obligation."
+    },
+    {
+      "id": "CM2-F03",
+      "reason": "The actual invoked PMF interfaces still require that coherent root/derived family. No receiver erasure, unrelated alias, PMF hand-decoding or synthetic interface/base was introduced."
+    }
+  ],
+  "finding_resolutions": {
+    "CM2-F02": "NEW-only menu/geometry hold retained; c010-r8 cleanup source wins.",
+    "CM2-F04": "R4 typed two-cell text-resource table retained and exact under v6/L1, with visible boundary/native-identity qualification."
+  },
+  "model_review_scope": {
+    "current_accepted_R1_callers": 28,
+    "NEW_R1_callers": 4,
+    "proposed_R1_callers": 32,
+    "L1_owning_functions": 1,
+    "helper_only_units": 25,
+    "actual_selection_transition": false,
+    "v18_transition_reopen_list": [
+      "func_00185d1c",
+      "func_00185bfc",
+      "func_001916e8",
+      "func_0016e270",
+      "func_0010be58",
+      "func_0013f06c",
+      "func_0015f890",
+      "func_00168d14",
+      "func_00172e00",
+      "func_001730ec",
+      "func_001a00f8",
+      "func_001a2814",
+      "func_001a3ee0",
+      "func_001b8908",
+      "func_001b9f18",
+      "func_001bd68c",
+      "func_001ddde4",
+      "func_001e0afc",
+      "func_001ed874",
+      "func_00112628",
+      "func_00112b5c",
+      "func_001131d4",
+      "func_001a8048",
+      "func_001819f4",
+      "func_00167284",
+      "func_001eade0",
+      "func_001b48c8",
+      "func_001f580c"
+    ],
+    "L1_reopen_list": [
+      "func_00203a68"
+    ],
+    "record": {
+      "path": "scratch/integrator/cmodels2-r5/MODEL-SELECTION.json",
+      "sha256": "e1edabe9bb53ae5fba18f848a5e6b8b7542854e444c3b6abccc2bd8f3983e941"
+    },
+    "rule": "Selecting v6 never waives the two known findings. Any later global v18 selection requires complete reproof/reopening of the listed R1/L1/U1 and header/helper dependencies."
+  },
+  "records": {
+    "COMPOSITION.json": {
+      "path": "scratch/integrator/cmodels2-r5/COMPOSITION.json",
+      "sha256": "b4c579d0fc9097e013d8b634d60db41be6e8086063c4a747f133e24f0f0d20a2"
+    },
+    "BOUNDED-PLAN.json": {
+      "path": "scratch/integrator/cmodels2-r5/BOUNDED-PLAN.json",
+      "sha256": "f5d05d5840a233ddee0566df11f3ddc2df52d72d0cd574178489c469808300dc"
+    },
+    "REPROOF.json": {
+      "path": "scratch/integrator/cmodels2-r5/REPROOF.json",
+      "sha256": "d6af8d28ea8e6b96a91fdda0e2362d08a09f1f07b9d8853408608317d3a06b0e"
+    },
+    "NATIVE-FAMILY-DECISION.json": {
+      "path": "scratch/integrator/cmodels2-r5/NATIVE-FAMILY-DECISION.json",
+      "sha256": "d152aa0a7eb00f87bb6efa51937d683a0537015de8cf26bc329350b7624247b1"
+    },
+    "CALLBACK-AUTHORITY.json": {
+      "path": "scratch/integrator/cmodels2-r5/CALLBACK-AUTHORITY.json",
+      "sha256": "d623ca25c77fdb1cf50b8b27209f10fbb994ee5511ddb68acdffd9d50ef07ca7"
+    },
+    "MODEL-SELECTION.json": {
+      "path": "scratch/integrator/cmodels2-r5/MODEL-SELECTION.json",
+      "sha256": "e1edabe9bb53ae5fba18f848a5e6b8b7542854e444c3b6abccc2bd8f3983e941"
+    },
+    "PROPOSED-LEDGER.json": {
+      "path": "scratch/integrator/cmodels2-r5/PROPOSED-LEDGER.json",
+      "sha256": "288903edd48a32f8f8086cd2d3e23af90cd0ab4c7a4e1711b4121c02267e4736"
+    },
+    "REMAINING-HEAVY-COMMANDS.json": {
+      "path": "scratch/integrator/cmodels2-r5/REMAINING-HEAVY-COMMANDS.json",
+      "sha256": "f007c33dc9a0289f345cbca6623d420af34cd777ed12f803c865d8ee27ca5844"
+    }
+  },
+  "known_issues": {
+    "path": "docs/known-issues-cmodels2.md",
+    "sha256": "2949a04a16b6aaaff922f0a74f82b90a7e295df6dfc682367601a5aacdf187a8"
+  },
+  "accepted_ledger_history_receipts_edited": false,
+  "canonical_names_or_profiles_changed": false,
+  "heavy_checks_exercised": [],
+  "accepted_credit_added": false,
+  "checkpoint_ready": false,
+  "output_safety": "Metadata, qualified source contracts, sizes, paths and hashes only; original payload/disassembly/packets and instruction words omitted from new summaries. Raw comparison inputs/receipts stay private."
+}

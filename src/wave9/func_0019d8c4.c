@@ -2,7 +2,7 @@
 
 unsigned func_0019d8c4(const struct FontFile *file)
 {
-    struct FontGlyphData *glyph = 0;
+    struct FontGlyphInfo *glyph = 0;
     const struct FontBlock *block;
     int i;
     if (file->signature != 0x554e4643 &&
@@ -11,10 +11,10 @@ unsigned func_0019d8c4(const struct FontFile *file)
     block = (const struct FontBlock *)((const unsigned char *)file + file->headerSize);
     for (i = 0; i < file->blockCount; ++i) {
         if (block->signature == 0x504c4754) {
-            glyph = (struct FontGlyphData *)block->data;
+            glyph = (struct FontGlyphInfo *)block->data;
             break;
         }
         block = (const struct FontBlock *)((const unsigned char *)block + block->size);
     }
-    return glyph ? glyph->sheetCount * 20 : 0;
+    return glyph ? glyph->sheet_count * 20 : 0;
 }

@@ -1,0 +1,40 @@
+{
+  "source": "src/checkpoint14/aligned_buffer.c",
+  "profile": "sdk",
+  "functions": [
+    "func_00122360"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_00122360": "src/checkpoint14/aligned_buffer.c"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint14/aligned_buffer.c",
+    "--profile",
+    "sdk",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u2644"
+  ],
+  "exit_code": 0,
+  "seconds": 0.293275,
+  "source_sha256": "e981c2b1a7e4694e987cb1b55cee57242d21c27d6cd6d18db33d03a81ddb46f2",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u2644/aligned_buffer.result.json",
+  "receipt_sha256": "345da854c743e2fbb6b666b4c107692702b38d0ba1c1eb3bd65638e6ed8149a1",
+  "output": "MATCH    func_00122360 @ 0x122360 size 0x2c/0x2c\n",
+  "stderr": ""
+}

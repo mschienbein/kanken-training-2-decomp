@@ -1,0 +1,38 @@
+{
+  "source": "src/checkpoint10/copy-view.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001dafb0",
+    "func_001dafe8"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/copy-view.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u2224"
+  ],
+  "exit_code": 0,
+  "seconds": 0.22838,
+  "source_sha256": "c315f16622a049a420f28b91061a2c5fdc2ca4e9491a3056efccccbe4a0bb90a",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-first-r1/u2224/copy-view.result.json",
+  "receipt_sha256": "6d8f888ffc54ebeeb5c60de5ac7577aa53f91b93c109cb14a1555a0e1ffb1012",
+  "output": "MATCH    _ZN2nw4font14CharStrmReader20ReadNextCharSJISCopyEv @ 0x1dafb0 size 0x38/0x38\nMATCH    _ZN2nw4font14CharStrmReader20ReadNextCharUTF8CopyEv @ 0x1dafe8 size 0x6c/0x6c\n",
+  "stderr": ""
+}

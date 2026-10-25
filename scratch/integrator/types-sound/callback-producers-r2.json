@@ -1,0 +1,82 @@
+{
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "facts": [
+    {
+      "caller": "0x150778",
+      "site": "0x1508e4",
+      "target": "0x185c58",
+      "args": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ],
+      "stack": {}
+    },
+    {
+      "caller": "0x150778",
+      "site": "0x150918",
+      "target": "0x185c58",
+      "args": [
+        "(entry.r0+unknown)",
+        "unknown",
+        "unknown",
+        "unknown"
+      ],
+      "stack": {}
+    },
+    {
+      "caller": "0x150778",
+      "site": "0x15092c",
+      "target": "0x17e500",
+      "args": [
+        "result.0x185c58",
+        "0x1",
+        "0x7fff",
+        "0x152f10"
+      ],
+      "stack": {
+        "0x0": "((entry.r0+unknown)+0x228)"
+      }
+    },
+    {
+      "caller": "0x150cf8",
+      "site": "0x150e18",
+      "target": "0x185c58",
+      "args": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ],
+      "stack": {}
+    },
+    {
+      "caller": "0x150cf8",
+      "site": "0x150e4c",
+      "target": "0x185c58",
+      "args": [
+        "(entry.r0+unknown)",
+        "unknown",
+        "unknown",
+        "unknown"
+      ],
+      "stack": {}
+    },
+    {
+      "caller": "0x150cf8",
+      "site": "0x150e60",
+      "target": "0x17e500",
+      "args": [
+        "result.0x185c58",
+        "0x1",
+        "0x7fff",
+        "0x152f10"
+      ],
+      "stack": {
+        "0x0": "((entry.r0+unknown)+0x228)"
+      }
+    }
+  ],
+  "qualification": "Conservative linear origins include the fifth ABI input at stack+0; unknown index expressions are not treated as bounds proofs. S08 proves the StreamBufferState containing interval independently."
+}

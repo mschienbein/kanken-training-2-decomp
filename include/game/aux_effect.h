@@ -106,7 +106,7 @@ extern void func_00148370(float volume);
 extern unsigned char func_001487f4(void);
 extern void func_0014b078(signed char channel);
 extern void func_0014b234(signed char channel);
-extern struct AudioRecord12 *func_0014ee30(struct AudioRecord12 *record);
+extern void *func_0014ee30(void *storage);
 extern int func_001504a8(struct SoundSubsystem *manager, unsigned char channel,
                   struct ChannelWorkspace *workspace);
 extern int func_0015050c(struct SoundSubsystem *manager, unsigned char channel,
@@ -114,6 +114,11 @@ extern int func_0015050c(struct SoundSubsystem *manager, unsigned char channel,
 extern int func_00150570(struct SoundSubsystem *manager, unsigned char channel,
                   struct AuxEffectNode *effect);
 extern int func_00151d50(struct AuxEffectState *effect, int enabled);
+/* [INFERENCE] The existing typed workspace receives four planar word
+ * buffers. Numerical sample representation is not established by routing. */
+extern void func_00154a28(struct ChannelWorkspace *filter, int *const input[4]);
+extern void func_00154b18(struct ExtendedWorkspace *filter, int *const input[4]);
+extern void func_001542d8(struct ServiceOutput *owner, int channel, int *samples);
 #ifdef __cplusplus
 }
 #endif

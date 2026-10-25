@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "operations": [
+    {
+      "operation": "Initial strict c009-r5 subset assertion",
+      "eval_exit_code": 1,
+      "reason": "Exactly one inherited protected prepared-only exclusion00117854 found; not a new source or MATCH failure. Accounted explicitly, no unsupported re-entry.",
+      "resolution": "IDENTITIES-AND-MOVES-r1.json"
+    },
+    {
+      "operation": "Source commit/add and ready base merge",
+      "exit_codes": [
+        0,
+        0,
+        0
+      ],
+      "records": [
+        "SOURCE-COMMIT-r1.json",
+        "MERGE-C011R9-r1.json"
+      ]
+    },
+    {
+      "operation": "Metadata-only readelf symbol inspection",
+      "exit_codes": [
+        0,
+        0
+      ],
+      "record": "NATIVE-CONSTRUCTOR-METADATA-r1.json"
+    }
+  ],
+  "MATCH_attempts": "Every actual numeric matcher exit is separately enumerated in DIRECT-REPROOF-r1.json, REPROOF-CLOSURE-r1.json and REPROOF-RESUME-r2.json; REPROOF-RESULTS.json aggregates1871 exit0 and1 exit2."
+}

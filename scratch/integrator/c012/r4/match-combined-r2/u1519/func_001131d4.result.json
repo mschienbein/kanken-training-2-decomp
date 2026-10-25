@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/linear_buffer/func_001131d4.c",
+ "source_sha256": "a159c7d18afa5ee5671fbe783f523edae1b765b6694b3185f66ff2f4c8f8d3db",
+ "profile": "sdk",
+ "compiler": "armcc_41_791",
+ "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O2",
+  "-Otime"
+ ],
+ "object_sha256": "a67782167956842ab90656e86ea9ff87ff67b1fec427c3ab9be91fa507aebd91",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/linear_buffer/linear_buffer_allocator.c",
+   "source_sha256": "769d023b593330b79ad72a11adf42e00dba0adb0b50a186573a4f862565eb6af",
+   "object_sha256": "cedcf93e308ce8cd981754e9b582e69431ab7464b3a4605635774b18b47232c1"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "InitializeLinearBufferAllocator"
+   ],
+   "section": "i.InitializeLinearBufferAllocator",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1519/extra-0-linear_buffer_allocator.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001131d4",
+   "address": 1126868,
+   "size": 36,
+   "candidate_size": 36,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 12,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5801000",
+     "removed_callee": {
+      "symbols": [
+       "InitializeLinearBufferAllocator"
+      ],
+      "section": "i.InitializeLinearBufferAllocator",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1519/extra-0-linear_buffer_allocator.o"
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+  "source": "src/checkpoint11/application_configuration-r5.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_0010bff4",
+    "func_0010c0a4"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_0010bff4": "src/checkpoint11/application_configuration-r5.cpp",
+    "func_0010c0a4": "src/checkpoint11/application_configuration-r5.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/application_configuration-r5.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u2590"
+  ],
+  "exit_code": 0,
+  "seconds": 0.287727,
+  "source_sha256": "1f863d9a299bfdb666f1d44f604bd9bb57b8fa89b61f7e73a762588b2a07d493",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u2590/application_configuration-r5.result.json",
+  "receipt_sha256": "28997141ee7ddadd5185d6911d4cbbe18aff1cccd4fd891aeccebf2161b0a197",
+  "output": "MATCH    func_0010bff4 @ 0x10bff4 size 0x78/0x78\nMATCH    func_0010c0a4 @ 0x10c0a4 size 0x70/0x70\n",
+  "stderr": ""
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/wave16/func_00153fec.c",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r3/014-wave16",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.193962,
+  "source": "src/wave16/func_00153fec.c",
+  "source_sha256": "80f5031229be9946f4cedf8fd871b54f8cf3f73bca61edae5269206466941386",
+  "claimed_functions": [
+    "func_00153fec"
+  ],
+  "profile": "game",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r3/014-wave16/func_00153fec.result.json",
+  "receipt_sha256": "e636a923d9f3f30975632478ba9f5b394e5868803020acfc944bcebb32cc078f",
+  "functions": [
+    {
+      "name": "func_00153fec",
+      "address": 1392620,
+      "size": 24,
+      "candidate_size": 24,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    func_00153fec @ 0x153fec size 0x18/0x18\n",
+  "stderr": ""
+}

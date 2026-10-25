@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "function": "func_001456e4",
+  "target_bytes": 240,
+  "status": "MATCH",
+  "exit_code": 0,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models2/display_initializer/func_001456e4.c",
+    "--extra-source",
+    "src/models2/display_initializer/display_metadata.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v8",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/cm2/resume-r1/display-initializer"
+  ],
+  "receipt": {
+    "path": "scratch/cm2/resume-r1/display-initializer/func_001456e4.result.json",
+    "sha256": "7abb5f63379e9b716f20b1d3ecd6b71059308ae6b78292ec590e104544ced114"
+  },
+  "compiled_metadata": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models2/display_initializer/func_001456e4.c",
+    "source_sha256": "20fa70607a38734c59c29302583160b31c1c0a7053b2fb0699611d90ada56605",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "a03de9b0f9ce30b762be1e3b3b24cf9562727235cddff7556744d456da2a6a58",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models2/display_initializer/display_metadata.c",
+        "source_sha256": "0b79e29766b3db971dc4b3fad37b012c8e45642b343bbeb25bce59615b6e8380",
+        "object_sha256": "d657fb9a8cea5b8907168558a8225ff6e5900ce26da2df8a8ab02f5edf20a1d8"
+      }
+    ],
+    "removed_callees": [
+      {
+        "symbols": [
+          "w16_set_screen"
+        ],
+        "section": "i.w16_set_screen",
+        "size": 8,
+        "object": "scratch/cm2/resume-r1/display-initializer/extra-0-display_metadata.o"
+      }
+    ],
+    "functions": [
+      {
+        "name": "func_001456e4",
+        "address": 1332964,
+        "size": 240,
+        "candidate_size": 240,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": [
+          {
+            "offset": 124,
+            "rule": "inline_insn",
+            "target": null,
+            "removed_callee": {
+              "symbols": [
+                "w16_set_screen"
+              ],
+              "section": "i.w16_set_screen",
+              "size": 8,
+              "object": "scratch/cm2/resume-r1/display-initializer/extra-0-display_metadata.o"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "header": {
+    "path": "include/game/display_initializer.h",
+    "sha256": "67f63a79ba25f0d928ddabe07b4670faa842d798c6a6cb3e3944cb5e583aa017"
+  },
+  "provenance": {
+    "author_result": {
+      "path": "scratch/authors/w16d/RESULT.json",
+      "sha256": "faf9d98acdb77af5152124c24ebb2a9f185bbbdb3c0eca24ebb1d1c922c51743"
+    },
+    "author_source": {
+      "path": "scratch/authors/w16d/v3/func_001456e4.c",
+      "sha256": "d6f6e6538f233a5a14a8d7cfe2ee2bc6c168a58e972f2d19045c29e6ce96f390"
+    },
+    "author_helper": {
+      "path": "scratch/authors/w16d/v3/display_metadata.c",
+      "sha256": "741268db3866768ffd0b4649251f55aefccbc3639ce7d60bac98f0f908a9bed4"
+    },
+    "historical_v3_match": {
+      "path": "scratch/authors/w16d/match/func_001456e4/v3-final/func_001456e4.result.json",
+      "sha256": "366a66533229928de54cecc46860008dd35f7b857cc96f7d53fff63112bc4b1a"
+    },
+    "preserved_v8_refusal": {
+      "path": "scratch/model-sweep-2/func_001456e4/v8-L1/func_001456e4.result.json",
+      "sha256": "40ca31c2f1db015b7b4b77a992af939c4d26c7ed7164e881426b7da15d0b4b67"
+    }
+  },
+  "change": "Replace the conflicting private W16SystemDisplay global declaration with canonical DisplayQueueFlags from game/screen.h, whose existing object field is at +8. Centralize unchanged caller/helper endpoint declarations in one project header. Executable author logic is unchanged. No accepted headers/source or name bindings changed for this row.",
+  "identity_qualification": "[INFERENCE] The supplied 8-byte screen setter has a caller-evidenced unused index and a typed BoundDisplayObject receiver. Exact caller bytes and the R1 proof do not establish original helper identity, outlining, existence or TU membership.",
+  "credit_scope": "One new ordinary function, 240 bytes. Helper unit functions: []; 8 removed code bytes earn no credit. No L1 pool used by this unit.",
+  "coordination": "ResumeC009-2 confirms no c009 ownership; ResumeC010 confirms no known nominal endpoint conflict. Main was notified of this minimal stale-hold correction."
+}

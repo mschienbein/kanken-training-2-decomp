@@ -1,6 +1,8 @@
 #include "game/display_target.h"
 
-/* Native virtual callback; the receiver is unused by the empty implementation. */
-void func_00110358(struct DisplayTarget *target)
+/* The array runtime passes opaque element storage; this empty lifecycle
+ * callback preserves it without asserting a DisplayTarget object model. */
+void *func_00110358(void *storage)
 {
+    return storage;
 }

@@ -152,7 +152,9 @@ struct ServiceWorker {
     struct SignalState request;
     struct SignalState completion;
 };
-struct ServiceBufferPair { unsigned int first, second; };
+/* [INFERENCE] Planar four-byte sample buffers, as consumed by func_001543b8;
+ * the routing path does not establish their numerical representation. */
+struct ServiceBufferPair { int *first, *second; };
 struct ServiceCoordinator {
     CtrHandle ready_event, completion_event;
     struct StreamMutex mutex;
@@ -253,7 +255,7 @@ extern int func_0014cc9c(struct ServiceCommandQueueW22E *queue, int channel,
     float value);
 extern int func_0014cd18(struct ServiceCommandQueueW22E *queue, int channel,
     const struct AdpcmCoefficients *source);
-extern void func_0017e7a0(struct ServiceOutput *output, int channel, unsigned value);
+extern void func_0017e7a0(struct ServiceOutput *output, int channel, int *samples);
 extern void func_0014fa0c(struct ServiceOutput *output, int channel, float value);
 extern void func_00148220(struct ServiceWorker *backend);
 extern void func_0014b224(struct ServiceWorker *state, unsigned char value);

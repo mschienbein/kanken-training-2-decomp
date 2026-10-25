@@ -1,0 +1,46 @@
+{
+  "source": "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_0013f06c"
+  ],
+  "extra_sources": [
+    "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+  ],
+  "function_owners": {
+    "func_0013f06c": "src/models/func_0013f06c/func_0013f06c_unbound.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u1502",
+    "--extra-source",
+    "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.435755,
+  "source_sha256": "fa93eae81600402323869190c29d3f4545d143d792bde5b9c1ffcd7402618472",
+  "extra_source_sha256": {
+    "src/models/func_0013f06c/frame_heap_unbound_hooks.c": "971f26f56ce6f2e54364e855413ae9072169b74af8ad5823c350553cfa77dad6"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u1502/func_0013f06c_unbound.result.json",
+  "receipt_sha256": "b1cef75b39a178672af7e6ef08e3f9c315479af7e0b4b0fc4333873a264cfc8f",
+  "output": "MATCH    _ZN2nw2ut9FrameHeap11FreeByStateEj @ 0x13f06c size 0xa4/0xa4 [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  frame_heap_release_lock (4 bytes; i.frame_heap_release_lock)\nREMOVED  frame_heap_release_unlock (4 bytes; i.frame_heap_release_unlock)\n",
+  "stderr": ""
+}

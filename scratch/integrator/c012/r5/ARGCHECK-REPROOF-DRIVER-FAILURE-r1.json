@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "status": "DRIVER_PATH_FAILURE_NOT_MATCH_FAILURE",
+  "command": "nice -n 10 .venv/bin/python scratch/integrator/c012/r5/reprove_grouped_closure.py --scope scratch/integrator/c012/r5/ARGCHECK-REPROOF-SCOPE-r1.json --out scratch/integrator/c012/r5/argcheck-reproof-r1",
+  "exit_code": 1,
+  "cause": "The reusable driver calls receipt.relative_to(ROOT), but the supplied out directory was relative. Its first matcher receipt was written before a ValueError aborted the driver.",
+  "error": "ValueError: scratch/integrator/c012/r5/argcheck-reproof-r1/u0000/loop_state.result.json is not in the subpath of the absolute repository ROOT",
+  "first_matcher_receipt": "scratch/integrator/c012/r5/argcheck-reproof-r1/u0000/loop_state.result.json",
+  "correction": "Use an absolute --out directory for the successor r2 run. The frozen scope and source inputs remain unchanged.",
+  "successor_output": "scratch/integrator/c012/r5/argcheck-reproof-r2"
+}

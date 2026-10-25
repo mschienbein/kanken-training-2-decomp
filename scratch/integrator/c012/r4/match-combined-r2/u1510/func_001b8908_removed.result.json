@@ -1,0 +1,117 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/func_001b8908/func_001b8908_removed.cpp",
+ "source_sha256": "c3afe300b1f62a3eb53372dc00b6721b044641b494e73ad981e5834ac4bca7dd",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "17fc2ef3bea2644edcc0c7d83c85483c074b802e8d6318517eb11235feff7823",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/func_001b8908/panel_accessors.c",
+   "source_sha256": "be5822350de5727f212fbcbb4906dfbd4015d46a6b2c73239de5eefc9d20e10e",
+   "object_sha256": "4d7bf36110058f8cd30fad6d6fe55f16cb219fcb9f46e600754793fd0009baaf"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "L034_get_selected"
+   ],
+   "section": "i.L034_get_selected",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1510/extra-0-panel_accessors.o"
+  },
+  {
+   "symbols": [
+    "L034_set_input_enabled"
+   ],
+   "section": "i.L034_set_input_enabled",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1510/extra-0-panel_accessors.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001b8908",
+   "address": 1804552,
+   "size": 664,
+   "candidate_size": 664,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 64,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5c0108c",
+     "removed_callee": {
+      "symbols": [
+       "L034_set_input_enabled"
+      ],
+      "section": "i.L034_set_input_enabled",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1510/extra-0-panel_accessors.o"
+     }
+    },
+    {
+     "offset": 456,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5c0108c",
+     "removed_callee": {
+      "symbols": [
+       "L034_set_input_enabled"
+      ],
+      "section": "i.L034_set_input_enabled",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1510/extra-0-panel_accessors.o"
+     }
+    },
+    {
+     "offset": 464,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5900090",
+     "removed_callee": {
+      "symbols": [
+       "L034_get_selected"
+      ],
+      "section": "i.L034_get_selected",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1510/extra-0-panel_accessors.o"
+     }
+    },
+    {
+     "offset": 484,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5900090",
+     "removed_callee": {
+      "symbols": [
+       "L034_get_selected"
+      ],
+      "section": "i.L034_get_selected",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1510/extra-0-panel_accessors.o"
+     }
+    }
+   ]
+  }
+ ]
+}

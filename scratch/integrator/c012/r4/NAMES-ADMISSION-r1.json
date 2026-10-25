@@ -1,0 +1,785 @@
+{
+  "schema_version": 1,
+  "metadata_exit_code": 0,
+  "only_actual_selected_object_symbols": true,
+  "new_bindings": {
+    "__sti___17_func_00214ef4_cpp_cb5ecbfb": {
+      "address": 2182900,
+      "evidence": "nf269 same-address compiler-generated self-definition: scratch/authors/nf269/src/func_00214ef4.cpp SHA-256 6e9fdeae0bfc9c4d2ccbd77fcdad869c20a5a31093ae0497108bd10211eac636 emits the complete 172-byte static initializer for data_00243148. The bound author receipt is scratch/authors/nf269/match/i02-final-selected-minimal-names/func_00214ef4.result.json; the copied destination is independently rederived in scratch/integrator/c012/derive-r34/. No external callee alias or original TU spelling is inferred."
+    },
+    "startup_constructors_begin": {
+      "address": 2318520,
+      "evidence": "rl283: func_0010163c independently references this constructor-table bound at entry+4; the original literal target is 0x002360b8. The distinct end-bound reference is recorded separately. See scratch/authors/rl283/RESULT.json and names.json. [INFERENCE] Descriptive linker-bound name, not an external callee alias or historical symbol claim."
+    },
+    "startup_constructors_end": {
+      "address": 2318520,
+      "evidence": "rl283: func_0010163c independently references this comparison bound at entry+8; its distinct original literal also targets 0x002360b8. See scratch/authors/rl283/RESULT.json and names.json. [INFERENCE] Descriptive linker-bound name; the unchanged constructor loop is retained."
+    }
+  },
+  "dropped_unselected_proposals": 95,
+  "operator_new_contract": "Any tagged allocation binding uses the actual adopted void*(unsigned,const void*) C provider0019ffa4; no native member/receiver alias is introduced.",
+  "symbol_inventory": [
+    {
+      "source": "src/checkpoint12/intake-r17/037-np007/func_00135908.c",
+      "undefined": [
+        "bss_00495b30",
+        "data_0023fdc8",
+        "func_001409c0",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/037-np007/func_00135908.c",
+        "$a",
+        "$d",
+        "i.func_00135908",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_00135908"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/068-nf220/func_001f1af4_shared.cpp",
+      "undefined": [
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/068-nf220/func_001f1af4_shared.cpp",
+        "$a",
+        "i.func_0018279c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0018279c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/func_001409c0/func_001409c0.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/func_001409c0/func_001409c0.c",
+        "$a",
+        "i.func_001409c0",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001409c0"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/func_001dac84/func_001dac84.c",
+      "undefined": [
+        "__aeabi_memcpy",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/func_001dac84/func_001dac84.c",
+        "$a",
+        "i.func_001dac84",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001dac84"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/func_0018ce64/func_0018ce64.c",
+      "undefined": [
+        "data_002429f4",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/func_0018ce64/func_0018ce64.c",
+        "$a",
+        "$d",
+        "i.func_0018ce64",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0018ce64"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/func_00126f44/func_00126f44.c",
+      "undefined": [
+        "data_002426d8",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/func_00126f44/func_00126f44.c",
+        "$a",
+        "$d",
+        "i.func_00126f44",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_00126f44"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/owner_func_0012d43c/func_0012d43c.c",
+      "undefined": [
+        "bss_0049ee70",
+        "data_00242ffc",
+        "func_00192bd8",
+        "func_00195d74",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/owner_func_0012d43c/func_0012d43c.c",
+        "$a",
+        "$d",
+        "i.func_0012d43c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0012d43c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/owner_func_00186538/func_00186538.c",
+      "undefined": [
+        "bss_0049ee70",
+        "data_00242a1c",
+        "func_0012d43c",
+        "func_0013622c",
+        "func_00192bd8",
+        "func_00195d74",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/owner_func_00186538/func_00186538.c",
+        "$a",
+        "$d",
+        "i.func_00186538",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_00186538"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/owner_func_00115344/func_00115344.c",
+      "undefined": [
+        "data_00243030",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/owner_func_00115344/func_00115344.c",
+        "$a",
+        "$d",
+        "i.func_00115344",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_00115344"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c",
+      "undefined": [
+        "data_00243030",
+        "func_00115b0c",
+        "func_0019dfbc",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c",
+        "$a",
+        "$d",
+        "i.func_0019ecf8",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0019ecf8"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c",
+        "$a",
+        "i.func_001db960",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001db960"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "$a",
+        "i.func_001d9df0",
+        "i.func_001d9df4",
+        "i.func_001d9df8",
+        "i.func_001d9dfc",
+        "i.func_001d9e00",
+        "i.func_001d9e04",
+        "i.func_001d9e08",
+        "i.func_001db958",
+        "i.func_001db95c",
+        "i.func_001dce3c",
+        "i.func_001dd360",
+        "i.func_001e35e0",
+        "i.func_001e37dc",
+        "i.func_001e3818",
+        "i.func_001ebe1c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$11",
+        "__ARM_grp_.debug_frame$14",
+        "__ARM_grp_.debug_frame$17",
+        "__ARM_grp_.debug_frame$20",
+        "__ARM_grp_.debug_frame$23",
+        "__ARM_grp_.debug_frame$26",
+        "__ARM_grp_.debug_frame$29",
+        "__ARM_grp_.debug_frame$32",
+        "__ARM_grp_.debug_frame$35",
+        "__ARM_grp_.debug_frame$38",
+        "__ARM_grp_.debug_frame$41",
+        "__ARM_grp_.debug_frame$44",
+        "__ARM_grp_.debug_frame$47",
+        "__ARM_grp_.debug_frame$5",
+        "__ARM_grp_.debug_frame$8",
+        "func_001d9df0",
+        "func_001d9df4",
+        "func_001d9df8",
+        "func_001d9dfc",
+        "func_001d9e00",
+        "func_001d9e04",
+        "func_001d9e08",
+        "func_001db958",
+        "func_001db95c",
+        "func_001dce3c",
+        "func_001dd360",
+        "func_001e35e0",
+        "func_001e37dc",
+        "func_001e3818",
+        "func_001ebe1c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp",
+      "undefined": [
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp",
+        "$a",
+        "$d",
+        ".bss",
+        ".init_array",
+        "i.__sti___17_func_0021092c_cpp_8a50bcae",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "__sti___17_func_0021092c_cpp_8a50bcae",
+        "bss_004b32b4"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r17/owner_func_0014b438/func_0014b438.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/owner_func_0014b438/func_0014b438.c",
+        "$a",
+        "i.func_0014b438",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0014b438"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001dcbf8/func_001dcbf8.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_001dcbf8/func_001dcbf8.c",
+        "$a",
+        "i.func_001dcbf8",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001dcbf8"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_00116e30/func_00116e30.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_00116e30/func_00116e30.c",
+        "$a",
+        "i.func_00116e30",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_00116e30"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001c5354/func_001c5354.cpp",
+      "undefined": [
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_001c5354/func_001c5354.cpp",
+        "$a",
+        "$d",
+        "i.func_001c5354",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001c5354"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_0019f904/func_0019f904.c",
+      "undefined": [
+        "bss_004e31cc",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_0019f904/func_0019f904.c",
+        "$a",
+        "$d",
+        "i.func_0019f904",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0019f904"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001542d8/func_001542d8.cpp",
+      "undefined": [
+        "func_00154a28",
+        "func_00154b18",
+        "func_00192bd8",
+        "func_00195d74",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_001542d8/func_001542d8.cpp",
+        "$a",
+        "i.func_001542d8",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001542d8"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_0011375c/func_0011375c.cpp",
+      "undefined": [
+        "func_00121444",
+        "func_00121610",
+        "func_001216b8",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_0011375c/func_0011375c.cpp",
+        "$a",
+        "$d",
+        "i.func_0011375c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0011375c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001543b8/func_001543b8.cpp",
+      "undefined": [
+        "func_00192bd8",
+        "func_00195d74",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_001543b8/func_001543b8.cpp",
+        "$a",
+        "i.func_001543b8",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001543b8"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_0019c920/func_0019c920.c",
+      "undefined": [
+        "bss_0049ecf0",
+        "data_00242fc8",
+        "data_00242fcc",
+        "func_0019cecc",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_0019c920/func_0019c920.c",
+        "$a",
+        "$d",
+        "i.func_0019c920",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0019c920"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_002175ec/func_002175ec.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_002175ec/func_002175ec.c",
+        "$a",
+        "i.func_002175ec",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_002175ec"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_0015dd7c/func_0015dd7c.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_0015dd7c/func_0015dd7c.c",
+        "$a",
+        "i.func_0015dd7c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0015dd7c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_0012f050/func_0012f050.cpp",
+      "undefined": [
+        "func_00136f38",
+        "func_00186538",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_0012f050/func_0012f050.cpp",
+        "$a",
+        "$d",
+        "i.func_0012f050",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0012f050"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001ed05c/func_001ed05c.c",
+      "undefined": [
+        "func_00166f1c",
+        "func_001741f8",
+        "func_00174210",
+        "func_001780c4",
+        "func_0017a034",
+        "func_001c1190",
+        "func_001dbacc",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_001ed05c/func_001ed05c.c",
+        "$a",
+        "$d",
+        "i.func_001ed05c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001ed05c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_00153ebc/func_00153ebc.cpp",
+      "undefined": [
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_00153ebc/func_00153ebc.cpp",
+        "$a",
+        "i.func_00153ebc",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_00153ebc"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+      "undefined": [
+        "_ZnwjPKv",
+        "data_002184b8",
+        "data_002232d5",
+        "func_001754d0",
+        "func_00175648",
+        "func_00175654",
+        "func_001757d0",
+        "func_00177b10",
+        "func_001852f4",
+        "func_00186598",
+        "func_0019eb48",
+        "func_001b6bf4",
+        "func_001b6d2c",
+        "func_001b7e00",
+        "func_001b7f38",
+        "func_001ef884",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+        "$a",
+        "$d",
+        "i.func_001e395c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001e395c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp",
+      "undefined": [
+        "_ZnwjPKv",
+        "data_00218888",
+        "data_002232d5",
+        "func_001754d0",
+        "func_00175648",
+        "func_00175654",
+        "func_001757d0",
+        "func_001757dc",
+        "func_00177b10",
+        "func_001852f4",
+        "func_00186598",
+        "func_0019eb48",
+        "func_001ef884",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp",
+        "$a",
+        "$d",
+        "i.func_001e722c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001e722c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
+      "undefined": [
+        "func_00181a4c",
+        "func_0019d798",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
+        "$a",
+        "$d",
+        "i.func_001757dc",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_001757dc"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_0010cb9c/func_0010cb9c.c",
+      "undefined": [
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r22/final_func_0010cb9c/func_0010cb9c.c",
+        "$a",
+        "i.func_0010cb9c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0010cb9c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r29/final_func_00164444/func_00164444.cpp",
+      "undefined": [
+        "func_001644d0",
+        "func_001c5424",
+        "func_00216fbc",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r29/final_func_00164444/func_00164444.cpp",
+        "$a",
+        "i.func_00164444",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_00164444"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r29/final_func_0016992c/func_0016992c.c",
+      "undefined": [
+        "bss_00280af0",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r29/final_func_0016992c/func_0016992c.c",
+        "$a",
+        "$d",
+        "i.func_0016992c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0016992c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r29/final_existing_pool_release/pool_release.cpp",
+      "undefined": [
+        "func_0018d868",
+        "func_00191154",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r29/final_existing_pool_release/pool_release.cpp",
+        "$a",
+        "i.func_0017e764",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0017e764"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r29/final_func_00173078/func_00173078.cpp",
+      "undefined": [
+        "func_0015f6ec",
+        "item_page_kind",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r29/final_func_00173078/func_00173078.cpp",
+        "$a",
+        "i.func_00173078",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_00173078"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+      "undefined": [
+        "func_001703c4",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+        "$a",
+        "i.func_0016f08c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0016f08c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r29/final_func_0019dc20/func_0019dc20.c",
+      "undefined": [
+        "bss_004952f0",
+        "bss_00495930",
+        "bss_00495990",
+        "bss_004959f0",
+        "func_00193a6c",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r29/final_func_0019dc20/func_0019dc20.c",
+        "$a",
+        "$d",
+        "i.func_0019dc20",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0019dc20"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp",
+      "undefined": [
+        "func_0014c23c",
+        "func_0014c25c",
+        "func_0014c2a4",
+        "func_0014c2b0",
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp",
+        "$a",
+        "$a",
+        "$a",
+        "$d",
+        "i.func_0014a380",
+        "i.func_0014a394",
+        "i.func_0014a3c4",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$11",
+        "__ARM_grp_.debug_frame$5",
+        "__ARM_grp_.debug_frame$8",
+        "func_0014a380",
+        "func_0014a394",
+        "func_0014a3c4"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r32/startup_constructors/func_0010163c.c",
+      "undefined": [
+        "startup_constructors_begin",
+        "startup_constructors_end",
+        "Lib$$Request$$armlib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r32/startup_constructors/func_0010163c.c",
+        "$a",
+        "$d",
+        "i.func_0010163c",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "func_0010163c"
+      ]
+    },
+    {
+      "source": "src/checkpoint12/intake-r34/attribute_initializer/func_00214ef4.cpp",
+      "undefined": [
+        "Lib$$Request$$armlib",
+        "Lib$$Request$$cpplib"
+      ],
+      "defined": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r34/attribute_initializer/func_00214ef4.cpp",
+        "$a",
+        "$d",
+        ".data",
+        ".init_array",
+        "i.__sti___17_func_00214ef4_cpp_cb5ecbfb",
+        "BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2",
+        "__ARM_grp_.debug_frame$5",
+        "__sti___17_func_00214ef4_cpp_cb5ecbfb",
+        "data_00243148"
+      ]
+    }
+  ]
+}

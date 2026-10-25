@@ -1,0 +1,5010 @@
+{
+  "schema_version": 1,
+  "last_finalized_checkpoint": "c010-r8",
+  "last_finalized_selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "proposed_selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "actual_model_transition": false,
+  "reason": "No native U1 owner is eligible; the four remaining NEW units are exact under Main-requested v6/L1. This is not a workaround for known CM2-F01/F03, which remain blockers independent of model selection.",
+  "R1_existing_callers": [
+    {
+      "function": "func_00185d1c",
+      "source": "src/wave4/func_00185d1c.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 52,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_object_manager_cleanup"
+            ],
+            "section": "i.register_object_manager_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/object_manager.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_00185bfc",
+      "source": "src/wave7/func_00185bfc.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 52,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_stream_manager_cleanup"
+            ],
+            "section": "i.register_stream_manager_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/stream_manager.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001916e8",
+      "source": "src/wave7/func_001916e8.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 52,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_stream_manager_cleanup"
+            ],
+            "section": "i.register_stream_manager_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/stream_manager.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_0016e270",
+      "source": "src/wave12/func_0016e270.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 100,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_prompt_manager_cleanup"
+            ],
+            "section": "i.register_prompt_manager_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/prompt_manager.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_0010be58",
+      "source": "src/models/func_0010be58/func_0010be58.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 36,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "result_failure_bits"
+            ],
+            "section": "i.result_failure_bits",
+            "size": 8,
+            "object": "src/models/func_0010be58/result_failure_bits.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_0013f06c",
+      "source": "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+      "profile": "middleware",
+      "rewrites": [
+        {
+          "offset": 12,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "frame_heap_release_lock"
+            ],
+            "section": "i.frame_heap_release_lock",
+            "size": 4,
+            "object": "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+          }
+        },
+        {
+          "offset": 144,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "frame_heap_release_unlock"
+            ],
+            "section": "i.frame_heap_release_unlock",
+            "size": 4,
+            "object": "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_0015f890",
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 28,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "completeTextResourceDestruction"
+            ],
+            "section": "i.completeTextResourceDestruction",
+            "size": 4,
+            "object": "src/models/func_0015f890/text_base_destruction.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_00168d14",
+      "source": "src/models/func_00168d14/func_00168d14.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 140,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "set_character_panel_minimum"
+            ],
+            "section": "i.set_character_panel_minimum",
+            "size": 8,
+            "object": "src/models/func_00168d14/character_panel_minimum.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_00172e00",
+      "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 4,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "set_completion"
+            ],
+            "section": "i.set_completion",
+            "size": 8,
+            "object": "src/models/func_00172e00/transition-C-setter.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001730ec",
+      "source": "src/models/func_001730ec/func_001730ec_removed.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 64,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "w19_item_category"
+            ],
+            "section": "i.w19_item_category",
+            "size": 8,
+            "object": "src/models/func_001730ec/item_accessors.c"
+          }
+        },
+        {
+          "offset": 84,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "w19_item_value"
+            ],
+            "section": "i.w19_item_value",
+            "size": 8,
+            "object": "src/models/func_001730ec/item_accessors.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001a00f8",
+      "source": "src/models/func_001a00f8/func_001a00f8.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 40,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "r4040_transition_active"
+            ],
+            "section": "i.r4040_transition_active",
+            "size": 8,
+            "object": "src/models/func_001a00f8/transition_active.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001a2814",
+      "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 56,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "tu441_update_secondary"
+            ],
+            "section": "i.tu441_update_secondary",
+            "size": 4,
+            "object": "src/models/func_001a2814/tu441_removed_helpers.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001a3ee0",
+      "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 40,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "tu441_transition_active"
+            ],
+            "section": "i.tu441_transition_active",
+            "size": 8,
+            "object": "src/models/func_001a2814/tu441_removed_helpers.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001b8908",
+      "source": "src/models/func_001b8908/func_001b8908_removed.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 64,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "L034_set_input_enabled"
+            ],
+            "section": "i.L034_set_input_enabled",
+            "size": 8,
+            "object": "src/models/func_001b8908/panel_accessors.c"
+          }
+        },
+        {
+          "offset": 456,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "L034_set_input_enabled"
+            ],
+            "section": "i.L034_set_input_enabled",
+            "size": 8,
+            "object": "src/models/func_001b8908/panel_accessors.c"
+          }
+        },
+        {
+          "offset": 464,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "L034_get_selected"
+            ],
+            "section": "i.L034_get_selected",
+            "size": 8,
+            "object": "src/models/func_001b8908/panel_accessors.c"
+          }
+        },
+        {
+          "offset": 484,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "L034_get_selected"
+            ],
+            "section": "i.L034_get_selected",
+            "size": 8,
+            "object": "src/models/func_001b8908/panel_accessors.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001b9f18",
+      "source": "src/models/func_001b9f18/func_001b9f18.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 516,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "scene_drawing_state"
+            ],
+            "section": "i.scene_drawing_state",
+            "size": 8,
+            "object": "src/models/func_001b9f18/drawing_state.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001bd68c",
+      "source": "src/models/func_001bd68c/func_001bd68c.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 516,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "r41262_drawing_state"
+            ],
+            "section": "i.r41262_drawing_state",
+            "size": 8,
+            "object": "src/models/func_001bd68c/drawing_state.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001ddde4",
+      "source": "src/models/func_001ddde4/func_001ddde4.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 104,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "r41279_item_identifier"
+            ],
+            "section": "i.r41279_item_identifier",
+            "size": 8,
+            "object": "src/models/func_001ddde4/item_accessors.c"
+          }
+        },
+        {
+          "offset": 296,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "r41279_item_category"
+            ],
+            "section": "i.r41279_item_category",
+            "size": 8,
+            "object": "src/models/func_001ddde4/item_accessors.c"
+          }
+        },
+        {
+          "offset": 356,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "r41279_item_category"
+            ],
+            "section": "i.r41279_item_category",
+            "size": 8,
+            "object": "src/models/func_001ddde4/item_accessors.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001e0afc",
+      "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 176,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "TU924_page_count"
+            ],
+            "section": "i.TU924_page_count",
+            "size": 8,
+            "object": "src/models/func_001e0afc/removed_initializers.c"
+          }
+        },
+        {
+          "offset": 368,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "TU924_reset_prompts"
+            ],
+            "section": "i.TU924_reset_prompts",
+            "size": 4,
+            "object": "src/models/func_001e0afc/removed_initializers.c"
+          }
+        },
+        {
+          "offset": 552,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "TU924_reset_optional"
+            ],
+            "section": "i.TU924_reset_optional",
+            "size": 4,
+            "object": "src/models/func_001e0afc/removed_initializers.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001ed874",
+      "source": "src/models/func_001ed874/func_001ed874.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 280,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "initialize_selector"
+            ],
+            "section": "i.initialize_selector",
+            "size": 4,
+            "object": "src/models/func_001ed874/category_initializers.c"
+          }
+        },
+        {
+          "offset": 292,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "initialize_handle_panel"
+            ],
+            "section": "i.initialize_handle_panel",
+            "size": 4,
+            "object": "src/models/func_001ed874/category_initializers.c"
+          }
+        },
+        {
+          "offset": 356,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "initialize_category_panel"
+            ],
+            "section": "i.initialize_category_panel",
+            "size": 4,
+            "object": "src/models/func_001ed874/category_initializers.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_00112628",
+      "source": "src/models/linear_buffer/func_00112628.c",
+      "profile": "sdk",
+      "rewrites": [
+        {
+          "offset": 12,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "InitializeLinearBufferAllocator"
+            ],
+            "section": "i.InitializeLinearBufferAllocator",
+            "size": 8,
+            "object": "src/models/linear_buffer/linear_buffer_allocator.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_00112b5c",
+      "source": "src/models/linear_buffer/func_00112b5c.c",
+      "profile": "sdk",
+      "rewrites": [
+        {
+          "offset": 12,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "InitializeLinearBufferAllocator"
+            ],
+            "section": "i.InitializeLinearBufferAllocator",
+            "size": 8,
+            "object": "src/models/linear_buffer/linear_buffer_allocator.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001131d4",
+      "source": "src/models/linear_buffer/func_001131d4.c",
+      "profile": "sdk",
+      "rewrites": [
+        {
+          "offset": 12,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "InitializeLinearBufferAllocator"
+            ],
+            "section": "i.InitializeLinearBufferAllocator",
+            "size": 8,
+            "object": "src/models/linear_buffer/linear_buffer_allocator.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001a8048",
+      "source": "src/models/transition_setters/func_001a8048_value_setter.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 40,
+          "rule": "inline_insn",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "transition_active"
+            ],
+            "section": "i.transition_active",
+            "size": 8,
+            "object": "src/models/transition_setters/transition_active.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001819f4",
+      "source": "src/wave18/func_001819f4.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 52,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_drawing_input_cleanup"
+            ],
+            "section": "i.register_drawing_input_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/drawing_input.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_00167284",
+      "source": "src/wave19/func_00167284.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 52,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_animation_state_cleanup"
+            ],
+            "section": "i.register_animation_state_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/animation_state.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001eade0",
+      "source": "src/wave18/func_001eade0.cpp",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 192,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_style_owner_cleanup"
+            ],
+            "section": "i.register_style_owner_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/style_owner.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001b48c8",
+      "source": "src/checkpoint10/func_001b48c8.c",
+      "profile": "game",
+      "rewrites": [
+        {
+          "offset": 52,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_sound_resource_cache_cleanup"
+            ],
+            "section": "i.register_sound_resource_cache_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/sound_resource_cache.c"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001f580c",
+      "source": "src/checkpoint10/func_001f580c_default.c",
+      "profile": "middleware",
+      "rewrites": [
+        {
+          "offset": 20,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "register_resource_service_lock_cleanup"
+            ],
+            "section": "i.register_resource_service_lock_cleanup",
+            "size": 4,
+            "object": "src/models/object_registration/resource_service_lock.c"
+          }
+        }
+      ]
+    }
+  ],
+  "L1_existing_owning_functions": [
+    {
+      "function": "func_00203a68",
+      "source": "src/models/func_00203a68/func_00203a68.cpp",
+      "profile": "game"
+    }
+  ],
+  "new_R1_callers": [
+    {
+      "function": "func_001456e4",
+      "source": "src/models2/display_initializer/func_001456e4.c",
+      "profile": "game",
+      "required_verdict": "QUALIFIED"
+    },
+    {
+      "function": "func_00169018",
+      "source": "src/models2/training_visibility/func_00169018.c",
+      "profile": "game",
+      "required_verdict": "QUALIFIED"
+    },
+    {
+      "function": "func_00171208",
+      "source": "src/models2/menu_transition/func_00171208.cpp",
+      "profile": "game",
+      "required_verdict": "QUALIFIED"
+    },
+    {
+      "function": "func_001e5d38",
+      "source": "src/models2/counted_resources/func_001e5d38.cpp",
+      "profile": "game",
+      "required_verdict": "QUALIFIED"
+    }
+  ],
+  "counts": {
+    "accepted_R1_callers": 28,
+    "new_R1_callers": 4,
+    "proposed_R1_callers": 32,
+    "L1_owning_functions": 1,
+    "accepted_helper_only_units": 24,
+    "proposed_helper_only_units": 25
+  },
+  "if_v18_selected_later": {
+    "scope": "Every current accepted R1 caller below and the L1 owner must reopen; all four new R1 rows already require review. A checkpoint selects one global model; never silently mix per-unit selectors in a prepare. Re-prove each scoped unit under that global choice before preparing.",
+    "accepted_R1_functions": [
+      "func_00185d1c",
+      "func_00185bfc",
+      "func_001916e8",
+      "func_0016e270",
+      "func_0010be58",
+      "func_0013f06c",
+      "func_0015f890",
+      "func_00168d14",
+      "func_00172e00",
+      "func_001730ec",
+      "func_001a00f8",
+      "func_001a2814",
+      "func_001a3ee0",
+      "func_001b8908",
+      "func_001b9f18",
+      "func_001bd68c",
+      "func_001ddde4",
+      "func_001e0afc",
+      "func_001ed874",
+      "func_00112628",
+      "func_00112b5c",
+      "func_001131d4",
+      "func_001a8048",
+      "func_001819f4",
+      "func_00167284",
+      "func_001eade0",
+      "func_001b48c8",
+      "func_001f580c"
+    ],
+    "L1_functions": [
+      "func_00203a68"
+    ],
+    "new_R1_functions": [
+      "func_001456e4",
+      "func_00169018",
+      "func_00171208",
+      "func_001e5d38"
+    ]
+  },
+  "unit_proof_selection": [
+    {
+      "source": "src/checkpoint10/func_00135c10.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/000-func_00135c10/func_00135c10.result.json",
+        "sha256": "cc26cae81f56f6e992f95fbf6fa9ad0c5ce142a149c6051f86e89ec2f8e6fa8a"
+      },
+      "source_sha256": "1fb13ee6f935d1297d4238b481d3b253beae73ba68c7412b12d883cd5a7bfb57",
+      "object_sha256": "02cb0fb562a8e7598f88f1323b2ab12fd592e900c0464f4cccaa8c2643275bc1",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00135c10",
+          "address": 1268752,
+          "size": 100,
+          "candidate_size": 100,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_0015f5e4.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/001-func_0015f5e4/func_0015f5e4.result.json",
+        "sha256": "5a05b9f2176afa928bb902b74089e3f868501ab4d9b51ba01cb362e7e4cc9b8c"
+      },
+      "source_sha256": "f471f38dc139d08394ed61fd9e1391fa1320b7208a93442b1e25c816616b1c0f",
+      "object_sha256": "2f26d48e1a3867c070652ba6326761d60079bb2c47592f6da7547f640b836180",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0015f5e4",
+          "address": 1439204,
+          "size": 236,
+          "candidate_size": 236,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_001773cc.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/002-func_001773cc/func_001773cc.result.json",
+        "sha256": "a8e9eef6f8d2d277c2b22e8dd2be4b8212f99c7b3870051bf3b10585c69eb067"
+      },
+      "source_sha256": "5620810810a00ed4b1d6ecd01f63e799cc2862d790274d88fdeaad1474fa7f69",
+      "object_sha256": "f01cac54cbf1ed4da7a3685c604352230a8e39351a9d15edcee5ee0d42e5aeed",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001773cc",
+          "address": 1536972,
+          "size": 208,
+          "candidate_size": 208,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_00196564.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/003-func_00196564/func_00196564.result.json",
+        "sha256": "9fb151f235c6c069c12e2fa9d7bef1a60cc878459dc8b17a80e45f8d2ac469d2"
+      },
+      "source_sha256": "83f4992403d61bafb2ed6fc7d6d75ee4480b7a70996ae79bf3fd833a608f9405",
+      "object_sha256": "57ecd996edaff8aeb89490180cbea30b28525fbcfc9cb59ee863ae2d68041485",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00196564",
+          "address": 1664356,
+          "size": 64,
+          "candidate_size": 64,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_001965a4.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/004-func_001965a4/func_001965a4.result.json",
+        "sha256": "44d2f67e464b7fadf937306ffa9735f58c7f12ee2fd7a9d9967b30076d64ce9f"
+      },
+      "source_sha256": "bf221c0c5d418ad21c4df572d4a70b699dcf3ab11a06d8b9d02f1f5feb959c7e",
+      "object_sha256": "6885aa8c8307863b87dcbeb6a39cb33d702a4032339e0719344f386e17f4d463",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001965a4",
+          "address": 1664420,
+          "size": 64,
+          "candidate_size": 64,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_001b48c8.c",
+      "extra_sources": [
+        "src/models/object_registration/sound_resource_cache.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/005-func_001b48c8/func_001b48c8.result.json",
+        "sha256": "f77b20565682cd296a4ab0c09d6a7d7e6761b60433ec64dd9d0575a54471f46b"
+      },
+      "source_sha256": "23ad536704c9e569dd28a9d0f1925046e1234ae977218ff37e29c6f08af76663",
+      "object_sha256": "1a6c52603495d3c460bf07c0d4b325bc334256049e212d78f3bd9e135f47c4b4",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/object_registration/sound_resource_cache.c",
+          "source_sha256": "45a9f591b10e8d25ddbe9350308b0cbcbca8def27d42b800599d6a504c922113",
+          "object_sha256": "61e15239ce0731f1f8ba61ae485b39801ec3f2e37585fd4019c2b0e70676c78e"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001b48c8",
+          "address": 1788104,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 52,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_sound_resource_cache_cleanup"
+                ],
+                "section": "i.register_sound_resource_cache_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/005-func_001b48c8/extra-0-sound_resource_cache.o"
+              }
+            },
+            {
+              "offset": 60,
+              "rule": "inline_nop",
+              "target": 2186948
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "register_sound_resource_cache_cleanup"
+          ],
+          "section": "i.register_sound_resource_cache_cleanup",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/005-func_001b48c8/extra-0-sound_resource_cache.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_001e8810.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/006-func_001e8810/func_001e8810.result.json",
+        "sha256": "6e8f003db3a03e35801a1bb21fb35239659255e9be9e0e061437e2c17048eee7"
+      },
+      "source_sha256": "9450e3761a86561bd9f25f7c187655846e4e456f2b3913f201393b3fbca9c497",
+      "object_sha256": "b4600676f60ff467e1d865dc769c35dc6e3cbdf564dd36d6a7b372b9671e6c8a",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001e8810",
+          "address": 2000912,
+          "size": 292,
+          "candidate_size": 292,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 116,
+              "rule": "inline_nop",
+              "target": 1636336
+            },
+            {
+              "offset": 200,
+              "rule": "inline_nop",
+              "target": 1636336
+            },
+            {
+              "offset": 212,
+              "rule": "inline_nop",
+              "target": 1636336
+            }
+          ]
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_001e9754.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/007-func_001e9754/func_001e9754.result.json",
+        "sha256": "133716169c0dac767ac4e950f78eba385384da421179dea731aacdfcb9658bf0"
+      },
+      "source_sha256": "ac86f681093d164b701cf31ba8d4984e92361f7f5d0f9ffcdc4c6d5249c742b8",
+      "object_sha256": "b28dcb20aa7780c8842f236b99c75b6d4cdf5760ca838ecacdbb520bc09d493f",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001e9754",
+          "address": 2004820,
+          "size": 196,
+          "candidate_size": 196,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_001f478c.c",
+      "extra_sources": [],
+      "profile": "sdk",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/008-func_001f478c/func_001f478c.result.json",
+        "sha256": "79e3a733113e0891d29cd65e742867a85d4732173a2530df2af9764009877c88"
+      },
+      "source_sha256": "a7e13ba2ec4179e103a2ea5fcc5da1311d6565b59a5ae83411284d2072aff215",
+      "object_sha256": "ff8daec68807ec48565a65eb82f93b57e2f9749f804746b280bf19d7df4b1754",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001f478c",
+          "address": 2049932,
+          "size": 40,
+          "candidate_size": 40,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_001f580c_default.c",
+      "extra_sources": [
+        "src/models/object_registration/resource_service_lock.c"
+      ],
+      "profile": "middleware",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/009-func_001f580c_default/func_001f580c_default.result.json",
+        "sha256": "e2f509edc79daca4406c5ec2355a61d79c430b844392b4ee36ddf9fa93c4c4ce"
+      },
+      "source_sha256": "cef8b5072f0df1af3e7f93b863cd771e069cccb8d7170cf82067fd781b97fa1b",
+      "object_sha256": "488ac4244d0f85f05f99a35e432d97387709f0e0762071618adcb2534284bd6f",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/object_registration/resource_service_lock.c",
+          "source_sha256": "3f5b2311d8af64bab6e18a40ec0d897f47c8ee8ebabd65878d09ffee01d5537b",
+          "object_sha256": "8e5e9eb9a48c8d9f7bd90eb50a176960828431d0cfceea72f59bb499491623eb"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001f580c",
+          "address": 2054156,
+          "size": 96,
+          "candidate_size": 96,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 20,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_resource_service_lock_cleanup"
+                ],
+                "section": "i.register_resource_service_lock_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/009-func_001f580c_default/extra-0-resource_service_lock.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "register_resource_service_lock_cleanup"
+          ],
+          "section": "i.register_resource_service_lock_cleanup",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/009-func_001f580c_default/extra-0-resource_service_lock.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint10/func_00216670.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/010-func_00216670/func_00216670.result.json",
+        "sha256": "9e198db041d9f2217fb9116e6754b7705ad935371ac08decb9f62f98471d6756"
+      },
+      "source_sha256": "55f4ac6daa3687044e44cc0a82a3ac6ada86d861e7ddec4c58746cedb318213f",
+      "object_sha256": "c5b1ee910f98ff28a91c46542c74ac94d535673f346efd695a48358d1e567d1e",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00216670",
+          "address": 2188912,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 72,
+              "rule": "inline_nop",
+              "target": 1203028
+            }
+          ]
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/large/func_00176e24.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/011-func_00176e24/func_00176e24.result.json",
+        "sha256": "2290d87c7e3f5ceb85f1c270ddb1b6b75e7b919fead676fef3b7195320cc82b0"
+      },
+      "source_sha256": "77201b3cc206a79c66def9d8fa79286012bb27ca54cf6d26abb63c76a826f007",
+      "object_sha256": "ba09f25c64eb3b17ca99939c26cd66b62e8c2329ae71cb0ec77ed8ecda2a8715",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00176e24",
+          "address": 1535524,
+          "size": 608,
+          "candidate_size": 608,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 16,
+              "rule": "inline_nop",
+              "target": 1524864
+            },
+            {
+              "offset": 28,
+              "rule": "inline_nop",
+              "target": 1524864
+            }
+          ]
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_0010be58/func_0010be58.c",
+      "extra_sources": [
+        "src/models/func_0010be58/result_failure_bits.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/012-func_0010be58/func_0010be58.result.json",
+        "sha256": "e3e856a6a48af58d007b52380f25f72368926f72b0944a9b9d4e1ada1b54d6b2"
+      },
+      "source_sha256": "eb9f07d402e029e66ff5b8e72981005f6af1098f5cd4f3143a153106110728bf",
+      "object_sha256": "f8193499f1032b92ed039481eda7caf97d885dbfd586eb92548f47dc97a270cd",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_0010be58/result_failure_bits.c",
+          "source_sha256": "540d28dafc06a8d8a4e3f0c7a00c56949278353df65777f6e6a44373acfa9f13",
+          "object_sha256": "4a2cb8d5f530c085f9534ba1922d13256aa7bdfb01ec0c7aecd8249b1470fd4d"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_0010be58",
+          "address": 1097304,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 36,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "result_failure_bits"
+                ],
+                "section": "i.result_failure_bits",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/012-func_0010be58/extra-0-result_failure_bits.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "result_failure_bits"
+          ],
+          "section": "i.result_failure_bits",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/012-func_0010be58/extra-0-result_failure_bits.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+      "extra_sources": [
+        "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+      ],
+      "profile": "middleware",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/013-func_0013f06c_unbound/func_0013f06c_unbound.result.json",
+        "sha256": "96fc66285246e4520573cefa99d2ea12e578ca943ebd81f5550f7b479f51f875"
+      },
+      "source_sha256": "fa93eae81600402323869190c29d3f4545d143d792bde5b9c1ffcd7402618472",
+      "object_sha256": "da13826a6544eeed5d3f5ee39c21d33eae8fbb53613a333ab5b0e23088e4b9a0",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_0013f06c/frame_heap_unbound_hooks.c",
+          "source_sha256": "971f26f56ce6f2e54364e855413ae9072169b74af8ad5823c350553cfa77dad6",
+          "object_sha256": "add1b2d1fd19c146e1cb8503fc9c3503c25ff39558c098344440428474918d5d"
+        }
+      ],
+      "functions": [
+        {
+          "name": "_ZN2nw2ut9FrameHeap11FreeByStateEj",
+          "address": 1306732,
+          "size": 164,
+          "candidate_size": 164,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 12,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "frame_heap_release_lock"
+                ],
+                "section": "i.frame_heap_release_lock",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/013-func_0013f06c_unbound/extra-0-frame_heap_unbound_hooks.o"
+              }
+            },
+            {
+              "offset": 144,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "frame_heap_release_unlock"
+                ],
+                "section": "i.frame_heap_release_unlock",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/013-func_0013f06c_unbound/extra-0-frame_heap_unbound_hooks.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "frame_heap_release_lock"
+          ],
+          "section": "i.frame_heap_release_lock",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/013-func_0013f06c_unbound/extra-0-frame_heap_unbound_hooks.o"
+        },
+        {
+          "symbols": [
+            "frame_heap_release_unlock"
+          ],
+          "section": "i.frame_heap_release_unlock",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/013-func_0013f06c_unbound/extra-0-frame_heap_unbound_hooks.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "extra_sources": [
+        "src/models/func_0015f890/text_base_destruction.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/014-func_0015f890/func_0015f890.result.json",
+        "sha256": "ddd4f535aa338325dd58be00964fc19b6a036b26845816889db6dfb7e2e96294"
+      },
+      "source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae",
+      "object_sha256": "fda0d3c447542d081a2b049eebb6677893bf02d25fd8825e7741d498317fddfb",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_0015f890/text_base_destruction.c",
+          "source_sha256": "7b40bed65b4fdd4e73f2d91997d442bdfe2056ae3c813d02413f7a7d6f37128c",
+          "object_sha256": "59b83079d518fce3ab03154dddaf80ef400971e99a396dc242b7f963896d31a2"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_0015f890",
+          "address": 1439888,
+          "size": 44,
+          "candidate_size": 44,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 28,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "completeTextResourceDestruction"
+                ],
+                "section": "i.completeTextResourceDestruction",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/014-func_0015f890/extra-0-text_base_destruction.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "completeTextResourceDestruction"
+          ],
+          "section": "i.completeTextResourceDestruction",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/014-func_0015f890/extra-0-text_base_destruction.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_00168d14/func_00168d14.c",
+      "extra_sources": [
+        "src/models/func_00168d14/character_panel_minimum.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/015-func_00168d14/func_00168d14.result.json",
+        "sha256": "e5d8bd90c957afd69dc247232278a3509f9923a3fd77e06d1916eb06d60a5654"
+      },
+      "source_sha256": "ada2656cfed7c69180cbe57f172ba42484201f1459ee963b28b0358b54a45dc7",
+      "object_sha256": "6cfefd03955bd0a70a21f20a3380aa5db65c7093623a37feb82638e0d7b268c9",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_00168d14/character_panel_minimum.c",
+          "source_sha256": "bf5936bcf02d89654a1d274eb60cf6e59354c345dedbd1537021c05abc407ab8",
+          "object_sha256": "0704d144704fe797bcc6797f6df770b1ab25f9097d475f0c5f650e03b962dba1"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_00168d14",
+          "address": 1477908,
+          "size": 168,
+          "candidate_size": 168,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 140,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "set_character_panel_minimum"
+                ],
+                "section": "i.set_character_panel_minimum",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/015-func_00168d14/extra-0-character_panel_minimum.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "set_character_panel_minimum"
+          ],
+          "section": "i.set_character_panel_minimum",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/015-func_00168d14/extra-0-character_panel_minimum.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+      "extra_sources": [
+        "src/models/func_00172e00/transition-C-setter.c",
+        "src/models2/menu_transition/func_00171208.cpp"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/016-transition-qualified-removed/transition-qualified-removed.result.json",
+        "sha256": "d9e91f52d2aecbd7be40669929da3d6d5d7ab8619dffe207e4217cfe8568c8a7"
+      },
+      "source_sha256": "3a81d25a069879ef6293913b66401d15eecfa12647ef2afaa60a853c18472d56",
+      "object_sha256": "01deeb3348d0ccc0a8632eb008e4f3160253e164b8f31e7204edaaa527cd1087",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_00172e00/transition-C-setter.c",
+          "source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3",
+          "object_sha256": "12f300b8b4d0f320772e9fc6e9ef1753b0bd27861cf1e2c7d0b9b89b7974865e"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models2/menu_transition/func_00171208.cpp",
+          "source_sha256": "7a97308881ee69ab80e381d27ce71c73859351126a2cfbe58d3a2597dae405c1",
+          "object_sha256": "0768e411571e9fe3164673c5a64502e3dfec0c67c88d840e368bda5ac7923712"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_00171208",
+          "address": 1511944,
+          "size": 96,
+          "candidate_size": 96,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 4,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "set_completion"
+                ],
+                "section": "i.set_completion",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/016-transition-qualified-removed/extra-0-transition-C-setter.o"
+              }
+            }
+          ]
+        },
+        {
+          "name": "func_00172e00",
+          "address": 1519104,
+          "size": 96,
+          "candidate_size": 96,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 4,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "set_completion"
+                ],
+                "section": "i.set_completion",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/016-transition-qualified-removed/extra-0-transition-C-setter.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "set_completion"
+          ],
+          "section": "i.set_completion",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/016-transition-qualified-removed/extra-0-transition-C-setter.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001730ec/func_001730ec_removed.c",
+      "extra_sources": [
+        "src/models/func_001730ec/item_accessors.c",
+        "src/models2/counted_resources/func_001e5d38.cpp"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/017-func_001730ec_removed/func_001730ec_removed.result.json",
+        "sha256": "07fd545f11dbc5cd2c225e3bc6116a114fdd809bfe4fca3ae02893fe8590d723"
+      },
+      "source_sha256": "8e85116907b06b33eaeba46698afb23d9c24f95360cb7c390e0db711d6e81714",
+      "object_sha256": "868ca4db13445111ab7fffe988748abdd05210a975c2f5ca6e8ad2bf6060cc5f",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001730ec/item_accessors.c",
+          "source_sha256": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874",
+          "object_sha256": "efd87c03f76805f271d370902a67311121e03d58b5b59d886406a660fc7e1966"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models2/counted_resources/func_001e5d38.cpp",
+          "source_sha256": "158809ed798b9ee6193ec1cb55684163787bf2b36acbfee19a8bac17515080a3",
+          "object_sha256": "61bf3f535874cb26963c62c1877679c18ded586b4306edde40f7fac097de8995"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001730ec",
+          "address": 1519852,
+          "size": 116,
+          "candidate_size": 116,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 64,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "w19_item_category"
+                ],
+                "section": "i.w19_item_category",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/017-func_001730ec_removed/extra-0-item_accessors.o"
+              }
+            },
+            {
+              "offset": 84,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "w19_item_value"
+                ],
+                "section": "i.w19_item_value",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/017-func_001730ec_removed/extra-0-item_accessors.o"
+              }
+            }
+          ]
+        },
+        {
+          "name": "func_001e5d38",
+          "address": 1989944,
+          "size": 116,
+          "candidate_size": 116,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 64,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "w19_item_category"
+                ],
+                "section": "i.w19_item_category",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/017-func_001730ec_removed/extra-0-item_accessors.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "w19_item_category"
+          ],
+          "section": "i.w19_item_category",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/017-func_001730ec_removed/extra-0-item_accessors.o"
+        },
+        {
+          "symbols": [
+            "w19_item_value"
+          ],
+          "section": "i.w19_item_value",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/017-func_001730ec_removed/extra-0-item_accessors.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001a00f8/func_001a00f8.c",
+      "extra_sources": [
+        "src/models/func_001a00f8/transition_active.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/018-func_001a00f8/func_001a00f8.result.json",
+        "sha256": "bbd5b91d4ec7ff5e4ae4dd83964f474c2bfefd7f8b5fc2ed33e3d55782198ffb"
+      },
+      "source_sha256": "8761a5835f925eb3407e5b9bd9690a094e692766396841fff7e3a9c9e75598af",
+      "object_sha256": "9c9728c3e128e99ce1f37352a0f53fbc9c7b0e80fd6a692161204e6859c650b1",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001a00f8/transition_active.c",
+          "source_sha256": "1c6dae14a667abe4af732b6a28c6f08b88c418bf7c4f2988d16351170ae4a0c0",
+          "object_sha256": "b1c6492c537f260f6807cd598e6dd0737bb96ce8c15e17c55542826342e8119f"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001a00f8",
+          "address": 1704184,
+          "size": 264,
+          "candidate_size": 264,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 40,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "r4040_transition_active"
+                ],
+                "section": "i.r4040_transition_active",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/018-func_001a00f8/extra-0-transition_active.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "r4040_transition_active"
+          ],
+          "section": "i.r4040_transition_active",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/018-func_001a00f8/extra-0-transition_active.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+      "extra_sources": [
+        "src/models/func_001a2814/tu441_removed_helpers.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/019-func_001a2814_tu/func_001a2814_tu.result.json",
+        "sha256": "31a4c6d83442609ccc2f68df83d99a2d52f8ac322035ab461fb8a591acc9e0a8"
+      },
+      "source_sha256": "4b2e2ee0e3552fe6c853e97bc02c4d2cc6cc618469240dbf51e89262b9e565ef",
+      "object_sha256": "a5aaa00cf517c04a6ee8e4317e546c20802e5bc1c1f7c134ff7b8b44e3fc77f2",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001a2814/tu441_removed_helpers.c",
+          "source_sha256": "ea097093e38d544f1bcfc71f303683ae3e15fc0246f77826af75741dab404a36",
+          "object_sha256": "4e53138b5c0f71a6b643cd707ff0ed764ee4845f2bdeaaddc99ec312c7c77278"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001a2814",
+          "address": 1714196,
+          "size": 480,
+          "candidate_size": 480,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 56,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "tu441_update_secondary"
+                ],
+                "section": "i.tu441_update_secondary",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/019-func_001a2814_tu/extra-0-tu441_removed_helpers.o"
+              }
+            }
+          ]
+        },
+        {
+          "name": "func_001a3ee0",
+          "address": 1720032,
+          "size": 412,
+          "candidate_size": 412,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 40,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "tu441_transition_active"
+                ],
+                "section": "i.tu441_transition_active",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/019-func_001a2814_tu/extra-0-tu441_removed_helpers.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "tu441_transition_active"
+          ],
+          "section": "i.tu441_transition_active",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/019-func_001a2814_tu/extra-0-tu441_removed_helpers.o"
+        },
+        {
+          "symbols": [
+            "tu441_update_secondary"
+          ],
+          "section": "i.tu441_update_secondary",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/019-func_001a2814_tu/extra-0-tu441_removed_helpers.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001b8908/func_001b8908_removed.cpp",
+      "extra_sources": [
+        "src/models/func_001b8908/panel_accessors.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/020-func_001b8908_removed/func_001b8908_removed.result.json",
+        "sha256": "caea857d84aa6a20974ac845b3fd6e4fc4aa280c8fb3d9fb2020e2e87dceff8b"
+      },
+      "source_sha256": "c3afe300b1f62a3eb53372dc00b6721b044641b494e73ad981e5834ac4bca7dd",
+      "object_sha256": "f5e93787a0efd559d90083ab130f72ae6edabcb0fd9df19ef3ebd2a8993f2542",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001b8908/panel_accessors.c",
+          "source_sha256": "be5822350de5727f212fbcbb4906dfbd4015d46a6b2c73239de5eefc9d20e10e",
+          "object_sha256": "efc38c7b386a8b5b4fc7dabc1bc27066ed2d8da8ff1703bd6a66589351a55d98"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001b8908",
+          "address": 1804552,
+          "size": 664,
+          "candidate_size": 664,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 64,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "L034_set_input_enabled"
+                ],
+                "section": "i.L034_set_input_enabled",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/020-func_001b8908_removed/extra-0-panel_accessors.o"
+              }
+            },
+            {
+              "offset": 456,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "L034_set_input_enabled"
+                ],
+                "section": "i.L034_set_input_enabled",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/020-func_001b8908_removed/extra-0-panel_accessors.o"
+              }
+            },
+            {
+              "offset": 464,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "L034_get_selected"
+                ],
+                "section": "i.L034_get_selected",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/020-func_001b8908_removed/extra-0-panel_accessors.o"
+              }
+            },
+            {
+              "offset": 484,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "L034_get_selected"
+                ],
+                "section": "i.L034_get_selected",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/020-func_001b8908_removed/extra-0-panel_accessors.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "L034_get_selected"
+          ],
+          "section": "i.L034_get_selected",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/020-func_001b8908_removed/extra-0-panel_accessors.o"
+        },
+        {
+          "symbols": [
+            "L034_set_input_enabled"
+          ],
+          "section": "i.L034_set_input_enabled",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/020-func_001b8908_removed/extra-0-panel_accessors.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001b9f18/func_001b9f18.cpp",
+      "extra_sources": [
+        "src/models/func_001b9f18/drawing_state.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/021-func_001b9f18/func_001b9f18.result.json",
+        "sha256": "20891ba0d8bc6c1925481e8161a3e47ab4ea62824accc0bb48af4a02d6a3f1ae"
+      },
+      "source_sha256": "94c67dabe1fa64a26abc442d1925cd8706334ea6bf8f740ac8250ca4be238a77",
+      "object_sha256": "0116c8d200c36ec4dc1aa53d1fb2b1328ec5010d415c66c6d2990f0f56e47464",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001b9f18/drawing_state.c",
+          "source_sha256": "32d417284339e827c46b284b3716531b419ec0c1ed1c1a7ea3981963824644dc",
+          "object_sha256": "14beee35b28ac202ced646646c84d7074ef1bb1890109f0b44d8ad00ad5123b3"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001b9f18",
+          "address": 1810200,
+          "size": 700,
+          "candidate_size": 700,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 516,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "scene_drawing_state"
+                ],
+                "section": "i.scene_drawing_state",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/021-func_001b9f18/extra-0-drawing_state.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "scene_drawing_state"
+          ],
+          "section": "i.scene_drawing_state",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/021-func_001b9f18/extra-0-drawing_state.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001bd68c/func_001bd68c.cpp",
+      "extra_sources": [
+        "src/models/func_001bd68c/drawing_state.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/022-func_001bd68c/func_001bd68c.result.json",
+        "sha256": "cf7828678f6017bb5becd9956f9795ddaf1010ee095f1e35fdb02cb0bf20566f"
+      },
+      "source_sha256": "e38a262bfc9cbe5a3c5016ec74d6c4318919ddc4b391e6612dc3eb3c5d137960",
+      "object_sha256": "2cb931fda2d501006e2f0a6892c3615cec78e48acff25c72cf56b045d8fbea9c",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001bd68c/drawing_state.c",
+          "source_sha256": "241e8241f60875e0a31998380046ffbd5cdeb9eb7dc7af96d719b8343c8ca1be",
+          "object_sha256": "9fd2a60da223dd44b26a87d1a61d15be56b884d903d19a9268fa292da566da83"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001bd68c",
+          "address": 1824396,
+          "size": 696,
+          "candidate_size": 696,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 516,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "r41262_drawing_state"
+                ],
+                "section": "i.r41262_drawing_state",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/022-func_001bd68c/extra-0-drawing_state.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "r41262_drawing_state"
+          ],
+          "section": "i.r41262_drawing_state",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/022-func_001bd68c/extra-0-drawing_state.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001ddde4/func_001ddde4.c",
+      "extra_sources": [
+        "src/models/func_001ddde4/item_accessors.c",
+        "src/models2/training_visibility/func_00169018.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/023-func_001ddde4/func_001ddde4.result.json",
+        "sha256": "c0b614cedc3bdaf7de6f55aefe8531e451791cc2b6cc7069a2289b74273f7b07"
+      },
+      "source_sha256": "a98c10266ad8d600832f4e93a063ca736908f139b7a351896dd182b794d8e661",
+      "object_sha256": "51db676827338ba2daaddee356d278a35799f8d5244851a5b0e3e06b58610dff",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001ddde4/item_accessors.c",
+          "source_sha256": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a",
+          "object_sha256": "24bd22ca87d47815cf92995b97b43b5b891d902278537d65902ea2eebd910ffc"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models2/training_visibility/func_00169018.c",
+          "source_sha256": "dad803d4f926f04f74fcf7f9b061d0bf2ca43ac9bb0acfb2a03510c6869e0985",
+          "object_sha256": "c21d1e7055e32cba585a803af80a871eae2fe2246bc36c3d142ca7e5f12ffba6"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_00169018",
+          "address": 1478680,
+          "size": 144,
+          "candidate_size": 144,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 68,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "r41279_item_category"
+                ],
+                "section": "i.r41279_item_category",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/023-func_001ddde4/extra-0-item_accessors.o"
+              }
+            }
+          ]
+        },
+        {
+          "name": "func_001ddde4",
+          "address": 1957348,
+          "size": 464,
+          "candidate_size": 464,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 104,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "r41279_item_identifier"
+                ],
+                "section": "i.r41279_item_identifier",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/023-func_001ddde4/extra-0-item_accessors.o"
+              }
+            },
+            {
+              "offset": 296,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "r41279_item_category"
+                ],
+                "section": "i.r41279_item_category",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/023-func_001ddde4/extra-0-item_accessors.o"
+              }
+            },
+            {
+              "offset": 356,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "r41279_item_category"
+                ],
+                "section": "i.r41279_item_category",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/023-func_001ddde4/extra-0-item_accessors.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "r41279_item_category"
+          ],
+          "section": "i.r41279_item_category",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/023-func_001ddde4/extra-0-item_accessors.o"
+        },
+        {
+          "symbols": [
+            "r41279_item_identifier"
+          ],
+          "section": "i.r41279_item_identifier",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/023-func_001ddde4/extra-0-item_accessors.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+      "extra_sources": [
+        "src/models/func_001e0afc/removed_initializers.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/024-training_initialize_grouped_reset/training_initialize_grouped_reset.result.json",
+        "sha256": "8f67f282ce1a026f2c0a66048d19b529060fed8f735efe1dc502766144f60116"
+      },
+      "source_sha256": "c68178d9c34bf59bfa69f60a06efe801613d19d43da4ab39dc769d663ebfa237",
+      "object_sha256": "bf47bba83270bf07cca113d02dbaacff4accc34686df94fd92f5f6471eaf60b2",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001e0afc/removed_initializers.c",
+          "source_sha256": "6eecbf5ad825ff2dbfd0820d2eadd5873a134673d4c6e4f9e9920f8afdae32d0",
+          "object_sha256": "783dff69b6fd7ef5193dd900355c17c0ee2135d93e76ff54f49208c21e900262"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001e0afc",
+          "address": 1968892,
+          "size": 1740,
+          "candidate_size": 1740,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 176,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "TU924_page_count"
+                ],
+                "section": "i.TU924_page_count",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/024-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+              }
+            },
+            {
+              "offset": 368,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "TU924_reset_prompts"
+                ],
+                "section": "i.TU924_reset_prompts",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/024-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+              }
+            },
+            {
+              "offset": 552,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "TU924_reset_optional"
+                ],
+                "section": "i.TU924_reset_optional",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/024-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "TU924_page_count"
+          ],
+          "section": "i.TU924_page_count",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/024-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+        },
+        {
+          "symbols": [
+            "TU924_reset_optional"
+          ],
+          "section": "i.TU924_reset_optional",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/024-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+        },
+        {
+          "symbols": [
+            "TU924_reset_prompts"
+          ],
+          "section": "i.TU924_reset_prompts",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/024-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_001ed874/func_001ed874.cpp",
+      "extra_sources": [
+        "src/models/func_001ed874/category_initializers.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/025-func_001ed874/func_001ed874.result.json",
+        "sha256": "b14f9a846e644dffc6d12c613192973ad171415be731680d9f5a128dae65a6cc"
+      },
+      "source_sha256": "3f96e8d1053e1b39d380c59df46ac8ab62f278302cdc7e93e8ed6c61cd9eff32",
+      "object_sha256": "85163e6a26c85bcbd0a6a2e73f9d435c504e4d2b59c3689928c80835cf6ae0d7",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/func_001ed874/category_initializers.c",
+          "source_sha256": "6a485c0d1ca9f80fc3fbcfb27dc5f7322997d4c0ee3402227e59c1c54728e6e9",
+          "object_sha256": "0661f3f69c6b3eae80eec817125a21bfcbfd27a654b5dd1d71a907384d7ab022"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001ed874",
+          "address": 2021492,
+          "size": 828,
+          "candidate_size": 828,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 280,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "initialize_selector"
+                ],
+                "section": "i.initialize_selector",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/025-func_001ed874/extra-0-category_initializers.o"
+              }
+            },
+            {
+              "offset": 292,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "initialize_handle_panel"
+                ],
+                "section": "i.initialize_handle_panel",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/025-func_001ed874/extra-0-category_initializers.o"
+              }
+            },
+            {
+              "offset": 356,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "initialize_category_panel"
+                ],
+                "section": "i.initialize_category_panel",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/025-func_001ed874/extra-0-category_initializers.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "initialize_category_panel"
+          ],
+          "section": "i.initialize_category_panel",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/025-func_001ed874/extra-0-category_initializers.o"
+        },
+        {
+          "symbols": [
+            "initialize_handle_panel"
+          ],
+          "section": "i.initialize_handle_panel",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/025-func_001ed874/extra-0-category_initializers.o"
+        },
+        {
+          "symbols": [
+            "initialize_selector"
+          ],
+          "section": "i.initialize_selector",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/025-func_001ed874/extra-0-category_initializers.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/func_00203a68/func_00203a68.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/026-func_00203a68/func_00203a68.result.json",
+        "sha256": "2de4ca1fdc5297b55ef019300bd32e94133e0ffd5ca8aa23f04da6e6bbcfb0b2"
+      },
+      "source_sha256": "0550634bf729b8f7bebd2e150b641ca6bfbf2c3a452783f1e7b41da2696ab1ff",
+      "object_sha256": "fd10b63439ca3f08b9d1c6e8d6d37d102741191a14bc71a0d6c405ba8762ef54",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00203a68",
+          "address": 2112104,
+          "size": 2540,
+          "candidate_size": 2540,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [
+        {
+          "rule": "anonymous-string-records-v1",
+          "section": ".constwstring",
+          "base": 2259280,
+          "section_index": 5,
+          "object": "scratch/integrator/cmodels2-r5/matches/026-func_00203a68/func_00203a68.o",
+          "size": 7284,
+          "record_count": 49,
+          "reference_count": 49,
+          "records": [
+            {
+              "candidate_offset": 0,
+              "output_offset": 2128,
+              "size": 68
+            },
+            {
+              "candidate_offset": 68,
+              "output_offset": 5952,
+              "size": 148
+            },
+            {
+              "candidate_offset": 216,
+              "output_offset": 2804,
+              "size": 96
+            },
+            {
+              "candidate_offset": 312,
+              "output_offset": 2196,
+              "size": 68
+            },
+            {
+              "candidate_offset": 380,
+              "output_offset": 1864,
+              "size": 140
+            },
+            {
+              "candidate_offset": 520,
+              "output_offset": 2336,
+              "size": 72
+            },
+            {
+              "candidate_offset": 592,
+              "output_offset": 2488,
+              "size": 130
+            },
+            {
+              "candidate_offset": 724,
+              "output_offset": 2004,
+              "size": 122
+            },
+            {
+              "candidate_offset": 848,
+              "output_offset": 2408,
+              "size": 80
+            },
+            {
+              "candidate_offset": 928,
+              "output_offset": 6232,
+              "size": 128
+            },
+            {
+              "candidate_offset": 1056,
+              "output_offset": 2264,
+              "size": 70
+            },
+            {
+              "candidate_offset": 1128,
+              "output_offset": 2980,
+              "size": 476
+            },
+            {
+              "candidate_offset": 1604,
+              "output_offset": 2900,
+              "size": 78
+            },
+            {
+              "candidate_offset": 1684,
+              "output_offset": 3588,
+              "size": 110
+            },
+            {
+              "candidate_offset": 1796,
+              "output_offset": 3780,
+              "size": 80
+            },
+            {
+              "candidate_offset": 1876,
+              "output_offset": 3456,
+              "size": 132
+            },
+            {
+              "candidate_offset": 2008,
+              "output_offset": 2712,
+              "size": 90
+            },
+            {
+              "candidate_offset": 2100,
+              "output_offset": 2620,
+              "size": 90
+            },
+            {
+              "candidate_offset": 2192,
+              "output_offset": 3700,
+              "size": 80
+            },
+            {
+              "candidate_offset": 2272,
+              "output_offset": 4848,
+              "size": 540
+            },
+            {
+              "candidate_offset": 2812,
+              "output_offset": 676,
+              "size": 106
+            },
+            {
+              "candidate_offset": 2920,
+              "output_offset": 100,
+              "size": 202
+            },
+            {
+              "candidate_offset": 3124,
+              "output_offset": 7072,
+              "size": 212
+            },
+            {
+              "candidate_offset": 3336,
+              "output_offset": 6536,
+              "size": 156
+            },
+            {
+              "candidate_offset": 3492,
+              "output_offset": 1412,
+              "size": 102
+            },
+            {
+              "candidate_offset": 3596,
+              "output_offset": 6820,
+              "size": 250
+            },
+            {
+              "candidate_offset": 3848,
+              "output_offset": 1748,
+              "size": 114
+            },
+            {
+              "candidate_offset": 3964,
+              "output_offset": 1000,
+              "size": 202
+            },
+            {
+              "candidate_offset": 4168,
+              "output_offset": 4300,
+              "size": 548
+            },
+            {
+              "candidate_offset": 4716,
+              "output_offset": 6360,
+              "size": 176
+            },
+            {
+              "candidate_offset": 4892,
+              "output_offset": 932,
+              "size": 66
+            },
+            {
+              "candidate_offset": 4960,
+              "output_offset": 3860,
+              "size": 236
+            },
+            {
+              "candidate_offset": 5196,
+              "output_offset": 6100,
+              "size": 132
+            },
+            {
+              "candidate_offset": 5328,
+              "output_offset": 5572,
+              "size": 178
+            },
+            {
+              "candidate_offset": 5508,
+              "output_offset": 4096,
+              "size": 204
+            },
+            {
+              "candidate_offset": 5712,
+              "output_offset": 6692,
+              "size": 128
+            },
+            {
+              "candidate_offset": 5840,
+              "output_offset": 1284,
+              "size": 126
+            },
+            {
+              "candidate_offset": 5968,
+              "output_offset": 5388,
+              "size": 184
+            },
+            {
+              "candidate_offset": 6152,
+              "output_offset": 1204,
+              "size": 80
+            },
+            {
+              "candidate_offset": 6232,
+              "output_offset": 0,
+              "size": 100
+            },
+            {
+              "candidate_offset": 6332,
+              "output_offset": 500,
+              "size": 70
+            },
+            {
+              "candidate_offset": 6404,
+              "output_offset": 1636,
+              "size": 112
+            },
+            {
+              "candidate_offset": 6516,
+              "output_offset": 5752,
+              "size": 200
+            },
+            {
+              "candidate_offset": 6716,
+              "output_offset": 852,
+              "size": 80
+            },
+            {
+              "candidate_offset": 6796,
+              "output_offset": 384,
+              "size": 114
+            },
+            {
+              "candidate_offset": 6912,
+              "output_offset": 784,
+              "size": 68
+            },
+            {
+              "candidate_offset": 6980,
+              "output_offset": 1516,
+              "size": 120
+            },
+            {
+              "candidate_offset": 7100,
+              "output_offset": 572,
+              "size": 104
+            },
+            {
+              "candidate_offset": 7204,
+              "output_offset": 304,
+              "size": 80
+            }
+          ]
+        }
+      ],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/linear_buffer/func_00112628.c",
+      "extra_sources": [
+        "src/models/linear_buffer/func_00112b5c.c",
+        "src/models/linear_buffer/func_001131d4.c",
+        "src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "profile": "sdk",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/027-func_00112628/func_00112628.result.json",
+        "sha256": "74ebd1fd216d5b8521f1a46cce461938bc5fcd654a8d2149bd20c53c8f4c44a0"
+      },
+      "source_sha256": "9d21e6a10d2780c4d22e01f78725432fec3d45172ad6727f149eb1e21a3e87e5",
+      "object_sha256": "a4da1106a6212d90657213623e91992c32a13081934f1d8563418bb07ce0248f",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/linear_buffer/func_00112b5c.c",
+          "source_sha256": "7c57da5c03b0eceb191c76f7d7ee1586d65b9b77f7022272ef4dacd1e5d0034c",
+          "object_sha256": "b7effcec2cf8aab2ee07ed4e5c4bc9d18b4f5582e4a19161870b02253aa3d50c"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/linear_buffer/func_001131d4.c",
+          "source_sha256": "a159c7d18afa5ee5671fbe783f523edae1b765b6694b3185f66ff2f4c8f8d3db",
+          "object_sha256": "51572e05193fba6ddd8b2b1b1ef828db2fb47192f7b08f6049a46e0a990bd13e"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/linear_buffer/linear_buffer_allocator.c",
+          "source_sha256": "769d023b593330b79ad72a11adf42e00dba0adb0b50a186573a4f862565eb6af",
+          "object_sha256": "08d31c0852220321482d9c1f3bd1a75520b1f21e1f6622686daad440bdf05a37"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_00112628",
+          "address": 1123880,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 12,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "InitializeLinearBufferAllocator"
+                ],
+                "section": "i.InitializeLinearBufferAllocator",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/027-func_00112628/extra-2-linear_buffer_allocator.o"
+              }
+            }
+          ]
+        },
+        {
+          "name": "func_00112b5c",
+          "address": 1125212,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 12,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "InitializeLinearBufferAllocator"
+                ],
+                "section": "i.InitializeLinearBufferAllocator",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/027-func_00112628/extra-2-linear_buffer_allocator.o"
+              }
+            }
+          ]
+        },
+        {
+          "name": "func_001131d4",
+          "address": 1126868,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 12,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "InitializeLinearBufferAllocator"
+                ],
+                "section": "i.InitializeLinearBufferAllocator",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/027-func_00112628/extra-2-linear_buffer_allocator.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "InitializeLinearBufferAllocator"
+          ],
+          "section": "i.InitializeLinearBufferAllocator",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/027-func_00112628/extra-2-linear_buffer_allocator.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models/transition_setters/func_001a8048_value_setter.c",
+      "extra_sources": [
+        "src/models/transition_setters/transition_active.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/028-func_001a8048_value_setter/func_001a8048_value_setter.result.json",
+        "sha256": "400a5f02d33045edf247c9cb76a1b9761ce2b4a939d182fae64cb007836fea4c"
+      },
+      "source_sha256": "4163d4a549b8d9eb174f76dfed879b9422f10a8cf9d1fd32e1bd56a08ba6e4c8",
+      "object_sha256": "c32ba5753fbe3c3b1991cea0a8956b09b087f9768a92b4f05b76a74d968066b1",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/transition_setters/transition_active.c",
+          "source_sha256": "697fe1ec9968e3c15dbae989ed0f4b91a0f046a4ce31962d5b519a0e88c0fa1f",
+          "object_sha256": "d51b5bc148fc5bba9558b8db0feff9bd72f4636423b83aef8ca4d42a0d362799"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001a8048",
+          "address": 1736776,
+          "size": 412,
+          "candidate_size": 412,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 40,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "transition_active"
+                ],
+                "section": "i.transition_active",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/028-func_001a8048_value_setter/extra-0-transition_active.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "transition_active"
+          ],
+          "section": "i.transition_active",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/028-func_001a8048_value_setter/extra-0-transition_active.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/models2/display_initializer/func_001456e4.c",
+      "extra_sources": [
+        "src/models2/display_initializer/display_metadata.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/029-func_001456e4/func_001456e4.result.json",
+        "sha256": "cfb38c0a6ecccb8dc2a6744143a7a1eb640d8a0c68360cca0344cd4ba5bada8e"
+      },
+      "source_sha256": "20fa70607a38734c59c29302583160b31c1c0a7053b2fb0699611d90ada56605",
+      "object_sha256": "6b72868c758a27801d6ca88391a62499aa14221e9b0e7fefceef18b980141be5",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models2/display_initializer/display_metadata.c",
+          "source_sha256": "0b79e29766b3db971dc4b3fad37b012c8e45642b343bbeb25bce59615b6e8380",
+          "object_sha256": "e341aeaf1cafa115dd7c60ca3390864e7139934964c22a27f7878695f3c7a5e2"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001456e4",
+          "address": 1332964,
+          "size": 240,
+          "candidate_size": 240,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 124,
+              "rule": "inline_insn",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "w16_set_screen"
+                ],
+                "section": "i.w16_set_screen",
+                "size": 8,
+                "object": "scratch/integrator/cmodels2-r5/matches/029-func_001456e4/extra-0-display_metadata.o"
+              }
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "w16_set_screen"
+          ],
+          "section": "i.w16_set_screen",
+          "size": 8,
+          "object": "scratch/integrator/cmodels2-r5/matches/029-func_001456e4/extra-0-display_metadata.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/retries/func_001c5b8c.cpp",
+      "extra_sources": [],
+      "profile": "sdk",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/030-func_001c5b8c/func_001c5b8c.result.json",
+        "sha256": "03febc2f1cffe55d62de0ef0f654554f056750cb30250599a8407135639c92a8"
+      },
+      "source_sha256": "735cd9d5f96d1fedecd289a617292cbe3b46785380b17fe9a09a86c4b19d42b8",
+      "object_sha256": "ded036c833dc3aefa5e973448827af3838519ea0ee7d76aae8b860cbec5ded47",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001c5b8c",
+          "address": 1858444,
+          "size": 52,
+          "candidate_size": 52,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/sdk/func_00121364.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/031-func_00121364/func_00121364.result.json",
+        "sha256": "027325f3a3b07c2b9c4ce04f7672648dd3c78eca30af3f63523d8de794db8cd8"
+      },
+      "source_sha256": "646d1fbaffaa2bb4d0a46ef753f6416e84836a63343c14f510a1325655d9aa8a",
+      "object_sha256": "e11169c5618e742134bedee8b39b9d5f23193fac6dac5d5446077eb9a7a69d1b",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00121364",
+          "address": 1184612,
+          "size": 76,
+          "candidate_size": 76,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/sdk2/func_001149c0.c",
+      "extra_sources": [],
+      "profile": "middleware",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/032-func_001149c0/func_001149c0.result.json",
+        "sha256": "5e54e42539f0332612910e648ab1b00715f1951f656df8e6a68f859d4dcd685d"
+      },
+      "source_sha256": "f322a6b782c9223d880e4f2fede02c9f382c2dc26530e4c6a3ae56d0ba625c54",
+      "object_sha256": "7c558a1e9ba6e6de438bd38e037d85c15bd2ebf88f22ea489dfe5fcb8dad7df4",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001149c0",
+          "address": 1132992,
+          "size": 128,
+          "candidate_size": 128,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave10/func_00177b10.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/033-func_00177b10/func_00177b10.result.json",
+        "sha256": "d2ee070b223c1bf0c274db3edfcc2797ff784d24bcf50adf8d03f6229d3bd42f"
+      },
+      "source_sha256": "9cfbb1f7ed97d1392a26dc5ce7ddee086019c94e913bcd526ecb3a46dbc994a2",
+      "object_sha256": "a03809fe367b435ae51c5269c0dfb70133a2a2d659d1fa8cbe859920f05f035c",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00177b10",
+          "address": 1538832,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave12/func_0016e270.cpp",
+      "extra_sources": [
+        "src/models/object_registration/prompt_manager.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/034-func_0016e270/func_0016e270.result.json",
+        "sha256": "b8f0f7fbed5328d01e9b8f32b59a906e15f4bdfe4b112510c6c0dea7aec73f3b"
+      },
+      "source_sha256": "d2bf3af89e20871eca620b8abdd864cc04668923dc08afafe3887a2fe5af5dbf",
+      "object_sha256": "a565543e04e3896835d6fed7a2e7a4f651ecf09dcd0678f0bbc872a7512daf04",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/object_registration/prompt_manager.c",
+          "source_sha256": "6ca12253c3ff117b00f8582c3b5b8c3942001c099cf0393769673c9115125623",
+          "object_sha256": "c96be5065ab927bf1d17182bfee118fa5be23b24c0633f29705b8370ce7cf010"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_0016e270",
+          "address": 1499760,
+          "size": 144,
+          "candidate_size": 144,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 100,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_prompt_manager_cleanup"
+                ],
+                "section": "i.register_prompt_manager_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/034-func_0016e270/extra-0-prompt_manager.o"
+              }
+            },
+            {
+              "offset": 112,
+              "rule": "inline_nop",
+              "target": 2186948
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "register_prompt_manager_cleanup"
+          ],
+          "section": "i.register_prompt_manager_cleanup",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/034-func_0016e270/extra-0-prompt_manager.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_0010c480.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/035-func_0010c480/func_0010c480.result.json",
+        "sha256": "ce4939a621e29c2f4f86d482f3e3ecd8903cc688a01713001ba65f69c92cd127"
+      },
+      "source_sha256": "6ac5a3ec199d2ba68a993048040405bfe5729207ade99389c486503bdeafb6cc",
+      "object_sha256": "b36021c62a8d87e79b90ff89e801fefaea5fe699ec423f54b45bb5fa4e98a97a",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0010c480",
+          "address": 1098880,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_0010e2c8.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/036-func_0010e2c8/func_0010e2c8.result.json",
+        "sha256": "537a2183ad26d40748e3f831903b9965b4c36d3f132c7734a1435637ff7fecb3"
+      },
+      "source_sha256": "88a4892033ea581d4269e9e9e5969aeee6910d66599c6b51699b4d21b6a809a5",
+      "object_sha256": "b23293d7bd26036d39a6487b1b9c9b97777cbfe0a8e10f3c42d284766f1d92b5",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0010e2c8",
+          "address": 1106632,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_0011ee7c.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/037-func_0011ee7c/func_0011ee7c.result.json",
+        "sha256": "f48f0e2f68b0a0ff3be00494efcb8d3ce18fc2e8e8994b90c268bc7735747025"
+      },
+      "source_sha256": "2f099780f3c0c8c79ed37d1aab0003e1350678eff79f3c1c93bfd5a343edca2c",
+      "object_sha256": "7ebfd19000347290ca7eff6451249bbe46579e80a187735fc910bc7e4a1824c0",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0011ee7c",
+          "address": 1175164,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_0011ee94.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/038-func_0011ee94/func_0011ee94.result.json",
+        "sha256": "039de9e89c3c39f52e4cdab9359a43a0da1f9992a5897d7ad62a8a84968ba94b"
+      },
+      "source_sha256": "53b60de57bf17d9c78ecd78017d1c2aeef072e2b7533bfc76675741afb064cbd",
+      "object_sha256": "6211518fea51e1d8a0924b25239928f51ae66e7ca39501b4fb1f914490f40a85",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0011ee94",
+          "address": 1175188,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_0011eeac.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/039-func_0011eeac/func_0011eeac.result.json",
+        "sha256": "33e9a277dcc87071e23812936e178f22c9d427953b783b509f31e70c1d5b8f1a"
+      },
+      "source_sha256": "fa390a9fa49ab92c7534a9c31adf4297e56d148303521a4af95ef2faa9b99f58",
+      "object_sha256": "83fde8a4889d924d238faa359e967d1a72f19caf470316e441c1a37004d5fa5e",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0011eeac",
+          "address": 1175212,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_00123b38.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/040-func_00123b38/func_00123b38.result.json",
+        "sha256": "90b020ad1f22e11b20ff3fb1dc5b74f63dc9d5021712f62d775ccf1bbed2b4bc"
+      },
+      "source_sha256": "726e3356c90a3ad35bf09bd0857dbd9a26961564835894324b59a8680e270a88",
+      "object_sha256": "7aabd1c25191c93c5b23582e276b228c03937d181effeb11dde15b9cdb003d1d",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00123b38",
+          "address": 1194808,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_0012d0b8.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/041-func_0012d0b8/func_0012d0b8.result.json",
+        "sha256": "9b2e8b384a5643ffee722feb283308a80e13a30daf7edce3cb16c367e3041d9f"
+      },
+      "source_sha256": "e86228651e37c99c771f58225a6b9fb4da88a514f3ffb26b0a84b8f10b80316a",
+      "object_sha256": "4c9b9c7c22db7a812a4ce20be64fcd9ea47e27dbd4f4580c5928678dcd6a7dbf",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0012d0b8",
+          "address": 1233080,
+          "size": 12,
+          "candidate_size": 12,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_0012d104.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/042-func_0012d104/func_0012d104.result.json",
+        "sha256": "b1fa023092b8f0b017d3b682edff8131d09df05e5a4bd0896a3287fa8b9eaabb"
+      },
+      "source_sha256": "a49b34fafcdea9be69af55f72da4c7127d1708892e1acc70522c3ceccdb18fd8",
+      "object_sha256": "3516d77e67040d68e4f1466034ea9adff309e179fa00169c1948721234eaafcd",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0012d104",
+          "address": 1233156,
+          "size": 68,
+          "candidate_size": 68,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 64,
+              "rule": "branchnop",
+              "target": 1233224
+            }
+          ]
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_001342f4.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/043-func_001342f4/func_001342f4.result.json",
+        "sha256": "6fc7959bb955b5721bf26abfd15a5c94a23169ca6e6cd3947cb6592aab0c4954"
+      },
+      "source_sha256": "693f6c412b0c177e597191e1c9aaadeaf8433c1781fdc10dbbad5859d35e3937",
+      "object_sha256": "8bf7bb8d7aad3ecbaf6e505ee51484a0117bff2201c2409ecb02267ae7aeb0b2",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001342f4",
+          "address": 1262324,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_00144970.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/044-func_00144970/func_00144970.result.json",
+        "sha256": "755313ad816cfddb2b90e30616ce7dcb7c0967283a45cbe5a6a14b8ecd329d5b"
+      },
+      "source_sha256": "ea0d778983afb64cc636694d8263ec9104e03c2fc726c495c8008bf3efeea8da",
+      "object_sha256": "0b0ca52b5961003fcb501cabeedde5a88b4cd1647cbc1723d310ba3c9f3d732d",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00144970",
+          "address": 1329520,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_00149388.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/045-func_00149388/func_00149388.result.json",
+        "sha256": "a5caf33c7a1a02792679e97f810a70efe70bf7bb70981d2b3dbd849705813abe"
+      },
+      "source_sha256": "6161d77270b2bf67b7176cc40021ff423d6e926be6c67c59457d770ab2ab811d",
+      "object_sha256": "7e55e1d6407ce63f963e084e3129eaffea2da2cbf5e630f7fec056a06fcd360b",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00149388",
+          "address": 1348488,
+          "size": 32,
+          "candidate_size": 32,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_0014ee44.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/046-func_0014ee44/func_0014ee44.result.json",
+        "sha256": "0d5cf3fcccd6e1eb663add5326bfe5187eb30b155bbd7b8b3469b335fd9a072d"
+      },
+      "source_sha256": "abff46508d297b7c34f3e59e0e738fc571b1717391fbf68e88727dbc62b20a26",
+      "object_sha256": "666b185b0f55935d6bb5e155a83ee1e14649cd0304306856f520805a5b23c7a4",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0014ee44",
+          "address": 1371716,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_00152624.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/047-func_00152624/func_00152624.result.json",
+        "sha256": "d2eb8f86d7fea16685f8692d8ac27d8e15be145a7c8caad28dfcbfbbdb6576f6"
+      },
+      "source_sha256": "a69d95263494d5a5eb84c739d2ace8851bd741792d547c1ecf5c358c8901acba",
+      "object_sha256": "e28e47f340636fa5cbf0bf0276b74b3ac5299b95fcf109e9aaf653307cdc657d",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00152624",
+          "address": 1386020,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave13/func_001cd2f0.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/048-func_001cd2f0/func_001cd2f0.result.json",
+        "sha256": "88a19ce188d2fe3dc74ed751a8ed8edaf4bfd4210fc9f01c9a3b6ea6153a862b"
+      },
+      "source_sha256": "6bfea81a5c83f97072ab698e3e90d268a3e227c8a0e7b43617e927bff55c6887",
+      "object_sha256": "34b9d5d3f9adfd313218d02772c98df87b8791142dc12ea9355c47fe373a0b10",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001cd2f0",
+          "address": 1889008,
+          "size": 84,
+          "candidate_size": 84,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave16/func_0012d0a4.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/049-func_0012d0a4/func_0012d0a4.result.json",
+        "sha256": "02729b2834a61e474d30d9d58236d2063238e07d16711bc519821f51ed3296c4"
+      },
+      "source_sha256": "4006d3156c1be22cf87b61a3351f5f3eb4c0c04d8587fae938fb44a2ef1d1278",
+      "object_sha256": "414421b885b129975b2ac36c254969d949ff475a6a8c6f034ddcffff746fbd74",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0012d0a4",
+          "address": 1233060,
+          "size": 20,
+          "candidate_size": 20,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 16,
+              "rule": "branchnop",
+              "target": 1233080
+            }
+          ]
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave17/func_001b3280.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/050-func_001b3280/func_001b3280.result.json",
+        "sha256": "1fc833c8c0ef563db92d4267391e79fee365a4397549609278640c747991cecc"
+      },
+      "source_sha256": "0580d56768396ccf87c5e59c9cc1f7c1ff3fee9a0b42c0367c973f5abbb3f2c0",
+      "object_sha256": "3c811e16f1bcfb96b89baee66eaa84f2f491437a508ca41e811c15791ba23050",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001b3280",
+          "address": 1782400,
+          "size": 192,
+          "candidate_size": 192,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave17/func_001e7470.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/051-func_001e7470/func_001e7470.result.json",
+        "sha256": "20582b907566da38b2446635460ee2ab931b8b08d81cbd1137ff74b9e811b4a6"
+      },
+      "source_sha256": "f5a2b933b92ea532f9208e771f06a4c52cf8be873a9698b813f2fac48e450a59",
+      "object_sha256": "870fdcedc677e29f9c4ad2ffb238c49cb90518b3987bf1fbe8c4adc4aaadd896",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001e7470",
+          "address": 1995888,
+          "size": 72,
+          "candidate_size": 72,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave17/func_001e7c70.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/052-func_001e7c70/func_001e7c70.result.json",
+        "sha256": "7046c36cc61619b279d5d029ab10031f718b56bae75f6547d1c34e781d5ed625"
+      },
+      "source_sha256": "9def5cfdc76b3e586ed61b8f431971624c23d1eeac654504d6a43b9616dae661",
+      "object_sha256": "1571e163aadeb4fc21badc62ac59db468cb4690166b674e54ef25a7c082da160",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001e7c70",
+          "address": 1997936,
+          "size": 72,
+          "candidate_size": 72,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave17/func_001e7fdc.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/053-func_001e7fdc/func_001e7fdc.result.json",
+        "sha256": "0390d0b3e98edddd7ddafeb16900185bfbcf6dcd7aa8f237147a6b0cdae46378"
+      },
+      "source_sha256": "e010a3a84431433ded34a1cad9046ec4e972a7c33dbe05e2a9b5b6d0fcff1afb",
+      "object_sha256": "cf1aa3291c3e9220babe76a92752e73fc2cf8927253a6167ec0457f6018e8228",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001e7fdc",
+          "address": 1998812,
+          "size": 72,
+          "candidate_size": 72,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave17/func_001ec14c.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/054-func_001ec14c/func_001ec14c.result.json",
+        "sha256": "f4493ae40ec544993cc6cd892f4eec0611f7eadc4cea74d59593c094e4441a2a"
+      },
+      "source_sha256": "461f09264dd4f91b3350f089154638e766966fcbdb8bbc3337f6dafa546d9cc7",
+      "object_sha256": "937281714b39807ff42728c5707fec572fdf5425d58de5ede9a3170b14ebda6a",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001ec14c",
+          "address": 2015564,
+          "size": 72,
+          "candidate_size": 72,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave18/func_001819f4.c",
+      "extra_sources": [
+        "src/models/object_registration/drawing_input.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/055-func_001819f4/func_001819f4.result.json",
+        "sha256": "267f80c659fcdf8104fc99f867e8b27464a2a8632e3722577e515971e97ac99a"
+      },
+      "source_sha256": "2f71a63e2c0f4d3fd9d818572022fa7facb0ab0b2b6e58729dc7c2c2474d14c2",
+      "object_sha256": "187c4eaabb21709189a99c6f328457d96d9fb39467018b1c56e77ee798bc3a7e",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/object_registration/drawing_input.c",
+          "source_sha256": "12f587bc0e836a9a708d715123b60d8f4464602323a8595299821714f426fae9",
+          "object_sha256": "8f000054829eaf394223a212d0777066241a32781bcaccd201033881fcda59ab"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001819f4",
+          "address": 1579508,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 52,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_drawing_input_cleanup"
+                ],
+                "section": "i.register_drawing_input_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/055-func_001819f4/extra-0-drawing_input.o"
+              }
+            },
+            {
+              "offset": 60,
+              "rule": "inline_nop",
+              "target": 2186948
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "register_drawing_input_cleanup"
+          ],
+          "section": "i.register_drawing_input_cleanup",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/055-func_001819f4/extra-0-drawing_input.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave18/func_001acbb4.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/056-func_001acbb4/func_001acbb4.result.json",
+        "sha256": "bc6d9f4091f6c4d7605c18ff1c4fa1119f38e222306f13d53d0480e4d7b9aa80"
+      },
+      "source_sha256": "e59fe1345c5354540843fc7c54d647c9fed7e75047e91ec6de40796a50514cb9",
+      "object_sha256": "a75f763418278bac1c4f27ae8612e9ef2044d7e71b38daf9732ac57eed5c917b",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001acbb4",
+          "address": 1756084,
+          "size": 100,
+          "candidate_size": 100,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave18/func_001be128.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/057-func_001be128/func_001be128.result.json",
+        "sha256": "9347b751d8f479525c49076cdbacd1c24dcda08624662ac5b83ecb68e2f99dc8"
+      },
+      "source_sha256": "bb511d54ec590b3c7b362a57c7139fce37ac4639e33040e69449086ede2195ea",
+      "object_sha256": "c898d0094a6c2769eb36ed4c2c34f5896e0ac46b019aa741e142c47dad50a051",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001be128",
+          "address": 1827112,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave18/func_001db318.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/058-func_001db318/func_001db318.result.json",
+        "sha256": "cd72d885230e1ac6e60e7c540ec6ec804d26c840469ca8ec248aa0be320c6439"
+      },
+      "source_sha256": "d08a0655d4496b29ed81517b188c34309a8744d2f2662ba493e3439d23dc7f09",
+      "object_sha256": "bed7a89aede84b0f2f0438f183f3a2220fe4714633ae2290721879431a0ca6d3",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001db318",
+          "address": 1946392,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave18/func_001eade0.cpp",
+      "extra_sources": [
+        "src/models/object_registration/style_owner.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/059-func_001eade0/func_001eade0.result.json",
+        "sha256": "c77d6077faf6cae444e34fa3a8f9806f357b49f7defe33d1bfc54fde00d75f83"
+      },
+      "source_sha256": "f2564510c5f0b9545f45aaa6b5f80e33b06444cd4201180f015ee781b85552f2",
+      "object_sha256": "f05e27e9ed19f99b53d91e6cef4205f325bc6da940de4fd234f50e0059be941a",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/object_registration/style_owner.c",
+          "source_sha256": "3a9fbb24621a5b9dc309dfb2e76ff37c0653aff2da3df2192e6bfcb44b722306",
+          "object_sha256": "b5acde95a3824b0deae7e36d51d32e688c8917a95f1abbbc19b25505c5c3c223"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_001eade0",
+          "address": 2010592,
+          "size": 248,
+          "candidate_size": 248,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 192,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_style_owner_cleanup"
+                ],
+                "section": "i.register_style_owner_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/059-func_001eade0/extra-0-style_owner.o"
+              }
+            },
+            {
+              "offset": 204,
+              "rule": "inline_nop",
+              "target": 2186948
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "register_style_owner_cleanup"
+          ],
+          "section": "i.register_style_owner_cleanup",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/059-func_001eade0/extra-0-style_owner.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave18/func_001ef7b4.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/060-func_001ef7b4/func_001ef7b4.result.json",
+        "sha256": "fab40631001f1bb2fbe5d3790167f107c8344d9dc0b04b9a4f5d5178b13a0b79"
+      },
+      "source_sha256": "e958d868ae728e2a5c87240c33cdc145d659f575d35b888eb33af95b949187bb",
+      "object_sha256": "0cadb6b226dc5babc349ab41a0479b759e968975277099222af77888d67a82f2",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001ef7b4",
+          "address": 2029492,
+          "size": 100,
+          "candidate_size": 100,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave19/func_00147478.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/061-func_00147478/func_00147478.result.json",
+        "sha256": "0b533aa7b537bc76fedbf5565ff38011a48f3490e3bfb7f09a990c4864a66da8"
+      },
+      "source_sha256": "c458ed24c36eb3a63280aaa06617290a6666f8435e361a3cb9224ed78a332287",
+      "object_sha256": "d8fe742abbbe618a7fb94f353f705b2bd3d86eef482d1ebe687fb66f43a3c2bb",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00147478",
+          "address": 1340536,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave19/func_0015f5b0.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/062-func_0015f5b0/func_0015f5b0.result.json",
+        "sha256": "c1090eb2d069f29c2175fb87b6db08c5284a7a5d796595d7c6226cb15cf18b7b"
+      },
+      "source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac",
+      "object_sha256": "de4240b0b2dfa8119f116160a677db1500fa3a07043d439d16abda51d8825f17",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0015f5b0",
+          "address": 1439152,
+          "size": 52,
+          "candidate_size": 52,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave19/func_00167284.c",
+      "extra_sources": [
+        "src/models/object_registration/animation_state.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/063-func_00167284/func_00167284.result.json",
+        "sha256": "cfb12a07154d7e47e61470c7fed1b6bbfb957bc814bb10194219f10f3e151a71"
+      },
+      "source_sha256": "ff10da281247559b755c33e573aa207d8350525ed53c6b5a764e6156cf80d787",
+      "object_sha256": "812a30da9c361b680d1ca4bccbf06c4ec7343c915baee4b0d809df092bdbfb56",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/object_registration/animation_state.c",
+          "source_sha256": "52ac1278c1f71c6fb826fe161c8561b6edfe5b84f5c46f5a332986963676950b",
+          "object_sha256": "4e4aa92c88c9c867e392664c1675c70004f008ba55872e6fcc705fedf56dca5e"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_00167284",
+          "address": 1471108,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 52,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_animation_state_cleanup"
+                ],
+                "section": "i.register_animation_state_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/063-func_00167284/extra-0-animation_state.o"
+              }
+            },
+            {
+              "offset": 60,
+              "rule": "inline_nop",
+              "target": 2186948
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "register_animation_state_cleanup"
+          ],
+          "section": "i.register_animation_state_cleanup",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/063-func_00167284/extra-0-animation_state.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave19/func_001743d8.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/064-func_001743d8/func_001743d8.result.json",
+        "sha256": "198baeff12b3e274873c0044518df112f59938eeddf45af4e445387a937b49b8"
+      },
+      "source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f",
+      "object_sha256": "85cdbfafcf4454abcfa7b23a13c79a54551cbf2dce94c634acd3c0cddbfbd7ef",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001743d8",
+          "address": 1524696,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave2/func_00149424.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/065-func_00149424/func_00149424.result.json",
+        "sha256": "9f6b1e4109f36574eb250cdfc15ab2bb2e2cda36cbeff7ff2074cc06cb6a72ee"
+      },
+      "source_sha256": "17b84058fd502894212abae9b95dced971cf4c0558e2abf42667b1a47bfe897e",
+      "object_sha256": "42677e358228b9fa9c9533aa37b986f75c64b697ae268af9b34ac1b782e1db1f",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00149424",
+          "address": 1348644,
+          "size": 4,
+          "candidate_size": 4,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave2/func_00174480.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/066-func_00174480/func_00174480.result.json",
+        "sha256": "05f592fcf1254a4320ac7c36d843fbab13b5361b533d80598076be16ac54968f"
+      },
+      "source_sha256": "05e5c3a44e9a92c9b2370d6d655953d2face42516f4a1a5a59db6112b2a89389",
+      "object_sha256": "5c49c6b8c596ba77d8e2348f89ea14e7767c290e4cb3bb81559cf8129ef05fab",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00174480",
+          "address": 1524864,
+          "size": 4,
+          "candidate_size": 4,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave20/func_00134190.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/067-func_00134190/func_00134190.result.json",
+        "sha256": "8a067a1a6c53e310263c32fad029ec41da3ad2414f4ae8474a16b0d738ffd7de"
+      },
+      "source_sha256": "e10acb153959a4f2e395d8bb93516b26f553234cf5d96d7ee2617887882dc0d7",
+      "object_sha256": "f86239821251b382f010de677b8e51df4316e0cc3ff3a57ff3b56c532ffe544f",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00134190",
+          "address": 1261968,
+          "size": 124,
+          "candidate_size": 124,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 96,
+              "rule": "inline_nop",
+              "target": 1524864
+            }
+          ]
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave20/func_0017a690.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/068-func_0017a690/func_0017a690.result.json",
+        "sha256": "7eff4d8fb57ac720065e027c5e86272f9cb78a5770df34566dcf107438e6b8d5"
+      },
+      "source_sha256": "b88e8f82a14c8d911b41e1d420b23552183c6cd1d2f0b5f8e9ec710d85063563",
+      "object_sha256": "fee8b325d3cf2b4827e39509a20d762d259b40a3d21b04d1e06b55b055a41c64",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0017a690",
+          "address": 1549968,
+          "size": 56,
+          "candidate_size": 56,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave20/func_0017a6c8.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/069-func_0017a6c8/func_0017a6c8.result.json",
+        "sha256": "456b91b7e6e094a9395bd0e6b63226780390993a0dcb37a9a534c3f312817b50"
+      },
+      "source_sha256": "cb901aab36505cf78a932c0801a3ab62e01f766805b89b420083f71a810ea86f",
+      "object_sha256": "ca38cdf3a5ebcb33cb4929cba32f90753261cca5ecaf61356601a981ec842faf",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0017a6c8",
+          "address": 1550024,
+          "size": 44,
+          "candidate_size": 44,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave20/func_00216518.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/070-func_00216518/func_00216518.result.json",
+        "sha256": "17252f0d8008e25891650ad7ec9e6d964f6fe55e80ef5d6b1a4d8c6d319188da"
+      },
+      "source_sha256": "29572d98c2ae511716a71842b5d95c844f3e54fbce5a411001d8db34f30ceeee",
+      "object_sha256": "1a7f58b3348824a2c0863fb15244d3eaf86b57cc694f9589253da6b8c32241a1",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00216518",
+          "address": 2188568,
+          "size": 124,
+          "candidate_size": 124,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 96,
+              "rule": "inline_nop",
+              "target": 1524864
+            }
+          ]
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave4/func_00185d1c.c",
+      "extra_sources": [
+        "src/models/object_registration/object_manager.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/071-func_00185d1c/func_00185d1c.result.json",
+        "sha256": "870571db28c8debef721be566eb3d1b50e792d5f1a32abcfc9b6d6bfcf7cf45d"
+      },
+      "source_sha256": "313256efc02b6951ec031c244ba85f83617ff97b9cb560f3777373a8168006c2",
+      "object_sha256": "4a9ea7f9f29c8330d665f35fce30422a9e7c46d9e3dd5d898847c63f24228253",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/object_registration/object_manager.c",
+          "source_sha256": "f3b2a6dc4ab54f5c40ca7fe609fad087fe28d96268ef9530fcd2a1816a66bd13",
+          "object_sha256": "8473b139aa2ed3813ab7b7b374e71a1ba42d811c5b496996d14000c76f80e9af"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_00185d1c",
+          "address": 1596700,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 52,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_object_manager_cleanup"
+                ],
+                "section": "i.register_object_manager_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/071-func_00185d1c/extra-0-object_manager.o"
+              }
+            },
+            {
+              "offset": 60,
+              "rule": "inline_nop",
+              "target": 2186948
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "register_object_manager_cleanup"
+          ],
+          "section": "i.register_object_manager_cleanup",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/071-func_00185d1c/extra-0-object_manager.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave7/func_00185bfc.c",
+      "extra_sources": [
+        "src/models/object_registration/stream_manager.c",
+        "src/wave7/func_001916e8.c"
+      ],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/072-func_00185bfc/func_00185bfc.result.json",
+        "sha256": "abe37f1349f3e6228607671d97ddf3264931b30d180366e468030974ffa504fd"
+      },
+      "source_sha256": "9ff3a82aae77725358c0b697a6ff4911827ce19a66c693b74c7fdcd9ef810dda",
+      "object_sha256": "63125533084606d4e62a31c2db6d1ceaa92c036358f513e40f5137fd4e611915",
+      "extra_source_bindings": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/models/object_registration/stream_manager.c",
+          "source_sha256": "ff08f2295c679ff5a266ef4ad6bed125c86ca31d9eab7a2ce41eb945b885e5ad",
+          "object_sha256": "51f4cec949e6188564f3401c8a69654edd431245d03fa512fa8830e4141f609e"
+        },
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r5/src/wave7/func_001916e8.c",
+          "source_sha256": "e19265e8634d0fce0a91a644d337c529856df78547d6d1faef0ec13a315ae6c2",
+          "object_sha256": "f2a4ee1cf27ca59d19cfd78efbb975fdd0da8182198bd3ed36245c6d9970c333"
+        }
+      ],
+      "functions": [
+        {
+          "name": "func_00185bfc",
+          "address": 1596412,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 52,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_stream_manager_cleanup"
+                ],
+                "section": "i.register_stream_manager_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/072-func_00185bfc/extra-0-stream_manager.o"
+              }
+            },
+            {
+              "offset": 60,
+              "rule": "inline_nop",
+              "target": 2186948
+            }
+          ]
+        },
+        {
+          "name": "func_001916e8",
+          "address": 1644264,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 52,
+              "rule": "inline_nop",
+              "target": null,
+              "removed_callee": {
+                "symbols": [
+                  "register_stream_manager_cleanup"
+                ],
+                "section": "i.register_stream_manager_cleanup",
+                "size": 4,
+                "object": "scratch/integrator/cmodels2-r5/matches/072-func_00185bfc/extra-0-stream_manager.o"
+              }
+            },
+            {
+              "offset": 60,
+              "rule": "inline_nop",
+              "target": 2186948
+            }
+          ]
+        }
+      ],
+      "removed_callees": [
+        {
+          "symbols": [
+            "register_stream_manager_cleanup"
+          ],
+          "section": "i.register_stream_manager_cleanup",
+          "size": 4,
+          "object": "scratch/integrator/cmodels2-r5/matches/072-func_00185bfc/extra-0-stream_manager.o"
+        }
+      ],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave7/func_001ad6d0.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/073-func_001ad6d0/func_001ad6d0.result.json",
+        "sha256": "ac2c6d301ed065058253f3f59d364a4aff026fe2067c65df4e69a46a0abf9785"
+      },
+      "source_sha256": "1b284be924aa6281f18d6e56013cbc0b53c863dd2467aaf9e302844389b20529",
+      "object_sha256": "85ce0acb1b68662e30fda4f753bd975b6d8a836a09f60cb5652eb4e75e9c7779",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001ad6d0",
+          "address": 1758928,
+          "size": 28,
+          "candidate_size": 28,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave7/func_001ad6ec.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/074-func_001ad6ec/func_001ad6ec.result.json",
+        "sha256": "46e38dc7c835a51ebdb4cb007773c46b53cc03c121d12a8a4f60e994cc4415e2"
+      },
+      "source_sha256": "131d2ab3369391c5939017a29865e0ad965b31aaae4fbf75b053b95e47951863",
+      "object_sha256": "735be2f10273960855004dd2a3205f4b840eb0e36ce4a33478b75f61bb13a723",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001ad6ec",
+          "address": 1758956,
+          "size": 28,
+          "candidate_size": 28,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave8/func_00167860.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/075-func_00167860/func_00167860.result.json",
+        "sha256": "a38e838939a32c1927db886079f4c9a8dff5eee294a0a57d257bc902c3f70eea"
+      },
+      "source_sha256": "437dadbb0a972825b3ec4078e7914f6050331e2fc6cdac5cb6d881d94e775963",
+      "object_sha256": "72e002213daa9d8752c848599fc6c160ce30d3cd9f7e5e3c311455389ae4606c",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00167860",
+          "address": 1472608,
+          "size": 96,
+          "candidate_size": 96,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave8/func_001f18b8.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/076-func_001f18b8/func_001f18b8.result.json",
+        "sha256": "7fb483be55cc7ff97cfee49466c57fbbae22da4ea20ea2f489b1de8e1cf7d3f3"
+      },
+      "source_sha256": "7179316ba8ba0040378a531d1ce3bb1727dfacbaa7adafbaf1892423bdb3a0c0",
+      "object_sha256": "93f5c481c75714256f28aa61b4b2e0c578e9f4b09b319e0e6a1e62d5a8626a9c",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001f18b8",
+          "address": 2037944,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave8/func_001f18c0.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/077-func_001f18c0/func_001f18c0.result.json",
+        "sha256": "1fe7d1ded84d55fd65fdf8cfd8628512dff889bbd02a387971fe3ca2f643b623"
+      },
+      "source_sha256": "1648dbd674ceab6e1c43c038f46f04b51e4ea32d82202ad7211020d2229dfa33",
+      "object_sha256": "91bcee955871a1e4bd15ff06403bef42fb511ebab1772099654664be2c08c760",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001f18c0",
+          "address": 2037952,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave8/func_001f18c8.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/078-func_001f18c8/func_001f18c8.result.json",
+        "sha256": "6b4df0a558600bbb7117c67fe7bb0899783eb1b414cc12aefe2afa21b45f4448"
+      },
+      "source_sha256": "1fa4c5ed90e884d274eda7a147e83c0b505307c35766b4b558a99236fd66b539",
+      "object_sha256": "9a0bdb747f00614c88e136488c1ba4376239e68100be1a1eebda1bc7a1b56927",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001f18c8",
+          "address": 2037960,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave8/func_001f2010.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/079-func_001f2010/func_001f2010.result.json",
+        "sha256": "f0813604c85cdb6e4e94240fa5970f04e52f7e8dd5317113ec3e13eb5f0b5c48"
+      },
+      "source_sha256": "00a43c3cdf8efd8b561ec62cb6ea28f81b80cbd17a238bc5ba76906c7f80a69b",
+      "object_sha256": "333b19ed14444b203ce8a1ff1872e270f2c40c16287cd36ad466bfa6141adc3b",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001f2010",
+          "address": 2039824,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave8/func_001f2018.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/080-func_001f2018/func_001f2018.result.json",
+        "sha256": "f595013410904999b6a7c6f786ae45da2807b3e9e986f2395047c34d97b232cc"
+      },
+      "source_sha256": "7cc077fab462d508311fa98a141b771e49d9eafc154dace288ae37190ced1f54",
+      "object_sha256": "939885e74e4b67a03462f83543300a8aa7794eb591a7fd2a0b400b28ae2dbfaf",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001f2018",
+          "address": 2039832,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave8/func_001f2020.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/081-func_001f2020/func_001f2020.result.json",
+        "sha256": "07e961bd7f014fd8044efada8001f7b2faba1e6cd7bfb6fbed69b8553022b0de"
+      },
+      "source_sha256": "a293bfffd27a9cf0b702a72d4aa6381795926802da5ed95e58f4e70634638c4e",
+      "object_sha256": "85ac42b94ade7709712ddc50da87f2a0372498b90f5ff5ce83a11873271b7735",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001f2020",
+          "address": 2039840,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave8/func_001f2028.cpp",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/082-func_001f2028/func_001f2028.result.json",
+        "sha256": "dc56feab7121b3910a591e2da9e8e1aff97637002d3e2252df3120fa212b6d38"
+      },
+      "source_sha256": "4d9b5d7334038debe6d39a53cdd451c18e8946b21331348fc95e1cdda37983d0",
+      "object_sha256": "47d59ff6b3ab574342f59a819a006428f9555e8a5b3807994ec8b47249e5438a",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_001f2028",
+          "address": 2039848,
+          "size": 8,
+          "candidate_size": 8,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave9/func_00113e14.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/083-func_00113e14/func_00113e14.result.json",
+        "sha256": "77f595e8a8922b649dcf43145bdf9c6b1329356bc392b20311c4afd9110268bb"
+      },
+      "source_sha256": "33290060559b4065ef69436945969d6b0ac2713117f71c87528bac7eb1a75e6e",
+      "object_sha256": "7b17e9a0154b231aa26a0aafef647bc5bdcf6510b491bce62ff05540b7f4f276",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_00113e14",
+          "address": 1130004,
+          "size": 12,
+          "candidate_size": 12,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave9/func_0019d8c4.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/084-func_0019d8c4/func_0019d8c4.result.json",
+        "sha256": "f994ff520ca7df2ad020479122c69be8bd88826f11c51ca23692c6da293eda79"
+      },
+      "source_sha256": "5efbe31658c60225f11314ed8ac48a10afc1ed8b7d91b34c9341afb1f7a9d262",
+      "object_sha256": "fa039bfb4f362160ef234503a49494280d2dc8c865e1076ea7b29c70e6007288",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0019d8c4",
+          "address": 1693892,
+          "size": 152,
+          "candidate_size": 152,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    },
+    {
+      "source": "src/wave9/func_0019dbec.c",
+      "extra_sources": [],
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1",
+      "receipt": {
+        "path": "scratch/integrator/cmodels2-r5/matches/085-func_0019dbec/func_0019dbec.result.json",
+        "sha256": "791f3ecb0b2f1b6eeba7b1979abddbb0c40981b0372e1a5f21911658e4454498"
+      },
+      "source_sha256": "a19afdcfd9ed82a6c123de49f1395b500e2ff85047dbd5adff80e9825ce46959",
+      "object_sha256": "e0bce6b315e2c8a9986f7bcd3119d2b45bbf5c719168b274a4e8ec2bcbaa81d9",
+      "extra_source_bindings": [],
+      "functions": [
+        {
+          "name": "func_0019dbec",
+          "address": 1694700,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "removed_callees": [],
+      "removed_special_members": [],
+      "literal_rebindings": [],
+      "model_selection_exercised": true,
+      "exit_code": 0
+    }
+  ],
+  "source_revisions": [
+    {
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0015f890"
+      ],
+      "accepted_source_sha256": "8fc747a274e476f700fb2d44d0332e248e52cbd0181e328c7f40d6f9a2ac0c14",
+      "current_source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae"
+    },
+    {
+      "source": "src/models/func_00172e00/transition-C-setter.c",
+      "profile": "game",
+      "functions": [],
+      "accepted_source_sha256": "4495a88e6ed8dbeed4be158af55169eef2872e38330944c961aeb17b2979fc9f",
+      "current_source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3"
+    },
+    {
+      "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00172e00"
+      ],
+      "accepted_source_sha256": "efa8e8efbf66784568c376e7970174fe3b0136390c377472b4bb01e60a567cb3",
+      "current_source_sha256": "3a81d25a069879ef6293913b66401d15eecfa12647ef2afaa60a853c18472d56"
+    },
+    {
+      "source": "src/models/func_001730ec/item_accessors.c",
+      "profile": "game",
+      "functions": [],
+      "accepted_source_sha256": "3dea631b293bfdf7f941db3de7bf2f42f73e001ac8ed65f39d282131b70e7ff3",
+      "current_source_sha256": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874"
+    },
+    {
+      "source": "src/wave19/func_0015f5b0.c",
+      "profile": "game",
+      "functions": [
+        "func_0015f5b0"
+      ],
+      "accepted_source_sha256": "e9c417a5c8c5bf9e05b50a82f6c76eee9452d4e8d298857055ee12bc1b5cf110",
+      "current_source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac"
+    },
+    {
+      "source": "src/wave19/func_001743d8.c",
+      "profile": "game",
+      "functions": [
+        "func_001743d8"
+      ],
+      "accepted_source_sha256": "0506975d8d7b0c01ce391a4a117bd60fe5a6ec9436f42be40a4712bf0e5d43dd",
+      "current_source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f"
+    }
+  ],
+  "header_revisions": [
+    {
+      "path": "include/game/functions.h",
+      "current_sha256": "1763a4259303204e7e2eb76265c09a929f897fd6a3f899efdf76c2c5b9a1fb73",
+      "base_sha256": "e66e3661971f14aefea3ec11c69495fe948804e715e59abd119da925131d480a"
+    },
+    {
+      "path": "include/game/item_entries.h",
+      "current_sha256": "278a86164775dace24b4601a2e081827f9f5e7eb3fc05c661a104fb7ae204781",
+      "base_sha256": "e896ea52323aed796dec57ba92155fc71257d842aa647a6d4a7dc677e13f209c"
+    },
+    {
+      "path": "include/game/transition.h",
+      "current_sha256": "efcb1bacbd21cad7c473f025f3015276b1efa733ee01209e2889c6d23d0feaef",
+      "base_sha256": "c27d3aeb6b938185f5ddc4dc27bff4c5289477cf3f06d9047f44d7518d50e88b"
+    },
+    {
+      "path": "include/game/text_resources.h",
+      "current_sha256": "a81c087e5092a3ff9b3149b0ab42f2453831ecee4edb01e89b05aa010fe4a2ff",
+      "base_sha256": "a725a9ba8bd60bfb4bb1e2933bf61c6eace3c8d1721dece2f851ccecd9ce7672"
+    },
+    {
+      "path": "include/game/display_initializer.h",
+      "current_sha256": "67f63a79ba25f0d928ddabe07b4670faa842d798c6a6cb3e3944cb5e583aa017",
+      "base_sha256": null
+    }
+  ],
+  "known_manual_failures_retained": [
+    "CM2-F01",
+    "CM2-F03"
+  ],
+  "qualification": "All R1 identity/outlining/existence/TU provenance remains QUALIFIED/INFERENCE. Positive bounded bytes do not close typed scene/member-interface findings or substitute for full receipts."
+}

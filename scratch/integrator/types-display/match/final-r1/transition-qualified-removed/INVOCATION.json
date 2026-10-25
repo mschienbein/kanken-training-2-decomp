@@ -1,0 +1,29 @@
+{
+  "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_00172e00/transition-qualified-removed.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/transition-qualified-removed",
+    "--extra-source",
+    "src/models/func_00172e00/transition-C-setter.c"
+  ],
+  "exit": 0,
+  "seconds": 0.189,
+  "output": "MATCH    func_00172e00 @ 0x172e00 size 0x60/0x60 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  set_completion (8 bytes; i.set_completion)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/transition-qualified-removed",
+  "extra_sources": [
+    "src/models/func_00172e00/transition-C-setter.c"
+  ],
+  "source_sha256": "efa8e8efbf66784568c376e7970174fe3b0136390c377472b4bb01e60a567cb3"
+}

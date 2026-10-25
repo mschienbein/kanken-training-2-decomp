@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/individual_wave/individual_wave.cpp",
+    "--profile",
+    "middleware",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/020-individual_wave",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 1,
+  "seconds": 0.205594,
+  "source": "src/checkpoint12/intake-r17/individual_wave/individual_wave.cpp",
+  "source_sha256": "fd25c498458f7ddb74bc179bb4500a219079d81455f88a47500b4557058c0a62",
+  "claimed_functions": [
+    "func_00183d3c"
+  ],
+  "profile": "middleware",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/020-individual_wave/individual_wave.result.json",
+  "receipt_sha256": "41aa7d6a0e44f154f475ea060a5468cf0abd85105c8f00fcd19e312e8938a66c",
+  "functions": [
+    {
+      "name": "_ZN2nw3snd8internal18SoundArchiveLoader18LoadIndividualWaveEjjPNS0_22SoundMemoryAllocatableEj",
+      "address": 1588540,
+      "size": 372,
+      "candidate_size": 356,
+      "status": "mismatch",
+      "first_diff": 4,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMISMATCH _ZN2nw3snd8internal18SoundArchiveLoader18LoadIndividualWaveEjjPNS0_22SoundMemoryAllocatableEj @ 0x183d3c size 0x164/0x174 first difference at +0x4\n",
+  "stderr": ""
+}

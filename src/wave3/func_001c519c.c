@@ -1,3 +1,4 @@
-void func_001c519c(void)
+void func_001c519c(void *storage)
 {
+
 }

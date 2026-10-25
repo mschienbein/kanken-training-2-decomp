@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/service_filters/service_filters.cpp",
+    "--profile",
+    "middleware",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r3/005-service_filters",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 1,
+  "seconds": 0.200034,
+  "source": "src/checkpoint12/intake-r17/service_filters/service_filters.cpp",
+  "source_sha256": "2cb93618b1be80d5373ca5d7cea14e1d2b661d36e70987893f8d4d2b2acac21a",
+  "claimed_functions": [
+    "func_001266e4",
+    "func_0012672c"
+  ],
+  "profile": "middleware",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r3/005-service_filters/service_filters.result.json",
+  "receipt_sha256": "9307d3bc02bca3bc50b5384d85b2feb8ed3640fe5d186c9d9c1e7decb6f4783b",
+  "functions": [
+    {
+      "name": "func_001266e4",
+      "address": 1205988,
+      "size": 72,
+      "candidate_size": 72,
+      "status": "mismatch",
+      "first_diff": 0,
+      "linker_rewrites": []
+    },
+    {
+      "name": "func_0012672c",
+      "address": 1206060,
+      "size": 148,
+      "candidate_size": 148,
+      "status": "mismatch",
+      "first_diff": 0,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMISMATCH func_001266e4 @ 0x1266e4 size 0x48/0x48 first difference at +0x0\nMISMATCH func_0012672c @ 0x12672c size 0x94/0x94 first difference at +0x0\n",
+  "stderr": ""
+}

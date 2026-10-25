@@ -1,0 +1,40 @@
+{
+  "source": "src/models/func_001730ec/func_001730ec_removed.c",
+  "profile": "game",
+  "functions": [
+    "func_001730ec",
+    "func_001e5d38"
+  ],
+  "extra_sources": [
+    "src/models/func_001730ec/item_accessors.c",
+    "src/models2/counted_resources/func_001e5d38.cpp"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001730ec/func_001730ec_removed.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/derive-r1/u000",
+    "--extra-source",
+    "src/models/func_001730ec/item_accessors.c",
+    "--extra-source",
+    "src/models2/counted_resources/func_001e5d38.cpp"
+  ],
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "error: unresolved symbol '_Z13func_001e5d38PK11W8EntryListi' (not in config/names.json, not func_/data_/bss_XXXXXXXX)\n",
+  "source_sha256": "f6923a716e18478f645eb13d884d9d4cd669853b37c46eb5201cf33f7a64eff6",
+  "receipt": "scratch/integrator/c012/r5/derive-r1/u000/func_001730ec_removed.result.json",
+  "result_functions": []
+}

@@ -1,0 +1,43 @@
+{
+  "source": "src/models/linear_buffer/func_00112628.c",
+  "profile": "sdk",
+  "functions": [
+    "func_00112628"
+  ],
+  "extra_sources": [
+    "src/models/linear_buffer/linear_buffer_allocator.c"
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/models/linear_buffer/func_00112628.c",
+    "--profile",
+    "sdk",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u1531",
+    "--extra-source",
+    "src/models/linear_buffer/linear_buffer_allocator.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.245503,
+  "source_sha256": "9d21e6a10d2780c4d22e01f78725432fec3d45172ad6727f149eb1e21a3e87e5",
+  "extra_source_sha256": {
+    "src/models/linear_buffer/linear_buffer_allocator.c": "769d023b593330b79ad72a11adf42e00dba0adb0b50a186573a4f862565eb6af"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u1531/func_00112628.result.json",
+  "receipt_sha256": "e2a0c601facb8e27ce13e76fe74241a0138c5ab6a01c9724d3e9dfa484313c0f",
+  "output": "MATCH    func_00112628 @ 0x112628 size 0x24/0x24 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  InitializeLinearBufferAllocator (8 bytes; i.InitializeLinearBufferAllocator)\n",
+  "stderr": ""
+}

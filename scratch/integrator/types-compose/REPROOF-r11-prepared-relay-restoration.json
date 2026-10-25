@@ -1,0 +1,1849 @@
+{
+  "schema_version": 1,
+  "cause": "Main rejected the memcpy value snapshot as well-defined type punning. Restore00137b48 byte-for-byte to its prepared source and keep the sole compatible relay union model opaque in the canonical header; reprove every header dependent. The prepared body is unchanged, not a newly approved source-policy form.",
+  "restored_source_sha256": "38580705fa34031de725020edb29724a1c614c010ef2f8618d129f64b87b2c71",
+  "prepared_source_sha256": "38580705fa34031de725020edb29724a1c614c010ef2f8618d129f64b87b2c71",
+  "required_units": 23,
+  "runs": [
+    {
+      "source": "src/sdk/func_0012fab0.c",
+      "profile": "game",
+      "functions": [
+        "func_0012fab0"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/sdk/func_0012fab0.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0001-func_0012fab0"
+      ],
+      "exit": 0,
+      "source_sha256": "3b3f871391e897b479c419b1fb9e883a8714fed8ccbae6d391e8dd90a654e042",
+      "dependency_headers": {
+        "include/ctr/cp15.h": "86c1bb2952e0aa32fb59f80849b146c7188f0abd90dce4921e6ad60263ca71e5",
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0001-func_0012fab0/func_0012fab0.result.json",
+      "receipt_sha256": "dbdf78703fb56ae4fa9d765fe436a2ded54fe3a0d42c89acf68d3e28e00347a2",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/sdk/func_0012fab0.c",
+        "source_sha256": "3b3f871391e897b479c419b1fb9e883a8714fed8ccbae6d391e8dd90a654e042",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "df5205ebbbdab0aa43b4c79765cf68011a897dd1fc728275e4ae50a04979cc95",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_0012fab0",
+            "address": 1243824,
+            "size": 40,
+            "candidate_size": 40,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/sdk/func_00137b48.c",
+      "profile": "game",
+      "functions": [
+        "func_00137b48"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/sdk/func_00137b48.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0002-func_00137b48"
+      ],
+      "exit": 0,
+      "source_sha256": "38580705fa34031de725020edb29724a1c614c010ef2f8618d129f64b87b2c71",
+      "dependency_headers": {},
+      "receipt": "scratch/integrator/types-compose/match/r11-0002-func_00137b48/func_00137b48.result.json",
+      "receipt_sha256": "d7dbae9c25f6b7411f3d88587637bf0a70e99a15a9ca17dc6a755a03503bd0c8",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/sdk/func_00137b48.c",
+        "source_sha256": "38580705fa34031de725020edb29724a1c614c010ef2f8618d129f64b87b2c71",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "4f2b0c6df2df33367d720b72e3046c91cab8ba1e09a86ee3aa72b52c45af66fe",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00137b48",
+            "address": 1276744,
+            "size": 60,
+            "candidate_size": 60,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/sdk2/func_00122a6c.c",
+      "profile": "sdk",
+      "functions": [
+        "func_00122a6c"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/sdk2/func_00122a6c.c",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0003-func_00122a6c"
+      ],
+      "exit": 0,
+      "source_sha256": "0d6b05e790adcfc726dfdc6de96673e4f6436249eda327831183cabd2a5a61b8",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0003-func_00122a6c/func_00122a6c.result.json",
+      "receipt_sha256": "0927bcca869de1561e650783af12ecac64c5505fd51e26b7ad2457c02e6c1613",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/sdk2/func_00122a6c.c",
+        "source_sha256": "0d6b05e790adcfc726dfdc6de96673e4f6436249eda327831183cabd2a5a61b8",
+        "profile": "sdk",
+        "compiler": "armcc_41_791",
+        "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O2",
+          "-Otime"
+        ],
+        "object_sha256": "4d669c5e8ffa172fcea282192899cd9720099fe6547b587d33c1d160d6d45bf6",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00122a6c",
+            "address": 1190508,
+            "size": 100,
+            "candidate_size": 100,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave14/func_00114f90.c",
+      "profile": "game",
+      "functions": [
+        "func_00114f90"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave14/func_00114f90.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0004-func_00114f90"
+      ],
+      "exit": 0,
+      "source_sha256": "190e80c486f3487b2147a52d541fd4dfbfea7774b02b28e33b4735ad31f87e2a",
+      "dependency_headers": {
+        "include/GLES2/gl2.h": "df4423416018d4e5d6f4732152c654cf3224a9504b4617ea846243c50fce7416",
+        "include/GLES2/gl2constants.h": "919c75ad7388ca8c0cbf0294d3e3dd8328b3d6f363d14faa181f56bcd0c61465",
+        "include/GLES2/gl2extern.h": "26094369c71c682b5d6e1084f81c7b74cfb723d63b9f9514668b725de571ca0d",
+        "include/GLES2/gl2legacyconstants.h": "4cf282a76a875f711ee24c630bf46eb63e195044f5ad7c06521b4aa21bff14e3",
+        "include/ctr/cp15.h": "86c1bb2952e0aa32fb59f80849b146c7188f0abd90dce4921e6ad60263ca71e5",
+        "include/ctr/ipc.h": "cfd1a67d3912536c18a34a93cab3cbd1ebbb12254d034fcc86a5ad261ea679e1",
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/audio_filter.h": "7d8cdee8031480b608b85bf5259549cacc0a098f6786d84569a05a4c4f1729df",
+        "include/game/audio_voice.h": "3025e3169a7bd297e4f4177b6f8af9fb6a425f3f8376508fff480a30159a4f60",
+        "include/game/aux_effect.h": "c20768c3b975338999f0ee5c835ac6eca325c6e4792a465cc51b6fc27bbb9983",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/input.h": "1521b2188661c710338335bf47f2cbd5d42d672fa73a1f10c373087dc6e6aab8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/result.h": "39a8c7080a9d28cb7cf5afaeb6255cf3f55feda8c6fb1acf71acf38b8e2fe973",
+        "include/game/runtime.h": "1a17d594929bb2ccfb7f77d3f71b56d25f57ed539159f7aa165aa931fd62ad71",
+        "include/game/service_callbacks.h": "d9fbfdfd13d873dadd0a239935f835c47941a7cf228492ef74eb21b5464701fe",
+        "include/game/service_runtime.h": "606a843b0704f167974cc459f4ed435f81160ec9917578f796c695674a4983f7",
+        "include/game/service_state.h": "6bbbc6dffe71a9de04396a7c5491d6932a6a4657a92337d563fdf21b4c16f902",
+        "include/game/shared_memory.h": "7db6da0adc6646eb3d617b5ecb5612e0669b1113e13d72f35e79841458a7d9d5",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92",
+        "include/game/voice_wave_info.h": "4a80204ea0cddd7fe61b0e670216f18e7499e0020d02ef580c0bd76dc8afe6dd",
+        "include/nn/Assert.h": "d8e4b3bd2de0adbcc2c09da1ae18f922d22e6fa0ed6bba773ef1bf213c68e90a",
+        "include/nn/gx.h": "e4a8c19e870695e311f51a10025888e3392395e606514d48d81ac3ef259c9f01",
+        "include/nn/gx/CTR/gx_CommandAccess.h": "1ee9d4a559a4d995f409954ae4951120d7d4ac135191a5b3bd556fc1a700a95f",
+        "include/nn/gx/CTR/gx_PicaAll.h": "25ebed83c0a090040fda8228adab463b5acfb035577f45762ce81ba9c23b6bc8",
+        "include/nn/gx/CTR/gx_PicaPublic.h": "d9c3b872ff7eac637e9dab4ba7dac3c50bfd5b282167c82a26465d3bd3bc3d02",
+        "include/nn/gx/CTR/gx_Registers.h": "2bb6100b1177c9dd486011480dae93aa73bd265ce76adbc66a451ce224ca0cf9",
+        "include/nn/gx/CTR/gx_Transfer.h": "856aa45232008f4dd75bd1d934c0afe22d9fb7d63c3b05d11205087c9ad2fe8b",
+        "include/nn/util/util_NonCopyable.h": "2ac7998ed77e4045da8cba8ac6facafe27a795fda88a7e66a8ce6e2c2700b3aa",
+        "include/nw/math/math_Types.h": "f7b9e4b4524ae17ab0be219d3a8c57e7b1acd1aca4bd1b9f20f83f6b8c4c357c",
+        "include/nw/snd/snd_CurveAdshr.h": "5c44888f6cffb137cc6565fe18f3607ce10944a1378835c01fe57e626284cd9e",
+        "include/nw/snd/snd_Global.h": "afd77825b18b1ad8d28ba5bbb905201dfcc32bf5c88696791e2b6a4b09caa191",
+        "include/nw/snd/snd_Voice.h": "207d178ca5d85d48b3e36495d47fd2bafc40afddbd4386d655c97362d160a898",
+        "include/nw/snd/snd_VoiceManager.h": "1af3becd305a15e0fdc5e5d597a91b97bed5face8dde262a81091c34d6c20458",
+        "include/nw/types.h": "b9a1d21bd305f4f4fd76292ffc80bf66991392a39340832a4de57c1d85a0fd62",
+        "include/preinclude.h": "7e97b53a88d2fa4dadae21dcd1f5ba29c37e5154172e811b4402328f3ba0ac10"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0004-func_00114f90/func_00114f90.result.json",
+      "receipt_sha256": "4b16576d8f0d8518d33aef0a2706341b8c694e6b4bf2587b2fccf82c47eb37b0",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave14/func_00114f90.c",
+        "source_sha256": "190e80c486f3487b2147a52d541fd4dfbfea7774b02b28e33b4735ad31f87e2a",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "44a56df54370427e073b33bd0c6d1a7dd72ffba140a45b8953ab2fef15dfef61",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00114f90",
+            "address": 1134480,
+            "size": 20,
+            "candidate_size": 20,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave15/func_001228c0.c",
+      "profile": "game",
+      "functions": [
+        "func_001228c0"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave15/func_001228c0.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0005-func_001228c0"
+      ],
+      "exit": 0,
+      "source_sha256": "30092ca9e83d3d84042f44265399ef245016eba0e822bbc872958274ec2d234b",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0005-func_001228c0/func_001228c0.result.json",
+      "receipt_sha256": "6cfde152de1a833a3084262caeccc906f78a13636e7a8991295bd642f819e103",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave15/func_001228c0.c",
+        "source_sha256": "30092ca9e83d3d84042f44265399ef245016eba0e822bbc872958274ec2d234b",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "c21bebf0a3aaac9a6e5e345a61944e44a733694f3641d011a4e0608888a92874",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_001228c0",
+            "address": 1190080,
+            "size": 16,
+            "candidate_size": 16,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave15/func_001228d4.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001228d4"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave15/func_001228d4.c",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0006-func_001228d4"
+      ],
+      "exit": 0,
+      "source_sha256": "4033d62e0f334273d678a7d86fd9ff2e8cd8de483a2d37d96e252b31b9740264",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0006-func_001228d4/func_001228d4.result.json",
+      "receipt_sha256": "cc55a52c2a32c915f8992ee25b431e190440efd5cd68a37d516c1f7eed056e5f",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave15/func_001228d4.c",
+        "source_sha256": "4033d62e0f334273d678a7d86fd9ff2e8cd8de483a2d37d96e252b31b9740264",
+        "profile": "middleware",
+        "compiler": "armcc_41_791",
+        "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "1697a39ab7f90ac90aa4588480b2cf204f4b34679763454cc900d86d748d784b",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_001228d4",
+            "address": 1190100,
+            "size": 28,
+            "candidate_size": 28,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave15/func_00122a20.c",
+      "profile": "game",
+      "functions": [
+        "func_00122a20"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave15/func_00122a20.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0007-func_00122a20"
+      ],
+      "exit": 0,
+      "source_sha256": "d74333dbdda598394a89f62a5474831b164bfb0e3998f9ba427e334fb2f4cb4b",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0007-func_00122a20/func_00122a20.result.json",
+      "receipt_sha256": "1cdd48fbdca25bd7eaf44c377b2b712ef428a78ecd5b5975328560d42c97af28",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave15/func_00122a20.c",
+        "source_sha256": "d74333dbdda598394a89f62a5474831b164bfb0e3998f9ba427e334fb2f4cb4b",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "61ace1e734a0b19684cd24ac33399e9381052d7a50ab55fe20d6864d914b93ad",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00122a20",
+            "address": 1190432,
+            "size": 16,
+            "candidate_size": 16,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave15/func_00137cfc.c",
+      "profile": "game",
+      "functions": [
+        "func_00137cfc"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave15/func_00137cfc.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0008-func_00137cfc"
+      ],
+      "exit": 0,
+      "source_sha256": "1251bebd9e1f7e84f65b9b59c9eaf672800b477e6b035666c7682e37de8092f0",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0008-func_00137cfc/func_00137cfc.result.json",
+      "receipt_sha256": "9fbf2f01d46a4ffa43947334afe24b4046627ce561da4759d0e7669aaead0f9a",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave15/func_00137cfc.c",
+        "source_sha256": "1251bebd9e1f7e84f65b9b59c9eaf672800b477e6b035666c7682e37de8092f0",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "c516f805b2807fba3924a2752d6c9f50c80cfc183df8b9ffc088bd3e565909f3",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00137cfc",
+            "address": 1277180,
+            "size": 16,
+            "candidate_size": 16,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave16/func_001229bc.c",
+      "profile": "game",
+      "functions": [
+        "func_001229bc"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave16/func_001229bc.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0009-func_001229bc"
+      ],
+      "exit": 0,
+      "source_sha256": "ffa2daafbb74efc9f502e6e4efe07c53e066125e664743bbe108a4bd2aedc44c",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0009-func_001229bc/func_001229bc.result.json",
+      "receipt_sha256": "bde9c62f279b05dc5522057e056c4b662e5beadc96b2cabb2ac5ee6762e86a4f",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave16/func_001229bc.c",
+        "source_sha256": "ffa2daafbb74efc9f502e6e4efe07c53e066125e664743bbe108a4bd2aedc44c",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "65298689c76183bdfb3d31e09c04a4ac7bf87f7a5e4e17d758f94a606b30ee73",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_001229bc",
+            "address": 1190332,
+            "size": 20,
+            "candidate_size": 20,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave17/func_00122894.c",
+      "profile": "sdk",
+      "functions": [
+        "func_00122894"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave17/func_00122894.c",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0010-func_00122894"
+      ],
+      "exit": 0,
+      "source_sha256": "1f83d126ce09efa08c4f91425be78e022d7645c87bcd5d13e67450f0d770d8a7",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0010-func_00122894/func_00122894.result.json",
+      "receipt_sha256": "41d2299b4b32fdefe343a5a7f254db69cb84a7cb487e66a8860258be3375d005",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave17/func_00122894.c",
+        "source_sha256": "1f83d126ce09efa08c4f91425be78e022d7645c87bcd5d13e67450f0d770d8a7",
+        "profile": "sdk",
+        "compiler": "armcc_41_791",
+        "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O2",
+          "-Otime"
+        ],
+        "object_sha256": "c56c99ad6c410ed283bf8ef9657cd7019ade639f3f51c47af21e2ad3faa48148",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00122894",
+            "address": 1190036,
+            "size": 40,
+            "candidate_size": 40,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave17/func_0012f980.c",
+      "profile": "game",
+      "functions": [
+        "func_0012f980"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave17/func_0012f980.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0011-func_0012f980"
+      ],
+      "exit": 0,
+      "source_sha256": "04342b9a5ea8d085fc6a6528f1db8d38285ffe8037146794ffcbd72d7ce53266",
+      "dependency_headers": {
+        "include/ctr/cp15.h": "86c1bb2952e0aa32fb59f80849b146c7188f0abd90dce4921e6ad60263ca71e5",
+        "include/ctr/ipc.h": "cfd1a67d3912536c18a34a93cab3cbd1ebbb12254d034fcc86a5ad261ea679e1",
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0011-func_0012f980/func_0012f980.result.json",
+      "receipt_sha256": "3135503ced2b353445cc4fa8f7f4c6aada436d3a7ed8c8cbbe83bc66da5795c1",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave17/func_0012f980.c",
+        "source_sha256": "04342b9a5ea8d085fc6a6528f1db8d38285ffe8037146794ffcbd72d7ce53266",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "9e7ac9603c81607f928d7e7571fcaf11fe0083e90ad6e7e3eb0664874f9fba4a",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_0012f980",
+            "address": 1243520,
+            "size": 40,
+            "candidate_size": 40,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave17/func_0012f9fc.c",
+      "profile": "sdk",
+      "functions": [
+        "func_0012f9fc"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave17/func_0012f9fc.c",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0012-func_0012f9fc"
+      ],
+      "exit": 0,
+      "source_sha256": "ce19a545f5ab23fbbbfd67e6bf4c466136b69b8f5040f88cec01d0dc9fc91662",
+      "dependency_headers": {
+        "include/GLES2/gl2.h": "df4423416018d4e5d6f4732152c654cf3224a9504b4617ea846243c50fce7416",
+        "include/GLES2/gl2constants.h": "919c75ad7388ca8c0cbf0294d3e3dd8328b3d6f363d14faa181f56bcd0c61465",
+        "include/GLES2/gl2extern.h": "26094369c71c682b5d6e1084f81c7b74cfb723d63b9f9514668b725de571ca0d",
+        "include/GLES2/gl2legacyconstants.h": "4cf282a76a875f711ee24c630bf46eb63e195044f5ad7c06521b4aa21bff14e3",
+        "include/ctr/cp15.h": "86c1bb2952e0aa32fb59f80849b146c7188f0abd90dce4921e6ad60263ca71e5",
+        "include/ctr/ipc.h": "cfd1a67d3912536c18a34a93cab3cbd1ebbb12254d034fcc86a5ad261ea679e1",
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/audio_filter.h": "7d8cdee8031480b608b85bf5259549cacc0a098f6786d84569a05a4c4f1729df",
+        "include/game/audio_voice.h": "3025e3169a7bd297e4f4177b6f8af9fb6a425f3f8376508fff480a30159a4f60",
+        "include/game/aux_effect.h": "c20768c3b975338999f0ee5c835ac6eca325c6e4792a465cc51b6fc27bbb9983",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/input.h": "1521b2188661c710338335bf47f2cbd5d42d672fa73a1f10c373087dc6e6aab8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/result.h": "39a8c7080a9d28cb7cf5afaeb6255cf3f55feda8c6fb1acf71acf38b8e2fe973",
+        "include/game/runtime.h": "1a17d594929bb2ccfb7f77d3f71b56d25f57ed539159f7aa165aa931fd62ad71",
+        "include/game/service_callbacks.h": "d9fbfdfd13d873dadd0a239935f835c47941a7cf228492ef74eb21b5464701fe",
+        "include/game/service_runtime.h": "606a843b0704f167974cc459f4ed435f81160ec9917578f796c695674a4983f7",
+        "include/game/service_state.h": "6bbbc6dffe71a9de04396a7c5491d6932a6a4657a92337d563fdf21b4c16f902",
+        "include/game/shared_memory.h": "7db6da0adc6646eb3d617b5ecb5612e0669b1113e13d72f35e79841458a7d9d5",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92",
+        "include/game/voice_wave_info.h": "4a80204ea0cddd7fe61b0e670216f18e7499e0020d02ef580c0bd76dc8afe6dd",
+        "include/nn/Assert.h": "d8e4b3bd2de0adbcc2c09da1ae18f922d22e6fa0ed6bba773ef1bf213c68e90a",
+        "include/nn/gx.h": "e4a8c19e870695e311f51a10025888e3392395e606514d48d81ac3ef259c9f01",
+        "include/nn/gx/CTR/gx_CommandAccess.h": "1ee9d4a559a4d995f409954ae4951120d7d4ac135191a5b3bd556fc1a700a95f",
+        "include/nn/gx/CTR/gx_PicaAll.h": "25ebed83c0a090040fda8228adab463b5acfb035577f45762ce81ba9c23b6bc8",
+        "include/nn/gx/CTR/gx_PicaPublic.h": "d9c3b872ff7eac637e9dab4ba7dac3c50bfd5b282167c82a26465d3bd3bc3d02",
+        "include/nn/gx/CTR/gx_Registers.h": "2bb6100b1177c9dd486011480dae93aa73bd265ce76adbc66a451ce224ca0cf9",
+        "include/nn/gx/CTR/gx_Transfer.h": "856aa45232008f4dd75bd1d934c0afe22d9fb7d63c3b05d11205087c9ad2fe8b",
+        "include/nn/util/util_NonCopyable.h": "2ac7998ed77e4045da8cba8ac6facafe27a795fda88a7e66a8ce6e2c2700b3aa",
+        "include/nw/math/math_Types.h": "f7b9e4b4524ae17ab0be219d3a8c57e7b1acd1aca4bd1b9f20f83f6b8c4c357c",
+        "include/nw/snd/snd_CurveAdshr.h": "5c44888f6cffb137cc6565fe18f3607ce10944a1378835c01fe57e626284cd9e",
+        "include/nw/snd/snd_Global.h": "afd77825b18b1ad8d28ba5bbb905201dfcc32bf5c88696791e2b6a4b09caa191",
+        "include/nw/snd/snd_Voice.h": "207d178ca5d85d48b3e36495d47fd2bafc40afddbd4386d655c97362d160a898",
+        "include/nw/snd/snd_VoiceManager.h": "1af3becd305a15e0fdc5e5d597a91b97bed5face8dde262a81091c34d6c20458",
+        "include/nw/types.h": "b9a1d21bd305f4f4fd76292ffc80bf66991392a39340832a4de57c1d85a0fd62",
+        "include/preinclude.h": "7e97b53a88d2fa4dadae21dcd1f5ba29c37e5154172e811b4402328f3ba0ac10"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0012-func_0012f9fc/func_0012f9fc.result.json",
+      "receipt_sha256": "614898175bc56aacded7fff0c85e4b5204af826c375c4a015c1174939aaf88a4",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave17/func_0012f9fc.c",
+        "source_sha256": "ce19a545f5ab23fbbbfd67e6bf4c466136b69b8f5040f88cec01d0dc9fc91662",
+        "profile": "sdk",
+        "compiler": "armcc_41_791",
+        "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O2",
+          "-Otime"
+        ],
+        "object_sha256": "bea846bf3b92e92c6ae9666c140e2823a83a5769295c34ba5a1254814040fcfc",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_0012f9fc",
+            "address": 1243644,
+            "size": 40,
+            "candidate_size": 40,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": [
+              {
+                "offset": 36,
+                "rule": "branchnop",
+                "target": 1243684,
+                "word": "0xe1a00000"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave18/func_00114fa8.c",
+      "profile": "game",
+      "functions": [
+        "func_00114fa8"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave18/func_00114fa8.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0013-func_00114fa8"
+      ],
+      "exit": 0,
+      "source_sha256": "3395ca27f450235cde573901a93065c6b0c75a4c58b55e5c757135d84432149a",
+      "dependency_headers": {
+        "include/ctr/cp15.h": "86c1bb2952e0aa32fb59f80849b146c7188f0abd90dce4921e6ad60263ca71e5",
+        "include/ctr/ipc.h": "cfd1a67d3912536c18a34a93cab3cbd1ebbb12254d034fcc86a5ad261ea679e1",
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0013-func_00114fa8/func_00114fa8.result.json",
+      "receipt_sha256": "7210d3f2aa753275658860bc9016aaba8a0d5b87e386510940f524781da04e5d",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave18/func_00114fa8.c",
+        "source_sha256": "3395ca27f450235cde573901a93065c6b0c75a4c58b55e5c757135d84432149a",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "28887bf342ea89df654cf880b04f7b005189635274b61a6fb5f0b20439dceb6a",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00114fa8",
+            "address": 1134504,
+            "size": 40,
+            "candidate_size": 40,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave2/func_001847f8.c",
+      "profile": "game",
+      "functions": [
+        "func_001847f8"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave2/func_001847f8.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0014-func_001847f8"
+      ],
+      "exit": 0,
+      "source_sha256": "1671126361c1f8ee27850bbc60633c545f7fb34c1b2dc242ce08408c994d05eb",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0014-func_001847f8/func_001847f8.result.json",
+      "receipt_sha256": "63d7b33d00c74363ec8d50f19a8d4992e2bc5e2677290d1854f50aa44e6eedbc",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave2/func_001847f8.c",
+        "source_sha256": "1671126361c1f8ee27850bbc60633c545f7fb34c1b2dc242ce08408c994d05eb",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "80f064889b1e6e283c036e51b782a64ec364e58b31855995e124885ecac231e8",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_001847f8",
+            "address": 1591288,
+            "size": 16,
+            "candidate_size": 16,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave2/func_001861c4.c",
+      "profile": "game",
+      "functions": [
+        "func_001861c4"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave2/func_001861c4.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0015-func_001861c4"
+      ],
+      "exit": 0,
+      "source_sha256": "d3945b55adda25cf82bb317bfa4d6accf28570ef84d24ddfdf1afef3bbf69bc8",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0015-func_001861c4/func_001861c4.result.json",
+      "receipt_sha256": "1cfc7ca0ff1dc4b63d1dfdc73a18d9c9d19e02bb728c9d4860c776e48296b3f6",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave2/func_001861c4.c",
+        "source_sha256": "d3945b55adda25cf82bb317bfa4d6accf28570ef84d24ddfdf1afef3bbf69bc8",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "4e60c0558581f9cf44f052c456f59bb8d79ea703b73917eb84b99b87b2f53c00",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_001861c4",
+            "address": 1597892,
+            "size": 16,
+            "candidate_size": 16,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave2/func_00187818.c",
+      "profile": "game",
+      "functions": [
+        "func_00187818"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave2/func_00187818.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0016-func_00187818"
+      ],
+      "exit": 0,
+      "source_sha256": "1eb328265fab62a04ad7e7fd9090c7807f37aad3ef3c4c1cb9a6ffba1d0febff",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0016-func_00187818/func_00187818.result.json",
+      "receipt_sha256": "b19d9521c2dff142264b7b553baa4007dff6581cbab9dc1872be01a61338c2a3",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave2/func_00187818.c",
+        "source_sha256": "1eb328265fab62a04ad7e7fd9090c7807f37aad3ef3c4c1cb9a6ffba1d0febff",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "65519c9d53260ba7e3d9fd39a7df9987cf5f1cc091de74d021b8612afc0d858a",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00187818",
+            "address": 1603608,
+            "size": 16,
+            "candidate_size": 16,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave2/func_00190ae0.c",
+      "profile": "game",
+      "functions": [
+        "func_00190ae0"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave2/func_00190ae0.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0017-func_00190ae0"
+      ],
+      "exit": 0,
+      "source_sha256": "e5e3c442c3b5f45b1ce6b433568bd8f0289bc3fb4016ac12147fbe30bb343a70",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0017-func_00190ae0/func_00190ae0.result.json",
+      "receipt_sha256": "ecb0112f8209060d6c97d32d024f39769f41ea3e5cbff3c57e758ed8609c3a3b",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave2/func_00190ae0.c",
+        "source_sha256": "e5e3c442c3b5f45b1ce6b433568bd8f0289bc3fb4016ac12147fbe30bb343a70",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "7e87127bd03a322f5f61065c7807a75e3b6af1a9bc7efc2284001779d4a50f0f",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00190ae0",
+            "address": 1641184,
+            "size": 60,
+            "candidate_size": 60,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave2/func_0019cff8.c",
+      "profile": "game",
+      "functions": [
+        "func_0019cff8"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave2/func_0019cff8.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0018-func_0019cff8"
+      ],
+      "exit": 0,
+      "source_sha256": "d6c2dd221f0e102621018f15eeb5f5abd9fb0533a40d80e54e8095be644681df",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0018-func_0019cff8/func_0019cff8.result.json",
+      "receipt_sha256": "156f2cd9b69a4037949737a4532d2e3dffff9d786dc4f985ff81b800adc28afd",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave2/func_0019cff8.c",
+        "source_sha256": "d6c2dd221f0e102621018f15eeb5f5abd9fb0533a40d80e54e8095be644681df",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "bb834b168eeba19b02c5d506c78eaaece2dc27c1301709773b4950f6fdb5d365",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_0019cff8",
+            "address": 1691640,
+            "size": 80,
+            "candidate_size": 80,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave4/func_001228bc.c",
+      "profile": "game",
+      "functions": [
+        "func_001228bc"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave4/func_001228bc.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0019-func_001228bc"
+      ],
+      "exit": 0,
+      "source_sha256": "6d050bd038686cc27fa71ffe79396a0f118d266f8d7faad01ac347e795dabbb2",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0019-func_001228bc/func_001228bc.result.json",
+      "receipt_sha256": "f557fc61be4ea913d848aa58cc78afdba9de2cff8eeb14dc4b55b08c95a0e8d9",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave4/func_001228bc.c",
+        "source_sha256": "6d050bd038686cc27fa71ffe79396a0f118d266f8d7faad01ac347e795dabbb2",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "216f59abc2026bf15e1016f40d389e7abec72e9ef79d7ee9df5963cdece14891",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_001228bc",
+            "address": 1190076,
+            "size": 4,
+            "candidate_size": 4,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": [
+              {
+                "offset": 0,
+                "rule": "branchnop",
+                "target": 1190080,
+                "word": "0xe1a00000"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave4/func_001229b8.c",
+      "profile": "game",
+      "functions": [
+        "func_001229b8"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave4/func_001229b8.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0020-func_001229b8"
+      ],
+      "exit": 0,
+      "source_sha256": "32cf21610635d8fcb7c150bbd8172fd9d9779c5b7108cf7298f2fba06ab102dd",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0020-func_001229b8/func_001229b8.result.json",
+      "receipt_sha256": "9f48be0db7d710b09487a8d7ec2fcab700867bcbd54c100cf587df4a7425bfbf",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave4/func_001229b8.c",
+        "source_sha256": "32cf21610635d8fcb7c150bbd8172fd9d9779c5b7108cf7298f2fba06ab102dd",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "937f35a381f7f1875784e696ff3aa2c8fe26b48482b4217b4d30c66057ce58b6",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_001229b8",
+            "address": 1190328,
+            "size": 4,
+            "candidate_size": 4,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": [
+              {
+                "offset": 0,
+                "rule": "branchnop",
+                "target": 1190332,
+                "word": "0xe1a00000"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave4/func_00122a68.c",
+      "profile": "game",
+      "functions": [
+        "func_00122a68"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave4/func_00122a68.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0021-func_00122a68"
+      ],
+      "exit": 0,
+      "source_sha256": "d12043f71b3bdc704f37cd46560d6a6a69ccc628482e834095e9f8fcfe0833a7",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0021-func_00122a68/func_00122a68.result.json",
+      "receipt_sha256": "4d5d2c5eccd8402be3581cd28ae3cd79e1b28c8bc3f3bc880da479fa49671880",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave4/func_00122a68.c",
+        "source_sha256": "d12043f71b3bdc704f37cd46560d6a6a69ccc628482e834095e9f8fcfe0833a7",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "670117f161e0de2bebeca6743915f774d92c0121c185c6bcb97e2f8028d5d9fb",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_00122a68",
+            "address": 1190504,
+            "size": 4,
+            "candidate_size": 4,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": [
+              {
+                "offset": 0,
+                "rule": "branchnop",
+                "target": 1190508,
+                "word": "0xe1a00000"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave5/func_0018f040.c",
+      "profile": "game",
+      "functions": [
+        "func_0018f040"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave5/func_0018f040.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0022-func_0018f040"
+      ],
+      "exit": 0,
+      "source_sha256": "2a8a132d0a46ac41e7670f02f5abba4fbf056cdc718af34bc4602371c6ab9340",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0022-func_0018f040/func_0018f040.result.json",
+      "receipt_sha256": "3cf91b323d3f3f4e37ba4f199ff8d4090d51730c81e9ba0ffc43fc1a9513a02b",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave5/func_0018f040.c",
+        "source_sha256": "2a8a132d0a46ac41e7670f02f5abba4fbf056cdc718af34bc4602371c6ab9340",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "c3df604fd3e20a84a8700a7881b5b80f8c2be0c4f1a91e225d00827d6c2a4408",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_0018f040",
+            "address": 1634368,
+            "size": 40,
+            "candidate_size": 40,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "src/wave6/func_0018f6c4.c",
+      "profile": "game",
+      "functions": [
+        "func_0018f6c4"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave6/func_0018f6c4.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/types-compose/match/r11-0023-func_0018f6c4"
+      ],
+      "exit": 0,
+      "source_sha256": "17d8f1f55bd6f0d6118cee68d92fb32f5ac6b8ab2ad7360b8891a757d13657b2",
+      "dependency_headers": {
+        "include/ctr/svc.h": "7be7a72734eae9c48cd1e9f6cd4366169df5816b6f0c02bfcd1a7f1bc2f0a9a8",
+        "include/game/functions.h": "fa0b80ef133314b0c166763c45880257e16bf026d4c8d89f09243c1cf4f83e4d",
+        "include/game/graphics_state.h": "7b43199d10e8edb9bcaf5fa2835222c8627d78d4d7a2fdb181a27d45edcd28b8",
+        "include/game/memory_arena.h": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61",
+        "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
+        "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
+        "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92"
+      },
+      "receipt": "scratch/integrator/types-compose/match/r11-0023-func_0018f6c4/func_0018f6c4.result.json",
+      "receipt_sha256": "25dd513e35a17ba1c0d95fdb4b147531fb4717084386f52c9629d978cea9f5fa",
+      "receipt_record": {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave6/func_0018f6c4.c",
+        "source_sha256": "17d8f1f55bd6f0d6118cee68d92fb32f5ac6b8ab2ad7360b8891a757d13657b2",
+        "profile": "game",
+        "compiler": "armcc_504_82",
+        "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+        "flags": [
+          "--cpu=MPCore",
+          "--fpmode=fast",
+          "--apcs=/interwork",
+          "--arm",
+          "--split_sections",
+          "--signed_chars",
+          "-O3",
+          "-Otime"
+        ],
+        "object_sha256": "86be2b7a0235ffa981866397b90b2aa1b2dc2d1f447167db4766a9cf708934e9",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1",
+        "literal_rebindings": [],
+        "proposed_names": null,
+        "extra_sources": [],
+        "removed_callees": [],
+        "functions": [
+          {
+            "name": "func_0018f6c4",
+            "address": 1636036,
+            "size": 4,
+            "candidate_size": 4,
+            "status": "match",
+            "first_diff": null,
+            "linker_rewrites": []
+          }
+        ]
+      }
+    }
+  ],
+  "exit_counts": {
+    "0": 23
+  }
+}

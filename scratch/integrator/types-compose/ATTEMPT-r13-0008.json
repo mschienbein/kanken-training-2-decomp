@@ -1,0 +1,74 @@
+{
+  "source": "src/wave14/func_001810e4.c",
+  "profile": "game",
+  "functions": [
+    "func_001810e4"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave14/func_001810e4.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-compose/match/r13-0008-func_001810e4"
+  ],
+  "exit": 0,
+  "source_sha256": "7a3d0cd6923703177634eed7f22a1a8af415a8e842d196ae85a3ca9f98803ca0",
+  "receipt": "scratch/integrator/types-compose/match/r13-0008-func_001810e4/func_001810e4.result.json",
+  "receipt_sha256": "66f32b9c9a9c7bd542446d849ae733e119aa085e5d5ed4ffa9f73f5310d7b964",
+  "receipt_record": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave14/func_001810e4.c",
+    "source_sha256": "7a3d0cd6923703177634eed7f22a1a8af415a8e842d196ae85a3ca9f98803ca0",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "400661b534975a4f46b4f717848e453935e17cd8bf972aaa53835e82f63900c0",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "func_001810e4",
+        "address": 1577188,
+        "size": 28,
+        "candidate_size": 28,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": [
+          {
+            "offset": 24,
+            "rule": "branchnop",
+            "target": 1577216,
+            "word": "0xe1a00000"
+          }
+        ]
+      }
+    ]
+  }
+}

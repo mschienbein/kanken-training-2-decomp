@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "owner": "Main only",
+  "checkpoint": "ctypes1",
+  "status": "NOT RUN by worker; no heavy slot requested",
+  "source_base": "f9ea308e21e3d9faa439631ac56189e3b28e62d2",
+  "predecessor": "c011-r8 including folded c013; must finalize before ctypes1",
+  "Main_gate_context": "GATES v1.20 adopted on Main5820254f; preserve Main gate/tool adoption, never replay the older prescribed source snapshot text as a downgrade. V6/L1 remains explicit.",
+  "prerequisites": [
+    "Finalize the exact c011 predecessor and retain all2761 identities,114 c011 and94 c010 NEW-only holds. Recompose/reprove if the predecessor source changes.",
+    "Use this complete r3 manifest/source/header/names transaction, including four exact accepted font rollbacks and the actual native interpolation constructor move. No accepted revision is held as a NEW deferral.",
+    "Review31 genuine generic callback fixes plus the actual native member-constructor protocol; inherited45 held ABI rows/four non-applicable rows are not waived.",
+    "Use source-bound current complete rewrite projection. Adjudicate every C++/native/member contract, unique emitted owner, R1 identity and L1 span qualification.",
+    "Reserve the machine-wide heavy slot and verify all output/checkpoint paths are unused immediately before execution."
+  ],
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "commands": [
+    {
+      "step": "whole-ledger interfaces",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/interfaces.py",
+        "check",
+        "--matches",
+        "scratch/integrator/ctypes1/r3/PROPOSED-LEDGER.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/ctypes1/r3/interfaces-r1.json"
+      ]
+    },
+    {
+      "step": "whole-ledger caller contracts",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/ctypes1/r3/PROPOSED-LEDGER.json",
+        "--rewrites",
+        "scratch/integrator/ctypes1/r3/LINKER-REWRITES.json",
+        "--json",
+        "scratch/integrator/ctypes1/r3/argcheck-r1.json"
+      ]
+    },
+    {
+      "step": "fresh prepare after gates/adjudications",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "ctypes1",
+        "--candidates",
+        "config/candidates/ctypes1.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "requirements": "Clean committed integrated source; two fresh full builds and full suite, then two independent bound reviews. Main alone registers/finalizes/pushes."
+    }
+  ]
+}

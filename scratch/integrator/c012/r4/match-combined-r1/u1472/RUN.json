@@ -1,0 +1,37 @@
+{
+  "source": "src/retries/func_001f2700.c",
+  "profile": "sdk",
+  "functions": [
+    "func_001f2700"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/retries/func_001f2700.c",
+    "--profile",
+    "sdk",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u1472"
+  ],
+  "exit_code": 0,
+  "seconds": 0.220981,
+  "source_sha256": "ebe6a4491339f5378cdb9be3621f3c4ed9490efa18dd07fdb4552248c6dab0b5",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u1472/func_001f2700.result.json",
+  "receipt_sha256": "26d4bcb3d94c8992fad2a733e640a719a5b420930d44b468e8ebbb679c98bfd7",
+  "output": "MATCH    __ARM_common_memcpy4_5 @ 0x183458 size 0x14/0x14\nMATCH    func_001f2700 @ 0x1f2700 size 0xc0/0xc0\n",
+  "stderr": ""
+}

@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "checkpoint": "ctypes1",
+  "branch": "types-compose",
+  "source_commit": "d80e0cdbf59b78479fcd27539d86cd4b661867bc",
+  "baseline_checkpoint": "c009-r5",
+  "baseline_matches_sha256": "e183f4cf206cf003bb1308b90d4bafb254253b4fe0705c7c813a6e4fbdac983d",
+  "candidate": {
+    "path": "config/candidates/ctypes1.json",
+    "sha256": "83e07d71fa9f3ac04614b212cc8aeeec433bbeb4cdd8f4dc8d6ac23a17612f6b"
+  },
+  "proposed_ledger": {
+    "path": "scratch/integrator/types-compose/proposed-ledger-r2.json",
+    "sha256": "57681d04288775fb7f12474bc24b9d4da6a6de583ca7166d155fdd18ddc1a452"
+  },
+  "composition": {
+    "path": "scratch/integrator/types-compose/COMPOSE-r2.json",
+    "sha256": "302ef06baff13625fd9516e5b8d50bf2af65de817f52eb67389c35013cc8ac5b",
+    "superseded_record": "COMPOSE-r1.json (relay typed-memcpy proposal rejected by Main; never an approved final source)"
+  },
+  "proof_closure": {
+    "path": "scratch/integrator/types-compose/PROOF-CLOSURE-r3.json",
+    "sha256": "f129e7a6ec459aa61887ca844034f8c94f3236e68f0c3b862e8cf143509a6e96"
+  },
+  "counts": {
+    "prepared_units": 2217,
+    "prepared_functions": 2270,
+    "proposed_units": 2217,
+    "proposed_functions": 2272,
+    "prepared_identities_preserved": 2270,
+    "new_functions": 2,
+    "moves": 91,
+    "retired_units": 91,
+    "revised_existing_identity_destinations": 188,
+    "revised_existing_functions": 190,
+    "prepare_revised_existing_path_units": 99,
+    "prepare_revised_existing_path_functions": 101,
+    "prepare_added_path_units": 91,
+    "prepare_added_path_functions": 91,
+    "revised_or_added_source_units": 190,
+    "revised_or_added_source_functions": 192,
+    "reverted_menu_revisions_units": 157,
+    "reverted_menu_revisions_functions": 156,
+    "unadmitted_menu_new_functions": 9,
+    "blocked_native_destructor_units": 9,
+    "prepared_source_restorations_equal": 18,
+    "missing_path_canonical_display_revision": 1,
+    "touched_headers": 50,
+    "names_added": 27,
+    "names_removed": 6,
+    "names_changed": 0,
+    "relay_revision_reverted_units": 1,
+    "relay_revision_reverted_functions": 1,
+    "total_reverted_units": 158,
+    "total_reverted_functions": 157
+  },
+  "reproof": {
+    "source_revisions_or_additions": 190,
+    "touched_headers": 50,
+    "transitive_header_dependent_units": 1671,
+    "required_changed_or_dependent_units": 1672,
+    "explicit_prepared_relay_restoration_units": 1,
+    "proof_units_including_helpers": 1673,
+    "matched_caller_units": 1656,
+    "matched_credited_functions": 1697,
+    "reused_completed_r5_jobs": 1453,
+    "fresh_final_jobs": 203,
+    "fresh_final_functions": 207,
+    "helper_only_units_proved_in_context": 17,
+    "fresh_match_invocations": 206,
+    "fresh_match_exit_counts": {
+      "0": 204,
+      "1": 2
+    },
+    "failed_launch_exit_counts": {
+      "127": 1
+    },
+    "matching_but_policy_rejected_attempts": 1
+  },
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "profiles": "Unchanged frozen profile per unit; no trial flags or model transitions."
+  },
+  "qualifications": {
+    "utf16": "Witnessed native wchar_t producer API; u16 reader result unchanged.",
+    "new": {
+      "func_0015e5d4": "NEW restoration of the carried c009 deferral, not an accepted move: D08 producer 0015d798 constructs the actual nw::lyt::TextBox stored by ResourceEntry, whose genuine Pane base owns rotation/flags. Exact 28-byte body; descriptive field roles remain [INFERENCE]. No DisplaySurface/DisplayPaneLink alias or byte-offset access.",
+      "func_001f4cf8": "NEW re-entry of exactly the PF06-excluded reader: native Font::GetCharStrmReader(wchar_t) returns actual CharStrmReader member descriptors from data_0021c64c; native CP1252/UTF16 providers are bound through explicit moves, and UTF16 consumes the witnessed wchar_t producer API. This does not close the opaque game FontVTable/data_00223d98 or re-enter the four excluded wrappers. Unobserved historical callee identity remains [INFERENCE]."
+    },
+    "font": "00131540/001f4920/001efcec/001f4994 absent; FontVTable and data_00223d98 opaque; converter float(float) unchanged.",
+    "menu": "Native MenuScene transaction quarantined at source/header/name granularity until linker v11; nine native destructor units remain prepared forms,001e84ec absent. Six closed InputRectangle leaves/providers/callers compose without the blocked model.",
+    "relay": "00137b48 is exact prepared source, not a type-model improvement. The compatible union tag remains opaque in the header; the rejected r8-r10 source attempts are not retained.",
+    "missing_paths": "18 prepared paths restored source-hash equal. Nineteenth001e403c is explicitly a retained canonical DisplayObject revision, with r5/r7 MATCH, not a restoration."
+  },
+  "main_only_next_steps": [
+    "Wait for c009-r5 finalization and use that exact full ledger as the ctypes1 base; do not merge sources into main while its prepared review tree is frozen.",
+    "Run whole-ledger caller-contract argcheck and adjudicate every candidate, including mechanically unchecked C++ and inherited R1/L1 contracts.",
+    "Run accept.py prepare --checkpoint ctypes1 --candidates config/candidates/ctypes1.json --allow-unchecked-cpp --linker-model armlink5-inline-branchnop-v6 --literal-model anonymous-string-records-v1 under the heavy slot, including two fresh full builds and the suite.",
+    "Obtain two independent bound reviews, then Main alone registers, finalizes and pushes."
+  ],
+  "not_run": [
+    "argcheck",
+    "full builds",
+    "test suite",
+    "prepare",
+    "acceptance reviews",
+    "finalize",
+    "push"
+  ],
+  "accepted_credit_claimed": false,
+  "status": "COMPLETE_WORKER_HANDOFF; source composition and final whole-ledger interfaces pass, not prepared or accepted",
+  "completed_utc": "2026-10-23T00:59:28.529120+00:00",
+  "interfaces": {
+    "source_commit": "d80e0cdbf59b78479fcd27539d86cd4b661867bc",
+    "final_output": "scratch/integrator/types-compose/interfaces-r2.json",
+    "sha256": "aae92027e9c16891aafa2a0963403b5dd89613a1f5a90cebea6ff996ab50f0e7",
+    "exit": 0,
+    "units": 2217,
+    "disagreements": 0,
+    "policy": 0,
+    "unchecked_cpp": 584,
+    "unchecked_c": 0,
+    "cpp_waiver": "Explicit --allow-unchecked-cpp; manual type and caller-contract audit remains required.",
+    "request": {
+      "path": "scratch/integrator/types-compose/HEAVY-SLOT-REQUEST-interfaces-r2.json",
+      "sha256": "27a8b4b80cf93a2b689dc26c135dd12b3700083011a756f8287e09ac2fc13ef3"
+    },
+    "grant": {
+      "path": "scratch/integrator/types-compose/HEAVY-SLOT-GRANTED-interfaces-r2.json",
+      "sha256": "224382de84a4a788b76b0a18f2b0c5e927ad64a3066c56b9c89124bf79f5617f"
+    },
+    "release": {
+      "path": "scratch/integrator/types-compose/HEAVY-SLOT-RELEASED-interfaces-r2.json",
+      "sha256": "8295a3177032e310fb18976e64f8c99ffccbee6ccb52526147053f4ffe78e2fe",
+      "released": true,
+      "atomic": true
+    },
+    "earlier_failure": {
+      "output": "scratch/integrator/types-compose/interfaces-r1.json",
+      "exit": 1,
+      "disagreements": 1,
+      "policy": 0,
+      "unchecked_c": 1,
+      "resolution": "Canonical HandleManager header included and exact prepared relay body restored; both corrections and the22 changed-header dependents have bound MATCH records. Failed output is preserved."
+    }
+  },
+  "records_immutability": "COMPOSE-r1 and PROOF-CLOSURE-r1/r2 remain historical rejected/superseded snapshots. Final source decision record is COMPOSE-r2; final proof closure is PROOF-CLOSURE-r3. No match output, failed audit or earlier record was overwritten.",
+  "names_delta": {
+    "added": 27,
+    "removed": 6,
+    "changed_or_rebound": 0,
+    "path": "config/names.json",
+    "sha256": "a4c2ef5a88241769d909a507db0715b4e14635de093dcd6fbac0d931d648a7b4"
+  },
+  "commit_binding": "source_commit names the exact source tree audited by interfaces-r2; the following handoff-only commit adds these immutable gate/request/grant/release records and changes no source/header/config."
+}

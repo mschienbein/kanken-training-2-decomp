@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "analysis_exit_code": 0,
+  "original_call_references": "FOLDED-DISPLAY-PRODUCER-REFERENCES-r1.json",
+  "original_pool_semantics": {
+    "function": "func_00183168",
+    "extent": 160,
+    "pool_global_references": [
+      2368056
+    ],
+    "observed_object_field_displacements": [
+      160
+    ],
+    "observed_walk_steps": [
+      204
+    ]
+  },
+  "accepted_canonical_pool": {
+    "header": "include/game/resource_runtime.h",
+    "header_sha256": "eb3fab2c6dce5c91e4c08dff8a5564e1a2cf49713e6ad9982f2e81cc880f982d",
+    "constructor": "src/wave16/func_00135268.c",
+    "constructor_sha256": "6c6e390eb48bdae2f4abc59a29cea9c563d1f86681360053b8b93b2a6aa01df1",
+    "record_type": "ResourceEvent",
+    "allocation": "capacity * sizeof(ResourceEvent)"
+  },
+  "cached_author_aid_hashes_only": {
+    "func_0013566c": "2cd5de47086a116f2243ea0ea8c7761a0d2b67f3563f0499ebd2ae1fa2fe8999",
+    "func_00183168": "0f10bd718395c4199470ea59868a67e5ae7a2521590e09aaa05bbd978c8433bc"
+  },
+  "type_conclusion": "A genuine BoundDisplayObject result is not independently established. The current producer chain selects the canonical ResourceEvent pool; reinterpreting its base as BoundDisplayObject is not justified by matching field offsets. Final81700/81448 receiver models require a coherent transaction, not a cast."
+}

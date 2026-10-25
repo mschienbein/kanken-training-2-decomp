@@ -327,6 +327,13 @@ extern CtrResult func_0013e770(const CtrHandle *session, void *buffer, unsigned 
                        unsigned char *output);
 extern unsigned func_0017da74(unsigned samples, unsigned format);
 extern struct SoundFileGroup *func_0014b60c(struct SoundFileGroup *object);
+/* [INFERENCE] The separately referenced linker bounds delimit an empty
+ * constructor range in this image; there is no claimed callback provider. */
+typedef void (*StartupConstructor)(void);
+
+extern StartupConstructor startup_constructors_begin[];
+extern StartupConstructor startup_constructors_end[];
+extern void func_0010163c(void);
 #ifdef __cplusplus
 }
 #endif

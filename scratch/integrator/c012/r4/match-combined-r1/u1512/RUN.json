@@ -1,0 +1,43 @@
+{
+  "source": "src/models/func_001730ec/func_001730ec_removed.c",
+  "profile": "game",
+  "functions": [
+    "func_001730ec"
+  ],
+  "extra_sources": [
+    "src/models/func_001730ec/item_accessors.c"
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001730ec/func_001730ec_removed.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u1512",
+    "--extra-source",
+    "src/models/func_001730ec/item_accessors.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.322679,
+  "source_sha256": "8e85116907b06b33eaeba46698afb23d9c24f95360cb7c390e0db711d6e81714",
+  "extra_source_sha256": {
+    "src/models/func_001730ec/item_accessors.c": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r1/u1512/func_001730ec_removed.result.json",
+  "receipt_sha256": "e2a665bc0783728beb9ea0c05928dee3d6c7a04e81b9988b34193ad794565b21",
+  "output": "MATCH    func_001730ec @ 0x1730ec size 0x74/0x74 [armlink5-inline-branchnop-v6: 2 inline_insn]\nREMOVED  w19_item_category (8 bytes; i.w19_item_category)\nREMOVED  w19_item_value (8 bytes; i.w19_item_value)\n",
+  "stderr": ""
+}

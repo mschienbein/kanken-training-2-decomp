@@ -1,0 +1,42 @@
+{
+  "source": "src/nw4c/snd_CurveAdshr.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_0014fd04",
+    "func_001519e4",
+    "func_0016a1f0",
+    "func_001d2d20",
+    "func_001d2d68",
+    "func_001d2d84"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/snd_CurveAdshr.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u0856"
+  ],
+  "exit_code": 0,
+  "seconds": 0.199299,
+  "source_sha256": "72577d0b1ec0fa3ba3e6016635af24bdf172c302814f984d142685947ed44926",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-first-r1/u0856/snd_CurveAdshr.result.json",
+  "receipt_sha256": "398c5f396d1e95f06ff6488e34117498a3bb17d914f11261df8b7ebdafba8ac2",
+  "output": "MATCH    _ZN2nw3snd8internal10CurveAdshr6UpdateEi @ 0x14fd04 size 0x110/0x110\nMATCH    _ZNK2nw3snd8internal10CurveAdshr8GetValueEv @ 0x1519e4 size 0x38/0x38\nMATCH    _ZN2nw3snd8internal10CurveAdshr9SetAttackEi @ 0x16a1f0 size 0x14/0x14\nMATCH    _ZN2nw3snd8internal10CurveAdshr10InitializeEf @ 0x1d2d20 size 0x48/0x48\nMATCH    _ZN2nw3snd8internal10CurveAdshr5ResetEf @ 0x1d2d68 size 0x1c/0x1c\nMATCH    _ZN2nw3snd8internal10CurveAdshrC1Ev @ 0x1d2d84 size 0x20/0x20\n",
+  "stderr": ""
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "owner": "Main",
+  "scope": "Combinedc012-r5 on adoptedv14; current source and lint closure complete. CM2-F01/F03 are inherited accepted-code known issues, not blockers by Main ruling.",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "current_granted_worker_request": "HEAVY-SLOT-REQUEST.json",
+  "commands": [
+    {
+      "purpose": "Whole-ledger caller/result audit and full adjudication before prepare",
+      "grant_required": true,
+      "fresh_output_required": true,
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/c012/r5/PROPOSED-LEDGER.json",
+        "--json",
+        "scratch/integrator/c012/r5/ARGCHECK-r1.json"
+      ]
+    },
+    {
+      "purpose": "Main-only clean prepare after ordinary remaining gates/adjudication; reserve a fresh checkpoint name first",
+      "grant_required": true,
+      "checkpoint_name_requires_Main_reservation": true,
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "c012-r5",
+        "--candidates",
+        "config/candidates/c012.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "includes": "Two fresh full-image/BLZ builds, suite, complete emitted ownership and exact identity/model evidence. Two independent full-scope reviews and Main finalize follow a passing prepare."
+    }
+  ],
+  "do_not_rerun_unchanged_full_closure": "Main authorizes the protectedv14 carry; re-prove only any later changed source/header-dependent units. Current2695-context proof coversall2799 identities.",
+  "not_exercised_by_worker": [
+    "argcheck",
+    "fresh full builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "agent_or_task_calls": 0
+}

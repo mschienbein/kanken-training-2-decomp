@@ -3,35 +3,24 @@
 
 #include "game/runtime.h"
 
-struct W8ItemEntry {
-    const unsigned *vtable;
-    short index;
-    signed char first;
-    signed char second;
-    signed char third;
-    unsigned char reserved09[3];
-    unsigned value0c;
-    unsigned value10;
-    unsigned char flag14;
-    unsigned char reserved15[3];
-    unsigned value18;
-    unsigned value1c;
-};
+#include "game/item_pages.h"
+
 
 struct W8EntryList {
     unsigned char reserved00[0x10];
     int count;
-    struct W8ItemEntry **entries;
+    struct ItemPage **entries;
 };
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern void *func_0019d788(unsigned size);
-extern struct W8ItemEntry *func_0015f84c(struct W8ItemEntry *entry);
+extern struct ItemPage *func_0015f84c(struct ItemPage *entry);
 /* [INFERENCE] Candidate-only field accessors; historical identities unknown. */
-int w19_item_category(const struct W8ItemEntry *entry);
-unsigned w19_item_value(const struct W8ItemEntry *entry);
+int w19_item_category(const struct ItemPage *entry);
+unsigned w19_item_value(const struct ItemPage *entry);
+extern int func_001e5d38(const struct W8EntryList *list, int category);
 #ifdef __cplusplus
 }
 #endif
