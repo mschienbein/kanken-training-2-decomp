@@ -1,0 +1,9 @@
+LEVEL       NAME / SOURCE                         SITES / TYPE
+----------- ------------------------------------- ----------------------------------------
+unchecked   src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp
+unchecked   src/checkpoint10/func_001306c8.cpp
+unchecked   src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp  C++ parser unavailable; only class-definition (ODR) agreement checked
+unchecked   src/checkpoint10/func_001306c8.cpp  C++ parser unavailable; only class-definition (ODR) agreement checked
+Units: 2; checked: 0; disagreements: 0; policy: 0; unchecked: 2
+Const coverage: typed lvalues, const-address casts and simple local pointer aliases. Not covered: whole-program/heap alias analysis and pointer arithmetic; interprocedural or branch-sensitive alias propagation; writes inside called functions or assembly.
+C++: qualified class-definition agreement across units and project headers (ODR, token-level; namespaces, enclosing classes and template specializations; unnamed namespaces unit-local), no forward declaration of a header-defined qualified class without that header, and no local extern "C" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only.

@@ -1,0 +1,31 @@
+{
+  "group_id": "LAYOUT-BINARY-PROTOCOL",
+  "functions": [
+    "func_001cbf34",
+    "func_001ce9e8"
+  ],
+  "bytes": 844,
+  "category": "canonical-native-intrusive-list-and-serialized-provider-closure",
+  "reason": "The genuine native bool IsValidBinaryFile(const nw::ut::BinaryFileHeader*,u32,u32,u16) remains different from accepted int001813a0(const game BinaryFileHeader*,unsigned,unsigned,unsigned). More importantly Layout::Build requires native Pane::AppendChild; accepted001822fc instead consumes RegistrationOwner/RegistrationEntry with PoolList/PoolLink and calls C00191154(PoolList*,PoolLink*,PoolLink*) returning PoolLink*. The native LinkListImpl::insert uses native iterator/Node types, and the current LinkList<Pane,TNOffset>::PushBack path recovers the node using runtime byte-offset arithmetic. There is no canonical cast-free list/provider transaction establishing those as one owner. A native-name alias, copied header, byte-offset helper or partial validator-only adoption cannot reconcile this two-function group.",
+  "prerequisite": "One canonical serialized-header/validator contract with all file clients, plus evidenced native Pane/list insertion providers and a source-policy-safe real-node operation, all dependent callers moved/reproved atomically. No native or C slot alias is supplied.",
+  "evidence": [
+    "scratch/integrator/held-native-survey/SURVEY.json#LAYOUT-BINARY-PROTOCOL",
+    "include/nw/ut/ut_BinaryFileFormat.h:44-67",
+    "include/game/font_resource.h:63-72,153-154",
+    "src/wave12/func_001813a0.c",
+    "src/wave12/func_001db354.c",
+    "src/wave6/func_001822fc.c",
+    "src/wave6/func_00191154.c",
+    "include/nw/lyt/lyt_Pane.h:27-54,181-188,245-248",
+    "include/nw/ut/ut_LinkList.h:173-176,386-407"
+  ],
+  "coordination": "SceneAnimCodex/SceneNativeCodex confirmed no overlapping ownership. SceneFontCodex owns runtime font blocks, leaves serialized file blocks separate; no font_resource.h or native binary header was edited.",
+  "fresh_match": null,
+  "why_not_retried": "The survey native-validator unresolved-symbol refusal is ground truth. No lawful complete Pane/list provider model exists to change that group; a partial or forbidden native probe was not compiled.",
+  "schema_version": 1,
+  "status": "blocked-uncredited",
+  "tracked_source_header_changes": [],
+  "accepted_units_revised": 0,
+  "moves": [],
+  "objects_remaining": 0
+}

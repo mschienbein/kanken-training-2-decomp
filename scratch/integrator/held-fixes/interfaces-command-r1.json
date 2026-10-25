@@ -1,0 +1,15 @@
+{
+  "argv": [
+    ".venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/held-fixes/dry-ledger.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/held-fixes/interfaces-r1.json"
+  ],
+  "exit_code": -9,
+  "harness_event": "Eval1800-second deadline interrupted subprocess.run; retained original Popen output and reaped the child without rerunning the audit. No report was written.",
+  "scope": "Complete2720-unit dry ledger; explicit C++ unchecked waiver."
+}

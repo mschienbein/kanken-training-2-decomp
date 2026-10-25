@@ -1,0 +1,48 @@
+{
+  "group_id": "SERVICE-RESULT-FILTERS",
+  "functions": [
+    "func_001266e4",
+    "func_0012672c"
+  ],
+  "bytes": 220,
+  "category": "whole-emitted-translator-context-still-mismatches",
+  "reason": "A new canonical whole-TU probe uses the complete nf134/np170 translation graph with the sole ServiceResult owner, without ResourceResult/FileDevice shadows or an imported short translator. Both filters MATCH under frozen middleware, but the co-emitted real0019e81c translator still mismatches (584/584 bytes, first difference+413). Removing the redundant selected Result copy is a natural simplification, but its translator is548/584 bytes and mismatches at+1. Neither whole TU passes; no passing target subset or unaccepted mismatching callee is imported.",
+  "prerequisite": "One natural exact complete translator/filter source atom under a frozen shared profile, or natural exact filters with only the external canonical translator. No steering, effects annotation, fabricated helper/binding or narrower source closure.",
+  "evidence": [
+    "scratch/integrator/held-native-survey/SURVEY.json#SERVICE-RESULT-FILTERS",
+    "scratch/authors/np170/RESULT.json#func_0019e81c",
+    "scratch/authors/nf134/src/file_result.cpp",
+    "scratch/integrator/held-fixes/SERVICE-RESULT-FILTERS/canonical-r1/canonical_service_filters.result.json",
+    "scratch/integrator/held-fixes/SERVICE-RESULT-FILTERS/simplified-r1/simplified_service_filters.result.json",
+    "scratch/integrator/held-fixes/SERVICE-RESULT-FILTERS/simplified-r1/payload-free-residuals.json"
+  ],
+  "fresh_matches": [
+    {
+      "source": "scratch/integrator/held-fixes/SERVICE-RESULT-FILTERS/canonical_service_filters.cpp",
+      "profile": "middleware",
+      "exit_code": 1,
+      "emitted_functions": 3,
+      "matching_target_functions": 2,
+      "mismatching_context": [
+        "func_0019e81c"
+      ]
+    },
+    {
+      "source": "scratch/integrator/held-fixes/SERVICE-RESULT-FILTERS/simplified_service_filters.cpp",
+      "profile": "middleware",
+      "exit_code": 1,
+      "emitted_functions": 3,
+      "matching_target_functions": 2,
+      "mismatching_context": [
+        "func_0019e81c"
+      ]
+    }
+  ],
+  "accepted_caller": "src/wave14/func_00192ab0.c intentionally unchanged because no source/header/provider cutover is admitted.",
+  "schema_version": 1,
+  "status": "blocked-uncredited",
+  "tracked_source_header_changes": [],
+  "accepted_units_revised": 0,
+  "moves": [],
+  "objects_remaining": 0
+}

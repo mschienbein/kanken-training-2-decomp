@@ -1,0 +1,24 @@
+{
+  "group_id": "GRADE-MASK",
+  "functions": [
+    "func_0017418c"
+  ],
+  "bytes": 108,
+  "category": "inherited-notification-union-punning",
+  "reason": "The isolated MATCH reads SavedNotification.payload.storage.text[0x18]. That same NotificationStorage is also modeled/accessed as words, NotificationFields and NotificationSelection. The newer c015 manifest explicitly retains this source-policy hold. A matching UTF-16 grade load or same-element setter does not establish one complete producer-evidenced typed payload. New use of the inherited union as an alternate storage view violates the standing no-punning/one-model rule.",
+  "prerequisite": "One producer-evidenced canonical notification payload, with the complete word/text/fields/selection client cutover and byte-identical dependent accepted units; no alias, memcpy reinterpretation or new union view.",
+  "evidence": [
+    "git:8f2be9c38a93717aae6cbeab363375fc50ec8734:config/candidates/c015.json#holds/func_0017418c",
+    "git:8f2be9c38a93717aae6cbeab363375fc50ec8734:scratch/integrator/c015/NOTIFICATION-UNION-HOLD.json",
+    "include/game/notification.h:43-81,91-99",
+    "scratch/integrator/held-native-survey/probes/grade-mask/func_0017418c.c:10-13"
+  ],
+  "fresh_match": null,
+  "why_not_retried": "Known isolated MATCH has no changed lawful root model; newer source-policy hold supersedes the survey no-mismatch observation.",
+  "schema_version": 1,
+  "status": "blocked-uncredited",
+  "tracked_source_header_changes": [],
+  "accepted_units_revised": 0,
+  "moves": [],
+  "objects_remaining": 0
+}
