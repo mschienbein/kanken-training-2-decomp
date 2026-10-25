@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "base_commit": "d93aa6c7",
+  "note": "c016 native graphics intake: scene-env alignment prerequisite at 70e33056 plus HARVEST-LIST entries 63-66. The five incoming sources re-derived through tools/collect.py under default v2/none; checkpoint closure proofs use the existing explicit v6/L1 selection. Native identities are qualified [INFERENCE]. No scene-native, scene-font or c015 claims, and no library _ZdaPv, are credited. Main owns prepare, independent review and finalization. Private per-function reconciliation and header-only re-proofs live under scratch/integrator/c016/.",
+  "units": [
+    {
+      "source": "src/checkpoint16/func_00115f5c.cpp",
+      "profile": "game",
+      "functions": ["func_00115f5c"],
+      "author": "fx01",
+      "reason": "Use canonical MeshRenderer/RenderContext/Model and resource shape wrappers; retain every material, ordinary/particle branch and native method argument. The particle downcast is within the native model hierarchy, not an alternate owner view."
+    },
+    {
+      "source": "src/checkpoint16/func_001240c8.cpp",
+      "profile": "game",
+      "functions": ["func_001240c8"],
+      "author": "fx01",
+      "reason": "Use native RenderContext::ActivateVertexAttribute(ResMesh), the real command-cache/IR-scale arrays and ShaderProgram Boolean interfaces. The ClearVertexAttribute provider retains exactly void(void)."
+    },
+    {
+      "source": "src/checkpoint16/func_001307b8.cpp",
+      "profile": "game",
+      "functions": ["func_001307b8"],
+      "author": "fx01",
+      "reason": "Use native RenderContext and actual Model::NormalMatrix/cache members; keep the established matrix34Identity static and canonical float matrix-upload contracts with no new data alias. Its inherited guard-release identity qualification is retained."
+    },
+    {
+      "source": "src/checkpoint16/func_001303a8.cpp",
+      "profile": "game",
+      "functions": ["func_001303a8"],
+      "author": "fx03",
+      "reason": "Use canonical MeshRenderer/SkeletalModel/Skeleton/ResPrimitiveSet and ResDicPatricia values, with exact matrix-pose and float-copy provider contracts. Adopt only the three evidenced fx03 native bindings."
+    },
+    {
+      "source": "src/checkpoint16/activate_context.cpp",
+      "profile": "game",
+      "functions": ["func_001305c0"],
+      "author": "scene-env",
+      "reason": "Use the corrected canonical SceneEnvironment/RenderContext layout and exact IMaterialActivator virtual interface. Publish native address-named ShaderProgram/RenderContext/MaterialHash endpoint declarations in game/render_context.h; remove all local integration declarations."
+    }
+  ],
+  "moves": [],
+  "revised_accepted_units": [
+    {
+      "source": "src/checkpoint10/func_00191c94.cpp",
+      "profile": "game",
+      "functions": ["func_00191c94"],
+      "author": "r4001",
+      "accepted_source_sha256": "3548208a0e5140e7e1e3c4ebf84385d5d06052239676b021c43e7bb027f04094",
+      "current_source_sha256": "69e744954901f6367f59898feba315a0568dcd07795eddff0c0a7f210e4b5cfc",
+      "reason": "Replace the obsolete RenderCache model with the actual RenderContext::MaterialHash receiver and eleven named native members; preserve the exact flag-to-field mapping and existing unsigned flags interface.",
+      "header_dependencies_changed": ["include/game/command_buffer.h", "include/game/render_context.h"],
+      "baseline": "d93aa6c7"
+    }
+  ],
+  "holds": []
+}
