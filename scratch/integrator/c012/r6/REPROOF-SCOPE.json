@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "comparison_base": "4c14ff9f2e36803d5e2ed5df33db88aad5889b1a",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "production_delta": [
+    {
+      "status": "D",
+      "path": "include/game/scene_parameters.h"
+    },
+    {
+      "status": "D",
+      "path": "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp"
+    },
+    {
+      "status": "D",
+      "path": "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp"
+    },
+    {
+      "status": "D",
+      "path": "src/wave20/func_001f4cf8.cpp"
+    }
+  ],
+  "surviving_source_changes": [],
+  "surviving_include_closure_changes": [],
+  "removed_header_only_includers": [
+    "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+    "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp"
+  ],
+  "required_changed_survivor_context_count": 0,
+  "reason": "r6 changes production source only by deleting the three held NEW units and their otherwise-unused new scene header. All retained production files are identical to r5; the removed header has no surviving include consumer. No changed surviving source/include closure is left unproved.",
+  "additional_focused_boundary_contexts": [
+    {
+      "source": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
+      "profile": "game",
+      "functions": [
+        "func_001757dc"
+      ],
+      "author": "C012IntakeCodex census-20261021-r2"
+    },
+    {
+      "source": "src/wave19/func_001e387c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001e387c"
+      ],
+      "author": "w19g"
+    },
+    {
+      "source": "src/wave19/func_001e716c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001e716c"
+      ],
+      "author": "w19g"
+    },
+    {
+      "source": "src/wave12/func_001efe90.c",
+      "profile": "game",
+      "functions": [
+        "func_001efe90"
+      ],
+      "author": "w12c"
+    },
+    {
+      "source": "src/wave12/func_001f4b3c.c",
+      "profile": "game",
+      "functions": [
+        "func_001f4b3c"
+      ],
+      "author": "w12d"
+    },
+    {
+      "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_00113e78",
+        "func_001f0008",
+        "func_001f0018"
+      ],
+      "author": "nw4c"
+    }
+  ],
+  "privacy": "Use --show 0; retain only source, symbol, extent, model and hash metadata, no original bytes/encodings/disassembly/packets."
+}

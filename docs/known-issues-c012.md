@@ -1,6 +1,41 @@
-# c012 known issues and qualifications — r5
+# c012 known issues and qualifications — r6
 
-## Current combined scope and governing rulings
+## Current r6 remediation
+
+Revision r6 starts from c012-r5 `4c14ff9f` and retains the explicit **v6 / L1**
+selection under frozen gates **v1.20**. Both independent r5 reviews failed on the
+same three blockers; their finding numbers differ for the first two:
+
+- **Scene/member callbacks — codex-b F01 / codex-a F02:** NEW `001e395c`
+  (408 B) and `001e722c` (364 B) are held, not credited. Their queued native
+  descriptors select slot +12, whose actual providers remain C functions with
+  different receiver contracts. Re-entry requires the genuine native hierarchy,
+  adopted exact slot providers and deferred invoker together. Their sources and
+  the otherwise-unused `scene_parameters.h`, including `Tu1140ParameterScene`,
+  are removed; canonical accepted declarations are unchanged.
+- **Font provider — codex-b F02 / codex-a F01:** NEW `001f4cf8` (64 B) is held,
+  not credited. Its native `GetCharacterCode` call reaches C providers not adopted
+  as `Font`/`ResFontBase` overrides. This is the only ctypes1 NEW reader; all
+  ctypes1 revised units, native declarations and accepted provider types remain.
+  No alias, cast or second model bridges the unresolved interface.
+- **Evidence preservation — both F03:** all **43** unrelated Main `4a4da5cd`
+  files listed by codex-b are restored byte-identically at their original paths,
+  including `scratch/integrator/c011-NOTES.md` and `c011-r3/**`. The only remaining
+  deletions from that Main tree are the **17** old source paths covered by the
+  **31** declared moves.
+
+Current candidate scope is **26 NEW / 3,988 B**, plus **31 moves / 940 B**:
+**57 candidate claims / 4,928 B** in **42 units**. All **2,770** accepted identities
+survive; the proposed ledger has **2,796 functions / 305,008 B** in **2,719 units**,
+including all **25** helper-only units. **64 NEW holds / 14,520 B** remain
+uncredited. Both revised-accepted-unit lists are retained unchanged from r5.
+The remediation evidence, focused re-proofs and lint dispositions are under
+`scratch/integrator/c012/r6/`; they do not constitute fresh acceptance gates.
+
+## Preserved r5 combined scope and governing rulings
+
+The following r5 counts and readiness statements are historical; the r6 scope
+and holds above take precedence.
 
 This candidate uses finalized main `69854e8e` (c011-r11, sequence 12), canonical
 ctypes1-r4 `93921aa2` through `eb37e93e`, and c012-r4 `4a9cf7b5`. There is one
@@ -164,10 +199,10 @@ byte-owner/shadow-view holds below remain held.
   helper credit and matches under selected v6/L1. **[INFERENCE]** Historical helper
   identity, outlining and original call graph are unrecovered. G6 requires an
   explicit **QUALIFIED R1/F03** row and all-path typed contract review.
-- The parameter scenes use genuine constructed `ParameterValue`-derived values
-  and the existing native `MemberCallback`/`CallbackTarget` interface, never C PMF
-  decoding. Complete scene hierarchy/provider obligations remain an integrator and
-  independent-review prerequisite; byte equality is not that proof.
+- NEW parameter-scene initializers `001e395c` and `001e722c` are now held under
+  codex-b F01 / codex-a F02. Matching value construction and descriptor transport
+  did not adopt the actual native virtual providers or establish their receiver
+  hierarchy; no current credit or closure claim is made for those initializers.
 - `001543b8` invokes the current canonical `AuxCallback(int **, unsigned, void *)`
   interface. C010-r8 classifies original provider `00152c88` as unclaimed, not an
   adopted conflicting type. Sample numerical representation remains **[INFERENCE]**;

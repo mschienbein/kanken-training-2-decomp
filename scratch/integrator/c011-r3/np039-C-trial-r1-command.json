@@ -1,0 +1,29 @@
+{
+  "source": "scratch/integrator/c011-r3/attempts/scheduled_repeat-r1.c",
+  "profile": "game",
+  "extra_sources": [],
+  "functions": [
+    "func_00107f0c"
+  ],
+  "argv": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c011-r3/attempts/scheduled_repeat-r1.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/c011-r3/np039-C-trial-r1"
+  ],
+  "actual_exit_code": 2,
+  "output": "error: armcc failed (1) on scheduled_repeat-r1.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/attempts/scheduled_repeat-r1.c\", line 28: Error:  #268: declaration may not appear after executable statement in block\n          short slot = (short)index;\n          ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/attempts/scheduled_repeat-r1.c\", line 29: Error:  #268: declaration may not appear after executable statement in block\n          struct ScheduledTask *position = 0;\n          ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/attempts/scheduled_repeat-r1.c\", line 30: Error:  #268: declaration may not appear after executable statement in block\n          int cursor = scheduler->begin;\n          ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/attempts/scheduled_repeat-r1.c\", line 61: Warning:  #940-D: missing return statement at end of non-void function \"func_0019f338\"\n  }\n  ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/attempts/scheduled_repeat-r1.c: 1 warning, 3 errors\n\n",
+  "source_sha256": "75ddc20f001fade3dc5299e0fb5d68578c57934b961b3cb585a50400947329e1",
+  "receipt": "scratch/integrator/c011-r3/np039-C-trial-r1/scheduled_repeat-r1.result.json",
+  "receipt_sha256": "67382c4c298e7febcda4214c540d17f7add1c1d91deadaf8576362f9e66ddba9",
+  "observed": []
+}
