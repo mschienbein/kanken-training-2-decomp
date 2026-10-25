@@ -1,0 +1,20 @@
+{
+  "family": "COMMAND-CURSORS",
+  "outcome": "held-evidence",
+  "members": [
+    "func_001dacc0",
+    "func_001dadc4"
+  ],
+  "reason": "W19CommandBuffer contains invented reserved virtual declarations and a void*-to-interface cast. command_buffer.h explicitly distinguishes the existing W15iRenderer begin/end protocol; same slots and pointer widths do not establish owner identity or byte-count versus flag contracts. Actual installed tables and exact reserve/commit providers remain unproved.",
+  "selected_sources": [
+    "scratch/authors/w19j/src/func_001dacc0.cpp",
+    "scratch/authors/w19j/src/func_001dadc4.cpp"
+  ],
+  "current_contract_boundary": [
+    "Centralize the one W19CommandBuffer cursor/virtual reserve-write interface, reconcile it with any canonical command-buffer owner, and use providers exactly matching returned byte-cursor and full count inputs.",
+    "Current canonical declaration witnesses, author integration requirements and the exact cited holds are the evidence boundaries. A historical body MATCH never selects a conflicting receiver, callback return or native class. Where ownership is unproved, the current accepted contract remains in force; no speculative alias is selected."
+  ],
+  "accepted_changes": [],
+  "names_admitted": [],
+  "proofs": "No retained invalid owner/callback/native-name model is compiled or collected."
+}

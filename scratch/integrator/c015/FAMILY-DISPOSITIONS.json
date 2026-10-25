@@ -173,9 +173,96 @@
       "accepted_revisions": [],
       "reason": "The full source atom still casts return-this cleanup providers to ObjectDestructor, reinterprets DisplayRegistration.object from DisplayObject* to ResourceEvent*, and conflicts with the current L044TrainingFrame func_001c1190 receiver. The real entry/registration/provider contract is not established by the three cleanup body matches; do not invent new typed registration callees or publish vector shadows.",
       "evidence": "reconcile/RESULT-COLLECTION/DECISION.json"
+    },
+    {
+      "family": "STREAM-VOICE-OWNER",
+      "rank": 14,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001d51c0",
+        "func_001d54b0",
+        "func_001d7edc",
+        "func_001d7f5c",
+        "func_001d80b0",
+        "func_001d82b0"
+      ],
+      "accepted_revisions": [],
+      "reason": "The six atoms do not yet describe one real owner transaction: the first two use SceneController/SceneChild where current endpoints require AnimationTrack/AudioVoice; the remaining stream views conflict with SoundVoiceObject native bases and use incompatible or past-object work-record locations (0x2068 versus the preserved0x21fc extent). Native slot/synchronization/secondary-registry ownership is not established, so no class alias, prefix cast or guessed capacity is introduced.",
+      "evidence": "reconcile/STREAM-VOICE-OWNER/DECISION.json"
+    },
+    {
+      "family": "STATIC-NATIVE-LIFETIMES",
+      "rank": 15,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_0015eae0",
+        "func_001671d4",
+        "func_001aea80",
+        "func_001dca5c",
+        "func_001dce40",
+        "func_001e3380"
+      ],
+      "accepted_revisions": [],
+      "reason": "The three empty callback inputs were already corrected by c012, but the six static atoms still request native destructor aliases rather than actual native provider definitions. The24-slot cleanup is currently a receiver-return WidgetController function, whereas the static owner allocates different four-byte WidgetRef objects; the generic registration/native destructor/type transaction is not proved. Do not alias return-only/no-argument/C functions to native destructors or invent registration helpers.",
+      "evidence": "reconcile/STATIC-NATIVE-LIFETIMES/DECISION.json"
+    },
+    {
+      "family": "HEAP-FACTORIES",
+      "rank": 16,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_0010d500",
+        "func_0010dcb0",
+        "func_0010dce8",
+        "func_0010dd20",
+        "func_00116be4"
+      ],
+      "accepted_revisions": [],
+      "reason": "The input Heap can use heap_interface.h, but all five concrete product classes require new inferred external _ZTV bindings with only declared undefined destructors. No original-evidenced actually undefined key and complete product provider identity is supplied. Merely declaring a destructor undefined to make an external table link is not evidence; no product table name is admitted.",
+      "evidence": "reconcile/HEAP-FACTORIES/DECISION.json"
+    },
+    {
+      "family": "COMMAND-CURSORS",
+      "rank": 17,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001dacc0",
+        "func_001dadc4"
+      ],
+      "accepted_revisions": [],
+      "reason": "W19CommandBuffer contains invented reserved virtual declarations and a void*-to-interface cast. command_buffer.h explicitly distinguishes the existing W15iRenderer begin/end protocol; same slots and pointer widths do not establish owner identity or byte-count versus flag contracts. Actual installed tables and exact reserve/commit providers remain unproved.",
+      "evidence": "reconcile/COMMAND-CURSORS/DECISION.json"
+    },
+    {
+      "family": "GFX-OWNING-ARRAY",
+      "rank": 18,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001c6440"
+      ],
+      "accepted_revisions": [],
+      "reason": "The selected destructor models a polymorphic owner as a manual vtable word plus reserved base storage. Canonical GfxPtr/MoveArray members are usable, but the actual enclosing native owner/base/key/table identity is not established by that storage shape. No second UiResourceContext ABI shadow, manual native-vptr reset or unsupported self-name/table admission is collected.",
+      "evidence": "reconcile/GFX-OWNING-ARRAY/DECISION.json"
+    },
+    {
+      "family": "SNPRINTF-BINDING",
+      "rank": 19,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_00136510"
+      ],
+      "accepted_revisions": [],
+      "reason": "The required __2snprintf binding targets an unclassified60-byte Thumb function at0x00100360. Current catalogue supplies no independent library identity witness for that helper; an inherited overlay and formatter call-site semantics do not prove the exact helper name/ABI. No external name is invented.",
+      "evidence": "reconcile/SNPRINTF-BINDING/DECISION.json"
     }
   ],
   "current_new_functions": 26,
   "current_new_bytes": 3704,
-  "current_holds": 38
+  "current_holds": 59
 }
