@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "revision": "c012-r6",
+  "source_parent": "4c14ff9f2e36803d5e2ed5df33db88aad5889b1a",
+  "reviews": {
+    "codex-a": {
+      "path": "scratch/review/c012-r5/codex-a/REVIEW.json",
+      "sha256": "f58aa9cbc34b7b47ba10ec6bd096f86558f61a9d96740c76813c53760bb579e8",
+      "verdict": "FAIL"
+    },
+    "codex-b": {
+      "path": "scratch/review/c012-r5/codex-b/REVIEW.json",
+      "sha256": "c41368a38340c8dceaa7f3e992dad8207cf62dc232d86825c20727be23d8f48c",
+      "verdict": "FAIL"
+    }
+  },
+  "findings": [
+    {
+      "finding_ids": [
+        "codex-b:F01",
+        "codex-a:F02"
+      ],
+      "disposition": "HOLD_NEW_UNCREDITED",
+      "functions": [
+        "func_001e395c",
+        "func_001e722c"
+      ],
+      "bytes": 772,
+      "basis": "The two NEW initializers queue native CallbackTarget member pointers without adopting the actual virtual providers. Independently decoded data_002184b8 and data_00218888 both select virtual slot +12 with zero this adjustment; the installed tables at 0x002237b4 and 0x0022380c route those calls to the C entry points func_001e387c(RestartTransitionScreenW19G*) and func_001e716c(TransitionScreenW19G*), not native overrides. In particular, NEW Tu1140ParameterScene derives only from CallbackTarget, so the second call delivers an unrelated object to a provider that writes TransitionScreenW19G::phase/progress/previous_phase. func_00177b10 stores this pair and the actual 001b7dac trampoline performs the virtual member dispatch; this is not opaque, non-invoking registration. The new code therefore extends the unresolved scene/member-callback contract family instead of remaining independent of it. Recover and migrate the actual common receiver hierarchy, native slot providers and invocation contract together before crediting these initializers; equal pointer widths or another nominal base/cast do not close the contract.",
+      "changes": [
+        "Remove both NEW unit claims; add explicit finding-bound holds.",
+        "Delete both proposed source files.",
+        "Delete new include/game/scene_parameters.h: its only includers are the two held sources; ParameterSelection, ParameterSequence, Tu1140ParameterScene, descriptor externs and initializer declarations have no surviving users.",
+        "Keep the actual moved func_001757dc ParameterBufferState definition and all accepted scene/deferred callback declarations unchanged."
+      ],
+      "evidence": [
+        "NEW-MEMBER-DESCRIPTORS.json",
+        "CONCRETE-SLOTS.json",
+        "DISPATCH-REGISTER-FACTS.json",
+        "src/wave10/func_00177b10.cpp:3-7",
+        "src/wave19/func_001e716c.cpp:7-25",
+        "src/wave19/func_001e387c.cpp:8-34",
+        "include/game/scene_parameters.h:29-36",
+        "include/game/controller_transitions.h:21-30",
+        "src/checkpoint10/func_001e744c.cpp:6-10"
+      ],
+      "reentry_requirement": "An evidenced common native hierarchy, exact adopted native slot providers and the invoking deferred-member interface, migrated together; no unrelated base, cast, alias or second model."
+    },
+    {
+      "finding_ids": [
+        "codex-b:F02",
+        "codex-a:F01"
+      ],
+      "disposition": "HOLD_NEW_UNCREDITED",
+      "functions": [
+        "func_001f4cf8"
+      ],
+      "bytes": 64,
+      "basis": "The NEW Font::GetCharStrmReader(wchar_t) invokes the native virtual CharacterCode Font::GetCharacterCode() const, but its actual slot providers have not been adopted as that interface. The independently re-derived call at 0x001f4d18 loads vptr+0x48. The accepted native ResFontBase constructor at 0x00113e78 installs address point 0x00223cd8, whose +0x48 cell selects func_001efe90; that accepted definition is unsigned func_001efe90(const W12cRegionReader*), with neither a Font/ResFontBase receiver nor a native override. The corresponding cells at 0x00224c64/0x00224d78 also select the revised C int(const FontResource*) provider func_001f4b3c. Thus keeping FontVTable opaque and selecting the correct UTF16 reader afterward does not close the virtual call already performed at this line: a NEW typed native consumer now invokes incompatible C/record providers. Adopt the genuine native encoding provider and migrate its affected clients, or retain this reader as uncredited until that transaction is complete; do not bridge the unrelated records with an alias or cast.",
+      "changes": [
+        "Remove only this ctypes1 NEW unit claim and source; add explicit finding-bound hold.",
+        "Both revised accepted unit lists are byte-for-byte equal as JSON values to c012-r5.",
+        "Keep native Font/ResFontBase/CharStrmReader headers and accepted C provider declarations unchanged: they predate this revision; no accepted declaration is weakened."
+      ],
+      "evidence": [
+        "FONT-DISPATCH.json",
+        "INVOKER-SEMANTICS.json",
+        "include/nw/font/font_Font.h:115-117",
+        "include/nw/font/font_ResFontBase.h:62",
+        "src/wave12/func_001efe90.c:1-5",
+        "include/game/item_text.h:75-78",
+        "src/wave12/func_001f4b3c.c:4-7",
+        "src/nw4c/font_ResFontBase_ctor.cpp"
+      ],
+      "reentry_requirement": "Adopt actual native GetCharacterCode overrides and migrate affected clients as one evidenced transaction."
+    },
+    {
+      "finding_ids": [
+        "codex-b:F03",
+        "codex-a:F03"
+      ],
+      "disposition": "RESTORED_BYTE_IDENTICAL",
+      "restored_count": 43,
+      "evidence": "scratch/integrator/c012/r6/RESTORATION.json",
+      "basis": "Restored every authoritative reviewer-listed Main file at the original path using git checkout 4a4da5cd; complete buffer equality and SHA-256 equality observed for all 43."
+    }
+  ],
+  "new_counts": {
+    "functions": 26,
+    "bytes": 3988
+  },
+  "holds": {
+    "functions": 64,
+    "bytes": 14520
+  },
+  "moves_unchanged": 31,
+  "revised_lists_unchanged": {
+    "revised_accepted_units": 67,
+    "surviving_revised_accepted_units": 64
+  },
+  "accepted_declarations_changed_by_r6": [],
+  "accepted_credit_withdrawn": 0
+}

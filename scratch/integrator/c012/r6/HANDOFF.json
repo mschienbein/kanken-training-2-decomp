@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "branch": "c012-r6",
+  "worktree": "scratch/worktrees/c012-r5",
+  "source_parent": "4c14ff9f2e36803d5e2ed5df33db88aad5889b1a",
+  "source_commit": "945681dbaca722be311ee88d30889d08de7ab9c3",
+  "comparison_main": "4a4da5cd",
+  "status": "REMEDIATED_READY_FOR_MAIN_REPREPARATION",
+  "acceptance_claim": false,
+  "reviews_remediated": {
+    "codex-a": {
+      "path": "scratch/review/c012-r5/codex-a/REVIEW.json",
+      "sha256": "f58aa9cbc34b7b47ba10ec6bd096f86558f61a9d96740c76813c53760bb579e8",
+      "verdict": "FAIL"
+    },
+    "codex-b": {
+      "path": "scratch/review/c012-r5/codex-b/REVIEW.json",
+      "sha256": "c41368a38340c8dceaa7f3e992dad8207cf62dc232d86825c20727be23d8f48c",
+      "verdict": "FAIL"
+    }
+  },
+  "findings": [
+    {
+      "codex_b": "F01",
+      "codex_a": "F02",
+      "disposition": "HOLD_NEW",
+      "functions": [
+        "func_001e395c",
+        "func_001e722c"
+      ],
+      "bytes": 772
+    },
+    {
+      "codex_b": "F02",
+      "codex_a": "F01",
+      "disposition": "HOLD_NEW",
+      "functions": [
+        "func_001f4cf8"
+      ],
+      "bytes": 64
+    },
+    {
+      "codex_b": "F03",
+      "codex_a": "F03",
+      "disposition": "RESTORED_BYTE_IDENTICAL",
+      "files": 43
+    }
+  ],
+  "counts": {
+    "NEW_functions": 26,
+    "NEW_bytes": 3988,
+    "moves": 31,
+    "moved_bytes": 940,
+    "candidate_units": 42,
+    "candidate_claims": 57,
+    "candidate_bytes": 4928,
+    "NEW_holds": 64,
+    "NEW_hold_bytes": 14520,
+    "accepted_identities_preserved": 2770,
+    "proposed_functions": 2796,
+    "proposed_bytes": 305008,
+    "proposed_units": 2719,
+    "helper_only_units": 25,
+    "restored_files": 43,
+    "retired_move_sources": 17
+  },
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "frozen v1.20",
+  "revised_lists": {
+    "revised_accepted_units": 67,
+    "surviving_revised_accepted_units": 64,
+    "both_identical_to_r5": true
+  },
+  "production_closure": {
+    "surviving_source_changes_from_r5": 0,
+    "surviving_include_closure_changes_from_r5": 0,
+    "required_changed_survivor_contexts": 0,
+    "removed_only_unused_new_header": "include/game/scene_parameters.h",
+    "accepted_declarations_weakened": []
+  },
+  "reproof": {
+    "contexts": 6,
+    "function_comparisons": 8,
+    "all_MATCH": true,
+    "exits": {
+      "0": 6
+    },
+    "driver_exit_code": 0,
+    "sequential": true,
+    "nice": 10,
+    "show": 0,
+    "kind": "Additional focused retained-provider and moved-parameter boundary proof; not a full-ledger rerun or acceptance gate."
+  },
+  "lint": {
+    "source_commit": "945681dbaca722be311ee88d30889d08de7ab9c3",
+    "exit_code": 0,
+    "counts": {
+      "c_pointer_cast": 8,
+      "memcpy": 3,
+      "static_cast_pointer": 6,
+      "union": 2,
+      "volatile": 4
+    },
+    "source_leads": 23,
+    "proximity_leads": 4,
+    "second_models": 0,
+    "new_leads": 0,
+    "unresolved_leads": 0,
+    "all_leads_dispositioned": true
+  },
+  "restoration": {
+    "authoritative_count": 43,
+    "all_byte_identical_to_4a4da5cd": true,
+    "default_diff_D_rows": 5,
+    "complete_old_source_deletions": 17,
+    "only_declared_move_old_sources_deleted": true,
+    "non_move_deletions": []
+  },
+  "scratch_cleanup": {
+    "objects_or_dependencies_removed": 6,
+    "hashes_recorded_before_deletion": true
+  },
+  "candidate_manifest": {
+    "path": "config/candidates/c012.json",
+    "sha256": "7cdb51f13af36b8d24ddad2072803704a2f2c378f905433e08e1fd2e956236f9"
+  },
+  "known_issues": {
+    "path": "docs/known-issues-c012.md",
+    "sha256": "b9d54c0e915750e91c62014b8f70e3e17e97dff2030715ba3e7d247b5100ee03"
+  },
+  "evidence": [
+    {
+      "path": "DISPOSITIONS.json",
+      "sha256": "9a3369acc0b7a9eef4cca736e74d663ac79fbdbb796c0e17c94491cf35737cff"
+    },
+    {
+      "path": "RESTORATION.json",
+      "sha256": "e98eafedde93144ac94f788de20e5a678fe22a7321db31d3ae8be409857c4bb5"
+    },
+    {
+      "path": "OTHER-FILE-PRESERVATION.json",
+      "sha256": "64106a7a27260b5bc9e28481a1f0fe84560dfc867b97ca611a9b009b340bd737"
+    },
+    {
+      "path": "DECLARATION-RETENTION.json",
+      "sha256": "47de932e7eef49ae18f735e022be79ab8ab7ddf91cbdd3a946cfbd0839cff756"
+    },
+    {
+      "path": "REPROOF-SCOPE.json",
+      "sha256": "86055b73e0e812e199c83327239fd995e0b7d20c769c9eb085025b0e0de933b0"
+    },
+    {
+      "path": "REPROOF.json",
+      "sha256": "d1035fcbb857092d8df8c538c437d181b130046d23a20577537c09a2177a9199"
+    },
+    {
+      "path": "CLEANUP.json",
+      "sha256": "a9be6c5c8353e64d341623dfef4bdbfa661369d5b3b0f44a01bdb9a9d578f985"
+    },
+    {
+      "path": "POLICY-LINT.json",
+      "sha256": "c975fbf1dd36378412bc733e289379dce73d805784182fc22b695419514979e0"
+    },
+    {
+      "path": "POLICY-LINT-DISPOSITIONS.json",
+      "sha256": "a24f7d472ce9abf098e505de09fb346832f09d9fc4ed210b5fcb33a97ac21e18"
+    }
+  ],
+  "initial_tree_prerequisite": {
+    "head_was_expected": true,
+    "branch_did_not_exist": true,
+    "tracked_tree_clean": true,
+    "preexisting_untracked_cache_symlink_preserved": true,
+    "local_exclusion_added": "/.cache in common .git/info/exclude",
+    "clean_tree_asserted_before_git_checkout_b": true
+  },
+  "not_run": [
+    "interfaces",
+    "argcheck",
+    "builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize"
+  ],
+  "agent_or_task_calls": 0,
+  "main_or_accept_writes": false,
+  "source_changes_after_lint": []
+}

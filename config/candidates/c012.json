@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "Combinedc012-r5 on main69854e8e plus ctypes1-r4(93921aa2), merged c012-r4(4a9cf7b5). Canonical Main/c011/ctypes models win. Main signed RestorableState fix retained. One explicit v6/L1 selection; no U1. CM2-F01/F03 are inherited accepted-code known issues outside this revision scope, not c012-r5 blockers by Main ruling.",
+  "note": "Combined c012-r6 remediates c012-r5 on Main 4a4da5cd, retaining canonical Main/c011/ctypes1-r4 revisions and all 31 declared moves. One explicit v6/L1 selection; no U1. Both c012-r5 reviews' scene/member-callback and native font-provider blockers are held as NEW uncredited functions; all 43 unrelated deleted Main evidence files are restored. Inherited accepted CM2-F01/F03 remain known issues, not repaired or extended by these holds.",
   "units": [
     {
       "source": "src/checkpoint12/intake-r17/037-np007/func_00135908.c",
@@ -233,22 +233,6 @@
       "author": "C012IntakeCodex census-20261021-r2"
     },
     {
-      "source": "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001e395c"
-      ],
-      "author": "C012IntakeCodex census-20261021-r2"
-    },
-    {
-      "source": "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001e722c"
-      ],
-      "author": "C012IntakeCodex census-20261021-r2"
-    },
-    {
       "source": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
       "profile": "game",
       "functions": [
@@ -358,15 +342,6 @@
         "func_001e5d38"
       ],
       "author": "nf217-cmodels2-shared-item-category"
-    },
-    {
-      "source": "src/wave20/func_001f4cf8.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001f4cf8"
-      ],
-      "author": "types-compose",
-      "qualification": "NEW re-entry of exactly the PF06-excluded reader: native Font::GetCharStrmReader(wchar_t) returns actual CharStrmReader member descriptors from data_0021c64c; native CP1252/UTF16 providers are bound through explicit moves, and UTF16 consumes the witnessed wchar_t producer API. This does not close the opaque game FontVTable/data_00223d98 or re-enter the four excluded wrappers. Unobserved historical callee identity remains [INFERENCE]."
     },
     {
       "source": "src/wave18/func_0014c2cc.cpp",
@@ -536,6 +511,53 @@
     }
   ],
   "holds": [
+    {
+      "function": "func_001e395c",
+      "target_bytes": 408,
+      "status": "uncredited-NEW-hold",
+      "component": "c012-r6",
+      "category": "native-member-provider-not-adopted",
+      "finding_ids": ["codex-b:F01", "codex-a:F02"],
+      "evidence": "scratch/integrator/c012/r6/DISPOSITIONS.json",
+      "review_evidence": [
+        "scratch/review/c012-r5/codex-b/NEW-MEMBER-DESCRIPTORS.json",
+        "scratch/review/c012-r5/codex-b/CONCRETE-SLOTS.json",
+        "scratch/review/c012-r5/codex-b/DISPATCH-REGISTER-FACTS.json"
+      ],
+      "reason": "The queued data_002184b8 native MemberCallback dispatches through CallbackTarget slot +12 to the C func_001e387c(RestartTransitionScreenW19G*) provider, not an adopted native override. The real common receiver hierarchy, exact slot provider and deferred invoker must be migrated together; no alias, receiver cast or second class model is introduced.",
+      "proposed_source": "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp"
+    },
+    {
+      "function": "func_001e722c",
+      "target_bytes": 364,
+      "status": "uncredited-NEW-hold",
+      "component": "c012-r6",
+      "category": "native-member-provider-not-adopted",
+      "finding_ids": ["codex-b:F01", "codex-a:F02"],
+      "evidence": "scratch/integrator/c012/r6/DISPOSITIONS.json",
+      "review_evidence": [
+        "scratch/review/c012-r5/codex-b/NEW-MEMBER-DESCRIPTORS.json",
+        "scratch/review/c012-r5/codex-b/CONCRETE-SLOTS.json",
+        "scratch/review/c012-r5/codex-b/DISPATCH-REGISTER-FACTS.json"
+      ],
+      "reason": "The queued data_00218888 native MemberCallback dispatches through CallbackTarget slot +12 to C func_001e716c(TransitionScreenW19G*), while Tu1140ParameterScene has no evidenced native relationship to that receiver. The unrelated Tu1140ParameterScene and its held-only declarations are removed; re-entry requires the real native hierarchy/provider/invoker transaction.",
+      "proposed_source": "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp"
+    },
+    {
+      "function": "func_001f4cf8",
+      "target_bytes": 64,
+      "status": "uncredited-NEW-hold",
+      "component": "ctypes1-r4",
+      "category": "native-font-provider-not-adopted",
+      "finding_ids": ["codex-b:F02", "codex-a:F01"],
+      "evidence": "scratch/integrator/c012/r6/DISPOSITIONS.json",
+      "review_evidence": [
+        "scratch/review/c012-r5/codex-b/FONT-DISPATCH.json",
+        "scratch/review/c012-r5/codex-b/INVOKER-SEMANTICS.json"
+      ],
+      "reason": "Font::GetCharStrmReader(wchar_t) invokes native GetCharacterCode at vptr+0x48, whose installed slots select C func_001efe90(const W12cRegionReader*) and func_001f4b3c(const FontResource*) rather than adopted Font/ResFontBase overrides. Hold only this ctypes1 NEW reader; retain every accepted native declaration and all ctypes1 revised units. Re-entry requires exact native provider adoption and affected-client migration, not an alias or cast.",
+      "proposed_source": "src/wave20/func_001f4cf8.cpp"
+    },
     {
       "function": "func_00107dec",
       "target_bytes": 288,
