@@ -1,0 +1,19 @@
+{
+  "repairs": [
+    {
+      "finding": "VRAM allocator second object overlaps HeapManager at +4",
+      "fix": "Define HeapManager.vram with the existing VramAllocator type moved to game/vram_allocator.h. Remove bss_004952f4 and use bss_004952f0.vram.",
+      "layout_proof": "HEAP-VRAM-LAYOUT.json"
+    },
+    {
+      "finding": "Two iterator helpers became unused after dropping unrelated context",
+      "fix": "Remove the unused insert_link and erase_link implementations from func_0017df84.cpp."
+    },
+    {
+      "finding": "Native group serialized-tail contract was implicit",
+      "fix": "Document the fixed-width serialized resource tail and inferred external bounds/alignment contract."
+    }
+  ],
+  "superseded_lint": "POLICY-LINT.json",
+  "superseded_scope": "COMPLETE-SCOPE-r1.json"
+}

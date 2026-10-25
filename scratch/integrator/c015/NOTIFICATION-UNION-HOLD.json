@@ -1,0 +1,24 @@
+{
+  "hold": {
+    "function": "func_0017418c",
+    "target_bytes": 108,
+    "status": "uncredited-NEW-hold",
+    "component": "c015",
+    "author": "nm87",
+    "category": "inherited-notification-union-storage",
+    "reason": "The matching target selects NotificationStorage.text while the same SavedNotification payload is also the fields/selection/word union model in notification.h. The grade setter uses the same text element, but that alone does not establish one complete typed payload model. The standing no-union-punning rule is not waived for a new caller of an inherited storage view; hold instead of extending that unresolved root contract.",
+    "author_source": "scratch/authors/nm87/src/func_0017418c.c",
+    "author_receipt": "scratch/authors/nm87/match/func_0017418c/40-delivered/func_0017418c.result.json",
+    "evidence": "scratch/integrator/c015/NOTIFICATION-UNION-HOLD.json"
+  },
+  "policy": "Existing accepted union models are not authorization for new union-view uses. No full payload cutover is guessed.",
+  "producer": "src/wave15/func_001dbca0.c writes the text member; other accepted clients use NotificationStorage.fields and selection.",
+  "scope": "Withdraw only this uncredited NEW function and its no-longer-needed shared declaration/caller migration.",
+  "prior_full_closure": {
+    "result": "PASS",
+    "contexts": 971,
+    "functions": 990,
+    "actual_exit_code": 0,
+    "path": "closure-r5/results.json"
+  }
+}

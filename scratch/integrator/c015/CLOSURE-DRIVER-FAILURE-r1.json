@@ -1,0 +1,16 @@
+{
+  "exit_code": 1,
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    ".venv/bin/python",
+    "scratch/integrator/c012/r5/reprove_grouped_closure.py",
+    "--scope",
+    "scratch/integrator/c015/COMPLETE-SCOPE-r1.json",
+    "--out",
+    "scratch/integrator/c015/closure-r1"
+  ],
+  "failure": "Existing c012 runner calls relative_to(absolute ROOT) on the output receipt path; a relative --out causes ValueError after its first matcher receipt. No closure PASS is claimed.",
+  "correction": "Use a new absolute --out path; retain the failed directory and first receipt."
+}

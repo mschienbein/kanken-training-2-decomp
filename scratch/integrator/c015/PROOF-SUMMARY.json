@@ -1,0 +1,57 @@
+{
+  "source_commit": "14866d881",
+  "scope": "COMPLETE-SCOPE-r5.json",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "driver_exit_code": 0,
+  "record": "closure-r6/results.json",
+  "record_sha256": "22f512f71466e64061515775dc68b4877f812cb3ea333b125faf970b99af465b",
+  "contexts": 903,
+  "scope_units": 919,
+  "required_functions": 920,
+  "matched_functions": 920,
+  "exit_counts": {
+    "0": 903
+  },
+  "helper_only_units": 15,
+  "new_functions": 18,
+  "new_bytes": 2220,
+  "moves": 0,
+  "revised_units": 901,
+  "revised_credited_functions": 902,
+  "holds": 27,
+  "prior_runs": [
+    {
+      "run": "closure-r1",
+      "exit_code": 1,
+      "cause": "Relative --out was rejected by the existing runner after one receipt; corrected to absolute output."
+    },
+    {
+      "run": "closure-r2",
+      "status": "cancelled/superseded",
+      "cause": "VRAM overlap source repair; no closure claim."
+    },
+    {
+      "run": "closure-r3",
+      "exit_code": 1,
+      "matched_functions": 1026,
+      "required_functions": 1027,
+      "cause": "Real HeapManager.vram member mismatch; candidate held."
+    },
+    {
+      "run": "closure-r4",
+      "status": "cancelled/superseded",
+      "cause": "Native vertex provider interface repair."
+    },
+    {
+      "run": "closure-r5",
+      "exit_code": 0,
+      "matched_functions": 990,
+      "required_functions": 990,
+      "contexts": 971,
+      "cause": "Passing proof subsequently narrowed by holding NotificationStorage union use; all final inputs re-proved in r6."
+    }
+  ]
+}
