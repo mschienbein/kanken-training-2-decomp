@@ -1,7 +1,23 @@
 {
   "schema_version": 1,
   "base_commit": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
-  "note": "c016 merged native graphics/current-contract intake at author snapshot770c4d16346a665e983122cf34ffcbd3387a6598: scene-env70e33056, initial fx01/fx03 harvest, held-fixes545491034e, wave-w1e9d1337a and wave-w317c9e343c. Exactly10 NEW functions/2216 B,12 in-place accepted source revisions and1 accepted240-byte move to a native member;10 holds/1924 B. Initial five graphics sources re-derived via collect.py under default v2/none; checkpoint dependency proofs preserve explicit v6/L1. Native identities and unrecovered historical source names remain [INFERENCE]. Library _ZdaPv, c015 claims, scene-native, scene-font and gate-failed W2 remain excluded. Main owns argcheck/prepare/review/finalize. Private reconciliation, original ABI witnesses and unchanged-source HEADER-CLOSURE-REPROOFS records live under scratch/integrator/c016/.",
+  "note": "c016 merged native graphics/current-contract intake at author snapshot770c4d16346a665e983122cf34ffcbd3387a6598: scene-env70e33056, initial fx01/fx03 harvest, held-fixes545491034e, wave-w1e9d1337a and wave-w317c9e343c. Exactly10 NEW functions/2216 B,10 in-place accepted source revisions and1 accepted240-byte move to a native member;10 holds/1924 B. Main deferred W1's declaration-only revisions to accepted00114778/001147c0: those bodies retain pre-existing matrix/command union punning and remain exactly at d93aa6c7; reopening requires a separate complete owner repair, not a c016 change. No new c016 function depends on their local cursor externs. Initial five graphics sources re-derived via collect.py under default v2/none; checkpoint dependency proofs preserve explicit v6/L1. Native identities and unrecovered historical source names remain [INFERENCE]. Library _ZdaPv, c015 claims, scene-native, scene-font and gate-failed W2 remain excluded. Main owns argcheck/prepare/review/finalize. Private reconciliation, ABI witnesses and unchanged-source HEADER-CLOSURE-REPROOFS records live under scratch/integrator/c016/; the deferred accepted-source issue is published in docs/known-issues-c016.md.",
+  "deferred_mechanical_revisions": [
+    {
+      "function": "func_00114778",
+      "source": "src/wave5/func_00114778.c",
+      "accepted_source_sha256": "3ccfc3fd0d12792f6a826a40db6cd2b0ad8cbbf19c0577587203cc158cb079ab",
+      "status": "accepted-source-unchanged; no new credit",
+      "reason": "Main deferred the cursor-extern retirement because reopening the pre-existing Matrix44Command union-punning body requires a separate matrix/command owner repair."
+    },
+    {
+      "function": "func_001147c0",
+      "source": "src/wave5/func_001147c0.c",
+      "accepted_source_sha256": "9de96086d1079ef07e8ff9ed6fde38c246111f985fb9e16f7db3db6c48cad116",
+      "status": "accepted-source-unchanged; no new credit",
+      "reason": "Main deferred the cursor-extern retirement because reopening the pre-existing Matrix34Command/ModelMatrixPacket union-punning body requires a separate matrix/command owner repair."
+    }
+  ],
   "units": [
     {
       "source": "src/checkpoint16/func_00115f5c.cpp",
@@ -212,34 +228,6 @@
       "reason": "Publish the exact IdentifierNode/IdentifierRegistry definition and void(registry*,int) prototype; remove the identical local definitions, with no key representation or body change. No codegen change expected; header visibility still needs Main remeasurement.",
       "header_dependencies_changed": [
         "include/game/object_pool.h"
-      ]
-    },
-    {
-      "source": "src/wave5/func_00114778.c",
-      "profile": "game",
-      "functions": [
-        "func_00114778"
-      ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
-      "accepted_source_sha256": "3ccfc3fd0d12792f6a826a40db6cd2b0ad8cbbf19c0577587203cc158cb079ab",
-      "current_source_sha256": "fc6b7a1c38e0825d8515ac825a2d4bce50543ed87dc7e804382228d263ddfb8c",
-      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; body and byte-cursor protocol stay unchanged. No codegen change expected; header visibility still needs Main remeasurement.",
-      "header_dependencies_changed": [
-        "include/game/command_buffer.h"
-      ]
-    },
-    {
-      "source": "src/wave5/func_001147c0.c",
-      "profile": "game",
-      "functions": [
-        "func_001147c0"
-      ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
-      "accepted_source_sha256": "9de96086d1079ef07e8ff9ed6fde38c246111f985fb9e16f7db3db6c48cad116",
-      "current_source_sha256": "330b02fd0de3cabc6d5ce2f2f9d58f4f576f3924a0c6aa5ed37cab4f0123e10d",
-      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; preserve direct byte publication. No codegen change expected; header visibility still needs Main remeasurement.",
-      "header_dependencies_changed": [
-        "include/game/command_buffer.h"
       ]
     },
     {
@@ -528,34 +516,6 @@
       ]
     },
     {
-      "source": "src/wave5/func_00114778.c",
-      "profile": "game",
-      "functions": [
-        "func_00114778"
-      ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
-      "accepted_source_sha256": "3ccfc3fd0d12792f6a826a40db6cd2b0ad8cbbf19c0577587203cc158cb079ab",
-      "current_source_sha256": "fc6b7a1c38e0825d8515ac825a2d4bce50543ed87dc7e804382228d263ddfb8c",
-      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; body and byte-cursor protocol stay unchanged. No codegen change expected; header visibility still needs Main remeasurement.",
-      "header_dependencies_changed": [
-        "include/game/command_buffer.h"
-      ]
-    },
-    {
-      "source": "src/wave5/func_001147c0.c",
-      "profile": "game",
-      "functions": [
-        "func_001147c0"
-      ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
-      "accepted_source_sha256": "9de96086d1079ef07e8ff9ed6fde38c246111f985fb9e16f7db3db6c48cad116",
-      "current_source_sha256": "330b02fd0de3cabc6d5ce2f2f9d58f4f576f3924a0c6aa5ed37cab4f0123e10d",
-      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; preserve direct byte publication. No codegen change expected; header visibility still needs Main remeasurement.",
-      "header_dependencies_changed": [
-        "include/game/command_buffer.h"
-      ]
-    },
-    {
       "source": "src/wave8/func_001d4174.c",
       "profile": "game",
       "functions": [
@@ -619,7 +579,7 @@
   "totals": {
     "new_functions": 10,
     "new_bytes": 2216,
-    "in_place_revised_accepted_units": 12,
+    "in_place_revised_accepted_units": 10,
     "native_moved_accepted_units": 1,
     "accepted_moves": 1,
     "moved_bytes": 240,
