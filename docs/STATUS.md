@@ -2,6 +2,32 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-25 (late evening) — catalogue v16 adopted (`_ZdaPv`); 16 subagents
+
+**Accepted:** 2,796 functions / 305,008 B (seq 13, unchanged). Denominator **v16** (history v13):
+4,545 creditable functions / 1,120,082 B (**27.23%**). Gates **v1.20**.
+
+- **Catalogue v16** classifies `func_0019e08c` (ARM, 12 B) as the C++ runtime library function
+  `_ZdaPv` (operator delete[]).
+  - Source: the ARM Compiler 4.1 b791 member `cpprt_4.l(array_del.o)`, byte-identical in b894.
+  - Two native callers name it independently.
+  - It is the one strict identity the 4.1 library sweep proved. The other 4.1 leads stay refused;
+    see `scratch/integrator/library-sweep-41/REPORT-41.md`, which is private.
+  - Review: `docs/catalogue/REVIEW-v16.md`, PASS_WITH_QUALIFICATIONS, no findings. Suite: 1,181
+    tests, 1 skipped, 0 failed modules.
+- **Concurrency raised to 16 subagents** (user, 2026-10-25).
+- **Scene dispatch unblocked without a ruling.** Genuine C++ virtual classes and member pointers
+  match the scene dispatch code under the game profile: the generic consumer `func_001b7dac`
+  matches 84/84 and two registrars match 180/180 and 192/192.
+  - The 87 scene and dispatch functions become a native-class migration.
+  - The explicit-table ruling remains the fallback.
+- **Small held-contract families:** 3 of 25 were reconciled (4 functions), and they go into c015.
+  The other 22 are held on unproven native class protocols, each with evidence; a survey is
+  testing native class models for them.
+- **Post-ladder revisit:** re-attempts of near misses within 16 B, using the new contracts. So far
+  1 match (`func_00122680`) from 48 functions.
+- **Open user question:** 9 Thumb runtime functions (362 B) that match no 4.1 library exactly.
+
 ## 2026-10-25 (evening) — catalogue v15 adopted; residue table generator landed
 
 **Accepted:** 2,796 functions / 305,008 B (seq 13, unchanged). Denominator **v15** (history v12):

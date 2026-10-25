@@ -1,0 +1,77 @@
+# ARM Compiler 4.1 library identities: strict adjudication
+
+Research certificate only. No catalogue, names, source, profile, gate or C-credit adoption. Build 791 is preferred wherever the complete member is identical to build 894.
+
+## Result
+
+**PROVEN: 1 owner / 12 B.** Thumb: **0 / 0 B**; ARM: **1 / 12 B**. Eight discovery owners are REFUSED; five other Thumb owners /276B are PENDING-LINKER-v19, never classified.
+
+| Owner | B | ISA | Verdict | Reason |
+|---|---:|---|---|---|
+| `func_0010011c` | 18 | thumb | **REFUSED** | The complete declared 18-byte __ARM_exceptions_buffer_init body reconstructs, and a fresh full 66-byte shared-section comparison ALSO reconstructs exactly (including the adjacent 26/22-byte allocate/free declarations). The extra 48 bytes are outside this unchanged owner and remain unknown, not credited or silently annexed. REFUSED identity: the single malloc relocation targets 0x0019ffa8 without an independently authenticated malloc binding, and no admitted natural caller names __ARM_exceptions_buffer_init. A short wrapper plus its newly evidenced shared section is retained evidence, not permission to waive the required API/name anchor. |
+| `func_00100360` | 60 | thumb | **REFUSED** | All 60 bytes of the complete snprintf-family section reencode; the _printf_char_common and _sputc calls agree with already classified targets. A retained public-stdio research source/208-byte MATCH receipt is a possible name lead, but its object is absent from its output directory, author subtree and content-addressed cache, so its named relocation cannot be freshly authenticated. REFUSED identity: no admitted anchor selects among the six separately defined snprintf spellings, and _snputc still resolves only to 0x001005fa, outside a function owner in the unchanged 16-byte unknown interval. Its callback API identity is not independently authenticated. The research caller's separate source/type holds are not waived; no alias or field-mask-only promotion is made. |
+| `func_00100c9c` | 2 | thumb | **REFUSED** | REFUSED: a two-byte generic return matches 7,400 whole-extent declaration records and many unrelated allocator, destructor and runtime stub symbols. A whole-section coincidence of this size supplies neither a unique vendor/API name nor an independently named original-address anchor. |
+| `func_0010cc94` | 24 | arm | **REFUSED** | REFUSED: the actual std::string/std::wstring constructor candidates contradict their same-object allocator definition: the inferred target 0x00113e78 does not equal that complete vendor target section. The null-reference target is only inferred BSS placement. The other compatible 24-byte constructor bodies are generic separate definitions, not aliases; no admitted original-address string-constructor anchor selects one. |
+| `func_00143318` | 16 | arm | **REFUSED** | REFUSED: the 16-byte std::exception constructor coincidence requires an unproved _ZTVSt9exception binding at 0x002240d4. The existing independently bound original identity is nw::lyt::ResourceAccessor's C2 constructor, not a std::exception alias; no catalogue name or vtable is rebound. |
+| `func_0019e08c` | 12 | arm | **PROVEN** | PROVEN _ZdaPv: the complete 12-byte ARM array_del.o section and complete STT_FUNC declaration match exactly after the unchanged strict R_ARM_CALL reconstruction, with zero linker rewrites. tr20's complete 140-byte native delete[] caller independently names _ZdaPv at original +96. A new natural public-<new> replay of the already accepted 32-byte func_00102cb0 independently names the outgoing _ZdlPv target at 0x001852f4 (+16). Thus neither the incoming API identity nor the outgoing relocation is justified by generic deleting-destructor shape. Build 791 is the preferred archive provenance. The corresponding complete members in build 894 are byte-identical in cpprt_4.l and cpprt_4f.l. This proves known-library body identity, not historical archive uniqueness or C credit. |
+| `func_001a00a4` | 16 | arm | **REFUSED** | REFUSED __rt_fp_status_addr: seven freshly reconstructed already classified complete callers actually name __rt_ctype_table at 0x001a00a4, not either fp-status API spelling. The one/two-libspace callees in the fp-status coincidences remain unbound. The actual __rt_ctype_table definition is not a rescue: the selected 4.1 c_5.l section is 20 bytes (c_t.l:24), versus the unchanged 16-byte owner. Its equal 16-byte masked prefix cannot replace complete-section/extent identity. |
+| `func_001ceca8` | 16 | arm | **REFUSED** | REFUSED: hundreds of unrelated 16-byte deleting-destructor/signal-wrapper definitions reconstruct with inferred retargets. No natural caller, primary-vtable/class identity or admitted same-address name selects a D0 API. Referenced D1/other target sections are inferred rather than independently placed; the generic call/return/deallocation shape is not ownership proof. |
+| `func_001db3ec` | 24 | arm | **REFUSED** | REFUSED: the actual std::string/std::wstring constructor candidates contradict their same-object allocator definition at inferred target 0x001daf74; the null-reference target is only inferred BSS placement. The existing independently bound original identity is nw::font::ResFont C1, not std::string. Other same-body constructor definitions cannot be treated as aliases or override that name. |
+
+## Proven archive and two independent name/ABI anchors
+
+Preferred: **4.1 b791 `lib/cpplib/cpprt_4.l(array_del.o)`, `_ZdaPv`**, member offset10774, complete12B section, ARM, aligned4, one R_ARM_CALL at+4 to `_ZdlPv`.
+
+- Incoming: retained tr20 native `delete[]` caller `func_00172f50`, complete140B, named relocation at+96; freshly reconstructed, no compiler rerun.
+- Outgoing: one new public-`<new>` natural scalar-deallocation replay of accepted `func_00102cb0`, complete32B, `_ZdlPv` at+16 targets001852f4. Whole section exact; zero rewrites. The temporary object and dependency file were deleted, and the global object cache was bypassed.
+- Cross-build: b791/b894 `cpprt_4.l(array_del.o)` members are byte-identical, SHA-256 `ebd595814707965bb838feecaf85555d3137cb2ed8e30926ba1e1907b482b06b`. The `cpprt_4f.l` alternatives are also byte-identical across builds, SHA-256 `d979bad977d5830202feaa3ab8e36b2e0ec90b264addbfaac1121152e0841d31`. The two archive variants' member payloads differ from each other, but their complete12B code sections agree; no claim conflates those hashes.
+- The original STRICT-41 inferred-target record is preserved. CANDIDATES-41 adds the independently named scalar-target certificate; it does not retroactively rewrite the old proof.
+
+## Important complete-section and false-positive findings
+
+The 18B exception-buffer initializer is not merely a declared-prefix hit: its complete shared66B vendor section also reconstructs exactly, including the26B allocate and22B free definitions. The extra48B currently occupy the unknown interval0010012e/48. This evidence is retained without changing any extent, unknown byte, or API admission rule; the missing malloc/name anchors still refuse classification.
+
+The public-stdio research source and historical208B MATCH receipt remain only a name lead: the corresponding object is absent from its output directory, author subtree and content-addressed cache. No fresh named-call replay is claimed. `_snputc` at001005fa is also still an unauthenticated callback target in an unknown16B interval, so snprintf remains REFUSED.
+
+Seven already classified whole callers—toupper, tolower, strtol, __strtoll, __strtoull, _mbrtowc and _wcrtomb—actually name `__rt_ctype_table` at001a00a4. The equal fp-status wrapper is therefore not an authenticated API identity. The actual4.1 ctype-table definition has20B/24B extent, not16B.
+
+## Six other Thumb owners: pending leads and exact provenance
+
+All five requested families are marked **PENDING-LINKER-v19** under the user ruling. Crucially, only the two printf dispatchers have exact single-slot4.1 witnesses; the exact three multibyte-family single-slot witnesses in the retained near-miss report are **5.04 b82**, not4.1. Adopting v19 cannot by itself erase the additional4.1 setup/extent differences.
+
+| Owner | B | Lead | Single differing call slot in the exact older-build witness | 4.1 b791/b894 result |
+|---|---:|---|---|---|
+| `func_0010080a` | 36 | `mbrlen`; PENDING-LINKER-v19 | +18, `_mbdata`, 4B; original two2B no-effect operations | c_5.l vendor extent30B; extra differing offsets outside the original slot: [2, 4, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 22, 23, 25, 27, 28, 29]. Exact single-slot evidence retained from5.04, not asserted for4.1. |
+| `func_00100914` | 22 | `_printf_cs_common`; PENDING-LINKER-v19 | +14, `_printf_str`, 4B; original two2B no-effect operations | c_5.l exact extent; all other masked bytes agree; actual callee WEAK UNDEF. No rewrite/classification yet. |
+| `func_00100af8` | 22 | `_printf_lcs_common`; PENDING-LINKER-v19 | +14, `_printf_wctomb`, 4B; original two2B no-effect operations | c_5.l exact extent; all other masked bytes agree; actual callee WEAK UNDEF. No rewrite/classification yet. |
+| `func_0018fd68` | 80 | `mbstowcs`; PENDING-LINKER-v19 | +12, `_mbdata`, 4B; original two2B no-effect operations | c_5.l vendor extent80B; extra differing offsets outside the original slot: [2, 4, 22, 28, 43, 52, 65]. Exact single-slot evidence retained from5.04, not asserted for4.1. |
+| `func_0019fe04` | 116 | `mbrtowc`; PENDING-LINKER-v19 | +30, `_mbdata`, 4B; original two2B no-effect operations | c_5.l vendor extent116B; extra differing offsets outside the original slot: [2, 4]. Exact single-slot evidence retained from5.04, not asserted for4.1. |
+| `func_0019f9a4` | 6 | No named library family; remains residue | None | No complete-section/extent match; do not manufacture an isolated helper or merge its cross-owner entry. |
+
+Every pending row includes exact archive/member offsets and hashes, callee symbol/binding, slot geometry, differing-offset counts and carried-versus-fresh mode. `SUPPLEMENT-41.json` binds both4.1 builds; the five exact5.04 diagnostics are explicitly carried from the hash-bound older artifact, not rerun or relabelled.
+
+**ANY partial evidence:** the six-owner section supplement retains11,742 metadata-only records:1,952 whole-field-erased untyped-section coincidences per owner, plus15 generic2B declared prefixes for each printf dispatcher. Every untyped-section extent differs, none passes the strict opcode-preserving mask, and none is a named family identity. They remain separate from the useful pending families. The main4.1 discovery ledger's declared leads are18 records per printf dispatcher; frozen strict reconstruction refuses all36, principally because a NOP slot cannot be reencoded as an ordinary Thumb call. No current gate is extended here.
+
+## Coverage, evidence and command exits
+
+- Fresh project-reader strict replay: **9,123 whole-extent records across nine owners**, plus36 declared Thumb leads. Combined status counts: `{"conflict": 69, "consistent_with_inferred_bindings": 1663, "unsupported": 36, "verified": 7391}`. These are body/relocation diagnostics, not9,123 identities.
+- 4.1 discovery:242 archives /48,974 members per build; scan/inventory/image/catalogue hashes and both provenance files are bound in CANDIDATES-41.json. The b894 replay read all242 archives; the dual-build supplement freshly read selected complete members and all distinct mbrlen-member archive variants.
+- `STRICT-41.json`, `ANCHORS-41.json`, `SCALAR-DELETE-ANCHOR-41.json`, `SNPRINTF-CALLER-41.json`, `SUPPLEMENT-41.json`, `THUMB-LEADS-41.json` retain all safe proof metadata; no payload, encoding, instruction text or packet is stored.
+- Accepted/checkpoint protections were read, never edited. A future reviewed catalogue revision must protect every current accepted identity again; this certificate grants no denominator or numerator credit.
+
+Executed and carried principal commands (complete argv/hashes in JSON):
+
+- Exit **0** (carried Main discovery): `.venv/bin/python scratch/integrator/library-sweep-41/sweep.py scan`
+- Exit **0** (carried Main discovery): `.venv/bin/python scratch/integrator/library-sweep-41-b791/sweep.py scan`
+- Exit **0** (this assignment): `.venv/bin/python -B scratch/integrator/library-sweep-41/strict_compare_41.py`
+- Exit **0** (this assignment): `.venv/bin/python -B scratch/integrator/library-sweep-41/scalar_delete_anchor_41.py`
+- Exit **1** (this assignment): `.venv/bin/python -B scratch/integrator/library-sweep-41/pending_replay_41.py`
+- Exit **1** (this assignment): `.venv/bin/python -B scratch/integrator/library-sweep-41/pending_replay_41.py`
+- Exit **0** (this assignment): `.venv/bin/python -B scratch/integrator/library-sweep-41/pending_replay_41.py`
+- Exit **1** (this assignment): `.venv/bin/python -B scratch/integrator/library-sweep-41/adjudicate_41.py`
+- Exit **0** (this assignment): `compiler invocation (frozen game profile; full argv in SCALAR-DELETE-ANCHOR-41.json)`
+- Exit **0** (this assignment): `.venv/bin/python -B scratch/integrator/library-sweep-41/adjudicate_41.py`
+
+The failed supplement commands are preserved genuine failures: r1 incorrectly assumed the older mbrlen slot geometry belonged to4.1; r2 incorrectly required all four other4.1 families to be single-slot-only. The final supplement records the actual negative geometry instead of weakening an identity check. Its exit0 means successful diagnostic recording, **not** admission of those mismatches. The first adjudication attempt also exited1 on the absent retained snprintf caller object; the final adjudication records that absence and refuses the anchor rather than claiming a replay. One additional bounded metadata-only interpreter query exited0 while identifying the differing declarations.
+
+No full build, tests, linter, formatter, acceptance operation, catalogue generation, git mutation or nested agent ran. The only compile was the isolated32B scalar-delete ABI caller. No compiler object is kept. V15 remains untouched and in review; all strict PROVEN identities await Main's next reviewed catalogue revision.
