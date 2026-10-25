@@ -1,0 +1,40 @@
+{
+  "source": "src/checkpoint11/fatal_header.c",
+  "profile": "sdk",
+  "functions": [
+    "func_00192afc"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_00192afc": "src/checkpoint11/fatal_header.c"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/fatal_header.c",
+    "--profile",
+    "sdk",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u1364"
+  ],
+  "exit_code": 0,
+  "seconds": 0.252572,
+  "source_sha256": "9f23ad0444955619a6c1a8a3683d322f4798663d97d9e0d9641e4f34e6897e96",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u1364/fatal_header.result.json",
+  "receipt_sha256": "f75d95816e874fcfc2b6f851a3389a8838d256da9125c0e5bd975a823c92dc6c",
+  "output": "MATCH    func_00192afc @ 0x192afc size 0x48/0x48\n",
+  "stderr": ""
+}
