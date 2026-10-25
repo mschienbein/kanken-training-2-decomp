@@ -19,4 +19,13 @@ struct SoundArchiveRequestState {
     struct ArchiveHandle *archive;
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_001d4174(struct SoundArchiveRequestState *state,
+    struct ArchiveHandle *archive);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,9 +1,4 @@
-struct ArchiveHandle;
-
-struct SoundArchiveRequestState {
-    unsigned pending;
-    struct ArchiveHandle *archive;
-};
+#include "game/archive_runtime.h"
 
 void func_001d4174(struct SoundArchiveRequestState *state,
                    struct ArchiveHandle *archive)

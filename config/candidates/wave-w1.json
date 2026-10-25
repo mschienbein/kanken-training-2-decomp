@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "note": "W1-CURRENT-CONTRACTS on main d93aa6c7, candidate only/unaccepted:2 new functions/396 B,8 revised accepted units, no accepted moves. Per Main the honest FORWARD-FULLWORD and GRAPHICS-RELAY failures remain explicit gate-failed residue; accepted00137b48 and graphics_state.h are unchanged. No source policy is weakened and no native/common-owner shadow is published. This does not clear the wider HEAP-REGISTRY, GPU-COMMAND-CURSOR or shader-owner residue families. Main alone owns post-composition dependency closure, argcheck, prepare, review, finalize and STATUS/RESUME.",
+  "units": [
+    {
+      "source": "src/contracts/w1/func_00117ad8.c",
+      "profile": "sdk",
+      "functions": [
+        "func_00117ad8"
+      ],
+      "author": "np040 / WaveW1Codex",
+      "reason": "Retire the duplicate filesystem token/protocol declarations; use the current FileArchiveHandle, complete 64-bit token, writable count/ArchiveInfo outputs and six-input provider without changing the author cursor atom."
+    },
+    {
+      "source": "src/contracts/w1/func_0011ef60.c",
+      "profile": "game",
+      "functions": [
+        "func_0011ef60"
+      ],
+      "author": "r4043 / WaveW1Codex",
+      "reason": "Use current TransitionState.active@0x18, the real one-millisecond sleep, void(void) shutdown callback and all five typed callback slots; supplied zero values remain null callbacks."
+    }
+  ],
+  "moves": [],
+  "holds": [
+    {
+      "function": "func_001c5a08",
+      "target_bytes": 20,
+      "status": "gate-failed",
+      "component": "W1-A / FORWARD-FULLWORD",
+      "author": "w13e / WaveW1Codex",
+      "category": "canonical-full-word-input-codegen",
+      "reason": "The honest current-contract unsigned-input source with AudioChannelState.flag0e and flags compiles to20/20 B but differs in2 bytes at offsets9 and13 (first+0x9). The explicit low-byte local and C++ source-language witness preserve the residual; the game/middleware witnesses do not match, and sdk differs from+0. No narrowed byte-formal API, second owner or steering is admitted.",
+      "author_source": "scratch/authors/w13e/src/func_001c5a08.c",
+      "canonical_source": "scratch/integrator/wave-w1/residue/FORWARD-FULLWORD/func_001c5a08.c",
+      "canonical_trial_receipts": [
+        "scratch/integrator/wave-w1/matches/r1/func_001c5a08/func_001c5a08.result.json",
+        "scratch/integrator/wave-w1/matches/r2/func_001c5a08-middleware/func_001c5a08.result.json",
+        "scratch/integrator/wave-w1/matches/r2/func_001c5a08-sdk/func_001c5a08.result.json",
+        "scratch/integrator/wave-w1/matches/r3/func_001c5a08-game/func_001c5a08.result.json",
+        "scratch/integrator/wave-w1/matches/r4/func_001c5a08-game/func_001c5a08.result.json"
+      ],
+      "evidence": "scratch/integrator/wave-w1/FAILED-CANONICAL-TRANSACTION.json"
+    },
+    {
+      "function": "func_0012f5a0",
+      "target_bytes": 104,
+      "status": "gate-failed",
+      "component": "W1-D / GRAPHICS-RELAY",
+      "author": "r41384 / WaveW1Codex",
+      "category": "canonical-scalar-relay-transaction-codegen",
+      "reason": "The current CtrResult return, exact int-enabled relay provider and real GraphicsContext.relay projection produce104/104 B with a residual at+0x2d (earlier direct scalar form100/104). The accepted00137b48 single-word repair independently fails: direct bit24 update48/60 B first+0x8; high-octet scalar extraction60/60 B first+0xd. The original accepted unit and opaque graphics header are retained byte-for-byte, not claimed revised, and neither class-return/reset-owner shadow nor union-view new source is restored.",
+      "author_source": "scratch/authors/r41384/src/func_0012f5a0.c",
+      "canonical_source": "scratch/integrator/wave-w1/residue/GRAPHICS-RELAY/func_0012f5a0.c",
+      "canonical_trial_receipts": [
+        "scratch/integrator/wave-w1/matches/r1/func_00137b48/func_00137b48.result.json",
+        "scratch/integrator/wave-w1/matches/r1/func_0012f5a0/func_0012f5a0.result.json",
+        "scratch/integrator/wave-w1/matches/r2/func_00137b48-game/func_00137b48.result.json",
+        "scratch/integrator/wave-w1/matches/r2/func_0012f5a0-game/func_0012f5a0.result.json",
+        "scratch/integrator/wave-w1/matches/r3/func_00137b48-game/func_00137b48.result.json",
+        "scratch/integrator/wave-w1/matches/r3/func_0012f5a0-game/func_0012f5a0.result.json",
+        "scratch/integrator/wave-w1/matches/r4/func_00137b48-game/func_00137b48.result.json",
+        "scratch/integrator/wave-w1/matches/r4/func_0012f5a0-game/func_0012f5a0.result.json"
+      ],
+      "evidence": "scratch/integrator/wave-w1/FAILED-CANONICAL-TRANSACTION.json"
+    }
+  ],
+  "revised_accepted_units": [
+    {
+      "source": "src/large/func_0010de68.c",
+      "profile": "game",
+      "functions": [
+        "func_0010de68"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "dc68941212d384ee5c009aee4b204d3188f6f42b4a4755c86350e208a20eb2f5",
+      "current_source_sha256": "6ba55ab7e48c7606f588d1ba86a0dadf3bcb3974109254648495996646fd17bd",
+      "reason": "Move the actual ShaderResource definition to its existing shader header without changing binary extent, selected pointer, allocation or program fields. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/shader.h"
+      ]
+    },
+    {
+      "source": "src/wave16/func_00107140.c",
+      "profile": "game",
+      "functions": [
+        "func_00107140"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "f40369bb8a2cb417d438dae970b44f93fcd104b1928e1947792be55559bb6e29",
+      "current_source_sha256": "3ff23956ea5b0f1ad4302dbadaaa87ff071de4e982503cae8c385879ed7d9c5b",
+      "reason": "Retire the identical void func_00135f1c(int) local declaration in favor of startup.h:118. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/startup.h"
+      ]
+    },
+    {
+      "source": "src/wave18/func_0019b574.c",
+      "profile": "game",
+      "functions": [
+        "func_0019b574"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "61cfbbc6974197e214351a67076fe656d9ba5a5a289b57903698320494100c5f",
+      "current_source_sha256": "2688ad4ff8287afc793de68f9b507115bf1504118597380ff403720c5de12003",
+      "reason": "Retire the identical unsigned-char cursor extern and include its existing canonical header; do not change cursor storage to word pointers. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave19/func_0011774c.c",
+      "profile": "game",
+      "functions": [
+        "func_0011774c"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "463cc013275d76c935247aed8503587b1ddb4c5f91fa6b7980ebbe5d71bc5283",
+      "current_source_sha256": "a5c52b812d2eb89b1756a332467762d1d7a29d21fafe5c61377871ee9415b7d4",
+      "reason": "Publish the distinct OwnerIdentifierNode/OwnerIdentifierRegistry and int(registry*,int) prototype; retain the actual returned count and all existing fatal-handler calls. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/object_pool.h"
+      ]
+    },
+    {
+      "source": "src/wave19/func_0019f518.c",
+      "profile": "game",
+      "functions": [
+        "func_0019f518"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "9d49df4721503ffc6906fc889ee497bdc10170013f55709ae4e2a91da61b2613",
+      "current_source_sha256": "09b77b66a5bf8af14b49014a2309d97fa02b810055277c0803aeda37f747fbfd",
+      "reason": "Publish the exact IdentifierNode/IdentifierRegistry definition and void(registry*,int) prototype; remove the identical local definitions, with no key representation or body change. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/object_pool.h"
+      ]
+    },
+    {
+      "source": "src/wave5/func_00114778.c",
+      "profile": "game",
+      "functions": [
+        "func_00114778"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "3ccfc3fd0d12792f6a826a40db6cd2b0ad8cbbf19c0577587203cc158cb079ab",
+      "current_source_sha256": "fc6b7a1c38e0825d8515ac825a2d4bce50543ed87dc7e804382228d263ddfb8c",
+      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; body and byte-cursor protocol stay unchanged. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave5/func_001147c0.c",
+      "profile": "game",
+      "functions": [
+        "func_001147c0"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "9de96086d1079ef07e8ff9ed6fde38c246111f985fb9e16f7db3db6c48cad116",
+      "current_source_sha256": "330b02fd0de3cabc6d5ce2f2f9d58f4f576f3924a0c6aa5ed37cab4f0123e10d",
+      "reason": "Retire the identical cursor extern in favor of the existing canonical declaration; preserve direct byte publication. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/command_buffer.h"
+      ]
+    },
+    {
+      "source": "src/wave8/func_001d4174.c",
+      "profile": "game",
+      "functions": [
+        "func_001d4174"
+      ],
+      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "accepted_source_sha256": "40ff826fec0189c563f81b93939d8301062e0c0835988d8e2b2a433e07a5e4d3",
+      "current_source_sha256": "af3eda98acda827deaab43da3d2ae95f340b27ef2f0f125802d260c9c8bb8c20",
+      "reason": "Retire the identical SoundArchiveRequestState local definition and publish/use its exact void(state*,ArchiveHandle*) declaration; do not equate the record with native SoundArchiveLoader. No codegen change expected; header visibility still needs Main remeasurement.",
+      "header_dependencies_changed": [
+        "include/game/archive_runtime.h"
+      ]
+    }
+  ],
+  "base_commit": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+  "wave_id": "W1-CURRENT-CONTRACTS",
+  "wave_plan_sha256": "8136009e60b77ca32d0a031f2ef9f8de651aedef35dda3bc1f86f493f35e62b1",
+  "wave_disposition": "scratch/integrator/wave-w1/WAVES.json",
+  "linker_model": "armlink5-inline-branchnop-v6",
+  "literal_model": "anonymous-string-records-v1",
+  "candidate_new_functions": 2,
+  "candidate_new_bytes": 396,
+  "candidate_revised_accepted_units": 8,
+  "accepted_moves": 0,
+  "notes": [
+    "No prepare, argcheck, full build, full suite or permuter was run.",
+    "Only published object_pool.h, shader.h, archive_runtime.h, archive_ipc.h and startup.h contracts change; all eight c015 overlap source owners remain untouched.",
+    "Main requested no edits to docs/STATUS.md or docs/RESUME.md; this manifest and the private wave dispositions are the W1 candidate/residue documentation.",
+    "Two previously untracked failed drafts were content-preservingly git-mv relocated into private scratch and unstaged; no accepted function or tracked baseline source moved."
+  ],
+  "private_draft_moves": [
+    {
+      "from": "src/contracts/w1/func_001c5a08.c",
+      "to": "scratch/integrator/wave-w1/residue/FORWARD-FULLWORD/func_001c5a08.c",
+      "kind": "untracked-new-draft-only; content-preserving git mv; not an accepted ledger move"
+    },
+    {
+      "from": "src/contracts/w1/func_0012f5a0.c",
+      "to": "scratch/integrator/wave-w1/residue/GRAPHICS-RELAY/func_0012f5a0.c",
+      "kind": "untracked-new-draft-only; content-preserving git mv; not an accepted ledger move"
+    }
+  ],
+  "family_dispositions": [
+    {
+      "family_id": "FORWARD-FULLWORD",
+      "disposition": "gate-failed",
+      "functions": [
+        "func_001c5a08"
+      ],
+      "new_functions": 0,
+      "new_bytes": 0,
+      "blocker": "The honest current-contract unsigned-input source with AudioChannelState.flag0e and flags compiles to20/20 B but differs in2 bytes at offsets9 and13 (first+0x9). The explicit low-byte local and C++ source-language witness preserve the residual; the game/middleware witnesses do not match, and sdk differs from+0. No narrowed byte-formal API, second owner or steering is admitted."
+    },
+    {
+      "family_id": "ARCHIVE-TOKEN",
+      "disposition": "landed",
+      "functions": [
+        "func_00117ad8"
+      ],
+      "new_functions": 1,
+      "new_bytes": 108,
+      "blocker": null
+    },
+    {
+      "family_id": "TRANSITION-POLL",
+      "disposition": "landed",
+      "functions": [
+        "func_0011ef60"
+      ],
+      "new_functions": 1,
+      "new_bytes": 288,
+      "blocker": null
+    },
+    {
+      "family_id": "GRAPHICS-RELAY",
+      "disposition": "gate-failed",
+      "functions": [
+        "func_0012f5a0"
+      ],
+      "new_functions": 0,
+      "new_bytes": 0,
+      "blocker": "The current CtrResult return, exact int-enabled relay provider and real GraphicsContext.relay projection produce104/104 B with a residual at+0x2d (earlier direct scalar form100/104). The accepted00137b48 single-word repair independently fails: direct bit24 update48/60 B first+0x8; high-octet scalar extraction60/60 B first+0xd. The original accepted unit and opaque graphics header are retained byte-for-byte, not claimed revised, and neither class-return/reset-owner shadow nor union-view new source is restored."
+    }
+  ],
+  "verification": {
+    "whole_unit_matches": {
+      "units": 10,
+      "all_exact": true,
+      "exit_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "evidence": "scratch/integrator/wave-w1/FINAL-MATCHES.json"
+    },
+    "interfaces": {
+      "scope": "10 touched units only",
+      "exit_code": 0,
+      "units": 10,
+      "disagreements": 0,
+      "unchecked": 0,
+      "report": "scratch/integrator/wave-w1/interfaces-scoped.json"
+    },
+    "whole_ledger_interfaces": {
+      "status": "deferred to c016 integration",
+      "terminated_exit_code": -15,
+      "reason": "Main stopped PID587555 to protect c015 heavy slot. No whole-ledger retry on this branch."
+    },
+    "objects_removed": true,
+    "cleanup": "scratch/integrator/wave-w1/CLEANUP.json"
+  }
+}

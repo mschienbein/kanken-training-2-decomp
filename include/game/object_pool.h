@@ -17,6 +17,29 @@ struct SizedBufferHandle;
 #include "game/property_descriptor.h"
 #include "game/sound_runtime.h"
 
+/* [INFERENCE] Descriptive registry names; the two scalar-key owners are distinct. */
+struct IdentifierNode {
+    int identifier;
+    unsigned reserved04;
+    struct IdentifierNode *next;
+};
+struct IdentifierRegistry {
+    int count;
+    unsigned char reserved04[0x14];
+    struct IdentifierNode sentinel;
+};
+struct OwnerIdentifierNode {
+    int identifier;
+    unsigned reserved04;
+    struct OwnerIdentifierNode *next;
+};
+struct OwnerIdentifierRegistry {
+    unsigned reserved00;
+    int count;
+    unsigned char reserved08[0x31c];
+    struct OwnerIdentifierNode sentinel;
+};
+
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 struct RegisteredObject {
     unsigned char reserved[0x88];
@@ -48,6 +71,8 @@ extern "C" {
 #endif
 extern volatile unsigned data_00243718;
 extern struct ObjectPool bss_004b8420;
+extern void func_0019f518(struct IdentifierRegistry *registry, int identifier);
+extern int func_0011774c(struct OwnerIdentifierRegistry *registry, int identifier);
 extern struct RegisteredObject *func_0014d784(struct RegisteredObject *object);
 extern struct ObjectPool *func_00185cc0(void);
 extern void func_00147264(struct ObjectPool *pool, void *storage, unsigned size);

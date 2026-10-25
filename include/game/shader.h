@@ -21,6 +21,16 @@ struct ShaderConfiguration {
     unsigned char initialized;
     unsigned char reserveded[0x43];
 };
+/* [INFERENCE] Descriptive owner name; preserve the full configuration and selection. */
+struct ShaderResource {
+    void *allocation;
+    unsigned size;
+    struct ShaderConfiguration binary;
+    struct ShaderConfiguration *selected;
+    unsigned reserved13c[8];
+    unsigned program2;
+    unsigned program3;
+};
 struct ShaderRegistry {
     unsigned programs[3];
     unsigned shaders[3];
@@ -29,6 +39,8 @@ struct ShaderRegistry {
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern void func_0010de68(struct ShaderResource *resource, int kind, void *data,
+    unsigned size, int release);
 extern void func_00116f40(struct ShaderConfiguration *state, const void *binary, unsigned size);
 extern struct ShaderConfiguration *func_00117684(struct ShaderConfiguration *state);
 extern void func_00193af4(unsigned index);

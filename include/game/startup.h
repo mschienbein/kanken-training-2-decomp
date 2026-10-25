@@ -91,6 +91,10 @@ extern void func_00195b6c(int mode, void (*initialize)(void), void (*callback)(v
                           void (*complete)(void), void (*finish)(void));
 extern struct StartupState bss_0049c878;
 extern void func_0011ef60(void);
+extern int func_0012d37c(void);
+extern int func_0019efd0(void);
+extern void func_00135b34(void);
+extern void func_00135450(unsigned mode);
 extern int func_0011f234(void);
 extern unsigned char func_00190678(void);
 extern void func_00195a50(void);
