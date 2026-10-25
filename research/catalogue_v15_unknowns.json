@@ -1,0 +1,489 @@
+{
+  "adoption": false,
+  "anomalies": [
+    {
+      "address": 1102520,
+      "explanation": "Unresolved sparse continuation inside the unchanged 352-byte owner 0010d2b8. The two-word return-shaped hole has no retained direct incoming edge or pointer; code shape and the earlier process-exit terminal do not prove original section ownership. No complete matched owning section or referenced-data declaration covers it, so retain both unknown bytes and the exact unexplained_function_bytes anomaly.",
+      "interval": "R07",
+      "issue": "unexplained_function_bytes",
+      "verdict": "genuinely_unresolved"
+    }
+  ],
+  "baseline_sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+  "bounded_scan": "Only retained code ranges were decoded for direct incoming edges; aligned literal/pointer candidates were screened across mapped image segments. Broad read vetoes are not actual-read certificates or negative-reference proofs.",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "intervals": [
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1048612,
+      "explanation": "Unresolved code-shaped branch to an existing assembly owner. No incoming retained code edge or aligned image pointer names this gap; both endpoints are already ARM-aligned. No complete original input section proves lexical ownership, so neither padding nor a separate function is justified.",
+      "id": "R01",
+      "image_sha256": "9148393517fc18460c9ed4d86fe6e572a16026928e93972ec4f2a19544d0b5d5",
+      "preceding_owner": {
+        "address": 1048576,
+        "end": 1048608,
+        "record_sha256": "652f3e1db20e3c0e8f27003078e5eb3a103ef130d0bd3f13b7a7f5c1489d0453"
+      },
+      "prior_missing_evidence": "No covering complete section or independent entry/data/fill witness; both endpoints already aligned.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 4,
+      "start": 1048608,
+      "successor": {
+        "address": 1048612,
+        "isa": "arm",
+        "record_sha256": "26dc663ab56068248ac65d01ccc50e288e88c44026b1e9be2fdc8d32a45c9e78"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1048926,
+      "explanation": "Unresolved two-function candidate. The carried complete 66-byte arm_exceptions_mem.o reconstruction contains actual 26/22-byte declarations, but the existing 18-byte initializer has no independently authenticated named identity/allocator contract. No new incoming entry evidence exists; do not turn this candidate replay into a new function identity.",
+      "id": "R02",
+      "image_sha256": "ef11ec111191833c342496c596a5186cedcf0c3191bf7b0676b42d94b67d2074",
+      "preceding_owner": {
+        "address": 1048860,
+        "end": 1048878,
+        "record_sha256": "15244246275127ba06a79996051e057b964a6f0fb16fbd29d3a8a99fd5919e6a"
+      },
+      "prior_missing_evidence": "Exact 66-byte arm_exceptions_mem.o candidate section and real 26/22-byte sibling declarations, but no independently authenticated historical initializer/entry anchor; natural C match is not API identity or sibling entry authentication.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 48,
+      "start": 1048878,
+      "successor": {
+        "address": 1048926,
+        "isa": "thumb",
+        "record_sha256": "cd34c9325d3b7bd2f3f58673c2cf8335f2228613d2721aee856ca7e99e96ce52"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1050122,
+      "explanation": "Resolved as a separate 16-byte Thumb library function: the complete relocation-free Arm 5.06-b960 _snputc.o section equals the entire interval, has an exact global STT_FUNC declaration, and has a named static REL32 import in the independently placed whole __0snprintf parent. Both parent's direct named imports lead to independently classified complete library owners. This is static ELF linkage, not admission of a runtime-loaded pool value.",
+      "id": "R03",
+      "image_sha256": "1fb4464921189a4fc75aa39ff4ef5232b71f69bd07db69ced34f4bc173dbf4cc",
+      "preceding_owner": {
+        "address": 1050096,
+        "end": 1050106,
+        "record_sha256": "6aa09ffee109210d92ceb765a2a6452543e985ea37e88b56f15e0ee6f434a719"
+      },
+      "prior_missing_evidence": "Relocation-free complete _snputc.o differs at four byte positions; no equal complete callback declaration/entry witness.",
+      "proof": "/sections/1",
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 16,
+      "start": 1050106,
+      "successor": {
+        "address": 1050122,
+        "isa": "thumb",
+        "record_sha256": "a4f2b660c2afb2085b85246f879e8424b5db547d61749f8dea9bbb849483ca83"
+      },
+      "verdict": "separate_library_function"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1050948,
+      "explanation": "Unresolved possible external fill. The two-byte value agrees with the reviewed image-wide fill census and is an exact successor alignment deficit, but the complete _printf_char.o predecessor still has the preserved refused weak-import field at +14. Uniform fill alone cannot satisfy the reviewed v13 rule. No new unsupported linker transformation is introduced.",
+      "id": "R04",
+      "image_sha256": "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb",
+      "preceding_owner": {
+        "address": 1050938,
+        "end": 1050946,
+        "record_sha256": "b6475fc010f644d4ed4e02757dd2fad415d00976ff136566ffaaa02473091a79"
+      },
+      "prior_missing_evidence": "Entire _printf_char.o predecessor remains incomplete at the refused weak-import call field +14; uniform external fill is not a substitute.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 2,
+      "start": 1050946,
+      "successor": {
+        "address": 1050948,
+        "isa": "thumb",
+        "record_sha256": "42305c94e9fb5a5c419013e92d4aec4317f2264cf27c4525a456456d4c609631"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1051432,
+      "explanation": "Unresolved possible external fill. The exact alignment deficit agrees with the reviewed fill census, but _printf_wchar.o still lacks complete predecessor reencoding at its refused weak-import field +14. This fails the same reviewed mandatory predecessor condition.",
+      "id": "R05",
+      "image_sha256": "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb",
+      "preceding_owner": {
+        "address": 1051422,
+        "end": 1051430,
+        "record_sha256": "d8d5ce6a5ca2642485b9cdf8fe486424b2ee42878647916494a0701ffa46b95f"
+      },
+      "prior_missing_evidence": "Entire _printf_wchar.o predecessor remains incomplete at the refused weak-import call field +14; uniform external fill is not a substitute.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 2,
+      "start": 1051430,
+      "successor": {
+        "address": 1051432,
+        "isa": "thumb",
+        "record_sha256": "436f20f734756ab7c680ebdb24657a62e5c2d55ce2d2147d28c839aad1fdc220"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1052020,
+      "explanation": "Unresolved return-shaped fragment. No independent incoming edge/pointer or complete covering section proves a callable entry or neighbouring lexical ownership; both endpoints are already aligned, excluding the reviewed minimum-deficit padding rule.",
+      "id": "R06",
+      "image_sha256": "379bec29dccd0a93c94826144d7ef6e42fab64ef195a3b8313a16926f66f388f",
+      "preceding_owner": {
+        "address": 1052012,
+        "end": 1052016,
+        "record_sha256": "141f13144c96fe83372a919262f58111e2ea8bae7a55f998c73fc3cc23b3ccbb"
+      },
+      "prior_missing_evidence": "Already word-aligned gap; a terminal-return-shaped decode is neither an entry nor lexical ownership.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 4,
+      "start": 1052016,
+      "successor": {
+        "address": 1052020,
+        "isa": "arm",
+        "record_sha256": "725d885003c2dfc61d2a9b94fa549b391f841eec51bbf7125ad5d0107af44382"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [
+        1102520
+      ],
+      "end": 1102768,
+      "explanation": "Unresolved sparse continuation inside the unchanged 352-byte owner 0010d2b8. The two-word return-shaped hole has no retained direct incoming edge or pointer; code shape and the earlier process-exit terminal do not prove original section ownership. No complete matched owning section or referenced-data declaration covers it, so retain both unknown bytes and the exact unexplained_function_bytes anomaly.",
+      "id": "R07",
+      "image_sha256": "a970222ef4e1d5973e67fea10a8dbde151fe1d9d34271700d29954b32bb89dfb",
+      "preceding_owner": {
+        "address": 1102520,
+        "end": 1102872,
+        "record_sha256": "2851fe2f9f66f65dd37d2679cb0a180d6b8b08719b724bb9e4750074e3aa0ff7"
+      },
+      "prior_missing_evidence": "Eight-byte sparse continuation hole; no complete owning section or independent entry/data witness; retain anomaly0010d2b8.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 8,
+      "start": 1102760,
+      "successor": {
+        "address": 1102872,
+        "isa": "arm",
+        "record_sha256": "7f8f2ae05ae6c8881ea9e409e32f6d810c6d43e5cbaddd6a1f6b3edd48c185d1"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1316280,
+      "explanation": "Unresolved return-shaped fragment. Carried complete adjacent sections end before/start after the gap and exclude it. No incoming entry or format/section witness exists; an already aligned four-byte gap is not admitted padding.",
+      "id": "R08",
+      "image_sha256": "379bec29dccd0a93c94826144d7ef6e42fab64ef195a3b8313a16926f66f388f",
+      "preceding_owner": {
+        "address": 1316272,
+        "end": 1316276,
+        "record_sha256": "bf4ea7389acd8eeec9863aca54cab6c46ce63349f45c2118c63797847bc36da4"
+      },
+      "prior_missing_evidence": "Both adjacent complete alignment4 sections exclude the gap; return-shaped decode supplies no entry.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 4,
+      "start": 1316276,
+      "successor": {
+        "address": 1316280,
+        "isa": "arm",
+        "record_sha256": "0e24bcd42c097b74e41a39960d88f8d6c11a5e0640e2988a65a565a24271d071"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1704120,
+      "explanation": "Unresolved candidate data field. The carried rt_ctype_table.o candidate contains a REL32 field, but the original getter/context identity and computed-continuation contract remain unauthenticated. The previously authenticated _get_lc_ctype target alone does not settle them. No runtime-endian or foreign-owner assumption closes this gap.",
+      "id": "R09",
+      "image_sha256": "32757b254157326cc739235fa363cfa5c61b59a6e64c2538f9afb2c86ca75965",
+      "preceding_owner": {
+        "address": 1704100,
+        "end": 1704116,
+        "record_sha256": "74c0e2fa237af515ac5bddd1a1d2b49ce1eec66f7c0d9f4316f167e66ed2cd72"
+      },
+      "prior_missing_evidence": "Complete candidate rt_ctype_table.o REL32 field, but original getter/context identity and computed-continuation contract remain unproved; newly authenticated _get_lc_ctype target alone is insufficient.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 4,
+      "start": 1704116,
+      "successor": {
+        "address": 1704120,
+        "isa": "thumb",
+        "record_sha256": "15a17ac74a8a3b9fe93c93d136176f82eaa8376b6b884d14c7bf8d79c0dc1e5a"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1865564,
+      "explanation": "Unresolved code/data candidate. An aligned data-segment word at 002437dc names its start, but the retained bounded pointer CFG has no return and falls through at 001c7760; that is not an entry-and-extent proof. No complete owning object or data-format witness covers the twenty bytes. The following independently classified four-byte padding is not borrowed.",
+      "id": "R10",
+      "image_sha256": "86ae0a6c2d542c3eea41aa92966f6977b65639b94d8a4d84b49b970dfa5ac162",
+      "preceding_owner": {
+        "address": 1865056,
+        "end": 1865544,
+        "record_sha256": "a89ad9fa94722d87973dbc2c40ebf0121ad4b3a797c8195e87bad27d7a2c67c8"
+      },
+      "prior_missing_evidence": "No matched complete owner/section or independent entry/data/veneer witness; do not borrow following separately classified padding.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [
+        {
+          "segment": "data",
+          "site": 2373596,
+          "target": 1865544,
+          "thumb": false
+        }
+      ],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 20,
+      "start": 1865544,
+      "successor": {
+        "address": 1865568,
+        "isa": "arm",
+        "record_sha256": "c18ddf0211c3f1c1be348c7df6ae1aebe6952a0bb65f7d5a8969486cf1a75d9a"
+      },
+      "verdict": "genuinely_unresolved"
+    },
+    {
+      "all_zero": false,
+      "containing_owners": [],
+      "end": 1889000,
+      "explanation": "Unresolved data/placement tail. The neighbouring two-byte rodata, later padding and next rodata are separately classified ranges, not an extent witness for this nonzero halfword. No complete source/data declaration or bounded reference proves an extension or padding.",
+      "id": "R11",
+      "image_sha256": "075d3ddf5a3a826e13a92288e853bc4b2cb17fb05367ae865f401a4bb11f05ce",
+      "preceding_owner": {
+        "address": 1888368,
+        "end": 1888996,
+        "record_sha256": "a04d325318ea1418692705ecc460acff222977c90f23af43765732b15c632c03"
+      },
+      "prior_missing_evidence": "No complete original source/data extent witness; adjacent two-byte rodata and following padding/rodata are separate.",
+      "proof": null,
+      "raw_pointer_occurrences_are_not_runtime_endian_proof": [],
+      "read_footprints": {
+        "bounded": [],
+        "categories": [],
+        "count": 0
+      },
+      "read_vetoes": {
+        "bounded": [],
+        "categories": [
+          "unmodeled_or_unbounded_static_read_veto_only",
+          "unproved_data_endian_pool_value_veto_only"
+        ],
+        "count": 4744
+      },
+      "retained_direct_incoming": [],
+      "size": 2,
+      "start": 1888998,
+      "successor": {
+        "address": 1889008,
+        "isa": "arm",
+        "record_sha256": "08f76d0eeca41a43d04b0c790fac4b45f598d7fa020a1524f1e19f7ea63da2c1"
+      },
+      "verdict": "genuinely_unresolved"
+    }
+  ],
+  "new_C_credit": 0,
+  "new_positive": "The 5.06-b960 complete _snputc definition supplies the missing equal named callback body; the old four-byte-different 5.04 result remains a negative.",
+  "pointer_inventory": {
+    "address": 1865544,
+    "code_bytes": 24,
+    "end": 1865568,
+    "isa": "arm",
+    "issues": [
+      {
+        "address": 1865568,
+        "issue": "fallthrough_into_start"
+      }
+    ],
+    "open_exits": [
+      1865568
+    ],
+    "pool_overlaps_code": false,
+    "reason": "pointer_cfg_not_closed",
+    "return_sites": [],
+    "unresolved_transfers": []
+  },
+  "prior_residue": {
+    "path": "research/catalogue_v13_residue.json",
+    "sha256": "d51a4e9feae710c6ad5358b16b87507276eb016b232605b1766d23271c81491b"
+  },
+  "private_payload_policy": "Only addresses, symbol/section/relocation metadata, hashes and verdicts are retained. No ROM/object payloads, instruction encodings, disassembly or packets.",
+  "research_sources": [
+    {
+      "path": "scratch/integrator/catalogue-unknowns/probe-r1.py",
+      "sha256": "ba8ccfb1efae51c0e3e892aa203b6777bd76aca516da8716e3ae65e9b903c268"
+    },
+    {
+      "path": "scratch/integrator/catalogue-unknowns/probe-r1.json",
+      "sha256": "2dc0b29d2bacdb1b31e5014264ca6e67dc3f4f1c70eab46cfc768856c3886a8c"
+    },
+    {
+      "path": "scratch/integrator/catalogue-unknowns/prove-callback-r1.py",
+      "sha256": "c74aec720eefefa08e4e3c22ae1017790332ad0315604c5ec8158c21d082be69"
+    },
+    {
+      "path": "scratch/integrator/catalogue-unknowns/callback-proof-r1.json",
+      "sha256": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a"
+    }
+  ],
+  "schema_version": 1
+}
