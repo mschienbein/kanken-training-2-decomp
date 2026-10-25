@@ -4,11 +4,11 @@
   "branch": "c015",
   "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015",
   "base": "18efd7bb0b76ffe63b7a4fca4d013e3ae8e490a7",
-  "source_commit": "14866d881",
+  "source_commit": "0836c0b56",
   "candidate_manifest": "config/candidates/c015.json",
-  "candidate_manifest_sha256": "0a10bb963d95797bf713f7e76d31328916f82b173e8a519c3e241b2e9d2b9362",
+  "candidate_manifest_sha256": "869cc4b43c5afce9e975a0a69dace63bc5852da99c48a436c1ff7a8960ee8001",
   "proposed_ledger": "scratch/integrator/c015/PROPOSED-LEDGER.json",
-  "proposed_ledger_sha256": "cc522f3ce222d5cc8ac7830c7c114938b55d49e7caff579853523682128beb04",
+  "proposed_ledger_sha256": "3c7731fd6dc9837588ee84339ba99f2cb4fef9465335b994e4da465f4f9201eb",
   "candidate_not_accepted": true,
   "selection": {
     "linker_model": "armlink5-inline-branchnop-v6",
@@ -18,12 +18,13 @@
     "harvest_rows": 58,
     "residue_pending_rows": 16,
     "overlap": 14,
-    "unique_functions": 60,
-    "new_functions": 18,
-    "new_bytes": 2220,
+    "unique_functions": 61,
+    "new_functions": 19,
+    "new_bytes": 2364,
     "holds": 27,
     "excluded_accepted": 13,
-    "excluded_c012_reserved": 2
+    "excluded_c012_reserved": 2,
+    "additional_author_rows": 1
   },
   "NEW": [
     {
@@ -151,6 +152,13 @@
       "source": "src/checkpoint15/func_001cdcfc.cpp",
       "profile": "game",
       "reason": "Retain canonical native Group/PaneLink and the serialized fixed-name tail operation; admit only constructor self-aliases and the own vtable binding."
+    },
+    {
+      "function": "func_0016bf90",
+      "bytes": 144,
+      "source": "src/checkpoint15/func_0016bf90.c",
+      "profile": "game",
+      "reason": "Collect the exact canonical L044TrainingFrame/WidgetSlot allocation source; existing ResourceEvent and NameTable interfaces require no header or names adoption."
     }
   ],
   "moves": [],
@@ -526,20 +534,22 @@
     "summary": "PROOF-SUMMARY.json",
     "actual_driver_exit_code": 0,
     "counts": {
-      "new_functions": 18,
-      "new_bytes": 2220,
+      "new_functions": 19,
+      "new_bytes": 2364,
       "holds": 27,
-      "contexts": 903,
-      "scope_units": 919,
-      "scope_functions": 920,
+      "contexts": 904,
+      "scope_units": 920,
+      "scope_functions": 921,
       "source_revised_units": 1,
       "header_closure_units": 900
     },
     "exit_counts": {
-      "0": 903
+      "0": 904
     },
     "all_required_functions": "MATCH",
-    "no_accepted_receipt_gate_claim": true
+    "no_accepted_receipt_gate_claim": true,
+    "composition": "Original903-context/920-function proof plus the1-context/1-function nm160 proof. Existing source/header/name inputs are unchanged; no prior include closure changes.",
+    "addition": "additions/nm160/INTAKE.json"
   },
   "lint": {
     "report": "POLICY-LINT.json",
@@ -548,19 +558,27 @@
     "pattern_hits": 3,
     "proximity_hits": 10,
     "second_models": 0,
-    "unadjudicated": 0
+    "unadjudicated": 0,
+    "addition": {
+      "report": "additions/nm160/POLICY-LINT.json",
+      "dispositions": "additions/nm160/LINT-DISPOSITIONS.json",
+      "actual_exit_code": 0,
+      "new_leads": 0
+    }
   },
   "pre_review": {
     "record": "PRE-REVIEW.json",
     "result": "PASS_WITH_QUALIFICATIONS",
-    "function_rows": 920,
+    "function_rows": 921,
     "independent_review": false,
-    "scope": "docs/REVIEWING.md steps1\u20136 over all NEW and revised function rows; inherited byte-identical source policy carry is explicit."
+    "scope": "docs/REVIEWING.md steps1\u20136 over all NEW and revised function rows; inherited byte-identical source policy carry is explicit.",
+    "addition": "additions/nm160/INTAKE.json includes the additional steps1\u20136 source review."
   },
   "cleanup": {
     "record": "CLEANUP.json",
-    "deleted_scratch_object_and_dependency_files": 4619,
-    "remaining": 0
+    "deleted_scratch_object_and_dependency_files": 4621,
+    "remaining": 0,
+    "addition_record": "additions/nm160/CLEANUP.json"
   },
   "interfaces": {
     "actual_exit_code": 0,
@@ -573,7 +591,8 @@
     "policy_items": 0,
     "slot_released": true,
     "qualification": "--allow-unchecked-cpp, with native/shared-interface manual pre-review; the auditor does not claim full C++ declaration/const-write checking.",
-    "valid_after_manifest_only_commit": true
+    "valid_after_manifest_only_commit": false,
+    "scope": "Historical pre-nm160 ledger only, retained as PROPOSED-LEDGER-r3.json. Main explicitly defers the updated interfaces audit to prepare on the rebased merge."
   },
   "not_run": [
     "accept.py prepare/finalize or accepted-ledger writes",
@@ -597,7 +616,9 @@
     "BASELINE-RESERVATION-NOTE.json",
     "INTERFACES-RUN-r1.json",
     "DURABLE-JOB-EXIT.json",
-    "HEAVY-SLOT-RELEASED.json"
+    "HEAVY-SLOT-RELEASED.json",
+    "additions/nm160/INTAKE.json",
+    "additions/nm160/LINT-DISPOSITIONS.json"
   ],
   "source_policy": "No casts around holds, no invented callees, no new union/memcpy reinterpretation, no runtime byte-offset owner recovery, no second model. Callback providers use exactly the invoking interface. No original bytes/packets/disassembly are emitted.",
   "header_closure_reproofs": {
