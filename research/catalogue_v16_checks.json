@@ -1,0 +1,189 @@
+{
+  "accounting": {
+    "path": "research/catalogue_v16_generation.json",
+    "sha256": "c1fa36489552c36a1db71f845d09b6f2a767483b21bd6554bd1c305d40446508"
+  },
+  "cleanup": {
+    "private_research_scalar_outputs_removed": true,
+    "public_replay_scalar_outputs_removed": true,
+    "retained_new_dependency_files": [],
+    "retained_new_objects": []
+  },
+  "denominator_verify": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16/.venv/bin/python",
+      "-B",
+      "tools/denominator.py",
+      "verify"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16",
+    "elapsed_seconds": 0.048743717998149805,
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "ok: denominator v13 matches config/catalogue.json\n"
+  },
+  "final_v16_tests": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "tests.test_catalogue_v16"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16",
+    "elapsed_seconds": 37.9918070470012,
+    "exit_code": 0,
+    "stderr": ".................\n----------------------------------------------------------------------\nRan 17 tests in 37.525s\n\nOK\n",
+    "stdout": ""
+  },
+  "history_record": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16/.venv/bin/python",
+      "-B",
+      "tools/denominator.py",
+      "record",
+      "--note",
+      "UNADOPTED catalogue v16 proposal: classify only func_0019e08c (12 B ARM) as known C++ runtime _ZdaPv, preferred 4.1-b791 cpprt_4.l(array_del.o), with complete strict reconstruction and independent native incoming/outgoing anchors; no accepted/pending identity, extent, entry, range, unknown or anomaly changes; creditable denominator -1 function/-12 B. Frozen c015 and initial recon-small c016 claims protected; Main must recheck later growth at adoption. Independent review and Main adoption required."
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16",
+    "elapsed_seconds": 0.11058807300287299,
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "denominator v13: 4744 functions, 1143948 bytes (b0031e73a206)\n"
+  },
+  "pre_edit_protection_check": [
+    {
+      "label": "accepted",
+      "manifest_paths": [
+        "config/matches.json"
+      ],
+      "matches": []
+    },
+    {
+      "label": "c015",
+      "manifest_paths": [
+        "scratch/worktrees/c015/config/candidates/c001-pilot.json",
+        "scratch/worktrees/c015/config/candidates/c002-wave1.json",
+        "scratch/worktrees/c015/config/candidates/c003-wave2.json",
+        "scratch/worktrees/c015/config/candidates/c004-wave3.json",
+        "scratch/worktrees/c015/config/candidates/c004-wave4.json",
+        "scratch/worktrees/c015/config/candidates/c004.json",
+        "scratch/worktrees/c015/config/candidates/c005.json",
+        "scratch/worktrees/c015/config/candidates/c006.json",
+        "scratch/worktrees/c015/config/candidates/c007.json",
+        "scratch/worktrees/c015/config/candidates/c008-r2.json",
+        "scratch/worktrees/c015/config/candidates/c008-r3.json",
+        "scratch/worktrees/c015/config/candidates/c008.json",
+        "scratch/worktrees/c015/config/candidates/c009.json",
+        "scratch/worktrees/c015/config/candidates/c010.json",
+        "scratch/worktrees/c015/config/candidates/c011.json",
+        "scratch/worktrees/c015/config/candidates/c012.json",
+        "scratch/worktrees/c015/config/candidates/c015.json",
+        "scratch/worktrees/c015/config/candidates/cmodels.json"
+      ],
+      "matches": []
+    },
+    {
+      "label": "recon-small",
+      "manifest_paths": [
+        "scratch/worktrees/recon-small/config/candidates/c001-pilot.json",
+        "scratch/worktrees/recon-small/config/candidates/c002-wave1.json",
+        "scratch/worktrees/recon-small/config/candidates/c003-wave2.json",
+        "scratch/worktrees/recon-small/config/candidates/c004-wave3.json",
+        "scratch/worktrees/recon-small/config/candidates/c004-wave4.json",
+        "scratch/worktrees/recon-small/config/candidates/c004.json",
+        "scratch/worktrees/recon-small/config/candidates/c005.json",
+        "scratch/worktrees/recon-small/config/candidates/c006.json",
+        "scratch/worktrees/recon-small/config/candidates/c007.json",
+        "scratch/worktrees/recon-small/config/candidates/c008-r2.json",
+        "scratch/worktrees/recon-small/config/candidates/c008-r3.json",
+        "scratch/worktrees/recon-small/config/candidates/c008.json",
+        "scratch/worktrees/recon-small/config/candidates/c009.json",
+        "scratch/worktrees/recon-small/config/candidates/c010.json",
+        "scratch/worktrees/recon-small/config/candidates/c011.json",
+        "scratch/worktrees/recon-small/config/candidates/c012.json",
+        "scratch/worktrees/recon-small/config/candidates/cmodels.json"
+      ],
+      "matches": []
+    }
+  ],
+  "preliminary_check_failure": {
+    "cause": "The initial guard incorrectly required all transfers to be unconditional. The second guard also incorrectly required R_ARM_JUMP24 to decode as B rather than its actual conditional call. Final source preserves strict reencoding and accepts the actual legacy branch/call form; a positive and refusal regression covers both.",
+    "exit_code": 1,
+    "observed_error": "v16 original native named transfer differs"
+  },
+  "public_generator_r1_failed": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16/.venv/bin/python",
+      "-B",
+      "tools/catalogue_library.py",
+      "propose-v16",
+      "--prove-objects",
+      "--private-root",
+      "/home/michael/code/kanken-training-2-decomp",
+      "--out",
+      "config/catalogue.json"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16",
+    "elapsed_seconds": 0.6958837359998142,
+    "exit_code": 1,
+    "stderr": "catalogue-v16: v16 scalar named tail transfer is not a branch\n",
+    "stdout": ""
+  },
+  "public_generator_r2": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16/.venv/bin/python",
+      "-B",
+      "tools/catalogue_library.py",
+      "propose-v16",
+      "--prove-objects",
+      "--private-root",
+      "/home/michael/code/kanken-training-2-decomp",
+      "--out",
+      "config/catalogue.json"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16",
+    "elapsed_seconds": 1.3466265780007234,
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "private replay: four complete vendor sections, native array caller, fresh scalar caller; temporary outputs removed\ncatalogue-v16: 4545 creditable functions; 1120082 extent bytes; proposal only; config/catalogue.json\n"
+  },
+  "research_private_replay": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "/home/michael/code/kanken-training-2-decomp/scratch/integrator/catalogue-v16/freeze-r1.py"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp",
+    "elapsed_seconds": 0.09153485999559052,
+    "exit_code": 0,
+    "scope": "Four selected array_del members, one retained whole native caller, one new isolated 32-byte scalar caller compile; no library discovery, cache write or build.",
+    "script_sha256": "f9245cbfe170a1efe76c277ef72198034e2ba4a1ce682a5644308136e2de28e2"
+  },
+  "scope": "Final v16 module freshly passed after the legacy-transfer source/test correction. The four ancestor modules passed in r1 and were unchanged. No full suite, matcher, build, acceptance or adoption.",
+  "targeted_tests_r1": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "tests.test_catalogue_v16",
+      "tests.test_catalogue_v15",
+      "tests.test_catalogue_v14",
+      "tests.test_catalogue_alignment",
+      "tests.test_catalogue_v13_r2"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v16",
+    "elapsed_seconds": 141.7545825230045,
+    "exit_code": 0,
+    "stderr": "......................................................................\n----------------------------------------------------------------------\nRan 70 tests in 141.008s\n\nOK\n",
+    "stdout": ""
+  },
+  "test_sources": {
+    "tests/test_catalogue_alignment.py": "8120dbdf75f6371801a80ff75a927ba524204c0782fbc2b9a71e831c45087cfd",
+    "tests/test_catalogue_v13_r2.py": "8c6bdd1035d9b4b20a7764ae703318e4a097aceb2a860b5b2f79fb825cd7b5cf",
+    "tests/test_catalogue_v14.py": "6e86226671fee1ea1139ce7ed2a6caef720ee596e4cd828aa8adf4e42efd7934",
+    "tests/test_catalogue_v15.py": "912c7cffa5561a6f79eb3237fb740306fd72e3e943f88dde20f2d1909db599a0",
+    "tests/test_catalogue_v16.py": "982ce812b83eeef206983981ecf557c01213af7a9a9c3bef5796b572905ca653"
+  }
+}

@@ -9444,6 +9444,15 @@
         ]
       }
     ],
+    "library_v16": {
+      "address": 1695884,
+      "new_C_credit": 0,
+      "proof": {
+        "path": "research/catalogue_v16_library_proof.json",
+        "sha256": "42d06903319fc6b074809cecd3a375ae53d3f208158cb4043386b44e72607d85",
+        "size": 14226
+      }
+    },
     "local_runtime_entries": {
       "adoption": false,
       "baseline": {
@@ -181934,6 +181943,83 @@
     },
     {
       "address": 1695884,
+      "classification_evidence": {
+        "address": 1695884,
+        "basis": "known_library",
+        "evidence": "research/catalogue_v16_library_proof.json",
+        "identity": "_ZdaPv",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "isa": "arm",
+        "kind": "library",
+        "known_library_identity": "Complete Arm Compiler 4.1-b791 cpprt_4.l(array_del.o) definition, strict call reencoding, independent native delete[] and public-header scalar-delete anchors",
+        "library_witness": {
+          "archive": ".cache/armlib/4.1-b791/lib/cpplib/cpprt_4.l",
+          "archive_sha256": "af94582ef9f66067a1008a93907145cd73ee9f39777838db28ae719b301db01b",
+          "build": 791,
+          "member": "array_del.o",
+          "member_offset": 10774,
+          "member_sha256": "ebd595814707965bb838feecaf85555d3137cb2ed8e30926ba1e1907b482b06b",
+          "member_size": 1268,
+          "section": {
+            "alignment": 4,
+            "base": 1695884,
+            "executable": true,
+            "image_sha256": "b8624762ba88c5a4e14e06b44617877ebc7785bdd0d2ed2ac410b5fcc440df03",
+            "index": 1,
+            "mapping": [
+              [
+                0,
+                "$a"
+              ]
+            ],
+            "name": "i._ZdaPv",
+            "nobits": false,
+            "object_sha256": "55efb9fc7c5de8cd774a3ed21838cb2633704d14c648d9e22aaeefd9e4adcfca",
+            "relocated_sha256": "b8624762ba88c5a4e14e06b44617877ebc7785bdd0d2ed2ac410b5fcc440df03",
+            "relocations": [
+              {
+                "addend": -8,
+                "offset": 4,
+                "reencoded_equal": true,
+                "symbol": "_ZdlPv",
+                "symbol_binding": "STB_GLOBAL",
+                "symbol_kind": "STT_FUNC",
+                "symbol_section": "SHN_UNDEF",
+                "symbol_size": 0,
+                "symbol_value": 0,
+                "target": 1594100,
+                "thumb": false,
+                "type": 28
+              }
+            ],
+            "rewrites": [],
+            "size": 12,
+            "symbols": [
+              {
+                "bind": "STB_LOCAL",
+                "kind": "STT_SECTION",
+                "name": "i._ZdaPv",
+                "offset": 0,
+                "size": 0,
+                "value": 0
+              },
+              {
+                "bind": "STB_GLOBAL",
+                "kind": "STT_FUNC",
+                "name": "_ZdaPv",
+                "offset": 0,
+                "size": 12,
+                "value": 0
+              }
+            ],
+            "whole_section_equal": true,
+            "writable": false
+          }
+        },
+        "original_extent_sha256": "b8624762ba88c5a4e14e06b44617877ebc7785bdd0d2ed2ac410b5fcc440df03",
+        "qualification": "Unadopted classification-only proposal. Complete named 4.1-b791 definition, independently named native delete[] call and fresh public-<new> scalar-delete target establish library body identity, not unique historical compiler/archive/TU, canonical/API name adoption or C credit. All old extents/entries/ranges and every accepted/pending record stay unchanged; other discovery refusals and PENDING-LINKER-v19 states are not promoted. Reconcile later pending/ledger changes at adoption.",
+        "size": 12
+      },
       "code_ranges": [
         [
           1695884,
@@ -181981,7 +182067,7 @@
         "bl_target"
       ],
       "isa": "arm",
-      "kind": "function",
+      "kind": "library",
       "literals": [],
       "noreturn": false,
       "noreturn_reasons": [],
@@ -247422,44 +247508,46 @@
     }
   ],
   "generator": {
-    "command": "tools/catalogue_unknowns.py propose-v15 --out X",
+    "command": "tools/catalogue_library.py propose-v16 --out X",
     "input_sha256": {
-      "docs/catalogue/REVIEW-v13-r2.md": "47fb9d1b2c04b26f3fd1baf97f47e17e139a46a6ee61b25f07800662553dad25",
-      "docs/catalogue/REVIEW-v14-r2.md": "683fc1b87f887905aa007c3a3988a73908987807f2bf0f8cd163b307f5a8ce16",
+      "docs/catalogue/REVIEW-v15.md": "bc0a9bddb2921d27e150a16b51261b88d2ddcb0fe1491de5cb28af32e24ee249",
       "exheader": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
-      "git:fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json@b823bc94b03c78edcefe7faa6d808336512f8854": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+      "git:ea985bcb37576c3347debe84579993a8f228352b:config/catalogue.json@54eb7aa363a00010404f4fc12dcb8e6c4d954015": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980",
       "image": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-      "research/catalogue_v13_section_proof.json": "2333ab0635582e8b5ccc800083d3f6014eac6d3d2168addd661fc0ec45eb6cc3",
-      "research/catalogue_v14_evidence.json": "c654518aaebe6eaade5ee968e877155892d4f3ee7312414ab5f7c30a3c126827",
-      "research/catalogue_v15_callback_proof.json": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
       "research/catalogue_v15_evidence.json": "9c63c4bddcfb4ce8bed27f3b44a99fc20df71afeb1ca234d8d46063e2cc4e256",
-      "research/catalogue_v15_frozen/c012-r6/config/candidates/c012.json": "7cdb51f13af36b8d24ddad2072803704a2f2c378f905433e08e1fd2e956236f9",
-      "research/catalogue_v15_frozen/c012-r6/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
-      "research/catalogue_v15_frozen/c015/config/candidates/c015.json": "869cc4b43c5afce9e975a0a69dace63bc5852da99c48a436c1ff7a8960ee8001",
-      "research/catalogue_v15_frozen/c015/config/names.json": "42f209541d3207bdeb43b9240e0b687dd2fda61a9c8ac21068e2cea4ccd5406b",
-      "research/catalogue_v15_frozen/config/matches.json": "4330cce9b9bdb086d1b3ef80d68c5bcdb8d0a8c99aab489aa44fc4827b9b2896",
-      "research/catalogue_v15_frozen/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
-      "research/catalogue_v15_unknowns.json": "7ebf2dfe5f853374b4bb6a8ffe807bb610805b584c11121a852940eacd72d548"
+      "research/catalogue_v16_evidence.json": "12881315877174fdff2240c232db040dd30397d01e7e54c466559bc5cd3b3a8d",
+      "research/catalogue_v16_frozen/CANDIDATES-41.json": "575ed1bbad803d83b2e6bdb4f7ff44aa7b3f7daf180d83b98cb5b9930a37e9e1",
+      "research/catalogue_v16_frozen/REPORT-41.txt": "56b3014c194c2f27be93d54beb011a471d35495e1e219802778c0cc8605a3274",
+      "research/catalogue_v16_frozen/c015/config/candidates/c015.json": "84d2712dd921672abc76ec83e9d96f067fbbd41d6aedc85d052d3e8ceac1426f",
+      "research/catalogue_v16_frozen/c015/config/names.json": "4b822cffd082a63d5b57970071bd9c5f8a3f1f0532256a0d647ba51ac588926e",
+      "research/catalogue_v16_frozen/config/matches.json": "44d4c0581e80bcd52c54f7caf7e08aad4f4b776dd225b914fb765ecfb39cd206",
+      "research/catalogue_v16_frozen/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v16_frozen/native_array_caller.cpp": "74f8d8b6c0c7ad5ee48d8d089ecc698a956b649817272002e3cf0c3756a4a55c",
+      "research/catalogue_v16_frozen/recon-small/config/candidates/c016.json": "fd3d37a6315bef328026dcd74774358712f9c3df127fd92abef1bb71a14799fe",
+      "research/catalogue_v16_frozen/recon-small/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v16_frozen/scalar_delete_caller.cpp": "0a31297a6635c0dc0d5cba594aa3439e697a82013c6776467ab20d1a6900d638",
+      "research/catalogue_v16_library_proof.json": "42d06903319fc6b074809cecd3a375ae53d3f208158cb4043386b44e72607d85"
     },
     "parent": {
-      "blob": "b823bc94b03c78edcefe7faa6d808336512f8854",
-      "reference": "fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json",
-      "revision": "catalogue-v14",
-      "sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff"
+      "blob": "54eb7aa363a00010404f4fc12dcb8e6c4d954015",
+      "reference": "ea985bcb37576c3347debe84579993a8f228352b:config/catalogue.json",
+      "revision": "catalogue-v15",
+      "sha256": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980"
     },
-    "policy": "complete_named_callback_sections_v1",
-    "revision": "catalogue-v15",
+    "policy": "unchanged_extent_array_delete_two_native_anchors_v1",
+    "revision": "catalogue-v16",
     "source_sha256": {
       "tools/analyze.py": "39edac788a92878e5d91f69fcafbec1df13f7fb12dccbdb73942975f5caf52ad",
+      "tools/catalogue_library.py": "a69661fa4d947a7f9cbb9dbf48f767942a5d9cc2ea2f61c0506dfc2ad3beb4a0",
       "tools/catalogue_local_entries.py": "26d2df18b084799dd1a6972453165440369613674e2c006be994f3d26a862eb6",
       "tools/catalogue_non_c.py": "d35211db73fc51e64c0cd6a501c024ec26229be4763c940a92c09dc9fe209918",
       "tools/catalogue_runtime_data.py": "3f2f1422f20ff9609a79dd5fdd529872806abef2ec302971301d7301b7ae672b",
-      "tools/catalogue_unknowns.py": "70b2eb2ca3557a36b5b301ca32ca20bf514fe357ae7a517e9dd376b0dece897f",
       "tools/ctrfmt.py": "3b380864744779afd222af8e3bb4a69d2c7d2baa6c1544147cd910736e9dc027",
       "tools/fingerprint.py": "d748c262f10f8f6510f510ea8e0b31ac1fe0df23f46301993860d9caa15ab80e",
       "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c",
       "tools/inplace.py": "4d93106408845f54ae4fb6ad3ce9fb0633756d12fadb4b4f29592d715f113189",
-      "tools/linker_models.py": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5"
+      "tools/linker_models.py": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5",
+      "tools/toolchain.py": "c1de88630cdb864782dcb90875392f51c24b5804745d77badcdaf214b5d18398"
     }
   },
   "image": "code.bin",
@@ -300309,58 +300397,66 @@
   ],
   "revision_review": {
     "adoption": false,
-    "anomalies": [
+    "baseline": {
+      "blob": "54eb7aa363a00010404f4fc12dcb8e6c4d954015",
+      "reference": "ea985bcb37576c3347debe84579993a8f228352b:config/catalogue.json",
+      "revision": "catalogue-v15",
+      "sha256": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980"
+    },
+    "changed_records": [
       {
-        "address": 1102520,
-        "issue": "unexplained_function_bytes"
+        "address": 1695884,
+        "changed_fields": [
+          "classification_evidence",
+          "kind"
+        ]
       }
     ],
-    "baseline": {
-      "blob": "b823bc94b03c78edcefe7faa6d808336512f8854",
-      "reference": "fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json",
-      "revision": "catalogue-v14",
-      "sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff"
-    },
     "input_sha256": {
-      "docs/catalogue/REVIEW-v13-r2.md": "47fb9d1b2c04b26f3fd1baf97f47e17e139a46a6ee61b25f07800662553dad25",
-      "docs/catalogue/REVIEW-v14-r2.md": "683fc1b87f887905aa007c3a3988a73908987807f2bf0f8cd163b307f5a8ce16",
+      "docs/catalogue/REVIEW-v15.md": "bc0a9bddb2921d27e150a16b51261b88d2ddcb0fe1491de5cb28af32e24ee249",
       "exheader": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
-      "git:fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json@b823bc94b03c78edcefe7faa6d808336512f8854": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+      "git:ea985bcb37576c3347debe84579993a8f228352b:config/catalogue.json@54eb7aa363a00010404f4fc12dcb8e6c4d954015": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980",
       "image": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-      "research/catalogue_v13_section_proof.json": "2333ab0635582e8b5ccc800083d3f6014eac6d3d2168addd661fc0ec45eb6cc3",
-      "research/catalogue_v14_evidence.json": "c654518aaebe6eaade5ee968e877155892d4f3ee7312414ab5f7c30a3c126827",
-      "research/catalogue_v15_callback_proof.json": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
       "research/catalogue_v15_evidence.json": "9c63c4bddcfb4ce8bed27f3b44a99fc20df71afeb1ca234d8d46063e2cc4e256",
-      "research/catalogue_v15_frozen/c012-r6/config/candidates/c012.json": "7cdb51f13af36b8d24ddad2072803704a2f2c378f905433e08e1fd2e956236f9",
-      "research/catalogue_v15_frozen/c012-r6/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
-      "research/catalogue_v15_frozen/c015/config/candidates/c015.json": "869cc4b43c5afce9e975a0a69dace63bc5852da99c48a436c1ff7a8960ee8001",
-      "research/catalogue_v15_frozen/c015/config/names.json": "42f209541d3207bdeb43b9240e0b687dd2fda61a9c8ac21068e2cea4ccd5406b",
-      "research/catalogue_v15_frozen/config/matches.json": "4330cce9b9bdb086d1b3ef80d68c5bcdb8d0a8c99aab489aa44fc4827b9b2896",
-      "research/catalogue_v15_frozen/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
-      "research/catalogue_v15_unknowns.json": "7ebf2dfe5f853374b4bb6a8ffe807bb610805b584c11121a852940eacd72d548",
+      "research/catalogue_v16_evidence.json": "12881315877174fdff2240c232db040dd30397d01e7e54c466559bc5cd3b3a8d",
+      "research/catalogue_v16_frozen/CANDIDATES-41.json": "575ed1bbad803d83b2e6bdb4f7ff44aa7b3f7daf180d83b98cb5b9930a37e9e1",
+      "research/catalogue_v16_frozen/REPORT-41.txt": "56b3014c194c2f27be93d54beb011a471d35495e1e219802778c0cc8605a3274",
+      "research/catalogue_v16_frozen/c015/config/candidates/c015.json": "84d2712dd921672abc76ec83e9d96f067fbbd41d6aedc85d052d3e8ceac1426f",
+      "research/catalogue_v16_frozen/c015/config/names.json": "4b822cffd082a63d5b57970071bd9c5f8a3f1f0532256a0d647ba51ac588926e",
+      "research/catalogue_v16_frozen/config/matches.json": "44d4c0581e80bcd52c54f7caf7e08aad4f4b776dd225b914fb765ecfb39cd206",
+      "research/catalogue_v16_frozen/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v16_frozen/native_array_caller.cpp": "74f8d8b6c0c7ad5ee48d8d089ecc698a956b649817272002e3cf0c3756a4a55c",
+      "research/catalogue_v16_frozen/recon-small/config/candidates/c016.json": "fd3d37a6315bef328026dcd74774358712f9c3df127fd92abef1bb71a14799fe",
+      "research/catalogue_v16_frozen/recon-small/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v16_frozen/scalar_delete_caller.cpp": "0a31297a6635c0dc0d5cba594aa3439e697a82013c6776467ab20d1a6900d638",
+      "research/catalogue_v16_library_proof.json": "42d06903319fc6b074809cecd3a375ae53d3f208158cb4043386b44e72607d85",
       "tools/analyze.py": "39edac788a92878e5d91f69fcafbec1df13f7fb12dccbdb73942975f5caf52ad",
+      "tools/catalogue_library.py": "a69661fa4d947a7f9cbb9dbf48f767942a5d9cc2ea2f61c0506dfc2ad3beb4a0",
       "tools/catalogue_local_entries.py": "26d2df18b084799dd1a6972453165440369613674e2c006be994f3d26a862eb6",
       "tools/catalogue_non_c.py": "d35211db73fc51e64c0cd6a501c024ec26229be4763c940a92c09dc9fe209918",
       "tools/catalogue_runtime_data.py": "3f2f1422f20ff9609a79dd5fdd529872806abef2ec302971301d7301b7ae672b",
-      "tools/catalogue_unknowns.py": "70b2eb2ca3557a36b5b301ca32ca20bf514fe357ae7a517e9dd376b0dece897f",
       "tools/ctrfmt.py": "3b380864744779afd222af8e3bb4a69d2c7d2baa6c1544147cd910736e9dc027",
       "tools/fingerprint.py": "d748c262f10f8f6510f510ea8e0b31ac1fe0df23f46301993860d9caa15ab80e",
       "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c",
       "tools/inplace.py": "4d93106408845f54ae4fb6ad3ce9fb0633756d12fadb4b4f29592d715f113189",
-      "tools/linker_models.py": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5"
+      "tools/linker_models.py": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5",
+      "tools/toolchain.py": "c1de88630cdb864782dcb90875392f51c24b5804745d77badcdaf214b5d18398"
     },
-    "name": "catalogue-v15",
+    "name": "catalogue-v16",
     "new_C_credit": 0,
-    "observations": {
-      "path": "research/catalogue_v15_unknowns.json",
-      "sha256": "7ebf2dfe5f853374b4bb6a8ffe807bb610805b584c11121a852940eacd72d548",
-      "size": 20569
+    "parent_review_sha256": "5c3e26393fca9a7a3fc7362e2bf810a351743bf111dcba90c5d026f99e72250c",
+    "pending_recon": {
+      "adoption_recheck_required": true,
+      "commit": "49056a408122e5aa5e59ae13ed7dfcf1ec9abe36",
+      "initial_observation": "No c016 manifest existed during the pre-edit protection check; Main authorized freezing that observation and adoption-time recheck. Its first committed manifest became available before input sealing and is additionally protected here.",
+      "manifest": "config/candidates/c016.json",
+      "status": "initial_manifest_frozen"
     },
-    "parent_review_sha256": "44bafd86159f738951470a822f76198c914ec83cae8f8a58d565c0674f980adc",
     "preservation": {
       "accepted_record_changes": [],
-      "candidate_record_changes": [],
-      "changed_old_function_records": []
+      "anomaly_changes": [],
+      "pending_record_changes": [],
+      "physical_range_changes": []
     },
     "protected_rows": [
       {
@@ -300417,6 +300513,11 @@
         "address": 1058496,
         "record_sha256": "a596bcd7ed50b729db2e5b7995b4c31c2862c9dc2905d628fae5a97e67b087f9",
         "size": 28
+      },
+      {
+        "address": 1058524,
+        "record_sha256": "33096c81e688230d19b0261322cbd6cfa8ad719eb3406934202edbfd25769329",
+        "size": 448
       },
       {
         "address": 1059380,
@@ -301394,6 +301495,11 @@
         "size": 16
       },
       {
+        "address": 1126328,
+        "record_sha256": "c51a23026187289404d4c32c7905550a56914e9ab574f8e0566c68cd80ae2fad",
+        "size": 232
+      },
+      {
         "address": 1126868,
         "record_sha256": "5933ff08ac802ec612683712a4e8a010cb5a3cd9b563b2f1c03da3abcdd15a06",
         "size": 36
@@ -301437,6 +301543,11 @@
         "address": 1128284,
         "record_sha256": "effcbb3cf82e8cbc49530a93ee4a1fc868284d22c17b5eef60691729e6139a7a",
         "size": 104
+      },
+      {
+        "address": 1128388,
+        "record_sha256": "fb68e7d3e85a49ab4879d222dd3206f063ad4ee692b900f91a9960b677914c59",
+        "size": 296
       },
       {
         "address": 1128924,
@@ -304189,6 +304300,11 @@
         "size": 52
       },
       {
+        "address": 1334844,
+        "record_sha256": "1cec57b71be1b1084e5de6117cca56ad4fba00ab3ebc9fa38b1baa64aa904257",
+        "size": 72
+      },
+      {
         "address": 1334916,
         "record_sha256": "41b9c8db77c2fea9c8ee58b509bd6a7f6fc4b4d2f1f30f4329791e728562fbd7",
         "size": 44
@@ -304732,6 +304848,11 @@
         "address": 1357860,
         "record_sha256": "17eafca02275dcb39714dfdaaa0e17bef78a0777f0bf9dc123cbfbcc6304b1a8",
         "size": 56
+      },
+      {
+        "address": 1357916,
+        "record_sha256": "a4ff1ff8e2da8e5c91f9e923ac28658b346837baf7a32c6950a7592cd06414fb",
+        "size": 124
       },
       {
         "address": 1359136,
@@ -308629,6 +308750,11 @@
         "size": 20
       },
       {
+        "address": 1634164,
+        "record_sha256": "1bbf361550fde3ee7ed473bf9b349dc3c20d8a93b8aaea91ddb08458f83ba820",
+        "size": 164
+      },
+      {
         "address": 1634328,
         "record_sha256": "b9bcdf96be5f2d5c60967b93c0d69267d0925fea7af1f202ee648744aa85417d",
         "size": 16
@@ -310094,6 +310220,11 @@
         "size": 76
       },
       {
+        "address": 1841632,
+        "record_sha256": "55c5d86f026d332ff466782772c550714d98f9ca859442684bb6516cd67fbd28",
+        "size": 64
+      },
+      {
         "address": 1841852,
         "record_sha256": "99e5338ebad0bed31acffd42701d9c471e1f20eb7ffb5f5c04bebce51b0308d4",
         "size": 88
@@ -310512,6 +310643,11 @@
         "address": 1856524,
         "record_sha256": "b053d52f8bc14b575180e898a68a11072ca9a1036bbbb9de355f99ff73429ad5",
         "size": 24
+      },
+      {
+        "address": 1856816,
+        "record_sha256": "8b988c42842bf48d7fa0c4d0a2b158062aca745b222ee5b190a95897f87dd0d5",
+        "size": 172
       },
       {
         "address": 1856988,
@@ -314441,100 +314577,22 @@
     ],
     "protected_summary": {
       "accepted": {
-        "bytes": 301020,
-        "complete_records_sha256": "621ddb312134cba24147f3e4fbaea13151f4834e18e0c98e5552518ca820a9fd",
-        "functions": 2770
-      },
-      "c012-r6": {
-        "bytes": 4928,
-        "complete_records_sha256": "897d3e5c03661d94438634bb3488b5cde6b327ad06ffd859c970dda68d7b2a32",
-        "functions": 57
+        "bytes": 305008,
+        "complete_records_sha256": "8bb5183481c18137e3f5c4843b80e8d3f8bfe4f1685abb57105e87261b8ba7c2",
+        "functions": 2796
       },
       "c015": {
-        "bytes": 2364,
-        "complete_records_sha256": "6d00b4ac71723c928f447b463e0573f28568ceeae515780319726e6868429792",
-        "functions": 19
+        "bytes": 3704,
+        "complete_records_sha256": "4ad01793342439451b6846ab39fafba773c4b2b5dd767629db9ce8e9d599d165",
+        "functions": 26
+      },
+      "recon-small": {
+        "bytes": 232,
+        "complete_records_sha256": "25763b264aad4ecb81dbd968b520b6ec9105a81fcd24571f26fa74711c14225e",
+        "functions": 1
       }
     },
-    "qualification": "Unadopted proposal requiring independent review and Main adoption. Adds only the newly equal complete _snputc library entry through complete independently placed parent/static named linkage. Every old complete owner, accepted/c012-r6/c015 identity, ancestor proof, refusal, names binding and source is unchanged; ten unknown ranges and the original anomaly remain. No runtime data-endian/computed-transfer claim or C credit.",
-    "transition": {
-      "adoption": false,
-      "entry": {
-        "address": 1050106,
-        "isa": "thumb",
-        "kind": "library",
-        "size": 16
-      },
-      "new_C_credit": 0,
-      "proof": {
-        "path": "research/catalogue_v15_callback_proof.json",
-        "sha256": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
-        "size": 5681
-      },
-      "runtime_pool_value_admitted": false
-    },
-    "unknown_ranges": [
-      {
-        "end": 1048612,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1048608
-      },
-      {
-        "end": 1048926,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1048878
-      },
-      {
-        "end": 1050948,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1050946
-      },
-      {
-        "end": 1051432,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1051430
-      },
-      {
-        "end": 1052020,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1052016
-      },
-      {
-        "end": 1102768,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1102760
-      },
-      {
-        "end": 1316280,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1316276
-      },
-      {
-        "end": 1704120,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1704116
-      },
-      {
-        "end": 1865564,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1865544
-      },
-      {
-        "end": 1889000,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1888998
-      }
-    ]
+    "qualification": "Unadopted classification-only proposal. Complete named 4.1-b791 definition, independently named native delete[] call and fresh public-<new> scalar-delete target establish library body identity, not unique historical compiler/archive/TU, canonical/API name adoption or C credit. All old extents/entries/ranges and every accepted/pending record stay unchanged; other discovery refusals and PENDING-LINKER-v19 states are not promoted. Reconcile later pending/ledger changes at adoption."
   },
   "schema_version": 1,
   "segments": [
@@ -314720,12 +314778,12 @@
       "segment_padding": 8268,
       "unknown": 98
     },
-    "classified_functions": 157,
+    "classified_functions": 158,
     "closed_graph_absorbed_owners": 2,
     "closed_graph_owner_merges": 1,
     "code_bytes": 1060888,
-    "creditable_bytes": 1120094,
-    "creditable_functions": 4546,
+    "creditable_bytes": 1120082,
+    "creditable_functions": 4545,
     "decoded_instructions": 266385,
     "direct_calls": 19999,
     "discovery_rounds": 7,
@@ -314737,8 +314795,8 @@
     },
     "functions_by_kind": {
       "assembly": 37,
-      "function": 4546,
-      "library": 96,
+      "function": 4545,
+      "library": 97,
       "multi_entry": 25,
       "runtime": 22,
       "veneer": 18
