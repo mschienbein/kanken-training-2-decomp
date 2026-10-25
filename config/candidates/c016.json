@@ -5,10 +5,33 @@
     {
       "source": "src/checkpoint16/property_lookup.cpp",
       "profile": "game",
-      "functions": ["func_00112fb8"],
+      "functions": [
+        "func_00112fb8"
+      ],
       "author": "np266",
       "family": "PROPERTY-LOOKUP",
       "reason": "Centralize the shared AttributeMapping and the distinct property table/reference and caller-evidenced 64-byte hidden result. No owner alias or storage reinterpretation."
+    },
+    {
+      "source": "src/checkpoint16/filesystem_worker.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0010af8c"
+      ],
+      "author": "r4041",
+      "family": "FILESYSTEM-WORKER",
+      "reason": "Use the one canonical OptionalAllocation root, its actual allocation pointer/count and value/state/stop members, the 44-byte work-item element, and the exact void(void*,void*) invoking thread callback."
+    },
+    {
+      "source": "src/checkpoint16/category_variadic.c",
+      "profile": "game",
+      "functions": [
+        "func_00190d0c",
+        "func_00190d68"
+      ],
+      "author": "w19i",
+      "family": "VAARG-PARSER",
+      "reason": "Use actual W6Category.group_count/patterns and count/items with standard va_arg; current G3 supports type operands. Remove the historical incompatible W19CategoryCodes overlay."
     }
   ],
   "moves": [],
@@ -17,21 +40,54 @@
     {
       "source": "src/checkpoint11/intake-r7/np024/attributes_accessors.c",
       "profile": "game",
-      "functions": ["func_0018fdfc", "func_0018fed0"],
+      "functions": [
+        "func_0018fdfc",
+        "func_0018fed0"
+      ],
       "reason": "PROPERTY-LOOKUP: remove the local AttributeMapping/AttributeRecord/AttributeCursor copies and include their canonical shared declarations."
     },
     {
       "source": "src/sdk2/func_001267c0.c",
       "profile": "sdk",
-      "functions": ["func_001267c0"],
+      "functions": [
+        "func_001267c0"
+      ],
       "reason": "PROPERTY-LOOKUP: centralize the identical AttributeMapping and genuine attribute owner/table/cursor layout."
     },
     {
       "source": "src/wave9/func_001267f4.c",
       "profile": "game",
-      "functions": ["func_001267f4"],
+      "functions": [
+        "func_001267f4"
+      ],
       "reason": "PROPERTY-LOOKUP: include the one canonical AttributeMapping/AttributeRecord/AttributeCursor contract."
     }
   ],
-  "surviving_revised_accepted_units": []
+  "surviving_revised_accepted_units": [
+    {
+      "source": "src/checkpoint11/intake-r7/np024/attributes_accessors.c",
+      "profile": "game",
+      "functions": [
+        "func_0018fdfc",
+        "func_0018fed0"
+      ],
+      "reason": "PROPERTY-LOOKUP: remove the local AttributeMapping/AttributeRecord/AttributeCursor copies and include their canonical shared declarations."
+    },
+    {
+      "source": "src/sdk2/func_001267c0.c",
+      "profile": "sdk",
+      "functions": [
+        "func_001267c0"
+      ],
+      "reason": "PROPERTY-LOOKUP: centralize the identical AttributeMapping and genuine attribute owner/table/cursor layout."
+    },
+    {
+      "source": "src/wave9/func_001267f4.c",
+      "profile": "game",
+      "functions": [
+        "func_001267f4"
+      ],
+      "reason": "PROPERTY-LOOKUP: include the one canonical AttributeMapping/AttributeRecord/AttributeCursor contract."
+    }
+  ]
 }

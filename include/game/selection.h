@@ -138,6 +138,8 @@ extern void func_001e981c(void *screen, int group_index, int index, int value);
 extern void func_00173d8c(struct W6HandlePanel10 *panel, int resource);
 extern void func_00190b1c(int category, int kind, int x, int y, int width, int height);
 extern void func_00190c1c(int category, int kind, int count, ...);
+extern void func_00190d0c(int category, int count, ...);
+extern void func_00190d68(int category, int count, ...);
 #ifdef __cplusplus
 }
 #endif
