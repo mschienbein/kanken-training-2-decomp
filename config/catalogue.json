@@ -9544,6 +9544,22 @@
       ],
       "runtime_pool_value_admitted": false
     },
+    "named_callback_v15": {
+      "adoption": false,
+      "entry": {
+        "address": 1050106,
+        "isa": "thumb",
+        "kind": "library",
+        "size": 16
+      },
+      "new_C_credit": 0,
+      "proof": {
+        "path": "research/catalogue_v15_callback_proof.json",
+        "sha256": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
+        "size": 5681
+      },
+      "runtime_pool_value_admitted": false
+    },
     "non_c_v13": {
       "classifications": [
         {
@@ -53407,6 +53423,57 @@
       "noreturn_reasons": [],
       "pools": [],
       "size": 10
+    },
+    {
+      "address": 1050106,
+      "classification_evidence": {
+        "address": 1050106,
+        "basis": "known_library",
+        "evidence": "research/catalogue_v15_callback_proof.json",
+        "identity": "_snputc",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "isa": "thumb",
+        "kind": "library",
+        "known_library_identity": "Complete named Arm 5.06-b960 definition plus whole independently placed __0snprintf parent and named static REL32 linkage",
+        "library_witness": {
+          "archive": ".cache/toolchain/armcc/5.06/b960/lib/armlib/c_5.l",
+          "archive_sha256": "00214991a43ef47f201fba5b54da0a7f509baf954c2fbd6ea9ebf2ef151e1c08",
+          "member": "_snputc.o",
+          "member_offset": 753252,
+          "member_sha256": "fa2a43ecd529175c1aeaae66c040c7b3f5655526e6b90ebf04751b0ff555853a"
+        },
+        "original_extent_sha256": "1fb4464921189a4fc75aa39ff4ef5232b71f69bd07db69ced34f4bc173dbf4cc",
+        "qualification": "Static ELF linkage only: no runtime pool/endian/computed-transfer admission, historical-build uniqueness, parent reclassification, canonical name or C credit. Older 5.04 mismatch remains a negative.",
+        "size": 16
+      },
+      "code_ranges": [
+        [
+          1050106,
+          1050122
+        ]
+      ],
+      "code_size": 16,
+      "entries": [
+        {
+          "address": 1050106,
+          "evidence": [
+            "exact_bound_library_callback_entry"
+          ],
+          "isa": "thumb",
+          "kind": "entry",
+          "sources": []
+        }
+      ],
+      "evidence": [
+        "exact_bound_library_callback_entry"
+      ],
+      "isa": "thumb",
+      "kind": "library",
+      "literals": [],
+      "noreturn": false,
+      "noreturn_reasons": [],
+      "pools": [],
+      "size": 16
     },
     {
       "address": 1050122,
@@ -247355,36 +247422,39 @@
     }
   ],
   "generator": {
-    "command": "tools/catalogue_non_c.py propose-v14 --out X",
+    "command": "tools/catalogue_unknowns.py propose-v15 --out X",
     "input_sha256": {
       "docs/catalogue/REVIEW-v13-r2.md": "47fb9d1b2c04b26f3fd1baf97f47e17e139a46a6ee61b25f07800662553dad25",
+      "docs/catalogue/REVIEW-v14-r2.md": "683fc1b87f887905aa007c3a3988a73908987807f2bf0f8cd163b307f5a8ce16",
       "exheader": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
-      "git:5820254f213d8b28130f18c59afde974733112b8:config/catalogue.json@1326f1675735048b26fa435f11605e613cac89f2": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+      "git:fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json@b823bc94b03c78edcefe7faa6d808336512f8854": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
       "image": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-      "include/nw/gfx/gfx_MemoryUtil.h": "a47b62ee44c7db5268dd13abf4c0439812debb77d70953feed67c760ef206427",
-      "research/catalogue_v13_r2_evidence.json": "2adf68b043881412092ce23c8c89ba43e64d47061e4f05ca100e45dfa15b86c0",
-      "research/catalogue_v14_assembly_evidence.json": "e627682c82cd3dd966076368016c41f6618231e36dcb0a252e0728f0c1329c6c",
-      "research/catalogue_v14_callers.json": "a82ba9ac958daa4a246a5d332a6a125b5600e611d8ababdb7369efc2779f1666",
+      "research/catalogue_v13_section_proof.json": "2333ab0635582e8b5ccc800083d3f6014eac6d3d2168addd661fc0ec45eb6cc3",
       "research/catalogue_v14_evidence.json": "c654518aaebe6eaade5ee968e877155892d4f3ee7312414ab5f7c30a3c126827",
-      "research/catalogue_v14_frozen/config/matches.json": "da285c365ea7c9b584b83041a3721a9c8364be8d575b138edbc915fe1edcdaaa",
-      "research/catalogue_v14_frozen/config/names.json": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
-      "research/catalogue_v14_library_evidence.json": "d52d5eb07945e932d55e7596ee611f384b8a43213c8dc625fa320f6d169b6c0f",
-      "research/catalogue_v14_non_c_proof.json": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24"
+      "research/catalogue_v15_callback_proof.json": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
+      "research/catalogue_v15_evidence.json": "9c63c4bddcfb4ce8bed27f3b44a99fc20df71afeb1ca234d8d46063e2cc4e256",
+      "research/catalogue_v15_frozen/c012-r6/config/candidates/c012.json": "7cdb51f13af36b8d24ddad2072803704a2f2c378f905433e08e1fd2e956236f9",
+      "research/catalogue_v15_frozen/c012-r6/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v15_frozen/c015/config/candidates/c015.json": "869cc4b43c5afce9e975a0a69dace63bc5852da99c48a436c1ff7a8960ee8001",
+      "research/catalogue_v15_frozen/c015/config/names.json": "42f209541d3207bdeb43b9240e0b687dd2fda61a9c8ac21068e2cea4ccd5406b",
+      "research/catalogue_v15_frozen/config/matches.json": "4330cce9b9bdb086d1b3ef80d68c5bcdb8d0a8c99aab489aa44fc4827b9b2896",
+      "research/catalogue_v15_frozen/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v15_unknowns.json": "7ebf2dfe5f853374b4bb6a8ffe807bb610805b584c11121a852940eacd72d548"
     },
     "parent": {
-      "blob": "1326f1675735048b26fa435f11605e613cac89f2",
-      "reference": "5820254f213d8b28130f18c59afde974733112b8:config/catalogue.json",
-      "revision": "catalogue-v13-r2",
-      "sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a"
+      "blob": "b823bc94b03c78edcefe7faa6d808336512f8854",
+      "reference": "fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json",
+      "revision": "catalogue-v14",
+      "sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff"
     },
-    "policy": "unchanged_extents_evidenced_non_c_only",
-    "revision": "catalogue-v14",
+    "policy": "complete_named_callback_sections_v1",
+    "revision": "catalogue-v15",
     "source_sha256": {
       "tools/analyze.py": "39edac788a92878e5d91f69fcafbec1df13f7fb12dccbdb73942975f5caf52ad",
       "tools/catalogue_local_entries.py": "26d2df18b084799dd1a6972453165440369613674e2c006be994f3d26a862eb6",
       "tools/catalogue_non_c.py": "d35211db73fc51e64c0cd6a501c024ec26229be4763c940a92c09dc9fe209918",
-      "tools/catalogue_review.py": "789e7acdaaf6bbc91c28741d51271af7ff5286d8e24f144d3b3d41233534074b",
       "tools/catalogue_runtime_data.py": "3f2f1422f20ff9609a79dd5fdd529872806abef2ec302971301d7301b7ae672b",
+      "tools/catalogue_unknowns.py": "70b2eb2ca3557a36b5b301ca32ca20bf514fe357ae7a517e9dd376b0dece897f",
       "tools/ctrfmt.py": "3b380864744779afd222af8e3bb4a69d2c7d2baa6c1544147cd910736e9dc027",
       "tools/fingerprint.py": "d748c262f10f8f6510f510ea8e0b31ac1fe0df23f46301993860d9caa15ab80e",
       "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c",
@@ -270722,8 +270792,8 @@
     },
     {
       "end": 1050122,
-      "kind": "unknown",
-      "owner": null,
+      "kind": "function",
+      "owner": 1050106,
       "start": 1050106
     },
     {
@@ -300238,25 +300308,7 @@
     }
   ],
   "revision_review": {
-    "adjudications": [
-      {
-        "decision": "admit_library_identity_only",
-        "function": "func_0018651c",
-        "reason": "The existing standard requires a complete named body plus an independent natural original-address caller/ABI witness, not adoption of that replay as native C++ source. The 204-byte representation-equivalent C-linkage replay retains the actual named call and has zero rewrites. It supplies bounded ABI/name evidence; it does not approve nominal C++ wchar_t equivalence or replace the accepted unsigned-short interface. Public-header C++ refusal and C mismatches remain failures."
-      },
-      {
-        "decision": "admit_library_with_new_independent_named_anchor",
-        "function": "func_0019d5b0",
-        "reason": "The previous generic-body refusal was correct on its then-available body-only evidence and remains immutable. The new public-C-wchar.h replay of the accepted 48-byte natural caller supplies the previously missing named original-address anchor. Its retained wcslen relocation is not rewritten; the one inherited v2 tail branchnop is at offset 44, separate from the call at offset 20. Full 18-byte relocation-free vendor equality plus this independent anchor meets the unchanged standard. No historical archive uniqueness or C source credit follows."
-      },
-      {
-        "decision": "admit_only_complete_5.06_b960_identity",
-        "function": "func_00100a04",
-        "reason": "Complete 16-byte 5.06-b960 definition plus the already authenticated complete __c89vswprintf caller named callback reference. The 5.04-b82 setup mismatch remains a genuine negative; no prefix match or weakened relocation mask is admitted."
-      }
-    ],
     "adoption": false,
-    "already_classified_assembly_family": [],
     "anomalies": [
       {
         "address": 1102520,
@@ -300264,676 +300316,51 @@
       }
     ],
     "baseline": {
-      "blob": "1326f1675735048b26fa435f11605e613cac89f2",
-      "reference": "5820254f213d8b28130f18c59afde974733112b8:config/catalogue.json",
-      "revision": "catalogue-v13-r2",
-      "sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a"
+      "blob": "b823bc94b03c78edcefe7faa6d808336512f8854",
+      "reference": "fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json",
+      "revision": "catalogue-v14",
+      "sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff"
     },
-    "changed_records": [
-      {
-        "address": 1051140,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1582892,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1589764,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1589792,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1589820,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1589848,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1589880,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1589928,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1589976,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590024,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590076,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590144,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590212,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590280,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590352,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590440,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590528,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590616,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590708,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590816,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1590924,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1591032,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1598748,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1645696,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      },
-      {
-        "address": 1693104,
-        "changed_fields": [
-          "classification_evidence",
-          "kind"
-        ]
-      }
-    ],
-    "classifications": [
-      {
-        "address": 1051140,
-        "basis": "known_library",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "_snputwc",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "thumb",
-        "kind": "library",
-        "new_C_credit": 0,
-        "original_extent_sha256": "d568659a5e449fd12d5886f4dbdc0258b64acab1157b060ab2babec682ea62e9",
-        "qualification": "Unadopted identity proposal, not C credit or a catalogue/name edit. Exact library-body and independent identity/placement witnesses do not uniquely identify the historical archive/compiler variant. Complete 16-byte 5.06-b960 definition plus the already authenticated complete __c89vswprintf caller named callback reference. The 5.04-b82 setup mismatch remains a genuine negative; no prefix match or weakened relocation mask is admitted.",
-        "size": 16
-      },
-      {
-        "address": 1582892,
-        "basis": "known_library",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "strcat",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "thumb",
-        "kind": "library",
-        "new_C_credit": 0,
-        "original_extent_sha256": "41ac13fb9aa71824ed18f571b6ca12ea4124dd38f1b224b6789b276cde70b040",
-        "qualification": "Unadopted identity proposal, not C credit or a catalogue/name edit. Exact library-body and independent identity/placement witnesses do not uniquely identify the historical archive/compiler variant. ",
-        "size": 24
-      },
-      {
-        "address": 1589764,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_2",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "83863719ac94ece886a7e6a0d2a3ceedc7a99bfff78d31fa6243d30fdb740a43",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 28
-      },
-      {
-        "address": 1589792,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_4",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "b6771f51b04223e5624a46eb955d245b08d04f43874d8b138ca757c8e100b20d",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 28
-      },
-      {
-        "address": 1589820,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_6",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "71366d8aab58c685cb87160586265f7dcc209984a266d7195c8d90a71dccdc56",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 28
-      },
-      {
-        "address": 1589848,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_8",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "cef84d6bb38ff5cd476d4b6b4cf4572ce18c13ed92aec15efb3bde5c086739a3",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 32
-      },
-      {
-        "address": 1589880,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_10",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "76d8dd821f16b6d5e18eeba1e176807d73e97c8af7ca175a5e4bd0e73a361346",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 48
-      },
-      {
-        "address": 1589928,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_12",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "20d7b1b10629296926924fbf565bdae3ea011600eaa61356911f70e5f92423ee",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 48
-      },
-      {
-        "address": 1589976,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_14",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "c60278ef679c26e1f1e93505ea8122241d6670b342519f19c85e4f8f7ba0ae1b",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 48
-      },
-      {
-        "address": 1590024,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_16",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "8939425ba1eebd51ed2b5b1a431fc20ca68b64ad22138a4386fd6d61a0076a8c",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 52
-      },
-      {
-        "address": 1590076,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_18",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "9167e88497cd32bb603e4a5a4b6ae225a44442b5de8d2193f5ee9944050d8887",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 68
-      },
-      {
-        "address": 1590144,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_20",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "492a30e460216e919a8dc77141cf77fba137eee3db8f05c217a500c5371497fa",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 68
-      },
-      {
-        "address": 1590212,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_22",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "df629a1f3b14d5d171b6d7fababd4b365006237840d43ae87dbaac065b310e1c",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 68
-      },
-      {
-        "address": 1590280,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_24",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "a89d8b821fcafa6dd509cf7a350d898f3100759975367c0c265f48d975ef30c6",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 72
-      },
-      {
-        "address": 1590352,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_26",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "98a29a7dcd78a348d9beba44d1aa0700b4de7a48dadd391c303c94c78de8c0e2",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 88
-      },
-      {
-        "address": 1590440,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_28",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "a9a020c90ee0c3c3434668d0f728e7a49f3b19df877a596ff0d20b2791ef9bdc",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 88
-      },
-      {
-        "address": 1590528,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_30",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "1da0fea8e7eb46b2b4b346419829b137bfa4b930bad4f1bed94186997045024c",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 88
-      },
-      {
-        "address": 1590616,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_32",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "cdc0d075774abb168b6ccbff8fa41fd94182fdc9234a691b0e0872703cad3f91",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 92
-      },
-      {
-        "address": 1590708,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_34",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "e37704a59cb7a3877c59015fd16058f3e55c7c61712ca07e262027969a0298c4",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 108
-      },
-      {
-        "address": 1590816,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_36",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "cd66017358f695c295dfa2bd1356968dd49773eab2a4585468f09485ae71749d",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 108
-      },
-      {
-        "address": 1590924,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_38",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "2798d8ac0ca507d0ebe9360e07b934d8f4974ebd0d55894644761eeade5bf790",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 108
-      },
-      {
-        "address": 1591032,
-        "basis": "explicit_assembly",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "nw::gfx::internal::FastWordCopyAsm_78",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "arm",
-        "kind": "assembly",
-        "new_C_credit": 0,
-        "original_extent_sha256": "e4d453aae0ae9e72c9d71002ef9bee38cefe78628ab9ad8d40e26fbfc26a305b",
-        "qualification": "All 20 complete ARM owners, including the 78-word endpoint rather than an invented 40-word specialization, have full retained normalized public-macro identity and explicit asm declarations. Public symbol-to-image identity is [INFERENCE] from this complete correspondence, not vendor archive/version authentication or compiled-C credit.",
-        "size": 208
-      },
-      {
-        "address": 1598748,
-        "basis": "known_library",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "wcsncpy",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "thumb",
-        "kind": "library",
-        "new_C_credit": 0,
-        "original_extent_sha256": "6cbf300b5b5b55c90f59c29c459d3ff6927ed8ca1fde343b2a81ad918d7a9c81",
-        "qualification": "Unadopted identity proposal, not C credit or a catalogue/name edit. Exact library-body and independent identity/placement witnesses do not uniquely identify the historical archive/compiler variant. The existing standard requires a complete named body plus an independent natural original-address caller/ABI witness, not adoption of that replay as native C++ source. The 204-byte representation-equivalent C-linkage replay retains the actual named call and has zero rewrites. It supplies bounded ABI/name evidence; it does not approve nominal C++ wchar_t equivalence or replace the accepted unsigned-short interface. Public-header C++ refusal and C mismatches remain failures.",
-        "size": 28
-      },
-      {
-        "address": 1645696,
-        "basis": "known_library",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "__cxa_guard_acquire",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "thumb",
-        "kind": "library",
-        "new_C_credit": 0,
-        "original_extent_sha256": "2d81a3f37d5e5150e37bb03f0e4114a3c20ec9f73170595e6db823c516945b0f",
-        "qualification": "Unadopted identity proposal, not C credit or a catalogue/name edit. Exact library-body and independent identity/placement witnesses do not uniquely identify the historical archive/compiler variant. ",
-        "size": 18
-      },
-      {
-        "address": 1693104,
-        "basis": "known_library",
-        "coverage": [],
-        "evidence": {
-          "path": "research/catalogue_v14_non_c_proof.json",
-          "sha256": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
-          "size": 21382
-        },
-        "identity": "wcslen",
-        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-        "isa": "thumb",
-        "kind": "library",
-        "new_C_credit": 0,
-        "original_extent_sha256": "8b6add75d20bde5f0fd78628ac964503b402f9a27468f87eae39213fbe5da057",
-        "qualification": "Unadopted identity proposal, not C credit or a catalogue/name edit. Exact library-body and independent identity/placement witnesses do not uniquely identify the historical archive/compiler variant. The previous generic-body refusal was correct on its then-available body-only evidence and remains immutable. The new public-C-wchar.h replay of the accepted 48-byte natural caller supplies the previously missing named original-address anchor. Its retained wcslen relocation is not rewritten; the one inherited v2 tail branchnop is at offset 44, separate from the call at offset 20. Full 18-byte relocation-free vendor equality plus this independent anchor meets the unchanged standard. No historical archive uniqueness or C source credit follows.",
-        "size": 18
-      }
-    ],
     "input_sha256": {
       "docs/catalogue/REVIEW-v13-r2.md": "47fb9d1b2c04b26f3fd1baf97f47e17e139a46a6ee61b25f07800662553dad25",
+      "docs/catalogue/REVIEW-v14-r2.md": "683fc1b87f887905aa007c3a3988a73908987807f2bf0f8cd163b307f5a8ce16",
       "exheader": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
-      "git:5820254f213d8b28130f18c59afde974733112b8:config/catalogue.json@1326f1675735048b26fa435f11605e613cac89f2": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+      "git:fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json@b823bc94b03c78edcefe7faa6d808336512f8854": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
       "image": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
-      "include/nw/gfx/gfx_MemoryUtil.h": "a47b62ee44c7db5268dd13abf4c0439812debb77d70953feed67c760ef206427",
-      "research/catalogue_v13_r2_evidence.json": "2adf68b043881412092ce23c8c89ba43e64d47061e4f05ca100e45dfa15b86c0",
-      "research/catalogue_v14_assembly_evidence.json": "e627682c82cd3dd966076368016c41f6618231e36dcb0a252e0728f0c1329c6c",
-      "research/catalogue_v14_callers.json": "a82ba9ac958daa4a246a5d332a6a125b5600e611d8ababdb7369efc2779f1666",
+      "research/catalogue_v13_section_proof.json": "2333ab0635582e8b5ccc800083d3f6014eac6d3d2168addd661fc0ec45eb6cc3",
       "research/catalogue_v14_evidence.json": "c654518aaebe6eaade5ee968e877155892d4f3ee7312414ab5f7c30a3c126827",
-      "research/catalogue_v14_frozen/config/matches.json": "da285c365ea7c9b584b83041a3721a9c8364be8d575b138edbc915fe1edcdaaa",
-      "research/catalogue_v14_frozen/config/names.json": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
-      "research/catalogue_v14_library_evidence.json": "d52d5eb07945e932d55e7596ee611f384b8a43213c8dc625fa320f6d169b6c0f",
-      "research/catalogue_v14_non_c_proof.json": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
+      "research/catalogue_v15_callback_proof.json": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
+      "research/catalogue_v15_evidence.json": "9c63c4bddcfb4ce8bed27f3b44a99fc20df71afeb1ca234d8d46063e2cc4e256",
+      "research/catalogue_v15_frozen/c012-r6/config/candidates/c012.json": "7cdb51f13af36b8d24ddad2072803704a2f2c378f905433e08e1fd2e956236f9",
+      "research/catalogue_v15_frozen/c012-r6/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v15_frozen/c015/config/candidates/c015.json": "869cc4b43c5afce9e975a0a69dace63bc5852da99c48a436c1ff7a8960ee8001",
+      "research/catalogue_v15_frozen/c015/config/names.json": "42f209541d3207bdeb43b9240e0b687dd2fda61a9c8ac21068e2cea4ccd5406b",
+      "research/catalogue_v15_frozen/config/matches.json": "4330cce9b9bdb086d1b3ef80d68c5bcdb8d0a8c99aab489aa44fc4827b9b2896",
+      "research/catalogue_v15_frozen/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v15_unknowns.json": "7ebf2dfe5f853374b4bb6a8ffe807bb610805b584c11121a852940eacd72d548",
       "tools/analyze.py": "39edac788a92878e5d91f69fcafbec1df13f7fb12dccbdb73942975f5caf52ad",
       "tools/catalogue_local_entries.py": "26d2df18b084799dd1a6972453165440369613674e2c006be994f3d26a862eb6",
       "tools/catalogue_non_c.py": "d35211db73fc51e64c0cd6a501c024ec26229be4763c940a92c09dc9fe209918",
-      "tools/catalogue_review.py": "789e7acdaaf6bbc91c28741d51271af7ff5286d8e24f144d3b3d41233534074b",
       "tools/catalogue_runtime_data.py": "3f2f1422f20ff9609a79dd5fdd529872806abef2ec302971301d7301b7ae672b",
+      "tools/catalogue_unknowns.py": "70b2eb2ca3557a36b5b301ca32ca20bf514fe357ae7a517e9dd376b0dece897f",
       "tools/ctrfmt.py": "3b380864744779afd222af8e3bb4a69d2c7d2baa6c1544147cd910736e9dc027",
       "tools/fingerprint.py": "d748c262f10f8f6510f510ea8e0b31ac1fe0df23f46301993860d9caa15ab80e",
       "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c",
       "tools/inplace.py": "4d93106408845f54ae4fb6ad3ce9fb0633756d12fadb4b4f29592d715f113189",
       "tools/linker_models.py": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5"
     },
-    "name": "catalogue-v14",
+    "name": "catalogue-v15",
     "new_C_credit": 0,
-    "parent_review_sha256": "a379b6ea4c2ee864216e06436d6e47e065e2bad4a818b12a06b58336fddf26a6",
+    "observations": {
+      "path": "research/catalogue_v15_unknowns.json",
+      "sha256": "7ebf2dfe5f853374b4bb6a8ffe807bb610805b584c11121a852940eacd72d548",
+      "size": 20569
+    },
+    "parent_review_sha256": "44bafd86159f738951470a822f76198c914ec83cae8f8a58d565c0674f980adc",
     "preservation": {
       "accepted_record_changes": [],
-      "anomaly_changes": [],
-      "entry_changes": [],
-      "extent_changes": [],
-      "physical_range_changes": [],
-      "unchanged_complete_function_records": 4718,
-      "unknown_changes": []
+      "candidate_record_changes": [],
+      "changed_old_function_records": []
     },
     "protected_rows": [
       {
@@ -300957,9 +300384,19 @@
         "size": 4
       },
       {
+        "address": 1054268,
+        "record_sha256": "939f2c0df3e9dc5b006b30b6e1f41bf9a6d4f9610df9c720a681e78c0358b3e1",
+        "size": 52
+      },
+      {
         "address": 1054436,
         "record_sha256": "5196fce94c15c2aa665d949b6ca1005e026c36bfe705196d177924c3f5325a52",
         "size": 48
+      },
+      {
+        "address": 1054484,
+        "record_sha256": "a5215de1d95dcb52efccda63ca7504123b4010ac2faa173916c795441275c710",
+        "size": 112
       },
       {
         "address": 1057692,
@@ -301422,9 +300859,19 @@
         "size": 16
       },
       {
+        "address": 1092136,
+        "record_sha256": "027eed56673ed9b1b48d1507100614e29f1e0b132f8053d601fb5c60719a5357",
+        "size": 280
+      },
+      {
         "address": 1095020,
         "record_sha256": "59a6cdaf85114ca50a5d07795fe40a8e8d33d9beffb372a699c6604a82e7c522",
         "size": 44
+      },
+      {
+        "address": 1095064,
+        "record_sha256": "196ebc1adf48123ce30fa958d9b0a7f4bc7fab4ba218e513a42c23207b324126",
+        "size": 52
       },
       {
         "address": 1095116,
@@ -301512,6 +300959,11 @@
         "size": 12
       },
       {
+        "address": 1097428,
+        "record_sha256": "63fb4dd9d80b89302eb6295faf81b1cf2c22dab3a149834d4649c809f43408a4",
+        "size": 32
+      },
+      {
         "address": 1097460,
         "record_sha256": "81921dd972575894e4ac9ded6ccb1fadca8ecc3bf97b65366ad603a0a8b478bf",
         "size": 4
@@ -301537,9 +300989,19 @@
         "size": 28
       },
       {
+        "address": 1097716,
+        "record_sha256": "33dcd8c2c2540be168ad2ead325109a71d4271cd59bbe0176ca2ce9ac2bb70d5",
+        "size": 120
+      },
+      {
         "address": 1097836,
         "record_sha256": "fc53fe40fadbb684b21cffd1c1aa72525adadc4906f17c9e5b81dbaa76e6f781",
         "size": 56
+      },
+      {
+        "address": 1097892,
+        "record_sha256": "655c581df12dd138c5bfc3bbf10bd489205dc77651aa96174ff930e7973a24a4",
+        "size": 112
       },
       {
         "address": 1098004,
@@ -301610,6 +301072,11 @@
         "address": 1099012,
         "record_sha256": "643e09d3c595c39d55119e7eb60518086a7bdf7e9d51f2a46fa3b1983ebca6a7",
         "size": 48
+      },
+      {
+        "address": 1100700,
+        "record_sha256": "5d11929b21d8e6e14f9d665ff0217dbfccb3460ba967b67cba1513a0540ddd4d",
+        "size": 112
       },
       {
         "address": 1101360,
@@ -301872,9 +301339,19 @@
         "size": 84
       },
       {
+        "address": 1123756,
+        "record_sha256": "1d1a062b50b1595beb7a9d2aeb4d8ebf3a30fb90f30864b990a1cfda509700ed",
+        "size": 124
+      },
+      {
         "address": 1123880,
         "record_sha256": "40e8c0542a8c6e84b46d67b485a849c3ccc1425e38e493c5bd9f0cf6a78f9856",
         "size": 36
+      },
+      {
+        "address": 1125088,
+        "record_sha256": "7a5d6abf31a2f11bcaceaafcb6d9ec8cd581555767dbcee3404089fb767ef610",
+        "size": 124
       },
       {
         "address": 1125212,
@@ -301892,6 +301369,11 @@
         "size": 60
       },
       {
+        "address": 1125368,
+        "record_sha256": "6d0cf312d706bae09533a2c084c7c26b1fc6817da5dd8ad3e7ae67bcabbdc867",
+        "size": 136
+      },
+      {
         "address": 1125504,
         "record_sha256": "62c79a457bae63865b1375269e2ad741ef5cc63eb57a46bad4fb512010ff08a4",
         "size": 24
@@ -301900,6 +301382,11 @@
         "address": 1125528,
         "record_sha256": "efb63b51ef54ed77e3167aff27e657639262dcc278b50abe92246f534a85779e",
         "size": 48
+      },
+      {
+        "address": 1126160,
+        "record_sha256": "74083c12dbac3f941433748eedabe37042085eeb28d03a80535ff976e262814b",
+        "size": 152
       },
       {
         "address": 1126312,
@@ -301945,6 +301432,11 @@
         "address": 1127984,
         "record_sha256": "3e15ed660698fcebc7433db40b3210eb7460675842d28c979e8fbbb629cc4ef4",
         "size": 16
+      },
+      {
+        "address": 1128284,
+        "record_sha256": "effcbb3cf82e8cbc49530a93ee4a1fc868284d22c17b5eef60691729e6139a7a",
+        "size": 104
       },
       {
         "address": 1128924,
@@ -302212,6 +301704,11 @@
         "size": 32
       },
       {
+        "address": 1142320,
+        "record_sha256": "22110c0536a54ae6fd088683712dc38a969e72928e77bd3be92a35f2f1d134eb",
+        "size": 128
+      },
+      {
         "address": 1142592,
         "record_sha256": "213154185893c67a0383a516f05016dcb106ede2d1618eb437522b0d162b69d9",
         "size": 1716
@@ -302225,6 +301722,11 @@
         "address": 1144392,
         "record_sha256": "ff2189c1ed8c485e0aa453f4dd4b32d7e8b200fbd3b8e338611d268465add317",
         "size": 60
+      },
+      {
+        "address": 1144452,
+        "record_sha256": "382aa8eb65318b5071a03749c212a0e4910b598db4a33bb66abf0eb77ec657fc",
+        "size": 92
       },
       {
         "address": 1144652,
@@ -302562,9 +302064,19 @@
         "size": 16
       },
       {
+        "address": 1188704,
+        "record_sha256": "1d4b3216e45c84569a4cd2b2c3f7e109dc9e1a17570750ffed69d1a2d3b0bc50",
+        "size": 44
+      },
+      {
         "address": 1188748,
         "record_sha256": "af995490efb4cd60283fcd304e1dc50062e1d18b93834ebc353b81882bd57767",
         "size": 52
+      },
+      {
+        "address": 1188800,
+        "record_sha256": "86fdf11eb5e0511713c976ef1c444286f5914fc4a70f9123697e54856f9b7a0d",
+        "size": 60
       },
       {
         "address": 1189024,
@@ -303032,6 +302544,11 @@
         "size": 4
       },
       {
+        "address": 1234372,
+        "record_sha256": "95a2cbe5ef59adaf7b9cce9ebdf03fa8293376e25a50ef2e72e2957d511c460d",
+        "size": 104
+      },
+      {
         "address": 1234476,
         "record_sha256": "0b418571f2f8a88b0947253e2051088e8d87ad8210f63db9e92e187e62ca70a2",
         "size": 4
@@ -303092,6 +302609,11 @@
         "size": 84
       },
       {
+        "address": 1238668,
+        "record_sha256": "08647e9ade019ac80a2991ed1781d712daf50bfe86fa565fcda39912ab3de11f",
+        "size": 296
+      },
+      {
         "address": 1238964,
         "record_sha256": "1de98934e3a4394693afba5d3670871aa13b0c9b5dd56a16557247f4ff382f67",
         "size": 68
@@ -303140,6 +302662,11 @@
         "address": 1240880,
         "record_sha256": "60e7330870f79e4c599ad434085a9bbaad2ea1493c92e353e401fde49f0cd7da",
         "size": 140
+      },
+      {
+        "address": 1241168,
+        "record_sha256": "69d1f54503e953b415cc12586a025cb99a94439207defbf4290deb50f81763e9",
+        "size": 148
       },
       {
         "address": 1241456,
@@ -303532,6 +303059,11 @@
         "size": 96
       },
       {
+        "address": 1267976,
+        "record_sha256": "6b8686fc89de9cf24475528ff500a78bc4afa1761edf463f97a91b846a42fe74",
+        "size": 288
+      },
+      {
         "address": 1268264,
         "record_sha256": "c8b895a68e214d6db90d5644aa6faa2a83cbb5a51f6f3fa0e034d192a75684f2",
         "size": 48
@@ -303642,6 +303174,11 @@
         "size": 60
       },
       {
+        "address": 1270592,
+        "record_sha256": "0a8c0a81bd240716a667fab12519e111e4d0afe4d2ef51a23606f5cbfb20af18",
+        "size": 112
+      },
+      {
         "address": 1270704,
         "record_sha256": "73723a5714a9e89f72fce4316184192c0a179e5d681ee1fb635cdfa13ac1019d",
         "size": 4
@@ -303665,6 +303202,11 @@
         "address": 1270856,
         "record_sha256": "b9bfb175c1372ab370fea3e7e6bedc317d28dbfcfd801d8219010b768cca6121",
         "size": 8
+      },
+      {
+        "address": 1270864,
+        "record_sha256": "07de39d26ffc8e51918660186a9a8132f07631108b01329bdd3db179dd0d86e1",
+        "size": 192
       },
       {
         "address": 1271264,
@@ -303705,6 +303247,11 @@
         "address": 1272112,
         "record_sha256": "195c7631a8376b1bc566b4e5628d3a01b6ee070c3373e615e4e5d6e247b74173",
         "size": 40
+      },
+      {
+        "address": 1272152,
+        "record_sha256": "50e85beda5f3ae443ad519f9d1dbc051645b1764ca3020c48529df0373826196",
+        "size": 148
       },
       {
         "address": 1272440,
@@ -303770,6 +303317,11 @@
         "address": 1275548,
         "record_sha256": "e114aa7b1d979e68f827d091b35349da33dd12869789c88118dd3e220a5959f2",
         "size": 96
+      },
+      {
+        "address": 1275644,
+        "record_sha256": "c130c9124d704f82b956309f5dd840c368047076be80c357416ea5837e9663f1",
+        "size": 112
       },
       {
         "address": 1275756,
@@ -303850,6 +303402,11 @@
         "address": 1278524,
         "record_sha256": "12397a442dfa5338df2de3bf76cc4d79970fc73b80f5ac9995d738359f8c79ec",
         "size": 56
+      },
+      {
+        "address": 1278580,
+        "record_sha256": "9feb89d93ec32ea8d523184694f10d31d0ceac336b2384dd6b5702563b83bd5a",
+        "size": 76
       },
       {
         "address": 1278656,
@@ -303957,6 +303514,11 @@
         "size": 40
       },
       {
+        "address": 1282420,
+        "record_sha256": "4044b58db39f9fd7f94451a2f1fdd7d43802d86595a99b148c75245284f5e211",
+        "size": 100
+      },
+      {
         "address": 1282520,
         "record_sha256": "4503b021e7681696c3d2d185a6ddc5026c4ac5eefb78f6e799dcf3781535ba70",
         "size": 60
@@ -304032,6 +303594,11 @@
         "size": 20
       },
       {
+        "address": 1303136,
+        "record_sha256": "0eb2e5d90d7c088a92607d6fd68817778049f24ca8f02900207dbfd3b423594f",
+        "size": 88
+      },
+      {
         "address": 1303320,
         "record_sha256": "7f68730ee1faee102e2e532ead43995bb8b044ec778dfbd66029fcfa78989ab8",
         "size": 80
@@ -304100,6 +303667,11 @@
         "address": 1311120,
         "record_sha256": "9ba8f7ea2a929aa37272adf1201f9f2c79b34754f74ecfb7e71771c2f17e8581",
         "size": 108
+      },
+      {
+        "address": 1311324,
+        "record_sha256": "95d8d4abbcdab859614e36e66518c226ebf359ef808d9705463b8fcfc3515fc7",
+        "size": 60
       },
       {
         "address": 1311888,
@@ -304287,9 +303859,19 @@
         "size": 16
       },
       {
+        "address": 1317188,
+        "record_sha256": "23af02031f63d0c3db5742e5983ef9e40d5a61b327ad4d7b255af03bb328b93c",
+        "size": 364
+      },
+      {
         "address": 1318000,
         "record_sha256": "4090ab70ff2baa2c3b5fc5c32ec7fff1ca500149675a1e5ea701382f09706c16",
         "size": 4
+      },
+      {
+        "address": 1319980,
+        "record_sha256": "9f96918d745ae2b587bb7fb9402693d1beb67be8e017b3c5d1ad8d98fdaa5cb7",
+        "size": 148
       },
       {
         "address": 1320128,
@@ -304707,6 +304289,11 @@
         "size": 92
       },
       {
+        "address": 1339476,
+        "record_sha256": "aff12405ff5f35f548908443678543466866db1d624efec07cb8fa71ace6ca79",
+        "size": 104
+      },
+      {
         "address": 1339580,
         "record_sha256": "89d7def877cc6dc9a973ebb2ac327bba04f4467d3c57b7594f1b8d240b3b3ea6",
         "size": 12
@@ -304725,6 +304312,11 @@
         "address": 1340004,
         "record_sha256": "dd704483392233ce2864797d9416863f01f5c2873c29e0a483a0d2ce19022942",
         "size": 64
+      },
+      {
+        "address": 1340304,
+        "record_sha256": "d35aa095e6de18fe6f830753579b7a6ac46af719270834f1c77bae205c44f49c",
+        "size": 68
       },
       {
         "address": 1340536,
@@ -304942,6 +304534,11 @@
         "size": 48
       },
       {
+        "address": 1348724,
+        "record_sha256": "ab4c1f037803371d78447abc8d15319f89bc391700bf9cca79e41c1e4929cb9c",
+        "size": 32
+      },
+      {
         "address": 1348756,
         "record_sha256": "bf0f522adb628da4d97034d8d50e40766ff7aba7a8672e3bd42548b265355d93",
         "size": 36
@@ -304995,6 +304592,11 @@
         "address": 1352596,
         "record_sha256": "6de93561f0c34d94b12abd5d32c98442e9c8417893605289fdaaf12e6e288dff",
         "size": 48
+      },
+      {
+        "address": 1352644,
+        "record_sha256": "ed1daef6f3d254c5dd81b5d84eaa5a4e4e1a3fce513a34e6f0c91b3035991b96",
+        "size": 124
       },
       {
         "address": 1352768,
@@ -305232,9 +304834,19 @@
         "size": 40
       },
       {
+        "address": 1362972,
+        "record_sha256": "3b72e04b0bf8d19cef835b8453cf5d193aaa232a839a22f740bba3539dcd034e",
+        "size": 128
+      },
+      {
         "address": 1363100,
         "record_sha256": "6a5a971ec8003280f3b9b8df7c38d405908f9b4789426321223c729428a11787",
         "size": 124
+      },
+      {
+        "address": 1363224,
+        "record_sha256": "00f38f6c513cf00945fc914e75264d1c26cac8f59b666da51b4827c2cbc44ac8",
+        "size": 140
       },
       {
         "address": 1363364,
@@ -305245,6 +304857,11 @@
         "address": 1363476,
         "record_sha256": "a1226effd3f1986cf2b7eefc8a42853e6a6d5ede606d33dab5d73c092e2d1ac0",
         "size": 120
+      },
+      {
+        "address": 1363596,
+        "record_sha256": "22336a9f6a866fbf9fc083a0bac8aeba57b3aae9d7f7931489429f7e24442a85",
+        "size": 140
       },
       {
         "address": 1363968,
@@ -305407,6 +305024,11 @@
         "size": 108
       },
       {
+        "address": 1372436,
+        "record_sha256": "08c2fd969d011f7c94564a4da05e18334ce1179d1bbe39e63eb32c3a382d1ef1",
+        "size": 496
+      },
+      {
         "address": 1373916,
         "record_sha256": "8b5d31bd496119792c3ed8e7503813fd3797da4418467657f849ffb65f4e606d",
         "size": 112
@@ -305465,6 +305087,11 @@
         "address": 1375916,
         "record_sha256": "77aad2222b2f8190d4b0af7c7c9f68196294885ce63b409ab3ea2d610bfee031",
         "size": 300
+      },
+      {
+        "address": 1376216,
+        "record_sha256": "09223bdede7f4308d2f91dc8ac54e39d47b8532d8ab5d3798d374662a4ec6d7a",
+        "size": 88
       },
       {
         "address": 1376304,
@@ -305597,6 +305224,11 @@
         "size": 68
       },
       {
+        "address": 1382696,
+        "record_sha256": "0d9a30d79ca70ee7d5f3eff94bbf7d287904280f3a485f8eb5cbe2d407f3bd7e",
+        "size": 188
+      },
+      {
         "address": 1382884,
         "record_sha256": "cf5b044a73d55e710963b874b9d786d027a93ecd3e5d7c742ae1caf36f7643fc",
         "size": 56
@@ -305640,6 +305272,11 @@
         "address": 1385512,
         "record_sha256": "81c07ae6bc57a874cfced7f999bcc6712b32a452759cf233ee1fcc4ad07a619f",
         "size": 36
+      },
+      {
+        "address": 1385708,
+        "record_sha256": "4ab79d9594f9b3463de2e70790c14e02cf926021d669a774f94cb6500a1ef78b",
+        "size": 116
       },
       {
         "address": 1385824,
@@ -305772,6 +305409,11 @@
         "size": 104
       },
       {
+        "address": 1392316,
+        "record_sha256": "b02f1df2e0e8970cf5aef10eec8807c6b11d6dd7ce0324c73eb6acc096aa1ea1",
+        "size": 108
+      },
+      {
         "address": 1392424,
         "record_sha256": "e8062720fbf9786090178ca1c805572bb0540038c212cb69b9bdd18f86c68852",
         "size": 104
@@ -305807,6 +305449,11 @@
         "size": 128
       },
       {
+        "address": 1393368,
+        "record_sha256": "b947ffaea02fa2a354a762e88fa9cbc9ac9cf19d90b72e42ea7b8bd2762aa107",
+        "size": 116
+      },
+      {
         "address": 1393484,
         "record_sha256": "ce04a81c82169e63ff6ca0f0c744811a5b76dac6550a5aa1a813bb9769f72e2d",
         "size": 44
@@ -305815,6 +305462,11 @@
         "address": 1393528,
         "record_sha256": "957b91cc765ad2c0de734492e70af87f0b2a1dbb46b8269c5bbbb6c3d6af10b9",
         "size": 64
+      },
+      {
+        "address": 1393592,
+        "record_sha256": "9dcd7860c6bfe540187c32e4bfdc339f5d8946357b6aed5b2d6ce6102df29111",
+        "size": 128
       },
       {
         "address": 1394156,
@@ -305840,6 +305492,11 @@
         "address": 1394212,
         "record_sha256": "ec47147c0f08ccb71e1e88e7af78616b865c1c7dcd8c48987a13e7ed13f58b06",
         "size": 80
+      },
+      {
+        "address": 1394292,
+        "record_sha256": "5f9b9d1898f6bc3034021da2fd26855fc041523ce882e8764b4bdc8d3cc9e3b2",
+        "size": 232
       },
       {
         "address": 1394524,
@@ -305982,6 +305639,11 @@
         "size": 160
       },
       {
+        "address": 1406208,
+        "record_sha256": "ed6a891d2ff1b055efe272d6d85de61ff2b2ab5bc9b8e4913577326e109f4312",
+        "size": 468
+      },
+      {
         "address": 1408912,
         "record_sha256": "78b261bdddd53b4925b8814fb33b6a06485e3205dfe927f6cac214c79d414efb",
         "size": 88
@@ -305990,6 +305652,11 @@
         "address": 1415596,
         "record_sha256": "4e46f1d0d274a4a078a62573cd8fe1b82451e44164491b74e0e42ebb1dd72ea5",
         "size": 188
+      },
+      {
+        "address": 1423696,
+        "record_sha256": "47494d9241ed670a5e60eb0126468b2131c3fa26743c3bd63b5e3936be7408fa",
+        "size": 456
       },
       {
         "address": 1426852,
@@ -306045,6 +305712,11 @@
         "address": 1432924,
         "record_sha256": "6c92dfe08bca0461e56c486668c10393cf1fd89836f24cad95347190072d7019",
         "size": 32
+      },
+      {
+        "address": 1432956,
+        "record_sha256": "5e377526a4869424187a812db2cabb3602279529a1d8f37fef7821968a7ea268",
+        "size": 76
       },
       {
         "address": 1433032,
@@ -306182,6 +305854,11 @@
         "size": 12
       },
       {
+        "address": 1435696,
+        "record_sha256": "6e82cd3fb543ddf4442ae234ec9cbea98fec853a31616bc07e9c3c1d65843b1c",
+        "size": 148
+      },
+      {
         "address": 1435844,
         "record_sha256": "116f1d95a8972b32e6ee960cee4f410ae9b3eba392bf09d7d92d98fabb067e36",
         "size": 132
@@ -306317,6 +305994,16 @@
         "size": 744
       },
       {
+        "address": 1459268,
+        "record_sha256": "768a4f2bef66eb48ffc05f67e1bf59bd256ea74e5f59d52300380e1c4502d6eb",
+        "size": 140
+      },
+      {
+        "address": 1461044,
+        "record_sha256": "f7f3ae3ac7669e3764b3e16779dcd6bdc1d792e3e5eb0cff5afc695215681e08",
+        "size": 72
+      },
+      {
         "address": 1461156,
         "record_sha256": "37309dcee152e8b4b242e61415c04c65dc386acbc35a3d16bee52cc438d83409",
         "size": 40
@@ -306360,6 +306047,11 @@
         "address": 1462520,
         "record_sha256": "d80e28af548cef79ef368b065390377dd15c296b454fd85db96dccbb43d13786",
         "size": 192
+      },
+      {
+        "address": 1463020,
+        "record_sha256": "6593199a832b1e4497588b6105b7cbc6f5b2a0451377df3f8aec99623e9e091d",
+        "size": 308
       },
       {
         "address": 1463940,
@@ -306492,6 +306184,11 @@
         "size": 16
       },
       {
+        "address": 1474276,
+        "record_sha256": "64a64ac1ee11e9dd4d0f3692460896e601949e7cd360770898fac7402d10343f",
+        "size": 152
+      },
+      {
         "address": 1475252,
         "record_sha256": "046e8803f242eb15802cc5f8fa767392074b9febd44d8f3a51292252ef848e7f",
         "size": 52
@@ -306547,6 +306244,11 @@
         "size": 48
       },
       {
+        "address": 1478680,
+        "record_sha256": "0989e2cecbf924817b46aa797aa1ec1ca7e4a5ffe67012f98265a3bc612dd86f",
+        "size": 144
+      },
+      {
         "address": 1480820,
         "record_sha256": "77ebcc30cbaeb52d2aff7fb42ec02669796d135e357fa37fa7ee960c8c8b8955",
         "size": 4
@@ -306565,6 +306267,11 @@
         "address": 1480992,
         "record_sha256": "86d2ac69618d0173a7ad04f7dfdf19fae8098e54bbf4ec50543c0bd6fc87cc9e",
         "size": 12
+      },
+      {
+        "address": 1481004,
+        "record_sha256": "dcd264ec345e96afa1077c2b20e808c73803afd6b7b46bd9a1376c57f949c829",
+        "size": 72
       },
       {
         "address": 1481076,
@@ -306667,6 +306374,11 @@
         "size": 28
       },
       {
+        "address": 1487876,
+        "record_sha256": "01412a3b8fdc7a80e4176aae0b180ca19d58fc1ad4f46ecc622151a9ac2e2cab",
+        "size": 40
+      },
+      {
         "address": 1488476,
         "record_sha256": "83013a42371086c1869f3d8f7c0625cc06d7558fe241ec174f6c61488496a068",
         "size": 28
@@ -306712,6 +306424,11 @@
         "size": 16
       },
       {
+        "address": 1490832,
+        "record_sha256": "7a3923cfb17f76f3abdd914277ede38ff637e8147e1c27a19d0fa0273a1d7357",
+        "size": 144
+      },
+      {
         "address": 1490976,
         "record_sha256": "d8ea08c2f34e30050bd3e49bee740f24efbef098df14bfc8a01abc5ba911598a",
         "size": 92
@@ -306720,6 +306437,11 @@
         "address": 1491068,
         "record_sha256": "3c48ae3ec0a22fefae913baf2553fc5735166982ee7c221156bdd0cf0fdcf11f",
         "size": 124
+      },
+      {
+        "address": 1491192,
+        "record_sha256": "3593c33bc5ae81ce815597287c91d51302cbd4f68aba707b9edc45116251e5c6",
+        "size": 88
       },
       {
         "address": 1492316,
@@ -306857,6 +306579,11 @@
         "size": 44
       },
       {
+        "address": 1501080,
+        "record_sha256": "1cd6af624ecaf58c2c28cc1dd949f325e377b0ad95f01ddd481e373ed15bd8e7",
+        "size": 72
+      },
+      {
         "address": 1501152,
         "record_sha256": "532dcd10d82f37658497570d989b25efbb0abdba50ee405d3f3fc94b5ed666c4",
         "size": 148
@@ -306890,6 +306617,11 @@
         "address": 1503268,
         "record_sha256": "6130e49264b73ed98c29220f4c142ffcb733c861d29203fb4a529c0de1d1a777",
         "size": 104
+      },
+      {
+        "address": 1503372,
+        "record_sha256": "a3f70e1fd2705a4b67efb5c5ad51b789474c181cb47e23bb1a6070ce5a294bf6",
+        "size": 232
       },
       {
         "address": 1504156,
@@ -307002,6 +306734,11 @@
         "size": 128
       },
       {
+        "address": 1507892,
+        "record_sha256": "6314a3564433e4693af8991e6f8ce557123523362a19ee85ea6682946c84ed90",
+        "size": 100
+      },
+      {
         "address": 1508232,
         "record_sha256": "368112eb7acb9871760b1ae902d70dfdc3f63cb9e2cfa986b930726339717b63",
         "size": 60
@@ -307095,6 +306832,11 @@
         "address": 1514788,
         "record_sha256": "a7a5cecf41e6b8be47009e85186e05e0c5b3184001276bd8404afcbc6f12c10c",
         "size": 28
+      },
+      {
+        "address": 1514816,
+        "record_sha256": "ceb0975a215384550e3e3885fa71b9428fae6c1aae7ffa647905a377292ef4bd",
+        "size": 72
       },
       {
         "address": 1514888,
@@ -307212,6 +306954,11 @@
         "size": 16
       },
       {
+        "address": 1519736,
+        "record_sha256": "6ebfe25289e136b6031b11bea354c0f4c2afbc2786445d457c01d563a6db1bf5",
+        "size": 116
+      },
+      {
         "address": 1519852,
         "record_sha256": "f389020ff23dc2b9f1479f3742faf79ea36b905b3e2252fbff822fdb8c0a4971",
         "size": 116
@@ -307270,6 +307017,11 @@
         "address": 1524216,
         "record_sha256": "7a3f57e558bc89e68f8476b2ac0d3d2c3481b1a83d8646afea933fa776c06d31",
         "size": 24
+      },
+      {
+        "address": 1524240,
+        "record_sha256": "a48a1db1943957f79a8e7359923f2761b3ff298928bdd68d81a728e0f4e5723a",
+        "size": 276
       },
       {
         "address": 1524516,
@@ -307365,6 +307117,11 @@
         "address": 1529912,
         "record_sha256": "da5700fa2f948ccc6e58f1c0a8b50bf19f0024e50571419c7286a95fc9d92da4",
         "size": 16
+      },
+      {
+        "address": 1529928,
+        "record_sha256": "3207132ad22e8c05e17120dc52f8868af38735e5a1310c04fae6bfb6c6d82c54",
+        "size": 140
       },
       {
         "address": 1530068,
@@ -307557,6 +307314,11 @@
         "size": 52
       },
       {
+        "address": 1544028,
+        "record_sha256": "0213f2128e0a93543c1c263acb836ab2f7bf62077c6f5e353b8f399b2de9b301",
+        "size": 40
+      },
+      {
         "address": 1544068,
         "record_sha256": "3d0abd4da1fbe68b9779793bb388bd3f7a053f0ab0da578a9ce1ddf73f2a52ef",
         "size": 44
@@ -307742,6 +307504,11 @@
         "size": 64
       },
       {
+        "address": 1549808,
+        "record_sha256": "d2ef7f8a13a61cbb207559213abcc99c0b2b32436539a436823b669d308bc947",
+        "size": 160
+      },
+      {
         "address": 1549968,
         "record_sha256": "c31f28004d76950e56b630d3aabc7548e5bf96739cf23bca8a6adc4e6c5fd681",
         "size": 56
@@ -307877,6 +307644,11 @@
         "size": 52
       },
       {
+        "address": 1564548,
+        "record_sha256": "b0563a4f2a0bbf5033b484b78647fb0c2bda15373b93ef8469fb8a38e0275fae",
+        "size": 88
+      },
+      {
         "address": 1564636,
         "record_sha256": "c922bbd753f883ed2fd92ff65c6d0da62120210e07508efde2d82816cb1c845f",
         "size": 24
@@ -307955,6 +307727,11 @@
         "address": 1566372,
         "record_sha256": "840e5ba0a491b69fc5d9e7c9e608e282692f93d89f6c6956fcaf4cd4fe3c7a71",
         "size": 36
+      },
+      {
+        "address": 1566564,
+        "record_sha256": "66debd41de7978505f39f2d0d66b50ca2ac00a13e55382f9675c5c87b81070c1",
+        "size": 44
       },
       {
         "address": 1566608,
@@ -308072,6 +307849,16 @@
         "size": 48
       },
       {
+        "address": 1573768,
+        "record_sha256": "d538b97a371450bcfd404976c34a5e827c15220864a1d38e694be0cd1dba1fa6",
+        "size": 72
+      },
+      {
+        "address": 1573840,
+        "record_sha256": "4d74fa2f1fdda54b2d24cf5a3673d9ae85d21e82a95e808bd31f71f4d95d5181",
+        "size": 52
+      },
+      {
         "address": 1573892,
         "record_sha256": "a64b3b27fab9eac6c96a4357ea0aa8edb51ba49f5ec18081d168cbcb057d5e4a",
         "size": 20
@@ -308115,6 +307902,11 @@
         "address": 1575008,
         "record_sha256": "0e0d30af7e142222a5a0700c3e5bb03908fef49966389db7ebf821d66df9c920",
         "size": 36
+      },
+      {
+        "address": 1575412,
+        "record_sha256": "e56bf10356553a9f654ce7e364e21d7a9da8eb4016ee7802381e5087d224502f",
+        "size": 88
       },
       {
         "address": 1576068,
@@ -308232,6 +308024,16 @@
         "size": 20
       },
       {
+        "address": 1579292,
+        "record_sha256": "ad4bc810ef0f8de9c9524164cd5c431406b4eb34d515aba6d5f7a0cb57703e6e",
+        "size": 120
+      },
+      {
+        "address": 1579412,
+        "record_sha256": "632295537e26e3191c0c24960da6695d46631b5e3df1cd4f302e09303c98b55e",
+        "size": 96
+      },
+      {
         "address": 1579508,
         "record_sha256": "1a3765c2df95946f90f90039830a173a3d997071ba4110d3ebee1659437fcc7f",
         "size": 88
@@ -308332,6 +308134,11 @@
         "size": 60
       },
       {
+        "address": 1583004,
+        "record_sha256": "6ae6ba13e14c6d1bd8beaab617e1b4ca3bde8566fe883c637773f5131e380d1b",
+        "size": 124
+      },
+      {
         "address": 1583372,
         "record_sha256": "b3acd5202c787e8a041aebb79b217d1b50dd346ad8cdec50f9ae6b65a8125622",
         "size": 136
@@ -308410,6 +308217,11 @@
         "address": 1586512,
         "record_sha256": "083584790c47d6ad7d4c3d5c68b6aec1c52efb2b57eda79ea3ee76cb3885da03",
         "size": 104
+      },
+      {
+        "address": 1586616,
+        "record_sha256": "7f3208cecb08233082080b6751f548f64f0d4ef028368ba2cec58bccfb7795ec",
+        "size": 92
       },
       {
         "address": 1586708,
@@ -308510,6 +308322,11 @@
         "address": 1593840,
         "record_sha256": "d2f30e219cecbf34fb34c81ea9094a8af970de9ddc2e67590d92b71e46ac3f20",
         "size": 156
+      },
+      {
+        "address": 1593996,
+        "record_sha256": "032f162d721473541bbf317bbd41aa92369af787dbd0648ab34b58f3e835111f",
+        "size": 104
       },
       {
         "address": 1594100,
@@ -308727,6 +308544,11 @@
         "size": 124
       },
       {
+        "address": 1623940,
+        "record_sha256": "37e5ab1f866dbcdbba160b2375691d2d733f79c13076c16b68bba329cb6ddb2a",
+        "size": 240
+      },
+      {
         "address": 1624380,
         "record_sha256": "0209d5d40e2815348565e78600d71b8b3de635acab959e32eed5ed203c1788a1",
         "size": 152
@@ -308900,6 +308722,16 @@
         "address": 1637844,
         "record_sha256": "a23040b3c97b5b09a19ef76d5a1f5ec75dcd9326be36c3f0911fdf81411d9d3e",
         "size": 40
+      },
+      {
+        "address": 1637884,
+        "record_sha256": "e3706469968e8180515363cae7b7a01a416e4088b0148c9f94f32eca82e830b7",
+        "size": 100
+      },
+      {
+        "address": 1638096,
+        "record_sha256": "5659cd724e2e15866f6f003d6f516daf4a7c2c518606f758698bc039439ab3d6",
+        "size": 100
       },
       {
         "address": 1638196,
@@ -309157,6 +308989,11 @@
         "size": 16
       },
       {
+        "address": 1649276,
+        "record_sha256": "a91eeff6d2934a7d753ccd8e1ee24981ac143ed6941dd698e6d6271187216d8d",
+        "size": 52
+      },
+      {
         "address": 1649328,
         "record_sha256": "4a6d1f760a3df74d61c13757699969f3dd8f301770ec086fcf6cab6db48120f0",
         "size": 56
@@ -309165,6 +309002,11 @@
         "address": 1649384,
         "record_sha256": "f1f8df0ad26859020fbae8a7e3b9c6c4bba997544eb12d78f7b98f8819813be5",
         "size": 20
+      },
+      {
+        "address": 1649404,
+        "record_sha256": "361800bd1175232c19afbb851d724189d73a5426da979c0fea58181232bc311a",
+        "size": 72
       },
       {
         "address": 1649476,
@@ -309250,6 +309092,11 @@
         "address": 1655208,
         "record_sha256": "9f2ccec8a3e97e72c572dd6c778f46a0bebf2c4d246d9bd070b36760946e95d5",
         "size": 8
+      },
+      {
+        "address": 1655216,
+        "record_sha256": "388a88455611561424141ae49e75ae1db4e22c91dd33106b427dca01176e2a2f",
+        "size": 72
       },
       {
         "address": 1656040,
@@ -309445,6 +309292,11 @@
         "address": 1685896,
         "record_sha256": "602663d1dd13964543ca36a72e676530f1dbdfa5b1fac61fc6f72e3b6bf45346",
         "size": 216
+      },
+      {
+        "address": 1689888,
+        "record_sha256": "97994e572c9f0eadb43d012fb2184e9406d39e52768e687c48609c844f400aea",
+        "size": 144
       },
       {
         "address": 1690032,
@@ -309667,6 +309519,11 @@
         "size": 4
       },
       {
+        "address": 1702148,
+        "record_sha256": "357d7529c8fe557ef7e5dc1b5325a80f2052256ff2e66b25c3188b8fc7d6afa3",
+        "size": 12
+      },
+      {
         "address": 1703844,
         "record_sha256": "e78d6e057608d134e66e78860df55a128ea2d89658056f57083cf298d60d7a3d",
         "size": 4
@@ -309742,6 +309599,11 @@
         "size": 84
       },
       {
+        "address": 1755960,
+        "record_sha256": "c3e645b0a50d1a044c964bbe907ed5273b825a8f6c606d3cc3a8208d036cc6de",
+        "size": 88
+      },
+      {
         "address": 1756084,
         "record_sha256": "cdbafb70ca9871f7831a12ca3acf703872fc781e814aff9f552b8f5b264bd711",
         "size": 100
@@ -309765,6 +309627,11 @@
         "address": 1756860,
         "record_sha256": "c181f467e97c08610fbd68e4d129781616b4e8208aac31b610b5f4d41c9d110c",
         "size": 20
+      },
+      {
+        "address": 1756880,
+        "record_sha256": "02151aeddb064be4e5ae90bf7e7b7119bfc663e5a25be48aa4100a0bc4e9d0ac",
+        "size": 88
       },
       {
         "address": 1757492,
@@ -309837,6 +309704,11 @@
         "size": 20
       },
       {
+        "address": 1766812,
+        "record_sha256": "d6dfe96ad687a1eeb2fc8b2aa863b6c0817c5e194fbe18b725edad1a07dfac62",
+        "size": 168
+      },
+      {
         "address": 1769344,
         "record_sha256": "cab933d640af457487b23f0d480ea896e82ed3b7f525a18684762fb9ade080ce",
         "size": 16
@@ -309885,6 +309757,11 @@
         "address": 1783140,
         "record_sha256": "3ac395da93aec58895327eb50c1259c22bdf1822b74765fedd05233d11380533",
         "size": 40
+      },
+      {
+        "address": 1783660,
+        "record_sha256": "70baf740cf25d765190594175dc7235c8bacc9ff1a55a4781ef7e31434949438",
+        "size": 344
       },
       {
         "address": 1784840,
@@ -309967,9 +309844,34 @@
         "size": 20
       },
       {
+        "address": 1795072,
+        "record_sha256": "63ea4ccf98f4c05598e2c848fdb83c0f0c70bfed5b98e1833048e6f4d7cd8da4",
+        "size": 176
+      },
+      {
+        "address": 1796356,
+        "record_sha256": "28f64d59d225e1e604b5c7f8aee932de42e597ba1d0f530e87c13edb56a8e923",
+        "size": 88
+      },
+      {
+        "address": 1796444,
+        "record_sha256": "838535ae3d1d793c04e11d2ec6949afa53ca33783fce8c43790e74dda788ca3f",
+        "size": 176
+      },
+      {
         "address": 1797000,
         "record_sha256": "281a246025e72336753b9dd91d26fbf63aa2a75711a8c2d09d1923e354290545",
         "size": 20
+      },
+      {
+        "address": 1797020,
+        "record_sha256": "8f7694c62757c3b4bde4572414b5cf3177ff683b4a3c26aa9ef98ab8a15a835f",
+        "size": 88
+      },
+      {
+        "address": 1797264,
+        "record_sha256": "cbf523e4cadabcb60c02c9a5667b77c7d356c1e2a22872f70779b64dc2742522",
+        "size": 156
       },
       {
         "address": 1797420,
@@ -310015,6 +309917,11 @@
         "address": 1801372,
         "record_sha256": "f05f9362e762b2f87bdb23709aa173bce47b3f9f41c253d8aaf42540a695e632",
         "size": 92
+      },
+      {
+        "address": 1801464,
+        "record_sha256": "f96e59ee595892043677a895758833cdcebe5ad74edc53637372481495c3bde5",
+        "size": 88
       },
       {
         "address": 1801552,
@@ -310542,6 +310449,11 @@
         "size": 36
       },
       {
+        "address": 1855808,
+        "record_sha256": "0d7d18d82a4f095b7b029b93ab8d1cd1b63719a33e3d634575ad568d2ff9be3c",
+        "size": 88
+      },
+      {
         "address": 1855896,
         "record_sha256": "75060bf8a1d8080dfaf6946aed2d8907aa72a6dab30c1ebb559cdd87c4bc7f25",
         "size": 4
@@ -310592,6 +310504,11 @@
         "size": 108
       },
       {
+        "address": 1856340,
+        "record_sha256": "e0434329af6da38bab96bafae02e93d4334efa426056cf241b8d30f4716b91e2",
+        "size": 184
+      },
+      {
         "address": 1856524,
         "record_sha256": "b053d52f8bc14b575180e898a68a11072ca9a1036bbbb9de355f99ff73429ad5",
         "size": 24
@@ -310635,6 +310552,11 @@
         "address": 1857816,
         "record_sha256": "cc4a106d6f2af6abf269659863133c4afa096c3ca2279f4b9ee300f965231907",
         "size": 24
+      },
+      {
+        "address": 1857840,
+        "record_sha256": "3d8c998d00d2494f946bc6b0c0c9f0255d37ba71697c3c98e7468bae010454d8",
+        "size": 32
       },
       {
         "address": 1857872,
@@ -310747,6 +310669,11 @@
         "size": 56
       },
       {
+        "address": 1861092,
+        "record_sha256": "b7b1e2d85a11c23cd06c773d4ba7f7d986f711d28e09669afafeeb324ba7a4ff",
+        "size": 332
+      },
+      {
         "address": 1862196,
         "record_sha256": "815fd2709da2511d6926eb8ce2b0ebac6f501bf7f0dc5433149b2232836bd17c",
         "size": 4
@@ -310837,6 +310764,11 @@
         "size": 208
       },
       {
+        "address": 1865976,
+        "record_sha256": "78fbb827babab5d8d60916fffd8a0e5d2b5cb6a4e8950d634c64d96833c430ae",
+        "size": 292
+      },
+      {
         "address": 1866268,
         "record_sha256": "62426d829b5dc0a9f8f79032a5f389bb3411d3782ddf981cc9c1e51b82300a4f",
         "size": 8
@@ -310892,6 +310824,11 @@
         "size": 128
       },
       {
+        "address": 1867680,
+        "record_sha256": "fe7fced9185aea3dd6b62d30c02198739e802902ccb041c5a4e0bd7a4d4975bc",
+        "size": 300
+      },
+      {
         "address": 1867980,
         "record_sha256": "604b09b0c9a932243e6561954a8d4fced6cad4ae44a611aac1a0fc2614396ff3",
         "size": 376
@@ -310902,9 +310839,19 @@
         "size": 480
       },
       {
+        "address": 1868836,
+        "record_sha256": "7b46bf42dcb01efdc4390748d0726951c7544cb4eec28d7f461790029295d1e1",
+        "size": 344
+      },
+      {
         "address": 1869968,
         "record_sha256": "ed1475ee96f935999ae41f34603faf19b4f03240dcfd15e19cc542981be8259a",
         "size": 4
+      },
+      {
+        "address": 1869972,
+        "record_sha256": "34d3c15eec02bae04f13abf13f6f0c1dd913e1fd9278fa2daf56d03c5a2fee11",
+        "size": 240
       },
       {
         "address": 1870212,
@@ -310915,6 +310862,11 @@
         "address": 1870224,
         "record_sha256": "c3c770ccbe3e638734c0e05f65e1f9450ee09dad46fcedc4952b5bfbfb5c7b86",
         "size": 4
+      },
+      {
+        "address": 1870228,
+        "record_sha256": "2a5c50b27337f1237bfe7703030fce87c8af3305eccf30fb4c6b13dfbd119ca9",
+        "size": 172
       },
       {
         "address": 1870620,
@@ -311060,6 +311012,11 @@
         "address": 1890980,
         "record_sha256": "aa30775b4d82b5a4f5d2d789cefa927187b6c9cf8da7108acc084ca8b9e7a02d",
         "size": 108
+      },
+      {
+        "address": 1891580,
+        "record_sha256": "0d13403446f61bfff0867bbcf8b19a2db9a057c0a0cbd73276a5c890cc2d6f85",
+        "size": 240
       },
       {
         "address": 1893940,
@@ -311257,6 +311214,11 @@
         "size": 24
       },
       {
+        "address": 1901372,
+        "record_sha256": "e10c4c54ca80055a7bd9d4248e0ca81454f0b51cbbafbf3fda828e23b539947c",
+        "size": 12
+      },
+      {
         "address": 1901384,
         "record_sha256": "db23bb983e3d55f58b6e1f3d4b7ff564c3a0e6d3ab0ab94457351d3bb96e0e99",
         "size": 56
@@ -311272,6 +311234,16 @@
         "size": 132
       },
       {
+        "address": 1909252,
+        "record_sha256": "4c57db287cccab3b22e7f28a8c34f167c0979979bba394a47a7ee7295722aa68",
+        "size": 40
+      },
+      {
+        "address": 1909292,
+        "record_sha256": "85180537366959951b03d0919680ebf5810090045874ea954bd45bc1cc5ab8ef",
+        "size": 8
+      },
+      {
         "address": 1909300,
         "record_sha256": "e237592fd7f96a3fb3694c56b4bc04d08164f54c002e9adf3e8daa5d9b1b6118",
         "size": 52
@@ -311285,6 +311257,11 @@
         "address": 1909608,
         "record_sha256": "fa626fd23217256751a5d388c4c4d653ed71c5f33b946d6e490fba45376313dd",
         "size": 76
+      },
+      {
+        "address": 1909684,
+        "record_sha256": "b70ef80ee817ffcb3b4236582567b3d4d8f3a817499871ea8f8c90efc47f0951",
+        "size": 168
       },
       {
         "address": 1910588,
@@ -311542,6 +311519,11 @@
         "size": 68
       },
       {
+        "address": 1918920,
+        "record_sha256": "4d1170cc6911a55d2ba42d2f17c0299347c26468c857c71cd8a615e3a0fe452c",
+        "size": 84
+      },
+      {
         "address": 1919020,
         "record_sha256": "72def5d9560739894b01ba5433016cf53048efa62f8ae6207d017616a4fe2246",
         "size": 36
@@ -311662,6 +311644,11 @@
         "size": 124
       },
       {
+        "address": 1920556,
+        "record_sha256": "18d7d642e67ae8fe11e9be773c3a394e75b99a91feb53e7a94386aa570285a18",
+        "size": 124
+      },
+      {
         "address": 1921464,
         "record_sha256": "72ea954aa0cdf6f21276403296b05effdbc97f56052f29ed10648a73982b450e",
         "size": 8
@@ -311720,6 +311707,11 @@
         "address": 1924892,
         "record_sha256": "a2ac1c847d9b3e30290497371f573a347edce03918e7e6a9eeedb2f915577a23",
         "size": 288
+      },
+      {
+        "address": 1925180,
+        "record_sha256": "291d62b4013e3e05e88ff015d53f214c7e8397ad84718bfcd4b5581051aa542f",
+        "size": 64
       },
       {
         "address": 1925244,
@@ -312322,6 +312314,11 @@
         "size": 32
       },
       {
+        "address": 1948528,
+        "record_sha256": "05ec3ab21090f3ab957406c6f4fee5918a699db2fa5adc023e811638c66befb4",
+        "size": 100
+      },
+      {
         "address": 1948628,
         "record_sha256": "238e15ea1903e064a89277f05f93c069effbeeb830da8738fa8abb5ff10048a9",
         "size": 176
@@ -312452,14 +312449,29 @@
         "size": 32
       },
       {
+        "address": 1950660,
+        "record_sha256": "f29c1dc78f2aeb62cb9a1d45612f2272d3ba478cb87c0b51a8d3c6b2fcad0d2f",
+        "size": 60
+      },
+      {
         "address": 1950884,
         "record_sha256": "169371d5c8063d8915e1c499e7ff88aecfd82883d1a324034cf16c6aeebaad65",
         "size": 148
       },
       {
+        "address": 1951032,
+        "record_sha256": "38f00dd660a930a5eee1aad6f64f6d8f32ac4389f5aff316a62d1f5a07679b6a",
+        "size": 60
+      },
+      {
         "address": 1951092,
         "record_sha256": "9c5e0e16105bd84463e59fffb889903916c6b8df69967ab335e479326f90cfd5",
         "size": 12
+      },
+      {
+        "address": 1951556,
+        "record_sha256": "c19db350ab0d1b8c2ce8cf44b8c4a286f0a94383509a1b1dd5d4ad1406cc740a",
+        "size": 60
       },
       {
         "address": 1951812,
@@ -312477,6 +312489,11 @@
         "size": 12
       },
       {
+        "address": 1952024,
+        "record_sha256": "a97bf4f317b107de932351ea93831ef72a4628ecb96bec5c3fec410925dab38e",
+        "size": 60
+      },
+      {
         "address": 1952084,
         "record_sha256": "c7f016448583597166d7e72c437768c9f1492513b78e31f7d36f86d018fe2896",
         "size": 24
@@ -312490,6 +312507,11 @@
         "address": 1952724,
         "record_sha256": "464b626e592d4fabf90bddb55962adc048896a9fa34b983c97b3ff29a28c4cf8",
         "size": 36
+      },
+      {
+        "address": 1952760,
+        "record_sha256": "1181125db61090d28002a89dfc6c62333793fa3fcc568cf70ca472236d0fefb7",
+        "size": 472
       },
       {
         "address": 1953232,
@@ -312697,6 +312719,11 @@
         "size": 88
       },
       {
+        "address": 1989944,
+        "record_sha256": "c455960d288da2915329a5002477ca9486196d990e0a1a9487eefec9a53fd1b5",
+        "size": 116
+      },
+      {
         "address": 1990060,
         "record_sha256": "2eefe9874101d14c2b72bab673fbbfea4b36df4bff11fce1121bbca1932af7ba",
         "size": 32
@@ -312787,9 +312814,19 @@
         "size": 4
       },
       {
+        "address": 2005020,
+        "record_sha256": "440338d5c0392eec8f3bc6890ce2d365f66448495849a0508592e95e10907854",
+        "size": 296
+      },
+      {
         "address": 2005316,
         "record_sha256": "ce819c2b1290da44d1019e2ed3485a854e043539365fbfd3070e91fc203e2cc4",
         "size": 12
+      },
+      {
+        "address": 2005752,
+        "record_sha256": "9923fe291c464be1e740983a8266c332f3175b0bbbff4055661af2253f922af4",
+        "size": 484
       },
       {
         "address": 2006652,
@@ -312892,6 +312929,11 @@
         "size": 36
       },
       {
+        "address": 2019420,
+        "record_sha256": "0fb6db9bb266981626bc239329427b37ebf41be0e14d0587da0761ef215fc12c",
+        "size": 624
+      },
+      {
         "address": 2020044,
         "record_sha256": "186ead52c88200bc8e7e46b2a99a123368e90bddc55fc0011cab151ef39395cd",
         "size": 408
@@ -312972,6 +313014,11 @@
         "size": 48
       },
       {
+        "address": 2030252,
+        "record_sha256": "1eceb5e86654b99480208b81daa59d85aa7638a8504c42923217084f071cf16a",
+        "size": 84
+      },
+      {
         "address": 2030336,
         "record_sha256": "afe5ce9924abbd88f3de0077835e79108a9fc37fed585e29e13600eabe490d3b",
         "size": 104
@@ -312980,6 +313027,16 @@
         "address": 2030440,
         "record_sha256": "38574a4765ea7a5aa42515be129dad3c34677786c81d8fd3ee2c1dbedba3eaf2",
         "size": 144
+      },
+      {
+        "address": 2030584,
+        "record_sha256": "9532d4a71ede91be030afa318599f4fd3d759f0c320954ea12e8de076cd12cf2",
+        "size": 108
+      },
+      {
+        "address": 2030692,
+        "record_sha256": "cf0a5d521e6dec1384df3c2549c314000b8647453a970336d713eb987e04ae9e",
+        "size": 108
       },
       {
         "address": 2030800,
@@ -313157,6 +313214,11 @@
         "size": 64
       },
       {
+        "address": 2037404,
+        "record_sha256": "97c983611cf4e45a8c0575c8a85026f544cb3766c26b9af844b875a7bc2a2163",
+        "size": 40
+      },
+      {
         "address": 2037444,
         "record_sha256": "7ab8ec46a6151a1634ad20a2a395cecb2c3c1fed7782dadcc8d5d60a004edad5",
         "size": 52
@@ -313260,6 +313322,16 @@
         "address": 2039512,
         "record_sha256": "b4887c2e7b16b5c2d8b39b44bf60f9d2d0e21978e1a8df726074b9efae563d07",
         "size": 28
+      },
+      {
+        "address": 2039540,
+        "record_sha256": "368512737ddf12c6eccd275b6d01f830683051f6dcad854e63e23e981cd9a557",
+        "size": 20
+      },
+      {
+        "address": 2039560,
+        "record_sha256": "5355e70d4dbf961aa990021bbbab2b3e820e23e916d5a5ff8ad58e18a4a83ee9",
+        "size": 24
       },
       {
         "address": 2039584,
@@ -313455,6 +313527,11 @@
         "address": 2042060,
         "record_sha256": "fc8d08b6313b453b3284025bb6050cc53035710027b8e2b9df62e2ef822620ef",
         "size": 232
+      },
+      {
+        "address": 2042292,
+        "record_sha256": "a31012fe2bb61804243d5076767229a743ddea256a5ccba63750043cbc5a75b5",
+        "size": 164
       },
       {
         "address": 2042456,
@@ -313690,6 +313767,11 @@
         "address": 2054156,
         "record_sha256": "8aaf1cc5be5e3731df4cbe1abd20075ff944ebb6df0fa7afc43b650b7dd01ab7",
         "size": 96
+      },
+      {
+        "address": 2054252,
+        "record_sha256": "010f0c954edb4c81c87f0930e92e99af9bb4df94380a74d794bde1e99d7f8e9a",
+        "size": 80
       },
       {
         "address": 2054332,
@@ -314172,6 +314254,11 @@
         "size": 1412
       },
       {
+        "address": 2182900,
+        "record_sha256": "2628f88d674ffa0862687631ef90535b82820f45d7bc82cb6082bc4e978c6a49",
+        "size": 172
+      },
+      {
         "address": 2183072,
         "record_sha256": "b8b02ae14f74777d34f04c196c9943e08e1d009fde57e30dab01084cdc07490b",
         "size": 24
@@ -314345,14 +314432,47 @@
         "address": 2192820,
         "record_sha256": "a80898945d0944713b5d19d1eacb02768e6cad13fe0efe6db1f63da0c043eb35",
         "size": 56
+      },
+      {
+        "address": 2192876,
+        "record_sha256": "93a4c1f6f9ef4ba0c46cc4daf51f306661966dde4da3ba9d10fa38087c6d46d1",
+        "size": 8
       }
     ],
     "protected_summary": {
-      "bytes": 288580,
-      "complete_records_sha256": "b5e4009340fcb9bb8e80fd88a230594aa2fe882337c0ad9c21faca45176f22a0",
-      "functions": 2682
+      "accepted": {
+        "bytes": 301020,
+        "complete_records_sha256": "621ddb312134cba24147f3e4fbaea13151f4834e18e0c98e5552518ca820a9fd",
+        "functions": 2770
+      },
+      "c012-r6": {
+        "bytes": 4928,
+        "complete_records_sha256": "897d3e5c03661d94438634bb3488b5cde6b327ad06ffd859c970dda68d7b2a32",
+        "functions": 57
+      },
+      "c015": {
+        "bytes": 2364,
+        "complete_records_sha256": "6d00b4ac71723c928f447b463e0573f28568ceeae515780319726e6868429792",
+        "functions": 19
+      }
     },
-    "qualification": "Reviewable proposal on a separate branch only. The hash-chained history entry on this branch is not Main adoption or an independent review. Historical evidence/refusals remain immutable. No accepted record, extent, ISA, entry, source, name or status changes.",
+    "qualification": "Unadopted proposal requiring independent review and Main adoption. Adds only the newly equal complete _snputc library entry through complete independently placed parent/static named linkage. Every old complete owner, accepted/c012-r6/c015 identity, ancestor proof, refusal, names binding and source is unchanged; ten unknown ranges and the original anomaly remain. No runtime data-endian/computed-transfer claim or C credit.",
+    "transition": {
+      "adoption": false,
+      "entry": {
+        "address": 1050106,
+        "isa": "thumb",
+        "kind": "library",
+        "size": 16
+      },
+      "new_C_credit": 0,
+      "proof": {
+        "path": "research/catalogue_v15_callback_proof.json",
+        "sha256": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
+        "size": 5681
+      },
+      "runtime_pool_value_admitted": false
+    },
     "unknown_ranges": [
       {
         "end": 1048612,
@@ -314365,12 +314485,6 @@
         "kind": "unknown",
         "owner": null,
         "start": 1048878
-      },
-      {
-        "end": 1050122,
-        "kind": "unknown",
-        "owner": null,
-        "start": 1050106
       },
       {
         "end": 1050948,
@@ -314600,31 +314714,31 @@
     },
     "bytes_by_range_kind": {
       "data": 51464,
-      "function": 1143812,
+      "function": 1143828,
       "padding": 68,
       "rodata": 123378,
       "segment_padding": 8268,
-      "unknown": 114
+      "unknown": 98
     },
-    "classified_functions": 156,
+    "classified_functions": 157,
     "closed_graph_absorbed_owners": 2,
     "closed_graph_owner_merges": 1,
-    "code_bytes": 1060872,
+    "code_bytes": 1060888,
     "creditable_bytes": 1120094,
     "creditable_functions": 4546,
-    "decoded_instructions": 266377,
+    "decoded_instructions": 266385,
     "direct_calls": 19999,
     "discovery_rounds": 7,
     "fallthrough_groups": 15,
-    "functions": 4743,
+    "functions": 4744,
     "functions_by_isa": {
       "arm": 4663,
-      "thumb": 80
+      "thumb": 81
     },
     "functions_by_kind": {
       "assembly": 37,
       "function": 4546,
-      "library": 95,
+      "library": 96,
       "multi_entry": 25,
       "runtime": 22,
       "veneer": 18
@@ -314680,6 +314794,7 @@
       "closed_fixed_record_leaf": 27,
       "entry": 1,
       "exact_bound_global_section_entry": 1,
+      "exact_bound_library_callback_entry": 1,
       "exact_bound_local_section_entry": 2,
       "leading_instructions": 7,
       "linker_branchnop": 204,
@@ -314692,7 +314807,7 @@
     },
     "switch_tables": 142,
     "tail_calls": 1446,
-    "unknown_ranges": 11
+    "unknown_ranges": 10
   },
   "tail_target_repairs": [
     {

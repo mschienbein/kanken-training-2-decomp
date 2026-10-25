@@ -1,0 +1,87 @@
+{
+  "accounting": {
+    "path": "research/catalogue_v15_generation.json",
+    "sha256": "d27133767efe949c6accb9c5dbd8fe3fadc0f91ba629ea2cc266bf989c0b1181"
+  },
+  "cleanup": {
+    "created_dependency_files": [],
+    "created_object_files": [],
+    "temporary_build_outputs": []
+  },
+  "denominator_verify": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "tools/denominator.py",
+      "verify"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v15",
+    "elapsed_seconds": 0.023078426995198242,
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "ok: denominator v12 matches config/catalogue.json\n"
+  },
+  "focused_tests": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "tests.test_catalogue_v15",
+      "tests.test_catalogue_v14",
+      "tests.test_catalogue_alignment",
+      "tests.test_catalogue_v13_r2",
+      "tests.test_catalogue_local_entries"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v15",
+    "elapsed_seconds": 55.84055088199966,
+    "exit_code": 0,
+    "stderr": ".............................................................\n----------------------------------------------------------------------\nRan 61 tests in 55.538s\n\nOK\n",
+    "stdout": ""
+  },
+  "generator": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "tools/catalogue_unknowns.py",
+      "propose-v15",
+      "--image",
+      "/home/michael/code/kanken-training-2-decomp/orig/code.bin",
+      "--exheader",
+      "/home/michael/code/kanken-training-2-decomp/orig/exheader.bin",
+      "--prove-objects",
+      "--private-root",
+      "/home/michael/code/kanken-training-2-decomp",
+      "--out",
+      "config/catalogue.json"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v15",
+    "elapsed_seconds": 0.8108978590025799,
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "private proof: 2 complete sections; static linkage only\ncatalogue-v15: 4546 creditable functions; 1120094 extent bytes; proposal only; config/catalogue.json\n"
+  },
+  "history_record": {
+    "argv": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "tools/denominator.py",
+      "record",
+      "--note",
+      "UNADOPTED catalogue v15 proposal: add complete Arm 5.06-b960 _snputc library callback via independently placed whole __0snprintf parent/static named REL32 linkage; 16 B unknown to function-owned library, zero creditable/accepted change; preserve all old records and frozen c012-r6/c015 identities, remaining 98 B/10 ranges and anomaly 0010d2b8. Requires independent review and Main adoption."
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v15",
+    "elapsed_seconds": 0.05258731600770261,
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "denominator v12: 4744 functions, 1143948 bytes (cb9f12368521)\n"
+  },
+  "scope": "Focused catalogue modules only; no full suite, compiler, matcher, build, acceptance or adoption.",
+  "test_sources": {
+    "tests/test_catalogue_alignment.py": "8120dbdf75f6371801a80ff75a927ba524204c0782fbc2b9a71e831c45087cfd",
+    "tests/test_catalogue_local_entries.py": "841bd229cfa00c8d51a064fbb0ccab6be8ff3a299c843900c76d511463ded28c",
+    "tests/test_catalogue_v13_r2.py": "8c6bdd1035d9b4b20a7764ae703318e4a097aceb2a860b5b2f79fb825cd7b5cf",
+    "tests/test_catalogue_v14.py": "6e86226671fee1ea1139ce7ed2a6caef720ee596e4cd828aa8adf4e42efd7934",
+    "tests/test_catalogue_v15.py": "912c7cffa5561a6f79eb3237fb740306fd72e3e943f88dde20f2d1909db599a0"
+  }
+}

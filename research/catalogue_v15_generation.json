@@ -1,0 +1,391 @@
+{
+  "added_function_records": [
+    {
+      "address": 1050106,
+      "classification_evidence": {
+        "address": 1050106,
+        "basis": "known_library",
+        "evidence": "research/catalogue_v15_callback_proof.json",
+        "identity": "_snputc",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "isa": "thumb",
+        "kind": "library",
+        "known_library_identity": "Complete named Arm 5.06-b960 definition plus whole independently placed __0snprintf parent and named static REL32 linkage",
+        "library_witness": {
+          "archive": ".cache/toolchain/armcc/5.06/b960/lib/armlib/c_5.l",
+          "archive_sha256": "00214991a43ef47f201fba5b54da0a7f509baf954c2fbd6ea9ebf2ef151e1c08",
+          "member": "_snputc.o",
+          "member_offset": 753252,
+          "member_sha256": "fa2a43ecd529175c1aeaae66c040c7b3f5655526e6b90ebf04751b0ff555853a"
+        },
+        "original_extent_sha256": "1fb4464921189a4fc75aa39ff4ef5232b71f69bd07db69ced34f4bc173dbf4cc",
+        "qualification": "Static ELF linkage only: no runtime pool/endian/computed-transfer admission, historical-build uniqueness, parent reclassification, canonical name or C credit. Older 5.04 mismatch remains a negative.",
+        "size": 16
+      },
+      "code_ranges": [
+        [
+          1050106,
+          1050122
+        ]
+      ],
+      "code_size": 16,
+      "entries": [
+        {
+          "address": 1050106,
+          "evidence": [
+            "exact_bound_library_callback_entry"
+          ],
+          "isa": "thumb",
+          "kind": "entry",
+          "sources": []
+        }
+      ],
+      "evidence": [
+        "exact_bound_library_callback_entry"
+      ],
+      "isa": "thumb",
+      "kind": "library",
+      "literals": [],
+      "noreturn": false,
+      "noreturn_reasons": [],
+      "pools": [],
+      "size": 16
+    }
+  ],
+  "adoption": false,
+  "baseline": {
+    "blob": "b823bc94b03c78edcefe7faa6d808336512f8854",
+    "reference": "fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json",
+    "revision": "catalogue-v14",
+    "sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff"
+  },
+  "creditable_delta": {
+    "bytes": 0,
+    "functions": 0
+  },
+  "generator_after": {
+    "command": "tools/catalogue_unknowns.py propose-v15 --out X",
+    "input_sha256": {
+      "docs/catalogue/REVIEW-v13-r2.md": "47fb9d1b2c04b26f3fd1baf97f47e17e139a46a6ee61b25f07800662553dad25",
+      "docs/catalogue/REVIEW-v14-r2.md": "683fc1b87f887905aa007c3a3988a73908987807f2bf0f8cd163b307f5a8ce16",
+      "exheader": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
+      "git:fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json@b823bc94b03c78edcefe7faa6d808336512f8854": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+      "image": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "research/catalogue_v13_section_proof.json": "2333ab0635582e8b5ccc800083d3f6014eac6d3d2168addd661fc0ec45eb6cc3",
+      "research/catalogue_v14_evidence.json": "c654518aaebe6eaade5ee968e877155892d4f3ee7312414ab5f7c30a3c126827",
+      "research/catalogue_v15_callback_proof.json": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
+      "research/catalogue_v15_evidence.json": "9c63c4bddcfb4ce8bed27f3b44a99fc20df71afeb1ca234d8d46063e2cc4e256",
+      "research/catalogue_v15_frozen/c012-r6/config/candidates/c012.json": "7cdb51f13af36b8d24ddad2072803704a2f2c378f905433e08e1fd2e956236f9",
+      "research/catalogue_v15_frozen/c012-r6/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v15_frozen/c015/config/candidates/c015.json": "869cc4b43c5afce9e975a0a69dace63bc5852da99c48a436c1ff7a8960ee8001",
+      "research/catalogue_v15_frozen/c015/config/names.json": "42f209541d3207bdeb43b9240e0b687dd2fda61a9c8ac21068e2cea4ccd5406b",
+      "research/catalogue_v15_frozen/config/matches.json": "4330cce9b9bdb086d1b3ef80d68c5bcdb8d0a8c99aab489aa44fc4827b9b2896",
+      "research/catalogue_v15_frozen/config/names.json": "a6d3fc9c8163b59f8c515613fc0103d14db9c7335abe60107b6cf67f99464f5b",
+      "research/catalogue_v15_unknowns.json": "7ebf2dfe5f853374b4bb6a8ffe807bb610805b584c11121a852940eacd72d548"
+    },
+    "parent": {
+      "blob": "b823bc94b03c78edcefe7faa6d808336512f8854",
+      "reference": "fa2327626852855fde2373c592b319ebe2b08de5:config/catalogue.json",
+      "revision": "catalogue-v14",
+      "sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff"
+    },
+    "policy": "complete_named_callback_sections_v1",
+    "revision": "catalogue-v15",
+    "source_sha256": {
+      "tools/analyze.py": "39edac788a92878e5d91f69fcafbec1df13f7fb12dccbdb73942975f5caf52ad",
+      "tools/catalogue_local_entries.py": "26d2df18b084799dd1a6972453165440369613674e2c006be994f3d26a862eb6",
+      "tools/catalogue_non_c.py": "d35211db73fc51e64c0cd6a501c024ec26229be4763c940a92c09dc9fe209918",
+      "tools/catalogue_runtime_data.py": "3f2f1422f20ff9609a79dd5fdd529872806abef2ec302971301d7301b7ae672b",
+      "tools/catalogue_unknowns.py": "70b2eb2ca3557a36b5b301ca32ca20bf514fe357ae7a517e9dd376b0dece897f",
+      "tools/ctrfmt.py": "3b380864744779afd222af8e3bb4a69d2c7d2baa6c1544147cd910736e9dc027",
+      "tools/fingerprint.py": "d748c262f10f8f6510f510ea8e0b31ac1fe0df23f46301993860d9caa15ab80e",
+      "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c",
+      "tools/inplace.py": "4d93106408845f54ae4fb6ad3ce9fb0633756d12fadb4b4f29592d715f113189",
+      "tools/linker_models.py": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5"
+    }
+  },
+  "generator_before": {
+    "command": "tools/catalogue_non_c.py propose-v14 --out X",
+    "input_sha256": {
+      "docs/catalogue/REVIEW-v13-r2.md": "47fb9d1b2c04b26f3fd1baf97f47e17e139a46a6ee61b25f07800662553dad25",
+      "exheader": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
+      "git:5820254f213d8b28130f18c59afde974733112b8:config/catalogue.json@1326f1675735048b26fa435f11605e613cac89f2": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+      "image": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "include/nw/gfx/gfx_MemoryUtil.h": "a47b62ee44c7db5268dd13abf4c0439812debb77d70953feed67c760ef206427",
+      "research/catalogue_v13_r2_evidence.json": "2adf68b043881412092ce23c8c89ba43e64d47061e4f05ca100e45dfa15b86c0",
+      "research/catalogue_v14_assembly_evidence.json": "e627682c82cd3dd966076368016c41f6618231e36dcb0a252e0728f0c1329c6c",
+      "research/catalogue_v14_callers.json": "a82ba9ac958daa4a246a5d332a6a125b5600e611d8ababdb7369efc2779f1666",
+      "research/catalogue_v14_evidence.json": "c654518aaebe6eaade5ee968e877155892d4f3ee7312414ab5f7c30a3c126827",
+      "research/catalogue_v14_frozen/config/matches.json": "da285c365ea7c9b584b83041a3721a9c8364be8d575b138edbc915fe1edcdaaa",
+      "research/catalogue_v14_frozen/config/names.json": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+      "research/catalogue_v14_library_evidence.json": "d52d5eb07945e932d55e7596ee611f384b8a43213c8dc625fa320f6d169b6c0f",
+      "research/catalogue_v14_non_c_proof.json": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24"
+    },
+    "parent": {
+      "blob": "1326f1675735048b26fa435f11605e613cac89f2",
+      "reference": "5820254f213d8b28130f18c59afde974733112b8:config/catalogue.json",
+      "revision": "catalogue-v13-r2",
+      "sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a"
+    },
+    "policy": "unchanged_extents_evidenced_non_c_only",
+    "revision": "catalogue-v14",
+    "source_sha256": {
+      "tools/analyze.py": "39edac788a92878e5d91f69fcafbec1df13f7fb12dccbdb73942975f5caf52ad",
+      "tools/catalogue_local_entries.py": "26d2df18b084799dd1a6972453165440369613674e2c006be994f3d26a862eb6",
+      "tools/catalogue_non_c.py": "d35211db73fc51e64c0cd6a501c024ec26229be4763c940a92c09dc9fe209918",
+      "tools/catalogue_review.py": "789e7acdaaf6bbc91c28741d51271af7ff5286d8e24f144d3b3d41233534074b",
+      "tools/catalogue_runtime_data.py": "3f2f1422f20ff9609a79dd5fdd529872806abef2ec302971301d7301b7ae672b",
+      "tools/ctrfmt.py": "3b380864744779afd222af8e3bb4a69d2c7d2baa6c1544147cd910736e9dc027",
+      "tools/fingerprint.py": "d748c262f10f8f6510f510ea8e0b31ac1fe0df23f46301993860d9caa15ab80e",
+      "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c",
+      "tools/inplace.py": "4d93106408845f54ae4fb6ad3ce9fb0633756d12fadb4b4f29592d715f113189",
+      "tools/linker_models.py": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5"
+    }
+  },
+  "new_C_credit": 0,
+  "new_closure_records": {
+    "named_callback_v15": {
+      "adoption": false,
+      "entry": {
+        "address": 1050106,
+        "isa": "thumb",
+        "kind": "library",
+        "size": 16
+      },
+      "new_C_credit": 0,
+      "proof": {
+        "path": "research/catalogue_v15_callback_proof.json",
+        "sha256": "e70508f45b43db07e5f0daedd6484b69b0e448b2c94bafe6cbe4268721c24c8a",
+        "size": 5681
+      },
+      "runtime_pool_value_admitted": false
+    }
+  },
+  "old_closure_record_changes": {},
+  "old_function_record_changes": [],
+  "old_function_records_unchanged": 4743,
+  "other_metadata_changes": {},
+  "physical_range_changes": [
+    {
+      "after": {
+        "end": 1050122,
+        "kind": "function",
+        "owner": 1050106,
+        "start": 1050106
+      },
+      "before": {
+        "end": 1050122,
+        "kind": "unknown",
+        "owner": null,
+        "start": 1050106
+      }
+    }
+  ],
+  "physical_range_count_unchanged": true,
+  "proposal": {
+    "path": "config/catalogue.json",
+    "sha256": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980",
+    "size": 6699901
+  },
+  "protection": [
+    {
+      "bytes": 4928,
+      "changed_complete_records": [],
+      "commit": "e09971a6748d514db114c2c050ed1694af6b384a",
+      "functions": 57,
+      "reference": "c012-r6"
+    },
+    {
+      "bytes": 2364,
+      "changed_complete_records": [],
+      "commit": "2dcf86af00a5c5d0e85e0637936552eb7e5a1492",
+      "functions": 19,
+      "reference": "c015"
+    },
+    {
+      "bytes": 301020,
+      "changed_complete_records": [],
+      "commit": "fa2327626852855fde2373c592b319ebe2b08de5",
+      "functions": 2770,
+      "reference": "fa2327626852855fde2373c592b319ebe2b08de5"
+    }
+  ],
+  "remaining_anomalies": [
+    {
+      "address": 1102520,
+      "issue": "unexplained_function_bytes"
+    }
+  ],
+  "remaining_unknown_ranges": [
+    {
+      "end": 1048612,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1048608
+    },
+    {
+      "end": 1048926,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1048878
+    },
+    {
+      "end": 1050948,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1050946
+    },
+    {
+      "end": 1051432,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1051430
+    },
+    {
+      "end": 1052020,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1052016
+    },
+    {
+      "end": 1102768,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1102760
+    },
+    {
+      "end": 1316280,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1316276
+    },
+    {
+      "end": 1704120,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1704116
+    },
+    {
+      "end": 1865564,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1865544
+    },
+    {
+      "end": 1889000,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1888998
+    }
+  ],
+  "review_after_sha256": "5c3e26393fca9a7a3fc7362e2bf810a351743bf111dcba90c5d026f99e72250c",
+  "review_before_sha256": "44bafd86159f738951470a822f76198c914ec83cae8f8a58d565c0674f980adc",
+  "schema_version": 1,
+  "statistics_changes": {
+    "bytes_by_range_kind": {
+      "after": {
+        "data": 51464,
+        "function": 1143828,
+        "padding": 68,
+        "rodata": 123378,
+        "segment_padding": 8268,
+        "unknown": 98
+      },
+      "before": {
+        "data": 51464,
+        "function": 1143812,
+        "padding": 68,
+        "rodata": 123378,
+        "segment_padding": 8268,
+        "unknown": 114
+      }
+    },
+    "classified_functions": {
+      "after": 157,
+      "before": 156
+    },
+    "code_bytes": {
+      "after": 1060888,
+      "before": 1060872
+    },
+    "decoded_instructions": {
+      "after": 266385,
+      "before": 266377
+    },
+    "functions": {
+      "after": 4744,
+      "before": 4743
+    },
+    "functions_by_isa": {
+      "after": {
+        "arm": 4663,
+        "thumb": 81
+      },
+      "before": {
+        "arm": 4663,
+        "thumb": 80
+      }
+    },
+    "functions_by_kind": {
+      "after": {
+        "assembly": 37,
+        "function": 4546,
+        "library": 96,
+        "multi_entry": 25,
+        "runtime": 22,
+        "veneer": 18
+      },
+      "before": {
+        "assembly": 37,
+        "function": 4546,
+        "library": 95,
+        "multi_entry": 25,
+        "runtime": 22,
+        "veneer": 18
+      }
+    },
+    "starts_by_evidence": {
+      "after": {
+        "bl_target": 3350,
+        "blx_target": 42,
+        "closed_constant_copy_leaf": 15,
+        "closed_entry_cfg": 1,
+        "closed_fixed_record_leaf": 27,
+        "entry": 1,
+        "exact_bound_global_section_entry": 1,
+        "exact_bound_library_callback_entry": 1,
+        "exact_bound_local_section_entry": 2,
+        "leading_instructions": 7,
+        "linker_branchnop": 204,
+        "pointer": 807,
+        "prologue": 182,
+        "relative_init_array": 108,
+        "tail_call": 429,
+        "veneer_pattern": 18,
+        "veneer_target": 18
+      },
+      "before": {
+        "bl_target": 3350,
+        "blx_target": 42,
+        "closed_constant_copy_leaf": 15,
+        "closed_entry_cfg": 1,
+        "closed_fixed_record_leaf": 27,
+        "entry": 1,
+        "exact_bound_global_section_entry": 1,
+        "exact_bound_local_section_entry": 2,
+        "leading_instructions": 7,
+        "linker_branchnop": 204,
+        "pointer": 807,
+        "prologue": 182,
+        "relative_init_array": 108,
+        "tail_call": 429,
+        "veneer_pattern": 18,
+        "veneer_target": 18
+      }
+    },
+    "unknown_ranges": {
+      "after": 10,
+      "before": 11
+    }
+  }
+}
