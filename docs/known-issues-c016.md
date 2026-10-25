@@ -26,3 +26,39 @@ cursor declarations in these two files.
 Private finding/disposition evidence is under `scratch/integrator/c016/`.
 The public disposition is also recorded in
 `config/candidates/c016.json` → `deferred_mechanical_revisions`.
+
+## Uncredited holds and failed canonical transactions
+
+These ten incoming functions (1,924 B) are not c016 claims. Their full
+dispositions remain in `config/candidates/c016.json` → `holds`.
+
+| Function(s) | Reason |
+|---|---|
+| `0014381c` | Complete native sound-manager lifetime/table/provider closure is unproved; a deleting-destructor transaction is outside this checkpoint. |
+| `001d3f58` | Native stream lifetime/key and all installed capability/provider slots are not reconciled to one owner. |
+| `001cbf34`, `001ce9e8` | Binary-validator contracts and native Pane/list insertion require a complete cutover without runtime byte-offset node recovery. |
+| `001266e4`, `0012672c` | Both filters match in isolation, but the real co-emitted translator does not; no narrowed passing subset is imported. |
+| `0017418c` | Notification storage retains incompatible word/text/field/selection union views. |
+| `001b8238` | Training control storage overlays unrelated list and animation owners. |
+| `001c5a08` | The honest full-word input contract remains a code-generation mismatch; no narrowed formal parameter or steering is admitted. |
+| `0012f5a0` | The canonical scalar relay transaction and its accepted prerequisite repair do not both match; the accepted relay/header remain unchanged. |
+
+## Qualifications retained by the candidate
+
+- **[INFERENCE]** The recovered cache-line alignment and descriptive native method
+  identities do not recover the historical declaration spelling or translation
+  unit boundaries. SDK/middleware alignment instantiations are compile/link
+  witnesses, not additional match credit.
+- New native renderer calls use canonical owner/resource types. Material
+  activation retains the exact native `IMaterialActivator::Activate` interface;
+  framebuffer array construction retains the exact `void *(*)(void *)` runtime
+  provider type.
+- The established `matrix34Identity` guard-release callee identity remains
+  qualified where armlink erased its call. Existing removed-helper identities
+  retain their accepted inference qualifications and are re-proved with their
+  complete source atoms.
+- The request protocol preserves the complete event result, both aligned timeout
+  words and genuinely optional outputs. Explicit byte stores are not Boolean
+  normalization. Descriptive duration/payload names remain **[INFERENCE]**.
+- Library `func_0019e08c` (`_ZdaPv`), c015 claims and all scene-native/scene-font
+  reservations are excluded. No gate-failed W2 transaction is imported.
