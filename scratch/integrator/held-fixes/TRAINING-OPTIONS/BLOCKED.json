@@ -1,0 +1,24 @@
+{
+  "group_id": "TRAINING-OPTIONS",
+  "functions": [
+    "func_001b8238"
+  ],
+  "bytes": 492,
+  "category": "inherited-training-control-union-punning",
+  "reason": "The source reads both TrainingScreen.controls.list and controls.animation in state13. TrainingControls overlays unrelated W6ListController* and AnimationOwner* pointers and its header explicitly disclaims common historical receiver identity. The newer c015 manifest therefore holds this exact source. Setter callback signatures are already void(int), but exact callbacks do not establish a real common controller owner or permit extending inherited union punning.",
+  "prerequisite": "One producer-evidenced controller class/subobject model covering both list queries and animation status, then the complete TrainingScreen/callee/provider/client cutover under the standing rules.",
+  "evidence": [
+    "git:8f2be9c38a93717aae6cbeab363375fc50ec8734:config/candidates/c015.json#holds/func_001b8238",
+    "git:8f2be9c38a93717aae6cbeab363375fc50ec8734:scratch/integrator/c015/PRE-REVIEW-FINAL-HOLDS.json",
+    "include/game/training_screen.h:15-27,41",
+    "scratch/integrator/held-native-survey/probes/training-options/func_001b8238.c:29-50"
+  ],
+  "fresh_match": null,
+  "why_not_retried": "Known isolated MATCH has no changed lawful controller model; newer source-policy hold supersedes the survey no-mismatch observation.",
+  "schema_version": 1,
+  "status": "blocked-uncredited",
+  "tracked_source_header_changes": [],
+  "accepted_units_revised": 0,
+  "moves": [],
+  "objects_remaining": 0
+}
