@@ -172,6 +172,33 @@
       ],
       "author": "nm160",
       "reason": "Collect the exact canonical L044TrainingFrame/WidgetSlot allocation source; existing ResourceEvent and NameTable interfaces require no header or names adoption."
+    },
+    {
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_00145e3c.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_00145e3c"
+      ],
+      "author": "r41385",
+      "reason": "Reconcile the resource service family to its current typed state/session fields and exact cleanup callback interface."
+    },
+    {
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_0018ef74.c",
+      "profile": "game",
+      "functions": [
+        "func_0018ef74"
+      ],
+      "author": "r41389",
+      "reason": "Reconcile the resource service family to its current typed state/session fields and exact cleanup callback interface."
+    },
+    {
+      "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_001c5530.c",
+      "profile": "game",
+      "functions": [
+        "func_001c5530"
+      ],
+      "author": "r41391",
+      "reason": "Reconcile the resource service family to its current typed state/session fields and exact cleanup callback interface."
     }
   ],
   "moves": [],
@@ -530,6 +557,42 @@
       "author_source": "scratch/authors/nm87/src/func_0017418c.c",
       "author_receipt": "scratch/authors/nm87/match/func_0017418c/40-delivered/func_0017418c.result.json",
       "evidence": "scratch/integrator/c015/NOTIFICATION-UNION-HOLD.json"
+    },
+    {
+      "function": "func_001ae908",
+      "target_bytes": 220,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "CONTROL-TRIPLET",
+      "author_source": "scratch/authors/w22g/src/func_001ae908.cpp",
+      "author_receipt": "scratch/authors/w22g/match/func_001ae908/06-game/func_001ae908.result.json",
+      "category": "contract-evidence",
+      "reason": "Canonical triplet identity is settled, but full enclosing-owner/input and native TouchBounds provider contracts remain incompatible; no cast/alias or second owner is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/CONTROL-TRIPLET/DECISION.json"
+    },
+    {
+      "function": "func_001b43bc",
+      "target_bytes": 300,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "CONTROL-TRIPLET",
+      "author_source": "scratch/authors/w22g/src/func_001b43bc.cpp",
+      "author_receipt": "scratch/authors/w22g/match/func_001b43bc/05-game/func_001b43bc.result.json",
+      "category": "contract-evidence",
+      "reason": "Canonical triplet identity is settled, but full enclosing-owner/input and native TouchBounds provider contracts remain incompatible; no cast/alias or second owner is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/CONTROL-TRIPLET/DECISION.json"
+    },
+    {
+      "function": "func_001b6310",
+      "target_bytes": 220,
+      "status": "uncredited-NEW-hold",
+      "component": "c015-reconcile",
+      "family": "CONTROL-TRIPLET",
+      "author_source": "scratch/authors/w22g/src/func_001b6310.cpp",
+      "author_receipt": "scratch/authors/w22g/match/func_001b6310/06-game/func_001b6310.result.json",
+      "category": "contract-evidence",
+      "reason": "Canonical triplet identity is settled, but full enclosing-owner/input and native TouchBounds provider contracts remain incompatible; no cast/alias or second owner is introduced.",
+      "evidence": "scratch/integrator/c015/reconcile/CONTROL-TRIPLET/DECISION.json"
     }
   ],
   "revised_accepted_units": [
@@ -547,6 +610,17 @@
         "include/game/graphics_state.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
+    },
+    {
+      "source": "src/checkpoint10/func_00121838.c",
+      "profile": "game",
+      "functions": [
+        "func_00121838"
+      ],
+      "author": "r41212",
+      "accepted_source_sha256": "836fee065f3243683f1471f84a6d27e520a07d34e3c52ae59a8f0442f243f888",
+      "current_source_sha256": "88c52db0434e6bfaf300047bfb109fa77380233e93cd4552851f44ad279036fc",
+      "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved."
     }
   ],
   "surviving_revised_accepted_units": [
@@ -564,6 +638,17 @@
         "include/game/graphics_state.h"
       ],
       "baseline": "c012-r5 prepared source ownership at 18efd7bb; c012 claims remain reserved."
+    },
+    {
+      "source": "src/checkpoint10/func_00121838.c",
+      "profile": "game",
+      "functions": [
+        "func_00121838"
+      ],
+      "author": "r41212",
+      "accepted_source_sha256": "836fee065f3243683f1471f84a6d27e520a07d34e3c52ae59a8f0442f243f888",
+      "current_source_sha256": "88c52db0434e6bfaf300047bfb109fa77380233e93cd4552851f44ad279036fc",
+      "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved."
     }
   ]
 }

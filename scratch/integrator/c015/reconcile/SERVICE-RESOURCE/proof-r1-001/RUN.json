@@ -1,0 +1,43 @@
+{
+  "source": "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_0018ef74.c",
+  "profile": "game",
+  "functions": [
+    "func_0018ef74"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint15/reconcile/SERVICE-RESOURCE/func_0018ef74.c",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-001"
+  ],
+  "exit_code": 1,
+  "source_sha256": "c55c7a9c6fabfe23c3c3d69933d3b986170b9c06fbb185e08db80f5671537490",
+  "receipt": "scratch/integrator/c015/reconcile/SERVICE-RESOURCE/proof-r1-001/func_0018ef74.result.json",
+  "receipt_sha256": "c2eb976d508604260bf22bb495ffe377a1956bd94713d5647810efb4d916397c",
+  "statuses": [
+    {
+      "name": "func_0018ef74",
+      "address": 1634164,
+      "size": 164,
+      "candidate_size": 164,
+      "status": "mismatch",
+      "first_diff": 12
+    }
+  ],
+  "all_required_match": false,
+  "stdout": "MISMATCH func_0018ef74 @ 0x18ef74 size 0xa4/0xa4 first difference at +0xc\n",
+  "stderr": ""
+}

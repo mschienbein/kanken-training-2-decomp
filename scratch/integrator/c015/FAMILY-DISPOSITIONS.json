@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "base": "18efd7bb",
+  "starting_commit": "2dcf86af0",
+  "plan": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/contract-plan/FAMILIES.json",
+  "plan_sha256": "4deaf004c474b0265b5c9b5f4f2651de8935624f1b42fb3aa1fc135538842c4f",
+  "starting_new_functions": 19,
+  "starting_new_bytes": 2364,
+  "budget": {
+    "new_function_target_about": 100,
+    "maximum_identified_accepted_migrations_per_family": 5
+  },
+  "families": [
+    {
+      "family": "CONTROL-TRIPLET",
+      "rank": 1,
+      "outcome": "held-evidence",
+      "members_credited": [],
+      "members_held": [
+        "func_001ae908",
+        "func_001b43bc",
+        "func_001b6310"
+      ],
+      "accepted_revisions": [],
+      "reason": "Canonical triplet identity is settled, but full enclosing-owner/input and native TouchBounds provider contracts remain incompatible; no cast/alias or second owner is introduced.",
+      "evidence": "reconcile/CONTROL-TRIPLET/DECISION.json"
+    },
+    {
+      "family": "SERVICE-RESOURCE",
+      "rank": 2,
+      "outcome": "collected",
+      "members_credited": [
+        "func_00145e3c",
+        "func_0018ef74",
+        "func_001c5530"
+      ],
+      "members_held": [],
+      "accepted_revisions": [
+        "src/checkpoint10/func_00121838.c"
+      ],
+      "reason": "Current typed service state resolves the stale hold; exact cleanup callback and shared primitive declarations reproduce all three members and both dependent units.",
+      "evidence": "reconcile/SERVICE-RESOURCE/DECISION.json"
+    }
+  ],
+  "current_new_functions": 22,
+  "current_new_bytes": 2772,
+  "current_holds": 30
+}
