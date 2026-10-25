@@ -1966,6 +1966,19 @@
       "reason": "Declaration-only revision: c012-r5 credits the callee, so the caller's local extern moved to the shared header (interfaces inline-declaration policy). Body unchanged; MATCH re-proved (scratch/integrator/c012/r5/main-decl-move-r1/).",
       "surviving_source_hash_revision": true,
       "current_source_sha256": "86be04dba204febc9f0864bb1b8cd54b43193c85d7405059e46293aabc7d8667"
+    },
+    {
+      "author": "c009-wave17",
+      "functions": [
+        "func_0017e7a0"
+      ],
+      "profile": "game",
+      "source": "src/wave17/func_0017e7a0.c",
+      "component": "c012-r5 argcheck adjudication",
+      "reason": "Preserve forwarded channel and sample-buffer arguments; replace the unsigned buffer word with the canonical int pointer used by newly credited func_001543b8 and its producer chain.",
+      "accepted_source_sha256": "f6d0a14553754974b9a8c108f8aa61a39f8524b7df084d2987432057b7769359",
+      "current_source_sha256": "8620927a1a9cb99a3a0caff6ec53e2448917cab398985399a118888c7d997a57",
+      "surviving_source_hash_revision": true
     }
   ],
   "surviving_revised_accepted_units": [
@@ -2658,6 +2671,17 @@
       "accepted_source_sha256": "fd337e268ec635a7c86f1b2cef7e7466672318b2af3a5adfc75de49ab34a7908",
       "current_source_sha256": "86be04dba204febc9f0864bb1b8cd54b43193c85d7405059e46293aabc7d8667",
       "reason": "Declaration-only revision by Main: callee newly credited in c012-r5, local extern moved to the shared header; body unchanged, MATCH re-proved."
+    },
+    {
+      "source": "src/wave17/func_0017e7a0.c",
+      "profile": "game",
+      "functions": [
+        "func_0017e7a0"
+      ],
+      "author": "c009-wave17",
+      "accepted_source_sha256": "f6d0a14553754974b9a8c108f8aa61a39f8524b7df084d2987432057b7769359",
+      "current_source_sha256": "8620927a1a9cb99a3a0caff6ec53e2448917cab398985399a118888c7d997a57",
+      "reason": "Caller-contract correction: retain all three forwarded inputs with canonical int * sample-buffer types, declared through game/input_runtime.h and game/service_runtime.h."
     }
   ]
 }

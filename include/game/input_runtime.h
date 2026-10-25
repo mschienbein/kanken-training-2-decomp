@@ -69,6 +69,7 @@ extern void func_001483c0(struct InputController *controller);
 extern void func_00146188(struct InputController *controller);
 extern void func_0013712c(struct InputSessionContext *state);
 extern void func_00137118(void);
+extern void func_001543b8(struct InputSessionContext *state, int index, int *output);
 #ifdef __cplusplus
 }
 #endif
