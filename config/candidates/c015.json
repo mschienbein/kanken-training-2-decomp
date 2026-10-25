@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "c015 harvested intake on main 18efd7bb. c012-r5 is reserved and unfinalized; proposed-ledger evidence composes its prepared ledger with these additions only. Explicit v6/L1 proofs do not grant credit. Main-requested scope correction: revised_accepted_units lists only source-hash revisions; the900 hash-identical header/name dependency re-proofs are in scratch/integrator/c015/HEADER-CLOSURE-REPROOFS.json. This manifest-only inventory change does not change sources, headers, bindings or the proposed interfaces ledger.",
+  "note": "c015 harvested intake on main 18efd7bb. Every c012 claim remains reserved. Explicit v6/L1 proofs do not grant credit. revised_accepted_units lists only source-hash revisions; the900 hash-identical header/name dependency re-proofs are in scratch/integrator/c015/HEADER-CLOSURE-REPROOFS.json. Main's later nm160 addition supplies func_0016bf90 without source/header changes elsewhere. The existing interfaces result covers the prior18-function intake only; Main explicitly defers the updated whole-ledger interfaces run to prepare on the rebased merge.",
   "units": [
     {
       "source": "src/checkpoint15/func_00136958.c",
@@ -163,6 +163,15 @@
       ],
       "author": "nm143",
       "reason": "Retain canonical native Group/PaneLink and the serialized fixed-name tail operation; admit only constructor self-aliases and the own vtable binding."
+    },
+    {
+      "source": "src/checkpoint15/func_0016bf90.c",
+      "profile": "game",
+      "functions": [
+        "func_0016bf90"
+      ],
+      "author": "nm160",
+      "reason": "Collect the exact canonical L044TrainingFrame/WidgetSlot allocation source; existing ResourceEvent and NameTable interfaces require no header or names adoption."
     }
   ],
   "moves": [],
