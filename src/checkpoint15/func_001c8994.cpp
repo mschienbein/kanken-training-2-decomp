@@ -22,7 +22,7 @@ extern "C" void func_001c8994(ResShape shape)
     s32 count = separate.GetVertexAttributesCount();
     for (; i < count; ++i) {
         ResVertexAttribute attribute = separate.GetVertexAttributes(i);
-        func_001c7ab4(&attribute);
+        attribute.Cleanup();
     }
     cleanup_shape_from(shape, 0);
 }
