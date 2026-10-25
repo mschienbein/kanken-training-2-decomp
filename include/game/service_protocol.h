@@ -20,9 +20,20 @@ struct ServiceConfiguration {
     unsigned char changed;
 };
 struct ServiceReport;
+
+/* [INFERENCE] Duration name; the original ABI carries a signed 64-bit value. */
+struct AppletTimeout {
+    long long nanoseconds;
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern struct AppletTimeout data_00242a40;
+extern unsigned data_00242a34;
+/* Full event result, including -1. The fifth pointer is optional; the timeout
+ * occupies the next aligned pair of stack words, not a RequestWait object. */
+extern int func_00191e18(unsigned *handle, void *buffer, unsigned capacity,
+    void **memory, unsigned *size, struct AppletTimeout timeout);
 extern unsigned func_0019058c(const struct ServiceObject *object);
 extern void func_001217b4(void);
 extern void func_001224a4(void);

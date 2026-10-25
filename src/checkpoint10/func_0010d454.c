@@ -3,20 +3,7 @@
 #include "ctr/svc.h"
 #include "game/service_state.h"
 
-struct AppletTimeout {
-    long long nanoseconds;
-};
-extern struct AppletTimeout data_00242a40;
-
-
-
-
-
-extern bool func_00191e18(unsigned *handle, void *buffer, unsigned capacity,
-                           void **memory, unsigned *size, struct AppletTimeout timeout);
-
-
-
+#include "game/service_protocol.h"
 
 
 static __forceinline void check_result(CtrResult result, const void *location)
@@ -38,13 +25,13 @@ void func_0010d454(bool notify)
     if (func_00191dbc() && !(func_00191de8() & 0x20)) {
         unsigned handle;
         void *memory;
-        bool available;
+        int event;
         func_00191dac(0x62);
-        available = func_00191e18(&handle, func_0011561c(), 0x1000,
+        event = func_00191e18(&handle, func_0011561c(), 0x1000,
                                    &memory, 0, data_00242a40);
         func_0011587c(handle);
         func_001155f8(memory);
         func_00115608();
-        func_00115628(available);
+        func_00115628(event);
     }
 }
