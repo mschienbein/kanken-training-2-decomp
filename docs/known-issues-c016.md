@@ -1,4 +1,21 @@
-# c016-r2 — candidate record; F01 withdrawal and retained current contracts
+# c016-r2 — accepted (history seq 15); F01 withdrawal and retained current contracts
+
+**Accepted 2026-10-26 as history seq 15:** 2,832 / 4,545 functions, 310,736 / 1,120,082 B (+5 functions / +1,008 B
+over c015), denominator v16 (history v13). Prepared at 9f7c9e08 (prepare.json sha256 5a54d5be…; 5 new units, 10
+revised units; suite 1,205 tests).
+- The first round (prepared bba58bef) is recorded on main b29069ff: codex-a PASS_WITH_QUALIFICATIONS; codex-b FAIL, F01.
+- F01: two type models for the 0x00242fc8 command-buffer cursor. r2 fixes it by withdrawal:
+  - the func_001306c8 native move is withdrawn, and its accepted C source is restored exactly;
+  - func_00115f5c, func_001240c8, func_001303a8, func_001307b8 and func_001387f4 are held;
+  - a single cursor model would have had to reopen the accepted union-punning bodies 00114778/001147c0.
+- r2 reviews: codex-a and codex-b are both PASS_WITH_QUALIFICATIONS with 0 findings, and F01 is closed. Their
+  argcheck runs gave 100 / 535 and 98 / 535 (codex-b with receipts), all dispositioned. Every qualification in
+  those records stands.
+- The 15 holds are uncredited and fall under docs/rulings/2026-10-25-held-contract-residue.md.
+
+The text below is the candidate record.
+
+## Candidate record
 
 **Remediated candidate, not acceptance.** The failed c016 predecessor was prepared
 at `bba58bef76fb7d0bacce6743658c00e923beb6fb`; its prepare record is

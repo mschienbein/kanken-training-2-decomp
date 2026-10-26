@@ -2,6 +2,27 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-26 (morning) — c016-r2 accepted (+5 functions)
+
+**Accepted:** 2,832 functions / 310,736 B (seq 15: … c015, c016-r2). Denominator **v16** (history v13):
+4,545 creditable functions / 1,120,082 B (**27.74%**). Gates **v1.20**.
+
+- **c016-r2** adds 5 functions / 1,008 B:
+  - ActivateContext (`func_001305c0`), with the FixedSizeArray inline buffer restored to 32-byte
+    cache-line alignment; this corrects the SceneEnvironment/RenderContext layout and keeps every
+    accepted user byte-identical;
+  - the archive and polling contracts (`func_00117ad8`, `func_0011ef60`);
+  - two receive/framebuffer functions (`func_001233d0`, `func_00190450`) on the exact `func_00191e18`
+    ABI, proved from all six original call sites.
+
+  Ten accepted units are revised byte-identically.
+- The first round FAILED one review (F01): one cursor object had two type models. r2 withdrew the
+  move and held 5 functions rather than reopen accepted union-punning bodies. Both r2 reviews pass
+  with no findings. Known issues: `docs/known-issues-c016.md`.
+- **Permuter sweeps 11, 12 and 13 are complete:** 164 rows, no new matches. Every creditable
+  function's escalation ladder is now dispositioned.
+- **Next:** final residue accounting under the user's rulings, then this file's residue section.
+
 ## 2026-10-26 — c015 accepted (+31 functions); held-contract residue ruling
 
 **Accepted:** 2,827 functions / 309,728 B (seq 14: … c012-r6, c015). Denominator **v16** (history v13):

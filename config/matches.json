@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "note": "Accepted ledger as of checkpoint c015.",
+ "note": "Accepted ledger as of checkpoint c016-r2.",
  "units": [
   {
    "source": "src/pilot/pilot_a.c",
@@ -22062,6 +22062,51 @@
    ],
    "author": "rv02",
    "reason": "Optional rv02 dependency-free scalar screening match; tools/collect.py copied and re-derived it cleanly under explicit v6/L1."
+  },
+  {
+   "source": "src/checkpoint16/activate_context.cpp",
+   "profile": "game",
+   "functions": [
+    "func_001305c0"
+   ],
+   "author": "scene-env",
+   "reason": "Use the corrected canonical SceneEnvironment/RenderContext layout and exact IMaterialActivator virtual interface. Publish native address-named ShaderProgram/RenderContext/MaterialHash endpoint declarations in game/render_context.h; remove all local integration declarations."
+  },
+  {
+   "source": "src/contracts/w1/func_00117ad8.c",
+   "profile": "sdk",
+   "functions": [
+    "func_00117ad8"
+   ],
+   "author": "np040 / WaveW1Codex",
+   "reason": "Retire the duplicate filesystem token/protocol declarations; use the current FileArchiveHandle, complete 64-bit token, writable count/ArchiveInfo outputs and six-input provider without changing the author cursor atom."
+  },
+  {
+   "source": "src/contracts/w1/func_0011ef60.c",
+   "profile": "game",
+   "functions": [
+    "func_0011ef60"
+   ],
+   "author": "r4043 / WaveW1Codex",
+   "reason": "Use current TransitionState.active@0x18, the real one-millisecond sleep, void(void) shutdown callback and all five typed callback slots; supplied zero values remain null callbacks."
+  },
+  {
+   "source": "src/wave20/func_001233d0.c",
+   "profile": "game",
+   "functions": [
+    "func_001233d0"
+   ],
+   "author": "WaveW3Codex",
+   "reason": "RQ-G04: canonical pair and exact generic callback; original uninitialized fields preserved."
+  },
+  {
+   "source": "src/wave20/func_00190450.cpp",
+   "profile": "game",
+   "functions": [
+    "func_00190450"
+   ],
+   "author": "WaveW3Codex",
+   "reason": "RQ-G01..03: full event result, genuine optional outputs and canonical aligned timeout."
   }
  ]
 }

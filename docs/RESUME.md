@@ -2,9 +2,9 @@
 
 Current entry on top.
 
-## 2026-10-26 — c015 accepted; held-contract residue ruling; 16 subagents (current)
+## 2026-10-26 (morning) — c016-r2 accepted; final residue accounting next (current)
 
-**State:** `docs/STATUS.md` top entry. Accepted 2,827 functions / 309,728 B (seq 14, c015);
+**State:** `docs/STATUS.md` top entry. Accepted 2,832 functions / 310,736 B (seq 15, c016-r2);
 denominator v16 (4,545 / 1,120,082 B); gates v1.20. **Concurrency cap: 16 subagents** (user,
 2026-10-25), all on the `subagent` role (`openai-codex/gpt-6.1-sol:max`). The user asked to clean up
 after every batch to save disk space.
@@ -13,17 +13,21 @@ Live state: `scratch/integrator/PIPELINE-LIVE-20261023.md`, top sections. After 
 `scratch/integrator/rotation.py` and then `scratch/integrator/main_helpers.py`, both by absolute
 path. Open user questions: `scratch/integrator/USER-QUESTIONS-PENDING.md`.
 
-Remaining, in order:
-1. **c016** (branch c016, C016Intake): merge post-c015 main, whole-ledger interfaces, argcheck
-   (baseline = c015's main argcheck), prepare, two reviewers, finalize.
-2. **Permuter rows:** sweep-11 (13 rows) and sweep-13 (4 rows), in heavy-slot gaps.
-3. **Final residue:**
-   - run `scratch/integrator/held-ruling/build_held_ruling.py --apply` on the final RESIDUE draft;
-     it writes the companion `docs/rulings/2026-10-25-held-contract-residue.json` and the user-ruling
-     holds;
-   - regenerate the table and put its STATUS-ready section in STATUS (unknown-byte ranges and the
-     anomaly per the 2026-10-25 ruling);
-   - push with CI green.
+Remaining (the final residue sequence in the live-state file):
+1. In `scratch/integrator/residue/PENDING-MANIFESTS.json`, move c015/c016 from pending to
+   `hold_manifests`, then generate the pre-ruling draft.
+2. Run `scratch/integrator/held-ruling/build_held_ruling.py --apply`. It writes the companion
+   `docs/rulings/2026-10-25-held-contract-residue.json` and the user-ruling holds. Commit the
+   companion.
+3. Generate the final draft. Expected classes: accepted, ruled_residue, near_miss_exhausted,
+   never_matched_exhausted. Write `docs/RESIDUE-TABLE.md` and the STATUS residue section, then push
+   with CI green.
+
+## 2026-10-26 — c015 accepted; held-contract residue ruling; 16 subagents
+
+**State:** `docs/STATUS.md` top entry. Accepted 2,827 functions / 309,728 B (seq 14, c015);
+denominator v16 (4,545 / 1,120,082 B); gates v1.20. **Concurrency cap: 16 subagents**.
+Remaining at that point: c016; permuter sweeps 11 and 13; final residue.
 
 ## 2026-10-25 — c012-r6 accepted; catalogue v15 and v16 adopted; 16 subagents
 
