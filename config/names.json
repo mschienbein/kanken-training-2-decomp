@@ -2,57 +2,9 @@
   "schema_version": 1,
   "note": "Names overlay: real names for catalogued addresses. Identity is the address; renaming never changes the catalogue.",
   "symbols": {
-    "_ZN2nw3gfx12MeshRenderer16SetMatrixPaletteEPNS0_13SkeletalModelENS0_3res15ResPrimitiveSetEi": {
-      "address": 1246120,
-      "evidence": "c016 fx03 final-matches.json: [INFERENCE] native SetMatrixPalette identity from the canonical separate-shape skeletal caller, which supplies MeshRenderer receiver, SkeletalModel*, ResPrimitiveSet value and signed bone count to func_001303a8. Full default-model source receipt agrees."
-    },
-    "_ZN2nw3gfx8internal18NWCopyMtx34ReverseEPfPKf": {
-      "address": 1630540,
-      "evidence": "c016 fx03 final-matches.json: [INFERENCE] canonical matrix reverse-copy endpoint corresponds to the direct original 00123b50 call and its writable float output/const float input interface."
-    },
-    "_ZN2nw3gfx8internal21NWCopyMtx34WithHeaderEPfPKfj": {
-      "address": 1630596,
-      "evidence": "c016 fx01 integration-matches.json and fx03 final-matches.json independently agree: [INFERENCE] canonical matrix upload-copy endpoint at func_0018e184 takes float output, const float matrix input and unsigned command header; two SetModelMatrixForModel submissions witness the direct target."
-    },
-    "_ZN2nw3gfx13RenderContext23ActivateVertexAttributeENS0_3res7ResMeshE": {
-      "address": 1196232,
-      "evidence": "c016 fx01 integration-matches.json: [INFERENCE] native ActivateVertexAttribute identity follows the command cache, 48-byte IR-scale command and shader Boolean bits 7/8. Complete natural game/default source matches func_001240c8."
-    },
-    "_ZN2nw3gfx8internal20ClearVertexAttributeEv": {
-      "address": 1249028,
-      "evidence": "c016 fx01 integration-matches.json: [INFERENCE] the native no-argument ClearVertexAttribute call corresponds to the direct original func_00130f04 call in ActivateVertexAttribute. The retained C provider has the same void(void) contract."
-    },
-    "_ZN2nw3gfx13RenderContext22SetModelMatrixForModelEPNS0_5ModelE": {
-      "address": 1247160,
-      "evidence": "c016 fx01 integration-matches.json: [INFERENCE] native model-matrix method uploads the established identity, Model::NormalMatrix at +0x1bc, and caches the actual Model pointer. Complete game/default source matches func_001307b8."
-    },
-    "_ZN2nw3gfx12MeshRenderer10RenderMeshENS0_3res7ResMeshEPNS0_5ModelE": {
-      "address": 1138524,
-      "evidence": "c016 fx01 integration-matches.json: [INFERENCE] native RenderMesh identity follows resource shape dispatch, material selection, ordinary/particle calls and command-cache deactivation; complete game/default source matches func_00115f5c."
-    },
     "_ZN2nw3gfx13RenderContext15ActivateContextEPNS0_18IMaterialActivatorE": {
       "address": 1246656,
       "evidence": "c016 scene-env ActivateContext and fx01 RenderMesh independently agree: [INFERENCE] RenderContext receiver and nullable IMaterialActivator* invoke the canonical activator interface at func_001305c0; the complete native 264-byte game/default source matches."
-    },
-    "_ZN2nw3gfx13RenderContext23ActivateParticleContextEv": {
-      "address": 1196072,
-      "evidence": "c016 fx01 integration-matches.json: [INFERENCE] the native particle-context activation call in RenderMesh corresponds to its direct original func_00124028 target with only the RenderContext receiver."
-    },
-    "_ZN2nw3gfx12MeshRenderer23RenderSeparateDataShapeEPNS0_5ModelENS0_3res20ResSeparateDataShapeEi": {
-      "address": 1195632,
-      "evidence": "c016 fx01 integration-matches.json: [INFERENCE] the ordinary RenderMesh branch calls func_00123e70 with native MeshRenderer receiver, Model*, separate-data resource wrapper and current primitive index; every canonical argument is retained."
-    },
-    "_ZN2nw3gfx12MeshRenderer19RenderParticleShapeEPNS0_5ModelENS0_3res16ResParticleShapeEi": {
-      "address": 1194832,
-      "evidence": "c016 fx01 integration-matches.json: [INFERENCE] the particle RenderMesh branch calls func_00123b50 with native MeshRenderer receiver, Model*, particle resource wrapper and shape index; every canonical argument is retained."
-    },
-    "_ZN2nw3gfx13RenderContext15RenderPrimitiveENS0_3res12ResPrimitiveE": {
-      "address": 1246920,
-      "evidence": "held-fixes: same-address self-definition of canonical native RenderContext::RenderPrimitive with the ResPrimitive value interface, byte-identical over the complete 240-byte accepted owner; scratch/integrator/held-fixes/NATIVE-PRIMITIVE/probe-native-r3/RenderPrimitive.result.json. [INFERENCE] Historical native spelling/member identity; no C facade or external provider alias."
-    },
-    "_ZN2nw3gfx8internal17FastWordCopyAsm_6EPjS2_": {
-      "address": 1589820,
-      "evidence": "Adopted catalogue v14 classification identifies func_0018423c as nw::gfx::internal::FastWordCopyAsm_6 with complete public-macro identity; config/catalogue.json classification_evidence and research/catalogue_v14_non_c_proof.json. [INFERENCE] Public native spelling, not compiled-C credit."
     },
     "__sti___17_func_0020e344_cpp_b04e481a": {
       "address": 2155332,

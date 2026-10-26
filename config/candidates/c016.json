@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "base_commit": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
-  "note": "Final c016 input set, composed on finalized c015 main 45d62e6d9c260076a2f3f86a38050928a5bf1717 (history seq14;2827 accepted functions/309728 B). Includes scene-env70e33056, fx01 x3/fx03 x1, held-fixes545491034e, W1e9d1337a minus two explicitly deferred matrix declarations, and W317c9e343c. Exactly10 NEW functions/2216 B,10 in-place accepted source revisions,1 accepted240-byte native move,10 uncredited holds/1924 B. fx04 and nc01-nc06 closed with0 new target MATCHes. All c015 claims and library _ZdaPv are excluded; no scene-native, scene-font or gate-failed W2 transaction is imported. Main ruling docs/rulings/2026-10-25-held-contract-residue.md keeps every held contract as documented residue with its exact blocker and no rule relaxation. Accepted00114778/001147c0 remain exactly at d93aa6c7; their pre-existing matrix/command union punning is a known issue, not c016 new credit or a revised source. New c016 functions do not depend on their local cursor externs. Native identities, recovered alignment and unrecovered helper names remain [INFERENCE]. Explicit v6/L1 is required. Main owns argcheck/prepare/review/finalize; private current post-merge closure and interfaces evidence live under scratch/integrator/c016/. See docs/known-issues-c016.md.",
+  "note": "c016-r2 F01 fallback on finalized c015 main45d62e6d, with failed c016 reviews merged from mainb29069ff.5 NEW functions/1008 B;10 in-place accepted revisions;0 accepted moves;15 uncredited holds/3132 B. Restore accepted src/checkpoint10/func_001306c8.c exactly and withdraw the native .cpp move plus4 cursor-dependent NEW renderers and NEW001387f4. One coherent cursor/native-primitive cutover would reopen the accepted punning bodies00114778/001147c0, which remain exactly at d93aa6c7. No forbidden repair or rule relaxation is attempted; all5 withdrawals carry the same exact held-contract blocker. Withdrawn sources/header and12 newly unused native bindings are retired, preserving only the ActivateContext binding.5 remaining NEW targets are001305c0,00117ad8,0011ef60,001233d0,00190450. Explicit v6/L1 stays selected. Failed accept/c016 records and prior receipts remain immutable; Main owns c016-r2 prepare, whole-ledger interfaces, argcheck, independent reviews and finalize. Evidence: scratch/integrator/c016/r2/; candidate record:docs/known-issues-c016.md.",
   "deferred_mechanical_revisions": [
     {
       "function": "func_00114778",
@@ -20,42 +20,6 @@
   ],
   "units": [
     {
-      "source": "src/checkpoint16/func_00115f5c.cpp",
-      "profile": "game",
-      "functions": [
-        "func_00115f5c"
-      ],
-      "author": "fx01",
-      "reason": "Use canonical MeshRenderer/RenderContext/Model and resource shape wrappers; retain every material, ordinary/particle branch and native method argument. The particle downcast is within the native model hierarchy, not an alternate owner view."
-    },
-    {
-      "source": "src/checkpoint16/func_001240c8.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001240c8"
-      ],
-      "author": "fx01",
-      "reason": "Use native RenderContext::ActivateVertexAttribute(ResMesh), the real command-cache/IR-scale arrays and ShaderProgram Boolean interfaces. The ClearVertexAttribute provider retains exactly void(void)."
-    },
-    {
-      "source": "src/checkpoint16/func_001307b8.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001307b8"
-      ],
-      "author": "fx01",
-      "reason": "Use native RenderContext and actual Model::NormalMatrix/cache members; keep the established matrix34Identity static and canonical float matrix-upload contracts with no new data alias. Its inherited guard-release identity qualification is retained."
-    },
-    {
-      "source": "src/checkpoint16/func_001303a8.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001303a8"
-      ],
-      "author": "fx03",
-      "reason": "Use canonical MeshRenderer/SkeletalModel/Skeleton/ResPrimitiveSet and ResDicPatricia values, with exact matrix-pose and float-copy provider contracts. Adopt only the three evidenced fx03 native bindings."
-    },
-    {
       "source": "src/checkpoint16/activate_context.cpp",
       "profile": "game",
       "functions": [
@@ -63,26 +27,6 @@
       ],
       "author": "scene-env",
       "reason": "Use the corrected canonical SceneEnvironment/RenderContext layout and exact IMaterialActivator virtual interface. Publish native address-named ShaderProgram/RenderContext/MaterialHash endpoint declarations in game/render_context.h; remove all local integration declarations."
-    },
-    {
-      "source": "src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001387f4"
-      ],
-      "author": "tu491",
-      "reason": "Canonical ResPrimitive::SetupDrawCommand(bool) with real index-stream resource/command-buffer types and a fully reconciled accepted native caller.",
-      "evidence": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/RECONCILED.json"
-    },
-    {
-      "source": "src/checkpoint10/func_001306c8.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001306c8"
-      ],
-      "author": "HeldFixesCodex",
-      "reason": "Explicit destination for the complete accepted caller identity; native value-wrapper/member operation replaces all descriptive renderer and serialized-resource models.",
-      "evidence": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/RECONCILED.json"
     },
     {
       "source": "src/contracts/w1/func_00117ad8.c",
@@ -121,13 +65,7 @@
       "reason": "RQ-G01..03: full event result, genuine optional outputs and canonical aligned timeout."
     }
   ],
-  "moves": [
-    {
-      "function": "func_001306c8",
-      "from": "src/checkpoint10/func_001306c8.c",
-      "to": "src/checkpoint10/func_001306c8.cpp"
-    }
-  ],
+  "moves": [],
   "revised_accepted_units": [
     {
       "source": "src/checkpoint10/func_00191c94.cpp",
@@ -144,21 +82,6 @@
         "include/game/render_context.h"
       ],
       "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
-    },
-    {
-      "source": "src/checkpoint10/func_001306c8.cpp",
-      "previous_source": "src/checkpoint10/func_001306c8.c",
-      "profile": "game",
-      "functions": [
-        "func_001306c8"
-      ],
-      "author": "HeldFixesCodex",
-      "prior_author": "r4036",
-      "accepted_source_sha256": "0a4f89533986391beec185b6283d8fd0e17c884a64cfbf016ee16cc626d92595",
-      "current_source_sha256": "8dbbc277dc695a5622aef7de638da5b1fcac2c6c75eb43692fe8ebb960b82e2e",
-      "reason": "Replace the C renderer/resource shadow models and member facade with the byte-identical canonical native RenderContext::RenderPrimitive(ResPrimitive) member; the content-preserving path move is explicit in moves.",
-      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
-      "evidence": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/RECONCILED.json"
     },
     {
       "source": "src/large/func_0010de68.c",
@@ -420,6 +343,76 @@
         "scratch/integrator/wave-w1/matches/r4/func_0012f5a0-game/func_0012f5a0.result.json"
       ],
       "evidence": "scratch/integrator/wave-w1/FAILED-CANONICAL-TRANSACTION.json"
+    },
+    {
+      "function": "func_00115f5c",
+      "target_bytes": 264,
+      "status": "uncredited-NEW-hold",
+      "component": "c016-r2",
+      "group": "F01-CURSOR-PRIMITIVE-CUTOVER",
+      "category": "coherent-cursor-model-requires-forbidden-legacy-punning-reopening",
+      "author": "fx01",
+      "reason": "A coherent 0x00242fc8 command-buffer cursor model and the native ResPrimitive caller/provider cutover require reopening the accepted union-punning bodies func_00114778 and func_001147c0. Those bodies must remain unchanged; reopening without a complete lawful matrix/command owner repair is not certifiable. The transaction is documented held-contract residue; no callback cast, punning, alias bridge or VFE relaxation is admitted.",
+      "withdrawn_source": "src/checkpoint16/func_00115f5c.cpp",
+      "private_source": "scratch/integrator/c016/r2/withdrawn/func_00115f5c.cpp",
+      "evidence": "scratch/integrator/c016/r2/F01-REMEDIATION.json",
+      "prior_byte_match": "Historical c016 MATCH is retained privately; it is not source/type-contract acceptance."
+    },
+    {
+      "function": "func_001240c8",
+      "target_bytes": 168,
+      "status": "uncredited-NEW-hold",
+      "component": "c016-r2",
+      "group": "F01-CURSOR-PRIMITIVE-CUTOVER",
+      "category": "coherent-cursor-model-requires-forbidden-legacy-punning-reopening",
+      "author": "fx01",
+      "reason": "A coherent 0x00242fc8 command-buffer cursor model and the native ResPrimitive caller/provider cutover require reopening the accepted union-punning bodies func_00114778 and func_001147c0. Those bodies must remain unchanged; reopening without a complete lawful matrix/command owner repair is not certifiable. The transaction is documented held-contract residue; no callback cast, punning, alias bridge or VFE relaxation is admitted.",
+      "withdrawn_source": "src/checkpoint16/func_001240c8.cpp",
+      "private_source": "scratch/integrator/c016/r2/withdrawn/func_001240c8.cpp",
+      "evidence": "scratch/integrator/c016/r2/F01-REMEDIATION.json",
+      "prior_byte_match": "Historical c016 MATCH is retained privately; it is not source/type-contract acceptance."
+    },
+    {
+      "function": "func_001307b8",
+      "target_bytes": 232,
+      "status": "uncredited-NEW-hold",
+      "component": "c016-r2",
+      "group": "F01-CURSOR-PRIMITIVE-CUTOVER",
+      "category": "coherent-cursor-model-requires-forbidden-legacy-punning-reopening",
+      "author": "fx01",
+      "reason": "A coherent 0x00242fc8 command-buffer cursor model and the native ResPrimitive caller/provider cutover require reopening the accepted union-punning bodies func_00114778 and func_001147c0. Those bodies must remain unchanged; reopening without a complete lawful matrix/command owner repair is not certifiable. The transaction is documented held-contract residue; no callback cast, punning, alias bridge or VFE relaxation is admitted.",
+      "withdrawn_source": "src/checkpoint16/func_001307b8.cpp",
+      "private_source": "scratch/integrator/c016/r2/withdrawn/func_001307b8.cpp",
+      "evidence": "scratch/integrator/c016/r2/F01-REMEDIATION.json",
+      "prior_byte_match": "Historical c016 MATCH is retained privately; it is not source/type-contract acceptance."
+    },
+    {
+      "function": "func_001303a8",
+      "target_bytes": 392,
+      "status": "uncredited-NEW-hold",
+      "component": "c016-r2",
+      "group": "F01-CURSOR-PRIMITIVE-CUTOVER",
+      "category": "coherent-cursor-model-requires-forbidden-legacy-punning-reopening",
+      "author": "fx03",
+      "reason": "A coherent 0x00242fc8 command-buffer cursor model and the native ResPrimitive caller/provider cutover require reopening the accepted union-punning bodies func_00114778 and func_001147c0. Those bodies must remain unchanged; reopening without a complete lawful matrix/command owner repair is not certifiable. The transaction is documented held-contract residue; no callback cast, punning, alias bridge or VFE relaxation is admitted.",
+      "withdrawn_source": "src/checkpoint16/func_001303a8.cpp",
+      "private_source": "scratch/integrator/c016/r2/withdrawn/func_001303a8.cpp",
+      "evidence": "scratch/integrator/c016/r2/F01-REMEDIATION.json",
+      "prior_byte_match": "Historical c016 MATCH is retained privately; it is not source/type-contract acceptance."
+    },
+    {
+      "function": "func_001387f4",
+      "target_bytes": 152,
+      "status": "uncredited-NEW-hold",
+      "component": "c016-r2",
+      "group": "F01-CURSOR-PRIMITIVE-CUTOVER",
+      "category": "coherent-cursor-model-requires-forbidden-legacy-punning-reopening",
+      "author": "tu491",
+      "reason": "A coherent 0x00242fc8 command-buffer cursor model and the native ResPrimitive caller/provider cutover require reopening the accepted union-punning bodies func_00114778 and func_001147c0. Those bodies must remain unchanged; reopening without a complete lawful matrix/command owner repair is not certifiable. The transaction is documented held-contract residue; no callback cast, punning, alias bridge or VFE relaxation is admitted.",
+      "withdrawn_source": "src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp",
+      "private_source": "scratch/integrator/c016/r2/withdrawn/gfx_ResPrimitive__SetupDrawCommand.cpp",
+      "evidence": "scratch/integrator/c016/r2/F01-REMEDIATION.json",
+      "prior_byte_match": "Historical c016 MATCH is retained privately; it is not source/type-contract acceptance."
     }
   ],
   "catalogue_version": "v16",
@@ -577,14 +570,14 @@
     }
   ],
   "totals": {
-    "new_functions": 10,
-    "new_bytes": 2216,
+    "new_functions": 5,
+    "new_bytes": 1008,
     "in_place_revised_accepted_units": 10,
-    "native_moved_accepted_units": 1,
-    "accepted_moves": 1,
-    "moved_bytes": 240,
-    "holds": 10,
-    "held_bytes": 1924
+    "native_moved_accepted_units": 0,
+    "accepted_moves": 0,
+    "moved_bytes": 0,
+    "holds": 15,
+    "held_bytes": 3132
   },
   "denominator_history_version": 13,
   "intake_scope_final": true,
@@ -596,5 +589,13 @@
     "nc04",
     "nc05",
     "nc06"
-  ]
+  ],
+  "checkpoint_target": "c016-r2",
+  "failed_predecessor": {
+    "checkpoint": "c016",
+    "source_baseline": "7b13d779f37053b01a79fc5d4135385f65c783ec",
+    "review_registration_main": "b29069ff",
+    "finding": "codex-b F01 (P1), one published cursor object exposed through incompatible byte/word pointer declarations",
+    "remediation": "Main-authorized fallback including001387f4; no native move or partial primitive transaction remains."
+  }
 }
