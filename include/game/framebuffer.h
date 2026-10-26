@@ -27,6 +27,19 @@ struct DisplayMemoryLayout {
     unsigned upper_format;
 };
 
+/* [INFERENCE] Resource roles are unrecovered; initialization fixes their widths. */
+struct ResourceCollectionEntry {
+    void *object;
+    unsigned first, second, third;
+};
+struct FramebufferState {
+    unsigned reserved00;
+    unsigned char active;
+    unsigned char reserved05[3];
+    unsigned mode;
+    struct ResourceCollectionEntry entries[4];
+};
+
 struct FramebufferResource {
     const void *vtable;
     void *allocator;
@@ -112,6 +125,7 @@ extern int func_00185fc0(unsigned channel, unsigned command, const void *buffer,
 extern int func_00142d74(unsigned expected, unsigned *output_value);
 extern int func_00142fa4(void *buffer, unsigned size);
 extern void *func_00142a54(void *storage);
+extern void func_0010b598(struct FramebufferState *collection);
 #ifdef __cplusplus
 }
 #endif

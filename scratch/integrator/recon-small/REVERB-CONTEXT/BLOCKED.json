@@ -1,0 +1,21 @@
+{
+  "family": "REVERB-CONTEXT",
+  "status": "blocked",
+  "reason": "The accepted Finalize is already the real nw::snd::FxReverb provider, but the target/caller still use a competing ResourceCleanup/CompositeResource byte-overlay owner inside opaque LargeResourceElement. A genuine FxReverb destructor/containing-object lifetime and external table/key transaction is not established; keeping the C facade or container-of casts would violate the single-owner rule.",
+  "members": [
+    "func_001d28f4"
+  ],
+  "member_bytes": 120,
+  "evidence": [
+    "src/checkpoint10/collect-r2/func_001d273c.cpp:11-28",
+    "include/nw/snd/snd_FxReverb.h:65-74,90-123",
+    "include/nw/snd/snd_FxBase.h:19-29",
+    "include/game/resource_cleanup.h:23-49",
+    "include/game/waitable_handle.h:25-34",
+    "src/wave20/func_001c3100.cpp:7-16",
+    "scratch/authors/nf260/src/func_001d273c.cpp:22-36"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

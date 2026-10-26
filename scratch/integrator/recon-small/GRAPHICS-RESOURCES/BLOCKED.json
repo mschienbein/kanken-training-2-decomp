@@ -1,0 +1,18 @@
+{
+  "family": "GRAPHICS-RESOURCES",
+  "status": "blocked",
+  "reason": "The target treats every +0x10..+0x30 slot as CleanupElement*, but the canonical root distinguishes renderer, scalar words and GraphicsResource pointers. The accepted initializer only zeroes the middle words and does not prove their nonzero producers/types or exact release providers. No all-pointer array or unrelated cleanup receiver is admitted.",
+  "members": [
+    "func_00104804"
+  ],
+  "member_bytes": 548,
+  "evidence": [
+    "include/game/graphics_resources.h:9-15,44-56",
+    "src/wave18/func_0010608c.c:6-12",
+    "src/large/func_00108f94.cpp:8-14",
+    "scratch/authors/r4018/src/func_00104804.cpp:19-31,39-46,57-66"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

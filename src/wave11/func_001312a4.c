@@ -11,8 +11,8 @@ void func_001312a4(struct ObjectManager *manager)
     struct StreamLockGuard guard;
     guard.mutex = &manager->lock;
     func_00192bd8(guard.mutex);
-    manager->field1b8 = 0;
-    manager->field1bc = 0;
-    manager->field1c0 = 0;
+    manager->samples = 0;
+    manager->capacity = 0;
+    manager->count = 0;
     release_guard(&guard);
 }

@@ -1,0 +1,118 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_001730ec/func_001730ec_removed.c",
+ "source_sha256": "f6923a716e18478f645eb13d884d9d4cd669853b37c46eb5201cf33f7a64eff6",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "e83441360f49a42f95d9e6fa192fe8ea390d9cb62e07facd02ffcfdf5a645258",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "8fbf9c14089dc98e25a4dd918f47f08ee0bb032c16c4e06917ad85028681f3ee",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_001730ec/item_accessors.c",
+   "source_sha256": "20a24ba5b27884993c2928a44375404af0e592cd06a7cb4352fd25ff3cee9d33",
+   "object_sha256": "4f5620a9449331d5a890a3250203b0685f210b1ceb3fbc160dd7da184619a76d"
+  },
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models2/counted_resources/func_001e5d38.cpp",
+   "source_sha256": "0ee23d5d31d45342ac133fc889e6d98082c1a3a396ab98c7d34ef35a2d06a66f",
+   "object_sha256": "71f1b1336411eb7b3a90730becdd14a5dab7db40daa277f6fd33c9e76061d3d4"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "w19_item_category"
+   ],
+   "section": "i.w19_item_category",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0766/extra-0-item_accessors.o"
+  },
+  {
+   "symbols": [
+    "w19_item_value"
+   ],
+   "section": "i.w19_item_value",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0766/extra-0-item_accessors.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001730ec",
+   "address": 1519852,
+   "size": 116,
+   "candidate_size": 116,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 64,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d000d6",
+     "removed_callee": {
+      "symbols": [
+       "w19_item_category"
+      ],
+      "section": "i.w19_item_category",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0766/extra-0-item_accessors.o"
+     }
+    },
+    {
+     "offset": 84,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe590000c",
+     "removed_callee": {
+      "symbols": [
+       "w19_item_value"
+      ],
+      "section": "i.w19_item_value",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0766/extra-0-item_accessors.o"
+     }
+    }
+   ]
+  },
+  {
+   "name": "func_001e5d38",
+   "address": 1989944,
+   "size": 116,
+   "candidate_size": 116,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 64,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d000d6",
+     "removed_callee": {
+      "symbols": [
+       "w19_item_category"
+      ],
+      "section": "i.w19_item_category",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/fold-recon-small/closure-r1/u0766/extra-0-item_accessors.o"
+     }
+    }
+   ]
+  }
+ ]
+}

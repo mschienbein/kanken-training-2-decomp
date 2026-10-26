@@ -2,6 +2,42 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-26 — c015 accepted (+31 functions); held-contract residue ruling
+
+**Accepted:** 2,827 functions / 309,728 B (seq 14: … c012-r6, c015). Denominator **v16** (history v13):
+4,545 creditable functions / 1,120,082 B (**27.65%**). Gates **v1.20**.
+
+- **c015** adds 31 functions / 4,720 B. Their sources:
+  - 19 harvested author matches with canonical headers;
+  - 7 from reconciled contract families;
+  - 4 from small independent families;
+  - 1 post-ladder revisit match.
+
+  6 accepted units are revised byte-identically. Both reviews are PASS_WITH_QUALIFICATIONS with no findings.
+  Known issues: `docs/known-issues-c015.md`.
+- **User ruling** (`docs/rulings/2026-10-25-held-contract-residue.md`): functions whose bodies match but whose
+  source contracts cannot be reconciled with the accepted code under the standing rules are
+  **documented residue**.
+  - At residue draft r15 that is 458 functions / 103,548 B.
+  - 389 of them lack evidence (owner identities, ABIs, key-function owners) that no ruling could
+    supply.
+  - The offered relaxations were declined: equivalent callback casts, punning waivers, and a VFE
+    null-vtable-cell linker model.
+- **Reconciliation attempted before the ruling:**
+  - contract waves W1 and W3 landed in c016; W2's ownership gate failed;
+  - surveys of native classes and of the c012 holds;
+  - scene/menu and font native-class migrations.
+  - Real C++ member pointers and native font classes match in function code. The migrations stopped
+    on unrecoverable key-function owners and null vtable cells, so they earned no new credit.
+- **Residue table generator:** `ruled_residue` comes only from machine-readable ruling companions;
+  review r4 failed on prose grants and r5 passed. Permuter sweeps 12 and 13 are ingested.
+- **Post-ladder revisits:** FixedSizeArray alignment 4/37; blind 1/96; destructor-tail 0/36; new
+  contracts 0/54. This confirms the exhausted classifications.
+- **In progress:**
+  - c016: about 10 new functions (FixedSizeArray alignment fix, waves W1 and W3, held fixes);
+  - the last 17 permuter rows;
+  - the final STATUS residue table.
+
 ## 2026-10-25 (late evening) — catalogue v16 adopted (`_ZdaPv`); 16 subagents
 
 **Accepted:** 2,796 functions / 305,008 B (seq 13, unchanged). Denominator **v16** (history v13):

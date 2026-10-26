@@ -175,3 +175,47 @@ native C and C++ execution comparisons. The C regressions remain in `test_permut
 Compiler tests skip without the pinned compiler/launcher; image tests
 also skip without private `orig/code.bin` and `orig/exheader.bin`. All temporary artifacts stay
 in `scratch/`; no full build or full test suite is required.
+
+## Residue accounting
+
+`tools/residue.py --root . --revision N` joins metadata only and writes immutable
+`scratch/integrator/residue/RESIDUE-rN.json` and `.md` drafts. The Markdown is one
+STATUS-ready section: accepted/pending/class totals, per-class function tables,
+and the carried catalogue unknown ranges/anomaly. Unknown evidence must match
+the current catalogue intervals exactly; the anomaly overlaps an unknown range
+and is not counted twice. Documentation under the unresolved-bytes ruling grants
+no byte credit or classification.
+
+`ruled_residue` requires a structured user-ruling hold and a JSON companion beside
+its existing ruling Markdown (`docs/rulings/<name>.json` and `<name>.md`). The
+companion must contain integer `schema_version: 1`, the exact Markdown `ruling`
+path, `decided_by: "user"`, `decision: "documented_residue"` and a nonempty,
+duplicate-free `functions` list of exact current creditable names. Missing fields,
+unknown functions, other decision values, a missing Markdown file or a non-user
+hold grant nothing. Prose is never parsed for a grant. Both files are hash-bound;
+optional structured `best_library_leads` labels supply display metadata only.
+The Markdown path remains in `resolved_policy_question_by`; the companion's exact
+function pointer supplies grant evidence. This resolves policy, not search rungs.
+Open policy questions remain `awaits_user_ruling`. Optional
+recon/survey/wave/dispatch dispositions add hash-bound exact-blocker pointers,
+never a new hold, acceptance, rung completion, or class change.
+
+The sweep-10 summary is required; sweep-11, sweep-12 and sweep-13 summaries are
+optional, hash-bound step-4 inputs. Their frozen `INPUTS.json` metadata is also
+bound when present; a summary's declared input path/hash must match it, and both
+policies must retain the frozen 32 B cap. A current-extent `plateau`, `exhausted` or `match`
+records completed search. An explicit current-extent `adapter_refused` gives
+step 4 a boundary disposition, not a search. Pending/planned or stale-extent
+records never complete the rung; all sweeps use the same frozen 32 B cap.
+
+`tools/census_supplements.py --root .` is the canonical supplement builder; the
+private `scratch/integrator/census-supplements/build.py` delegates to it. Explicit
+Main batches for rungs 1–3 still need delivered, current-extent target RESULT
+rows and batch/RESULT hash bindings. rv01–rv12, fx01–fx05 and dt01–dt04 are
+supplemental revisits only; fs10 is an explicit step-2 witness. Run the focused
+metadata tests with `.venv/bin/python -m unittest tests.test_residue`.
+Historical supplement witnesses for a now non-C function are retained separately,
+not silently dropped or credited: the current catalogue must carry the exact
+same identity/extent and explicit non-C classification evidence, and the original
+Main batch, delivered target row and hash bindings are still verified. Unknown,
+unclassified, changed-extent or unverifiable identities remain fatal.

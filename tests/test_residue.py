@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import residue  # noqa: E402
+import census_supplements  # noqa: E402
 
 
 class ResidueTest(unittest.TestCase):
@@ -335,6 +336,113 @@ class ResidueTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.report()
 
+    def test_sweep12_dispositions_are_hash_bound_extent_scoped_and_not_plans(self) -> None:
+        label = "scratch/permute/sweep-12/summary.json"
+        self.assertIn(label, self.report()["absent_optional_inputs"])
+        self.census(list(range(3, 16)), ["initial", "2", "3"])
+        self.author("w02", [self.row(index, 12) for index in range(3, 16)])
+        rows = {
+            self.names[3]: {"size": 32, "state": "plateau"},
+            self.names[4]: {"size": 32, "state": "exhausted"},
+            self.names[5]: {"size": 32, "state": "match"},
+            self.names[6]: {"size": 32, "state": "adapter_refused"},
+            self.names[7]: {"size": 32, "state": "pending"},
+            self.names[8]: {"size": 32, "state": "planned_adapter_refusal"},
+            self.names[9]: {"size": 28, "state": "adapter_refused"},
+            self.names[10]: {"state": "adapter_refused"},
+            self.names[11]: {"size": 32, "state": "adapter_refused",
+                            "final_functions": [self.row(11, 6, size=28)]},
+            self.names[12]: {"size": 32, "state": "plateau",
+                            "applicability": {"residual_evidence": {"target_size": 28}}},
+            self.names[13]: {"size": 32, "state": "not_applicable_operational_boundary",
+                            "stop_reason": "source_bound_residual_above_32_differing_bytes"},
+            self.names[14]: {"size": 32, "state": "pending",
+                            "stop_reason": "adapter_refused planned; no completed attempt"},
+            self.names[15]: {"state": "plateau",
+                            "applicability": {"residual_evidence": {"target_size": 32}}}}
+        self.put(label, {"policy": {"operational_differing_byte_cap": 32}, "rows": rows})
+        report = self.report()
+        self.assertEqual(report["input_hashes"][label], residue.digest((self.root / label).read_bytes()))
+        by_name = {row["function"]: row for row in report["rows"]}
+        for index in (3, 4, 5, 15):
+            row = by_name[self.names[index]]
+            self.assertTrue(row["ladder"]["4"]["completed"])
+            self.assertTrue(row["permuter"]["search_completed"])
+            self.assertEqual(row["permuter"]["disposition"], "completed")
+            self.assertIn("sweep-12", row["ladder"]["4"]["attempted_batches"])
+            self.assertEqual(row["status_class"], "near_miss_exhausted")
+        refused = by_name[self.names[6]]
+        self.assertTrue(refused["ladder"]["4"]["completed"])
+        self.assertFalse(refused["permuter"]["search_completed"])
+        self.assertEqual(refused["permuter"]["disposition"], "adapter_refused")
+        self.assertTrue(refused["permuter"]["boundary_not_search"])
+        for index in range(7, 15):
+            row = by_name[self.names[index]]
+            self.assertIn("4", row["missing_steps"])
+            self.assertIsNone(row["permuter"]["disposition"])
+            self.assertEqual(row["status_class"], "ladder_incomplete")
+        self.assertEqual(by_name[self.names[13]]["permuter"]["state"], "reopened_inside_bound")
+        for index in (9, 10, 11, 12):
+            self.assertTrue(by_name[self.names[index]]["stale_extent_evidence"])
+
+    def test_sweep12_cannot_override_the_frozen_permuter_cap(self) -> None:
+        label = "scratch/permute/sweep-12/summary.json"
+        for cap in (16, 64, None, True):
+            with self.subTest(cap=cap):
+                self.put(label, {"policy": {"operational_differing_byte_cap": cap}, "rows": {}})
+                with self.assertRaisesRegex(ValueError, "frozen 32 B"):
+                    self.report()
+
+    def test_sweep13_binds_frozen_inputs_and_preserves_pending_and_refusal_rules(self) -> None:
+        label = "scratch/permute/sweep-13/summary.json"
+        inputs = "scratch/permute/sweep-13/INPUTS.json"
+        self.census([3, 4, 5, 6, 7, 8], ["initial", "2", "3"])
+        self.author("w02", [self.row(index, 12) for index in (3, 4, 5, 6, 7)] + [self.row(8, 80)])
+        self.put(inputs, {"policy": {"operational_differing_byte_cap": 32},
+                          "assignment_rows": [{"function": self.names[index]} for index in range(3, 9)]})
+        self.put(label, {"policy": {"operational_differing_byte_cap": 32},
+                         "input_list": inputs, "input_list_sha256": residue.digest((self.root / inputs).read_bytes()),
+                         "rows": {
+                             self.names[3]: {"size": 32, "state": "pending"},
+                             self.names[4]: {"size": 32, "state": "adapter_refused"},
+                             self.names[5]: {"size": 28, "state": "adapter_refused"},
+                             self.names[6]: {"size": 32, "state": "plateau"},
+                             self.names[7]: {"size": 32, "state": "exhausted"},
+                             self.names[8]: {"size": 32, "state": "not_applicable_operational_boundary"}}})
+        report = self.report()
+        for source in (inputs, label):
+            self.assertEqual(report["input_hashes"][source], residue.digest((self.root / source).read_bytes()))
+        by_name = {row["function"]: row for row in report["rows"]}
+        for index in (3, 5):
+            self.assertEqual(by_name[self.names[index]]["status_class"], "ladder_incomplete")
+        refused = by_name[self.names[4]]
+        self.assertEqual(refused["permuter"]["disposition"], "adapter_refused")
+        self.assertFalse(refused["permuter"]["search_completed"])
+        for index in (6, 7):
+            self.assertTrue(by_name[self.names[index]]["permuter"]["search_completed"])
+            self.assertIn("sweep-13", by_name[self.names[index]]["ladder"]["4"]["attempted_batches"])
+        above_bound = by_name[self.names[8]]
+        self.assertEqual(above_bound["permuter"]["disposition"], "not_applicable")
+        self.assertFalse(above_bound["permuter"]["search_completed"])
+        self.put(inputs, {"policy": {"operational_differing_byte_cap": 32}, "changed": True})
+        with self.assertRaisesRegex(ValueError, "hash binding"):
+            self.report()
+
+    def test_frozen_sweep_bindings_refuse_missing_inputs_and_wrong_caps(self) -> None:
+        for number in (11, 12, 13):
+            with self.subTest(sweep=number):
+                label = f"scratch/permute/sweep-{number}/summary.json"
+                inputs = f"scratch/permute/sweep-{number}/INPUTS.json"
+                self.put(label, {"policy": {"operational_differing_byte_cap": 32}, "rows": {},
+                                 "input_list": inputs, "input_list_sha256": "0" * 64})
+                with self.assertRaisesRegex(ValueError, "required metadata input missing"):
+                    self.report()
+                self.put(inputs, {"policy": {"operational_differing_byte_cap": 64}})
+                with self.assertRaisesRegex(ValueError, "frozen permuter cap"):
+                    self.report()
+                self.put(label, {"policy": {"operational_differing_byte_cap": 32}, "rows": {}})
+                (self.root / inputs).unlink()
+
     def test_census_identity_reconciliation_preserves_mapping_gaps(self) -> None:
         self.put("scratch/integrator/census-20261021-r3/LADDER.json", {
             "rows": [
@@ -617,7 +725,7 @@ class ResidueTest(unittest.TestCase):
         self.author("w01", [self.row(9, 20)])
         for cap in (16, 64, 0, None, True):
             with self.subTest(cap=cap):
-                for sweep in ("sweep-10", "sweep-11"):
+                for sweep in ("sweep-10", "sweep-11", "sweep-12", "sweep-13"):
                     self.put(f"scratch/permute/{sweep}/summary.json", {
                         "policy": {"operational_differing_byte_cap": cap}, "rows": {}})
                 with self.assertRaises(ValueError):
@@ -830,6 +938,414 @@ class ResidueTest(unittest.TestCase):
 
     def test_missing_required_metadata_refuses_instead_of_silent_empty_residue(self) -> None:
         (self.root / "scratch/integrator/census-20261021-r3/LADDER.json").unlink()
+        with self.assertRaisesRegex(ValueError, "required metadata input missing"):
+            self.report()
+
+    def ruling(self, index: int, decision: str = "documented_residue",
+               stem: str = "2026-10-25-runtime-residue") -> str:
+        label = f"docs/rulings/{stem}.md"
+        self.put(label, f"# Runtime decision\n\n**Decision (user, 2026-10-25).** "
+                 f"The functions below stay documented residue.\n\n"
+                 "| Function | Size | Best lead |\n|---|---:|---|\n"
+                 f"| `{self.names[index]}` | 32 | `_runtime_helper` |\n")
+        self.put(label.removesuffix(".md") + ".json", {
+            "schema_version": 1, "ruling": label, "decided_by": "user",
+            "decision": decision, "functions": [self.names[index]],
+            "best_library_leads": {self.names[index]: "_runtime_helper"}})
+        return label
+
+    def ruling_hold(self, index: int = 5) -> None:
+        self.put(residue.USER_RULING_HOLDS, {"holds": [
+            {"function": self.names[index], "size": 32, "awaits_user_ruling": True,
+             "reason": "No frozen Thumb profile; user ruling required"}]})
+
+    def test_named_explicit_residue_ruling_resolves_only_the_policy_hold(self) -> None:
+        label = self.ruling(5)
+        self.ruling_hold()
+        report = self.report()
+        row = next(row for row in report["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "ruled_residue")
+        self.assertEqual(row["resolved_policy_question_by"], [label])
+        self.assertFalse(any(hold["awaits_user_ruling"] for hold in row["holds"]))
+        self.assertEqual(row["holds"][0]["resolved_policy_question_by"], [label])
+        self.assertEqual(row["ruled_residue_evidence"][0]["best_library_lead"], "_runtime_helper")
+        self.assertEqual(row["missing_steps"], list(residue.REQUIRED_STEPS))
+        self.assertFalse(any(row["ladder"][step]["completed"] for step in residue.REQUIRED_STEPS))
+        self.assertEqual(row["actionable_items"], [])
+        self.assertNotIn(self.names[5], [r["function"] for r in report["incomplete_ladder"]])
+        self.assertIn(label, report["input_hashes"])
+        companion = label.removesuffix(".md") + ".json"
+        self.assertIn(companion, report["input_hashes"])
+        self.assertEqual(row["ruled_residue_evidence"][0]["evidence"], companion + "#/functions/0")
+        self.assertTrue(row["holds"][0]["user_ruling_hold"])
+
+    def test_residue_companion_must_list_the_held_function(self) -> None:
+        label = self.ruling(6)
+        self.ruling_hold()
+        self.put(label, (self.root / label).read_text() + f"\nUnrelated mention of {self.names[5]}.\n")
+        row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "awaits_user_ruling")
+        self.assertEqual(row["resolved_policy_question_by"], [])
+
+    def test_negative_companion_decisions_leave_the_policy_question_open(self) -> None:
+        self.ruling_hold()
+        for decision in ("not_documented_residue", "undecided", "not allowed to remain documented residue"):
+            with self.subTest(decision=decision):
+                self.ruling(5, decision)
+                row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+                self.assertEqual(row["status_class"], "awaits_user_ruling")
+                self.assertFalse(row["ruled_residue_evidence"])
+                self.assertEqual(row["resolved_policy_question_by"], [])
+
+    def test_residue_ruling_does_not_resolve_an_unrelated_contract_or_resource_hold(self) -> None:
+        self.ruling(5)
+        self.author("nm01", [self.row(5, 0, status="match", integration_needs=["native owner contract"])])
+        self.put("scratch/integrator/escalation/LEDGER.json", {"functions": [
+            {"function": self.names[5], "size": 32, "blockers": [
+                {"category": "user-input", "detail": "User-supplied archive missing"}]}]})
+        row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "held_contract")
+        self.assertEqual(row["resolved_policy_question_by"], [])
+        self.assertFalse(row["ruled_residue_evidence"])
+
+    def test_residue_companion_requires_every_field_and_only_known_functions(self) -> None:
+        self.ruling_hold()
+        fields = ("schema_version", "ruling", "decided_by", "decision", "functions")
+        invalid = (
+            {"schema_version": True}, {"schema_version": 2}, {"decided_by": "assistant"},
+            {"ruling": "docs/rulings/other.md"}, {"functions": [self.names[5], "func_00ffffff"]},
+            {"functions": [self.names[1]]}, {"functions": [self.names[5], self.names[5]]},
+            {"functions": self.names[5]}, {"functions": []}, {"functions": [None]})
+        for change in (*fields, *invalid):
+            with self.subTest(change=change):
+                label = self.ruling(5).removesuffix(".md") + ".json"
+                companion = json.loads((self.root / label).read_bytes())
+                if isinstance(change, str):
+                    del companion[change]
+                else:
+                    companion.update(change)
+                self.put(label, companion)
+                row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+                self.assertEqual(row["status_class"], "awaits_user_ruling")
+                self.assertFalse(row["ruled_residue_evidence"])
+
+    def test_residue_companion_cannot_grant_without_its_named_markdown(self) -> None:
+        label = self.ruling(5)
+        self.ruling_hold()
+        (self.root / label).unlink()
+        report = self.report()
+        row = next(row for row in report["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "awaits_user_ruling")
+        self.assertEqual(row["resolved_policy_question_by"], [])
+        self.assertIn(label, report["absent_optional_inputs"])
+        self.assertIn(label.removesuffix(".md") + ".json", report["input_hashes"])
+
+    def test_two_companions_do_not_transfer_one_decision_to_another(self) -> None:
+        approved = self.ruling(5, stem="approved")
+        undecided = self.ruling(6, decision="undecided", stem="undecided")
+        self.put(residue.USER_RULING_HOLDS, {"holds": [
+            {"function": self.names[index], "size": 32} for index in (5, 6)]})
+        by_name = {row["function"]: row for row in self.report()["rows"]}
+        self.assertEqual(by_name[self.names[5]]["status_class"], "ruled_residue")
+        self.assertEqual(by_name[self.names[5]]["resolved_policy_question_by"], [approved])
+        self.assertEqual(by_name[self.names[6]]["status_class"], "awaits_user_ruling")
+        self.assertNotIn(undecided, by_name[self.names[5]]["resolved_policy_question_by"])
+        self.assertEqual(by_name[self.names[6]]["resolved_policy_question_by"], [])
+
+    def test_negative_prose_without_a_companion_never_grants(self) -> None:
+        label = self.ruling(5)
+        (self.root / (label.removesuffix(".md") + ".json")).unlink()
+        self.put(label, "# Runtime decision\n\n**Decision (user).** "
+                 "The following functions are not allowed to remain documented residue.\n\n"
+                 "| Function | Size |\n|---|---:|\n"
+                 f"| {self.names[5]} | 32 |\n")
+        self.ruling_hold()
+        row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "awaits_user_ruling")
+        self.assertEqual(row["resolved_policy_question_by"], [])
+        self.assertEqual(row["actionable_items"], list(residue.REQUIRED_STEPS))
+
+    def test_later_decisions_and_non_function_prose_tables_cannot_grant(self) -> None:
+        label = self.ruling(5)
+        self.put(label, (self.root / label).read_text() +
+                 "\n**Decision (user).** The next functions are undecided.\n\n"
+                 "| Function | Size |\n|---|---:|\n"
+                 f"| {self.names[6]} | 32 |\n\n"
+                 "| Unrelated record | Size |\n|---|---:|\n"
+                 f"| {self.names[7]} | 32 |\n")
+        self.put(residue.USER_RULING_HOLDS, {"holds": [
+            {"function": self.names[index], "size": 32} for index in (5, 6, 7)]})
+        by_name = {row["function"]: row for row in self.report()["rows"]}
+        self.assertEqual(by_name[self.names[5]]["status_class"], "ruled_residue")
+        for index in (6, 7):
+            self.assertEqual(by_name[self.names[index]]["status_class"], "awaits_user_ruling")
+            self.assertFalse(by_name[self.names[index]]["ruled_residue_evidence"])
+
+    def test_ruling_companion_cannot_turn_a_prose_only_hold_into_a_user_ruling_hold(self) -> None:
+        self.ruling(5)
+        self.put("scratch/integrator/c010/contract-deferrals.json", [
+            {"function": self.names[5], "reason": "native owner awaits user ruling"}])
+        row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+        self.assertEqual(row["status_class"], "awaits_user_ruling")
+        self.assertFalse(any(hold["user_ruling_hold"] for hold in row["holds"]))
+        self.assertEqual(row["resolved_policy_question_by"], [])
+        self.assertFalse(row["ruled_residue_evidence"])
+
+    def test_optional_dispositions_bind_exact_blockers_without_changing_classes(self) -> None:
+        self.author("nm01", [self.row(5, 0, status="match", integration_needs=["native owner contract"]),
+                             self.row(6, 0, status="match"), self.row(7, 12)])
+        before = {r["function"]: r["status_class"] for r in self.report()["rows"]}
+        labels = [
+            "scratch/integrator/recon-small/FONT-SLOTS/BLOCKED.json",
+            "scratch/integrator/native-class-survey/SURVEY.json",
+            "scratch/integrator/held-native-survey/SURVEY.json",
+            "scratch/integrator/contract-waves/WAVES.json",
+            "scratch/integrator/dispatch-plan/TABLES.json",
+            "scratch/worktrees/scene-native/scratch/integrator/scene-native/FINAL-DISPOSITION.json",
+            "scratch/worktrees/scene-native/scratch/integrator/scene-native/VFE-CLASSIFICATION.json",
+            "scratch/worktrees/held-fixes/scratch/integrator/held-fixes/BLOCKED.json",
+            "scratch/worktrees/wave-w1/scratch/integrator/wave-w1/DISPOSITION.json",
+            "scratch/worktrees/wave-w2/scratch/integrator/wave-w2/WAVES-disposition.json",
+            "scratch/integrator/wave-w3/family/BLOCKED.json"]
+        shapes = [
+            {"members": [self.names[5], self.names[6]], "reason": "PRIVATE_BLOCKER native receiver missing"},
+            {"families": [{"held_members": [{"function": self.names[5], "bytes": 32}],
+                           "exact_missing_evidence_or_source_residual": ["PRIVATE_BLOCKER native owner"]}]},
+            {"groups": [{"functions": [self.names[5]], "missing": "PRIVATE_BLOCKER callback contract"}]},
+            {"stable_residue_candidates": [{
+                "source_evidence_references": ["scratch/authors/nm01/RESULT.json#/functions/0"],
+                "blocker": "PRIVATE_BLOCKER exact owner missing"}]},
+            {"families": [{"members": [{"function": self.names[5]}],
+                           "other_contract_prerequisites": "PRIVATE_BLOCKER owner contract"}]},
+            {"targets": [{"function": self.names[5], "target_bytes": 32, "reason": "PRIVATE_BLOCKER"}]}]
+        for index, label in enumerate(labels):
+            self.put(label, shapes[min(index, len(shapes) - 1)])
+        report = self.report()
+        by_name = {r["function"]: r for r in report["rows"]}
+        self.assertEqual(before, {name: row["status_class"] for name, row in by_name.items()})
+        held = by_name[self.names[5]]
+        for label in labels:
+            self.assertIn(label, report["input_hashes"])
+            self.assertTrue(any(d["evidence"].startswith(label + "#") for d in held["disposition_evidence"]), label)
+        for index in (6, 7):
+            self.assertFalse(by_name[self.names[index]]["disposition_evidence"])
+        self.assertNotIn("PRIVATE_BLOCKER", residue.canonical(report).decode())
+        self.assertIn(labels[7], residue.markdown(report))  # Latest worktree pointers precede older surveys.
+        self.assertIn("disposition_evidence", residue.canonical(report).decode())
+
+    def test_disposition_scope_is_exact_and_stale_member_extents_are_excluded(self) -> None:
+        self.author("nm01", [self.row(5, 0, status="match", integration_needs=["native owner contract"]),
+                             self.row(6, 0, status="match", integration_needs=["native owner contract"])])
+        label = "scratch/integrator/native-class-survey/SURVEY.json"
+        self.put(label, {"families": [
+            {"held_members": [{"function": self.names[5], "bytes": 28}],
+             "exact_missing_evidence_or_source_residual": ["wrong old extent"]},
+            {"held_members": [self.names[6]], "reason": "native owner missing"},
+            {"reason": f"Unscoped prose mentions {self.names[5]}"}]})
+        by_name = {r["function"]: r for r in self.report()["rows"]}
+        self.assertFalse(by_name[self.names[5]]["disposition_evidence"])
+        self.assertTrue(by_name[self.names[5]]["stale_extent_evidence"])
+        self.assertEqual(len(by_name[self.names[6]]["disposition_evidence"]), 1)
+
+    def test_wave_family_dispositions_use_hash_bound_exact_family_members(self) -> None:
+        self.author("nm01", [self.row(5, 0, status="match", integration_needs=["native owner contract"]),
+                             self.row(6, 0, status="match", integration_needs=["native owner contract"])])
+        scope = "scratch/integrator/contract-plan/FAMILIES.json"
+        label = "scratch/integrator/contract-waves/WAVES.json"
+        self.put(scope, {"families": [
+            {"family_id": "RESOURCE-BASE", "members": [{"function": self.names[5], "size": 32}]}]})
+        self.put(label, {"input_hashes": {scope: residue.digest((self.root / scope).read_bytes())},
+                         "gated_package_residue_candidates": [
+                             {"family_id": "RESOURCE-BASE", "functions": 1, "blocker": "Actual owner proof missing"}]})
+        local = "scratch/worktrees/wave-w2/scratch/integrator/wave-w2/WAVES-disposition.json"
+        self.put(local, {"slices": [{"planned_functions": [self.names[5]],
+                                    "blocker": "Exact gate failed", "final_disposition": "residue"}]})
+        report = self.report()
+        by_name = {r["function"]: r for r in report["rows"]}
+        evidence = by_name[self.names[5]]["disposition_evidence"]
+        self.assertTrue(any(d["evidence"] == label + "#/gated_package_residue_candidates/0/blocker"
+                            and d["scope"] == scope + "#/families/0/members/0" for d in evidence))
+        self.assertTrue(any(d["evidence"] == local + "#/slices/0/blocker" for d in evidence))
+        self.assertFalse(by_name[self.names[6]]["disposition_evidence"])
+        self.put(scope, {"families": []})
+        with self.assertRaisesRegex(ValueError, "hash binding"):
+            self.report()
+
+    def test_builder_covers_all_today_revisits_without_completing_rungs(self) -> None:
+        for batch in sorted(residue.REVISIT_BATCHES):
+            self.author(batch, [self.row(5, 6)])
+            self.put(f"scratch/integrator/batches/{batch}.json", {
+                "created_by": "Main", "step": "targeted revisit",
+                "functions": [self.names[5]]})
+        self.author("fs10", [self.row(6, 8)])
+        self.put("scratch/integrator/batches/fs10.json", {
+            "created_by": "Main", "step": "2", "functions": [{"function": self.names[6]}]})
+        path, summary = census_supplements.build(self.root)
+        self.assertEqual(summary["by_step"], {"1": 0, "2": 1, "3": 0})
+        self.assertEqual(summary["revisit_witnesses"], 21)
+        self.assertIsNotNone(path)
+        document = json.loads(path.read_bytes())
+        self.assertEqual(len(document["input_sha256"]), 44)
+        by_name = {r["function"]: r for r in self.report()["rows"]}
+        revisit = by_name[self.names[5]]
+        self.assertEqual({r["batch"] for r in revisit["supplemental_revisits"]}, residue.REVISIT_BATCHES)
+        self.assertFalse(any(revisit["ladder"][step]["completed"] for step in residue.AUTHOR_STEPS))
+        self.assertTrue(by_name[self.names[6]]["ladder"]["2"]["completed"])
+        original = path.read_bytes()
+        self.assertIsNone(census_supplements.build(self.root)[0])
+        self.assertEqual(path.read_bytes(), original)
+
+    def test_builder_rejects_non_main_context_untargeted_and_stale_revisit_rows(self) -> None:
+        for index, extra in enumerate((
+                {"created_by": "not Main"},
+                {"status": "context_match"},
+                {"targets": [self.names[6]]},
+                {"size": 28},
+                {"residual": {"target_size": 28, "differing_bytes": 6}}), 1):
+            batch = f"rv{index:02d}"
+            self.author(batch, [self.row(5, 6, **{k: v for k, v in extra.items()
+                                               if k in ("status", "size", "residual")})])
+            self.put(f"scratch/integrator/batches/{batch}.json", {
+                "created_by": extra.get("created_by", "Main"), "step": "targeted revisit",
+                "functions": extra.get("targets", [self.names[5]])})
+        self.assertIsNone(census_supplements.build(self.root)[0])
+
+    def test_revisit_supplement_refuses_changed_hashes_and_wrong_batch_steps(self) -> None:
+        self.author("rv01", [self.row(5, 6)])
+        batch_path = "scratch/integrator/batches/rv01.json"
+        self.put(batch_path, {"created_by": "Main", "step": "post-ladder revisit",
+                              "functions": [self.names[5]]})
+        path, _ = census_supplements.build(self.root)
+        original = json.loads(path.read_bytes())
+        self.put("scratch/authors/rv01/RESULT.json", {"functions": [self.row(5, 7)]})
+        with self.assertRaisesRegex(ValueError, "hash"):
+            self.report()
+        self.put("scratch/authors/rv01/RESULT.json", {"functions": [self.row(5, 6)]})
+        self.put(batch_path, {"created_by": "Main", "step": "2", "functions": [self.names[5]]})
+        original["input_sha256"][batch_path] = residue.digest((self.root / batch_path).read_bytes())
+        self.put(path.relative_to(self.root).as_posix(), original)
+        with self.assertRaisesRegex(ValueError, "revisit"):
+            self.report()
+
+    def retire_supplement_target(self) -> None:
+        catalogue = json.loads((self.root / "config/catalogue.json").read_bytes())
+        catalogue["functions"][9].update({
+            "kind": "library", "classification_evidence": {
+                "function": self.names[9], "size": 32, "kind": "library"}})
+        self.put("config/catalogue.json", catalogue)
+
+    def test_retired_supplement_keeps_verified_history_without_current_credit(self) -> None:
+        self.supplement()
+        self.retire_supplement_target()
+        report = self.report()
+        self.assertNotIn(self.names[9], [row["function"] for row in report["rows"]])
+        retired = report["retired_supplement_witnesses"]
+        self.assertEqual(retired, [{
+            "function": self.names[9], "size": 32, "current_kind": "library",
+            "evidence": "scratch/integrator/census-supplements/S01.json#/rows/0",
+            "witness_kind": "objective_completion",
+            "classification_evidence": "config/catalogue.json#/functions/9/classification_evidence",
+            "contributes_current_rung": False}])
+        self.assertEqual(report["denominator"]["functions"], 14)
+        self.assertEqual(report["accepted"]["functions"] + report["pending_checkpoint"]["functions"] +
+                         report["residue"]["functions"], 14)
+
+    def test_retired_supplements_still_refuse_unclassified_stale_or_unverified_witnesses(self) -> None:
+        original = json.loads((self.root / "config/catalogue.json").read_bytes())
+        label = "scratch/integrator/census-supplements/S01.json"
+        batch = "scratch/integrator/batches/fa90.json"
+        result = "scratch/authors/fa90/RESULT.json"
+        for change in ("unclassified", "wrong_identity", "extent", "non_main",
+                       "untargeted", "changed_hash", "stale_measurement", "absent"):
+            with self.subTest(change=change):
+                self.put("config/catalogue.json", original)
+                document = self.supplement()
+                self.retire_supplement_target()
+                catalogue = json.loads((self.root / "config/catalogue.json").read_bytes())
+                row = catalogue["functions"][9]
+                if change == "unclassified":
+                    del row["classification_evidence"]
+                elif change == "wrong_identity":
+                    row["classification_evidence"]["function"] = self.names[8]
+                elif change == "extent":
+                    row["size"] = row["classification_evidence"]["size"] = 28
+                elif change == "absent":
+                    catalogue["functions"].pop(9)
+                elif change in ("non_main", "untargeted"):
+                    self.put(batch, {"created_by": "Other" if change == "non_main" else "Main",
+                                     "step": "1",
+                                     "functions": [self.names[8] if change == "untargeted" else self.names[9]]})
+                    document["input_sha256"][batch] = residue.digest((self.root / batch).read_bytes())
+                elif change == "changed_hash":
+                    self.put(result, {"functions": [self.row(9, 7)]})
+                elif change == "stale_measurement":
+                    self.put(result, {"functions": [self.row(9, 6, residual={
+                        "target_size": 28, "differing_bytes": 6})]})
+                    document["input_sha256"][result] = residue.digest((self.root / result).read_bytes())
+                self.put("config/catalogue.json", catalogue)
+                self.put(label, document)
+                with self.assertRaises(ValueError):
+                    self.report()
+
+    def unknown_fixture(self) -> None:
+        catalogue = json.loads((self.root / "config/catalogue.json").read_bytes())
+        catalogue["ranges"] = [{"start": 0x10d3a8, "end": 0x10d3b0, "kind": "unknown"}]
+        catalogue["anomalies"] = [{"address": 0x10d2b8, "issue": "unexplained_function_bytes"}]
+        self.put("config/catalogue.json", catalogue)
+        self.put(residue.UNKNOWN_EVIDENCE, {
+            "intervals": [
+                {"id": "R03", "start": 0x1005fa, "end": 0x10060a, "size": 16,
+                 "verdict": "separate_library_function", "explanation": "Already classified library."},
+                {"id": "R07", "start": 0x10d3a8, "end": 0x10d3b0, "size": 8,
+                 "verdict": "genuinely_unresolved", "explanation": "No complete section | identity.\nNo entry proof."}],
+            "anomalies": [{"address": 0x10d2b8, "issue": "unexplained_function_bytes",
+                           "interval": "R07", "verdict": "genuinely_unresolved",
+                           "explanation": "Owner has eight unexplained bytes; same R07 hole."}]})
+        self.put(residue.UNKNOWN_REPORT, "| R07 | hole | 8 | Unresolved |\n| A01 | owner | 8 | Same hole |\n")
+        self.put(residue.UNKNOWN_RULING, "Documented irreducible unknowns count as resolved; no credit.\n")
+
+    def test_unknown_table_binds_only_current_unknowns_and_does_not_double_count_anomaly(self) -> None:
+        self.unknown_fixture()
+        report = self.report()
+        unknowns = report["catalogue_residue"]
+        self.assertEqual(unknowns["unknown_bytes"], 8)
+        self.assertEqual([row["id"] for row in unknowns["unknown_ranges"]], ["R07"])
+        self.assertEqual(unknowns["unknown_ranges"][0]["evidence"][0],
+                         residue.UNKNOWN_EVIDENCE + "#/intervals/1")
+        self.assertEqual(unknowns["anomalies"][0]["overlaps_unknown_range"], "R07")
+        self.assertEqual(unknowns["anomalies"][0]["size"], 8)
+        rendered = residue.markdown(report)
+        self.assertEqual(rendered.count("\n## "), 0)
+        self.assertTrue(rendered.startswith("## Residue accounting"))
+        self.assertIn("0x0010d2b8: unexplained_function_bytes", rendered)
+        self.assertIn("No complete section &#124; identity. No entry proof.", rendered)
+        self.assertIn("8 B in 1 ranges", rendered)
+        self.assertIn("already counted", rendered)
+        self.assertNotIn("R03:", rendered)
+        self.assertIn(residue.UNKNOWN_REPORT, report["input_hashes"])
+        for state in residue.CLASSES:
+            self.assertIn("### " + state, rendered)
+        for row in report["rows"]:
+            self.assertEqual(rendered.count("| `" + row["function"] + "` |"), 1)
+
+    def test_unknown_table_refuses_unbound_changed_or_undocumented_ranges(self) -> None:
+        self.unknown_fixture()
+        source = json.loads((self.root / residue.UNKNOWN_EVIDENCE).read_bytes())
+        for change in ("extent", "verdict", "report"):
+            with self.subTest(change=change):
+                self.unknown_fixture()
+                modified = json.loads(json.dumps(source))
+                if change == "extent":
+                    modified["intervals"][1]["end"] += 4
+                elif change == "verdict":
+                    modified["intervals"][1]["verdict"] = "padding"
+                else:
+                    self.put(residue.UNKNOWN_REPORT, "Missing exact interval table.\n")
+                self.put(residue.UNKNOWN_EVIDENCE, modified)
+                with self.assertRaises(ValueError):
+                    self.report()
+        self.unknown_fixture()
+        (self.root / residue.UNKNOWN_EVIDENCE).unlink()
         with self.assertRaisesRegex(ValueError, "required metadata input missing"):
             self.report()
 

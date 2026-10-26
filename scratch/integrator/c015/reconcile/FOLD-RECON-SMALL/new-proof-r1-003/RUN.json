@@ -1,0 +1,43 @@
+{
+  "source": "src/checkpoint15/optional-rv02/func_00122680.c",
+  "profile": "middleware",
+  "functions": [
+    "func_00122680"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint15/optional-rv02/func_00122680.c",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-003"
+  ],
+  "exit_code": 0,
+  "source_sha256": "78f11d04578b35cbdf4440d3b09f12b078e78048413d90c9259f6cdb4feaf896",
+  "receipt": "scratch/integrator/c015/reconcile/FOLD-RECON-SMALL/new-proof-r1-003/func_00122680.result.json",
+  "receipt_sha256": "112ea1b6d9c779a83f4cc43e42bf10ad41f203b861dc99aa3b7607730f367b72",
+  "statuses": [
+    {
+      "name": "func_00122680",
+      "address": 1189504,
+      "size": 264,
+      "candidate_size": 264,
+      "status": "match",
+      "first_diff": null
+    }
+  ],
+  "all_required_match": true,
+  "stdout": "MATCH    func_00122680 @ 0x122680 size 0x108/0x108\n",
+  "stderr": ""
+}

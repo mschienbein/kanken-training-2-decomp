@@ -1,0 +1,20 @@
+{
+  "family": "HWR-OUTPUT",
+  "status": "blocked",
+  "reason": "The output root is established, but it combines a full-width flags write with an accepted halfword mode update. A natural unsigned-word masked update changes accepted 0014a98c from 76 to 88 bytes; a natural two-halfword configuration subobject preserves 0014a98c but changes target 0014a9dc from 184 to 196 bytes. No type-punning, scalar alias, union view, byte cast or whole-output-record assignment is admitted.",
+  "evidence": [
+    "include/game/hwr_image.h:10-13",
+    "src/wave10/func_0014a98c.c:12",
+    "src/wave17/func_0017d9e0.c:10",
+    "scratch/authors/r41224/src/func_0014a9dc.c:28",
+    "scratch/integrator/recon-small/HWR-OUTPUT/word-flags-low-halfword-update/func_0014a98c.result.json",
+    "scratch/integrator/recon-small/HWR-OUTPUT/configuration-pair-assignment/hwr_output.result.json"
+  ],
+  "trial_exit_codes": [
+    1,
+    2,
+    0,
+    1
+  ],
+  "canonical_edits_retained": false
+}

@@ -1,0 +1,25 @@
+{
+  "family": "SLOT-BANK",
+  "status": "blocked",
+  "reason": "The actual ControlTriplet, MaskDimensions and InputRectangle/C initializer contracts can be selected without the unproved TouchBounds constructor alias, but the canonical C-bounds trial remains a 196-byte mismatch at +13 and a natural local-bounds trial is 184 versus 196 bytes. The original complete source atom also contains c015-reserved func_001b6c90. No alias or steering is admitted to recover the historical witness.",
+  "members": [
+    "func_001b4f58"
+  ],
+  "member_bytes": 196,
+  "evidence": [
+    "include/game/control_triplet.h:10-24",
+    "include/game/selection_collections.h:18-27",
+    "include/game/animation.h:94",
+    "src/wave1/func_001670e4.c",
+    "scratch/authors/nf036/src/controllers.cpp:71-99,240-253",
+    "scratch/integrator/recon-small/SLOT-BANK/canonical-c-bounds-provider/slot_bank.result.json",
+    "scratch/integrator/recon-small/SLOT-BANK/canonical-local-bounds/slot_bank_local_bounds.result.json",
+    "scratch/integrator/contract-plan/FAMILIES.json: SLOT-BANK reserved_source_atom_dependencies"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": [
+    1,
+    1
+  ]
+}

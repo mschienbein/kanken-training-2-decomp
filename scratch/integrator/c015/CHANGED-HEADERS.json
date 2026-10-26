@@ -1,0 +1,174 @@
+{
+  "base": "18efd7bb",
+  "source_commit": "14866d881",
+  "count": 15,
+  "headers": [
+    {
+      "path": "include/game/audio_dsp.h",
+      "sha256": "93b8d769300d4edf01e26f07b2c7a8faf9cf615f4232b095e6bc6788b74b6d0f",
+      "reason": "Declare the exact ServiceCoordinator five-short coefficient endpoint; body uses the real settings subobject.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/audio_tasks.h",
+      "sha256": "bbcad69ba4c2c7c85c0beaf92b7d4c45702100e8a1b803b6b4647307b7f41435",
+      "reason": "Embed canonical SignalState instead of signal words and centralize the original queue notification declaration.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/character_panel.h",
+      "sha256": "112a9185d618fec5e791407b0daeb2527b128f46506acbf285d8e1d772b73a0d",
+      "reason": "Publish CharacterPanel input/value entry with its canonical receiver.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/framebuffer.h",
+      "sha256": "d98b4c197ce2a41ce94ece327df4e192d2ece56e3d866adab42f733ede8eff92",
+      "reason": "Publish the evidenced FramebufferState and four16-byte resource records, not an alternative framebuffer view.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/geometry_resources.h",
+      "sha256": "5bfc3ced6e1b961779c8c7b7956e8f3e24bda40fd9fbf7efd815008b991fc40a",
+      "reason": "Publish the free shape cleanup wrapper only; native vertex cleanup is invoked through its real member declaration, not a C alias.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/graphics_state.h",
+      "sha256": "9df1fe4580947541354859ad4590404959328588c9e42a564248642eb357bc16",
+      "reason": "One GPU transfer wire record, template and queue type; expose GraphicsContext.commands as a true member and centralize transfer declarations.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/object_manager.h",
+      "sha256": "24c8244c6b24820b5034456d202bf466de41fef60b0e841c471aaefac44990ee",
+      "reason": "Expose actual callback/context members in reserved storage and exact void(void *) service provider.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/render_binding.h",
+      "sha256": "f99365df0c196c79d553374e66f6502acfdd0ce87ec4bb04ca9ef7126a3b790c",
+      "reason": "New shared complete/subobject lifetime definitions, opaque distinct table addresses and deleting-wrapper contract.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "sha256": "edd52edfaf7e8b3f9d377a1f2eabdec0354072e03014c51224335e48ae59c37a",
+      "reason": "Complete the six-handle MenuOptionGroup and publish the canonical WidgetController value setter.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/selection.h",
+      "sha256": "7d8aca00abb7b5ed23683d9a5d1840b3daf037fecd6eeac2be9c55923abd0d33",
+      "reason": "Complete W6Selector with its real eight-byte reference, without conflating it with DisplayHandle.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/service_state.h",
+      "sha256": "39e2bced5aac3386f7e044089c03cff619603cfefddad022da96870a22f5974a",
+      "reason": "Publish the exact CtrResult IPC endpoint with const input buffer and full-word flags.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/sound_pool.h",
+      "sha256": "12d47a7030d89404b8efd8733bc326c6e5028881399c5f3fc3686e928bf46f2d",
+      "reason": "New shared six-word ChannelBuffer layout and initialization endpoint.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/static_objects.h",
+      "sha256": "0dd5417393c037f7cec3317bf460c64d9f63faf235793bdedd1312718d3868a4",
+      "reason": "Centralize the exact CtrHandle copy sources, mutex object, startup entry and void(void *) cleanup callback.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/texture_coordinates.h",
+      "sha256": "28da781c27b36b10a0fae720094464eaef593a946af9d6cb57fb4868557a125e",
+      "reason": "New shared vector/orientation types and the three authored table/function declarations; unmatched companion receives no credit.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    },
+    {
+      "path": "include/game/wave_player.h",
+      "sha256": "f8eb645e8331351a2c83b8cf3d231bc23ec8aa2bebaf5caa17c2d38e4d4af824",
+      "reason": "Centralize the contiguous wave-player primary/registry/manager address-point group and opaque base table declaration.",
+      "evidence": [
+        "HEADER-CUTOVERS-FINAL.json",
+        "PRE-REVIEW.json",
+        "COMPLETE-SCOPE-r5.json",
+        "closure-r6/results.json"
+      ]
+    }
+  ],
+  "unchanged_during_interfaces": true,
+  "metadata_correction": "MANIFEST-SCOPE-CORRECTION.json"
+}

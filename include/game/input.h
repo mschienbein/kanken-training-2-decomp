@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "ctr/svc.h"
 #include "game/memory_arena.h"
+#include "game/input_memory.h"
 
 struct InputController;
 
@@ -14,11 +15,6 @@ struct InputCalibration {
     float scale, limit, offset[3];
 };
 
-struct ButtonRing;
-struct TouchRing;
-struct SensorRing;
-struct MotionRing;
-struct AuxiliaryInputRing;
 struct MotionInputVTable;
 struct TouchInputService {
     CtrHandle handle;
@@ -176,6 +172,11 @@ extern unsigned char data_00242c50[];
 extern struct InputController *func_00185044(void);
 extern void func_00137128(struct InputController *controller);
 extern int func_001137c4(struct InputService *service, const char *service_name);
+extern unsigned func_00121d28(unsigned *memory, unsigned *buttons, unsigned *touch,
+                             unsigned *sensor, unsigned *motion, unsigned *auxiliary);
+extern unsigned char data_00242c38;
+extern CtrResult func_0013672c(struct MappedMemoryBlock *block, CtrHandle handle,
+                              unsigned size, unsigned char read_only);
 extern struct InputCalibration *func_00113b90(struct InputCalibration *calibration);
 extern void func_001139e4(struct InputCalibration *calibration, int minimum, int maximum);
 extern float func_00113a34(const struct InputCalibration *calibration, int coordinate);

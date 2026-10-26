@@ -167,7 +167,10 @@ struct ResourceRegistrationState {
     unsigned short reservedd62;
     unsigned count;
 };
-struct MenuOptionGroup;
+/* [INFERENCE] This option group exposes the six caller-owned display handles. */
+struct MenuOptionGroup {
+    struct DisplayHandle *handles[6];
+};
 struct Screen;
 struct ScreenInitializationState;
 struct W8DisplaySet;
@@ -430,6 +433,7 @@ extern void func_0018528c(struct BoundDisplayObject *object);
 extern void func_001af258(struct Screen *screen, int enabled);
 extern const struct NameTable *bss_00246f4c[];
 extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);
+extern void func_001b5b60(struct WidgetController *controller, int index, int value);
 extern void func_0016e3e0(struct WidgetController *controller, int index, int value);
 extern void func_0016e648(struct WidgetController *controller, int index, int character);
 /* The widget color dispatcher forwards all four full-word color values.

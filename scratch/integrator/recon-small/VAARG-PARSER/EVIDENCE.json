@@ -1,0 +1,25 @@
+{
+  "family": "VAARG-PARSER",
+  "status": "reconciled",
+  "reason": "The current parser explicitly normalizes standard va_arg type operands. Canonical W6Category already exposes group_count and its nine CategoryPattern entries, so the first setter can use patterns[i].selection directly instead of a second owner cast; the second uses the existing twelve items. Both functions MATCH.",
+  "members": [
+    "func_00190d0c",
+    "func_00190d68"
+  ],
+  "member_bytes": 180,
+  "evidence": [
+    "tools/interfaces.py:27-29",
+    "include/game/selection.h:58-65",
+    "include/game/category_pattern.h:14-18",
+    "scratch/authors/w19i/src/func_00190d0c.c",
+    "scratch/authors/w19i/src/func_00190d68.c"
+  ],
+  "new_source": "src/checkpoint16/category_variadic.c",
+  "revised_accepted_units": [],
+  "match_exit_codes": [
+    0
+  ],
+  "original_bugs": [
+    "Both variadic counts remain unchecked against their actual array capacities."
+  ]
+}

@@ -1,7 +1,5 @@
 #include "game/service_runtime.h"
 #include "game/runtime.h"
-/* [INFERENCE] This view refines reserved lifecycle bytes and the word at +8;
- * the canonical ResourceServiceState does not yet expose the session pointer. */
 struct ShutdownTimeSpan { long long nanoseconds; };
 static struct ShutdownTimeSpan milliseconds(int value)
 {
@@ -9,8 +7,7 @@ static struct ShutdownTimeSpan milliseconds(int value)
     duration.nanoseconds = (long long)value * 1000000;
     return duration;
 }
-extern int func_00186424(struct StreamCriticalSection *lock);
-extern void func_001863b0(struct StreamCriticalSection *lock);
+#include "game/service_lock.h"
 #include "game/service_protocol.h"
 CtrResult func_00121838(void)
 {

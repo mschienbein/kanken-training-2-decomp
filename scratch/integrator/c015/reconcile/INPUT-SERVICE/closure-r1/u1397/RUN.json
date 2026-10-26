@@ -1,0 +1,40 @@
+{
+  "source": "src/checkpoint14/channel_drop.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_00154674"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_00154674": "src/checkpoint14/channel_drop.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint14/channel_drop.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u1397"
+  ],
+  "exit_code": 0,
+  "seconds": 0.385283,
+  "source_sha256": "a40d13dec4d695920dc9777eb7244fa96fc15ebd52275841b408f52ccc3e6275",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u1397/channel_drop.result.json",
+  "receipt_sha256": "cc9e6efccf4c3e750f5698b97f73e2abb815eacdfbd79fb9d5c863a7a7bbea5d",
+  "output": "MATCH    func_00154674 @ 0x154674 size 0xe8/0xe8\n",
+  "stderr": ""
+}

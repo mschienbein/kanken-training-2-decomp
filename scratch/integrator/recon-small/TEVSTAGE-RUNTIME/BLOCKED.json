@@ -1,0 +1,24 @@
+{
+  "family": "TEVSTAGE-RUNTIME",
+  "status": "blocked",
+  "reason": "The exact EABI void*(void*) provider contract and canonical three-word TevStage layout are established, but honest canonical callback trials remain nonmatching: direct Set initialization is 172 versus 64 bytes and placement construction is 180 versus 64, under both game and middleware. No native constructor alias, material facade or codegen steering is admitted.",
+  "members": [
+    "func_0014b54c"
+  ],
+  "member_bytes": 64,
+  "evidence": [
+    "include/game/reset_reference.h:30-33",
+    "include/nw/lyt/lyt_Types.h:648-679,724-727",
+    "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json: func_0014b54c runtime_parameter_type void*(void*)",
+    "scratch/integrator/recon-small/TEVSTAGE-RUNTIME/exact-runtime-initializer/tev_stage_initializer.result.json",
+    "scratch/integrator/recon-small/TEVSTAGE-RUNTIME/canonical-placement-construction/tev_stage_runtime.result.json"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": [
+    1,
+    1,
+    1,
+    1
+  ]
+}

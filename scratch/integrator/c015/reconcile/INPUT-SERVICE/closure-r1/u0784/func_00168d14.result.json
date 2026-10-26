@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_00168d14/func_00168d14.c",
+ "source_sha256": "ada2656cfed7c69180cbe57f172ba42484201f1459ee963b28b0358b54a45dc7",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "f521d9d68de045c4b9b0935fa75a2dc4aa193537b6f4b990dde483fb2acc39bb",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_00168d14/character_panel_minimum.c",
+   "source_sha256": "bf5936bcf02d89654a1d274eb60cf6e59354c345dedbd1537021c05abc407ab8",
+   "object_sha256": "538a55d249a03c7bfacd080eb507e8aa611e9073594473ed87649cb2cae32e66"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "set_character_panel_minimum"
+   ],
+   "section": "i.set_character_panel_minimum",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u0784/extra-0-character_panel_minimum.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00168d14",
+   "address": 1477908,
+   "size": 168,
+   "candidate_size": 168,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 140,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5801080",
+     "removed_callee": {
+      "symbols": [
+       "set_character_panel_minimum"
+      ],
+      "section": "i.set_character_panel_minimum",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u0784/extra-0-character_panel_minimum.o"
+     }
+    }
+   ]
+  }
+ ]
+}

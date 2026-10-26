@@ -1,0 +1,43 @@
+{
+  "source": "src/checkpoint15/reconcile/INPUT-SERVICE/func_001137c4.c",
+  "profile": "sdk",
+  "functions": [
+    "func_001137c4"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint15/reconcile/INPUT-SERVICE/func_001137c4.c",
+    "--profile",
+    "sdk",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c015/reconcile/INPUT-SERVICE/proof-r1"
+  ],
+  "exit_code": 0,
+  "source_sha256": "5f98f062898034b9b4a6cd2f35fd9c2a11d7867357371a168944d5a605af9eeb",
+  "receipt": "scratch/integrator/c015/reconcile/INPUT-SERVICE/proof-r1/func_001137c4.result.json",
+  "receipt_sha256": "50b7c95082eecc2ac50496300c5cc6bcd0c9e660381c9653a2a567debb7a7941",
+  "statuses": [
+    {
+      "name": "func_001137c4",
+      "address": 1128388,
+      "size": 296,
+      "candidate_size": 296,
+      "status": "match",
+      "first_diff": null
+    }
+  ],
+  "all_required_match": true,
+  "stdout": "MATCH    func_001137c4 @ 0x1137c4 size 0x128/0x128\n",
+  "stderr": ""
+}

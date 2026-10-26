@@ -1,0 +1,26 @@
+{
+  "family": "HEAP-FACTORIES",
+  "outcome": "held-evidence",
+  "members": [
+    "func_0010d500",
+    "func_0010dcb0",
+    "func_0010dce8",
+    "func_0010dd20",
+    "func_00116be4"
+  ],
+  "reason": "The input Heap can use heap_interface.h, but all five concrete product classes require new inferred external _ZTV bindings with only declared undefined destructors. No original-evidenced actually undefined key and complete product provider identity is supplied. Merely declaring a destructor undefined to make an external table link is not evidence; no product table name is admitted.",
+  "selected_sources": [
+    "scratch/authors/w20b/src/func_0010d500.cpp",
+    "scratch/authors/w20b/src/func_0010dcb0.cpp",
+    "scratch/authors/w20b/src/func_0010dce8.cpp",
+    "scratch/authors/w20b/src/func_0010dd20.cpp",
+    "scratch/authors/w20b/src/func_00116be4.cpp"
+  ],
+  "current_contract_boundary": [
+    "Unify the factory input with the actual allocating Heap owner and exactly typed allocate/release providers; centralize each concrete allocator class and admit its evidenced external _ZTV only under the virtual-destructor/undefined-key rule.",
+    "Current canonical declaration witnesses, author integration requirements and the exact cited holds are the evidence boundaries. A historical body MATCH never selects a conflicting receiver, callback return or native class. Where ownership is unproved, the current accepted contract remains in force; no speculative alias is selected."
+  ],
+  "accepted_changes": [],
+  "names_admitted": [],
+  "proofs": "No retained invalid owner/callback/native-name model is compiled or collected."
+}

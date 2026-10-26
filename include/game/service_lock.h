@@ -16,6 +16,11 @@ extern "C" {
 extern struct StreamCriticalSection *func_001135cc(struct StreamCriticalSection *lock);
 extern void func_001c5530(void *context);
 extern void func_001c51a0(void);
+extern int func_00186424(struct StreamCriticalSection *lock);
+extern void func_001863b0(struct StreamCriticalSection *lock);
+extern CtrResult func_00148150(const CtrHandle *session, unsigned command,
+                              void *buffer, unsigned size);
+extern CtrResult func_00145e3c(unsigned command, void *buffer, unsigned size);
 /* The erased registration does not store or invoke the no-argument cleanup. */
 extern void register_resource_service_lock_cleanup(struct StreamCriticalSection *object,
     void (*destroy)(void), void (*image_base)(void));

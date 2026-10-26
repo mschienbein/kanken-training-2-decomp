@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "base_commit": "ea985bcb37576c3347debe84579993a8f228352b",
+  "merge_commit": "110a1158fb28a7b58f8b2f22d71d7a9ea94d05e6",
+  "catalogue_version": "v15",
+  "catalogue_sha256": "756bacb96bb8e7e59a1e97480b40557ad056819ce27aa030a8b245812fe50980",
+  "denominator_history_version": 12,
+  "denominator_history_sha256": "83fbd0e6747c2e2cf889c3cd987ce968c594ed1e862b6942a97c4f549489bace",
+  "NEW_functions": 26,
+  "NEW_bytes": 3704,
+  "new_in_reconciliation": 7,
+  "new_reconciliation_bytes": 1340,
+  "moves": [],
+  "source_revised_accepted_units": [
+    {
+      "source": "src/checkpoint10/func_00132344.c",
+      "profile": "game",
+      "functions": [
+        "func_00132344"
+      ],
+      "author": "w22i",
+      "accepted_source_sha256": "09b6991912e47f87610d48faa50cfc9b6329286cf65d232546e242734b934084",
+      "current_source_sha256": "0d263f1fde99a1fc39cb9092d475d8e913fcc6aa82e9ad53b512cd0f871c156d",
+      "reason": "Shared GPU-command declaration migration changes source.",
+      "header_dependencies_changed": [
+        "include/game/graphics_state.h"
+      ],
+      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+    },
+    {
+      "source": "src/checkpoint10/func_00121838.c",
+      "profile": "game",
+      "functions": [
+        "func_00121838"
+      ],
+      "author": "r41212",
+      "accepted_source_sha256": "836fee065f3243683f1471f84a6d27e520a07d34e3c52ae59a8f0442f243f888",
+      "current_source_sha256": "88c52db0434e6bfaf300047bfb109fa77380233e93cd4552851f44ad279036fc",
+      "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
+      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+    },
+    {
+      "source": "src/wave11/func_001312a4.c",
+      "profile": "game",
+      "functions": [
+        "func_001312a4"
+      ],
+      "author": "w11d",
+      "accepted_source_sha256": "facf1b07b1317c0db8a8e9f23b9e78e10da9be11026a50569e7b95c74835aae8",
+      "current_source_sha256": "c3d0571bb1fda989ba6ac3b0d20a445b8de2a1feb3cc920d5b62689d2d5c1256",
+      "reason": "Canonical contract reconciliation/shared declaration migration; complete changed include closure is re-proved.",
+      "baseline": "ea985bcb37576c3347debe84579993a8f228352b"
+    }
+  ],
+  "holds": 44,
+  "families_collected": [
+    "SERVICE-RESOURCE",
+    "SINF-BINDING",
+    "INPUT-SERVICE",
+    "FRAME-TIMING-CALLBACK",
+    "RESOURCE-CACHE-CONSTRUCTOR"
+  ],
+  "families_held": [
+    "CONTROL-TRIPLET",
+    "STREAM-LOAD",
+    "SCENE-ENVIRONMENT",
+    "CHILD-VIRTUAL",
+    "RESOURCE-OBJECT-CONSTRUCTOR",
+    "RESULT-COLLECTION",
+    "STREAM-VOICE-OWNER"
+  ],
+  "families_skipped_reserved": [
+    "ANIMATION-BINDING",
+    "SCENE-VIRTUAL"
+  ],
+  "external_evidence_only": [
+    "STATIC-NATIVE-LIFETIMES",
+    "HEAP-FACTORIES",
+    "COMMAND-CURSORS",
+    "GFX-OWNING-ARRAY",
+    "SNPRINTF-BINDING"
+  ],
+  "family_proofs": {
+    "SERVICE-RESOURCE": {
+      "final_new_matches": 3,
+      "dependent_matches": 2,
+      "failed_attempts_kept": 2
+    },
+    "SINF-BINDING": {
+      "final_new_matches": 1,
+      "compiler_ABI_probe_exit": 0
+    },
+    "INPUT-SERVICE": {
+      "driver_exit": 0,
+      "contexts": 1439,
+      "functions": 1473,
+      "final_comment_only_target_reproof_exit": 0
+    },
+    "FRAME-TIMING-CALLBACK": {
+      "contexts": 43,
+      "functions": 43,
+      "all_exits": 0
+    },
+    "RESOURCE-CACHE-CONSTRUCTOR": {
+      "contexts": 2,
+      "functions": 2,
+      "all_exits": 0
+    },
+    "SCENE-ENVIRONMENT": {
+      "native_trial_exit": 1,
+      "canonical_mismatch_held": true
+    }
+  },
+  "merge_proofs": "No surviving source/include closure changed; zero additional matcher commands required. Exact input/function-identity carry is recorded in REBASE-CLOSURE.json.",
+  "lint": {
+    "base": "18efd7bb",
+    "actual_exit": 0,
+    "pattern_leads": 7,
+    "proximity_leads": 13,
+    "second_models": 0,
+    "unadjudicated": 0,
+    "report": "POLICY-LINT-FINAL-r1.json",
+    "dispositions": "LINT-DISPOSITIONS-FINAL.json"
+  },
+  "interfaces_argcheck_prepare": "Not run; Main explicitly owns these on the rebased candidate. Earlier interfaces exit0 is historical and not claimed for the26-function candidate.",
+  "stop_authority": "Main explicitly limits c015 to its first14 ranked families plus already collected functions; ranks15 onward are reserved to c016/later waves. No further reconciliation is attempted."
+}

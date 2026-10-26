@@ -7,5 +7,6 @@ void func_001c7560(nw::gfx::ResPrimitive *primitive, nw::os::IAllocator *allocat
 void func_001c7a24(nw::gfx::ResVertexAttribute *attribute);
 void func_001c8894(nw::os::IAllocator *allocator, nw::gfx::ResShape shape);
 void func_001c78f8(nw::gfx::ResPrimitiveSet *primitive_set);
+void func_001c8994(nw::gfx::ResShape shape);
 }
 #endif

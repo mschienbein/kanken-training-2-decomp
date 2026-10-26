@@ -1,0 +1,108 @@
+{
+  "family": "RESOURCE-CACHE-CONSTRUCTOR",
+  "outcome": "collected",
+  "members": [
+    "func_001c19e0"
+  ],
+  "new_bytes": 64,
+  "canonical_changes": [
+    "Publish CacheEntry/ResourceCache in existing resource_cache.h, keeping the distinct ResourceProvider10 intact.",
+    "Store only the opaque CacheVTable address; no callable completion or native _ZTV/key claim."
+  ],
+  "accepted_source_revisions": [],
+  "changed_headers": [
+    "include/game/resource_cache.h"
+  ],
+  "proofs": [
+    {
+      "source": "src/checkpoint15/reconcile/RESOURCE-CACHE-CONSTRUCTOR/func_001c19e0.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_001c19e0"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint15/reconcile/RESOURCE-CACHE-CONSTRUCTOR/func_001c19e0.cpp",
+        "--profile",
+        "middleware",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/RESOURCE-CACHE-CONSTRUCTOR/proof-r1"
+      ],
+      "exit_code": 0,
+      "source_sha256": "08d03f2213a271b4e2f149f1d801aff6b6fc0ae9a9b403b94f61b199e17eba09",
+      "receipt": "scratch/integrator/c015/reconcile/RESOURCE-CACHE-CONSTRUCTOR/proof-r1/func_001c19e0.result.json",
+      "receipt_sha256": "debcb89fed9b220316381aa66ddc5eddedc3f3dec35a29b8411ae8efb02392d0",
+      "statuses": [
+        {
+          "name": "func_001c19e0",
+          "address": 1841632,
+          "size": 64,
+          "candidate_size": 64,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_001c19e0 @ 0x1c19e0 size 0x40/0x40\n",
+      "stderr": ""
+    },
+    {
+      "source": "src/wave13/func_001cd2f0.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001cd2f0"
+      ],
+      "extra_sources": [],
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+        "tools/match.py",
+        "src/wave13/func_001cd2f0.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c015/reconcile/RESOURCE-CACHE-CONSTRUCTOR/closure-r1-000"
+      ],
+      "exit_code": 0,
+      "source_sha256": "6bfea81a5c83f97072ab698e3e90d268a3e227c8a0e7b43617e927bff55c6887",
+      "receipt": "scratch/integrator/c015/reconcile/RESOURCE-CACHE-CONSTRUCTOR/closure-r1-000/func_001cd2f0.result.json",
+      "receipt_sha256": "00bcf08ae0a526fc5541adf8a4372db984d188ac1c63a93fe3a948fcda95c114",
+      "statuses": [
+        {
+          "name": "func_001cd2f0",
+          "address": 1889008,
+          "size": 84,
+          "candidate_size": 84,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "all_required_match": true,
+      "stdout": "MATCH    func_001cd2f0 @ 0x1cd2f0 size 0x54/0x54\n",
+      "stderr": ""
+    }
+  ],
+  "proof_exit_counts": {
+    "0": 2
+  },
+  "qualification": "Descriptive cache/entry identities and stored-address table under-specification; table is never invoked."
+}

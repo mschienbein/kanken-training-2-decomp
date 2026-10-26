@@ -1,0 +1,18 @@
+{
+  "family": "GFX-OWNING-ARRAY",
+  "status": "blocked",
+  "reason": "The author UiResourceContext explicitly resets an opaque vptr and has no genuine virtual owner/key protocol. Its nested two-word array prefix is evidenced, but neither a canonical containing native owner nor an original-evidenced undefined key and complete table protocol is established. Promoting that storage class would retain the forbidden second native-owner model.",
+  "members": [
+    "func_001c6440"
+  ],
+  "member_bytes": 360,
+  "evidence": [
+    "scratch/authors/r41303/src/func_001c6440.cpp:7-32",
+    "include/nw/gfx/gfx_GfxObject.h:19-41,69-128",
+    "src/nw4c/gfx_ShaderProgram.cpp:25-54",
+    "scratch/integrator/contract-plan/FAMILIES.json: GFX-OWNING-ARRAY canonical_contract_change and names_binding_plan"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

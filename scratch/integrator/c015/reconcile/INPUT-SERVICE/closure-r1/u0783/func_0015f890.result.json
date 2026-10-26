@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_0015f890/func_0015f890.cpp",
+ "source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "29d83f8d4fd052697d1c2a11ff28300a7dfab7aa1008bf3322f1a6feda55d546",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/func_0015f890/text_base_destruction.c",
+   "source_sha256": "7b40bed65b4fdd4e73f2d91997d442bdfe2056ae3c813d02413f7a7d6f37128c",
+   "object_sha256": "2bf12c8645ea929a932b84775e7480ee017aef5ab77308f2b1a9a103855463f4"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "completeTextResourceDestruction"
+   ],
+   "section": "i.completeTextResourceDestruction",
+   "size": 4,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u0783/extra-0-text_base_destruction.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_0015f890",
+   "address": 1439888,
+   "size": 44,
+   "candidate_size": 44,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 28,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "completeTextResourceDestruction"
+      ],
+      "section": "i.completeTextResourceDestruction",
+      "size": 4,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/reconcile/INPUT-SERVICE/closure-r1/u0783/extra-0-text_base_destruction.o"
+     }
+    }
+   ]
+  }
+ ]
+}

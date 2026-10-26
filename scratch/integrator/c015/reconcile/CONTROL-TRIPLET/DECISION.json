@@ -1,0 +1,32 @@
+{
+  "family": "CONTROL-TRIPLET",
+  "outcome": "held-evidence",
+  "members": [
+    "func_001ae908",
+    "func_001b43bc",
+    "func_001b6310"
+  ],
+  "canonical_contract": "ControlTriplet is already canonical; no TouchHistory alias is admitted.",
+  "remaining_conflicts": [
+    {
+      "source": "func_001ae908.cpp",
+      "canonical_owner": "selection_components.h W19SelectionPanel contains WidgetController, WidgetSlot* and InputSnapshot*, not the local W22ResourceGroup/TouchFrame native class."
+    },
+    {
+      "source": "func_001b43bc.cpp",
+      "canonical_owner": "w11_control.h declares AnimationState *func_001b43bc(AnimationState *); the author provides W22WeightedGroup native constructor. Its input/base relationships do not follow from replacing TouchHistory alone."
+    },
+    {
+      "source": "func_001b6310.cpp",
+      "canonical_owner": "The full W22LargeResourceGroup/TouchFrame and native cleanup ownership is not established by ControlTriplet constructor equality."
+    }
+  ],
+  "additional_provider_conflict": "TouchBounds native constructor is aliased in the author overlay to accepted C func_001670e4(InputRectangle *,float,float,float,float), which is not that native constructor interface.",
+  "forbidden_repairs_not_taken": [
+    "No same-offset ControlTriplet/PointerState/InputSnapshot overlay",
+    "No native TouchBounds alias to a C provider",
+    "No second canonical enclosing owner or guessed native constructor binding"
+  ],
+  "accepted_changes": [],
+  "proofs": "No invalid mixed-model source is compiled or collected."
+}

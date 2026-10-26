@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/transition_setters/func_001a8048_value_setter.c",
+ "source_sha256": "4163d4a549b8d9eb174f76dfed879b9422f10a8cf9d1fd32e1bd56a08ba6e4c8",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "7d0eb3ae0045a762f9eba16f5ff60535f8216f351cc42aaaecb609273a203039",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/src/models/transition_setters/transition_active.c",
+   "source_sha256": "697fe1ec9968e3c15dbae989ed0f4b91a0f046a4ce31962d5b519a0e88c0fa1f",
+   "object_sha256": "dfcae522ee720a02849f144325c2d79cc3901dc2b03167c01dfcba80468181ea"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "transition_active"
+   ],
+   "section": "i.transition_active",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/closure-r3/u0497/extra-0-transition_active.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001a8048",
+   "address": 1736776,
+   "size": 412,
+   "candidate_size": 412,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 40,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d003d4",
+     "removed_callee": {
+      "symbols": [
+       "transition_active"
+      ],
+      "section": "i.transition_active",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/closure-r3/u0497/extra-0-transition_active.o"
+     }
+    }
+   ]
+  }
+ ]
+}

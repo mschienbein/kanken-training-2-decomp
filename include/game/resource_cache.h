@@ -20,6 +20,23 @@ struct ResourceProvider10 {
     struct PoolList cache;
 };
 
+/* [INFERENCE] Separate four-record owner. Its installed table address stays
+ * opaque: no callable slots or native table identity are asserted. */
+struct CacheVTable;
+struct CacheEntry {
+    unsigned first, second, third, fourth;
+#ifdef __cplusplus
+    CacheEntry(unsigned a, unsigned b, unsigned c, unsigned d);
+#endif
+};
+struct ResourceCache {
+    const struct CacheVTable *vtable;
+    unsigned char active;
+    unsigned char reserved05[3];
+    unsigned count;
+    struct CacheEntry entries[4];
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -27,6 +44,8 @@ void *func_001cc0dc(struct PoolList *cache, const char *name);
 struct NamedResourceEntry *func_001cc050(struct PoolList *cache, const char *name,
                                        void *resource, unsigned char owned);
 extern void *func_001cd2f0(struct ResourceProvider10 *provider, const char *name);
+extern const struct CacheVTable data_00223778;
+extern struct ResourceCache *func_001c19e0(struct ResourceCache *cache);
 #ifdef __cplusplus
 }
 #endif

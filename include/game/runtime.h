@@ -49,6 +49,7 @@ struct OptionalAllocation {
     int value;
     unsigned reserved0c;
     unsigned state;
+    unsigned stop;
 };
 
 struct AllocationRecord {

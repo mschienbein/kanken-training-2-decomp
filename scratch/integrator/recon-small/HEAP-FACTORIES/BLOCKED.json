@@ -1,0 +1,23 @@
+{
+  "family": "HEAP-FACTORIES",
+  "status": "blocked",
+  "reason": "This connected family requires the unresolved GRAPHICS-HEAP native allocating-owner/provider cutover. The five proposed concrete external tables have destructor-only author classes, while the actual accepted Heap protocol includes allocate and release; table pointers alone do not establish the full class/key/provider contracts.",
+  "members": [
+    "func_0010d500",
+    "func_0010dcb0",
+    "func_0010dce8",
+    "func_0010dd20",
+    "func_00116be4"
+  ],
+  "member_bytes": 288,
+  "evidence": [
+    "include/game/heap_interface.h:8-13",
+    "scratch/authors/w20b/src/func_0010d500.cpp:3-15,23-28",
+    "scratch/integrator/contract-plan/FAMILIES.json: HEAP-FACTORIES names_binding_plan",
+    "src/wave17/func_0016b260.cpp:5-8",
+    "scratch/integrator/recon-small/GRAPHICS-HEAP/BLOCKED.json"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

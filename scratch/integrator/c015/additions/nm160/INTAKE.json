@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "requested_by": "Main after c015 commit5ad4b3ce6",
+  "source_commit": "0836c0b56",
+  "function": "func_0016bf90",
+  "bytes": 144,
+  "author_result": "scratch/authors/nm160/RESULT.json#/functions/0",
+  "author_row": {
+    "address": "0x0016bf90",
+    "name": "func_0016bf90",
+    "size": 144,
+    "isa": "arm",
+    "status": "match",
+    "source": "scratch/authors/nm160/src/func_0016bf90.c",
+    "source_sha256": "8e76cd5754af9523b2ad27511c5068cdc1240363d36571db3142310c26f58e23",
+    "profile": "game",
+    "receipt": "scratch/authors/nm160/match/0016bf90/delivered-game/func_0016bf90.result.json",
+    "receipt_sha256": "700bf35daa132502b78f2420f6c809e1b49762b4969224fe36a9103e09524bb5",
+    "final_exit_code": 0,
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none",
+    "names": null,
+    "needs_names": [],
+    "attempts": 22,
+    "minutes": null,
+    "matcher_process_seconds": 3.493779,
+    "attempt_exit_counts": {
+      "1": 11,
+      "2": 7,
+      "0": 4
+    },
+    "baseline_source": "scratch/authors/r4076/src/func_0016bf90.c",
+    "baseline_reported_differing_bytes": 63,
+    "residual": {
+      "candidate_size": 144,
+      "target_size": 144,
+      "size_delta": 0,
+      "differing_bytes": 0,
+      "differing_words": 0,
+      "first_difference": null,
+      "changed_word_offsets": []
+    },
+    "notes": "step5c: MATCH, 144/144 bytes under frozen game. The 63-byte baseline residue was not a different switch meaning: zero depth and the genuinely used x/y/screen/active allocation defaults had different lifetimes. Initializing z, x, y, screen and active before the switch stages the default floating argument and integer call arguments before bounded dispatch, reproducing the original case destinations and allocation join exactly. All five locals are consumed by the real allocation call; no dead value, barrier, forced register or invented callee was added. Canonical L044TrainingFrame/WidgetSlot and ResourceEvent signatures replace the stale DisplayHandle**/DisplayObject declaration in the inherited source without changing the measured baseline behavior.",
+    "qualifications": []
+  },
+  "source": "src/checkpoint15/func_0016bf90.c",
+  "source_sha256": "8e76cd5754af9523b2ad27511c5068cdc1240363d36571db3142310c26f58e23",
+  "profile": "game",
+  "changed_headers": [],
+  "names_changes": [],
+  "accepted_units_changed": [],
+  "dependent_closure_reason": "The only new translation unit includes existing canonical headers. No existing source, header or names binding changed, so no existing include closure changes.",
+  "proof": {
+    "receipt": "proof-r1/func_0016bf90.result.json",
+    "actual_exit_code": 0,
+    "function_count": 1,
+    "match_count": 1,
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "source_pre_review": {
+    "steps": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "result": "PASS",
+    "contracts": [
+      "category_progress.h defines L044TrainingFrame with17 WidgetSlot pointers and the exact target prototype.",
+      "screen.h defines ResourceEvent-returning func_0017a818 with all integer and floating inputs.",
+      "property_descriptor.h owns mutable NameTable *bss_00290f60[6].",
+      "Accepted func_001c144c supplies the unchanged frame and full-word index/resource inputs."
+    ],
+    "policy": "All five initialized locals are consumed by the allocation call. No casts, union views, asm, directives, invented callee, extra side effect or callback contract is introduced.",
+    "credit_scope": "Only func_0016bf90; no other function emitted or credited.",
+    "linker_model_review": "No removed callees or literal rebindings are reported."
+  },
+  "policy_lint": {
+    "base": "5ad4b3ce6",
+    "head": "0836c0b56",
+    "actual_exit_code": 0,
+    "report": "POLICY-LINT.json",
+    "pattern_hits": 0,
+    "second_models": 0,
+    "proximity_hits": 0
+  },
+  "interfaces": "Not rerun, explicitly authorized by Main. The prior exit0 audit covers the pre-addition ledger snapshot PROPOSED-LEDGER-r3.json; prepare will run interfaces on the rebased merge."
+}

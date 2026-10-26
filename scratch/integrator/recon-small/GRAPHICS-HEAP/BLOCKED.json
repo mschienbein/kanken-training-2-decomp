@@ -1,0 +1,22 @@
+{
+  "family": "GRAPHICS-HEAP",
+  "status": "blocked",
+  "reason": "The installed heap slots are identified, but data_002426d0 still has incompatible GraphicsHeap, W19RegisteredObject and native Heap owner publications. The destructor/registration callback and installed native providers have not been reconciled into one exact protocol; no one-pointer alias or cast is admitted.",
+  "members": [
+    "func_001e3794",
+    "func_001e37b8",
+    "func_001f5780"
+  ],
+  "member_bytes": 156,
+  "evidence": [
+    "include/game/graphics_resources.h:32-42,98-101",
+    "include/game/heap_interface.h:7-13",
+    "include/game/static_objects.h: W19RegisteredObject and data_002426d0",
+    "scratch/authors/r4029/src/func_001f5780.cpp:20-28",
+    "scratch/authors/w23e/src/func_001e37b8.cpp:3-22",
+    "original pointer-cell role census: data_00224db4 slots 0/2/3 = func_001e37dc/func_001e37b8/func_001e3794; data_00224dcc slots 0/2/3 = func_001e3818/func_001e37ec/func_001e37e0"
+  ],
+  "canonical_edits_retained": false,
+  "dependency_disposition": null,
+  "match_exit_codes": []
+}

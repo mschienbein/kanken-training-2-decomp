@@ -1,0 +1,52 @@
+{
+  "source": "src/models/func_001ddde4/func_001ddde4.c",
+  "profile": "game",
+  "functions": [
+    "func_001ddde4",
+    "func_00169018"
+  ],
+  "extra_sources": [
+    "src/models/func_001ddde4/item_accessors.c",
+    "src/models2/training_visibility/func_00169018.c"
+  ],
+  "function_owners": {
+    "func_001ddde4": "src/models/func_001ddde4/func_001ddde4.c",
+    "func_00169018": "src/models2/training_visibility/func_00169018.c"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001ddde4/func_001ddde4.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c015/scratch/integrator/c015/closure-r3/u0494",
+    "--extra-source",
+    "src/models/func_001ddde4/item_accessors.c",
+    "--extra-source",
+    "src/models2/training_visibility/func_00169018.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.249837,
+  "source_sha256": "a98c10266ad8d600832f4e93a063ca736908f139b7a351896dd182b794d8e661",
+  "extra_source_sha256": {
+    "src/models/func_001ddde4/item_accessors.c": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a",
+    "src/models2/training_visibility/func_00169018.c": "dad803d4f926f04f74fcf7f9b061d0bf2ca43ac9bb0acfb2a03510c6869e0985"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c015/closure-r3/u0494/func_001ddde4.result.json",
+  "receipt_sha256": "8803513a221de3f603a16c8e5fe719e837a1707eb09e3784a9ef3f6982ca7d26",
+  "output": "MATCH    func_00169018 @ 0x169018 size 0x90/0x90 [armlink5-inline-branchnop-v6: 1 inline_insn]\nMATCH    func_001ddde4 @ 0x1ddde4 size 0x1d0/0x1d0 [armlink5-inline-branchnop-v6: 3 inline_insn]\nREMOVED  r41279_item_category (8 bytes; i.r41279_item_category)\nREMOVED  r41279_item_identifier (8 bytes; i.r41279_item_identifier)\n",
+  "stderr": ""
+}
