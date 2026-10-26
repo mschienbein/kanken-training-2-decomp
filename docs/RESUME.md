@@ -2,7 +2,18 @@
 
 Current entry on top.
 
-## 2026-10-26 (morning) — c016-r2 accepted; final residue accounting next (current)
+## 2026-10-26 — final accounting complete (current)
+
+**State:** `docs/STATUS.md` top entry, "Final accounting". All 4,545 creditable functions (denominator v16) are accounted for:
+- 2,832 accepted (seq 15);
+- 1,243 residue with an exhausted escalation ladder;
+- 470 residue by user ruling.
+
+The complete table is `docs/RESIDUE-TABLE.md` (residue tool revision 17). The catalogue's unknown bytes and anomaly are documented as irreducible.
+
+**If work resumes:** new evidence (an owner identity, an ABI proof, a recovered key-function TU, or a lawful matching source) reopens a residue function through an ordinary checkpoint. Regenerate the residue table at the next free revision, passing `--revision` explicitly, because the tool's default numbering can collide with old drafts.
+
+## 2026-10-26 (morning) — c016-r2 accepted; final residue accounting next
 
 **State:** `docs/STATUS.md` top entry. Accepted 2,832 functions / 310,736 B (seq 15, c016-r2);
 denominator v16 (4,545 / 1,120,082 B); gates v1.20. **Concurrency cap: 16 subagents** (user,
