@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "base_commit": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
-  "note": "c016 merged native graphics/current-contract intake at author snapshot770c4d16346a665e983122cf34ffcbd3387a6598: scene-env70e33056, initial fx01/fx03 harvest, held-fixes545491034e, wave-w1e9d1337a and wave-w317c9e343c. Exactly10 NEW functions/2216 B,10 in-place accepted source revisions and1 accepted240-byte move to a native member;10 holds/1924 B. Main deferred W1's declaration-only revisions to accepted00114778/001147c0: those bodies retain pre-existing matrix/command union punning and remain exactly at d93aa6c7; reopening requires a separate complete owner repair, not a c016 change. No new c016 function depends on their local cursor externs. Initial five graphics sources re-derived via collect.py under default v2/none; checkpoint dependency proofs preserve explicit v6/L1. Native identities and unrecovered historical source names remain [INFERENCE]. Library _ZdaPv, c015 claims, scene-native, scene-font and gate-failed W2 remain excluded. Main owns argcheck/prepare/review/finalize. Private reconciliation, ABI witnesses and unchanged-source HEADER-CLOSURE-REPROOFS records live under scratch/integrator/c016/; the deferred accepted-source issue is published in docs/known-issues-c016.md.",
+  "base_commit": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
+  "note": "Final c016 input set, composed on finalized c015 main 45d62e6d9c260076a2f3f86a38050928a5bf1717 (history seq14;2827 accepted functions/309728 B). Includes scene-env70e33056, fx01 x3/fx03 x1, held-fixes545491034e, W1e9d1337a minus two explicitly deferred matrix declarations, and W317c9e343c. Exactly10 NEW functions/2216 B,10 in-place accepted source revisions,1 accepted240-byte native move,10 uncredited holds/1924 B. fx04 and nc01-nc06 closed with0 new target MATCHes. All c015 claims and library _ZdaPv are excluded; no scene-native, scene-font or gate-failed W2 transaction is imported. Main ruling docs/rulings/2026-10-25-held-contract-residue.md keeps every held contract as documented residue with its exact blocker and no rule relaxation. Accepted00114778/001147c0 remain exactly at d93aa6c7; their pre-existing matrix/command union punning is a known issue, not c016 new credit or a revised source. New c016 functions do not depend on their local cursor externs. Native identities, recovered alignment and unrecovered helper names remain [INFERENCE]. Explicit v6/L1 is required. Main owns argcheck/prepare/review/finalize; private current post-merge closure and interfaces evidence live under scratch/integrator/c016/. See docs/known-issues-c016.md.",
   "deferred_mechanical_revisions": [
     {
       "function": "func_00114778",
@@ -143,7 +143,7 @@
         "include/game/command_buffer.h",
         "include/game/render_context.h"
       ],
-      "baseline": "d93aa6c7"
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
     },
     {
       "source": "src/checkpoint10/func_001306c8.cpp",
@@ -157,7 +157,7 @@
       "accepted_source_sha256": "0a4f89533986391beec185b6283d8fd0e17c884a64cfbf016ee16cc626d92595",
       "current_source_sha256": "8dbbc277dc695a5622aef7de638da5b1fcac2c6c75eb43692fe8ebb960b82e2e",
       "reason": "Replace the C renderer/resource shadow models and member facade with the byte-identical canonical native RenderContext::RenderPrimitive(ResPrimitive) member; the content-preserving path move is explicit in moves.",
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "evidence": "scratch/integrator/held-fixes/NATIVE-PRIMITIVE/RECONCILED.json"
     },
     {
@@ -166,10 +166,10 @@
       "functions": [
         "func_0010de68"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "dc68941212d384ee5c009aee4b204d3188f6f42b4a4755c86350e208a20eb2f5",
       "current_source_sha256": "6ba55ab7e48c7606f588d1ba86a0dadf3bcb3974109254648495996646fd17bd",
-      "reason": "Move the actual ShaderResource definition to its existing shader header without changing binary extent, selected pointer, allocation or program fields. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Move the actual ShaderResource definition to its existing shader header without changing binary extent, selected pointer, allocation or program fields. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/shader.h"
       ]
@@ -180,10 +180,10 @@
       "functions": [
         "func_00107140"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "f40369bb8a2cb417d438dae970b44f93fcd104b1928e1947792be55559bb6e29",
       "current_source_sha256": "3ff23956ea5b0f1ad4302dbadaaa87ff071de4e982503cae8c385879ed7d9c5b",
-      "reason": "Retire the identical void func_00135f1c(int) local declaration in favor of startup.h:118. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Retire the identical void func_00135f1c(int) local declaration in favor of startup.h:118. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/startup.h"
       ]
@@ -194,10 +194,10 @@
       "functions": [
         "func_0019b574"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "61cfbbc6974197e214351a67076fe656d9ba5a5a289b57903698320494100c5f",
       "current_source_sha256": "2688ad4ff8287afc793de68f9b507115bf1504118597380ff403720c5de12003",
-      "reason": "Retire the identical unsigned-char cursor extern and include its existing canonical header; do not change cursor storage to word pointers. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Retire the identical unsigned-char cursor extern and include its existing canonical header; do not change cursor storage to word pointers. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/command_buffer.h"
       ]
@@ -208,10 +208,10 @@
       "functions": [
         "func_0011774c"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "463cc013275d76c935247aed8503587b1ddb4c5f91fa6b7980ebbe5d71bc5283",
       "current_source_sha256": "a5c52b812d2eb89b1756a332467762d1d7a29d21fafe5c61377871ee9415b7d4",
-      "reason": "Publish the distinct OwnerIdentifierNode/OwnerIdentifierRegistry and int(registry*,int) prototype; retain the actual returned count and all existing fatal-handler calls. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Publish the distinct OwnerIdentifierNode/OwnerIdentifierRegistry and int(registry*,int) prototype; retain the actual returned count and all existing fatal-handler calls. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/object_pool.h"
       ]
@@ -222,10 +222,10 @@
       "functions": [
         "func_0019f518"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "9d49df4721503ffc6906fc889ee497bdc10170013f55709ae4e2a91da61b2613",
       "current_source_sha256": "09b77b66a5bf8af14b49014a2309d97fa02b810055277c0803aeda37f747fbfd",
-      "reason": "Publish the exact IdentifierNode/IdentifierRegistry definition and void(registry*,int) prototype; remove the identical local definitions, with no key representation or body change. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Publish the exact IdentifierNode/IdentifierRegistry definition and void(registry*,int) prototype; remove the identical local definitions, with no key representation or body change. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/object_pool.h"
       ]
@@ -236,10 +236,10 @@
       "functions": [
         "func_001d4174"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "40ff826fec0189c563f81b93939d8301062e0c0835988d8e2b2a433e07a5e4d3",
       "current_source_sha256": "af3eda98acda827deaab43da3d2ae95f340b27ef2f0f125802d260c9c8bb8c20",
-      "reason": "Retire the identical SoundArchiveRequestState local definition and publish/use its exact void(state*,ArchiveHandle*) declaration; do not equate the record with native SoundArchiveLoader. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Retire the identical SoundArchiveRequestState local definition and publish/use its exact void(state*,ArchiveHandle*) declaration; do not equate the record with native SoundArchiveLoader. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/archive_runtime.h"
       ]
@@ -258,7 +258,7 @@
         "include/game/service_protocol.h",
         "include/game/applet.h"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
     },
     {
       "source": "src/wave14/func_00115628.c",
@@ -273,7 +273,7 @@
       "header_dependencies_changed": [
         "include/game/applet.h"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
     },
     {
       "source": "src/wave5/func_00145840.c",
@@ -288,7 +288,7 @@
       "header_dependencies_changed": [
         "include/game/service_state.h"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
     }
   ],
   "holds": [
@@ -443,7 +443,7 @@
         "include/game/command_buffer.h",
         "include/game/render_context.h"
       ],
-      "baseline": "d93aa6c7"
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
     },
     {
       "source": "src/large/func_0010de68.c",
@@ -451,10 +451,10 @@
       "functions": [
         "func_0010de68"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "dc68941212d384ee5c009aee4b204d3188f6f42b4a4755c86350e208a20eb2f5",
       "current_source_sha256": "6ba55ab7e48c7606f588d1ba86a0dadf3bcb3974109254648495996646fd17bd",
-      "reason": "Move the actual ShaderResource definition to its existing shader header without changing binary extent, selected pointer, allocation or program fields. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Move the actual ShaderResource definition to its existing shader header without changing binary extent, selected pointer, allocation or program fields. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/shader.h"
       ]
@@ -465,10 +465,10 @@
       "functions": [
         "func_00107140"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "f40369bb8a2cb417d438dae970b44f93fcd104b1928e1947792be55559bb6e29",
       "current_source_sha256": "3ff23956ea5b0f1ad4302dbadaaa87ff071de4e982503cae8c385879ed7d9c5b",
-      "reason": "Retire the identical void func_00135f1c(int) local declaration in favor of startup.h:118. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Retire the identical void func_00135f1c(int) local declaration in favor of startup.h:118. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/startup.h"
       ]
@@ -479,10 +479,10 @@
       "functions": [
         "func_0019b574"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "61cfbbc6974197e214351a67076fe656d9ba5a5a289b57903698320494100c5f",
       "current_source_sha256": "2688ad4ff8287afc793de68f9b507115bf1504118597380ff403720c5de12003",
-      "reason": "Retire the identical unsigned-char cursor extern and include its existing canonical header; do not change cursor storage to word pointers. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Retire the identical unsigned-char cursor extern and include its existing canonical header; do not change cursor storage to word pointers. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/command_buffer.h"
       ]
@@ -493,10 +493,10 @@
       "functions": [
         "func_0011774c"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "463cc013275d76c935247aed8503587b1ddb4c5f91fa6b7980ebbe5d71bc5283",
       "current_source_sha256": "a5c52b812d2eb89b1756a332467762d1d7a29d21fafe5c61377871ee9415b7d4",
-      "reason": "Publish the distinct OwnerIdentifierNode/OwnerIdentifierRegistry and int(registry*,int) prototype; retain the actual returned count and all existing fatal-handler calls. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Publish the distinct OwnerIdentifierNode/OwnerIdentifierRegistry and int(registry*,int) prototype; retain the actual returned count and all existing fatal-handler calls. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/object_pool.h"
       ]
@@ -507,10 +507,10 @@
       "functions": [
         "func_0019f518"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "9d49df4721503ffc6906fc889ee497bdc10170013f55709ae4e2a91da61b2613",
       "current_source_sha256": "09b77b66a5bf8af14b49014a2309d97fa02b810055277c0803aeda37f747fbfd",
-      "reason": "Publish the exact IdentifierNode/IdentifierRegistry definition and void(registry*,int) prototype; remove the identical local definitions, with no key representation or body change. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Publish the exact IdentifierNode/IdentifierRegistry definition and void(registry*,int) prototype; remove the identical local definitions, with no key representation or body change. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/object_pool.h"
       ]
@@ -521,10 +521,10 @@
       "functions": [
         "func_001d4174"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8",
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717",
       "accepted_source_sha256": "40ff826fec0189c563f81b93939d8301062e0c0835988d8e2b2a433e07a5e4d3",
       "current_source_sha256": "af3eda98acda827deaab43da3d2ae95f340b27ef2f0f125802d260c9c8bb8c20",
-      "reason": "Retire the identical SoundArchiveRequestState local definition and publish/use its exact void(state*,ArchiveHandle*) declaration; do not equate the record with native SoundArchiveLoader. No codegen change expected; header visibility still needs Main remeasurement.",
+      "reason": "Retire the identical SoundArchiveRequestState local definition and publish/use its exact void(state*,ArchiveHandle*) declaration; do not equate the record with native SoundArchiveLoader. Exact complete-unit output is included in the c016 merged closure re-proof.",
       "header_dependencies_changed": [
         "include/game/archive_runtime.h"
       ]
@@ -543,7 +543,7 @@
         "include/game/service_protocol.h",
         "include/game/applet.h"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
     },
     {
       "source": "src/wave14/func_00115628.c",
@@ -558,7 +558,7 @@
       "header_dependencies_changed": [
         "include/game/applet.h"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
     },
     {
       "source": "src/wave5/func_00145840.c",
@@ -573,7 +573,7 @@
       "header_dependencies_changed": [
         "include/game/service_state.h"
       ],
-      "baseline": "d93aa6c7d51331bb851b59e568a396b06a7785e8"
+      "baseline": "45d62e6d9c260076a2f3f86a38050928a5bf1717"
     }
   ],
   "totals": {
@@ -585,5 +585,16 @@
     "moved_bytes": 240,
     "holds": 10,
     "held_bytes": 1924
-  }
+  },
+  "denominator_history_version": 13,
+  "intake_scope_final": true,
+  "closed_without_new_matches": [
+    "fx04",
+    "nc01",
+    "nc02",
+    "nc03",
+    "nc04",
+    "nc05",
+    "nc06"
+  ]
 }

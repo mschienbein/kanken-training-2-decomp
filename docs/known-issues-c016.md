@@ -62,3 +62,15 @@ dispositions remain in `config/candidates/c016.json` → `holds`.
   normalization. Descriptive duration/payload names remain **[INFERENCE]**.
 - Library `func_0019e08c` (`_ZdaPv`), c015 claims and all scene-native/scene-font
   reservations are excluded. No gate-failed W2 transaction is imported.
+
+## Finalized-main boundary and residue ruling
+
+c016 is composed on finalized c015 main `45d62e6d` (history sequence 14).
+The accepted native caller move preserves `func_001306c8`'s existing 240 B;
+it does not count as new credit. fx04 and the nc01–nc06 revisits supplied no
+additional new matches.
+
+The [held-contract residue ruling](rulings/2026-10-25-held-contract-residue.md)
+keeps every held-contract function as documented residue with its exact blocker.
+c016 introduces no callback-cast, punning or VFE exception and undertakes no
+further reconciliation of the held functions.
