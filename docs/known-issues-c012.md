@@ -11,6 +11,39 @@ findings (accept/c012-r6/reviews/). Every qualification in those records stands.
   (docs/rulings/2026-10-25-thumb-linker-model.md).
 The text below is the candidate record.
 
+## Standalone hold reconciliation candidates (2026-10-25)
+
+`config/candidates/held-fixes.json` records later proposed contract repairs, not
+accepted c012 credit. The native `ResPrimitive::SetupDrawCommand` candidate
+(`001387f4`, 152 B) now has a byte-identical accepted caller transaction:
+`001306c8` moves explicitly from C to C++ and becomes the canonical
+`RenderContext::RenderPrimitive(ResPrimitive)` member. The renderer/resource
+shadow records and C member facade are retired; both complete units MATCH.
+The native word-copy binding uses the already adopted catalogue-v14 assembly
+identity and earns no additional credit. Evidence and exact remaining standalone
+holds are under `scratch/integrator/held-fixes/`; Main still owns checkpoint
+preparation and independent acceptance review.
+
+The standalone survey's seven groups have the following dispositions:
+
+| Group | Candidate functions / B | Disposition |
+|---|---:|---|
+| Native primitive | 1 / 152 | Reconciled; canonical native caller/provider units both MATCH, with one accepted caller move/revision (240 B). |
+| Sound data manager | 1 / 64 | Held: complete primary/secondary table and native lifetime/provider closure is missing; deleting-cleanup adoption is outside the no-D0 boundary. |
+| Memory file stream | 1 / 72 | Held: the externalized implicit destructor/key, complete installed slots and inherited stream providers lack a proved native transaction. |
+| Layout binary protocol | 2 / 844 | Held: native validator/header and Pane/intrusive-list provider contracts are not one source-policy-safe model. |
+| Service result filters | 2 / 220 | Held: both filters MATCH with the complete canonical translator visible, but the co-emitted translator still mismatches; no passing subset is adopted. |
+| Grade mask | 1 / 108 | Held: newer c015 notification union-storage hold remains authoritative. |
+| Training options | 1 / 492 | Held: newer c015 unrelated-controller union hold remains authoritative. |
+
+Thus only **1 NEW function / 152 B** is proposed; **6 groups / 8 functions /
+1,800 B** remain uncredited. Each held group has an exact `BLOCKED.json`
+prerequisite. No scene, c015-credit or library claim is duplicated. No new
+destructor/key, VFE selection, runtime byte-offset view or union view is added.
+Touched-unit interfaces exits **0** for the two C++ units, with the explicit
+unchecked-C++ waiver; whole-ledger interfaces is deferred to c016's single
+granted integration slot under Main's revised instruction.
+
 ## Current r6 remediation
 
 Revision r6 starts from c012-r5 `4c14ff9f` and retains the explicit **v6 / L1**

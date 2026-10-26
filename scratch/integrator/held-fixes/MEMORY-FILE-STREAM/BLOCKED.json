@@ -1,0 +1,30 @@
+{
+  "group_id": "MEMORY-FILE-STREAM",
+  "functions": [
+    "func_001d3f58"
+  ],
+  "bytes": 72,
+  "category": "unproved-native-lifetime-and-installed-slot-closure",
+  "reason": "Read already MATCHes, but four accepted capabilities still use the separate MemoryInputStream owner (signed position/size). The canonical MemoryFileStream header explicitly introduced an out-of-line implicit destructor to externalize its VFE-stripped table; the survey supplies no original-backed destructor/key, complete installed table extent or inherited IOStream/FileStream provider adoption. Merely moving inline capabilities out of the header would extend that unresolved native-key/table contract and assign the two indistinguishable true-return providers to guessed slots. A partial Read/capability cutover, second owner, receiver alias, or artificial external key is not allowed.",
+  "prerequisite": "Establish the real lifetime/key and complete installed slot identities (including inherited stream providers), then migrate every provider/client and retire MemoryInputStream atomically. If genuine native emission needs D0, it must wait for the separately authorized gate revision.",
+  "evidence": [
+    "scratch/integrator/held-native-survey/SURVEY.json#MEMORY-FILE-STREAM",
+    "include/nw/snd/snd_MemorySoundArchive.h:5,47-69",
+    "include/nw/io/io_IOStream.h:19-38",
+    "include/nw/io/io_FileStream.h:25-35",
+    "include/game/archive_runtime.h:11-16",
+    "src/nw4c/snd_MemorySoundArchive.cpp:19-61",
+    "src/wave8/func_001f2010.cpp",
+    "src/wave8/func_001f2018.cpp",
+    "src/wave8/func_001f2020.cpp",
+    "src/wave8/func_001f2028.cpp"
+  ],
+  "fresh_match": null,
+  "why_not_retried": "The known isolated72-byte MATCH was not rerun; the missing evidence is the complete native installation/lifetime/provider contract, not Read bytes.",
+  "schema_version": 1,
+  "status": "blocked-uncredited",
+  "tracked_source_header_changes": [],
+  "accepted_units_revised": 0,
+  "moves": [],
+  "objects_remaining": 0
+}

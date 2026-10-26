@@ -3,6 +3,7 @@
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Modified 2026-10-17: standalone UTF-8 and relative include normalization.
+ * Modified 2026-10-25: document retail offsets from aligned fixed-array storage.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -278,6 +279,9 @@ private:
     AmbientLight* m_AmbientLight;
     HemiSphereLight* m_HemiSphereLight;
     VertexLightArray m_VertexLights;
+    /* [INFERENCE] The fixed array's cache-line-aligned inline buffer places this
+     * member at +0x20 and its buffer at +0x40; the dirty tail is +0xa8..+0xac.
+     * SceneEnvironment consequently has 0x20-byte alignment and size 0xc0. */
     FixedFragmentLightArray m_FragmentLights;
     Fog* m_Fog;
     Camera* m_Camera;

@@ -122,6 +122,10 @@ extern int func_00192c10(void);
 extern void func_00115040(unsigned char mode);
 extern void func_00192458(unsigned value);
 extern void func_0019051c(struct RequestRecord *record);
+extern void func_00190450(unsigned char *output, struct RequestRecord *record);
+extern CtrResult func_0013ef10(unsigned channel);
+extern CtrResult func_0013ed94(unsigned channel, struct RequestRecord *record,
+    unsigned size, unsigned flags);
 extern unsigned char func_00122af0(void);
 extern void func_00122fe8(unsigned char value);
 extern void func_00122ff8(void);

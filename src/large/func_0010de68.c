@@ -1,16 +1,6 @@
 #include "game/shader.h"
 #include <string.h>
 
-struct ShaderResource {
-    void *allocation;
-    unsigned size;
-    struct ShaderConfiguration binary;
-    struct ShaderConfiguration *selected;
-    unsigned reserved13c[8];
-    unsigned program2;
-    unsigned program3;
-};
-
 void func_0010de68(struct ShaderResource *resource, int kind, void *data,
                    unsigned size, int release)
 {

@@ -52,6 +52,13 @@ Current entry on top; older entries are kept as history.
   - Review: `docs/catalogue/REVIEW-v16.md`, PASS_WITH_QUALIFICATIONS, no findings. Suite: 1,181
     tests, 1 skipped, 0 failed modules.
 - **Concurrency raised to 16 subagents** (user, 2026-10-25).
+- **W3 applet/request candidate:** `config/candidates/wave-w3.json` records 2 new functions /
+  348 B and 3 revised accepted units, with no accepted-function moves. The original six-callsite
+  receive ABI proves optional outputs, an aligned 64-bit timeout and full event results including
+  `-1`; the accepted applet caller and its byte-storage sink retain their complete original bytes.
+  All five new/revised units MATCH. Scoped interfaces exits 0 (one C++ unit remains explicitly
+  unchecked by the mechanical type audit); whole-ledger interfaces is deferred to c016 integration
+  in Main's heavy slot. These are branch-candidate results, not additional acceptance credit.
 - **Scene dispatch unblocked without a ruling.** Genuine C++ virtual classes and member pointers
   match the scene dispatch code under the game profile: the generic consumer `func_001b7dac`
   matches 84/84 and two registrars match 180/180 and 192/192.

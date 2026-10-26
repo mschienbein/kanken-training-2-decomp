@@ -1,0 +1,16 @@
+{
+  "argv": [
+    ".venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp",
+    "src/checkpoint10/func_001306c8.cpp",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/held-fixes/interfaces-touched-r1.json"
+  ],
+  "exit_code": 0,
+  "scope": "Only the two touched native C++ units; both use frozen game profile. C++ declaration/const-write limits explicitly waived and preserved in report. Whole dry-ledger interfaces deferred to Main/C016Intake by revised heavy-slot instruction.",
+  "whole_ledger_check": "deferred-to-c016-integration",
+  "prior_whole_attempt": "interfaces-command-r1.json (terminated and reaped, exit-9, no report)"
+}

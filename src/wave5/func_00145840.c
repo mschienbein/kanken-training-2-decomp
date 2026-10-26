@@ -1,7 +1,5 @@
 #include "game/service_state.h"
 
-extern void func_00190450(unsigned char *output, struct RequestRecord *record);
-
 static void copyText(unsigned short *destination, const unsigned short *text,
                      unsigned remaining)
 {

@@ -1,0 +1,38 @@
+{
+  "coverage": {
+    "const_writes": "typed lvalues, const-address casts and simple local pointer aliases",
+    "cpp": "qualified class-definition agreement across units and project headers (ODR, token-level; namespaces, enclosing classes and template specializations; unnamed namespaces unit-local), no forward declaration of a header-defined qualified class without that header, and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
+    "not_covered": [
+      "whole-program/heap alias analysis and pointer arithmetic",
+      "interprocedural or branch-sensitive alias propagation",
+      "writes inside called functions or assembly"
+    ]
+  },
+  "disagreements": [],
+  "policy": [],
+  "schema_version": 1,
+  "unchecked": [
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp"
+    },
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/checkpoint10/func_001306c8.cpp"
+    }
+  ],
+  "units": [
+    {
+      "checked": false,
+      "sha256": "d9c80b4450cbc52d387bd69767789f83e31aee18698ae236fc4dcaecd3b6dfeb",
+      "source": "src/held-fixes/gfx_ResPrimitive__SetupDrawCommand.cpp"
+    },
+    {
+      "checked": false,
+      "sha256": "8dbbc277dc695a5622aef7de638da5b1fcac2c6c75eb43692fe8ebb960b82e2e",
+      "source": "src/checkpoint10/func_001306c8.cpp"
+    }
+  ]
+}
