@@ -8,9 +8,12 @@ behaviour.
 [![Code](https://bytematch.dev/mschienbein/kanken-training-2-decomp.svg?measure=matched_code_percent&label=Code)](https://bytematch.dev/mschienbein/kanken-training-2-decomp)
 [![Functions](https://bytematch.dev/mschienbein/kanken-training-2-decomp.svg?measure=matched_functions&label=Functions)](https://bytematch.dev/mschienbein/kanken-training-2-decomp)
 
-**Status:** early. **17.31% of creditable code bytes** are accepted: 1,621 functions /
-195,908 bytes through nine finalized checkpoints, each re-derived by two independent reviews.
-The next checkpoints, c009 onward, are being integrated. Details in [`docs/STATUS.md`](docs/STATUS.md).
+**Status:** matching pass complete, readability pass not started.
+- **27.74% of creditable code bytes** are accepted: 2,832 of 4,545 functions / 310,736 of 1,120,082 bytes, through 15 finalized checkpoints. Two independent reviews re-derived each checkpoint.
+- Every other creditable function is documented residue with evidence: 1,243 exhausted the escalation ladder, and 470 were ruled residue by the owner.
+- Most accepted functions still carry address names (`func_XXXXXXXX`) in address-named files grouped by intake wave. Renaming them and reorganizing the source tree is the next phase.
+
+Details in [`docs/STATUS.md`](docs/STATUS.md); the per-function table is [`docs/RESIDUE-TABLE.md`](docs/RESIDUE-TABLE.md).
 
 ## What you need
 
